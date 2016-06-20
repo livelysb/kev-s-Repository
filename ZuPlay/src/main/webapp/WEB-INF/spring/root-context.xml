@@ -10,7 +10,6 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	  
 	<!-- MyBatis 설정 -->
-	
 	<!-- properties파일 사용 -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">

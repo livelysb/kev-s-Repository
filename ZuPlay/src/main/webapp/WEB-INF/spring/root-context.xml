@@ -19,8 +19,8 @@
 
 	<!-- oracle 연결 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		p:driverClassName="${dbcp.driverClassName}" p:url="${dbcp.url}" p:username="${dbcp.username}"
-		p:password="${dbcp.password}" p:maxActive="10" />
+		p:driverClassName="${db.driverClassName}" p:url="${db.url}" p:username="${db.username}"
+		p:password="${db.password}" p:maxActive="10" />
 
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

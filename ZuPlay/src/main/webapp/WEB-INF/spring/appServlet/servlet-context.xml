@@ -19,7 +19,18 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<!-- BeanNameViewResolver때문에 order 속성 줌 -->
+		<beans:property name="order" value="1"/> 
 	</beans:bean>
+	
+	<!-- 파일업로드 -->
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
+	
+	
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="0"></beans:property>
+	</beans:bean>
+	
 	
 	<context:component-scan base-package="com.kosta.zuplay" />
 	

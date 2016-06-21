@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
 <html lang="ko-kr">
 <head>
@@ -24,19 +24,23 @@
 							
 							<!-- 로고 영역 -->
 							<div class="zp-wrapper-logo">
-								<a href=<c:url value="/"/>><img src="resources/img/logo.png" alt="zuplay-logo"></a>
+								<a href='<c:url value="/"/>'><img src="resources/img/logo.png" alt="zuplay-logo"></a>
 							</div>
 							
 							<!-- 메인 아바타 영역-->
 							<div class="zp-wrapper-avatar-main">
 								<div class="zp-wrapper-avatar">
-									<img alt="avatar-head" src="">
+									<img alt="avatar-body" src="resources/img/avatar/body/body.svg">
+									<img alt="avatar-head" src="resources/img/avatar/head/head.svg">
+									<img alt="avatar-hair" src="resources/img/avatar/hair/hyohair.svg">
+									<img alt="avatar-eyes" src="resources/img/avatar/eyes/normaleye.svg">
+									<img alt="avatar-mouse" src="resources/img/avatar/mouse/mouse.svg">
 								</div>
 							</div>
 							
 							<!-- 광고 영역 -->
 							<div class="zp-wrapper-ad">
-							
+								광고
 							</div>
 						</div>
 					</div>

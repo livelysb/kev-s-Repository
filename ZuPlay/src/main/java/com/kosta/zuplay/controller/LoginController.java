@@ -17,12 +17,16 @@ public class LoginController {
 	private LoginService loginServiceImpl;
 	
 	@RequestMapping(value="firstLoginCheck",method=RequestMethod.POST)
-	public String firstLoginCheck(PlayerDTO playerDTO,HttpSession session){
+	public String firstLogin(PlayerDTO playerDTO,HttpSession session){
 		boolean firstLogin=loginServiceImpl.firstLoginCheck(playerDTO.getPlayerNaverId());
-		session.setAttribute("firstLogin", firstLogin);
-		
-		return "/";
+		session.setAttribute("firstLogin", firstLogin);  //true면 최초로그인, false면 기존회원
+		return "Login";
 	}
 	
-	@RequestMapping(value="")
+	@RequestMapping(value="join")
+	public String join(PlayerDTO playerDTO, HttpSession session){
+		boolean join=loginServiceImpl.joinMember(playerDTO);
+		session.setAttribute("join",join );
+		return "/";
+	}
 }

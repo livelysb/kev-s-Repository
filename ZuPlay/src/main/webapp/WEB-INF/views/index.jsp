@@ -17,21 +17,30 @@
 		<div class="container-fluid">
 				<div class="row-fluid">
 				
+				<!-- 사이드바 Wrapper -->
 					<div class="zp-wrapper-side">
 						<div class="col-md-1">
-							<!--사이드-->
+							<!--사이드 영역-->
+							
+							<!-- 로고 영역 -->
 							<div class="zp-wrapper-logo">
 								<a href=<c:url value="/"/>><img src="resources/img/logo.png" alt="zuplay-logo"></a>
 							</div>
+							
+							<!-- 메인 아바타 영역-->
 							<div class="zp-wrapper-avatar-main">
-								<div class="panel panel-default">
-									<div class="panel-body">
-										dd
-									</div>
+								<div class="zp-wrapper-avatar">
+									<img alt="avatar-head" src="">
 								</div>
+							</div>
+							
+							<!-- 광고 영역 -->
+							<div class="zp-wrapper-ad">
+							
 							</div>
 						</div>
 					</div>
+					<!-- 사이드바 Wrapper 끝 -->
 					
 					<div class="zp-wrapper-content">
 						<div class="col-md-11">

@@ -19,12 +19,12 @@
 				
 				<!-- 사이드바 Wrapper -->
 					<div class="zp-wrapper-side">
-						<div class="col-md-1">
+						<div class="col-md-2">
 							<!--사이드 영역-->
 							
 							<!-- 로고 영역 -->
 							<div class="zp-wrapper-logo">
-								<a href='<c:url value="/"/>'><img src="resources/img/logo.png" alt="zuplay-logo"></a>
+								<a href="/zuplay"><img src="resources/img/logo.png" alt="zuplay-logo"></a>
 							</div>
 							
 							<!-- 메인 아바타 영역-->
@@ -47,7 +47,7 @@
 					<!-- 사이드바 Wrapper 끝 -->
 					
 					<div class="zp-wrapper-content">
-						<div class="col-md-11">
+						<div class="col-md-10">
 							<!--본문-->
 							Test
 						</div>

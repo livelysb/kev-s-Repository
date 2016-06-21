@@ -31,16 +31,12 @@
 							<div class="zp-wrapper-avatar-main">
 								<div class="zp-wrapper-avatar">
 									<img alt="avatar-body" src="resources/img/avatar/body/body.svg">
-									<img alt="avatar-head" src="resources/img/avatar/head/head.svg">
-									<img alt="avatar-hair" src="resources/img/avatar/hair/hyohair.svg">
-									<img alt="avatar-eyes" src="resources/img/avatar/eyes/normaleye.svg">
-									<img alt="avatar-mouse" src="resources/img/avatar/mouse/mouse.svg">
 								</div>
 							</div>
 							
 							<!-- 광고 영역 -->
 							<div class="zp-wrapper-ad">
-								광고
+								<img alt="ad" src="">
 							</div>
 						</div>
 					</div>

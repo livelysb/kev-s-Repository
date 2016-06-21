@@ -3,10 +3,10 @@ package com.kosta.zuplay.model.dto.stock;
 public class StockDealHistoryDTO {
 	int sdhSq;				//주식거래기록코드
 	String isuCd;			//종목코드
-	String playerNickname;	//?��?��?��
-	int sdhDealPrice;		//거래�?
-	String sdhDealTime;		//거래?���?
-	int sdhQuantity;		//?��?��
+	String playerNickname;	//닉네임
+	int sdhDealPrice;		//거래가
+	String sdhDealTime;		//거래시각
+	int sdhQuantity;		//수량
 	String sdhBuySell;		//Buy or Sell
 	
 	public StockDealHistoryDTO() {}

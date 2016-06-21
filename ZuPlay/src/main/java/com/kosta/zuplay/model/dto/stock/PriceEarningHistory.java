@@ -1,10 +1,10 @@
 package com.kosta.zuplay.model.dto.stock;
 
 public class PriceEarningHistory {
-	int pehSq;				//?ˆ˜?µë¥ ì½”?“œ
-	String playerNickname;	//?‹‰?„¤?„
-	int pehPe;				//?ˆ˜?µë¥?
-	String pehDate;			//?¼?
+	int pehSq;				//ìˆ˜ìµë¥ ì½”ë“œ
+	String playerNickname;	//ë‹‰ë„¤ì„
+	int pehPe;				//ìˆ˜ìµë¥ 
+	String pehDate;			//ì¼ì
 	
 	public PriceEarningHistory() {}
 

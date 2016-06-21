@@ -3,7 +3,7 @@ package com.kosta.zuplay.model.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kosta.zuplay.model.DAO.LoginDAOImpl;
+import com.kosta.zuplay.model.dao.LoginDAOImpl;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.service.LoginService;
 

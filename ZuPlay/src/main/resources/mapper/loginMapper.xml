@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosta.zuplay.loginMapper">
-	<select id="firstLoginCheck">
+
+<resultMap type="playerDTO" id="firstLoginCheckMap">
+	<id column="player_Nickname" property="playerNickname"/>
+	<result column="player_Naver_Id" property="playerNaverId"/>	
+	<result column="player_Gender" property="playerGender"/>
+	<result column="player_age" property="playerAge"/>
+	<result column="player_Like" property="playerLike"/>
+	<result column="player_Money" property="playerMoney"/>
+	<result column="player_Ruby" property="playerRuby"/>
+	<result column="player_Grade" property="playerGrade"/>
+	<result column="player_Daily_Rank" property="playerDailyRank"/>
+	<result column="player_Weekly_Rank" property="playerWeeklyRank"/>
+	<result column="player_Season_Rank" property="playerSeasonRank"/>
+	<result column="player_Total_Rank" property="playerTotalRank"/>	
+</resultMap>
+	<select id="firstLoginCheck" resultMap="firstLoginCheckMap" parameterType="String">
 		select * from player where naver_Id=#{naverId}
 	</select>
 
-	<insert id="joinMember">
-		insert into player values (#{playerNickname},#{naverId},#{)
+	<insert id="joinMember" parameterType="playerDTO">
+		insert into player values 
+		(#{playerNickname},#{playerNaverId},#{playerGender},#{playerAge},#{playerLike},#{playerMoney},#{playerRuby},#{playerGrade},#{playerDailyRank},#{playerWeeklyRank},#{playerSeasonRank},#{playerTotalRank})
 	</insert>
 </mapper>

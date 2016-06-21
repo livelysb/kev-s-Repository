@@ -1,10 +1,10 @@
-package com.kosta.zuplay.model.dto;
+package com.kosta.zuplay.model.dto.board;
 
 public class BoardImageDTO {
-	int biSq;			//ì´ë¯¸ì§€ ë²ˆí˜¸
-	int boardNo;		//ì´ë¯¸ì§€ ì‚½ì…ëœ ê¸€ë²ˆí˜¸
-	String biOrigin;	//ì›ë³¸ì´ë¯¸ì§€ íŒŒì¼ëª…
-	String biName;		//ë³€ê²½ì´ë¯¸ì§€ íŒŒì¼ëª…
+	int biSq;			//?´ë¯¸ì? ë²ˆí˜¸
+	int boardNo;		//?´ë¯¸ì? ?‚½?…?œ ê¸?ë²ˆí˜¸
+	String biOrigin;	//?›ë³¸ì´ë¯¸ì? ?ŒŒ?¼ëª?
+	String biName;		//ë³?ê²½ì´ë¯¸ì? ?ŒŒ?¼ëª?
 	
 	public BoardImageDTO() {}
 	public BoardImageDTO(int biSq, int boardNo, String biOrigin, String biName) {

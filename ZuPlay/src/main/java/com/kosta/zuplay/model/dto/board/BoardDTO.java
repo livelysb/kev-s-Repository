@@ -1,13 +1,13 @@
-package com.kosta.zuplay.model.dto;
+package com.kosta.zuplay.model.dto.board;
 
 public class BoardDTO {
-	int boardNo;			//ê²Œì‹œê¸€ ë²ˆí˜¸
-	String playerNickname;	//ë‹‰ë„¤ì„
-	String boardTitle;		//ê¸€ì œëª©
-	int boardLike;			//ì¢‹ì•„ìš” ê°¯ìˆ˜
-	String boardContent;	//ë³¸ë¬¸ë‚´ìš©
-	String boardTime;		//ì‘ì„ì‹œê°„
-	int boardHits;			//ì¡°íšŒìˆ˜
+	int boardNo;			//ê²Œì‹œê¸? ë²ˆí˜¸
+	String playerNickname;	//?‹‰?„¤?„
+	String boardTitle;		//ê¸?? œëª?
+	int boardLike;			//ì¢‹ì•„?š” ê°??ˆ˜
+	String boardContent;	//ë³¸ë¬¸?‚´?š©
+	String boardTime;		//?‘?„?‹œê°?
+	int boardHits;			//ì¡°íšŒ?ˆ˜
 	
 	public BoardDTO() {}
 	public BoardDTO(int boardNo, String playerNickname, String boardTitle, int boardLike, String boardContent,

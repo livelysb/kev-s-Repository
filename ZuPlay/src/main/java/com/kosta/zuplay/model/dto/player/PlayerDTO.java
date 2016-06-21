@@ -1,18 +1,18 @@
-package com.kosta.zuplay.model.dto;
+package com.kosta.zuplay.model.dto.player;
 
 public class PlayerDTO {
-	String playerNickname;	//ë‹‰ë„¤ì„
-	String playerNaverId;	//ë„¤ì´ë²„ì•„ì´ë””
-	String playerGender;	//ì„±ë³„
-	String playerAge;		//ì—°ë ¹ëŒ€
-	int playerLike;			//í”Œë ˆì´ì–´ ì¶”ì²œìˆ˜
+	String playerNickname;	//?‹‰?„¤?„
+	String playerNaverId;	//?„¤?´ë²„ì•„?´?””
+	String playerGender;	//?„±ë³?
+	String playerAge;		//?—°? ¹??
+	int playerLike;			//?”Œ? ˆ?´?–´ ì¶”ì²œ?ˆ˜
 	int playerMoney;		//ê²Œì„ë¨¸ë‹ˆ
 	int playerRuby;			//ë£¨ë¹„(ìºì‰¬)
 	String playerGrade;		//ê³„ê¸‰
-	int playerDailyRank;	//ì¼ê°„ë­í¬
-	int playerWeeklyRank;	//ì£¼ê°„ë­í¬
-	int playerSeasonRank;	//ì‹œì¦Œë­í¬
-	int playerTotalRank;	//ì¢…í•©ë­í¬
+	int playerDailyRank;	//?¼ê°„ë­?¬
+	int playerWeeklyRank;	//ì£¼ê°„?­?¬
+	int playerSeasonRank;	//?‹œì¦Œë­?¬
+	int playerTotalRank;	//ì¢…í•©?­?¬
 	
 	public PlayerDTO() {}
 	public PlayerDTO(String playerNickname, String playerNaverId, String playerGender, String playerAge, int playerLike,

@@ -1,36 +1,36 @@
-package com.kosta.zuplay.model.dto;
+package com.kosta.zuplay.model.dto.stock;
 
 public class MasterDTO {
-	private String krxBioSectidxYn;			//KRXë°”ì´ì˜¤ì„¹í„° ì§€ìˆ˜ì—¬ë¶€
-	private String mktcapScaleCd;			//ì‹œê°€ì´ì•¡ê·œëª¨ì½”ë“œ
-	private double lwlmtprc;				//í•˜í•œê°€
-	private String krxSteelSectidxYn;		//KRXì² ê°•ì„¹í„° ì§€ìˆ˜ì—¬ë¶€
-	private String krxInsuSectidxYn;		//KRXì„¹í„°ì§€ìˆ˜ ë³´í—˜ì—¬ë¶€
-	private double uplmtprc;				//ìƒí•œê°€
-	private double prevddAccTrdvol;			//ì „ì¼ëˆ„ì ì²´ê²°ìˆ˜ëŸ‰
-	private String krxEnergyChemSectidxYn;	//KRXì—ë„ˆì§€í™”í•™ì„¹í„° ì§€ìˆ˜ì—¬ë¶€
-	private String haltYn;					//ê±°ë˜ì •ì§€ì—¬ë¶€
-	private String krxTransSectidxYn;		//KRXì„¹í„°ì§€ìˆ˜ ìš´ì†¡ì—¬ë¶€
-	private String isuSrtCd;				//ì¢…ëª©ë‹¨ì¶•ì½”ë“œ
-	private String govncExcelYn;			//ì§€ë°°êµ¬ì¡°ìš°ëŸ‰ì—¬ë¶€
-	private double parval;					//ì•¡ë©´ê°€
-	private String krxConstrSectidxYn;		//KRXê±´ì„¤ì„¹í„° ì§€ìˆ˜ì—¬ë¶€
-	private String kospiYn;					//ì½”ìŠ¤í”¼ ì—¬ë¶€
-	private String krxConsgoodSectidxYn;	//KRXì†Œë¹„ì¬ì„¹í„° ì§€ìˆ˜ì—¬ë¶€
-	private double listShrs;				//ìƒì¥ì£¼ì‹ìˆ˜
-	private String krxSecuSectidxYn;		//KRXì„¹í„°ì§€ìˆ˜ ì¦ê¶Œì—¬ë¶€
-	private String krxInfoCommSectidxYn;	//KRXì •ë³´í†µì‹ ì„¹í„° ì§€ìˆ˜ì—¬ë¶€
-	private double prevddAccTrdval;			//ì „ì¼ëˆ„ì ê±°ë˜ëŒ€ê¸ˆ
-	private String krxRetailSectidxYn;		//KRXì„¹í„°ì§€ìˆ˜ì†Œë¹„ììœ í†µì—¬ë¶€
-	private String krxSemiconSectidxYn;		//KRXë°˜ë„ì²´ì„¹í„° ì§€ìˆ˜ì—¬ë¶€
-	private String mfindYn;					//ì œì¡°ì—…ì—¬ë¶€
-	private String krxLeisureSectidxYn;		//KRXì„¹í„°ì§€ìˆ˜ë ˆì €ì—”í„°í…Œì¸ë¨¼íŠ¸ ì—¬ë¶€
-	private String krxAutosSectidxYn;		//KRXìë™ì°¨ì„¹í„° ì§€ìˆ˜ì—¬ë¶€
-	private String isuKorAbbrv;				//ì¢…ëª©í•œê¸€ì•½ëª…
-	private String krxFncSectidxYn;			//KRXê¸ˆìœµì„¹í„° ì§€ìˆ˜ì—¬ë¶€
-	private String krxShipSectidxYn;		//KRXì„¹í„°ì§€ìˆ˜ ì„ ë°•ì—¬ë¶€
-	private String krxFncSvcSectidxYn;		//KRXê¸ˆìœµì„œë¹„ìŠ¤ì„¹í„° ì§€ìˆ˜ì—¬ë¶€
-	private String krxMediaCommSectidxYn;	//KRXë¯¸ë””ì–´í†µì‹ ì„¹í„° ì§€ìˆ˜ì—¬ë¶€
+	private String krxBioSectidxYn;			//KRXë°”ì´?˜¤?„¹?„° ì§??ˆ˜?—¬ë¶?
+	private String mktcapScaleCd;			//?‹œê°?ì´ì•¡ê·œëª¨ì½”ë“œ
+	private double lwlmtprc;				//?•˜?•œê°?
+	private String krxSteelSectidxYn;		//KRXì² ê°•?„¹?„° ì§??ˆ˜?—¬ë¶?
+	private String krxInsuSectidxYn;		//KRX?„¹?„°ì§??ˆ˜ ë³´í—˜?—¬ë¶?
+	private double uplmtprc;				//?ƒ?•œê°?
+	private double prevddAccTrdvol;			//? „?¼?ˆ„? ì²´ê²°?ˆ˜?Ÿ‰
+	private String krxEnergyChemSectidxYn;	//KRX?—?„ˆì§??™”?•™?„¹?„° ì§??ˆ˜?—¬ë¶?
+	private String haltYn;					//ê±°ë˜? •ì§??—¬ë¶?
+	private String krxTransSectidxYn;		//KRX?„¹?„°ì§??ˆ˜ ?š´?†¡?—¬ë¶?
+	private String isuSrtCd;				//ì¢…ëª©?‹¨ì¶•ì½”?“œ
+	private String govncExcelYn;			//ì§?ë°°êµ¬ì¡°ìš°?Ÿ‰?—¬ë¶?
+	private double parval;					//?•¡ë©´ê?
+	private String krxConstrSectidxYn;		//KRXê±´ì„¤?„¹?„° ì§??ˆ˜?—¬ë¶?
+	private String kospiYn;					//ì½”ìŠ¤?”¼ ?—¬ë¶?
+	private String krxConsgoodSectidxYn;	//KRX?†Œë¹„ì¬?„¹?„° ì§??ˆ˜?—¬ë¶?
+	private double listShrs;				//?ƒ?¥ì£¼ì‹?ˆ˜
+	private String krxSecuSectidxYn;		//KRX?„¹?„°ì§??ˆ˜ ì¦ê¶Œ?—¬ë¶?
+	private String krxInfoCommSectidxYn;	//KRX? •ë³´í†µ?‹ ?„¹?„° ì§??ˆ˜?—¬ë¶?
+	private double prevddAccTrdval;			//? „?¼?ˆ„? ê±°ë˜??ê¸?
+	private String krxRetailSectidxYn;		//KRX?„¹?„°ì§??ˆ˜?†Œë¹„ì?œ ?†µ?—¬ë¶?
+	private String krxSemiconSectidxYn;		//KRXë°˜ë„ì²´ì„¹?„° ì§??ˆ˜?—¬ë¶?
+	private String mfindYn;					//? œì¡°ì—…?—¬ë¶?
+	private String krxLeisureSectidxYn;		//KRX?„¹?„°ì§??ˆ˜? ˆ???—”?„°?…Œ?¸ë¨¼íŠ¸ ?—¬ë¶?
+	private String krxAutosSectidxYn;		//KRX??™ì°¨ì„¹?„° ì§??ˆ˜?—¬ë¶?
+	private String isuKorAbbrv;				//ì¢…ëª©?•œê¸??•½ëª?
+	private String krxFncSectidxYn;			//KRXê¸ˆìœµ?„¹?„° ì§??ˆ˜?—¬ë¶?
+	private String krxShipSectidxYn;		//KRX?„¹?„°ì§??ˆ˜ ?„ ë°•ì—¬ë¶?
+	private String krxFncSvcSectidxYn;		//KRXê¸ˆìœµ?„œë¹„ìŠ¤?„¹?„° ì§??ˆ˜?—¬ë¶?
+	private String krxMediaCommSectidxYn;	//KRXë¯¸ë””?–´?†µ?‹ ?„¹?„° ì§??ˆ˜?—¬ë¶?
 	private String isuCd;					//ì¢…ëª©ì½”ë“œ
 
 	public MasterDTO() {}

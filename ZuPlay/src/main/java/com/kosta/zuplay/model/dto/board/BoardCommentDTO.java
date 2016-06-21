@@ -1,11 +1,11 @@
-package com.kosta.zuplay.model.dto;
+package com.kosta.zuplay.model.dto.board;
 
 public class BoardCommentDTO {
-	int bcSq;					//ì½”ë©˜íŠ¸ ë²ˆí˜¸
-	String playerNickname;		//ë‹‰ë„¤ìž„
-	int boardNo;				//ë³¸ë¬¸ ê¸€ë²ˆí˜¸
-	String bcCommentTime;		//ì½”ë©˜íŠ¸ ìž‘ì„±ì‹œê°„
-	String bcCommentContent;	//ì½”ë©˜íŠ¸ ë‚´ìš©
+	int bcSq;					//ì½”ë©˜?Š¸ ë²ˆí˜¸
+	String playerNickname;		//?‹‰?„¤?ž„
+	int boardNo;				//ë³¸ë¬¸ ê¸?ë²ˆí˜¸
+	String bcCommentTime;		//ì½”ë©˜?Š¸ ?ž‘?„±?‹œê°?
+	String bcCommentContent;	//ì½”ë©˜?Š¸ ?‚´?š©
 	
 	public BoardCommentDTO() {}
 	

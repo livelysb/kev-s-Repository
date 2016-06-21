@@ -1,10 +1,10 @@
-package com.kosta.zuplay.model.dto;
+package com.kosta.zuplay.model.dto.player;
 
 public class PlayerListsDTO {
 	int plSq;				//ë³´ìœ ì£¼ì‹ì½”ë“œ
 	String isuCd;			//ì¢…ëª©ì½”ë“œ
-	String playerNickname;	//ë‹‰ë„¤ì„
-	int plQuantity;			//ìˆ˜ëŸ‰
+	String playerNickname;	//?‹‰?„¤?„
+	int plQuantity;			//?ˆ˜?Ÿ‰
 	
 	public PlayerListsDTO() {}
 

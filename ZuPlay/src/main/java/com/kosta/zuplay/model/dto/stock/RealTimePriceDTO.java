@@ -1,10 +1,10 @@
-package com.kosta.zuplay.model.dto;
+package com.kosta.zuplay.model.dto.stock;
 
 public class RealTimePriceDTO {
-	int rpSq;		//실시간 주가 코드
+	int rpSq;		//?��?���? 주�? 코드
 	String isuCd;	//종목코드
-	int rpTrdPrc;	//체결가격
-	String rpTrdTm;	//체결시각,거래시각
+	int rpTrdPrc;	//체결�?�?
+	String rpTrdTm;	//체결?���?,거래?���?
 	
 	public RealTimePriceDTO() {}
 	public RealTimePriceDTO(int rpSq, String isuCd, int rpTrdPrc, String rpTrdTm) {

@@ -1,10 +1,10 @@
-package com.kosta.zuplay.model.dto;
+package com.kosta.zuplay.model.dto.player;
 
 public class PlayerQuestDTO {
-	int pqSq;				//ë³´ìœ í€˜ìŠ¤íŠ¸ ì½”ë“œ
-	String questCode;		//í€˜ìŠ¤íŠ¸ì½”ë“œ
-	String playerNickname;	//ë‹‰ë„¤ìž„
-	int pqDone;				//ìˆ˜í–‰íšŸìˆ˜
+	int pqSq;				//ë³´ìœ ?˜ìŠ¤?Š¸ ì½”ë“œ
+	String questCode;		//?˜ìŠ¤?Š¸ì½”ë“œ
+	String playerNickname;	//?‹‰?„¤?ž„
+	int pqDone;				//?ˆ˜?–‰?šŸ?ˆ˜
 	
 	public PlayerQuestDTO() {}
 	public PlayerQuestDTO(int pqSq, String questCode, String playerNickname, int pqDone) {

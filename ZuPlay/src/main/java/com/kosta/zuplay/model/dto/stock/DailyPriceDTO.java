@@ -1,10 +1,10 @@
-package com.kosta.zuplay.model.dto;
+package com.kosta.zuplay.model.dto.stock;
 
 public class DailyPriceDTO {
 	int dpSq;		//db코드
 	String isuCd;	//종목코드
-	int dpClsprc;	//종가
-	String dpDate;	//일자
+	int dpClsprc;	//종�?
+	String dpDate;	//?��?��
 	
 	public DailyPriceDTO() {}
 	public DailyPriceDTO(int dpSq, String isuCd, int dpClsprc, String dpDate) {

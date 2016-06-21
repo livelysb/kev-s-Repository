@@ -1,11 +1,11 @@
-package com.kosta.zuplay.model.dto;
+package com.kosta.zuplay.model.dto.item;
 
 public class ItemMarketDTO {
-	int imSq;				//ê²½ë§¤ì¥ ë“±ë¡ì½”ë“œ
-	String playerNickname;	//ë“±ë¡ì
-	String itemCode;		//ì•„ì´í…œ ì½”ë“œ
-	int imPurchasePrice;	//íŒë§¤ê°€
-	String imBidTime;		//ì…ì°°ì‹œê°„
+	int imSq;				//ê²½ë§¤?¥ ?“±ë¡ì½”?“œ
+	String playerNickname;	//?“±ë¡ì
+	String itemCode;		//?•„?´?…œ ì½”ë“œ
+	int imPurchasePrice;	//?Œë§¤ê?
+	String imBidTime;		//?…ì°°ì‹œê°?
 	
 	public ItemMarketDTO() {}
 	public ItemMarketDTO(int imSq, String playerNickname, String itemCode, int imPurchasePrice, String imBidTime) {

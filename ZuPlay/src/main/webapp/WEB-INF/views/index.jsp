@@ -16,7 +16,6 @@
 	<div class="zp-wrapper">
 		<div class="container-fluid">
 				<div class="row-fluid">
-				
 				<!-- 사이드바 Wrapper -->
 					<div class="zp-wrapper-side">
 						<div class="col-md-2">
@@ -41,7 +40,6 @@
 						</div>
 					</div>
 					<!-- 사이드바 Wrapper 끝 -->
-					
 					<div class="zp-wrapper-content">
 						<div class="col-md-10">
 							<!--본문-->

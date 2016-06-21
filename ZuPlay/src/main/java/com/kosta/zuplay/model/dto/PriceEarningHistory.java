@@ -1,10 +1,10 @@
 package com.kosta.zuplay.model.dto;
 
 public class PriceEarningHistory {
-	int pehSq;
-	String playerNickname;
-	int pehPe;
-	String pehDate;
+	int pehSq;				//수익률코드
+	String playerNickname;	//닉네임
+	int pehPe;				//수익률
+	String pehDate;			//일자
 	
 	public PriceEarningHistory() {}
 

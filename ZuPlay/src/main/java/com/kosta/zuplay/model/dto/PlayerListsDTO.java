@@ -1,10 +1,10 @@
 package com.kosta.zuplay.model.dto;
 
 public class PlayerListsDTO {
-	int plSq;
-	String isuCd;
-	String playerNickname;
-	int plQuantity;
+	int plSq;				//보유주식코드
+	String isuCd;			//종목코드
+	String playerNickname;	//닉네임
+	int plQuantity;			//수량
 	
 	public PlayerListsDTO() {}
 

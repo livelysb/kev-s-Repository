@@ -1,37 +1,37 @@
 package com.kosta.zuplay.model.dto;
 
 public class MasterDTO {
-	private String krxBioSectidxYn;
-	private String mktcapScaleCd;
-	private double lwlmtprc;
-	private String krxSteelSectidxYn;
-	private String krxInsuSectidxYn;
-	private double uplmtprc;
-	private double prevddAccTrdvol;
-	private String krxEnergyChemSectidxYn;
-	private String haltYn;
-	private String krxTransSectidxYn;
-	private String isuSrtCd;
-	private String govncExcelYn;
-	private double parval;
-	private String krxConstrSectidxYn;
-	private String kospiYn;
-	private String krxConsgoodSectidxYn;
-	private double listShrs;
-	private String krxSecuSectidxYn;
-	private String krxInfoCommSectidxYn;
-	private double prevddAccTrdval;
-	private String krxRetailSectidxYn;
-	private String krxSemiconSectidxYn;
-	private String mfindYn;
-	private String krxLeisureSectidxYn;
-	private String krxAutosSectidxYn;
-	private String isuKorAbbrv;
-	private String krxFncSectidxYn;
-	private String krxShipSectidxYn;
-	private String krxFncSvcSectidxYn;
-	private String krxMediaCommSectidxYn;
-	private String isuCd;
+	private String krxBioSectidxYn;			//KRX바이오섹터 지수여부
+	private String mktcapScaleCd;			//시가총액규모코드
+	private double lwlmtprc;				//하한가
+	private String krxSteelSectidxYn;		//KRX철강섹터 지수여부
+	private String krxInsuSectidxYn;		//KRX섹터지수 보험여부
+	private double uplmtprc;				//상한가
+	private double prevddAccTrdvol;			//전일누적체결수량
+	private String krxEnergyChemSectidxYn;	//KRX에너지화학섹터 지수여부
+	private String haltYn;					//거래정지여부
+	private String krxTransSectidxYn;		//KRX섹터지수 운송여부
+	private String isuSrtCd;				//종목단축코드
+	private String govncExcelYn;			//지배구조우량여부
+	private double parval;					//액면가
+	private String krxConstrSectidxYn;		//KRX건설섹터 지수여부
+	private String kospiYn;					//코스피 여부
+	private String krxConsgoodSectidxYn;	//KRX소비재섹터 지수여부
+	private double listShrs;				//상장주식수
+	private String krxSecuSectidxYn;		//KRX섹터지수 증권여부
+	private String krxInfoCommSectidxYn;	//KRX정보통신섹터 지수여부
+	private double prevddAccTrdval;			//전일누적거래대금
+	private String krxRetailSectidxYn;		//KRX섹터지수소비자유통여부
+	private String krxSemiconSectidxYn;		//KRX반도체섹터 지수여부
+	private String mfindYn;					//제조업여부
+	private String krxLeisureSectidxYn;		//KRX섹터지수레저엔터테인먼트 여부
+	private String krxAutosSectidxYn;		//KRX자동차섹터 지수여부
+	private String isuKorAbbrv;				//종목한글약명
+	private String krxFncSectidxYn;			//KRX금융섹터 지수여부
+	private String krxShipSectidxYn;		//KRX섹터지수 선박여부
+	private String krxFncSvcSectidxYn;		//KRX금융서비스섹터 지수여부
+	private String krxMediaCommSectidxYn;	//KRX미디어통신섹터 지수여부
+	private String isuCd;					//종목코드
 
 	public MasterDTO() {}
 	public MasterDTO(String krxBioSectidxYn, String mktcapScaleCd, double lwlmtprc, String krxSteelSectidxYn,

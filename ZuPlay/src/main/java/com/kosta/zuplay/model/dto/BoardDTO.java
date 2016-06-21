@@ -1,13 +1,13 @@
 package com.kosta.zuplay.model.dto;
 
 public class BoardDTO {
-	int boardNo;
-	String playerNickname;
-	String boardTitle;
-	int boardLike;
-	String boardContent;
-	String boardTime;
-	int boardHits;
+	int boardNo;			//게시글 번호
+	String playerNickname;	//닉네임
+	String boardTitle;		//글제목
+	int boardLike;			//좋아요 갯수
+	String boardContent;	//본문내용
+	String boardTime;		//작석시간
+	int boardHits;			//조회수
 	
 	public BoardDTO() {}
 	public BoardDTO(int boardNo, String playerNickname, String boardTitle, int boardLike, String boardContent,

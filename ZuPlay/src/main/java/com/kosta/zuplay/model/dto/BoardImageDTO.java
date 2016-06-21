@@ -1,10 +1,10 @@
 package com.kosta.zuplay.model.dto;
 
 public class BoardImageDTO {
-	int biSq;
-	int boardNo;
-	String biOrigin;
-	String biName;
+	int biSq;			//이미지 번호
+	int boardNo;		//이미지 삽입된 글번호
+	String biOrigin;	//원본이미지 파일명
+	String biName;		//변경이미지 파일명
 	
 	public BoardImageDTO() {}
 	public BoardImageDTO(int biSq, int boardNo, String biOrigin, String biName) {

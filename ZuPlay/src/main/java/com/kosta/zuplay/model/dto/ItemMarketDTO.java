@@ -1,11 +1,12 @@
 package com.kosta.zuplay.model.dto;
 
 public class ItemMarketDTO {
-	int imSq;
-	String playerNickname;
-	String itemCode;
-	int imPurchasePrice;
-	String imBidTime;
+	int imSq;				//경매장 등록코드
+	String playerNickname;	//등록자
+	String itemCode;		//아이템 코드
+	int imPurchasePrice;	//판매가
+	String imBidTime;		//입찰시간
+	
 	public ItemMarketDTO() {}
 	public ItemMarketDTO(int imSq, String playerNickname, String itemCode, int imPurchasePrice, String imBidTime) {
 		super();

@@ -1,18 +1,18 @@
 package com.kosta.zuplay.model.dto;
 
 public class PlayerDTO {
-	String playerNickname;
-	String playerNaverId;
-	String playerGender;
-	String playerAge;
-	int playerLike;
-	int playerMoney;
-	int playerRuby;
-	String playerGrade;
-	int playerDailyRank;
-	int playerWeeklyRank;
-	int playerSeasonRank;
-	int playerTotalRank;
+	String playerNickname;	//닉네임
+	String playerNaverId;	//네이버아이디
+	String playerGender;	//성별
+	String playerAge;		//연령대
+	int playerLike;			//플레이어 추천수
+	int playerMoney;		//게임머니
+	int playerRuby;			//루비(캐쉬)
+	String playerGrade;		//계급
+	int playerDailyRank;	//일간랭크
+	int playerWeeklyRank;	//주간랭크
+	int playerSeasonRank;	//시즌랭크
+	int playerTotalRank;	//종합랭크
 	
 	public PlayerDTO() {}
 	public PlayerDTO(String playerNickname, String playerNaverId, String playerGender, String playerAge, int playerLike,

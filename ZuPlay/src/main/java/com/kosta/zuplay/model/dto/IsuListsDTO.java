@@ -1,11 +1,11 @@
 package com.kosta.zuplay.model.dto;
 
 public class IsuListsDTO {
-	private String isuSrtCd;
-	private String isuKorAbbrv;
-	private String isuKorNm;
-	private String mktTpCd;
-	private String isuCd;
+	private String isuSrtCd;	//종목단축코드
+	private String isuKorAbbrv;	//종목 한글 약명
+	private String isuKorNm;	//종목한글명
+	private String mktTpCd;		//시장구분코드
+	private String isuCd;		//종목코드
 
 	public IsuListsDTO() {}
 	public IsuListsDTO(String isuSrtCd, String isuKorAbbrv, String isuKorNm, String mktTpCd, String isuCd) {

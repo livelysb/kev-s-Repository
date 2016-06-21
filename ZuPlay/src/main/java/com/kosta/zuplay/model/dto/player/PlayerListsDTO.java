@@ -3,8 +3,8 @@ package com.kosta.zuplay.model.dto.player;
 public class PlayerListsDTO {
 	int plSq;				//ë³´ìœ ì£¼ì‹ì½”ë“œ
 	String isuCd;			//ì¢…ëª©ì½”ë“œ
-	String playerNickname;	//?‹‰?„¤?„
-	int plQuantity;			//?ˆ˜?Ÿ‰
+	String playerNickname;	//ë‹‰ë„¤ì„
+	int plQuantity;			//ìˆ˜ëŸ‰
 	
 	public PlayerListsDTO() {}
 

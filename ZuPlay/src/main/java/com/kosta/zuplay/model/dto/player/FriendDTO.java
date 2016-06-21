@@ -2,10 +2,10 @@ package com.kosta.zuplay.model.dto.player;
 
 public class FriendDTO {
 	int friendSq;				//ì¹œêµ¬ì½”ë“œ
-	String playerNickname;		//?‹‰?„¤?„1
-	String playerNickname2;		//?‹‰?„¤?„2
-	boolean friendIsAccepted;	//?ˆ˜?½(T=ì¹œêµ¬ê´?ê³?/F=?‹ ì²?ë§?)
-	String friendDate;			//ì¹œêµ¬?‹ ì²??‹œê°?
+	String playerNickname;		//ë‹‰ë„¤ì„1
+	String playerNickname2;		//ë‹‰ë„¤ì„2
+	boolean friendIsAccepted;	//ì¹œêµ¬ ìˆ˜ë½ì—¬ë¶€(T=ì¹œêµ¬/F=ì¹œêµ¬ìˆ˜ë½ëŒ€ê¸°ì¤‘)
+	String friendDate;			//ì¹œêµ¬ì‹ ì²­ì¼ì
 	
 	public FriendDTO() {}
 	public FriendDTO(int friendSq, String playerNickname, String playerNickname2, boolean friendIsAccepted,

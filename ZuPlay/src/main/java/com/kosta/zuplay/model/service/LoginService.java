@@ -1,6 +1,5 @@
 package com.kosta.zuplay.model.service;
 
-import com.kosta.zuplay.model.dto.PlayerDTO;
 
 public interface LoginService {
 	/**

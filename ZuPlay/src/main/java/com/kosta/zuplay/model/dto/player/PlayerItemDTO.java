@@ -1,11 +1,11 @@
 package com.kosta.zuplay.model.dto.player;
 
 public class PlayerItemDTO {
-	int piSq;				//ë³´ìœ ?•„?´?…œì½”ë“œ
-	String playerNickname;	//?‹‰?„¤?„
-	String itemCode;		//?•„?´?…œì½”ë“œ
-	String piIsused;		//ì°©ìš©?—¬ë¶?
-	int piIndex;			//?¸ë²¤í† ë¦? ?œ„ì¹˜ì?? •
+	int piSq;				//ë³´ìœ ì•„ì´í…œì½”ë“œ
+	String playerNickname;	//ë‹‰ë„¤ì„
+	String itemCode;		//ì•„ì´í…œì½”ë“œ
+	String piIsused;		//ì°©ìš©ì—¬ë¶€
+	int piIndex;			//ì¸ë²¤í† ë¦¬ ìœ„ì¹˜ ì¸ë±ìŠ¤
 	
 	public PlayerItemDTO() {}
 	public PlayerItemDTO(int piSq, String playerNickname, String itemCode, String piIsused, int piIndex) {

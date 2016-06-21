@@ -1,12 +1,12 @@
 package com.kosta.zuplay.model.dto.item;
 
 public class ItemDTO {
-	String itemCode;	//?•„?´?…œì½”ë“œ
-	String itemName;	//?•„?´?…œ?´ë¦?
-	int itemPrice;		//?•„?´?…œê°?ê²?
-	String itemClass;	//?•„?´?…œêµ¬ë¶„
-	String itemGrade;	//?•„?´?…œ?“±ê¸?
-	String itemImg;		//?•„?´?…œ?´ë¯¸ì?
+	String itemCode;	//ì•„ì´í…œì½”ë“œ
+	String itemName;	//ì•„ì´í…œì´ë¦„
+	int itemPrice;		//ì•„ì´í…œê°€ê²©
+	String itemClass;	//ì•„ì´í…œêµ¬ë¶„
+	String itemGrade;	//ì•„ì´í…œë“±ê¸‰
+	String itemImg;		//ì•„ì´í…œì´ë¯¸ì§€
 	
 	public ItemDTO() {}
 	public ItemDTO(String itemCode, String itemName, int itemPrice, String itemClass, String itemGrade,

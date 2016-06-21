@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kosta.zuplay.model.dao.StockUpdate">
+	<select id="getIsuSrtCd" resultType="String">
+		select isusrtcd from lists
+	</select>
+	<insert id="insertTrdPrc" parameterType="priceDTO">
+		insert into realtime_price(RP_SQ, isuCd, RP_trdPrc, RP_trdTm) values(rp_sq.nextval, #{isuCd}, #{trdPrc}, #{trdTm})
+	</insert>
 	<update id="priceMerge" parameterType="priceDTO">
 		merge into price
 		using dual

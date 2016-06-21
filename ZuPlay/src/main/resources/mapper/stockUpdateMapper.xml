@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.zuplay.model.dao.StockUpdate">
+	<update id="priceMerge" parameterType="priceDTO">
+		merge into price
+		using dual
+		on (isuCd=#{isuCd})
+		when matched then
+		update set
+		infoTpCd = #{infoTpCd},
+		mktTpCd = #{mktTpCd},
+		cmpprevddTpCd = #{cmpprevddTpCd} ,
+		cmpprevddPrc =
+		#{cmpprevddPrc} ,
+		trdPrc = #{trdPrc} ,
+		trdvol = #{trdvol} ,
+		opnprc =
+		#{opnprc} ,
+		hgprc = #{hgprc} ,
+		lwprc = #{lwprc} ,
+		accTrdvol =
+		#{accTrdvol} ,
+		accTrdval = #{accTrdval} ,
+		lstAskbidTpCd =
+		#{lstAskbidTpCd} ,
+		trdTm = #{trdTm} ,
+		askordPrc_1 = #{askordPrc_1} ,
+		bidordPrc_1 = #{bidordPrc_1} ,
+		mkStatTpCd = #{mkStatTpCd}
+		when not
+		matched then
+		insert into price
+		(infoTpCd,mktTpCd,isuCd,cmpprevddTpCd,cmpprevddPrc,trdPrc,trdvol,opnprc,hgprc,lwprc,accTrdvol,accTrdval,lstAskbidTpCd,
+		trdTm,askordPrc_1,bidordPrc_1,mkStatTpCd)
+		values
+		(#{infoTpCd},#{mktTpCd},#{isuCd},#{cmpprevddTpCd},#{cmpprevddPrc},#{trdPrc},#{trdvol},#{opnprc},#{hgprc},#{lwprc},#{accTrdvol},
+		#{accTrdval},#{lstAskbidTpCd},#{trdTm},#{askordPrc_1},#{bidordPrc_1},#{mkStatTpCd})
+	</update>
+</mapper>

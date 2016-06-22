@@ -138,6 +138,7 @@ function testcallback() {
         		 dataType:"text",
         		 data: $("#nickForm").serialize(),
         		 success:function(result){
+        			 alert(result);
         			 location.href="index";
         		 },
         		 error:function(err){

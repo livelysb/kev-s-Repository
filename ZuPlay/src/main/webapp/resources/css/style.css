@@ -8,10 +8,10 @@ html, body, .zp-wrapper, .zp-wrapper-content{height:100%;}
 .zp-wrapper>.row>.col-md-1{width:12.5% !important;}
 .zp-wrapper>.row>.col-md-12{width:87.5% !important;}
 
-.zp-wrapper-avatar-main {position: relative; min-height:285px; max-height:285px; width:200px; border: 2px solid; border-radius: 25px;}
+.zp-wrapper-avatar-main {position: relative; height:285px; max-height:285px; width:250px; border: 2px solid; border-radius: 25px;}
 .zp-wrapper-avatar-main * {width:100%;}
-.zp-wrapper-avatar{position: relative; height:100%;}
-.zp-wrapper-avatar img{position: absolute;}
+.zp-wrapper-avatar{position: relative; width:100%; height:100%;}
+.zp-wrapper-avatar img{position: absolute; max-width:100%; max-height:auto;}
 
 .full-width, .full-width *{width:100%}
 .zp-wrapper-screen{height:100%}
@@ -19,9 +19,19 @@ html, body, .zp-wrapper, .zp-wrapper-content{height:100%;}
 .zp-wrapper-content>.row:nth-child(2){height:25%;}
 .zp-wrapper-footer>.col-md-5{height:100%; padding: 1px}
 
+.zp-wrapper-screen{position: relative;}
+
 .zp-wrapper-chat{height:85%}
 .zp-wrapper-chat-input{height:13%}
 .zp-wrapper-chat-input>input[type=text]{height:100%}
 
 .zp-chat-input-id{width:20%}
 .zp-chat-input{width:80%}
+
+.zp-warpper-toolbar{height: 100%}
+
+.zp-warpper-toolbar-menu{height: 15%}
+.zp-warpper-toolbar-icons{height: 70%; text-align: center; line-height: 200px}
+.zp-warpper-toolbar-icons>div>.glyphicon{font-size: 6em; vertical-align: middle; text-align: center;}
+
+.zp-warpper-toolbar-status{height: 15%}

@@ -17,8 +17,10 @@
 	<result column="player_Total_Rank" property="playerTotalRank"/>	
 </resultMap>
 	<select id="firstLoginCheck" resultMap="firstLoginCheckMap" parameterType="String">
-		select * from player where naver_Id=#{naverId}
+		select * from player where player_Naver_Id=#{playerNaverId}
 	</select>
+	
+	
 
 	<insert id="joinMember" parameterType="playerDTO">
 		insert into player values 

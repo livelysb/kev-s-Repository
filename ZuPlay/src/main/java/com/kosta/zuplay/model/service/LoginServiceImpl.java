@@ -17,6 +17,7 @@ public class LoginServiceImpl implements LoginService {
 	public boolean firstLoginCheck(String naverId) {
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
 		PlayerDTO playerDTO=loginDAO.firstLoginCheck(naverId);
+		System.out.println("[ Log ] naverId = "+ naverId);
 		if(playerDTO!=null){
 			return false;
 		}
@@ -27,6 +28,7 @@ public class LoginServiceImpl implements LoginService {
 	public boolean joinMember(PlayerDTO playerDTO) {
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
 		int result=loginDAO.joinMember(playerDTO);
+		System.out.println("[ Log ] playerNaverId = " +playerDTO.getPlayerNaverId()+" | playerNickname"+playerDTO.getPlayerNickname()+" | playerGender"+playerDTO.getPlayerGender()+" | playerAge"+playerDTO.getPlayerAge());
 		if(result==0){
 			return false;
 		}

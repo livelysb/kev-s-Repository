@@ -43,9 +43,10 @@
 				<!-- body -->
 				<div class="modal-body">
 					<form action="joinMember" method="post" id="nickForm">
-						별명 :  <input type="text" name="playerNaverId" id="playerNaverId">
+						별명 : <input type="text" name="playerNickname" id="playerNickname"> 
 						<button type="button" id="NickCheck" class="btn btn-default">중복확인</button>
 						<div id="divIdCheck"></div>
+						<input type="hidden" name="playerNaverId" id="playerNaverId"/>
 						<input type="hidden" name="playerGender" id="playerGender"/>
     					<input type="hidden" name="playerAge" id="playerAge"/>
 						
@@ -53,8 +54,6 @@
 						<!-- <input type="hidden" id="playerNaverId" name="playerNaverId">
 						<input type="hidden" id="playerGender" name="playerGender">
 						<input type="hidden" id="playerAge" name="playerAge"> -->
-						
-						
 						
 					</form>
 				</div>
@@ -91,8 +90,9 @@ function testcallback() {
     	    Logincheck();
     	 } 
     	 
+    	 
+		//최초로그인인지 확인 후 모달띄우거나 메인페이지로 이동	 
     	 function Logincheck(){
-    		
     		 $.ajax({
     			url: "firstLoginCheck" ,
     			type:"post",
@@ -100,11 +100,9 @@ function testcallback() {
     			data : "playerNaverId=" + $("#playerNaverId").val(),
     			success:function(result){
     				if(result==true){
-    					//모달띄어줘
-    					alert("모달성공 : " + result);
+    					
     					$("#nickModal").modal("show");
     				}else{
-    					//메인으로 페이지이동
     					location.href="index";
     				}
     			} ,
@@ -114,12 +112,24 @@ function testcallback() {
     		}) 
     		
     	 }
-
-  
     $(function() {
-    	
     	 naverLogin.get_naver_userprofile("testcallback()");
-    	
+    	 
+    	 //모달에서 닉네임 입력적고 확인 누를 시 정보저장후 메인페이지로 이동
+    	 $("#nickConfirm").on("click",function (){
+    		 $.ajax({
+        		 url:"joinMember",
+        		 type:"post",
+        		 dataType:"text",
+        		 data: $("#nickForm").serialize(),
+        		 success:function(result){
+        			 location.href="index";
+        		 },
+        		 error:function(err){
+        			 alert(err +"에러발생");
+        		 }
+    		 })
+    	 })
    }) 
 	</script>
 </html>

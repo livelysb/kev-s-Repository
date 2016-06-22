@@ -1,5 +1,8 @@
 package com.kosta.zuplay.model.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class QuestDTO {
 	String questCode;		//퀘스트코드
 	String questClass;		//퀘스트분류

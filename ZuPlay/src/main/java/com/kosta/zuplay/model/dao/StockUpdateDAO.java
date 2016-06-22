@@ -2,14 +2,21 @@ package com.kosta.zuplay.model.dao;
 
 import java.util.List;
 
+import com.kosta.zuplay.model.dto.stock.MasterDTO;
 import com.kosta.zuplay.model.dto.stock.PriceDTO;
 
 public interface StockUpdateDAO {
 
-	void priceMerge(PriceDTO priceDTO);
+	void mergePrice(PriceDTO priceDTO);
 	
 	List<String> getIsuSrtCd();
 	
 	void insertTrdPrc(PriceDTO priceDTO);
+	
+	void mergeMaster(MasterDTO masterDTO);
+	
+	List<PriceDTO> getPrice();
+	
+	void insertDailyPrice(PriceDTO priceDTO);
 
 }

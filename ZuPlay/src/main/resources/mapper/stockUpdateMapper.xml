@@ -5,6 +5,12 @@
 	<select id="getIsuSrtCd" resultType="String">
 		select isusrtcd from lists
 	</select>
+	<select id="getPrice" resultType="priceDTO">
+		select * from price
+	</select>
+	<insert id="insertDailyPrice" parameterType="priceDTO">
+		insert into daily_price(dp_sq, isuCd, dp_clsprc, dp_date) values(rp_sq.nextval, #{isuCd}, #{trdPrc}, sysdate)
+	</insert>
 	<insert id="insertTrdPrc" parameterType="priceDTO">
 		insert into realtime_price(RP_SQ, isuCd, RP_trdPrc, RP_trdTm) values(rp_sq.nextval, #{isuCd}, #{trdPrc}, #{trdTm})
 	</insert>

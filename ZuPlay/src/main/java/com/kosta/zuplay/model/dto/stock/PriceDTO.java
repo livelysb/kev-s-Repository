@@ -2,7 +2,7 @@ package com.kosta.zuplay.model.dto.stock;
 
 public class PriceDTO
 {
-	 private String mktStatTpCd;		//장상태구분코드
+	 	private String mktStatTpCd;		//장상태구분코드
 	    private String trdTm;			//체결시각,거래시각
 	    private double trdvol;			//체결수량,거래량
 	    private double cmpprevddPrc;	//전일대비가격

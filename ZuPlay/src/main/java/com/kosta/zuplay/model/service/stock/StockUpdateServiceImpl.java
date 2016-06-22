@@ -19,16 +19,24 @@ public class StockUpdateServiceImpl implements StockUpdateService {
 	public void actionPerMin() {
 		updateStockPrice.updateStockPrice();
 	}
-
+	/**
+	 * 수행사항
+	 * 1. 마스터정보를 업데이트한다.
+	 * 2. 장을 오픈한다. ( 거래 활성화 )
+	 * */
 	@Scheduled(cron="0 30 9 * * *") //매일 아홉시반에 작동
 	@Override
 	public void actionAtNine() {
-		//
+		updateStockPrice.updateMaster();
 	}
 
+	/**
+	 * 수행사항
+	 * 1. 현재 체결가를 조회하여 DAILY_PRICE 테이블에 저장한다.
+	 * */
 	@Scheduled(cron="0 30 15 * * *") //매일 세시반에 작동
 	@Override
 	public void actionAtFour() {
-		
+		updateStockPrice.insertDailyPrice();
 	}
 }

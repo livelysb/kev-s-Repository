@@ -99,7 +99,7 @@ function testcallback() {
     			dataType:"text",  
     			data : "playerNaverId=" + $("#playerNaverId").val(),
     			success:function(result){
-    				if(result==true){
+    				if(result=="true"){
     					
     					$("#nickModal").modal("show");
     				}else{

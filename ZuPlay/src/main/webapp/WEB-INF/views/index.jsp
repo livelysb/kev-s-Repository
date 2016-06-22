@@ -55,7 +55,7 @@
 					</div>
 					
 					<!-- Footer -->
-					<div class="row jqui zp-wrapper-footer">
+					<div class="row scope-jqui zp-wrapper-footer">
 						<div class="col-md-5">
 						
 							<div class="zp-wrapper-chat">
@@ -78,8 +78,41 @@
 							<div class="zp-wrapper-chat-input">
 							<input type="text" class="zp-chat-input-id"/><input type="text" class="zp-chat-input"/>
 						</div>
+						
 						</div>
-						<div class="col-md-7"></div>
+						<div class="col-md-7 zp-warpper-toolbar">
+							<div class="row zp-warpper-toolbar-menu">
+								helllllllllllllo
+							</div>
+							<div class="row zp-warpper-toolbar-icons">
+								<div class="col-md-1">
+									 <span class="glyphicon glyphicon-briefcase"></span>
+								</div>
+								<div class="col-md-1">
+								<span class="glyphicon glyphicon-flag"></span>
+								</div>
+								<div class="col-md-1">
+								<span class="glyphicon glyphicon-user"></span>
+								</div>
+								<div class="col-md-1">
+								<span class="glyphicon glyphicon-gift"></span></div>
+								<div class="col-md-1">
+								<span class="glyphicon glyphicon-grain"></span></div>
+								<div class="col-md-1">
+								<span class="glyphicon glyphicon-knight"></span></div>
+								<div class="col-md-1">
+								<span class="glyphicon glyphicon-send"></span></div>
+								<div class="col-md-1">
+								<span class="glyphicon glyphicon-cog"></span></div>
+								<div class="col-md-2"></div>
+								<div class="col-md-2"></div>
+							</div>
+							<div class="row zp-warpper-toolbar-status">
+								<div class="col-md-2">cash</div>
+								<div class="col-md-2">ruby</div>
+								<div class="col-md-3 col-md-offset-5">time</div>
+							</div>
+						</div>
 					</div>
 				</div>
 		</div>

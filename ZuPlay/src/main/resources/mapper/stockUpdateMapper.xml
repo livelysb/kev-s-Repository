@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kosta.zuplay.model.dao.StockUpdate">
-	<select id="getIsuSrtCd" resultType="String">
-		select isusrtcd from lists
+<mapper namespace="com.kosta.zuplay.model.dao.StockUpdateDAO">
+	<select id="getLists" resultType="ListsDTO">
+		select * from lists
 	</select>
 	<select id="getPrice" resultType="priceDTO">
 		select * from price
@@ -14,39 +14,123 @@
 	<insert id="insertTrdPrc" parameterType="priceDTO">
 		insert into realtime_price(RP_SQ, isuCd, RP_trdPrc, RP_trdTm) values(rp_sq.nextval, #{isuCd}, #{trdPrc}, #{trdTm})
 	</insert>
-	<update id="priceMerge" parameterType="priceDTO">
+	<update id="mergeIsu" parameterType="ListsDTO">
+		merge into lists
+		using
+		dual
+		on
+		(isuCd=#{isuCd})
+		when matched then
+		update set
+		mktTpCd=#{mktTpCd,
+		jdbcType=VARCHAR},isuSrtCd=#{isuSrtCd},isuKorNm=#{isuKorNm},isuKorAbbrv=#{isuKorAbbrv}
+		when not matched then
+		insert
+		(mktTpCd,isuCd,isuSrtCd,isuKorNm,isuKorAbbrv)
+		values (#{mktTpCd,
+		jdbcType=VARCHAR},#{isuCd},#{isuSrtCd},#{isuKorNm},#{isuKorAbbrv})
+	</update>
+	
+		
+	<update id="mergeMaster" parameterType="masterDTO">
+	merge into master
+	using
+	dual
+	on (isuCd=#{isuCd})
+	when matched then
+	update
+	set
+	isuSrtCd = #{isuSrtCd},
+	isuKorAbbrv = #{isuKorAbbrv},
+	govncExcelYn= #{govncExcelYn},
+	haltYn = #{haltYn},
+	mktcapScaleCd = #{mktcapScaleCd},
+	mfindYn = #{mfindYn},
+	krxAutosSectidxYn = #{krxAutosSectidxYn},
+	krxSemiconSectidxYn = #{krxSemiconSectidxYn},
+	krxBioSectidxYn = #{krxBioSectidxYn},
+	krxFncSectidxYn = #{krxFncSectidxYn},
+	krxInfoCommSectidxYn = #{krxInfoCommSectidxYn},
+	krxEnergyChemSectidxYn = #{krxEnergyChemSectidxYn},
+	krxSteelSectidxYn = #{krxSteelSectidxYn},
+	krxConsgoodSectidxYn = #{krxConsgoodSectidxYn},
+	krxMediaCommSectidxYn = #{krxMediaCommSectidxYn},
+	krxConstrSectidxYn = #{krxConstrSectidxYn},
+	krxFncSvcSectidxYn = #{krxFncSvcSectidxYn},
+	krxSecuSectidxYn = #{krxSecuSectidxYn},
+	krxShipSectidxYn = #{krxShipSectidxYn},
+	prevddAccTrdvol = #{prevddAccTrdvol},
+	prevddAccTrdval = #{prevddAccTrdval},
+	uplmtprc = #{uplmtprc},
+	lwlmtprc = #{lwlmtprc},
+	parval = #{parval},
+	listShrs = #{listShrs},
+	krxInsuSectidxYn = #{krxInsuSectidxYn},
+	krxTransSectidxYn = #{krxTransSectidxYn},
+	krxRetailSectidxYn = #{krxRetailSectidxYn},
+	krxLeisureSectidxYn = #{krxLeisureSectidxYn}
+
+	when not matched then
+	insert(isuCd, isuSrtCd ,isuKorAbbrv ,govncExcelYn ,haltYn ,mktcapScaleCd ,mfindYn ,krxAutosSectidxYn ,krxSemiconSectidxYn
+	,krxBioSectidxYn ,krxFncSectidxYn ,
+	krxInfoCommSectidxYn
+	,krxEnergyChemSectidxYn ,krxSteelSectidxYn ,krxConsgoodSectidxYn
+	,krxMediaCommSectidxYn ,krxConstrSectidxYn ,
+	krxFncSvcSectidxYn
+	,krxSecuSectidxYn ,krxShipSectidxYn ,prevddAccTrdvol ,prevddAccTrdval
+	,uplmtprc ,lwlmtprc ,
+	parval ,listShrs ,krxInsuSectidxYn
+	,krxTransSectidxYn ,krxRetailSectidxYn ,krxLeisureSectidxYn)
+	values(
+	#{isuCd},
+	#{isuSrtCd},
+	#{isuKorAbbrv},
+	#{govncExcelYn},
+	#{haltYn},
+	#{mktcapScaleCd},
+	#{mfindYn},
+	#{krxAutosSectidxYn},
+	#{krxSemiconSectidxYn},
+	#{krxBioSectidxYn},
+	#{krxFncSectidxYn},
+	#{krxInfoCommSectidxYn},
+	#{krxEnergyChemSectidxYn},
+	#{krxSteelSectidxYn},
+	#{krxConsgoodSectidxYn},
+	#{krxMediaCommSectidxYn},
+	#{krxConstrSectidxYn},
+	#{krxFncSvcSectidxYn},
+	#{krxSecuSectidxYn},
+	#{krxShipSectidxYn},
+	#{prevddAccTrdvol},
+	#{prevddAccTrdval},
+	#{uplmtprc},
+	#{lwlmtprc},
+	#{parval},
+	#{listShrs},
+	#{krxInsuSectidxYn},
+	#{krxTransSectidxYn},
+	#{krxRetailSectidxYn},
+	#{krxLeisureSectidxYn})
+	</update>
+	<update id="mergePrice" parameterType="priceDTO">
 		merge into price
 		using dual
 		on (isuCd=#{isuCd})
 		when matched then
 		update set
-		infoTpCd = #{infoTpCd},
-		mktTpCd = #{mktTpCd},
-		cmpprevddTpCd = #{cmpprevddTpCd} ,
-		cmpprevddPrc =
-		#{cmpprevddPrc} ,
-		trdPrc = #{trdPrc} ,
-		trdvol = #{trdvol} ,
-		opnprc =
-		#{opnprc} ,
-		hgprc = #{hgprc} ,
-		lwprc = #{lwprc} ,
-		accTrdvol =
-		#{accTrdvol} ,
-		accTrdval = #{accTrdval} ,
-		lstAskbidTpCd =
-		#{lstAskbidTpCd} ,
-		trdTm = #{trdTm} ,
-		askordPrc_1 = #{askordPrc_1} ,
-		bidordPrc_1 = #{bidordPrc_1} ,
-		mkStatTpCd = #{mkStatTpCd}
-		when not
-		matched then
-		insert into price
-		(infoTpCd,mktTpCd,isuCd,cmpprevddTpCd,cmpprevddPrc,trdPrc,trdvol,opnprc,hgprc,lwprc,accTrdvol,accTrdval,lstAskbidTpCd,
-		trdTm,askordPrc_1,bidordPrc_1,mkStatTpCd)
+		cmpprevddTpCd = #{cmpprevddTpCd},
+		cmpprevddPrc = #{cmpprevddPrc},
+		trdPrc = #{trdPrc},
+		trdvol = #{trdvol},
+		opnprc = #{opnprc},
+		hgprc = #{hgprc},
+		lwprc =	#{lwprc},
+		trdTm = #{trdTm},
+		mktStatTpCd = #{mktStatTpCd}
+		when not matched then
+		insert(isuCd,cmpprevddTpCd,cmpprevddPrc,trdPrc,trdvol,opnprc,hgprc,lwprc,trdTm,mktStatTpCd)
 		values
-		(#{infoTpCd},#{mktTpCd},#{isuCd},#{cmpprevddTpCd},#{cmpprevddPrc},#{trdPrc},#{trdvol},#{opnprc},#{hgprc},#{lwprc},#{accTrdvol},
-		#{accTrdval},#{lstAskbidTpCd},#{trdTm},#{askordPrc_1},#{bidordPrc_1},#{mkStatTpCd})
+		(#{isuCd},#{cmpprevddTpCd},#{cmpprevddPrc},#{trdPrc},#{trdvol},#{opnprc},#{hgprc},#{lwprc},#{trdTm},#{mktStatTpCd})
 	</update>
 </mapper>

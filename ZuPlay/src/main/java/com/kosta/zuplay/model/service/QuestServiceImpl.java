@@ -16,8 +16,6 @@ public class QuestServiceImpl implements QuestService {
 
 	@Autowired
 	private SqlSession sqlSession;
-	@Autowired
-	private Random random;
 	
 	@Override
 	public List<QuestDTO> questSelectAll(String playerNickname) {
@@ -38,6 +36,7 @@ public class QuestServiceImpl implements QuestService {
 
 	@Override
 	public boolean questSelectRan(String playerNickname) {
+		Random random = new Random();
 		QuestDAO questDAO=sqlSession.getMapper(QuestDAO.class);
 		int count=questDAO.questCount("common");
 		int questCode=random.nextInt(count+1);

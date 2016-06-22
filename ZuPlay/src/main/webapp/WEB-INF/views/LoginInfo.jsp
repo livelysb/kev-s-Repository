@@ -86,7 +86,6 @@ function testcallback() {
     	    $("#playerNaverId").val(naverLogin.getProfileData('email'));
     	    $("#playerGender").val(naverLogin.getProfileData('gender'));
     	    $("#playerAge").val(naverLogin.getProfileData('age'));
-    	    alert($("#playerNaverId").val());
     	    Logincheck();
     	 } 
     	 

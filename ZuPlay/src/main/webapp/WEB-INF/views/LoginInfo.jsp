@@ -43,7 +43,7 @@
 				<!-- body -->
 				<div class="modal-body">
 					<form action="joinMember" method="post" id="nickForm">
-						별명 :  <input type="text" name="playerNickname" id="playerNickname">
+						별명 :  <input type="text" name="playerNaverId" id="playerNaverId">
 						<button type="button" id="NickCheck" class="btn btn-default">중복확인</button>
 						<div id="divIdCheck"></div>
 						<input type="hidden" name="playerGender" id="playerGender"/>
@@ -72,6 +72,7 @@
 	
 <script src="resources/js/jquery-2.2.4.min.js"></script>
 <script src="resources/js/naverLogin_implicit-1.0.2.js"></script>
+
 <script src="resources/js/jquery-ui.min.js"></script>
 <script src="resources/js/jquery.cookie.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
@@ -79,38 +80,45 @@
 
 <script type="text/javascript">
 
-    var naverLogin = new naver_id_login("MEu9lHVoIBXQU0fULcr6","http://127.0.0.1:8000/zuplay/LoginInfo");
+var naverLogin = new naver_id_login("MEu9lHVoIBXQU0fULcr6","http://127.0.0.1:8000/zuplay/LoginInfo");
 
-   //get_naver_userprofile 동작후 callback 될 function
-    function testcallback() {
-      alert(naverLogin.getProfileData('email'))
-      $("#playerNaverId").val(naverLogin.getProfileData('email'));
-      $("#playerGender").val(naverLogin.getProfileData('gender'));
-      $("#playerAge").val(naverLogin.getProfileData('age'));
-   } 
+//get_naver_userprofile 동작후 callback 될 function
+function testcallback() {
+    	    $("#playerNaverId").val(naverLogin.getProfileData('email'));
+    	    $("#playerGender").val(naverLogin.getProfileData('gender'));
+    	    $("#playerAge").val(naverLogin.getProfileData('age'));
+    	    alert($("#playerNaverId").val());
+    	    Logincheck();
+    	 } 
+    	 
+    	 function Logincheck(){
+    		
+    		 $.ajax({
+    			url: "firstLoginCheck" ,
+    			type:"post",
+    			dataType:"text",  
+    			data : "playerNaverId=" + $("#playerNaverId").val(),
+    			success:function(result){
+    				if(result==true){
+    					//모달띄어줘
+    					alert("모달성공 : " + result);
+    					$("#nickModal").modal("show");
+    				}else{
+    					//메인으로 페이지이동
+    					location.href="index";
+    				}
+    			} ,
+    			error:function(err){
+    				alert(err +"에러발생");
+    			}
+    		}) 
+    		
+    	 }
+
+  
     $(function() {
-        naverLogin.get_naver_userprofile("testcallback()");
-    	$.ajax({
-    		url: "firstLoginCheck" ,
-			type:"post",
-			dataType:"text",  
-			data : "playerNickname=" + $("#playerNaverId").val(),
-			success:function(result){
-				if(result==true){
-					//모달띄어줘
-					alert("모달성공 : " + result);
-					$("#nickModal").modal("show");
-				}else{
-					//메인으로 페이지이동
-					location.href="index";
-				}
-			} ,
-			error:function(err){
-				alert(err +"에러발생");
-			}
-    	})
     	
- 
+    	 naverLogin.get_naver_userprofile("testcallback()");
     	
    }) 
 	</script>

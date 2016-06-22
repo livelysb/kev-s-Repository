@@ -24,6 +24,7 @@ public class LoginController {
 	@RequestMapping(value="firstLoginCheck",method=RequestMethod.POST)
 	@ResponseBody
 	public boolean firstLoginCheck(String playerNaverId){
+		System.out.println(playerNaverId);
 		boolean firstLogin=loginServiceImpl.firstLoginCheck(playerNaverId);
 		return firstLogin;
 	}

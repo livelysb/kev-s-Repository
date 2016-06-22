@@ -100,7 +100,6 @@ function testcallback() {
     			data : "playerNaverId=" + $("#playerNaverId").val(),
     			success:function(result){
     				if(result=="true"){
-    					
     					$("#nickModal").modal("show");
     				}else{
     					location.href="index";
@@ -110,8 +109,25 @@ function testcallback() {
     				alert(err +"에러발생");
     			}
     		}) 
-    		
     	 }
+		
+		
+		//닉네임 중복체크
+    	 $("#NickCheck").on("click",function (){
+ 			$.ajax({
+ 				url: "checkRepetition" ,
+ 				type:"post",
+ 				dataType:"text",  
+ 				data : "playerNickname=" + $("#playerNickname").val(),
+ 				success:function(result){
+ 					$("#divIdCheck").html(result);
+ 				} ,
+ 				error:function(err){
+ 					alert(err +"에러발생");
+ 				}
+ 			})
+ 		})	
+		
     $(function() {
     	 naverLogin.get_naver_userprofile("testcallback()");
     	 

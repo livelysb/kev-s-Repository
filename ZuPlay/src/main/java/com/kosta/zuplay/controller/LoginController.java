@@ -30,9 +30,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="joinMember")
-	public String joinMember(String playerNickname,String playerNaverId,String playerGender,String playerAge){
+	@ResponseBody
+	public boolean joinMember(String playerNickname,String playerNaverId,String playerGender,String playerAge){
 		boolean joinMember=loginServiceImpl.joinMember(new PlayerDTO(playerNickname, playerNaverId, playerGender, playerAge, 0, 0, 0, "마스터", 1, 1, 1, 1));
-		return "/";
+		return joinMember;
 	}
 	
 	@RequestMapping(value="checkRepetition")

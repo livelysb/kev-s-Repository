@@ -2,7 +2,7 @@ package com.kosta.zuplay.model.dto.stock;
 
 public class PriceDTO
 {
-	 private String mkStatTpCd;		//장상태구분코드
+	 private String mktStatTpCd;		//장상태구분코드
 	    private String trdTm;			//체결시각,거래시각
 	    private double trdvol;			//체결수량,거래량
 	    private double cmpprevddPrc;	//전일대비가격
@@ -15,10 +15,10 @@ public class PriceDTO
 
 
     public PriceDTO() {}
-    public PriceDTO(String mkStatTpCd, String trdTm, double trdvol, double cmpprevddPrc, double trdPrc, double hgprc,
+    public PriceDTO(String mktStatTpCd, String trdTm, double trdvol, double cmpprevddPrc, double trdPrc, double hgprc,
 			double lwprc, String cmpprevddTpCd, double opnprc, String isuCd) {
 		super();
-		this.mkStatTpCd = mkStatTpCd;
+		this.mktStatTpCd = mktStatTpCd;
 		this.trdTm = trdTm;
 		this.trdvol = trdvol;
 		this.cmpprevddPrc = cmpprevddPrc;
@@ -30,14 +30,14 @@ public class PriceDTO
 		this.isuCd = isuCd;
 	}
 
-	public String getMkStatTpCd ()
+	public String getmktStatTpCd ()
     {
-        return mkStatTpCd;
+        return mktStatTpCd;
     }
 
-    public void setMkStatTpCd (String mkStatTpCd)
+    public void setmktStatTpCd (String mktStatTpCd)
     {
-        this.mkStatTpCd = mkStatTpCd;
+        this.mktStatTpCd = mktStatTpCd;
     }
 
     public String getTrdTm ()
@@ -133,6 +133,6 @@ public class PriceDTO
     @Override
     public String toString()
     {
-        return "ClassPojo [mkStatTpCd = "+mkStatTpCd+", trdTm = "+trdTm+", trdvol = "+trdvol+", cmpprevddPrc = "+cmpprevddPrc+", trdPrc = "+trdPrc+", hgprc = "+hgprc+", lwprc = "+lwprc+", cmpprevddTpCd = "+cmpprevddTpCd+", opnprc = "+opnprc+", isuCd = "+isuCd+"]";
+        return "ClassPojo [mktStatTpCd = "+mktStatTpCd+", trdTm = "+trdTm+", trdvol = "+trdvol+", cmpprevddPrc = "+cmpprevddPrc+", trdPrc = "+trdPrc+", hgprc = "+hgprc+", lwprc = "+lwprc+", cmpprevddTpCd = "+cmpprevddTpCd+", opnprc = "+opnprc+", isuCd = "+isuCd+"]";
     }
 }

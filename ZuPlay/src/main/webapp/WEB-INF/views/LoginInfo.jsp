@@ -27,7 +27,6 @@
 	<form id = 'f' name="f" method='post' action ='<c:url value="firstLoginCheck"/>' style="display: none">
       <input type="text" name="playerNaverId" id="playerNaverId"/>
       
-      
    </form> --%>
    
    <!-- 모달 창 -->

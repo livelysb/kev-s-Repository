@@ -40,7 +40,7 @@ public class LoginController {
 	@ResponseBody
 	public boolean checkRepetition(String playerNickname){
 		boolean checkRepetiton=loginServiceImpl.checkRepetition(playerNickname);
-		return true;
+		return checkRepetiton;
 		
 	}
 }

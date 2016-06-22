@@ -13,7 +13,4 @@ public interface LoginService {
 	 */
 	boolean joinMember(PlayerDTO playerDTO);
 	
-	/**
-	 * 최초 로그인 일 시 닉네임 지정
-	 */
 }

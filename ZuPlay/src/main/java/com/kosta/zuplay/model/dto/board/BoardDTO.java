@@ -1,5 +1,8 @@
 package com.kosta.zuplay.model.dto.board;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class BoardDTO {
 	int boardNo;			//게시글 번호
 	String playerNickname;	//닉네임

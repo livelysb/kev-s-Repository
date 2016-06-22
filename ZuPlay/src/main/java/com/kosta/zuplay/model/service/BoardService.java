@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dto.board.BoardDTO;
 
-@Service
 public interface BoardService {
 	
 	boolean insertBoard(BoardDTO dto);

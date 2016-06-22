@@ -33,17 +33,12 @@
 				</div>
 				<!-- body -->
 				<div class="modal-body">
-					<form action="joinMember" method="post" id="nickForm">
+					<form action="joinMember" method="post" id="nickForm" >
 						별명 : <input type="text" name="playerNickname" id="playerNickname"> 
 						<div id="divIdCheck"></div>
 						<input type="hidden" name="playerNaverId" id="playerNaverId"/>
 						<input type="hidden" name="playerGender" id="playerGender"/>
     					<input type="hidden" name="playerAge" id="playerAge"/>
-						
-						
-						<!-- <input type="hidden" id="playerNaverId" name="playerNaverId">
-						<input type="hidden" id="playerGender" name="playerGender">
-						<input type="hidden" id="playerAge" name="playerAge"> -->
 						
 					</form>
 				</div>
@@ -68,17 +63,20 @@
 
 <script type="text/javascript">
 
-var naverLogin = new naver_id_login("MEu9lHVoIBXQU0fULcr6","http://127.0.0.1:8000/zuplay/LoginInfo");
+	var naverLogin = new naver_id_login("MEu9lHVoIBXQU0fULcr6","http://127.0.0.1:8000/zuplay/LoginInfo");
 
-//get_naver_userprofile 동작후 callback 될 function
-function testcallback() {
-    	    $("#playerNaverId").val(naverLogin.getProfileData('email'));
-    	    $("#playerGender").val(naverLogin.getProfileData('gender'));
-    	    $("#playerAge").val(naverLogin.getProfileData('age'));
-    	    Logincheck();
-    	 } 
-    	 
-    	 
+	//get_naver_userprofile 동작후 callback 될 function
+	function testcallback() {
+	    	    $("#playerNaverId").val(naverLogin.getProfileData('email'));
+	    	    $("#playerGender").val(naverLogin.getProfileData('gender'));
+	    	    $("#playerAge").val(naverLogin.getProfileData('age'));
+	    	    Logincheck();
+	    	 } 
+	
+		 $("#nickConfirm").on("click",function(){
+			 $("#nickForm").submit();
+		 })
+	
 		//최초로그인인지 확인 후 모달띄우거나 메인페이지로 이동	 
     	 function Logincheck(){
     		 $.ajax({
@@ -98,7 +96,6 @@ function testcallback() {
     			}
     		}) 
     	 }
-		
 		//닉네임 중복체크
     	 $("#playerNickname").on("keyup",function (){
 			if($(this).val()==""){
@@ -115,7 +112,6 @@ function testcallback() {
 	 						$("#divIdCheck").text("사용가능한 닉네임입니다.");
 	 					}else{
 	 						$("#divIdCheck").text("사용불가능한 닉네임입니다.");
-	 						
 	 					}
 	 				} ,
 	 				error:function(err){
@@ -124,26 +120,9 @@ function testcallback() {
 	 			});
 			}
  		})	
-		
     $(function() {
     	 naverLogin.get_naver_userprofile("testcallback()");
-    	 
-    	 //모달에서 닉네임 입력적고 확인 누를 시 정보저장후 메인페이지로 이동
-    	 $("#nickConfirm").on("click",function (){
-    		 $.ajax({
-        		 url:"joinMember",
-        		 type:"post",
-        		 dataType:"text",
-        		 data: $("#nickForm").serialize(),
-        		 success:function(result){
-        			 location.href="index";
-        		 },
-        		 error:function(err){
-        			 alert(err +"에러발생");
-        		 }
-    		 })
-    	 })
-    	 
+    	
     	 //모달이 포커스를 잃을 시 로그인화면으로 이동
     	 $('#nickModal').on('hidden.bs.modal', function() {
     		 alert("별명을 입력하지않으면 게임을 할 수 없습니다.")

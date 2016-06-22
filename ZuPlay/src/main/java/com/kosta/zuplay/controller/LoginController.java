@@ -43,10 +43,10 @@ public class LoginController {
 	 * @return true=회원정보 DB 삽입 성공/false=회원정보 DB 삽입 실패
 	 */
 	@RequestMapping(value="joinMember")
-	@ResponseBody
-	public boolean joinMember(String playerNickname,String playerNaverId,String playerGender,String playerAge){
+	public String joinMember(String playerNickname,String playerNaverId,String playerGender,String playerAge){
+		System.out.println(playerNickname);
 		boolean joinMember=loginServiceImpl.joinMember(new PlayerDTO(playerNickname, playerNaverId, playerGender, playerAge, 0, 0, 0, "마스터", 1, 1, 1, 1));
-		return joinMember;
+		return "index";
 	}
 	
 	/**

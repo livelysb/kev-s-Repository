@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosta.zuplay.model.dao.QuestDAO">
+
+<resultMap type="questDTO" id="questMapper">
+	<id column="" property=""/>
+	<result column="QUEST_CODE" property="questCode"/>
+	<result column="QUEST_CLASS" property="questClass"/>
+	<result column="QUEST_TITLE" property="questName"/>
+	<result column="QUEST_CONTENT" property="questContent"/>
+	<result column="QUEST_GOAL" property="questGoal"/>
+	<result column="QUEST_REWARD" property="questReward"/>
+	<result column="ITEM_CODE" property="itemCode"/>	
+</resultMap>
+
+	<select id="questSelectAll" parameterType="String" resultMap="questMapper">
+		select * from player_quest 
+		where player_nickname=#{playerNickname}
+	</select>
+	<select id="questCount" resultType="int">
+		select count(*) from quest
+		where quest_code=common
+	</select>
+	<select id="questSelect"  parameterType="String"   resultMap="questMapper">
+		select * from quest where quest_code=#{questCode}
+	</select>
+	<insert id="questSelectInsert" parameterType="playerQuestDTO">
+		insert into player_quest
+		values(pq_sq.nextval,#{questCode},#{playerNickname},0)
+	</insert>
+	
+</mapper>

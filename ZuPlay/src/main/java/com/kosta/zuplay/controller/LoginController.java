@@ -17,6 +17,10 @@ public class LoginController {
 	@Autowired
 	private LoginService loginServiceImpl;
 	
+	@RequestMapping(value={"Login", "LoginInfo"})
+	public void login(){
+	}
+	
 	@RequestMapping(value="firstLoginCheck",method=RequestMethod.POST)
 	@ResponseBody
 	public boolean firstLoginCheck(String playerNaverId){

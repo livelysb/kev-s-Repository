@@ -16,11 +16,16 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean firstLoginCheck(String naverId) {
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
+		
 		PlayerDTO playerDTO=loginDAO.firstLoginCheck(naverId);
+		
 		System.out.println("[ Log ] naverId = "+ naverId);
+		
 		if(playerDTO!=null){
+			System.out.println("[ Log ] 기존회원 로그인");
 			return false;
 		}
+		System.out.println("[ Log ] 신규회원 최초 로그인");
 		return true;
 	}
 

@@ -24,4 +24,8 @@
 		insert into player values 
 		(#{playerNickname},#{playerNaverId},#{playerGender},#{playerAge},#{playerLike},#{playerMoney},#{playerRuby},#{playerGrade},#{playerDailyRank},#{playerWeeklyRank},#{playerSeasonRank},#{playerTotalRank})
 	</insert>
+	
+	<select id="checkRepetiton" parameterType="String" resultType="String">
+		select player_naver_id from player where player_nickname=#{playerNickname} 
+	</select>
 </mapper>

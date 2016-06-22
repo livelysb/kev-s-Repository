@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.service.LoginService;
@@ -17,10 +18,10 @@ public class LoginController {
 	private LoginService loginServiceImpl;
 	
 	@RequestMapping(value="firstLoginCheck",method=RequestMethod.POST)
-	public String firstLoginCheck(PlayerDTO playerDTO,HttpSession session){
-		boolean firstLogin=loginServiceImpl.firstLoginCheck(playerDTO.getPlayerNaverId());
-		session.setAttribute("firstLogin", firstLogin);  //true면 최초로그인, false면 기존회원
-		return "Login";
+	@ResponseBody
+	public boolean firstLoginCheck(String playerNaverId){
+		boolean firstLogin=loginServiceImpl.firstLoginCheck(playerNaverId);
+		return firstLogin;
 	}
 	
 	@RequestMapping(value="joinMember")
@@ -28,5 +29,13 @@ public class LoginController {
 		boolean joinMember=loginServiceImpl.joinMember(playerDTO);
 		session.setAttribute("joinMember",joinMember );
 		return "/";
+	}
+	
+	@RequestMapping(value="checkRepetition")
+	@ResponseBody
+	public boolean checkRepetition(String playerNickname){
+		boolean checkRepetiton=loginServiceImpl.checkRepetition(playerNickname);
+		return true;
+		
 	}
 }

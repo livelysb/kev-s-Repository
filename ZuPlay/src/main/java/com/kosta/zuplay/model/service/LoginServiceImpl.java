@@ -16,12 +16,30 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean firstLoginCheck(String naverId) {
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
-		return loginDAO.firstLoginCheck(naverId);
+		PlayerDTO playerDTO=loginDAO.firstLoginCheck(naverId);
+		if(playerDTO!=null){
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean joinMember(PlayerDTO playerDTO) {
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
-		return loginDAO.joinMember(playerDTO);
+		int result=loginDAO.joinMember(playerDTO);
+		if(result==0){
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean checkRepetition(String playerNickname) {
+		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
+		String playerNaverId=loginDAO.checkRepetiton(playerNickname);
+		if(playerNaverId!=null){
+			return false;
+		}
+		return true;
 	}
 }

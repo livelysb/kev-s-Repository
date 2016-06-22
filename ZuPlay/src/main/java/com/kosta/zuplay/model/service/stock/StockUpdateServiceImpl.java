@@ -17,7 +17,7 @@ public class StockUpdateServiceImpl implements StockUpdateService {
 	@Scheduled(fixedDelay=60000) //작업이 끝난지 1분 후 재시작
 	@Override
 	public void actionPerMin() {
-		updateStockPrice.updateStockPrice();
+		updateStockPrice.updateStockPrice11();
 	}
 
 	@Scheduled(cron="0 30 9 * * *") //매일 아홉시반에 작동

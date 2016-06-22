@@ -20,10 +20,9 @@ public class UpdateStockPrice {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	private StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-	
-	public void updateStockPrice() {
+
+	public void updateStockPrice11() {
+		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 		List<String> list = getIsuSrtCd();
 		for(String isuSrtCd : list) {
 			PriceDTO priceDTO = getPrice(isuSrtCd);
@@ -37,7 +36,7 @@ public class UpdateStockPrice {
 	 * */
 	@Transactional
 	public List<String> getIsuSrtCd() {
-		
+		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 		return stockUpdateDAO.getIsuSrtCd();
 	}
 	/**
@@ -45,6 +44,7 @@ public class UpdateStockPrice {
 	 * */
 	@Transactional
 	public void updatePrice(PriceDTO price) {
+		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 		stockUpdateDAO.priceMerge(price);
 	}
 
@@ -72,6 +72,7 @@ public class UpdateStockPrice {
 	 * */
 	@Transactional
 	public void insertTrdPrc(PriceDTO priceDTO) {
+		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 		stockUpdateDAO.insertTrdPrc(priceDTO);
 	}
 }

@@ -13,4 +13,9 @@ public interface LoginService {
 	 */
 	boolean joinMember(PlayerDTO playerDTO);
 	
+	/**
+	 * 닉네임 중복 체크
+	 */
+	boolean checkRepetition(String playerNickname);
+	
 }

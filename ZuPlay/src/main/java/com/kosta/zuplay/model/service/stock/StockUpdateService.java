@@ -6,6 +6,9 @@ public interface StockUpdateService {
 	public void actionPerMin();
 	
 	
+	public void actionPer10Min();
+	
+	
 	public void actionAtNine();
 	
 	

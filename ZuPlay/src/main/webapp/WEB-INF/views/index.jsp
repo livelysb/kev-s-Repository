@@ -9,76 +9,91 @@
 <title>Home</title>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="resources/css/jquery-ui.min.css" rel="stylesheet">
-<link href="resources/css/zuplay.css" rel="stylesheet">
+<link href="resources/css/style.css" rel="stylesheet">
 </head>
 
 <body>
-	<div class="zp-wrapper">
-		<div class="container-fluid">
-			<div class="row-fluid">
-
-				<!--사이드 영역-->
-				<div class="zp-wrapper-side">
-					<div class="col-md-1">
-
-						<!-- 로고 영역 -->
-						<div class="zp-wrapper-logo">
-							<a href="/zuplay"> 
-								<img src="resources/img/logo_kr.png" alt="zuplay-logo">
-							</a>
+	<div class="container-fluid zp-wrapper">
+		<div class="row">
+		
+		   <!-- 사이드 -->
+				<div class="col-md-1 zp-wrapper-side full-width">
+					<div class="zp-wrapper-logo">
+						<img src="resources/img/logo_kr.png" alt="zuplay-logo-kr">
+					</div>
+					<div class="zp-wrapper-avatar-main">
+						<div class="zp-wrapper-avatar">
+							<img src="resources/img/avatar/body/clothes-02.png" alt="avatar-body"> 
+							<img src="resources/img/avatar/head/hair-02.png" alt="avatar-body">
+							<img src="resources/img/avatar/eyes/eyes-03.png" alt="avatar-body"> 
+							<img src="resources/img/avatar/mouse/mouse-01.png" alt="avatar-body">
+							<img src="resources/img/avatar/acc/acc-01.png" alt="avatar-body">
 						</div>
-
-						<!-- 메인 아바타 영역-->
-						<div class="zp-wrapper-avatar-main">
-							<div class="zp-wrapper-avatar">
-							</div>
-						</div>
-						<!-- 유저 정보 표시 영역 -->
-						<div class="zp-warpper-userinfo">
-							<table>
-								<tr>
-									<td></td>
-								</tr>
-							
-							</table>
-						</div>
+					</div>
+					<div class="zp-wrapper-userinfo">
+						<table>
+							<tr>
+								<td>name</td>
+							</tr>
+							<tr>
+								<td>name</td>
+							</tr>
+							<tr>
+								<td>name</td>
+							</tr>
+						</table>
+					</div>
+					<div class="zp-wrapper-ad">광고</div>
+				</div>
+			
+				<!-- 오른쪽영역 -->
+				<div class="col-md-12 zp-wrapper-content">
+				
+					<!-- Content -->
+					<div class="row">
+						<div class="col-md-12 zp-wrapper-screen" style="border: 2px red solid">Content</div>
+					</div>
+					
+					<!-- Footer -->
+					<div class="row jqui zp-wrapper-footer">
+						<div class="col-md-5">
 						
-						<!-- 광고 영역 -->
-						<div class="zp-wrapper-ad">
-							<img alt="ad" src="ad">
+							<div class="zp-wrapper-chat">
+								<ul>
+								    <li><a href="#tabs-1">전체</a></li>
+								    <li><a href="#tabs-2">Park</a></li>
+								    <li><a href="#tabs-3">Kim</a></li>
+								</ul>
+								<div id="tabs-1">
+									<p>11</p>
+								</div>
+								<div id="tabs-2">
+									<p>22</p>
+								</div>
+								<div id="tabs-3">
+									<p>33</p>
+								</div>
+							</div>
+							
+							<div class="zp-wrapper-chat-input">
+							<input type="text" class="zp-chat-input-id"/><input type="text" class="zp-chat-input"/>
 						</div>
+						</div>
+						<div class="col-md-7"></div>
 					</div>
 				</div>
-
-				<!--본문 영역-->
-				<div class="zp-wrapper-content">
-					<div class="col-md-11">
-						<!--본문-->
-						Test
-					</div>
-				</div>
-
-				<!--네비게이션 영역-->
-				<div class="zp-wrapper-nav">
-					<div class="col-md-11"></div>
-					
-					<!-- 채팅창 영역 -->
-					<div class="col-md-4">
-					
-					</div>
-					
-					<!-- 버튼 영역 -->
-					<div class="col-md-5">
-					
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
+								
 </body>
 
 <script src="resources/js/jquery-2.2.4.min.js"></script>
 <script src="resources/js/jquery-ui.min.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
 <script src="resources/js/zuplay.js"></script>
+<script>
+$(function() {
+    $( ".zp-wrapper-chat" ).tabs();
+  });
+</script>
 </html>

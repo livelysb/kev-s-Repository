@@ -21,7 +21,7 @@ public class UpdateStockPrice {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public void updateStockPrice11() {
+	public void updateStockPrice() {
 		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 		List<String> list = getIsuSrtCd();
 		for(String isuSrtCd : list) {

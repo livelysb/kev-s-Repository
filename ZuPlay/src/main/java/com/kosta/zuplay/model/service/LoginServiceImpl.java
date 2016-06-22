@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService {
 	public boolean joinMember(PlayerDTO playerDTO) {
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
 		int result=loginDAO.joinMember(playerDTO);
-		System.out.println("[ Log ] playerNaverId = " +playerDTO.getPlayerNaverId()+" | playerNickname"+playerDTO.getPlayerNickname()+" | playerGender"+playerDTO.getPlayerGender()+" | playerAge"+playerDTO.getPlayerAge());
+		System.out.println("[ Log ] playerNaverId = " +playerDTO.getPlayerNaverId()+" | playerNickname = "+playerDTO.getPlayerNickname()+" | playerGender = "+playerDTO.getPlayerGender()+" | playerAge = "+playerDTO.getPlayerAge());
 		if(result==0){
 			return false;
 		}

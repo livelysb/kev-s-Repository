@@ -43,53 +43,6 @@
 	//naver_id_login.setPopup();
 	naver_id_login.init_naver_id_login();
 
-
-	/* function testcallback() {
-		alert(callback);
-		alert(naver_id_login.getProfileData('email'))
-		$("#playerNaverId").val(naver_id_login.getProfileData('email'));
-		$("#playerGender").val(naver_id_login.getProfileData('gender'));
-		$("#playerAge").val(naver_id_login.getProfileData('age'));
-		$("#nickModal").submit();
-	}
-	
-	 
-	 $(function() {
-		 naver_id_login.get_naver_userprofile("testcallback()");
-	})
-	*/
-	
-/* 	
-	
-	$(function() {
-		if("${firstLogin}"=="true"){
-			$("#nickModal").modal("show");
-		}
-		
-		$("#NickCheck").on("click",function (){
-			$.ajax({
-				url: "idcheck" ,
-				type:"post",
-				dataType:"text",  
-				data : "playerNickname=" + $("#playerNickname").val(),
-				success:function(result){
-					$("#divIdCheck").html(result);
-				} ,
-				error:function(err){
-					alert(err +"에러발생");
-				}
-			})
-		})
-		
-		$("#nickConfirm").on("click",function (){
-			$("#nickForm").submit();
-		})
-		
-		
-		
-
-	}) */
-	
 </script>
 
 </html>

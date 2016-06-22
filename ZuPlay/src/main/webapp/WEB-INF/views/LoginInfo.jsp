@@ -14,21 +14,12 @@
 <link href="resources/css/zuplay.css" rel="stylesheet">
 
 <style type="text/css">
-	#logo {text-align: center}
 </style>
 
 </head>
 
 <body>
 	
-	<div id="logo"><img src="resources/img/logo.png" alt="zuplay-logo" ></div>
-	
-	<%-- <!-- 네이버회원정보 submit -->
-	<form id = 'f' name="f" method='post' action ='<c:url value="firstLoginCheck"/>' style="display: none">
-      <input type="text" name="playerNaverId" id="playerNaverId"/>
-      
-   </form> --%>
-   
    <!-- 모달 창 -->
 	<div class="modal fade" id="nickModal">
 		<div class="modal-dialog">
@@ -36,7 +27,7 @@
 				<!-- header -->
 				<div class="modal-header">
 					<!-- 닫기(x) 버튼 -->
-					<button type="button" class="close" data-dismiss="modal">×</button>
+					<button type="button" class="close" id="nickX" data-dismiss="modal">×</button>
 					<!-- header title -->
 					<h4 class="modal-title">회원가입</h4>
 				</div>
@@ -44,7 +35,6 @@
 				<div class="modal-body">
 					<form action="joinMember" method="post" id="nickForm">
 						별명 : <input type="text" name="playerNickname" id="playerNickname"> 
-						<button type="button" id="NickCheck" class="btn btn-default">중복확인</button>
 						<div id="divIdCheck"></div>
 						<input type="hidden" name="playerNaverId" id="playerNaverId"/>
 						<input type="hidden" name="playerGender" id="playerGender"/>
@@ -60,12 +50,11 @@
 				<!-- Footer -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal" id="nickConfirm">확인</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="nickCancel">닫기</button>
 				</div>
 			</div>
 		</div>
 	</div>
-   
 </body>
 
 	
@@ -110,21 +99,30 @@ function testcallback() {
     		}) 
     	 }
 		
-		
 		//닉네임 중복체크
-    	 $("#NickCheck").on("click",function (){
- 			$.ajax({
- 				url: "checkRepetition" ,
- 				type:"post",
- 				dataType:"text",  
- 				data : "playerNickname=" + $("#playerNickname").val(),
- 				success:function(result){
- 					$("#divIdCheck").html(result);
- 				} ,
- 				error:function(err){
- 					alert(err +"에러발생");
- 				}
- 			})
+    	 $("#playerNickname").on("keyup",function (){
+			if($(this).val()==""){
+				$("#divIdCheck").text("");
+			}else{
+	 			$.ajax({
+	 				url: "checkRepetition" ,
+	 				type:"post",
+	 				dataType:"text",  
+	 				data : "playerNickname=" + $("#playerNickname").val(),
+	 				success:function(result){
+	
+	 					if(result=="true"){
+	 						$("#divIdCheck").text("사용가능한 닉네임입니다.");
+	 					}else{
+	 						$("#divIdCheck").text("사용불가능한 닉네임입니다.");
+	 						
+	 					}
+	 				} ,
+	 				error:function(err){
+	 					alert(err +"에러발생");
+	 				}
+	 			});
+			}
  		})	
 		
     $(function() {
@@ -138,13 +136,18 @@ function testcallback() {
         		 dataType:"text",
         		 data: $("#nickForm").serialize(),
         		 success:function(result){
-        			 alert(result);
         			 location.href="index";
         		 },
         		 error:function(err){
         			 alert(err +"에러발생");
         		 }
     		 })
+    	 })
+    	 
+    	 //모달이 포커스를 잃을 시 로그인화면으로 이동
+    	 $('#nickModal').on('hidden.bs.modal', function() {
+    		 alert("별명을 입력하지않으면 게임을 할 수 없습니다.")
+    		 location.href="http://127.0.0.1:8000/zuplay/Login";
     	 })
    }) 
 	</script>

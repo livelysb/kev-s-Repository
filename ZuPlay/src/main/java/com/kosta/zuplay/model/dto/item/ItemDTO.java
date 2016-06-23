@@ -1,12 +1,12 @@
 package com.kosta.zuplay.model.dto.item;
 
 public class ItemDTO {
-	String itemCode;	//아이템코드
-	String itemName;	//아이템이름
-	int itemPrice;		//아이템가격
-	String itemClass;	//아이템구분
-	String itemGrade;	//아이템등급
-	String itemImg;		//아이템이미지
+	private String itemCode;	//아이템코드
+	private String itemName;	//아이템이름
+	private int itemPrice;		//아이템가격
+	private String itemClass;	//아이템구분
+	private String itemGrade;	//아이템등급
+	private String itemImg;		//아이템이미지
 	
 	public ItemDTO() {}
 	public ItemDTO(String itemCode, String itemName, int itemPrice, String itemClass, String itemGrade,

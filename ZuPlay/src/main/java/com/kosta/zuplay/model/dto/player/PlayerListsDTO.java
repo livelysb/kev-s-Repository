@@ -1,11 +1,37 @@
 package com.kosta.zuplay.model.dto.player;
 
+import com.kosta.zuplay.model.dto.stock.MasterDTO;
+import com.kosta.zuplay.model.dto.stock.PriceDTO;
+
 public class PlayerListsDTO {
-	int plSq;				//보유주식코드
-	String isuCd;			//종목코드
-	String playerNickname;	//닉네임
-	int plQuantity;			//수량
+	private int plSq;				//보유주식코드
+	private String isuCd;			//종목코드
+	private String playerNickname;	//닉네임
+	private int plQuantity;			//수량
 	
+	private MasterDTO masterDTO;
+	private PriceDTO priceDTO;
+	
+	
+	
+	
+	
+	public MasterDTO getMasterDTO() {
+		return masterDTO;
+	}
+
+	public void setMasterDTO(MasterDTO masterDTO) {
+		this.masterDTO = masterDTO;
+	}
+
+	public PriceDTO getPriceDTO() {
+		return priceDTO;
+	}
+
+	public void setPriceDTO(PriceDTO priceDTO) {
+		this.priceDTO = priceDTO;
+	}
+
 	public PlayerListsDTO() {}
 
 	public PlayerListsDTO(int plSq, String isuCd, String playerNickname, int plQuantity) {

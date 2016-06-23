@@ -1,11 +1,11 @@
 package com.kosta.zuplay.model.dto.player;
 
 public class PlayerItemDTO {
-	int piSq;				//보유아이템코드
-	String playerNickname;	//닉네임
-	String itemCode;		//아이템코드
-	String piIsused;		//착용여부
-	int piIndex;			//인벤토리 위치 인덱스
+	private int piSq;				//보유아이템코드
+	private String playerNickname;	//닉네임
+	private String itemCode;		//아이템코드
+	private String piIsused;		//착용여부
+	private int piIndex;			//인벤토리 위치 인덱스
 	
 	public PlayerItemDTO() {}
 	public PlayerItemDTO(int piSq, String playerNickname, String itemCode, String piIsused, int piIndex) {

@@ -4,18 +4,18 @@ import org.springframework.stereotype.Component;
 
 @Component("playerDTO")
 public class PlayerDTO {
-	String playerNickname;	//닉네임
-	String playerNaverId;	//네이버아이디
-	String playerGender;	//성별
-	String playerAge;		//연령대
-	int playerLike;			//캐릭터 좋아요 갯수
-	int playerMoney;		//게임머니
-	int playerRuby;			//루비(캐쉬)
-	String playerGrade;		//계급
-	int playerDailyRank;	//일간랭킹
-	int playerWeeklyRank;	//주간랭킹
-	int playerSeasonRank;	//시즌랭킹
-	int playerTotalRank;	//종합랭킹
+	private String playerNickname;	//닉네임
+	private String playerNaverId;	//네이버아이디
+	private String playerGender;	//성별
+	private String playerAge;		//연령대
+	private int playerLike;			//캐릭터 좋아요 갯수
+	private int playerMoney;		//게임머니
+	private int playerRuby;			//루비(캐쉬)
+	private String playerGrade;		//계급
+	private int playerDailyRank;	//일간랭킹
+	private int playerWeeklyRank;	//주간랭킹
+	private int playerSeasonRank;	//시즌랭킹
+	private int playerTotalRank;	//종합랭킹
 	
 	public PlayerDTO() {}
 	public PlayerDTO(String playerNickname, String playerNaverId, String playerGender, String playerAge, int playerLike,

@@ -1,13 +1,13 @@
 package com.kosta.zuplay.model.dto.stock;
 
 public class StockDealHistoryDTO {
-	int sdhSq;				//주식거래기록코드
-	String isuCd;			//종목코드
-	String playerNickname;	//닉네임
-	int sdhDealPrice;		//거래가
-	String sdhDealTime;		//거래시각
-	int sdhQuantity;		//수량
-	String sdhBuySell;		//Buy or Sell
+	private int sdhSq;				//주식거래기록코드
+	private String isuCd;			//종목코드
+	private String playerNickname;	//닉네임
+	private int sdhDealPrice;		//거래가
+	private String sdhDealTime;		//거래시각
+	private int sdhQuantity;		//수량
+	private String sdhBuySell;		//Buy or Sell
 	
 	public StockDealHistoryDTO() {}
 

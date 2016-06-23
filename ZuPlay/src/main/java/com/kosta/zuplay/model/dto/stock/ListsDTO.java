@@ -1,13 +1,15 @@
 package com.kosta.zuplay.model.dto.stock;
 
 public class ListsDTO {
-	private String isuSrtCd;	//종목단축코드
-	private String isuKorAbbrv;	//종목 한글약명
-	private String isuKorNm;	//종목한글명
-	private String mktTpCd;		//시장구분코드
-	private String isuCd;		//종목코드
+	private String isuSrtCd; // 종목단축코드
+	private String isuKorAbbrv; // 종목 한글약명
+	private String isuKorNm; // 종목한글명
+	private String mktTpCd; // 시장구분코드
+	private String isuCd; // 종목코드
 
-	public ListsDTO() {}
+	public ListsDTO() {
+	}
+
 	public ListsDTO(String isuSrtCd, String isuKorAbbrv, String isuKorNm, String mktTpCd, String isuCd) {
 		super();
 		this.isuSrtCd = isuSrtCd;

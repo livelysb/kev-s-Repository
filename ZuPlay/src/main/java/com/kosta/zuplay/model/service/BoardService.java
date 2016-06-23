@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.kosta.zuplay.model.dto.board.BoardCommentDTO;
 import com.kosta.zuplay.model.dto.board.BoardDTO;
 
 public interface BoardService {
@@ -13,5 +14,8 @@ public interface BoardService {
 	BoardDTO selectDetail(int boardNo);
 	List<BoardDTO> selectAll();
 	boolean deleteBoard(String playerNickname, int boardNo);
-	
+	boolean insertComment(BoardCommentDTO dto);
+	boolean updateComment(BoardCommentDTO dto);
+	List<BoardCommentDTO> selectComment(int boardNo);
+	boolean deleteComment(String playerNickname,int bcSq);
 }

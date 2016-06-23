@@ -5,50 +5,50 @@ conn zuplay/1234;
 
 conn system/admin;
 
-drop user zuplay cascade; -- °èÁ¤ »èÁ¦
+drop user zuplay cascade; -- ê³„ì • ì‚­ì œ
 
 drop table player;
-/* ÇÃ·¹ÀÌ¾î */
+/* í”Œë ˆì´ì–´ */
 CREATE TABLE PLAYER (
-	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ´Ð³×ÀÓ */
-	PLAYER_NAVER_ID VARCHAR2(30) NOT NULL, /* ³×ÀÌ¹ö¾ÆÀÌµð */
-	PLAYER_GENDER VARCHAR2(2) NOT NULL, /* ¼ºº° */
-	PLAYER_AGE VARCHAR2(30), /* ¿¬·É´ë */
-	PLAYER_LIKE INTEGER, /* ÁÁ¾Æ¿ä */
-	PLAYER_MONEY INTEGER DEFAULT 0 NOT NULL, /* »çÀÌ¹ö¸Ó´Ï */
-	PLAYER_RUBY INTEGER DEFAULT 0 NOT NULL, /* ·çºñ */
-	PLAYER_GRADE VARCHAR2(30) NOT NULL, /* µî±Þ */
-	PLAYER_DAILY_RANK INTEGER NOT NULL, /* ÀÏ°£ ·©Å© */
-	PLAYER_WEEKLY_RANK INTEGER NOT NULL, /* ÁÖ°£ ·©Å© */
-	PLAYER_SEASON_RANK INTEGER NOT NULL, /* ½ÃÁð ·©Å© */
-	PLAYER_TOTAL_RANK INTEGER NOT NULL /* ÅäÅ» ·©Å© */
+	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ë‹‰ë„¤ìž„ */
+	PLAYER_NAVER_ID VARCHAR2(30) NOT NULL, /* ë„¤ì´ë²„ì•„ì´ë”” */
+	PLAYER_GENDER VARCHAR2(2) NOT NULL, /* ì„±ë³„ */
+	PLAYER_AGE VARCHAR2(30), /* ì—°ë ¹ëŒ€ */
+	PLAYER_LIKE INTEGER, /* ì¢‹ì•„ìš” */
+	PLAYER_MONEY INTEGER DEFAULT 0 NOT NULL, /* ì‚¬ì´ë²„ë¨¸ë‹ˆ */
+	PLAYER_RUBY INTEGER DEFAULT 0 NOT NULL, /* ë£¨ë¹„ */
+	PLAYER_GRADE VARCHAR2(30) NOT NULL, /* ë“±ê¸‰ */
+	PLAYER_DAILY_RANK INTEGER NOT NULL, /* ì¼ê°„ ëž­í¬ */
+	PLAYER_WEEKLY_RANK INTEGER NOT NULL, /* ì£¼ê°„ ëž­í¬ */
+	PLAYER_SEASON_RANK INTEGER NOT NULL, /* ì‹œì¦Œ ëž­í¬ */
+	PLAYER_TOTAL_RANK INTEGER NOT NULL /* í† íƒˆ ëž­í¬ */
 );
 
-COMMENT ON TABLE PLAYER IS 'ÇÃ·¹ÀÌ¾î';
+COMMENT ON TABLE PLAYER IS 'í”Œë ˆì´ì–´';
 
-COMMENT ON COLUMN PLAYER.PLAYER_NICKNAME IS '´Ð³×ÀÓ';
+COMMENT ON COLUMN PLAYER.PLAYER_NICKNAME IS 'ë‹‰ë„¤ìž„';
 
-COMMENT ON COLUMN PLAYER.PLAYER_NAVER_ID IS '³×ÀÌ¹ö¾ÆÀÌµð';
+COMMENT ON COLUMN PLAYER.PLAYER_NAVER_ID IS 'ë„¤ì´ë²„ì•„ì´ë””';
 
-COMMENT ON COLUMN PLAYER.PLAYER_GENDER IS '¼ºº°';
+COMMENT ON COLUMN PLAYER.PLAYER_GENDER IS 'ì„±ë³„';
 
-COMMENT ON COLUMN PLAYER.PLAYER_AGE IS '¿¬·É´ë';
+COMMENT ON COLUMN PLAYER.PLAYER_AGE IS 'ì—°ë ¹ëŒ€';
 
-COMMENT ON COLUMN PLAYER.PLAYER_LIKE IS 'ÁÁ¾Æ¿ä';
+COMMENT ON COLUMN PLAYER.PLAYER_LIKE IS 'ì¢‹ì•„ìš”';
 
-COMMENT ON COLUMN PLAYER.PLAYER_MONEY IS '»çÀÌ¹ö¸Ó´Ï';
+COMMENT ON COLUMN PLAYER.PLAYER_MONEY IS 'ì‚¬ì´ë²„ë¨¸ë‹ˆ';
 
-COMMENT ON COLUMN PLAYER.PLAYER_RUBY IS '·çºñ';
+COMMENT ON COLUMN PLAYER.PLAYER_RUBY IS 'ë£¨ë¹„';
 
-COMMENT ON COLUMN PLAYER.PLAYER_GRADE IS 'µî±Þ';
+COMMENT ON COLUMN PLAYER.PLAYER_GRADE IS 'ë“±ê¸‰';
 
-COMMENT ON COLUMN PLAYER.PLAYER_DAILY_RANK IS 'ÀÏ°£ ·©Å©';
+COMMENT ON COLUMN PLAYER.PLAYER_DAILY_RANK IS 'ì¼ê°„ ëž­í¬';
 
-COMMENT ON COLUMN PLAYER.PLAYER_WEEKLY_RANK IS 'ÁÖ°£ ·©Å©';
+COMMENT ON COLUMN PLAYER.PLAYER_WEEKLY_RANK IS 'ì£¼ê°„ ëž­í¬';
 
-COMMENT ON COLUMN PLAYER.PLAYER_SEASON_RANK IS '½ÃÁð ·©Å©';
+COMMENT ON COLUMN PLAYER.PLAYER_SEASON_RANK IS 'ì‹œì¦Œ ëž­í¬';
 
-COMMENT ON COLUMN PLAYER.PLAYER_TOTAL_RANK IS 'ÅäÅ» ·©Å©';
+COMMENT ON COLUMN PLAYER.PLAYER_TOTAL_RANK IS 'í† íƒˆ ëž­í¬';
 
 ALTER TABLE PLAYER
 	ADD
@@ -58,26 +58,26 @@ ALTER TABLE PLAYER
 		);
 
 delete 
-/* ÇÃ·¹ÀÌ¾î_¾ÆÀÌÅÛ */
+/* í”Œë ˆì´ì–´_ì•„ì´í…œ */
 CREATE TABLE PLAYER_ITEM (
-	PI_SQ INTEGER NOT NULL, /* ½ÃÄö½º */
-	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ´Ð³×ÀÓ */
-	ITEM_CODE VARCHAR(10) NOT NULL, /* ¾ÆÀÌÅÛ ÄÚµå */
-	PI_ISUSED VARCHAR(1) NOT NULL, /* Âø¿ë¿©ºÎ */
-	PI_INDEX INTEGER /* ÀÎµ¦½º */
+	PI_SQ INTEGER NOT NULL, /* ì‹œí€€ìŠ¤ */
+	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ë‹‰ë„¤ìž„ */
+	ITEM_CODE VARCHAR(10) NOT NULL, /* ì•„ì´í…œ ì½”ë“œ */
+	PI_ISUSED VARCHAR(1) NOT NULL, /* ì°©ìš©ì—¬ë¶€ */
+	PI_INDEX INTEGER /* ì¸ë±ìŠ¤ */
 );
 
-COMMENT ON TABLE PLAYER_ITEM IS 'ÇÃ·¹ÀÌ¾î_¾ÆÀÌÅÛ';
+COMMENT ON TABLE PLAYER_ITEM IS 'í”Œë ˆì´ì–´_ì•„ì´í…œ';
 
-COMMENT ON COLUMN PLAYER_ITEM.PI_SQ IS '½ÃÄö½º';
+COMMENT ON COLUMN PLAYER_ITEM.PI_SQ IS 'ì‹œí€€ìŠ¤';
 
-COMMENT ON COLUMN PLAYER_ITEM.PLAYER_NICKNAME IS '´Ð³×ÀÓ';
+COMMENT ON COLUMN PLAYER_ITEM.PLAYER_NICKNAME IS 'ë‹‰ë„¤ìž„';
 
-COMMENT ON COLUMN PLAYER_ITEM.ITEM_CODE IS '¾ÆÀÌÅÛ ÄÚµå';
+COMMENT ON COLUMN PLAYER_ITEM.ITEM_CODE IS 'ì•„ì´í…œ ì½”ë“œ';
 
-COMMENT ON COLUMN PLAYER_ITEM.PI_ISUSED IS 'Âø¿ë¿©ºÎ';
+COMMENT ON COLUMN PLAYER_ITEM.PI_ISUSED IS 'ì°©ìš©ì—¬ë¶€';
 
-COMMENT ON COLUMN PLAYER_ITEM.PI_INDEX IS 'ÀÎµ¦½º';
+COMMENT ON COLUMN PLAYER_ITEM.PI_INDEX IS 'ì¸ë±ìŠ¤';
 
 ALTER TABLE PLAYER_ITEM
 	ADD
@@ -86,80 +86,80 @@ ALTER TABLE PLAYER_ITEM
 			PI_SQ
 		);
 
-/* ¾ÆÀÌÅÛ */
+/* ì•„ì´í…œ */
 CREATE TABLE ITEM (
-	ITEM_CODE VARCHAR(10) NOT NULL, /* ¾ÆÀÌÅÛ ÄÚµå */
-	ITEM_NAME VARCHAR2(30) NOT NULL, /* ¾ÆÀÌÅÛ ÀÌ¸§ */
-	ITEM_PRICE INTEGER, /* ¾ÆÀÌÅÛ °¡°Ý */
-	ITEM_CLASS VARCHAR2(15) NOT NULL, /* ¾ÆÀÌÅÛ ±¸ºÐ */
-	ITEM_GRADE VARCHAR(10) NOT NULL, /* ¾ÆÀÌÅÛ µî±Þ */
-	ITEM_IMG VARCHAR2(255) NOT NULL /* ÀÌ¹ÌÁö ÆÄÀÏ */
+	ITEM_CODE VARCHAR(10) NOT NULL, /* ì•„ì´í…œ ì½”ë“œ */
+	ITEM_NAME VARCHAR2(30) NOT NULL, /* ì•„ì´í…œ ì´ë¦„ */
+	ITEM_PRICE INTEGER, /* ì•„ì´í…œ ê°€ê²© */
+	ITEM_CLASS VARCHAR2(15) NOT NULL, /* ì•„ì´í…œ êµ¬ë¶„ */
+	ITEM_GRADE VARCHAR(10) NOT NULL, /* ì•„ì´í…œ ë“±ê¸‰ */
+	ITEM_IMG VARCHAR2(255) NOT NULL /* ì´ë¯¸ì§€ íŒŒì¼ */
 );
 
-COMMENT ON TABLE ITEM IS '¾ÆÀÌÅÛ';
+COMMENT ON TABLE ITEM IS 'ì•„ì´í…œ';
 
-COMMENT ON COLUMN ITEM.ITEM_CODE IS '¾ÆÀÌÅÛ ÄÚµå';
+COMMENT ON COLUMN ITEM.ITEM_CODE IS 'ì•„ì´í…œ ì½”ë“œ';
 
-COMMENT ON COLUMN ITEM.ITEM_NAME IS '¾ÆÀÌÅÛ ÀÌ¸§';
+COMMENT ON COLUMN ITEM.ITEM_NAME IS 'ì•„ì´í…œ ì´ë¦„';
 
-COMMENT ON COLUMN ITEM.ITEM_PRICE IS '¾ÆÀÌÅÛ °¡°Ý';
+COMMENT ON COLUMN ITEM.ITEM_PRICE IS 'ì•„ì´í…œ ê°€ê²©';
 
-COMMENT ON COLUMN ITEM.ITEM_CLASS IS '¾ÆÀÌÅÛ ±¸ºÐ';
+COMMENT ON COLUMN ITEM.ITEM_CLASS IS 'ì•„ì´í…œ êµ¬ë¶„';
 
-COMMENT ON COLUMN ITEM.ITEM_GRADE IS '¾ÆÀÌÅÛ µî±Þ';
+COMMENT ON COLUMN ITEM.ITEM_GRADE IS 'ì•„ì´í…œ ë“±ê¸‰';
 
-COMMENT ON COLUMN ITEM.ITEM_IMG IS 'ÀÌ¹ÌÁö ÆÄÀÏ';
+COMMENT ON COLUMN ITEM.ITEM_IMG IS 'ì´ë¯¸ì§€ íŒŒì¼';
 
 select count(*) from item;
 delete item ;
-insert into item values ('m_hair_00','±âº»³²ÀÚ¸Ó¸®',0,'hair','default','resource/img/avatar/head/hair-04.png','M');
-insert into item values ('m_hair_01','¼®ÀÌ¸Ó¸®',20000,'hair','common','resource/img/avatar/head/hair-15.png','M');
-insert into item values ('m_hair_02','Å°µµ¸Ó¸®',20000,'hair','common','resource/img/avatar/head/hair-03.png','M');
-insert into item values ('m_hair_03','ÅÍÇÁ¸Ó¸®',25000,'hair','common','resource/img/avatar/head/hair-05.png','M');
-insert into item values ('m_hair_04','¹Î¼ö¸Ó¸®',35000,'hair','rare','resource/img/avatar/head/hair-07.png','M');
-insert into item values ('m_hair_05','¹üÀÌ¸Ó¸®',40000,'hair','rare','resource/img/avatar/head/hair-09.png','M');
-insert into item values ('m_hair_06','½°Ç¥¸Ó¸®',45000,'hair','rare','resource/img/avatar/head/hair-10.png','M');
-insert into item values ('m_hair_07','½ÂÀÌ¸Ó¸®',45000,'hair','rare','resource/img/avatar/head/hair-16.png','M');
-insert into item values ('m_hair_08','»ÏÁ·¸Ó¸®',45000,'hair','rare','resource/img/avatar/head/hair-02.png','M');
-insert into item values ('m_hair_09','¾î¸°¿ÕÀÚ¸Ó¸®',60000,'hair','uniq','resource/img/avatar/head/hair-12.png','M');
+insert into item values ('m_hair_00','ê¸°ë³¸ë‚¨ìžë¨¸ë¦¬',0,'hair','default','resource/img/avatar/head/hair-04.png','M');
+insert into item values ('m_hair_01','ì„ì´ë¨¸ë¦¬',20000,'hair','common','resource/img/avatar/head/hair-15.png','M');
+insert into item values ('m_hair_02','í‚¤ë„ë¨¸ë¦¬',20000,'hair','common','resource/img/avatar/head/hair-03.png','M');
+insert into item values ('m_hair_03','í„°í”„ë¨¸ë¦¬',25000,'hair','common','resource/img/avatar/head/hair-05.png','M');
+insert into item values ('m_hair_04','ë¯¼ìˆ˜ë¨¸ë¦¬',35000,'hair','rare','resource/img/avatar/head/hair-07.png','M');
+insert into item values ('m_hair_05','ë²”ì´ë¨¸ë¦¬',40000,'hair','rare','resource/img/avatar/head/hair-09.png','M');
+insert into item values ('m_hair_06','ì‰¼í‘œë¨¸ë¦¬',45000,'hair','rare','resource/img/avatar/head/hair-10.png','M');
+insert into item values ('m_hair_07','ìŠ¹ì´ë¨¸ë¦¬',45000,'hair','rare','resource/img/avatar/head/hair-16.png','M');
+insert into item values ('m_hair_08','ë¾°ì¡±ë¨¸ë¦¬',45000,'hair','rare','resource/img/avatar/head/hair-02.png','M');
+insert into item values ('m_hair_09','ì–´ë¦°ì™•ìžë¨¸ë¦¬',60000,'hair','uniq','resource/img/avatar/head/hair-12.png','M');
 
-insert into item values ('m_eyes_00',	'±âº»´«',	0,	'eyes',	'default',	'resource/img/avatar/eyes/eyes-08.png',	'a'	);
-insert into item values ('m_eyes_01','ÃÊ·Õ´«',	15000,	'eyes',	'common','resource/img/avatar/eyes/eyes-01.png',	'a'	);
-insert into item values ('m_eyes_02',	'¿ë°¨´«',	25000,	'eyes',	'common','resource/img/avatar/eyes/eyes-06.png',	'm'	);
-insert into item values ('m_eyes_03','¿ô´Â´«',	10000,	'eyes',	'common',	'resource/img/avatar/eyes/eyes-06.png',	'a'	);
-insert into item values ('m_eyes_04',	'Á¹¸°´«',	10000,	'eyes',	'common',	'resource/img/avatar/eyes/eyes-07.png',	'a'	);
-insert into item values ('m_eyes_05','À¯·É½Å¶û´«',	15000,	'eyes',	'common',	'resource/img/avatar/eyes/eyes-02.png',	'a'	);
-insert into item values ('f_eyes_01',	'ÃÊ·Õ´«	',	15000,	'eyes',	'common','resource/img/avatar/eyes/eyes-03.png',	'f'	);
+insert into item values ('m_eyes_00',	'ê¸°ë³¸ëˆˆ',	0,	'eyes',	'default',	'resource/img/avatar/eyes/eyes-08.png',	'a'	);
+insert into item values ('m_eyes_01','ì´ˆë¡±ëˆˆ',	15000,	'eyes',	'common','resource/img/avatar/eyes/eyes-01.png',	'a'	);
+insert into item values ('m_eyes_02',	'ìš©ê°ëˆˆ',	25000,	'eyes',	'common','resource/img/avatar/eyes/eyes-06.png',	'm'	);
+insert into item values ('m_eyes_03','ì›ƒëŠ”ëˆˆ',	10000,	'eyes',	'common',	'resource/img/avatar/eyes/eyes-06.png',	'a'	);
+insert into item values ('m_eyes_04',	'ì¡¸ë¦°ëˆˆ',	10000,	'eyes',	'common',	'resource/img/avatar/eyes/eyes-07.png',	'a'	);
+insert into item values ('m_eyes_05','ìœ ë ¹ì‹ ëž‘ëˆˆ',	15000,	'eyes',	'common',	'resource/img/avatar/eyes/eyes-02.png',	'a'	);
+insert into item values ('f_eyes_01',	'ì´ˆë¡±ëˆˆ	',	15000,	'eyes',	'common','resource/img/avatar/eyes/eyes-03.png',	'f'	);
 
-insert into item values (	'f_hair_00','±âº»¸Ó¸®',	0	,'hair','default','resource/img/avatar/head/hair-17.png',	'w'	);
-insert into item values (	'f_hair_01','´Ù¼Ø¸Ó¸®',	20000	,'hair','common','resource/img/avatar/head/hair-13.png',	'w'	);
-insert into item values (	'f_hair_02','ÁøÁÖ¸Ó¸®',	30000	,'hair','rare','resource/img/avatar/head/hair-01.png',	'w'	);
-insert into item values (	'f_hair_03','»óÅ­·¹¸ó¸Ó¸®',	30000	,'hair','rare','resource/img/avatar/head/hair-06.png',	'w'	);
-insert into item values (	'f_hair_04','¹ÐÅ©¸Ó¸®',	60000	,'hair','uniq','resource/img/avatar/head/hair-08.png',	'w'	);
-insert into item values (	'f_hair_05','ÀÎ¾î¸Ó¸®',	70000	,'hair','uniq','resource/img/avatar/head/hair-11.png',	'w'	);
-insert into item values (	'f_hair_06','¿À¼Ç¸Ó¸®',	65000	,'hair','uniq','resource/img/avatar/head/hair-14.png',	'w'	);
+insert into item values (	'f_hair_00','ê¸°ë³¸ë¨¸ë¦¬',	0	,'hair','default','resource/img/avatar/head/hair-17.png',	'w'	);
+insert into item values (	'f_hair_01','ë‹¤ì†œë¨¸ë¦¬',	20000	,'hair','common','resource/img/avatar/head/hair-13.png',	'w'	);
+insert into item values (	'f_hair_02','ì§„ì£¼ë¨¸ë¦¬',	30000	,'hair','rare','resource/img/avatar/head/hair-01.png',	'w'	);
+insert into item values (	'f_hair_03','ìƒí¼ë ˆëª¬ë¨¸ë¦¬',	30000	,'hair','rare','resource/img/avatar/head/hair-06.png',	'w'	);
+insert into item values (	'f_hair_04','ë°€í¬ë¨¸ë¦¬',	60000	,'hair','uniq','resource/img/avatar/head/hair-08.png',	'w'	);
+insert into item values (	'f_hair_05','ì¸ì–´ë¨¸ë¦¬',	70000	,'hair','uniq','resource/img/avatar/head/hair-11.png',	'w'	);
+insert into item values (	'f_hair_06','ì˜¤ì…˜ë¨¸ë¦¬',	65000	,'hair','uniq','resource/img/avatar/head/hair-14.png',	'w'	);
 
-insert into item values (	'f_cloth_00','±âº»¿Ê',	0	,'clothes','default','resources/img/avatar/body/clothes-08.png',	'w'	);
-insert into item values (	'f_cloth_01','È¸»öºêÀÌ³Ø',	10000	,'clothes	','default','resources/img/avatar/body/clothes-09.png',	'w'	);
-insert into item values (	'f_cloth_02','±âº»Á¤Àå',	20000	,'clothes	','default','resources/img/avatar/body/clothes-10.png',	'w'	);
-insert into item values (	'f_cloth_03','Ã»¸á»§',	25000	,'clothes','default','resources/img/avatar/body/clothes-07.png',	'w'	);
-insert into item values (	'm_cloth_00','±âº»¿Ê',	0	,'clothes','default','resources/img/avatar/body/clothes-02.png',	'm'	);
-insert into item values (	'a_cloth_01','¹Ú½º¿Ê',	10000	,'clothes','common','resources/img/avatar/body/clothes-05.png',	'a'	);
-insert into item values (	'm_cloth_02','È¸»öºêÀÌ³Ø',	10000	,'clothes','common','resources/img/avatar/body/clothes-11.png',	'm'	);
-insert into item values (	'm_cloth_03','±âº»Á¤Àå',	20000	,'clothes','common','resources/img/avatar/body/clothes-06.png',	'm'	);
-insert into item values (	'm_cloth_04','Ã»¸á»§',	25000	,'clothes','common','resources/img/avatar/body/clothes-01.png',	'm'	);
-insert into item values (	'm_cloth_05','»þÇÁÁ¤Àå',	30000	,'clothes','common','resources/img/avatar/body/clothes-03.png',	'm'	);
-insert into item values (	'm_cloth_06','¿ÍÀÌ¼ÅÃ÷',	30000	,'clothes','common','resources/img/avatar/body/clothes-04.png',	'm'	);
+insert into item values (	'f_cloth_00','ê¸°ë³¸ì˜·',	0	,'clothes','default','resources/img/avatar/body/clothes-08.png',	'w'	);
+insert into item values (	'f_cloth_01','íšŒìƒ‰ë¸Œì´ë„¥',	10000	,'clothes	','default','resources/img/avatar/body/clothes-09.png',	'w'	);
+insert into item values (	'f_cloth_02','ê¸°ë³¸ì •ìž¥',	20000	,'clothes	','default','resources/img/avatar/body/clothes-10.png',	'w'	);
+insert into item values (	'f_cloth_03','ì²­ë©œë¹µ',	25000	,'clothes','default','resources/img/avatar/body/clothes-07.png',	'w'	);
+insert into item values (	'm_cloth_00','ê¸°ë³¸ì˜·',	0	,'clothes','default','resources/img/avatar/body/clothes-02.png',	'm'	);
+insert into item values (	'a_cloth_01','ë°•ìŠ¤ì˜·',	10000	,'clothes','common','resources/img/avatar/body/clothes-05.png',	'a'	);
+insert into item values (	'm_cloth_02','íšŒìƒ‰ë¸Œì´ë„¥',	10000	,'clothes','common','resources/img/avatar/body/clothes-11.png',	'm'	);
+insert into item values (	'm_cloth_03','ê¸°ë³¸ì •ìž¥',	20000	,'clothes','common','resources/img/avatar/body/clothes-06.png',	'm'	);
+insert into item values (	'm_cloth_04','ì²­ë©œë¹µ',	25000	,'clothes','common','resources/img/avatar/body/clothes-01.png',	'm'	);
+insert into item values (	'm_cloth_05','ìƒ¤í”„ì •ìž¥',	30000	,'clothes','common','resources/img/avatar/body/clothes-03.png',	'm'	);
+insert into item values (	'm_cloth_06','ì™€ì´ì…”ì¸ ',	30000	,'clothes','common','resources/img/avatar/body/clothes-04.png',	'm'	);
 
-insert into item values (	'm_mouse_00','±âº»ÀÔ',	0	,'mouse','default','resources/img/avatar/mouse/mouse-02.png',	'a'	);
-insert into item values (	'm_mouse_01','¹Ì¼ÒÀÔ',	5000	,'mouse','common','resources/img/avatar/mouse/mouse-03.png',	'a'	);
-insert into item values (	'm_mouse_02','ÇÏÇÏÇÏÀÔ',	5000	,'mouse','common','resources/img/avatar/mouse/mouse-01.png',	'a'	);
-insert into item values (	'm_mouse_03','½º¸¶ÀÏÀÔ',	6000	,'mouse','common','resources/img/avatar/mouse/mouse-05.png',	'a'	);
-insert into item values (	'm_mouse_04','»Ç»ÇÀÔ',	6000	,'mouse','common','resources/img/avatar/mouse/mouse-04.png',	'a'	);
-insert into item values (	'm_mouse_05','Á¹¸®ÀÔ',	3000	,'mouse','common','resources/img/avatar/mouse/mouse-01.png',	'a'	);
+insert into item values (	'm_mouse_00','ê¸°ë³¸ìž…',	0	,'mouse','default','resources/img/avatar/mouse/mouse-02.png',	'a'	);
+insert into item values (	'm_mouse_01','ë¯¸ì†Œìž…',	5000	,'mouse','common','resources/img/avatar/mouse/mouse-03.png',	'a'	);
+insert into item values (	'm_mouse_02','í•˜í•˜í•˜ìž…',	5000	,'mouse','common','resources/img/avatar/mouse/mouse-01.png',	'a'	);
+insert into item values (	'm_mouse_03','ìŠ¤ë§ˆì¼ìž…',	6000	,'mouse','common','resources/img/avatar/mouse/mouse-05.png',	'a'	);
+insert into item values (	'm_mouse_04','ë½€ë½€ìž…',	6000	,'mouse','common','resources/img/avatar/mouse/mouse-04.png',	'a'	);
+insert into item values (	'm_mouse_05','ì¡¸ë¦¬ìž…',	3000	,'mouse','common','resources/img/avatar/mouse/mouse-01.png',	'a'	);
 
-insert into item values (	'm_acc_01','¹ÝÃ¢°í',	2000	,'acc','common','resources/img/avatar/acc/acc-01.png',	'a'	);
-insert into item values (	'm_acc_02','ºê¶ó¿î¾È°æ',	3000	,'acc','common','resources/img/avatar/acc/acc-02.png',	'a'	);
+insert into item values (	'm_acc_01','ë°˜ì°½ê³ ',	2000	,'acc','common','resources/img/avatar/acc/acc-01.png',	'a'	);
+insert into item values (	'm_acc_02','ë¸Œë¼ìš´ì•ˆê²½',	3000	,'acc','common','resources/img/avatar/acc/acc-02.png',	'a'	);
 
 
 ALTER TABLE ITEM
@@ -169,31 +169,31 @@ ALTER TABLE ITEM
 			ITEM_CODE
 		);
     
-    insert into item values ('randombox','·£´ý¹Ú½º',1000,'±âÅ¸','ÀÏ¹Ý','randombox.jpg');
+    insert into item values ('randombox','ëžœë¤ë°•ìŠ¤',1000,'ê¸°íƒ€','ì¼ë°˜','randombox.jpg');
     delete item where item_code='randombox';
 ALTER TABLE ITEM
   ADD ITEM_GENDER VARCHAR2(1) NOT NULL;
   select * from item;
-/* Ä£±¸ */
+/* ì¹œêµ¬ */
 CREATE TABLE FRIEND (
-	FRIEND_SQ INTEGER NOT NULL, /* ½ÃÄö½º */
-	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ´Ð³×ÀÓ */
-	PLAYER_NICKNAME2 VARCHAR2(30) NOT NULL, /* ´Ð³×ÀÓ2 */
-	FRIEND_ISACEPTED VARCHAR(1) NOT NULL, /* ¼ö¶ô¿©ºÎ */
-	FRIEND_DATE DATE NOT NULL /* Ä£±¸¸ÎÀº³¯Â¥ */
+	FRIEND_SQ INTEGER NOT NULL, /* ì‹œí€€ìŠ¤ */
+	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ë‹‰ë„¤ìž„ */
+	PLAYER_NICKNAME2 VARCHAR2(30) NOT NULL, /* ë‹‰ë„¤ìž„2 */
+	FRIEND_ISACEPTED VARCHAR(1) NOT NULL, /* ìˆ˜ë½ì—¬ë¶€ */
+	FRIEND_DATE DATE NOT NULL /* ì¹œêµ¬ë§ºì€ë‚ ì§œ */
 );
 
-COMMENT ON TABLE FRIEND IS 'Ä£±¸';
+COMMENT ON TABLE FRIEND IS 'ì¹œêµ¬';
 
-COMMENT ON COLUMN FRIEND.FRIEND_SQ IS '½ÃÄö½º';
+COMMENT ON COLUMN FRIEND.FRIEND_SQ IS 'ì‹œí€€ìŠ¤';
 
-COMMENT ON COLUMN FRIEND.PLAYER_NICKNAME IS '´Ð³×ÀÓ';
+COMMENT ON COLUMN FRIEND.PLAYER_NICKNAME IS 'ë‹‰ë„¤ìž„';
 
-COMMENT ON COLUMN FRIEND.PLAYER_NICKNAME2 IS '´Ð³×ÀÓ2';
+COMMENT ON COLUMN FRIEND.PLAYER_NICKNAME2 IS 'ë‹‰ë„¤ìž„2';
 
-COMMENT ON COLUMN FRIEND.FRIEND_ISACEPTED IS '¼ö¶ô¿©ºÎ';
+COMMENT ON COLUMN FRIEND.FRIEND_ISACEPTED IS 'ìˆ˜ë½ì—¬ë¶€';
 
-COMMENT ON COLUMN FRIEND.FRIEND_DATE IS 'Ä£±¸¸ÎÀº³¯Â¥';
+COMMENT ON COLUMN FRIEND.FRIEND_DATE IS 'ì¹œêµ¬ë§ºì€ë‚ ì§œ';
 
 ALTER TABLE FRIEND
 	ADD
@@ -202,33 +202,33 @@ ALTER TABLE FRIEND
 			FRIEND_SQ
 		);
 
-/* °Ô½Ã±Û */
+/* ê²Œì‹œê¸€ */
 CREATE TABLE BOARD (
-	BOARD_NO INTEGER NOT NULL, /* °Ô½Ã±Û ¹øÈ£ */
-	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ´Ð³×ÀÓ  */
-	BOARD_TITLE VARCHAR2(255) NOT NULL, /* °Ô½Ã±Û Á¦¸ñ */
-	BOARD_LIKE INTEGER NOT NULL, /* ÁÁ¾Æ¿ä */
-	BOARD_CONTENT VARCHAR2(255) NOT NULL, /* °Ô½Ã±Û ³»¿ë */
-	BOARD_TIME DATE NOT NULL, /* °Ô½Ã ½Ã°£ */
-	BOARD_HITS INTEGER NOT NULL /* Á¶È¸¼ö */
+	BOARD_NO INTEGER NOT NULL, /* ê²Œì‹œê¸€ ë²ˆí˜¸ */
+	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ë‹‰ë„¤ìž„  */
+	BOARD_TITLE VARCHAR2(255) NOT NULL, /* ê²Œì‹œê¸€ ì œëª© */
+	BOARD_LIKE INTEGER NOT NULL, /* ì¢‹ì•„ìš” */
+	BOARD_CONTENT VARCHAR2(255) NOT NULL, /* ê²Œì‹œê¸€ ë‚´ìš© */
+	BOARD_TIME DATE NOT NULL, /* ê²Œì‹œ ì‹œê°„ */
+	BOARD_HITS INTEGER NOT NULL /* ì¡°íšŒìˆ˜ */
 );
 CREATE SEQUENCE board_no NOCACHE;
 
-COMMENT ON TABLE BOARD IS '°Ô½Ã±Û';
+COMMENT ON TABLE BOARD IS 'ê²Œì‹œê¸€';
 
-COMMENT ON COLUMN BOARD.BOARD_NO IS '°Ô½Ã±Û ¹øÈ£';
+COMMENT ON COLUMN BOARD.BOARD_NO IS 'ê²Œì‹œê¸€ ë²ˆí˜¸';
 
-COMMENT ON COLUMN BOARD.PLAYER_NICKNAME IS '´Ð³×ÀÓ';
+COMMENT ON COLUMN BOARD.PLAYER_NICKNAME IS 'ë‹‰ë„¤ìž„';
 
-COMMENT ON COLUMN BOARD.BOARD_TITLE IS '°Ô½Ã±Û Á¦¸ñ';
+COMMENT ON COLUMN BOARD.BOARD_TITLE IS 'ê²Œì‹œê¸€ ì œëª©';
 
-COMMENT ON COLUMN BOARD.BOARD_LIKE IS 'ÁÁ¾Æ¿ä';
+COMMENT ON COLUMN BOARD.BOARD_LIKE IS 'ì¢‹ì•„ìš”';
 
-COMMENT ON COLUMN BOARD.BOARD_CONTENT IS '°Ô½Ã±Û ³»¿ë';
+COMMENT ON COLUMN BOARD.BOARD_CONTENT IS 'ê²Œì‹œê¸€ ë‚´ìš©';
 
-COMMENT ON COLUMN BOARD.BOARD_TIME IS '°Ô½Ã ½Ã°£';
+COMMENT ON COLUMN BOARD.BOARD_TIME IS 'ê²Œì‹œ ì‹œê°„';
 
-COMMENT ON COLUMN BOARD.BOARD_HITS IS 'Á¶È¸¼ö';
+COMMENT ON COLUMN BOARD.BOARD_HITS IS 'ì¡°íšŒìˆ˜';
 
 ALTER TABLE BOARD
 	ADD
@@ -237,26 +237,26 @@ ALTER TABLE BOARD
 			BOARD_NO
 		);
 
-/* ´ñ±Û */
+/* ëŒ“ê¸€ */
 CREATE TABLE BOARD_COMMENT (
-	BC_SQ INTEGER NOT NULL, /* ½ÃÄö½º */
-	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ´Ð³×ÀÓ */
-	BOARD_NO INTEGER NOT NULL, /* °Ô½Ã±Û ¹øÈ£ */
-	BC_COMMENT_TIME DATE NOT NULL, /* °Ô½Ã ½Ã°£ */
-	BC_COMMENT_CONTENT VARCHAR2(255) NOT NULL /* ´ñ±Û ³»¿ë */
+	BC_SQ INTEGER NOT NULL, /* ì‹œí€€ìŠ¤ */
+	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ë‹‰ë„¤ìž„ */
+	BOARD_NO INTEGER NOT NULL, /* ê²Œì‹œê¸€ ë²ˆí˜¸ */
+	BC_COMMENT_TIME DATE NOT NULL, /* ê²Œì‹œ ì‹œê°„ */
+	BC_COMMENT_CONTENT VARCHAR2(255) NOT NULL /* ëŒ“ê¸€ ë‚´ìš© */
 );
 
-COMMENT ON TABLE BOARD_COMMENT IS '´ñ±Û';
+COMMENT ON TABLE BOARD_COMMENT IS 'ëŒ“ê¸€';
 
-COMMENT ON COLUMN BOARD_COMMENT.BC_SQ IS '½ÃÄö½º';
+COMMENT ON COLUMN BOARD_COMMENT.BC_SQ IS 'ì‹œí€€ìŠ¤';
 
-COMMENT ON COLUMN BOARD_COMMENT.PLAYER_NICKNAME IS '´Ð³×ÀÓ';
+COMMENT ON COLUMN BOARD_COMMENT.PLAYER_NICKNAME IS 'ë‹‰ë„¤ìž„';
 
-COMMENT ON COLUMN BOARD_COMMENT.BOARD_NO IS '°Ô½Ã±Û ¹øÈ£';
+COMMENT ON COLUMN BOARD_COMMENT.BOARD_NO IS 'ê²Œì‹œê¸€ ë²ˆí˜¸';
 
-COMMENT ON COLUMN BOARD_COMMENT.BC_COMMENT_TIME IS '°Ô½Ã ½Ã°£';
+COMMENT ON COLUMN BOARD_COMMENT.BC_COMMENT_TIME IS 'ê²Œì‹œ ì‹œê°„';
 
-COMMENT ON COLUMN BOARD_COMMENT.BC_COMMENT_CONTENT IS '´ñ±Û ³»¿ë';
+COMMENT ON COLUMN BOARD_COMMENT.BC_COMMENT_CONTENT IS 'ëŒ“ê¸€ ë‚´ìš©';
 
 ALTER TABLE BOARD_COMMENT
 	ADD
@@ -267,32 +267,32 @@ ALTER TABLE BOARD_COMMENT
 
 create sequence bc_sq nocache;
 
-/* Äù½ºÆ® */
+/* í€˜ìŠ¤íŠ¸ */
 CREATE TABLE QUEST (
-	QUEST_CODE VARCHAR(10) NOT NULL, /* Äù½ºÆ® ÄÚµå */
-	QUEST_CLASS VARCHAR2(15) NOT NULL, /* Äù½ºÆ® ºÐ·ù */
-	QUEST_TITLE VARCHAR2(255) NOT NULL, /* Äù½ºÆ® ¸í */
-	QUEST_CONTENT VARCHAR2(255) NOT NULL, /* Äù½ºÆ® ³»¿ë */
-	QUEST_GOAL INTEGER NOT NULL, /* ¸ñÇ¥¼ö */
-	QUEST_REWARD INTEGER NOT NULL, /* Äù½ºÆ® º¸»ó±Ý È¤Àº ¼ö·® */
-	ITEM_CODE VARCHAR(10) NOT NULL /* ¾ÆÀÌÅÛ ÄÚµå */
+	QUEST_CODE VARCHAR(10) NOT NULL, /* í€˜ìŠ¤íŠ¸ ì½”ë“œ */
+	QUEST_CLASS VARCHAR2(15) NOT NULL, /* í€˜ìŠ¤íŠ¸ ë¶„ë¥˜ */
+	QUEST_TITLE VARCHAR2(255) NOT NULL, /* í€˜ìŠ¤íŠ¸ ëª… */
+	QUEST_CONTENT VARCHAR2(255) NOT NULL, /* í€˜ìŠ¤íŠ¸ ë‚´ìš© */
+	QUEST_GOAL INTEGER NOT NULL, /* ëª©í‘œìˆ˜ */
+	QUEST_REWARD INTEGER NOT NULL, /* í€˜ìŠ¤íŠ¸ ë³´ìƒê¸ˆ í˜¹ì€ ìˆ˜ëŸ‰ */
+	ITEM_CODE VARCHAR(10) NOT NULL /* ì•„ì´í…œ ì½”ë“œ */
 );
 
-COMMENT ON TABLE QUEST IS 'Äù½ºÆ®';
+COMMENT ON TABLE QUEST IS 'í€˜ìŠ¤íŠ¸';
 
-COMMENT ON COLUMN QUEST.QUEST_CODE IS 'Äù½ºÆ® ÄÚµå';
+COMMENT ON COLUMN QUEST.QUEST_CODE IS 'í€˜ìŠ¤íŠ¸ ì½”ë“œ';
 
-COMMENT ON COLUMN QUEST.QUEST_CLASS IS 'Äù½ºÆ® ºÐ·ù';
+COMMENT ON COLUMN QUEST.QUEST_CLASS IS 'í€˜ìŠ¤íŠ¸ ë¶„ë¥˜';
 
-COMMENT ON COLUMN QUEST.QUEST_TITLE IS 'Äù½ºÆ® ¸í';
+COMMENT ON COLUMN QUEST.QUEST_TITLE IS 'í€˜ìŠ¤íŠ¸ ëª…';
 
-COMMENT ON COLUMN QUEST.QUEST_CONTENT IS 'Äù½ºÆ® ³»¿ë';
+COMMENT ON COLUMN QUEST.QUEST_CONTENT IS 'í€˜ìŠ¤íŠ¸ ë‚´ìš©';
 
-COMMENT ON COLUMN QUEST.QUEST_GOAL IS '¸ñÇ¥¼ö';
+COMMENT ON COLUMN QUEST.QUEST_GOAL IS 'ëª©í‘œìˆ˜';
 
-COMMENT ON COLUMN QUEST.QUEST_REWARD IS 'Äù½ºÆ® º¸»ó±Ý È¤Àº ¼ö·®';
+COMMENT ON COLUMN QUEST.QUEST_REWARD IS 'í€˜ìŠ¤íŠ¸ ë³´ìƒê¸ˆ í˜¹ì€ ìˆ˜ëŸ‰';
 
-COMMENT ON COLUMN QUEST.ITEM_CODE IS '¾ÆÀÌÅÛ ÄÚµå';
+COMMENT ON COLUMN QUEST.ITEM_CODE IS 'ì•„ì´í…œ ì½”ë“œ';
 
 ALTER TABLE QUEST
 	ADD
@@ -302,33 +302,33 @@ ALTER TABLE QUEST
 		);
 
 
-insert into quest values('tutorial01', 'Æ©Åä¸®¾ó','³»Á¤º¸ È®ÀÎÇÏ±â','¿ìÃø ÇÏ´Ü Á¤º¸Ã¢¿¡¼­ ³»Á¤º¸ µé¾î°¡±â',1,1,'randombox');
-insert into quest values('tutorial02', 'Æ©Åä¸®¾ó','ÁÖ½ÄÁ¤º¸ È®ÀÎÇÏ±â','¿ìÃø ÇÏ´Ü Á¤º¸Ã¢¿¡¼­ ÁÖ½ÄÁ¤º¸ µé¾î°¡±â',1,1,'randombox');
-insert into quest values('tutorial03', 'Æ©Åä¸®¾ó','°æ¸ÅÀå È®ÀÎÇÏ±â','¿ìÃø ÇÏ´Ü Á¤º¸Ã¢¿¡¼­ °æ¸ÅÀå µé¾î°¡±â',1,1,'randombox');
-insert into quest values('tutorial04', 'Æ©Åä¸®¾ó','»óÁ¡ È®ÀÎÇÏ±â','¿ìÃø ÇÏ´Ü Á¤º¸Ã¢¿¡¼­ »óÁ¡ µé¾î°¡±â',1,1,'randombox');
-insert into quest values('tutorial05', 'Æ©Åä¸®¾ó','°Ô½ÃÆÇ È®ÀÎÇÏ±â','¿ìÃø ÇÏ´Ü Á¤º¸Ã¢¿¡¼­ °Ô½ÃÆÇ µé¾î°¡±â',1,1,'randombox');
-insert into quest values('tutorial06', 'Æ©Åä¸®¾ó','Ä£±¸¸ñ·Ï È®ÀÎÇÏ±â','¿ìÃø ÇÏ´Ü Á¤º¸Ã¢¿¡¼­ Ä£±¸¸ñ·Ï µé¾î°¡±â',1,1,'randombox');
+insert into quest values('tutorial01', 'íŠœí† ë¦¬ì–¼','ë‚´ì •ë³´ í™•ì¸í•˜ê¸°','ìš°ì¸¡ í•˜ë‹¨ ì •ë³´ì°½ì—ì„œ ë‚´ì •ë³´ ë“¤ì–´ê°€ê¸°',1,1,'randombox');
+insert into quest values('tutorial02', 'íŠœí† ë¦¬ì–¼','ì£¼ì‹ì •ë³´ í™•ì¸í•˜ê¸°','ìš°ì¸¡ í•˜ë‹¨ ì •ë³´ì°½ì—ì„œ ì£¼ì‹ì •ë³´ ë“¤ì–´ê°€ê¸°',1,1,'randombox');
+insert into quest values('tutorial03', 'íŠœí† ë¦¬ì–¼','ê²½ë§¤ìž¥ í™•ì¸í•˜ê¸°','ìš°ì¸¡ í•˜ë‹¨ ì •ë³´ì°½ì—ì„œ ê²½ë§¤ìž¥ ë“¤ì–´ê°€ê¸°',1,1,'randombox');
+insert into quest values('tutorial04', 'íŠœí† ë¦¬ì–¼','ìƒì  í™•ì¸í•˜ê¸°','ìš°ì¸¡ í•˜ë‹¨ ì •ë³´ì°½ì—ì„œ ìƒì  ë“¤ì–´ê°€ê¸°',1,1,'randombox');
+insert into quest values('tutorial05', 'íŠœí† ë¦¬ì–¼','ê²Œì‹œíŒ í™•ì¸í•˜ê¸°','ìš°ì¸¡ í•˜ë‹¨ ì •ë³´ì°½ì—ì„œ ê²Œì‹œíŒ ë“¤ì–´ê°€ê¸°',1,1,'randombox');
+insert into quest values('tutorial06', 'íŠœí† ë¦¬ì–¼','ì¹œêµ¬ëª©ë¡ í™•ì¸í•˜ê¸°','ìš°ì¸¡ í•˜ë‹¨ ì •ë³´ì°½ì—ì„œ ì¹œêµ¬ëª©ë¡ ë“¤ì–´ê°€ê¸°',1,1,'randombox');
 delete quest where item_code='randombox';
 
 select * from quest;
 
-/* ÇÃ·¹ÀÌ¾î_Äù½ºÆ® */
+/* í”Œë ˆì´ì–´_í€˜ìŠ¤íŠ¸ */
 CREATE TABLE PLAYER_QUEST (
-	PQ_SQ INTEGER NOT NULL, /* ½ÃÄö½º */
-	QUEST_CODE VARCHAR(10) NOT NULL, /* Äù½ºÆ® ÄÚµå */
-	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ´Ð³×ÀÓ */
-	PQ_DONE INTEGER NOT NULL /* ¼öÇàÈ½¼ö */
+	PQ_SQ INTEGER NOT NULL, /* ì‹œí€€ìŠ¤ */
+	QUEST_CODE VARCHAR(10) NOT NULL, /* í€˜ìŠ¤íŠ¸ ì½”ë“œ */
+	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ë‹‰ë„¤ìž„ */
+	PQ_DONE INTEGER NOT NULL /* ìˆ˜í–‰íšŸìˆ˜ */
 );
 
-COMMENT ON TABLE PLAYER_QUEST IS 'ÇÃ·¹ÀÌ¾î_Äù½ºÆ®';
+COMMENT ON TABLE PLAYER_QUEST IS 'í”Œë ˆì´ì–´_í€˜ìŠ¤íŠ¸';
 
-COMMENT ON COLUMN PLAYER_QUEST.PQ_SQ IS '½ÃÄö½º';
+COMMENT ON COLUMN PLAYER_QUEST.PQ_SQ IS 'ì‹œí€€ìŠ¤';
 
-COMMENT ON COLUMN PLAYER_QUEST.QUEST_CODE IS 'Äù½ºÆ® ÄÚµå';
+COMMENT ON COLUMN PLAYER_QUEST.QUEST_CODE IS 'í€˜ìŠ¤íŠ¸ ì½”ë“œ';
 
-COMMENT ON COLUMN PLAYER_QUEST.PLAYER_NICKNAME IS '´Ð³×ÀÓ';
+COMMENT ON COLUMN PLAYER_QUEST.PLAYER_NICKNAME IS 'ë‹‰ë„¤ìž„';
 
-COMMENT ON COLUMN PLAYER_QUEST.PQ_DONE IS '¼öÇàÈ½¼ö';
+COMMENT ON COLUMN PLAYER_QUEST.PQ_DONE IS 'ìˆ˜í–‰íšŸìˆ˜';
 
 ALTER TABLE PLAYER_QUEST
 	ADD
@@ -339,26 +339,26 @@ ALTER TABLE PLAYER_QUEST
 CREATE SEQUENCE pq_sq NOCACHE;
 
 
-/* »óÀå¸ñ·Ï */
+/* ìƒìž¥ëª©ë¡ */
 CREATE TABLE LISTS (
-	isuCd VARCHAR2(100) NOT NULL, /* Á¾¸ñÄÚµå */
-	isuSrtCd VARCHAR2(255) NOT NULL, /* Á¾¸ñ´ÜÃàÄÚµå */
-	mktTpCd VARCHAR2(255), /* ½ÃÀå±¸ºÐÄÚµå */
-	isuKorNm VARCHAR2(255), /* Á¾¸ñÇÑ±Û¸í */
-	isuKorAbbrv VARCHAR2(255) /* Á¾¸ñÇÑ±Û¾à¸í */
+	isuCd VARCHAR2(100) NOT NULL, /* ì¢…ëª©ì½”ë“œ */
+	isuSrtCd VARCHAR2(255) NOT NULL, /* ì¢…ëª©ë‹¨ì¶•ì½”ë“œ */
+	mktTpCd VARCHAR2(255), /* ì‹œìž¥êµ¬ë¶„ì½”ë“œ */
+	isuKorNm VARCHAR2(255), /* ì¢…ëª©í•œê¸€ëª… */
+	isuKorAbbrv VARCHAR2(255) /* ì¢…ëª©í•œê¸€ì•½ëª… */
 );
 
-COMMENT ON TABLE LISTS IS '»óÀå¸ñ·Ï';
+COMMENT ON TABLE LISTS IS 'ìƒìž¥ëª©ë¡';
 
-COMMENT ON COLUMN LISTS.isuCd IS 'Á¾¸ñÄÚµå';
+COMMENT ON COLUMN LISTS.isuCd IS 'ì¢…ëª©ì½”ë“œ';
 
-COMMENT ON COLUMN LISTS.isuSrtCd IS 'Á¾¸ñ´ÜÃàÄÚµå';
+COMMENT ON COLUMN LISTS.isuSrtCd IS 'ì¢…ëª©ë‹¨ì¶•ì½”ë“œ';
 
-COMMENT ON COLUMN LISTS.mktTpCd IS '½ÃÀå±¸ºÐÄÚµå';
+COMMENT ON COLUMN LISTS.mktTpCd IS 'ì‹œìž¥êµ¬ë¶„ì½”ë“œ';
 
-COMMENT ON COLUMN LISTS.isuKorNm IS 'Á¾¸ñÇÑ±Û¸í';
+COMMENT ON COLUMN LISTS.isuKorNm IS 'ì¢…ëª©í•œê¸€ëª…';
 
-COMMENT ON COLUMN LISTS.isuKorAbbrv IS 'Á¾¸ñÇÑ±Û¾à¸í';
+COMMENT ON COLUMN LISTS.isuKorAbbrv IS 'ì¢…ëª©í•œê¸€ì•½ëª…';
 
 ALTER TABLE LISTS
 	ADD
@@ -367,101 +367,101 @@ ALTER TABLE LISTS
 			isuCd
 		);
 
-/* ¸¶½ºÅÍ */
+/* ë§ˆìŠ¤í„° */
 CREATE TABLE MASTER (
-	isuCd VARCHAR2(100) NOT NULL, /* Á¾¸ñÄÚµå */
-	isuSrtCd VARCHAR2(100), /* Á¾¸ñ´ÜÃàÄÚµå */
-	isuKorAbbrv VARCHAR2(100), /* Á¾¸ñÇÑ±Û¾à¸í */
-	govncExcelYn VARCHAR2(100), /* Áö¹è±¸Á¶¿ì·®¿©ºÎ */
-	haltYn VARCHAR2(100), /* °Å·¡Á¤Áö¿©ºÎ */
-	mktcapScaleCd VARCHAR2(100), /* ½Ã°¡ÃÑ¾×±Ô¸ðÄÚµå */
-	mfindYn VARCHAR2(100), /* Á¦Á¶¾÷¿©ºÎ */
-	krxAutosSectidxYn VARCHAR2(100), /* KRXÀÚµ¿Â÷¼½ÅÍÁö¼ö¿©ºÎ */
-	krxSemiconSectidxYn VARCHAR2(100), /* KRX¹ÝµµÃ¼¼½ÅÍÁö¼ö¿©ºÎ */
-	krxBioSectidxYn VARCHAR2(100), /* KRX¹ÙÀÌ¿À¼½ÅÍÁö¼ö¿©ºÎ */
-	krxFncSectidxYn VARCHAR2(100), /* KRX±ÝÀ¶¼½ÅÍÁö¼ö¿©ºÎ */
-	krxInfoCommSectidxYn VARCHAR2(100), /* KRXÁ¤º¸Åë½Å¼½ÅÍÁö¼ö¿©ºÎ */
-	krxEnergyChemSectidxYn VARCHAR2(100), /* KRX¿¡³ÊÁöÈ­ÇÐ¼½ÅÍÁö¼ö¿©ºÎ */
-	krxSteelSectidxYn VARCHAR2(100), /* KRXÃ¶°­¼½ÅÍÁö¼ö¿©ºÎ */
-	krxConsgoodSectidxYn VARCHAR2(100), /* KRX¼ÒºñÀç¼½ÅÍÁö¼ö¿©ºÎ */
-	krxMediaCommSectidxYn VARCHAR2(100), /* KRX¹Ìµð¾îÅë½Å¼½ÅÍÁö¼ö¿©ºÎ */
-	krxConstrSectidxYn VARCHAR2(100), /* KRX°Ç¼³¼½ÅÍÁö¼ö¿©ºÎ */
-	krxFncSvcSectidxYn VARCHAR2(100), /* KRX±ÝÀ¶¼­ºñ½º¼½ÅÍÁö¼ö¿©ºÎ */
-	krxSecuSectidxYn VARCHAR2(100), /* KRX¼½ÅÍÁö¼öÁõ±Ç¿©ºÎ */
-	krxShipSectidxYn VARCHAR2(100), /* KRX¼½ÅÍÁö¼ö¼±¹Ú¿©ºÎ */
-	prevddAccTrdvol INTEGER, /* ÀüÀÏ´©ÀûÃ¼°á¼ö·® */
-	prevddAccTrdval INTEGER, /* ÀüÀÏ´©Àû°Å·¡´ë±Ý */
-	uplmtprc INTEGER, /* »óÇÑ°¡ */
-	lwlmtprc INTEGER, /* ÇÏÇÑ°¡ */
-	parval INTEGER, /* ¾×¸é°¡ */
-	listShrs INTEGER, /* »óÀåÁÖ½Ä¼ö */
-	krxInsuSectidxYn VARCHAR2(100), /* KRX¼½ÅÍÁö¼öº¸Çè¿©ºÎ */
-	krxTransSectidxYn VARCHAR2(100), /* KRX¼½ÅÍÁö¼ö¿î¼Û¿©ºÎ */
-	krxRetailSectidxYn VARCHAR2(100), /* KRX¼½ÅÍÁö¼ö¼ÒºñÀÚÀ¯Åë¿©ºÎ */
-	krxLeisureSectidxYn VARCHAR2(100) /* KRX¼½ÅÍÁö¼ö·¹Àú¿£ÅÍÅ×ÀÎ¸ÕÆ®¿©ºÎ */
+	isuCd VARCHAR2(100) NOT NULL, /* ì¢…ëª©ì½”ë“œ */
+	isuSrtCd VARCHAR2(100), /* ì¢…ëª©ë‹¨ì¶•ì½”ë“œ */
+	isuKorAbbrv VARCHAR2(100), /* ì¢…ëª©í•œê¸€ì•½ëª… */
+	govncExcelYn VARCHAR2(100), /* ì§€ë°°êµ¬ì¡°ìš°ëŸ‰ì—¬ë¶€ */
+	haltYn VARCHAR2(100), /* ê±°ëž˜ì •ì§€ì—¬ë¶€ */
+	mktcapScaleCd VARCHAR2(100), /* ì‹œê°€ì´ì•¡ê·œëª¨ì½”ë“œ */
+	mfindYn VARCHAR2(100), /* ì œì¡°ì—…ì—¬ë¶€ */
+	krxAutosSectidxYn VARCHAR2(100), /* KRXìžë™ì°¨ì„¹í„°ì§€ìˆ˜ì—¬ë¶€ */
+	krxSemiconSectidxYn VARCHAR2(100), /* KRXë°˜ë„ì²´ì„¹í„°ì§€ìˆ˜ì—¬ë¶€ */
+	krxBioSectidxYn VARCHAR2(100), /* KRXë°”ì´ì˜¤ì„¹í„°ì§€ìˆ˜ì—¬ë¶€ */
+	krxFncSectidxYn VARCHAR2(100), /* KRXê¸ˆìœµì„¹í„°ì§€ìˆ˜ì—¬ë¶€ */
+	krxInfoCommSectidxYn VARCHAR2(100), /* KRXì •ë³´í†µì‹ ì„¹í„°ì§€ìˆ˜ì—¬ë¶€ */
+	krxEnergyChemSectidxYn VARCHAR2(100), /* KRXì—ë„ˆì§€í™”í•™ì„¹í„°ì§€ìˆ˜ì—¬ë¶€ */
+	krxSteelSectidxYn VARCHAR2(100), /* KRXì² ê°•ì„¹í„°ì§€ìˆ˜ì—¬ë¶€ */
+	krxConsgoodSectidxYn VARCHAR2(100), /* KRXì†Œë¹„ìž¬ì„¹í„°ì§€ìˆ˜ì—¬ë¶€ */
+	krxMediaCommSectidxYn VARCHAR2(100), /* KRXë¯¸ë””ì–´í†µì‹ ì„¹í„°ì§€ìˆ˜ì—¬ë¶€ */
+	krxConstrSectidxYn VARCHAR2(100), /* KRXê±´ì„¤ì„¹í„°ì§€ìˆ˜ì—¬ë¶€ */
+	krxFncSvcSectidxYn VARCHAR2(100), /* KRXê¸ˆìœµì„œë¹„ìŠ¤ì„¹í„°ì§€ìˆ˜ì—¬ë¶€ */
+	krxSecuSectidxYn VARCHAR2(100), /* KRXì„¹í„°ì§€ìˆ˜ì¦ê¶Œì—¬ë¶€ */
+	krxShipSectidxYn VARCHAR2(100), /* KRXì„¹í„°ì§€ìˆ˜ì„ ë°•ì—¬ë¶€ */
+	prevddAccTrdvol INTEGER, /* ì „ì¼ëˆ„ì ì²´ê²°ìˆ˜ëŸ‰ */
+	prevddAccTrdval INTEGER, /* ì „ì¼ëˆ„ì ê±°ëž˜ëŒ€ê¸ˆ */
+	uplmtprc INTEGER, /* ìƒí•œê°€ */
+	lwlmtprc INTEGER, /* í•˜í•œê°€ */
+	parval INTEGER, /* ì•¡ë©´ê°€ */
+	listShrs INTEGER, /* ìƒìž¥ì£¼ì‹ìˆ˜ */
+	krxInsuSectidxYn VARCHAR2(100), /* KRXì„¹í„°ì§€ìˆ˜ë³´í—˜ì—¬ë¶€ */
+	krxTransSectidxYn VARCHAR2(100), /* KRXì„¹í„°ì§€ìˆ˜ìš´ì†¡ì—¬ë¶€ */
+	krxRetailSectidxYn VARCHAR2(100), /* KRXì„¹í„°ì§€ìˆ˜ì†Œë¹„ìžìœ í†µì—¬ë¶€ */
+	krxLeisureSectidxYn VARCHAR2(100) /* KRXì„¹í„°ì§€ìˆ˜ë ˆì €ì—”í„°í…Œì¸ë¨¼íŠ¸ì—¬ë¶€ */
 );
 
-COMMENT ON TABLE MASTER IS '¸¶½ºÅÍ';
+COMMENT ON TABLE MASTER IS 'ë§ˆìŠ¤í„°';
 
-COMMENT ON COLUMN MASTER.isuCd IS 'Á¾¸ñÄÚµå';
+COMMENT ON COLUMN MASTER.isuCd IS 'ì¢…ëª©ì½”ë“œ';
 
-COMMENT ON COLUMN MASTER.isuSrtCd IS 'Á¾¸ñ´ÜÃàÄÚµå';
+COMMENT ON COLUMN MASTER.isuSrtCd IS 'ì¢…ëª©ë‹¨ì¶•ì½”ë“œ';
 
-COMMENT ON COLUMN MASTER.isuKorAbbrv IS 'Á¾¸ñÇÑ±Û¾à¸í';
+COMMENT ON COLUMN MASTER.isuKorAbbrv IS 'ì¢…ëª©í•œê¸€ì•½ëª…';
 
-COMMENT ON COLUMN MASTER.govncExcelYn IS 'Áö¹è±¸Á¶¿ì·®¿©ºÎ';
+COMMENT ON COLUMN MASTER.govncExcelYn IS 'ì§€ë°°êµ¬ì¡°ìš°ëŸ‰ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.haltYn IS '°Å·¡Á¤Áö¿©ºÎ';
+COMMENT ON COLUMN MASTER.haltYn IS 'ê±°ëž˜ì •ì§€ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.mktcapScaleCd IS '½Ã°¡ÃÑ¾×±Ô¸ðÄÚµå';
+COMMENT ON COLUMN MASTER.mktcapScaleCd IS 'ì‹œê°€ì´ì•¡ê·œëª¨ì½”ë“œ';
 
-COMMENT ON COLUMN MASTER.mfindYn IS 'Á¦Á¶¾÷¿©ºÎ';
+COMMENT ON COLUMN MASTER.mfindYn IS 'ì œì¡°ì—…ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxAutosSectidxYn IS 'KRXÀÚµ¿Â÷¼½ÅÍÁö¼ö¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxAutosSectidxYn IS 'KRXìžë™ì°¨ì„¹í„°ì§€ìˆ˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxSemiconSectidxYn IS 'KRX¹ÝµµÃ¼¼½ÅÍÁö¼ö¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxSemiconSectidxYn IS 'KRXë°˜ë„ì²´ì„¹í„°ì§€ìˆ˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxBioSectidxYn IS 'KRX¹ÙÀÌ¿À¼½ÅÍÁö¼ö¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxBioSectidxYn IS 'KRXë°”ì´ì˜¤ì„¹í„°ì§€ìˆ˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxFncSectidxYn IS 'KRX±ÝÀ¶¼½ÅÍÁö¼ö¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxFncSectidxYn IS 'KRXê¸ˆìœµì„¹í„°ì§€ìˆ˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxInfoCommSectidxYn IS 'KRXÁ¤º¸Åë½Å¼½ÅÍÁö¼ö¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxInfoCommSectidxYn IS 'KRXì •ë³´í†µì‹ ì„¹í„°ì§€ìˆ˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxEnergyChemSectidxYn IS 'KRX¿¡³ÊÁöÈ­ÇÐ¼½ÅÍÁö¼ö¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxEnergyChemSectidxYn IS 'KRXì—ë„ˆì§€í™”í•™ì„¹í„°ì§€ìˆ˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxSteelSectidxYn IS 'KRXÃ¶°­¼½ÅÍÁö¼ö¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxSteelSectidxYn IS 'KRXì² ê°•ì„¹í„°ì§€ìˆ˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxConsgoodSectidxYn IS 'KRX¼ÒºñÀç¼½ÅÍÁö¼ö¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxConsgoodSectidxYn IS 'KRXì†Œë¹„ìž¬ì„¹í„°ì§€ìˆ˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxMediaCommSectidxYn IS 'KRX¹Ìµð¾îÅë½Å¼½ÅÍÁö¼ö¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxMediaCommSectidxYn IS 'KRXë¯¸ë””ì–´í†µì‹ ì„¹í„°ì§€ìˆ˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxConstrSectidxYn IS 'KRX°Ç¼³¼½ÅÍÁö¼ö¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxConstrSectidxYn IS 'KRXê±´ì„¤ì„¹í„°ì§€ìˆ˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxFncSvcSectidxYn IS 'KRX±ÝÀ¶¼­ºñ½º¼½ÅÍÁö¼ö¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxFncSvcSectidxYn IS 'KRXê¸ˆìœµì„œë¹„ìŠ¤ì„¹í„°ì§€ìˆ˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxSecuSectidxYn IS 'KRX¼½ÅÍÁö¼öÁõ±Ç¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxSecuSectidxYn IS 'KRXì„¹í„°ì§€ìˆ˜ì¦ê¶Œì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxShipSectidxYn IS 'KRX¼½ÅÍÁö¼ö¼±¹Ú¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxShipSectidxYn IS 'KRXì„¹í„°ì§€ìˆ˜ì„ ë°•ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.prevddAccTrdvol IS 'ÀüÀÏ´©ÀûÃ¼°á¼ö·®';
+COMMENT ON COLUMN MASTER.prevddAccTrdvol IS 'ì „ì¼ëˆ„ì ì²´ê²°ìˆ˜ëŸ‰';
 
-COMMENT ON COLUMN MASTER.prevddAccTrdval IS 'ÀüÀÏ´©Àû°Å·¡´ë±Ý';
+COMMENT ON COLUMN MASTER.prevddAccTrdval IS 'ì „ì¼ëˆ„ì ê±°ëž˜ëŒ€ê¸ˆ';
 
-COMMENT ON COLUMN MASTER.uplmtprc IS '»óÇÑ°¡';
+COMMENT ON COLUMN MASTER.uplmtprc IS 'ìƒí•œê°€';
 
-COMMENT ON COLUMN MASTER.lwlmtprc IS 'ÇÏÇÑ°¡';
+COMMENT ON COLUMN MASTER.lwlmtprc IS 'í•˜í•œê°€';
 
-COMMENT ON COLUMN MASTER.parval IS '¾×¸é°¡';
+COMMENT ON COLUMN MASTER.parval IS 'ì•¡ë©´ê°€';
 
-COMMENT ON COLUMN MASTER.listShrs IS '»óÀåÁÖ½Ä¼ö';
+COMMENT ON COLUMN MASTER.listShrs IS 'ìƒìž¥ì£¼ì‹ìˆ˜';
 
-COMMENT ON COLUMN MASTER.krxInsuSectidxYn IS 'KRX¼½ÅÍÁö¼öº¸Çè¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxInsuSectidxYn IS 'KRXì„¹í„°ì§€ìˆ˜ë³´í—˜ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxTransSectidxYn IS 'KRX¼½ÅÍÁö¼ö¿î¼Û¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxTransSectidxYn IS 'KRXì„¹í„°ì§€ìˆ˜ìš´ì†¡ì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxRetailSectidxYn IS 'KRX¼½ÅÍÁö¼ö¼ÒºñÀÚÀ¯Åë¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxRetailSectidxYn IS 'KRXì„¹í„°ì§€ìˆ˜ì†Œë¹„ìžìœ í†µì—¬ë¶€';
 
-COMMENT ON COLUMN MASTER.krxLeisureSectidxYn IS 'KRX¼½ÅÍÁö¼ö·¹Àú¿£ÅÍÅ×ÀÎ¸ÕÆ®¿©ºÎ';
+COMMENT ON COLUMN MASTER.krxLeisureSectidxYn IS 'KRXì„¹í„°ì§€ìˆ˜ë ˆì €ì—”í„°í…Œì¸ë¨¼íŠ¸ì—¬ë¶€';
 
 ALTER TABLE MASTER
 	ADD
@@ -470,41 +470,41 @@ ALTER TABLE MASTER
 			isuCd
 		);
 
-/* °¡°Ý */
+/* ê°€ê²© */
 CREATE TABLE PRICE (
-	isuCd VARCHAR2(100) NOT NULL, /* Á¾¸ñÄÚµå */
-	cmpprevddTpCd VARCHAR2(100), /* ÀüÀÏ´ëºñ±¸ºÐÄÚµå */
-	cmpprevddPrc INTEGER, /* ÀüÀÏ´ëºñ°¡°Ý */
-	trdPrc INTEGER, /* Ã¼°á°¡°Ý */
-	trdvol INTEGER, /* Ã¼°á¼ö·®,°Å·¡·® */
-	opnprc INTEGER, /* ½Ã°¡ */
-	hgprc INTEGER, /* °í°¡ */
-	lwprc INTEGER, /* Àú°¡ */
-	trdTm VARCHAR2(100), /* Ã¼°á½Ã°¢,°Å·¡½Ã°¢ */
-	mkStatTpCd VARCHAR(10) /* Àå»óÅÂ±¸ºÐÄÚµå */
+	isuCd VARCHAR2(100) NOT NULL, /* ì¢…ëª©ì½”ë“œ */
+	cmpprevddTpCd VARCHAR2(100), /* ì „ì¼ëŒ€ë¹„êµ¬ë¶„ì½”ë“œ */
+	cmpprevddPrc INTEGER, /* ì „ì¼ëŒ€ë¹„ê°€ê²© */
+	trdPrc INTEGER, /* ì²´ê²°ê°€ê²© */
+	trdvol INTEGER, /* ì²´ê²°ìˆ˜ëŸ‰,ê±°ëž˜ëŸ‰ */
+	opnprc INTEGER, /* ì‹œê°€ */
+	hgprc INTEGER, /* ê³ ê°€ */
+	lwprc INTEGER, /* ì €ê°€ */
+	trdTm VARCHAR2(100), /* ì²´ê²°ì‹œê°,ê±°ëž˜ì‹œê° */
+	mkStatTpCd VARCHAR(10) /* ìž¥ìƒíƒœêµ¬ë¶„ì½”ë“œ */
 );
 
-COMMENT ON TABLE PRICE IS '°¡°Ý';
+COMMENT ON TABLE PRICE IS 'ê°€ê²©';
 
-COMMENT ON COLUMN PRICE.isuCd IS 'Á¾¸ñÄÚµå';
+COMMENT ON COLUMN PRICE.isuCd IS 'ì¢…ëª©ì½”ë“œ';
 
-COMMENT ON COLUMN PRICE.cmpprevddTpCd IS 'ÀüÀÏ´ëºñ±¸ºÐÄÚµå';
+COMMENT ON COLUMN PRICE.cmpprevddTpCd IS 'ì „ì¼ëŒ€ë¹„êµ¬ë¶„ì½”ë“œ';
 
-COMMENT ON COLUMN PRICE.cmpprevddPrc IS 'ÀüÀÏ´ëºñ°¡°Ý';
+COMMENT ON COLUMN PRICE.cmpprevddPrc IS 'ì „ì¼ëŒ€ë¹„ê°€ê²©';
 
-COMMENT ON COLUMN PRICE.trdPrc IS 'Ã¼°á°¡°Ý';
+COMMENT ON COLUMN PRICE.trdPrc IS 'ì²´ê²°ê°€ê²©';
 
-COMMENT ON COLUMN PRICE.trdvol IS 'Ã¼°á¼ö·®,°Å·¡·®';
+COMMENT ON COLUMN PRICE.trdvol IS 'ì²´ê²°ìˆ˜ëŸ‰,ê±°ëž˜ëŸ‰';
 
-COMMENT ON COLUMN PRICE.opnprc IS '½Ã°¡';
+COMMENT ON COLUMN PRICE.opnprc IS 'ì‹œê°€';
 
-COMMENT ON COLUMN PRICE.hgprc IS '°í°¡';
+COMMENT ON COLUMN PRICE.hgprc IS 'ê³ ê°€';
 
-COMMENT ON COLUMN PRICE.lwprc IS 'Àú°¡';
+COMMENT ON COLUMN PRICE.lwprc IS 'ì €ê°€';
 
-COMMENT ON COLUMN PRICE.trdTm IS 'Ã¼°á½Ã°¢,°Å·¡½Ã°¢';
+COMMENT ON COLUMN PRICE.trdTm IS 'ì²´ê²°ì‹œê°,ê±°ëž˜ì‹œê°';
 
-COMMENT ON COLUMN PRICE.mkStatTpCd IS 'Àå»óÅÂ±¸ºÐÄÚµå';
+COMMENT ON COLUMN PRICE.mkStatTpCd IS 'ìž¥ìƒíƒœêµ¬ë¶„ì½”ë“œ';
 
 ALTER TABLE PRICE
 	ADD
@@ -513,23 +513,23 @@ ALTER TABLE PRICE
 			isuCd
 		);
 
-/* ½Ç½Ã°£ÁÖ½ÄÃ¼°á°¡ */
+/* ì‹¤ì‹œê°„ì£¼ì‹ì²´ê²°ê°€ */
 CREATE TABLE REALTIME_PRICE (
-	RP_SQ INTEGER NOT NULL, /* ½ÃÄö½º */
-	isuCd VARCHAR2(100) NOT NULL, /* Á¾¸ñÄÚµå */
-	RP_trdPrc INTEGER NOT NULL, /* Ã¼°á°¡°Ý */
-	RP_trdTm VARCHAR2(100) NOT NULL /* Ã¼°á½Ã°¢,°Å·¡½Ã°¢ */
+	RP_SQ INTEGER NOT NULL, /* ì‹œí€€ìŠ¤ */
+	isuCd VARCHAR2(100) NOT NULL, /* ì¢…ëª©ì½”ë“œ */
+	RP_trdPrc INTEGER NOT NULL, /* ì²´ê²°ê°€ê²© */
+	RP_trdTm VARCHAR2(100) NOT NULL /* ì²´ê²°ì‹œê°,ê±°ëž˜ì‹œê° */
 );
 
-COMMENT ON TABLE REALTIME_PRICE IS '½Ç½Ã°£ÁÖ½ÄÃ¼°á°¡';
+COMMENT ON TABLE REALTIME_PRICE IS 'ì‹¤ì‹œê°„ì£¼ì‹ì²´ê²°ê°€';
 
-COMMENT ON COLUMN REALTIME_PRICE.RP_SQ IS '½ÃÄö½º';
+COMMENT ON COLUMN REALTIME_PRICE.RP_SQ IS 'ì‹œí€€ìŠ¤';
 
-COMMENT ON COLUMN REALTIME_PRICE.isuCd IS 'Á¾¸ñÄÚµå';
+COMMENT ON COLUMN REALTIME_PRICE.isuCd IS 'ì¢…ëª©ì½”ë“œ';
 
-COMMENT ON COLUMN REALTIME_PRICE.RP_trdPrc IS 'Ã¼°á°¡°Ý';
+COMMENT ON COLUMN REALTIME_PRICE.RP_trdPrc IS 'ì²´ê²°ê°€ê²©';
 
-COMMENT ON COLUMN REALTIME_PRICE.RP_trdTm IS 'Ã¼°á½Ã°¢,°Å·¡½Ã°¢';
+COMMENT ON COLUMN REALTIME_PRICE.RP_trdTm IS 'ì²´ê²°ì‹œê°,ê±°ëž˜ì‹œê°';
 
 ALTER TABLE REALTIME_PRICE
 	ADD
@@ -538,23 +538,23 @@ ALTER TABLE REALTIME_PRICE
 			RP_SQ
 		);
 
-/* ÀÏº°ÁÖ½ÄÁ¾°¡ */
+/* ì¼ë³„ì£¼ì‹ì¢…ê°€ */
 CREATE TABLE DAILY_PRICE (
-	DP_SQ INTEGER NOT NULL, /* ½ÃÄö½º */
-	isuCd VARCHAR2(100) NOT NULL, /* Á¾¸ñÄÚµå */
-	DP_clsprc INTEGER NOT NULL, /* Á¾°¡ */
-	DP_DATE DATE NOT NULL /* ÀÏÀÚ */
+	DP_SQ INTEGER NOT NULL, /* ì‹œí€€ìŠ¤ */
+	isuCd VARCHAR2(100) NOT NULL, /* ì¢…ëª©ì½”ë“œ */
+	DP_clsprc INTEGER NOT NULL, /* ì¢…ê°€ */
+	DP_DATE DATE NOT NULL /* ì¼ìž */
 );
 
-COMMENT ON TABLE DAILY_PRICE IS 'ÀÏº°ÁÖ½ÄÁ¾°¡';
+COMMENT ON TABLE DAILY_PRICE IS 'ì¼ë³„ì£¼ì‹ì¢…ê°€';
 
-COMMENT ON COLUMN DAILY_PRICE.DP_SQ IS '½ÃÄö½º';
+COMMENT ON COLUMN DAILY_PRICE.DP_SQ IS 'ì‹œí€€ìŠ¤';
 
-COMMENT ON COLUMN DAILY_PRICE.isuCd IS 'Á¾¸ñÄÚµå';
+COMMENT ON COLUMN DAILY_PRICE.isuCd IS 'ì¢…ëª©ì½”ë“œ';
 
-COMMENT ON COLUMN DAILY_PRICE.DP_clsprc IS 'Á¾°¡';
+COMMENT ON COLUMN DAILY_PRICE.DP_clsprc IS 'ì¢…ê°€';
 
-COMMENT ON COLUMN DAILY_PRICE.DP_DATE IS 'ÀÏÀÚ';
+COMMENT ON COLUMN DAILY_PRICE.DP_DATE IS 'ì¼ìž';
 
 ALTER TABLE DAILY_PRICE
 	ADD
@@ -563,23 +563,23 @@ ALTER TABLE DAILY_PRICE
 			DP_SQ
 		);
 
-/* ÇÃ·¹ÀÌ¾î_ÁÖ½Ä */
+/* í”Œë ˆì´ì–´_ì£¼ì‹ */
 CREATE TABLE PLAYER_LISTS (
-	PL_SQ INTEGER NOT NULL, /* ½ÃÄö½º */
-	isuCd VARCHAR2(100) NOT NULL, /* Á¾¸ñÄÚµå */
-	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ´Ð³×ÀÓ */
-	PL_QUANTITY INTEGER NOT NULL /* ¼ö·® */
+	PL_SQ INTEGER NOT NULL, /* ì‹œí€€ìŠ¤ */
+	isuCd VARCHAR2(100) NOT NULL, /* ì¢…ëª©ì½”ë“œ */
+	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ë‹‰ë„¤ìž„ */
+	PL_QUANTITY INTEGER NOT NULL /* ìˆ˜ëŸ‰ */
 );
 
-COMMENT ON TABLE PLAYER_LISTS IS 'ÇÃ·¹ÀÌ¾î_ÁÖ½Ä';
+COMMENT ON TABLE PLAYER_LISTS IS 'í”Œë ˆì´ì–´_ì£¼ì‹';
 
-COMMENT ON COLUMN PLAYER_LISTS.PL_SQ IS '½ÃÄö½º';
+COMMENT ON COLUMN PLAYER_LISTS.PL_SQ IS 'ì‹œí€€ìŠ¤';
 
-COMMENT ON COLUMN PLAYER_LISTS.isuCd IS 'Á¾¸ñÄÚµå';
+COMMENT ON COLUMN PLAYER_LISTS.isuCd IS 'ì¢…ëª©ì½”ë“œ';
 
-COMMENT ON COLUMN PLAYER_LISTS.PLAYER_NICKNAME IS '´Ð³×ÀÓ';
+COMMENT ON COLUMN PLAYER_LISTS.PLAYER_NICKNAME IS 'ë‹‰ë„¤ìž„';
 
-COMMENT ON COLUMN PLAYER_LISTS.PL_QUANTITY IS '¼ö·®';
+COMMENT ON COLUMN PLAYER_LISTS.PL_QUANTITY IS 'ìˆ˜ëŸ‰';
 
 ALTER TABLE PLAYER_LISTS
 	ADD
@@ -588,30 +588,30 @@ ALTER TABLE PLAYER_LISTS
 			PL_SQ
 		);
 
-/* ÁÖ½Ä°Å·¡ ±â·Ï */
+/* ì£¼ì‹ê±°ëž˜ ê¸°ë¡ */
 CREATE TABLE STOCK_DEAL_HISTORY (
-	SDH_SQ INTEGER NOT NULL, /* ½ÃÄö½º */
-	isuCd VARCHAR2(100) NOT NULL, /* Á¾¸ñÄÚµå */
-	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ´Ð³×ÀÓ */
-	SDH_DEAL_PRICE INTEGER NOT NULL, /* °Å·¡°¡ */
-	SDH_DEAL_TIME DATE NOT NULL, /* °Å·¡ ½Ã°¢ */
-	SDH_QUANTITY INTEGER NOT NULL, /* ¼ö·® */
+	SDH_SQ INTEGER NOT NULL, /* ì‹œí€€ìŠ¤ */
+	isuCd VARCHAR2(100) NOT NULL, /* ì¢…ëª©ì½”ë“œ */
+	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ë‹‰ë„¤ìž„ */
+	SDH_DEAL_PRICE INTEGER NOT NULL, /* ê±°ëž˜ê°€ */
+	SDH_DEAL_TIME DATE NOT NULL, /* ê±°ëž˜ ì‹œê° */
+	SDH_QUANTITY INTEGER NOT NULL, /* ìˆ˜ëŸ‰ */
 	SDH_BUY_SELL VARCHAR(1) NOT NULL /* B/S */
 );
 
-COMMENT ON TABLE STOCK_DEAL_HISTORY IS 'ÁÖ½Ä°Å·¡ ±â·Ï';
+COMMENT ON TABLE STOCK_DEAL_HISTORY IS 'ì£¼ì‹ê±°ëž˜ ê¸°ë¡';
 
-COMMENT ON COLUMN STOCK_DEAL_HISTORY.SDH_SQ IS '½ÃÄö½º';
+COMMENT ON COLUMN STOCK_DEAL_HISTORY.SDH_SQ IS 'ì‹œí€€ìŠ¤';
 
-COMMENT ON COLUMN STOCK_DEAL_HISTORY.isuCd IS 'Á¾¸ñÄÚµå';
+COMMENT ON COLUMN STOCK_DEAL_HISTORY.isuCd IS 'ì¢…ëª©ì½”ë“œ';
 
-COMMENT ON COLUMN STOCK_DEAL_HISTORY.PLAYER_NICKNAME IS '´Ð³×ÀÓ';
+COMMENT ON COLUMN STOCK_DEAL_HISTORY.PLAYER_NICKNAME IS 'ë‹‰ë„¤ìž„';
 
-COMMENT ON COLUMN STOCK_DEAL_HISTORY.SDH_DEAL_PRICE IS '°Å·¡°¡';
+COMMENT ON COLUMN STOCK_DEAL_HISTORY.SDH_DEAL_PRICE IS 'ê±°ëž˜ê°€';
 
-COMMENT ON COLUMN STOCK_DEAL_HISTORY.SDH_DEAL_TIME IS '°Å·¡ ½Ã°¢';
+COMMENT ON COLUMN STOCK_DEAL_HISTORY.SDH_DEAL_TIME IS 'ê±°ëž˜ ì‹œê°';
 
-COMMENT ON COLUMN STOCK_DEAL_HISTORY.SDH_QUANTITY IS '¼ö·®';
+COMMENT ON COLUMN STOCK_DEAL_HISTORY.SDH_QUANTITY IS 'ìˆ˜ëŸ‰';
 
 COMMENT ON COLUMN STOCK_DEAL_HISTORY.SDH_BUY_SELL IS 'B/S';
 
@@ -622,23 +622,23 @@ ALTER TABLE STOCK_DEAL_HISTORY
 			SDH_SQ
 		);
 
-/* ÁÖ°¡¼öÀÍ·ü_±â·Ï */
+/* ì£¼ê°€ìˆ˜ìµë¥ _ê¸°ë¡ */
 CREATE TABLE PRICE_EARNING_HISTORY (
-	PEH_SQ INTEGER NOT NULL, /* ½ÃÄö½º */
-	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ´Ð³×ÀÓ */
-	PEH_PE NUMBER(4,3) NOT NULL, /* ¼öÀÍ·ü */
-	PEH_DATE DATE NOT NULL /* ÀÏÀÚ */
+	PEH_SQ INTEGER NOT NULL, /* ì‹œí€€ìŠ¤ */
+	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ë‹‰ë„¤ìž„ */
+	PEH_PE NUMBER(4,3) NOT NULL, /* ìˆ˜ìµë¥  */
+	PEH_DATE DATE NOT NULL /* ì¼ìž */
 );
 
-COMMENT ON TABLE PRICE_EARNING_HISTORY IS 'ÁÖ°¡¼öÀÍ·ü_±â·Ï';
+COMMENT ON TABLE PRICE_EARNING_HISTORY IS 'ì£¼ê°€ìˆ˜ìµë¥ _ê¸°ë¡';
 
-COMMENT ON COLUMN PRICE_EARNING_HISTORY.PEH_SQ IS '½ÃÄö½º';
+COMMENT ON COLUMN PRICE_EARNING_HISTORY.PEH_SQ IS 'ì‹œí€€ìŠ¤';
 
-COMMENT ON COLUMN PRICE_EARNING_HISTORY.PLAYER_NICKNAME IS '´Ð³×ÀÓ';
+COMMENT ON COLUMN PRICE_EARNING_HISTORY.PLAYER_NICKNAME IS 'ë‹‰ë„¤ìž„';
 
-COMMENT ON COLUMN PRICE_EARNING_HISTORY.PEH_PE IS '¼öÀÍ·ü';
+COMMENT ON COLUMN PRICE_EARNING_HISTORY.PEH_PE IS 'ìˆ˜ìµë¥ ';
 
-COMMENT ON COLUMN PRICE_EARNING_HISTORY.PEH_DATE IS 'ÀÏÀÚ';
+COMMENT ON COLUMN PRICE_EARNING_HISTORY.PEH_DATE IS 'ì¼ìž';
 
 ALTER TABLE PRICE_EARNING_HISTORY
 	ADD
@@ -647,26 +647,26 @@ ALTER TABLE PRICE_EARNING_HISTORY
 			PEH_SQ
 		);
 
-/* ¾ÆÀÌÅÛ °æ¸ÅÀå */
+/* ì•„ì´í…œ ê²½ë§¤ìž¥ */
 CREATE TABLE ITEM_MARKET (
-	IM_SQ INTEGER NOT NULL, /* ½ÃÄö½º */
-	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ´Ð³×ÀÓ */
-	ITEM_CODE VARCHAR(10) NOT NULL, /* ¾ÆÀÌÅÛ ÄÚµå */
-	IM_PURCHASE_PRICE INTEGER NOT NULL, /* ÆÇ¸Å°¡ */
-	IM_BID_TIME DATE NOT NULL /* ÀÔÂû ½Ã°¢ */
+	IM_SQ INTEGER NOT NULL, /* ì‹œí€€ìŠ¤ */
+	PLAYER_NICKNAME VARCHAR2(30) NOT NULL, /* ë‹‰ë„¤ìž„ */
+	ITEM_CODE VARCHAR(10) NOT NULL, /* ì•„ì´í…œ ì½”ë“œ */
+	IM_PURCHASE_PRICE INTEGER NOT NULL, /* íŒë§¤ê°€ */
+	IM_BID_TIME DATE NOT NULL /* ìž…ì°° ì‹œê° */
 );
 
-COMMENT ON TABLE ITEM_MARKET IS '¾ÆÀÌÅÛ °æ¸ÅÀå';
+COMMENT ON TABLE ITEM_MARKET IS 'ì•„ì´í…œ ê²½ë§¤ìž¥';
 
-COMMENT ON COLUMN ITEM_MARKET.IM_SQ IS '½ÃÄö½º';
+COMMENT ON COLUMN ITEM_MARKET.IM_SQ IS 'ì‹œí€€ìŠ¤';
 
-COMMENT ON COLUMN ITEM_MARKET.PLAYER_NICKNAME IS '´Ð³×ÀÓ';
+COMMENT ON COLUMN ITEM_MARKET.PLAYER_NICKNAME IS 'ë‹‰ë„¤ìž„';
 
-COMMENT ON COLUMN ITEM_MARKET.ITEM_CODE IS '¾ÆÀÌÅÛ ÄÚµå';
+COMMENT ON COLUMN ITEM_MARKET.ITEM_CODE IS 'ì•„ì´í…œ ì½”ë“œ';
 
-COMMENT ON COLUMN ITEM_MARKET.IM_PURCHASE_PRICE IS 'ÆÇ¸Å°¡';
+COMMENT ON COLUMN ITEM_MARKET.IM_PURCHASE_PRICE IS 'íŒë§¤ê°€';
 
-COMMENT ON COLUMN ITEM_MARKET.IM_BID_TIME IS 'ÀÔÂû ½Ã°¢';
+COMMENT ON COLUMN ITEM_MARKET.IM_BID_TIME IS 'ìž…ì°° ì‹œê°';
 
 ALTER TABLE ITEM_MARKET
 	ADD
@@ -675,23 +675,23 @@ ALTER TABLE ITEM_MARKET
 			IM_SQ
 		);
 
-/* °Ô½Ã±Û ÀÌ¹ÌÁö */
+/* ê²Œì‹œê¸€ ì´ë¯¸ì§€ */
 CREATE TABLE BOARD_IMAGE (
-	BI_SQ INTEGER NOT NULL, /* ½ÃÄö½º */
-	BOARD_NO INTEGER NOT NULL, /* °Ô½Ã±Û ¹øÈ£ */
-	BI_ORIGIN VARCHAR2(255) NOT NULL, /* ÀÌ¹ÌÁöÆÄÀÏ¸í */
-	BI_NAME VARCHAR2(255) /* °Ô½Ã±ÛÀÌ¹ÌÁö */
+	BI_SQ INTEGER NOT NULL, /* ì‹œí€€ìŠ¤ */
+	BOARD_NO INTEGER NOT NULL, /* ê²Œì‹œê¸€ ë²ˆí˜¸ */
+	BI_ORIGIN VARCHAR2(255) NOT NULL, /* ì´ë¯¸ì§€íŒŒì¼ëª… */
+	BI_NAME VARCHAR2(255) /* ê²Œì‹œê¸€ì´ë¯¸ì§€ */
 );
 
-COMMENT ON TABLE BOARD_IMAGE IS '°Ô½Ã±Û ÀÌ¹ÌÁö';
+COMMENT ON TABLE BOARD_IMAGE IS 'ê²Œì‹œê¸€ ì´ë¯¸ì§€';
 
-COMMENT ON COLUMN BOARD_IMAGE.BI_SQ IS '½ÃÄö½º';
+COMMENT ON COLUMN BOARD_IMAGE.BI_SQ IS 'ì‹œí€€ìŠ¤';
 
-COMMENT ON COLUMN BOARD_IMAGE.BOARD_NO IS '°Ô½Ã±Û ¹øÈ£';
+COMMENT ON COLUMN BOARD_IMAGE.BOARD_NO IS 'ê²Œì‹œê¸€ ë²ˆí˜¸';
 
-COMMENT ON COLUMN BOARD_IMAGE.BI_ORIGIN IS 'ÀÌ¹ÌÁöÆÄÀÏ¸í';
+COMMENT ON COLUMN BOARD_IMAGE.BI_ORIGIN IS 'ì´ë¯¸ì§€íŒŒì¼ëª…';
 
-COMMENT ON COLUMN BOARD_IMAGE.BI_NAME IS '°Ô½Ã±ÛÀÌ¹ÌÁö';
+COMMENT ON COLUMN BOARD_IMAGE.BI_NAME IS 'ê²Œì‹œê¸€ì´ë¯¸ì§€';
 
 ALTER TABLE BOARD_IMAGE
 	ADD

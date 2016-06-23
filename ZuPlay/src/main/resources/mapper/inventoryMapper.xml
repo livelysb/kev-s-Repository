@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosta.zuplay.model.dao.InventoryDAO">
+<resultMap type="playerItemDTO" id="playerItemMapper">
+	<id column="pi_sq" property="#{piSq}"/>
+	<result column="player_nickname" property="#{playerNickname}"/>
+	<result column="item_code" property="#{itemCode}"/>
+	<result column="pi_isused" property="#{piIsused}"/>
+	<result column="pi_index" property="#{piIndex}"/>
+	
+</resultMap>
+<select id="playerItemSelectAll" parameterType="String" resultMap="playerItemMapper">
+	select * from player_item where player_nickname=#{playerNickname}
+</select>
+<update id="playerItemInsert" parameterType="playerItemDTO">
+	update player_item pi_isused=#{pi_isused},pi_index=#{pi_index} where pi_sq=#{piSq}
+</update>
+
+</mapper>

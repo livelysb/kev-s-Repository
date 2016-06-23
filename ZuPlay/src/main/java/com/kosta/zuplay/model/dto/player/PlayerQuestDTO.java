@@ -1,10 +1,10 @@
 package com.kosta.zuplay.model.dto.player;
 
 public class PlayerQuestDTO {
-	int pqSq;				//보유퀘스트 코드
-	String questCode;		//퀘스트코드
-	String playerNickname;	//닉네임
-	int pqDone;				//수행횟수
+	private int pqSq;				//보유퀘스트 코드
+	private String questCode;		//퀘스트코드
+	private String playerNickname;	//닉네임
+	private int pqDone;				//수행횟수
 	
 	public PlayerQuestDTO() {}
 	public PlayerQuestDTO(int pqSq, String questCode, String playerNickname, int pqDone) {

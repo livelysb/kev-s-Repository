@@ -4,13 +4,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BoardDTO {
-	int boardNo;			//게시글 번호
-	String playerNickname;	//닉네임
-	String boardTitle;		//글제목
-	int boardLike;			//좋아요 갯수
-	String boardContent;	//본문 내용
-	String boardTime;		//작성시각
-	int boardHits;			//조회수
+	private int boardNo;			//게시글 번호
+	private String playerNickname;	//닉네임
+	private String boardTitle;		//글제목
+	private int boardLike;			//좋아요 갯수
+	private String boardContent;	//본문 내용
+	private String boardTime;		//작성시각
+	private int boardHits;			//조회수
 	
 	public BoardDTO() {}
 	public BoardDTO(int boardNo, String playerNickname, String boardTitle, int boardLike, String boardContent,

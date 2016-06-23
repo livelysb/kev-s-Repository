@@ -4,13 +4,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class QuestDTO {
-	String questCode;		//퀘스트코드
-	String questClass;		//퀘스트분류
-	String questName;		//퀘스트명
-	String questContent;	//퀘스트내용
-	int questGoal;			//목표수
-	int questReward;		//퀘스트보상금 혹은 수량
-	String itemCode;		//아이템코드
+	private String questCode;		//퀘스트코드
+	private String questClass;		//퀘스트분류
+	private String questName;		//퀘스트명
+	private String questContent;	//퀘스트내용
+	private int questGoal;			//목표수
+	private int questReward;		//퀘스트보상금 혹은 수량
+	private String itemCode;		//아이템코드
 	
 	public QuestDTO() {}
 	public QuestDTO(String questCode, String questClass, String questName, String questContent, int questGoal,

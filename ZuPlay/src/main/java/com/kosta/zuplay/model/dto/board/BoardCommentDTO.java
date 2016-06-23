@@ -1,11 +1,11 @@
 package com.kosta.zuplay.model.dto.board;
 
 public class BoardCommentDTO {
-	int bcSq;					//코멘트번호
-	String playerNickname;		//닉네임
-	int boardNo;				//본문 글번호
-	String bcCommentTime;		//코멘트 작성시각
-	String bcCommentContent;	//코멘트 내용
+	private int bcSq;					//코멘트번호
+	private String playerNickname;		//닉네임
+	private int boardNo;				//본문 글번호
+	private String bcCommentTime;		//코멘트 작성시각
+	private String bcCommentContent;	//코멘트 내용
 	
 	public BoardCommentDTO() {}
 	

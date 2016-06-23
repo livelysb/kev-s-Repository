@@ -19,7 +19,6 @@ public class StockUpdateServiceImpl implements StockUpdateService {
 	public void actionPerMin() {
 		System.out.println("5분마다");
 		stockUpdate.updateStockPrice();
-		long end_time  = System.currentTimeMillis();
 	}
 	
 	/**

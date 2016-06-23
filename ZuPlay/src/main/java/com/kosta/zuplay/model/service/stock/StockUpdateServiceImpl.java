@@ -8,16 +8,18 @@ import org.springframework.stereotype.Service;
 public class StockUpdateServiceImpl implements StockUpdateService {
 	
 	@Autowired
-	private UpdateStockPrice updateStockPrice;
+	private StockUpdate stockUpdate;
 		
 	/**
 	 * 작동빈도 : 작업이 끝난 시점으로 1분 뒤 재시작한다.
 	 * 수행사항 : price 값 받아와서 PRICE, REALTIME_PRICE 테이블을 update, insert를 진행한다.
 	 * */
-	@Scheduled(fixedDelay=5*60*1000) //작업이 끝난지 1분 후 재시작
+	@Scheduled(fixedDelay=5*60*1000) //작업이 끝난지 5분 후 재시작
 	@Override
 	public void actionPerMin() {
-		updateStockPrice.updateStockPrice();
+		System.out.println("5분마다");
+		stockUpdate.updateStockPrice();
+		long end_time  = System.currentTimeMillis();
 	}
 	
 	/**
@@ -26,30 +28,33 @@ public class StockUpdateServiceImpl implements StockUpdateService {
 	@Scheduled(fixedDelay=10*60*1000)//10분
 	@Override
 	public void actionPer10Min() {
-		updateStockPrice.insertRealtimePrice();
+		System.out.println("10분마다");
+		stockUpdate.insertRealtimePrice();
 	}
 	
 	/**
 	 * 수행사항
 	 * 1. 마스터정보를 업데이트한다.
+	 * 2. 어제의 실시간 체결가를 초기화한다.
 	 * 2. 장을 오픈한다. ( 거래 활성화 )
 	 * */
 	@Scheduled(cron="0 30 9 * * *") //매일 아홉시반에 작동
 	@Override
 	public void actionAtNine() {
-		System.out.println("되나?");
-		updateStockPrice.updateMaster();
+		System.out.println("930");
+		stockUpdate.updateMaster();
+		stockUpdate.resetRealtimePrice();
 	}
 
 	/**
 	 * 수행사항
 	 * 1. 현재 체결가를 조회하여 DAILY_PRICE 테이블에 저장한다.
 	 * */
-
 	@Scheduled(cron="0 30 15 * * *") //매일 세시반에 작동
 	@Override
 	public void actionAtFour() {
-		updateStockPrice.insertDailyPrice();
+		System.out.println("330");
+		stockUpdate.insertDailyPrice();
 	}
 	
 }

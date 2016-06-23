@@ -3,8 +3,7 @@
 <mapper namespace="com.kosta.zuplay.model.dao.BoardDAO">
 
 <resultMap type="boardDTO" id="boardMapper">
-	<id column="" property=""/>
-	<result column="BOARD_NO" property="boardNo"/>
+	<id column="BOARD_NO" property="boardNo"/>
 	<result column="PLAYER_NICKNAME" property="playerNickname"/>
 	<result column="BOARD_TITLE" property="boardTitle"/>
 	<result column="BOARD_LIKE" property="boardLike"/>
@@ -13,8 +12,15 @@
 	<result column="BOARD_HITS" property="boardHits"/>
 
 </resultMap>
+<resultMap type="boardCommentDTO" id="boardCommentMapper">
+	<id column="bc_sq" property="bcSq"/>
+	<result column="PLAYER_NICKNAME" property="playerNickname"/>
+	<result column="BOARD_no" property="boardNo"/>
+	<result column="board_comment_time" property="bcCommentTime"/>
+	<result column="BOARD_comment_CONTENT" property="bcCommentContent"/>
+</resultMap>
 	<insert id="insertBoard" parameterType="BoardDTO">
-		insert into board values (board_no.nextval,#{playerNickname},#{boardTitle},#{boardLike},#{boardContent},sysdate,#{boardHits})
+		insert into board values (board_no.nextval,#{playerNickname},#{boardTitle},#{boardLike},#{boardContent},#{boardTime},#{boardHits})
 	</insert>
 	<update id="updateBoard" parameterType="BoardDTO">
 		update board set board_title=#{boardTitle},board_content=#{boardContent},board_time=sysdate where board_no=#{boardNo}
@@ -27,5 +33,25 @@
 	</select>
 	<delete id="deleteBoard" parameterType="int">
 		delete board where board_no=#{boardNo}	
+	</delete>
+	
+	<select id="boardNicknameCheck" parameterType="int" resultType="String">
+		select player_nickname from board where board_no=#{boardNo}
+	</select>
+	<select id="commentNicknameCheck" parameterType="int" resultType="String">
+		selecpt player_nickname from board_comment where bc_sq=#{bcSq}
+	</select>
+	
+	<insert id="insertComment" parameterType="BoardCommentDTO">
+		insert into board_comment values (#{bcSq},#{playerNickname},#{boardNo},sysdate,#{bcCommentContent})
+	</insert>
+	<update id="updateComment" parameterType="BoardCommentDTO">
+		update board_comment (bc_comment_content=#{bcCommentContent)
+	</update>
+	<select id="selectComment" resultMap="boardCommentMapper">
+		select * from board_comment where board_no=#{boardNo}
+	</select>
+	<delete id="deleteComment" parameterType="int">
+		delete board_comment where bc_sq=#{bcSq}
 	</delete>
 </mapper>

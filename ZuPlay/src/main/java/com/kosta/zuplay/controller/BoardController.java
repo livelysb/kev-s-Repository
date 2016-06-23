@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kosta.zuplay.model.dto.board.BoardCommentDTO;
 import com.kosta.zuplay.model.dto.board.BoardDTO;
 import com.kosta.zuplay.model.service.BoardService;
 
@@ -63,5 +64,47 @@ public class BoardController {
 	@ResponseBody
 	public boolean deleteBoard(String playerNickname, int boardNo){
 		return boardServiceImpl.deleteBoard(playerNickname, boardNo);
+	}
+	
+	/**
+	 * 코멘트 쓰기
+	 * @param boardCommentDTO
+	 * @return
+	 */
+	@RequestMapping("insertComment")
+	@ResponseBody
+	public boolean insertComment(BoardCommentDTO boardCommentDTO){
+		return boardServiceImpl.insertComment(boardCommentDTO);
+	}
+	/**
+	 * 코멘트 수정
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping("updateComment")
+	@ResponseBody
+	public boolean updateComment(BoardCommentDTO dto){
+		return boardServiceImpl.updateComment(dto);
+	}
+	/**
+	 * 코멘트 읽기
+	 * @param boardNo
+	 * @return
+	 */
+	@RequestMapping("selectComment")
+	@ResponseBody
+	public List<BoardCommentDTO> selectComment(int boardNo){
+		return boardServiceImpl.selectComment(boardNo);
+	}
+	/**
+	 * 코멘트 삭제
+	 * @param playerNickname
+	 * @param bcSq
+	 * @return
+	 */
+	@RequestMapping("deleteComment")
+	@ResponseBody
+	public boolean deleteComment(String playerNickname,int bcSq){
+		return boardServiceImpl.deleteComment(playerNickname, bcSq);
 	}
 }

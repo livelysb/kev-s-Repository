@@ -32,6 +32,20 @@ public class MasterDTO {
 	private String krxFncSvcSectidxYn; // KRX금융서비스섹터 지수여부
 	private String krxMediaCommSectidxYn; // KRX미디어통신섹터 지수여부
 	private String isuCd; // 종목코드
+	
+	private PriceDTO priceDTO; // 1:1조인
+
+	public PriceDTO getPriceDTO() {
+		return priceDTO;
+	}
+
+	public void setPriceDTO(PriceDTO priceDTO) {
+		this.priceDTO = priceDTO;
+	}
+
+	public double getPrevddAccTrdvol() {
+		return prevddAccTrdvol;
+	}
 
 	public MasterDTO() {
 	}

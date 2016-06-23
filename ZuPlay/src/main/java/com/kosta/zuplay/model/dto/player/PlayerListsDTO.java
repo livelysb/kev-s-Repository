@@ -4,16 +4,12 @@ import com.kosta.zuplay.model.dto.stock.MasterDTO;
 import com.kosta.zuplay.model.dto.stock.PriceDTO;
 
 public class PlayerListsDTO {
-	private int plSq;				//보유주식코드
+	private int plSq;				//시퀀스
 	private String isuCd;			//종목코드
 	private String playerNickname;	//닉네임
 	private int plQuantity;			//수량
 	
-	private MasterDTO masterDTO;
-	private PriceDTO priceDTO;
-	
-	
-	
+	private MasterDTO masterDTO; // 1:1조인
 	
 	
 	public MasterDTO getMasterDTO() {
@@ -22,14 +18,6 @@ public class PlayerListsDTO {
 
 	public void setMasterDTO(MasterDTO masterDTO) {
 		this.masterDTO = masterDTO;
-	}
-
-	public PriceDTO getPriceDTO() {
-		return priceDTO;
-	}
-
-	public void setPriceDTO(PriceDTO priceDTO) {
-		this.priceDTO = priceDTO;
 	}
 
 	public PlayerListsDTO() {}

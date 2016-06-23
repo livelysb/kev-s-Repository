@@ -5,15 +5,23 @@
 	<select id="getLists" resultType="ListsDTO">
 		select * from lists
 	</select>
+	
 	<select id="getPrice" resultType="priceDTO">
 		select * from price
 	</select>
+	
 	<insert id="insertDailyPrice" parameterType="priceDTO">
 		insert into daily_price(dp_sq, isuCd, dp_clsprc, dp_date) values(rp_sq.nextval, #{isuCd}, #{trdPrc}, sysdate)
 	</insert>
-	<insert id="insertTrdPrc" parameterType="priceDTO">
+	
+	<insert id="insertRealtimePrice" parameterType="priceDTO">
 		insert into realtime_price(RP_SQ, isuCd, RP_trdPrc, RP_trdTm) values(rp_sq.nextval, #{isuCd}, #{trdPrc}, #{trdTm})
 	</insert>
+	
+	<delete id="resetRealtimePrice">
+		delete from realtime_price where 1=1
+	</delete>
+	
 	<update id="mergeIsu" parameterType="ListsDTO">
 		merge into lists
 		using
@@ -113,6 +121,7 @@
 	#{krxRetailSectidxYn},
 	#{krxLeisureSectidxYn})
 	</update>
+	
 	<update id="mergePrice" parameterType="priceDTO">
 		merge into price
 		using dual

@@ -51,7 +51,28 @@
 				
 					<!-- Content -->
 					<div class="row">
-						<div class="col-md-12 zp-wrapper-screen" style="border: 2px red solid">Content</div>
+						<div class="col-md-12 zp-wrapper-screen scope-jqui">
+							<div class="zp-wrapper-stock-current" style="width:350px; height:400px;">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr class="bg-primary">
+										<th>종목명<span class="caret"></span></th>
+										<th>전일비<span class="caret"></span></th>
+										<th>등락률<span class="caret"></span></th>
+										<th>거래량<span class="caret"></span></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>삼성전자</td>
+										<td>$150,000</td>
+										<td>20</td>
+										<td><img src="" />5.7%</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						</div>
 					</div>
 					
 					<!-- Footer -->
@@ -82,11 +103,10 @@
 						</div>
 						<div class="col-md-7 zp-warpper-toolbar">
 							<div class="row zp-warpper-toolbar-menu">
-								helllllllllllllo
 							</div>
 							<div class="row zp-warpper-toolbar-icons">
 								<div class="col-md-1">
-									 <span class="glyphicon glyphicon-briefcase"></span>
+									 <a href="#"><span class="glyphicon glyphicon-briefcase" id="zp-show-stock"></span></a>
 								</div>
 								<div class="col-md-1">
 								<span class="glyphicon glyphicon-flag"></span>
@@ -104,8 +124,8 @@
 								<span class="glyphicon glyphicon-send"></span></div>
 								<div class="col-md-1">
 								<span class="glyphicon glyphicon-cog"></span></div>
-								<div class="col-md-2"></div>
-								<div class="col-md-2"></div>
+								<div class="col-md-2">stock</div>
+								<div class="col-md-2">menu</div>
 							</div>
 							<div class="row zp-warpper-toolbar-status">
 								<div class="col-md-2">cash</div>
@@ -123,7 +143,7 @@
 <script src="resources/js/jquery-2.2.4.min.js"></script>
 <script src="resources/js/jquery-ui.min.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/zuplay.js"></script>
+<script src="resources/js/script.js"></script>
 <script>
 $(function() {
     $( ".zp-wrapper-chat" ).tabs();

@@ -25,10 +25,14 @@
 
 	<select id="getStockList" parameterType="java.util.Map"
 		resultMap="masterDTO">
-		<![CDATA[ select * from (select rownum, isuCd, isuSrtCd, isuKorAbbrv, govncExcelYn, haltYn, mktcapScaleCd, mfindYn, krxAutosSectidxYn, krxSemiconSectidxYn, krxBioSectidxYn, krxFncSectidxYn, 
+		<![CDATA[
+		select * from ( SELECT * FROM (          
+    SELECT ROW_NUMBER() OVER(ORDER BY  prevddAccTrdvol desc) rnum, 
+	    			isuCd, isuSrtCd, isuKorAbbrv, govncExcelYn, haltYn, mktcapScaleCd, mfindYn, krxAutosSectidxYn, krxSemiconSectidxYn, krxBioSectidxYn, krxFncSectidxYn, 
 krxInfoCommSectidxYn, krxEnergyChemSectidxYn, krxSteelSectidxYn, krxConsgoodSectidxYn, krxMediaCommSectidxYn, krxConstrSectidxYn, krxFncSvcSectidxYn, krxSecuSectidxYn,
-krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, listShrs, krxInsuSectidxYn, krxTransSectidxYn, krxRetailSectidxYn, krxLeisureSectidxYn from
-(select * from master order by prevddAccTrdvol) where rownum>= #{startPage} and rownum<= #{endPage}) m join price p on m.isucd = p.isucd ]]>
+krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, listShrs, krxInsuSectidxYn, krxTransSectidxYn, krxRetailSectidxYn, krxLeisureSectidxYn FROM master
+	        ) WHERE rnum >= #{startPage} AND rnum <= #{endPage} ) m join price p on m.isucd = p.isucd
+	        ]]>
 	</select>
 
 

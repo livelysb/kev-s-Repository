@@ -75,7 +75,6 @@
 <script src="resources/js/jquery-ui.min.js"></script>
 <script src="resources/js/jquery.cookie.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/zuplay.js"></script>
 
 <script type="text/javascript">
 

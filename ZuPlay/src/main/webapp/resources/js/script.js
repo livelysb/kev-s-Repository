@@ -118,8 +118,10 @@ $(function() {
 	       url:'realTimeStock',
 	       type:'post',
 	       dataType:'json',
+	       contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 	       data: {"page":stockPage},
 	       success:function(data){
+	    	   
 	    	   console.log(stockPage);
 	    	   console.log(data);
 	    	   stockPage++;

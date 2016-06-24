@@ -23,27 +23,13 @@ public class StockUpdate {
 	@Autowired
 	private SqlSession sqlSession;
 
-	/**
-	 * DB의 isuSerCd 가져오기
-	 */
-	public List<ListsDTO> getLists() {
-		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-		return stockUpdateDAO.getLists();
-	}
-
-	/**
-	 * DB의 price 가져오기
-	 */
-	public List<PriceDTO> getPrice() {
-		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-		return stockUpdateDAO.getPrice();
-	}
-
+	@Autowired
+	private GetStockInfo getStockInfoImpl;
 	/**
 	 * 실시간으로 주식정보를 업데이트 시킨다.
 	 * */
 	public void updateStockPrice() {
-		List<ListsDTO> list = getLists();
+		List<ListsDTO> list = getStockInfoImpl.getLists();
 		for (ListsDTO listsDTO : list) {
 			PriceDTO priceDTO = getPriceFromAPI(listsDTO.getIsuSrtCd());
 			updatePrice(priceDTO);
@@ -88,7 +74,7 @@ public class StockUpdate {
 	 * DB로부터 PRICE 받아와 REALTIME_PRICE에 삽입한다.
 	 * */
 	public void insertRealtimePrice() {
-		List<PriceDTO> priceList = getPrice();
+		List<PriceDTO> priceList = getStockInfoImpl.getPrice();
 		for (PriceDTO priceDTO : priceList) {
 			insertTrdPrc(priceDTO);
 		}
@@ -111,7 +97,7 @@ public class StockUpdate {
 	//////////////////////////////////////////////////////////////////// 9:30
 	@Transactional
 	public void updateMaster() {
-		List<ListsDTO> lists = getLists();
+		List<ListsDTO> lists = getStockInfoImpl.getLists();
 		URL url = null;
 		for (ListsDTO listsDTO : lists) {
 			try {
@@ -141,7 +127,7 @@ public class StockUpdate {
 	////////////////////////////////////////////////////////////////////// 3:30
 	@Transactional
 	public void insertDailyPrice() {
-		List<PriceDTO> priceList = getPrice();
+		List<PriceDTO> priceList = getStockInfoImpl.getPrice();
 		for (PriceDTO priceDTO : priceList) {
 			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 			stockUpdateDAO.insertDailyPrice(priceDTO);

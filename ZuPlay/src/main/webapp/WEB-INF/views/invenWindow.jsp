@@ -91,8 +91,9 @@
 
 	//인벤토리 보유아이템 조회
 	$(function() {
-	    $( "#sortable" ).sortable();
-	    $( "#sortable" ).disableSelection();
+	    $("#sortable" ).sortable();
+	    $("#sortable").draggable();
+	    //$( "#sortable" ).disableSelection();
 	    
 	     $.ajax({
 			url: "playerItemSelectAll" ,
@@ -104,9 +105,7 @@
 				$.each(data, function(index, item){
 					invenUrl+="<div class='ui-state-default'> <img src='" + item.itemDTO.itemImg +"' style='width:100%; height:100%;'/></div>";
 				})
-				
 				//$("#sortable").html(invenUrl);
-					
 				} ,
 			error:function(err){
 				alert(err +"에러발생");
@@ -117,7 +116,6 @@
        	  
             hoverClass: 'active',
             drop: function(e, ui) {
-            	
             	var droptitle = $(this).attr("title");
             	alert(droptitle);
 				var drophtml = $(this).html();

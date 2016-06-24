@@ -120,16 +120,14 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
                 <div class="bhoechie-tab-content active">
-                <span class="glyphicon glyphicon-chevron-left" style="float:left"></span>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-				<span class="glyphicon glyphicon-chevron-right" style="float:right"></span>
+					<div class="itemBox" id="itemAll0"></div>
+					<div class="itemBox" id="itemAll1"></div>
+					<div class="itemBox" id="itemAll2"></div>
+					<div class="itemBox" id="itemAll3"></div>
+					<div class="itemBox" id="itemAll4"> </div>
+					<div class="itemBox" id="itemAll5"></div>
+					<div class="itemBox" id="itemAll6"></div>
+					<div class="itemBox" id="itemAll7"></div>
                 </div>
                 <div class="bhoechie-tab-content">
 					<div class="itemBox"></div>
@@ -214,6 +212,25 @@ $(document).ready(function() {
         $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
         $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
     });
+    
+    store()
+    
+    //Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
+    function store(attr){
+	    $.ajax({
+	    	url: "store" ,
+			type:"post",
+			dataType:"json",  
+			success:function(data){
+				$.each(data, function(index, item){
+					$("#"+attr +" "+index).text(item.attr);
+				})
+			},
+			error:function(err){
+				alert(err +"에러발생");
+			}
+	    })
+	}
 });
 </script>
 </html>

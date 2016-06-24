@@ -91,7 +91,7 @@
 				console.log(data);
 				invenUrl="";
 				$.each(data, function(index, item){
-					invenUrl+="<div class='ui-state-default'> <img src=' " + item.url + " style='width:100%; height:100%;'/></div>";
+					invenUrl+="<div class='ui-state-default'> <img src='" + item.itemDTO.itemImg +"' style='width:100%; height:100%;'/></div>";
 				})
 				
 				$("#sortable").html(invenUrl);

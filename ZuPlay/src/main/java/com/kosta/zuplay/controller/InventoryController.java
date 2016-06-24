@@ -32,6 +32,8 @@ public class InventoryController {
 	/**
 	 * 아이템 목록 업데이트
 	 */
+	@RequestMapping("playerItemInsert")
+	@ResponseBody
 	public boolean playerItemInsert(List<PlayerItemDTO> list){
 		return inventoryServiceImpl.playerItemInsert(list);
 	}

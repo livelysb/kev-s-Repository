@@ -49,4 +49,10 @@ public class LoginServiceImpl implements LoginService {
 		}
 		return true;
 	}
+
+	@Override
+	public String getNickname(String playerNaverId) {
+		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
+		return loginDAO.getNickname(playerNaverId);
+	}
 }

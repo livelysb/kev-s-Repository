@@ -27,9 +27,12 @@ public class LoginController {
 	 */
 	@RequestMapping(value="firstLoginCheck",method=RequestMethod.POST)
 	@ResponseBody
-	public boolean firstLoginCheck(String playerNaverId){
+	public boolean firstLoginCheck(String playerNaverId,HttpSession session){
 		System.out.println(playerNaverId);
 		boolean firstLogin=loginServiceImpl.firstLoginCheck(playerNaverId);
+		if(firstLogin==false){
+			session.setAttribute("playerNickname", loginServiceImpl.getNickname(playerNaverId));
+		}
 		return firstLogin;
 	}
 	
@@ -43,9 +46,11 @@ public class LoginController {
 	 * @return true=회원정보 DB 삽입 성공/false=회원정보 DB 삽입 실패
 	 */
 	@RequestMapping(value="joinMember")
-	public String joinMember(String playerNickname,String playerNaverId,String playerGender,String playerAge){
+	public String joinMember(String playerNickname,String playerNaverId,String playerGender,String playerAge,HttpSession session){
 		System.out.println(playerNickname);
 		boolean joinMember=loginServiceImpl.joinMember(new PlayerDTO(playerNickname, playerNaverId, playerGender, playerAge, 0, 0, 0, "마스터", 1, 1, 1, 1));
+		System.out.println("[ LOG ] : 회원가입 성공 " +joinMember);
+		session.setAttribute("playerNickname", playerNickname);
 		return "index";
 	}
 	

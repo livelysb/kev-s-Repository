@@ -18,4 +18,8 @@ public interface LoginService {
 	 */
 	boolean checkRepetition(String playerNickname);
 	
+	/**
+	 * 닉네임 가져오기
+	 */
+	String getNickname(String playerNaverId);
 }

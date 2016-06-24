@@ -10,13 +10,15 @@ public interface PlayerStockInfo {
 	public PlayerListsDTO getStockOfPlayer(String playerNickname);
 	
 	/**
-	 * 플레이어의 전체 수익률 계산하기
+	 * 플레이어의 일일 수익률 계산해서 insert 하기
 	 * */
 	public double getEarningRate(String playerNickname);
+
 	
 	/**
 	 * 플레이어의 종목별 수익률 계산하기
 	 * */
+	
 	
 	
 	/**

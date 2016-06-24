@@ -22,23 +22,33 @@ public class StockInfoImpl implements StockInfo {
 	
 	
 	/**
-	 * DB의 모든 isuSerCd 가져오기
+	 * DB의 모든 prices 가져오기
 	 */
 	@Override
-	public List<PriceDTO> getPrice() {
+	public List<PriceDTO> getPrices() {
 		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-		return stockUpdateDAO.getPrice();
+		return stockUpdateDAO.getPrices();
 	}
 
+	/**
+	 * DB의 한 기업의 price 가져오기
+	 * */
+	@Override
+	public PriceDTO getPrice(String isuCd) {
+		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
+		return stockUpdateDAO.getPrice(isuCd);
+	}
 	
 	/**
-	 * DB의 모든 price 가져오기
+	 * DB의 모든 isuSerCd 가져오기
 	 */
 	@Override
 	public List<ListsDTO> getLists() {
 		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 		return stockUpdateDAO.getLists();
 	}
+	
+	
 
 	
 	/**
@@ -72,5 +82,8 @@ public class StockInfoImpl implements StockInfo {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	
 
 }

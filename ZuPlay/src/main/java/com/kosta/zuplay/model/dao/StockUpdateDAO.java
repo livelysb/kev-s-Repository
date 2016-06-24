@@ -35,9 +35,15 @@ public interface StockUpdateDAO {
 	void mergeMaster(MasterDTO masterDTO);
 	
 	/**
-	 * GET ALL PRICE FROM DB
+	 * GET ALL STOCK PRICES FROM DB
 	 * */
-	List<PriceDTO> getPrice();
+	List<PriceDTO> getPrices();
+	
+	/**
+	 * Get a stock price from DB
+	 * */
+	PriceDTO getPrice(String isuCd);
+	
 	
 	/**
 	 * INSERT INTO DAILY_PRICE 테이블에 3:30분의 체결가(종가) 삽입

@@ -74,7 +74,7 @@ public class StockUpdate {
 	 * DB로부터 PRICE 받아와 REALTIME_PRICE에 삽입한다.
 	 * */
 	public void insertRealtimePrice() {
-		List<PriceDTO> priceList = stockInfo.getPrice();
+		List<PriceDTO> priceList = stockInfo.getPrices();
 		for (PriceDTO priceDTO : priceList) {
 			insertTrdPrc(priceDTO);
 		}
@@ -127,7 +127,7 @@ public class StockUpdate {
 	////////////////////////////////////////////////////////////////////// 3:30
 	@Transactional
 	public void insertDailyPrice() {
-		List<PriceDTO> priceList = stockInfo.getPrice();
+		List<PriceDTO> priceList = stockInfo.getPrices();
 		for (PriceDTO priceDTO : priceList) {
 			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 			stockUpdateDAO.insertDailyPrice(priceDTO);

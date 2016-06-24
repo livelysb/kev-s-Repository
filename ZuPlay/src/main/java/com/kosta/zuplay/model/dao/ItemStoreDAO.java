@@ -9,8 +9,8 @@ public interface ItemStoreDAO {
 	List<ItemDTO> itemStoreSelect(Map<String, String> map);
 	int getRuby(String playerNickname);
 	int getPrice(String itemCode);
-	int payRuby(String playerNickname,String price);
-	int itemStoreBuy(String playerNickname,String itemCode,String quantity);
-	int itemDelete(String piSq);
-	int payBackRuby(String playerNickname,String payBackPrice);
+	List<Integer> getItemIndex(String playerNickname);
+	int payRuby(Map<String, String> map);
+	int itemStoreBuy(Map<String, String> map);
+	int itemDelete(int piSq);
 }

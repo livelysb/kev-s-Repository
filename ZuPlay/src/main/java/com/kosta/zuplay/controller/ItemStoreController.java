@@ -38,7 +38,17 @@ public class ItemStoreController {
 	@ResponseBody
 	public int itemStoreBuy(HttpSession session, ItemDTO itemDTO, int quantity){
 		String playerNickname = (String) session.getAttribute("playerNickname");
-		itemStoreServiceImpl.itemStoreBuy(playerNickname, itemDTO, quantity);
-		return 1;
+		int result=itemStoreServiceImpl.itemStoreBuy(playerNickname, itemDTO, quantity);// 1=정상 / 2=인벤토리부족 / 3=루비부족
+		
+		return result;
 	}
+	 /**
+	  * 상점 아이템 판매하기
+	  */
+	 @RequestMapping(value="itemStoreSell" ,produces="text/plain;charset=UTF-8" )
+		@ResponseBody
+		public boolean itemStoreSell(HttpSession session,int piSq,String itemCode){
+			String playerNickname = (String) session.getAttribute("playerNickname");
+			return itemStoreServiceImpl.itemStoreSell(playerNickname, piSq, itemCode);
+	 }
 }

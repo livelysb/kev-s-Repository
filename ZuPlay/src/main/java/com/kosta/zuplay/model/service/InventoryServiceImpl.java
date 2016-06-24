@@ -17,7 +17,9 @@ public class InventoryServiceImpl implements InventoryService {
 	@Override
 	public List<PlayerItemDTO> playerItemSelectAll(String playerNickname) {
 		InventoryDAO dao=sqlSession.getMapper(InventoryDAO.class);
-		return	dao.playerItemSelectAll(playerNickname);
+		List<PlayerItemDTO> list=dao.playerItemSelectAll(playerNickname);
+		System.out.println(list.get(0).getItemCode());
+		return list;
 	}
 
 	@Override

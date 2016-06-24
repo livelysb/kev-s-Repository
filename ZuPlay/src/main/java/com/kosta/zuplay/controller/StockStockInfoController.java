@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
-import com.kosta.zuplay.model.service.stock.GetStockInfo;
+import com.kosta.zuplay.model.service.stock.StockInfo;
 
 @Controller
 public class StockStockInfoController {
 	
 	@Autowired
-	private GetStockInfo getStockInfo;
+	private StockInfo stockInfo;
 	
 	@ResponseBody
 	@RequestMapping(value="realTimeStock" ,produces="text/plain;charset=UTF-8" )
 	public String getStockList(String page) {
-		List<MasterDTO>masterList = getStockInfo.getStockList(Integer.parseInt(page));
+		List<MasterDTO>masterList = stockInfo.getStockList(Integer.parseInt(page));
 		Gson gson = new Gson();
 		String json = gson.toJson(masterList);
 		return json;

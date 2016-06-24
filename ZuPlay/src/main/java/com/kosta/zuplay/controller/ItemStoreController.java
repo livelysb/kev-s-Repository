@@ -21,13 +21,24 @@ public class ItemStoreController {
 	/**
 	 * 상점아이템 리스트 가져오기
 	 */
-	@RequestMapping("itemStoreSelect")
-	@ResponseBody
+	 @RequestMapping(value="itemStoreSelect" ,produces="text/plain;charset=UTF-8" )
+	 @ResponseBody
 	public String itemStoreSelect(HttpSession session, String itemClass, int page) {
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		List<ItemDTO> list = itemStoreServiceImpl.itemStoreSelect(playerNickname, itemClass, page);
 		Gson gson = new Gson();
 		String json=gson.toJson(list);
 		return json;
+	}
+	
+	/**
+	 * 상점 아이템 구매하기
+	 */
+	 @RequestMapping(value="itemStoreBuy" ,produces="text/plain;charset=UTF-8" )
+	@ResponseBody
+	public int itemStoreBuy(HttpSession session, ItemDTO itemDTO, int quantity){
+		String playerNickname = (String) session.getAttribute("playerNickname");
+		itemStoreServiceImpl.itemStoreBuy(playerNickname, itemDTO, quantity);
+		return 1;
 	}
 }

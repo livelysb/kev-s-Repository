@@ -7,5 +7,14 @@
 		where upper(item_gender)!=#{playerGender} and item_class=#{itemClass} and item_grade='common') where
 		rownum between #{startNo} and #{endNo}
 	</select>
-
+	<select id="getRuby" parameterType="String" resultType="int">
+		select player_ruby from player where player_nickname=#{playerNickname}
+	</select>
+	<select id="getPrice" parameterType="String" resultType="int">
+		select item_price from item where item_code=#{itemCode}
+	</select>
+	<update id="payRuby" parameterType="java.util.Map">
+		update player set (player_ruby=player_ruby-#{price}) where player_nickname=#{playerNickname}
+	</update>
+	<update id=""></update>
 </mapper>

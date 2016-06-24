@@ -87,8 +87,9 @@
 	     $.ajax({
 			url: "playerItemSelectAll" ,
 			type:"post",
-			dataType:"text",  
+			dataType:"json",  
 			success:function(data){
+				console.log(data);
 				invenUrl="";
 				$.each(data, function(index, item){
 					invenUrl+="<div class='ui-state-default'> <img src=' " + item.url + " style='width:100%; height:100%;'/></div>";

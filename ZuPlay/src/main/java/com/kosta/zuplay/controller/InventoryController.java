@@ -26,17 +26,16 @@ public class InventoryController {
 	@RequestMapping("playerItemSelectAll")
 	@ResponseBody
 	public String playerItemSelectAll(HttpSession session) {
-		System.out.println("1111");
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		System.out.println("playerNickname : " + playerNickname);
 		
 		List<PlayerItemDTO> list= inventoryServiceImpl.playerItemSelectAll(playerNickname);
+		System.out.println(list);
 		Gson gson = new Gson();
-		Type type = new ArrayList<PlayerItemDTO>(){}.getClass();
-		String json = gson.toJson(list, type);
+		String json = gson.toJson(list);
 		System.out.println(json);
 		
-		return json != null ? json : "{}";
+		return "null".equals(json) ? "{}" : json;
 		
 	}
 

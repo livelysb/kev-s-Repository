@@ -1,5 +1,7 @@
 package com.kosta.zuplay.model.service.stock;
 
+import java.util.List;
+
 import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
 
 public interface PlayerStockInfo {	
@@ -7,7 +9,12 @@ public interface PlayerStockInfo {
 	/**
 	 * 플레이어가 가지는 주식정보 보여주기
 	 * */
-	public PlayerListsDTO getStockOfPlayer(String playerNickname);
+	public List<PlayerListsDTO> getPlayerStocks(String playerNickname);
+	
+	/**
+	 * 플레이어가 가진 한 주식의 수량만을 가져오기
+	 * */
+	public PlayerListsDTO getPlayerStock(String playerNickname, String isuCd);
 	
 	/**
 	 * 플레이어의 일일 수익률 계산해서 insert 하기

@@ -16,8 +16,7 @@
 <style type="text/css">
 	#sortable { list-style-type: none; margin: 0; padding: 0; width: 450px; }
   	#sortable div {border:solid 2px black; margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }
-  	.closet {border:solid 2px black; margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; } 
-  	     
+  	.closet {border:solid 2px black; margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; text-align: center; } 
   	
   /* 	.draggable-4 { 
             width: 90px; height: 50px; padding: 0.5em; float: left;
@@ -44,26 +43,38 @@
 				<div style="border: 2px blue solid; height: 60%" id="invenCharacter">
 					
 				</div>
-				<div style="border: 2px black solid; height: 40%">
-					<div class="closet droppable-7"></div>
-					<div class="closet droppable-7" ></div>
-					<div class="closet droppable-7" ></div>
-					<div class="closet droppable-7"></div>
-					<div class="closet droppable-7"></div>
-					<div class="closet droppable-7"></div>
+				<div style="border: 2px black solid; height: 40%" class="dropable">
+					<div class="closet droppable-7 " title="head">head</div>
+					<div class="closet droppable-7 " title="body">body</div>
+					<div class="closet droppable-7 " title="eyes">eyes</div>
+					<div class="closet droppable-7 " title="mouse">mouse</div>
+					<div class="closet droppable-7 " title="earring">earring</div>
+					<div class="closet droppable-7 " title="acc">acc</div>
 				</div>
 			</div>
 				<div>
 					<div class="col-xs-6" id="sortable">
 						
-						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>		
-						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
-						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
-						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
-						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
-						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
-						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
-						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;" id="body"/></div>		
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;" id="body"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;" id="body"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;" id="body"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;" id="body"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;" id="body"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;" id="body"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;" id="body"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;" id="body"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;" id="body"/></div>
+						<div class="ui-state-default"> </div>
+						<div class="ui-state-default"> </div>
+						<div class="ui-state-default"> </div>
+						<div class="ui-state-default"> </div>
+						<div class="ui-state-default"> </div>
+						<div class="ui-state-default"> </div>
+						<div class="ui-state-default"> </div>
+						<div class="ui-state-default"> </div>
+						<div class="ui-state-default"> </div>
+						<div class="ui-state-default"> </div>
 					</div>
 			</div>
 		</div>
@@ -94,7 +105,7 @@
 					invenUrl+="<div class='ui-state-default'> <img src='" + item.itemDTO.itemImg +"' style='width:100%; height:100%;'/></div>";
 				})
 				
-				$("#sortable").html(invenUrl);
+				//$("#sortable").html(invenUrl);
 					
 				} ,
 			error:function(err){
@@ -103,15 +114,32 @@
 		})  
 		
          $('.droppable-7').droppable({
+       	  
             hoverClass: 'active',
             drop: function(e, ui) {
+            	
+            	var droptitle = $(this).attr("title");
+            	alert(droptitle);
+				var drophtml = $(this).html();
+				var dragid = ui.draggable.attr("id");
+				alert(dragid);
+				if( dragid == droptitle ) {
+					ui.draggable.draggable( "option", "revert", false );
+					var droppableOffset = $(this).offset();
+					var x = droppableOffset.left + 1;
+					var y = droppableOffset.top + 1;
+					ui.draggable.offset({ top: y, left: x });
+				}
+            	
                $(this).html(ui.draggable.remove().html());
                $(this).droppable('destroy');
                $( this )
                .addClass( "ui-state-highlight" )
                .find( "p" )
             }
+         
          });
+	     
 	  });
 </script> 
 </html> 

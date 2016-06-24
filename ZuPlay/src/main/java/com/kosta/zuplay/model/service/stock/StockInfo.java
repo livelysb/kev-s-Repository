@@ -9,12 +9,17 @@ import com.kosta.zuplay.model.dto.stock.PriceDTO;
 public interface StockInfo {
 	
 	/**
-	 * DB의 모든 isuSerCd 가져오기
+	 * DB의 모든 prices 가져오기
 	 */
-	public List<PriceDTO> getPrice();
+	public List<PriceDTO> getPrices();
 	
 	/**
-	 * DB의 모든 price 가져오기
+	 * DB의 한 기업의 price 가져오기
+	 * */
+	public PriceDTO getPrice(String isuCd);
+	
+	/**
+	 * DB의 모든 리스트정보 가져오기
 	 */
 	public List<ListsDTO> getLists();
 	

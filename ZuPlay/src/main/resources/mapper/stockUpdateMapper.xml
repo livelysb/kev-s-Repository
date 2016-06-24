@@ -19,8 +19,12 @@
 		select * from lists
 	</select>
 
-	<select id="getPrice" resultType="priceDTO">
+	<select id="getPrices" resultType="priceDTO">
 		select * from price
+	</select>
+	
+	<select id="getPrice" parameterType="String" resultType="priceDTO">
+		select * from price where isuCd=#{value}
 	</select>
 
 	<select id="getStockList" parameterType="java.util.Map"

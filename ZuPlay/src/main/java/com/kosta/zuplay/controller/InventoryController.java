@@ -24,7 +24,7 @@ public class InventoryController {
 	/**
 	 * 보유 아이템 리스트 조회
 	 */
-	@RequestMapping("playerItemSelectAll")
+	 @RequestMapping(value="playerItemSelectAll" ,produces="text/plain;charset=UTF-8" )
 	@ResponseBody
 	public String playerItemSelectAll(HttpSession session) {
 		String playerNickname = (String) session.getAttribute("playerNickname");
@@ -42,7 +42,7 @@ public class InventoryController {
 	/**
 	 * 아이템 목록 업데이트
 	 */
-	@RequestMapping("playerItemInsert")
+	 @RequestMapping(value="playerItemInsert" ,produces="text/plain;charset=UTF-8" )
 	@ResponseBody
 	public boolean playerItemInsert(HttpSession session, List<PlayerItemDTO> jsonList) {
 		String playerNickname = (String) session.getAttribute("playerNickname");

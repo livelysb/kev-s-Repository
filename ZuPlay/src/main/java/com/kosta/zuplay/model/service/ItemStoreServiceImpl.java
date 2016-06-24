@@ -29,5 +29,9 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		System.out.println("[ LOG ] list = "+list);
 		return list;
 	}
+	@Override
+	public boolean itemStoreBuy(String playerNickname, ItemDTO itemDTO, int quantity) {
+		return false;
+	}
 
 }

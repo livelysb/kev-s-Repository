@@ -7,8 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class StockTradeServiceImpl implements StockTradeService {
 
-	@Autowired
-	Stock
+
 	
 	/**
 	 * 주식 판매

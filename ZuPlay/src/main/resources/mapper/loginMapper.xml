@@ -30,4 +30,8 @@
 	<select id="checkRepetiton" parameterType="String" resultType="String">
 		select player_naver_id from player where player_nickname=#{playerNickname} 
 	</select>
+	
+	<select id="getNickname" parameterType="String" resultType="String">
+		select player_nickname from player where player_naver_id=#{playerNaverId}
+	</select>
 </mapper>

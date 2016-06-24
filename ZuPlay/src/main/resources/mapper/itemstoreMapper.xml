@@ -13,8 +13,16 @@
 	<select id="getPrice" parameterType="String" resultType="int">
 		select item_price from item where item_code=#{itemCode}
 	</select>
+	<select id="getItemIndex" parameterType="String" resultType="int">
+		select pi_index from player_item where player_nickname=#{playerNickname} order by pi_index
+	</select>
 	<update id="payRuby" parameterType="java.util.Map">
 		update player set (player_ruby=player_ruby-#{price}) where player_nickname=#{playerNickname}
 	</update>
-	<update id=""></update>
+	<insert id="itemStoreBuy" parameterType="java.util.Map">
+		insert into player_item values(pi_sq.nextval,#{playerNickname},#{itemCode},'F',#{piIndex})
+	</insert>
+	<delete id="itemDelete" parameterType="int">
+		delete player_item where pi_sq=#{piSq}
+	</delete>
 </mapper>

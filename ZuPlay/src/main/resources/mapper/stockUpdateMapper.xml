@@ -2,26 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kosta.zuplay.model.dao.StockUpdateDAO">
+
+	<resultMap type="masterDTO" id="masterDTO">
+		<result column="isuKorAbbrv" property="isuKorAbbrv"/>
+		<association property="priceDTO" javaType="priceDTO">
+			<result column="cmpprevddPrc" property="cmpprevddPrc"/>
+			<result column="trdPrc" property="trdPrc"/>
+			<result column="trdvol" property="trdvol"/>
+			<result column="openprc" property="openprc"/>
+			<result column="hgprc" property="hgprc"/>
+			<result column="lwprc" property="lwprc"/>
+		</association>
+	</resultMap>
+
 	<select id="getLists" resultType="ListsDTO">
 		select * from lists
 	</select>
-	
+
 	<select id="getPrice" resultType="priceDTO">
 		select * from price
 	</select>
-	
+
+	<select id="getStockList" parameterType="java.util.Map"
+		resultMap="masterDTO">
+		<![CDATA[ select * from (select rownum, isuCd, isuSrtCd, isuKorAbbrv, govncExcelYn, haltYn, mktcapScaleCd, mfindYn, krxAutosSectidxYn, krxSemiconSectidxYn, krxBioSectidxYn, krxFncSectidxYn, 
+krxInfoCommSectidxYn, krxEnergyChemSectidxYn, krxSteelSectidxYn, krxConsgoodSectidxYn, krxMediaCommSectidxYn, krxConstrSectidxYn, krxFncSvcSectidxYn, krxSecuSectidxYn,
+krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, listShrs, krxInsuSectidxYn, krxTransSectidxYn, krxRetailSectidxYn, krxLeisureSectidxYn from
+(select * from master order by prevddAccTrdvol) where rownum>= #{startPage} and rownum<= #{endPage}) m join price p on m.isucd = p.isucd ]]>
+	</select>
+
+
 	<insert id="insertDailyPrice" parameterType="priceDTO">
-		insert into daily_price(dp_sq, isuCd, dp_clsprc, dp_date) values(rp_sq.nextval, #{isuCd}, #{trdPrc}, sysdate)
+		insert into
+		daily_price(dp_sq, isuCd, dp_clsprc, dp_date) values(rp_sq.nextval,
+		#{isuCd}, #{trdPrc}, sysdate)
 	</insert>
-	
+
 	<insert id="insertRealtimePrice" parameterType="priceDTO">
-		insert into realtime_price(RP_SQ, isuCd, RP_trdPrc, RP_trdTm) values(rp_sq.nextval, #{isuCd}, #{trdPrc}, #{trdTm})
+		insert into
+		realtime_price(RP_SQ, isuCd, RP_trdPrc, RP_trdTm)
+		values(rp_sq.nextval, #{isuCd}, #{trdPrc}, #{trdTm})
 	</insert>
-	
+
 	<delete id="resetRealtimePrice">
 		delete from realtime_price where 1=1
 	</delete>
-	
+
 	<update id="mergeIsu" parameterType="ListsDTO">
 		merge into lists
 		using
@@ -38,106 +64,126 @@
 		values (#{mktTpCd,
 		jdbcType=VARCHAR},#{isuCd},#{isuSrtCd},#{isuKorNm},#{isuKorAbbrv})
 	</update>
-	
-		
-	<update id="mergeMaster" parameterType="masterDTO">
-	merge into master
-	using
-	dual
-	on (isuCd=#{isuCd})
-	when matched then
-	update
-	set
-	isuSrtCd = #{isuSrtCd},
-	isuKorAbbrv = #{isuKorAbbrv},
-	govncExcelYn= #{govncExcelYn},
-	haltYn = #{haltYn},
-	mktcapScaleCd = #{mktcapScaleCd},
-	mfindYn = #{mfindYn},
-	krxAutosSectidxYn = #{krxAutosSectidxYn},
-	krxSemiconSectidxYn = #{krxSemiconSectidxYn},
-	krxBioSectidxYn = #{krxBioSectidxYn},
-	krxFncSectidxYn = #{krxFncSectidxYn},
-	krxInfoCommSectidxYn = #{krxInfoCommSectidxYn},
-	krxEnergyChemSectidxYn = #{krxEnergyChemSectidxYn},
-	krxSteelSectidxYn = #{krxSteelSectidxYn},
-	krxConsgoodSectidxYn = #{krxConsgoodSectidxYn},
-	krxMediaCommSectidxYn = #{krxMediaCommSectidxYn},
-	krxConstrSectidxYn = #{krxConstrSectidxYn},
-	krxFncSvcSectidxYn = #{krxFncSvcSectidxYn},
-	krxSecuSectidxYn = #{krxSecuSectidxYn},
-	krxShipSectidxYn = #{krxShipSectidxYn},
-	prevddAccTrdvol = #{prevddAccTrdvol},
-	prevddAccTrdval = #{prevddAccTrdval},
-	uplmtprc = #{uplmtprc},
-	lwlmtprc = #{lwlmtprc},
-	parval = #{parval},
-	listShrs = #{listShrs},
-	krxInsuSectidxYn = #{krxInsuSectidxYn},
-	krxTransSectidxYn = #{krxTransSectidxYn},
-	krxRetailSectidxYn = #{krxRetailSectidxYn},
-	krxLeisureSectidxYn = #{krxLeisureSectidxYn}
 
-	when not matched then
-	insert(isuCd, isuSrtCd ,isuKorAbbrv ,govncExcelYn ,haltYn ,mktcapScaleCd ,mfindYn ,krxAutosSectidxYn ,krxSemiconSectidxYn
-	,krxBioSectidxYn ,krxFncSectidxYn ,
-	krxInfoCommSectidxYn
-	,krxEnergyChemSectidxYn ,krxSteelSectidxYn ,krxConsgoodSectidxYn
-	,krxMediaCommSectidxYn ,krxConstrSectidxYn ,
-	krxFncSvcSectidxYn
-	,krxSecuSectidxYn ,krxShipSectidxYn ,prevddAccTrdvol ,prevddAccTrdval
-	,uplmtprc ,lwlmtprc ,
-	parval ,listShrs ,krxInsuSectidxYn
-	,krxTransSectidxYn ,krxRetailSectidxYn ,krxLeisureSectidxYn)
-	values(
-	#{isuCd},
-	#{isuSrtCd},
-	#{isuKorAbbrv},
-	#{govncExcelYn},
-	#{haltYn},
-	#{mktcapScaleCd},
-	#{mfindYn},
-	#{krxAutosSectidxYn},
-	#{krxSemiconSectidxYn},
-	#{krxBioSectidxYn},
-	#{krxFncSectidxYn},
-	#{krxInfoCommSectidxYn},
-	#{krxEnergyChemSectidxYn},
-	#{krxSteelSectidxYn},
-	#{krxConsgoodSectidxYn},
-	#{krxMediaCommSectidxYn},
-	#{krxConstrSectidxYn},
-	#{krxFncSvcSectidxYn},
-	#{krxSecuSectidxYn},
-	#{krxShipSectidxYn},
-	#{prevddAccTrdvol},
-	#{prevddAccTrdval},
-	#{uplmtprc},
-	#{lwlmtprc},
-	#{parval},
-	#{listShrs},
-	#{krxInsuSectidxYn},
-	#{krxTransSectidxYn},
-	#{krxRetailSectidxYn},
-	#{krxLeisureSectidxYn})
+
+	<update id="mergeMaster" parameterType="masterDTO">
+		merge into master
+		using
+		dual
+		on (isuCd=#{isuCd})
+		when matched then
+		update
+		set
+		isuSrtCd =
+		#{isuSrtCd},
+		isuKorAbbrv = #{isuKorAbbrv},
+		govncExcelYn=
+		#{govncExcelYn},
+		haltYn = #{haltYn},
+		mktcapScaleCd = #{mktcapScaleCd},
+		mfindYn = #{mfindYn},
+		krxAutosSectidxYn = #{krxAutosSectidxYn},
+		krxSemiconSectidxYn = #{krxSemiconSectidxYn},
+		krxBioSectidxYn =
+		#{krxBioSectidxYn},
+		krxFncSectidxYn = #{krxFncSectidxYn},
+		krxInfoCommSectidxYn = #{krxInfoCommSectidxYn},
+		krxEnergyChemSectidxYn
+		= #{krxEnergyChemSectidxYn},
+		krxSteelSectidxYn = #{krxSteelSectidxYn},
+		krxConsgoodSectidxYn = #{krxConsgoodSectidxYn},
+		krxMediaCommSectidxYn =
+		#{krxMediaCommSectidxYn},
+		krxConstrSectidxYn = #{krxConstrSectidxYn},
+		krxFncSvcSectidxYn = #{krxFncSvcSectidxYn},
+		krxSecuSectidxYn =
+		#{krxSecuSectidxYn},
+		krxShipSectidxYn = #{krxShipSectidxYn},
+		prevddAccTrdvol = #{prevddAccTrdvol},
+		prevddAccTrdval =
+		#{prevddAccTrdval},
+		uplmtprc = #{uplmtprc},
+		lwlmtprc = #{lwlmtprc},
+		parval = #{parval},
+		listShrs = #{listShrs},
+		krxInsuSectidxYn =
+		#{krxInsuSectidxYn},
+		krxTransSectidxYn = #{krxTransSectidxYn},
+		krxRetailSectidxYn = #{krxRetailSectidxYn},
+		krxLeisureSectidxYn =
+		#{krxLeisureSectidxYn}
+
+		when not matched then
+		insert(isuCd, isuSrtCd
+		,isuKorAbbrv ,govncExcelYn ,haltYn ,mktcapScaleCd ,mfindYn
+		,krxAutosSectidxYn ,krxSemiconSectidxYn
+		,krxBioSectidxYn
+		,krxFncSectidxYn ,
+		krxInfoCommSectidxYn
+		,krxEnergyChemSectidxYn
+		,krxSteelSectidxYn ,krxConsgoodSectidxYn
+		,krxMediaCommSectidxYn
+		,krxConstrSectidxYn ,
+		krxFncSvcSectidxYn
+		,krxSecuSectidxYn
+		,krxShipSectidxYn ,prevddAccTrdvol ,prevddAccTrdval
+		,uplmtprc ,lwlmtprc
+		,
+		parval ,listShrs ,krxInsuSectidxYn
+		,krxTransSectidxYn
+		,krxRetailSectidxYn ,krxLeisureSectidxYn)
+		values(
+		#{isuCd},
+		#{isuSrtCd},
+		#{isuKorAbbrv},
+		#{govncExcelYn},
+		#{haltYn},
+		#{mktcapScaleCd},
+		#{mfindYn},
+		#{krxAutosSectidxYn},
+		#{krxSemiconSectidxYn},
+		#{krxBioSectidxYn},
+		#{krxFncSectidxYn},
+		#{krxInfoCommSectidxYn},
+		#{krxEnergyChemSectidxYn},
+		#{krxSteelSectidxYn},
+		#{krxConsgoodSectidxYn},
+		#{krxMediaCommSectidxYn},
+		#{krxConstrSectidxYn},
+		#{krxFncSvcSectidxYn},
+		#{krxSecuSectidxYn},
+		#{krxShipSectidxYn},
+		#{prevddAccTrdvol},
+		#{prevddAccTrdval},
+		#{uplmtprc},
+		#{lwlmtprc},
+		#{parval},
+		#{listShrs},
+		#{krxInsuSectidxYn},
+		#{krxTransSectidxYn},
+		#{krxRetailSectidxYn},
+		#{krxLeisureSectidxYn})
 	</update>
-	
+
 	<update id="mergePrice" parameterType="priceDTO">
 		merge into price
 		using dual
 		on (isuCd=#{isuCd})
 		when matched then
 		update set
-		cmpprevddTpCd = #{cmpprevddTpCd},
+		cmpprevddTpCd =
+		#{cmpprevddTpCd},
 		cmpprevddPrc = #{cmpprevddPrc},
 		trdPrc = #{trdPrc},
 		trdvol = #{trdvol},
 		opnprc = #{opnprc},
 		hgprc = #{hgprc},
-		lwprc =	#{lwprc},
+		lwprc =
+		#{lwprc},
 		trdTm = #{trdTm},
 		mktStatTpCd = #{mktStatTpCd}
-		when not matched then
+		when not matched
+		then
 		insert(isuCd,cmpprevddTpCd,cmpprevddPrc,trdPrc,trdvol,opnprc,hgprc,lwprc,trdTm,mktStatTpCd)
 		values
 		(#{isuCd},#{cmpprevddTpCd},#{cmpprevddPrc},#{trdPrc},#{trdvol},#{opnprc},#{hgprc},#{lwprc},#{trdTm},#{mktStatTpCd})

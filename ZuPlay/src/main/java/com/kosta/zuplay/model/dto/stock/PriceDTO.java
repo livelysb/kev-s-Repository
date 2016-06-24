@@ -11,6 +11,9 @@ public class PriceDTO {
 	private String cmpprevddTpCd; // 전일대비구분코드
 	private double opnprc; // 시가
 	private String isuCd; // 종목코드
+	
+	private double fluctuationRate; //등락률
+
 
 	public PriceDTO() {
 	}
@@ -29,12 +32,20 @@ public class PriceDTO {
 		this.opnprc = opnprc;
 		this.isuCd = isuCd;
 	}
+	
+	public double getFluctuationRate() {
+		return fluctuationRate;				
+	}
 
-	public String getmktStatTpCd() {
+	public void setFluctuationRate(double fluctuationRate) {
+		this.fluctuationRate = fluctuationRate;
+	}
+	
+	public String getMktStatTpCd() {
 		return mktStatTpCd;
 	}
 
-	public void setmktStatTpCd(String mktStatTpCd) {
+	public void setMktStatTpCd(String mktStatTpCd) {
 		this.mktStatTpCd = mktStatTpCd;
 	}
 

@@ -1,6 +1,7 @@
 package com.kosta.zuplay.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kosta.zuplay.model.dto.stock.ListsDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
@@ -39,8 +40,13 @@ public interface StockUpdateDAO {
 	List<PriceDTO> getPrice();
 	
 	/**
-	 * INSERT INTO DAILY_PRICE ON PM 3:30
+	 * INSERT INTO DAILY_PRICE 테이블에 3:30분의 체결가(종가) 삽입
 	 * */
 	void insertDailyPrice(PriceDTO priceDTO);
+	
+	/**
+	 * DB의 페이지 별 주식리스트 보여주기
+	 * */
+	List<MasterDTO> getStockList(Map<String, Integer> map);
 
 }

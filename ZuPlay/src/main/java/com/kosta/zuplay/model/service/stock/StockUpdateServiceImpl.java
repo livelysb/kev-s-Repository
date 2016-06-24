@@ -9,6 +9,8 @@ public class StockUpdateServiceImpl implements StockUpdateService {
 	
 	@Autowired
 	private StockUpdate stockUpdate;
+	
+	
 		
 	/**
 	 * 작동빈도 : 작업이 끝난 시점으로 1분 뒤 재시작한다.

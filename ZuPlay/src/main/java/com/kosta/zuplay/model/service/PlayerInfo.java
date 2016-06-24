@@ -11,6 +11,12 @@ public interface PlayerInfo {
 	public PlayerDTO getPlayer(String playerNickname);
 	
 	/**
-	 * 플레이어의 사이버머니 깍기
+	 * 플레이어의 사이버머니 수정하기
 	 * */
+	public boolean changePlayerMoney(String playerNickname, double money);
+	
+	/**
+	 * 플레이어의 주식 수량 수정하기
+	 * */
+	public boolean changePlayerStock(String playerNickname, String isuCd, int plQuantity);
 }

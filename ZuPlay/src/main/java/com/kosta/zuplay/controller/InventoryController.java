@@ -36,7 +36,7 @@ public class InventoryController {
 		String json = gson.toJson(list, type);
 		System.out.println(json);
 		
-		return json;
+		return json != null ? json : "{}";
 		
 	}
 

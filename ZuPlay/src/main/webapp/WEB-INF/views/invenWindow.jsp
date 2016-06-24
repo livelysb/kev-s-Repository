@@ -111,10 +111,8 @@
                $( this )
                .addClass( "ui-state-highlight" )
                .find( "p" )
-               .html( "i'm destroyed!" );
             }
          });
-		
 	  });
 </script> 
 </html> 

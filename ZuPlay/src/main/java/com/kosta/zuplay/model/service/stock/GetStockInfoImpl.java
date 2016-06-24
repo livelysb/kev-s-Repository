@@ -55,7 +55,10 @@ public class GetStockInfoImpl implements GetStockInfo {
 		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 		List<MasterDTO> masterList = stockUpdateDAO.getStockList(map);		
 		for(MasterDTO masterDTO : masterList) {
-			masterDTO.getPriceDTO().setFluctuationRate((masterDTO.getPriceDTO().getTrdPrc()*100)/(masterDTO.getPriceDTO().getTrdPrc()-masterDTO.getPriceDTO().getCmpprevddPrc())-100);
+			double fr = (masterDTO.getPriceDTO().getTrdPrc()*100)/(masterDTO.getPriceDTO().getTrdPrc()-masterDTO.getPriceDTO().getCmpprevddPrc())-100;
+			int fr2 = (int)(fr*100);
+			fr = (double)(fr2/100.0);
+			masterDTO.getPriceDTO().setFluctuationRate(fr);
 		}		
 		return masterList;
 	}

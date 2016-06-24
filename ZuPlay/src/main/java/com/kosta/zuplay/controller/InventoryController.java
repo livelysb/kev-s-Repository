@@ -25,7 +25,7 @@ public class InventoryController {
 	@ResponseBody
 	public List<PlayerItemDTO> playerItemSelectAll(HttpSession session) {
 		String playerNickname = (String) session.getAttribute("playerNickname");
-		System.out.println(playerNickname);
+		System.out.println("playerNickname : " + playerNickname);
 		return inventoryServiceImpl.playerItemSelectAll(playerNickname);
 		
 	}

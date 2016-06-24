@@ -20,6 +20,7 @@ public class InventoryController {
 
 	@Autowired
 	private InventoryService inventoryServiceImpl;
+
 	/**
 	 * 보유 아이템 리스트 조회
 	 */
@@ -28,14 +29,14 @@ public class InventoryController {
 	public String playerItemSelectAll(HttpSession session) {
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		System.out.println("playerNickname : " + playerNickname);
-		
-		List<PlayerItemDTO> list= inventoryServiceImpl.playerItemSelectAll(playerNickname);
+
+		List<PlayerItemDTO> list = inventoryServiceImpl.playerItemSelectAll(playerNickname);
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
 		System.out.println(json);
-		
+
 		return "null".equals(json) ? "{}" : json;
-		
+
 	}
 
 	/**
@@ -43,7 +44,13 @@ public class InventoryController {
 	 */
 	@RequestMapping("playerItemInsert")
 	@ResponseBody
-	public boolean playerItemInsert(List<PlayerItemDTO> list){
+	public boolean playerItemInsert(HttpSession session, List<PlayerItemDTO> jsonList) {
+		String playerNickname = (String) session.getAttribute("playerNickname");
+		ArrayList<PlayerItemDTO> list = new ArrayList<PlayerItemDTO>();
+		for (int i = 0; i < jsonList.size(); i++) {
+			list.add(new PlayerItemDTO(jsonList.get(i).getPiSq(), playerNickname, jsonList.get(i).getItemCode(),
+					jsonList.get(i).getPiIsused(), jsonList.get(i).getPiIndex(), null));
+		}
 		return inventoryServiceImpl.playerItemInsert(list);
 	}
 }

@@ -7,4 +7,5 @@ public interface LoginDAO {
 	int joinMember(PlayerDTO playerDTO);
 	String checkRepetiton(String playerNickname);
 	String getNickname(String playerNaverId);
+	String getGender(String playerNickname);
 }

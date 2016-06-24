@@ -34,4 +34,7 @@
 	<select id="getNickname" parameterType="String" resultType="String">
 		select player_nickname from player where player_naver_id=#{playerNaverId}
 	</select>
+	<select id="getGender" parameterType="String" resultType="String">
+		select player_gender from player where player_nickname=#{playerNickname}
+	</select>
 </mapper>

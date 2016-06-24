@@ -17,6 +17,22 @@
 	#sortable { list-style-type: none; margin: 0; padding: 0; width: 450px; }
   	#sortable div {border:solid 2px black; margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }
   	.closet {border:solid 2px black; margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; } 
+  	
+  	
+  /* 	.draggable-4 { 
+            width: 90px; height: 50px; padding: 0.5em; float: left;
+            margin: 0px 5px 10px 0;
+            border: 1px solid red;  
+         }
+         .droppable-7 { 
+            width: 100px; height: 90px;padding: 0.5em; float: left; 
+            margin: 10px; 
+            border: 1px solid black; 
+         }
+         .droppable.active { 
+         } */
+  	
+  	
 </style>
 </head>
 
@@ -29,19 +45,25 @@
 					
 				</div>
 				<div style="border: 2px black solid; height: 40%">
-					<div class="closet"></div>
-					<div class="closet"></div>
-					<div class="closet"></div>
-					<div class="closet"></div>
-					<div class="closet"></div>
-					<div class="closet"></div>
+					<div class="closet droppable-7"></div>
+					<div class="closet droppable-7" ></div>
+					<div class="closet droppable-7" ></div>
+					<div class="closet droppable-7"></div>
+					<div class="closet droppable-7"></div>
+					<div class="closet droppable-7"></div>
 				</div>
 			</div>
 				<div>
 					<div class="col-xs-6" id="sortable">
 						
 						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>		
-					
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
+						<div class="ui-state-default"> <img src="resources/img/avatar/body/clothes-10.png" style="width:100%; height:100%;"/></div>
 					</div>
 			</div>
 		</div>
@@ -50,7 +72,6 @@
 
 <script src="resources/js/jquery-2.2.4.min.js"></script>
 <script src="resources/js/naverLogin_implicit-1.0.2.js"></script>
-
 <script src="resources/js/jquery-ui.min.js"></script>
 <script src="resources/js/jquery.cookie.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
@@ -64,24 +85,35 @@
 	    $( "#sortable" ).disableSelection();
 	    
 	     $.ajax({
-			url: "inventory" ,
+			url: "playerItemSelectAll" ,
 			type:"post",
 			dataType:"text",  
 			success:function(data){
 				invenUrl="";
-				
 				$.each(data, function(index, item){
-					
-					str+="<div class='ui-state-default'> <img src=' " + item.url + " style='width:100%; height:100%;'/></div>";
+					invenUrl+="<div class='ui-state-default'> <img src=' " + item.url + " style='width:100%; height:100%;'/></div>";
 				})
 				
 				$("#sortable").html(invenUrl);
-				
+					
 				} ,
 			error:function(err){
 				alert(err +"에러발생");
 			}
 		})  
+		
+         $('.droppable-7').droppable({
+            hoverClass: 'active',
+            drop: function(e, ui) {
+               $(this).html(ui.draggable.remove().html());
+               $(this).droppable('destroy');
+               $( this )
+               .addClass( "ui-state-highlight" )
+               .find( "p" )
+               .html( "i'm destroyed!" );
+            }
+         });
+		
 	  });
 </script> 
 </html> 

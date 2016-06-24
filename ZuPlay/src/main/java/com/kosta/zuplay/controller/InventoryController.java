@@ -30,7 +30,6 @@ public class InventoryController {
 		System.out.println("playerNickname : " + playerNickname);
 		
 		List<PlayerItemDTO> list= inventoryServiceImpl.playerItemSelectAll(playerNickname);
-		System.out.println(list);
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
 		System.out.println(json);

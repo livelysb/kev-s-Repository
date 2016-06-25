@@ -1,4 +1,4 @@
-package com.kosta.zuplay.model.service;
+package com.kosta.zuplay.model.service.item;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kosta.zuplay.model.dao.ItemStoreDAO;
 import com.kosta.zuplay.model.dao.LoginDAO;
 import com.kosta.zuplay.model.dto.item.ItemDTO;
+import com.kosta.zuplay.model.service.UtilService;
 
 @Service
 public class ItemStoreServiceImpl implements ItemStoreService {

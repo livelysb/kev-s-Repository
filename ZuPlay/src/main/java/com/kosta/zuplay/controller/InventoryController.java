@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
-import com.kosta.zuplay.model.service.InventoryService;
+import com.kosta.zuplay.model.service.item.InventoryService;
 
 @Controller
 public class InventoryController {

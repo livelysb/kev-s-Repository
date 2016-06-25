@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.item.ItemDTO;
-import com.kosta.zuplay.model.service.ItemStoreService;
+import com.kosta.zuplay.model.service.item.ItemStoreService;
 
 @Controller
 public class ItemStoreController {

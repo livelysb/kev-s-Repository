@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 
 @Service
-public class PlayerInfoImpl implements PlayerInfo {
+public class PlayerInfoServiceImpl implements PlayerInfoService {
 
 	@Override
 	public PlayerDTO getPlayer(String playerNickname) {

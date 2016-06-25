@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kosta.zuplay.model.dto.item.ItemDTO;
 import com.kosta.zuplay.model.dto.item.ItemMarketDTO;
+import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 
 public interface ItemAuctionDAO {
 	/**
@@ -26,7 +27,7 @@ public interface ItemAuctionDAO {
 	/**
 	 * 아이템정보 player_item 테이블에 삽입
 	 */
-	int auctionInsertPlayerItem(String playerNickname, ItemDTO itemDTO);
+	int auctionInsertPlayerItem(PlayerItemDTO playerItemDTO);
 
 	/**
 	 * 경매 종료물품으로 변경
@@ -43,7 +44,7 @@ public interface ItemAuctionDAO {
 	/**
 	 * item_market 테이블에 레코드 삽입
 	 */
-	int auctionInsertItemMarket(ItemDTO itemDTO);
+	int auctionInsertItemMarket(Map<String, String> map);
 
 	/**
 	 * player_item 테이블 레코드 삭제
@@ -53,8 +54,15 @@ public interface ItemAuctionDAO {
 	/**
 	 * 경매 취소 item_market 테이블 해당 레코드 IM_AUCTION_END 컬럼 수정 (T -> X)
 	 */
-	int auctionMiscarriage(String imSq);
+	int auctionCancle(String imSq);
+
 	/**
-	 * 
+	 * 경매장 유찰품/골드 수령 시작
+	 * IM_AUCTION_END  진행중 여부 (T=진행중/F=종료/X=유찰) 가져오기
 	 */
+	String auctionBring(String imSq);
+	/**
+	 * 내 경매 물품 가져오기
+	 */
+	List<ItemMarketDTO> auctionMyPage(String playerNickname);
 }

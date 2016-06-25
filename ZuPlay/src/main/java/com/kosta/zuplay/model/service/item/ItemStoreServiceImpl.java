@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kosta.zuplay.model.dao.ItemStoreDAO;
 import com.kosta.zuplay.model.dao.LoginDAO;
@@ -38,6 +39,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 	 * 아이템 구매 리턴: 1=정상 / 2=인벤토리 풀 / 3=루비부족
 	 */
 	@Override
+	@Transactional
 	public int itemStoreBuy(String playerNickname, ItemDTO itemDTO, int quantity) {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		Map<String, String> payRubyMap = new HashMap<String, String>();
@@ -73,6 +75,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 	}
 
 	@Override
+	@Transactional
 	public boolean itemStoreSell(String playerNickname, int piSq, String itemCode) {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		Map<String, String> map = new HashMap<String, String>();

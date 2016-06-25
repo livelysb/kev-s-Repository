@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kosta.zuplay.model.dto.item.ItemDTO;
 
 public interface ItemStoreDAO {
+	List<ItemDTO> itemStoreSelectAll(Map<String, String> map);
 	List<ItemDTO> itemStoreSelect(Map<String, String> map);
 	int getRuby(String playerNickname);
 	int getPrice(String itemCode);

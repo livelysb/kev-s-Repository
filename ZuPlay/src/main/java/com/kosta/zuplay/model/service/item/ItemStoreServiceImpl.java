@@ -1,5 +1,6 @@
 package com.kosta.zuplay.model.service.item;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,12 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		map.put("startNo", 1 + ((page - 1) * 8) + "");
 		map.put("endNo", page * 8 + "");
 		System.out.println(map);
-		List<ItemDTO> list = itemStoreDAO.itemStoreSelect(map);
+		List<ItemDTO> list = new ArrayList<ItemDTO>();
+			if(itemClass.equals("all")){
+				itemStoreDAO.itemStoreSelectAll(map);
+			}else{
+				itemStoreDAO.itemStoreSelect(map);
+			}
 		System.out.println("[ LOG ] list = " + list);
 		return list;
 	}

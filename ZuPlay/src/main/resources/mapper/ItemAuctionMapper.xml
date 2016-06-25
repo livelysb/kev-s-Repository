@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosta.zuplay.model.dao.InventoryDAO">
+	<resultMap type="itemMarketDTO" id="itemMarketMapper">
+		<id column="im_sq" property="imSq" />
+		<result column="player_nickname" property="playerNickname" />
+		<result column="item_code" property="itemCode" />
+		<result column="im_purchase_price" property="imPurchasePrice" />
+		<result column="im_bid_time" property="imBidTime" />
+		<result column="im_auction_end" property="imAuctionEnd" />
+		<association property="itemDTO" javaType="itemDTO">
+			<id column="item_code" property="itemCode" />
+			<result column="item_name" property="itemName" />
+			<result column="item_price" property="itemPrice" />
+			<result column="item_class" property="itemClass" />
+			<result column="item_grade" property="itemGrade" />
+			<result column="item_img" property="itemImg" />
+		</association>
+	</resultMap>
+	<resultMap type="itemDTO" id="itemMapper">
+		<id column="ITEM_CODE" property="itemCode" />
+		<result column="ITEM_NAME" property="itemName" />
+		<result column="ITEM_PRICE" property="itemPrice" />
+		<result column="ITEM_CLASS" property="itemClass" />
+		<result column="ITEM_GRADE" property="itemGrade" />
+		<result column="ITEM_IMG" property="itemImg" />
+
+	</resultMap>
+	<select id="auctionSearch" parameterType="java.util.Map"
+		resultMap="itemMarketMapper">
+		select * from (select * from item_market where
+		im_auction_end='T' order by im_bid_time) m join item i on
+		m.item_code=i.item_code
+		where item_name=#{keyword} and
+		item_class=#{itemClass}
+	</select>
+	<select id="bringItemInfoByImSq" parameterType="String"
+		resultMap="itemMarketMapper">
+		select * from item_market m join item i on
+		m.item_code=i.item_code
+		where im_sq=#{imSq}
+	</select>
+	<insert id="auctionInsertPlayerItem" parameterType="playerItemDTO">
+		insert into
+		player_item values
+		(pi_sq.nextval,#{playerNickname},#{itemCode},'F',#{piIndex})
+	</insert>
+	<update id="auctionBuyFinish" parameterType="String">
+		update item_market
+		set (IM_AUCTION_END='F') where im_sq=#{imSq}
+	</update>
+	<select id="bringItemInfoByPiSq" parameterType="String" resultMap="itemMapper">
+			select * from player_item p join item i on p.item_code=i.item_code where pi_sq=#{piSq}
+	</select>
+	<insert id="auctionInsertItemMarket" parameterType="java.util.Map">
+		insert into item_market values (im_sq.nextval,#{playerNickname},#{itemCode},#{imPurchasePrice},sysdate),'T')
+	</insert>
+	<delete id="auctionDeletePlayerItem" parameterType="String">
+		delete player_item where pi_sq=#{piSq}
+	</delete>
+	<update id="auctionCancle" parameterType="String">
+		update item_market set (im_auction_end='X') where im_sq=#{imSq}
+	</update>
+	<select id="auctionBring" parameterType="String" resultType="String">
+		select IM_AUCTION_END from item_market where im_sq=#{imSq}
+	</select>
+	<select id="auctionMyPage" parameterType="playerNickname" resultMap="itemMarketMapper">
+		select * from (select * from item_market where
+		im_auction_end='T' order by im_bid_time) m join item i on
+		m.item_code=i.item_code
+		where player_nickname=#{playerNickname}
+	</select>
+</mapper>

@@ -95,27 +95,13 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
         <div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 bhoechie-tab-container">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
               <div class="list-group">
-                <a href="#" class="list-group-item active text-center">
-                    All
-                </a>
-                <a href="#" class="list-group-item text-center">
-                	Head
-                </a>
-                 <a href="#" class="list-group-item text-center">
-                    Body
-                </a>
-                <a href="#" class="list-group-item text-center">
-                    Acc
-                </a>
-                <a href="#" class="list-group-item text-center">
-                    Eyes
-                </a>
-                <a href="#" class="list-group-item text-center">
-                    Mouse
-                </a>
-                <a href="#" class="list-group-item text-center">
-                    Earring
-                </a>
+                <a href="#" class="list-group-item active text-center">All</a>
+                <a href="#" class="list-group-item text-center">Hair</a>
+                 <a href="#" class="list-group-item text-center">Clothes</a>
+                <a href="#" class="list-group-item text-center">Acc</a>
+                <a href="#" class="list-group-item text-center">Eyes</a>
+                <a href="#" class="list-group-item text-center">Mouse</a>
+                <a href="#" class="list-group-item text-center">Earring </a>
               </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
@@ -128,68 +114,22 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 					<div class="itemBox" id="itemAll5"></div>
 					<div class="itemBox" id="itemAll6"></div>
 					<div class="itemBox" id="itemAll7"></div>
+                	<button type="button" id="backAllBtn" class="backBtn">이전</button>
+                	<button type="button" id="nexAlltBtn" class="nextBtn">다음</button>
                 </div>
                 <div class="bhoechie-tab-content">
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>               
+					<div class="itemBox" id="itemAll0"></div>
+					<div class="itemBox" id="itemAll1"></div>
+					<div class="itemBox" id="itemAll2"></div>
+					<div class="itemBox" id="itemAll3"></div>
+					<div class="itemBox" id="itemAll4"> </div>
+					<div class="itemBox" id="itemAll5"></div>
+					<div class="itemBox" id="itemAll6"></div>
+					<div class="itemBox" id="itemAll7"></div>
+                	<button type="button" id="backAllBtn" class="backBtn">이전</button>
+                	<button type="button" id="nexAlltBtn" class="nextBtn">다음</button>          
                 </div>
     
-                <div class="bhoechie-tab-content">
-                	<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-                </div>
-                <div class="bhoechie-tab-content">
-                	<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-                </div>
-                <div class="bhoechie-tab-content">
-                	<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-                </div>
-                <div class="bhoechie-tab-content">
-                	<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-                </div>
-                <div class="bhoechie-tab-content">
-                	<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-					<div class="itemBox"></div>
-                </div>
             </div>
         </div>
   </div>
@@ -204,26 +144,40 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 
 <script type="text/javascript">
 $(document).ready(function() {
+	count="1";
+	tabs="";
+	storeSelect("hair",count)
+	
+	//탭들을 클릭 했을 때 일어나는 이벤트
     $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+    	
+    	count="1";
+    	tabs=($(this).text());
+    	
         e.preventDefault();
         $(this).siblings('a.active').removeClass("active");
         $(this).addClass("active");
         var index = $(this).index();
         $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
         $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+        
+        storeSelect(tabs,1);
     });
     
-    store()
-    
     //Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
-    function store(attr){
+    function storeSelect(tab,page){
 	    $.ajax({
-	    	url: "store" ,
+	    	url: "itemStoreSelect" ,
 			type:"post",
 			dataType:"json",  
+			data:"itemClass="+tab+"&page="+page,
 			success:function(data){
 				$.each(data, function(index, item){
-					$("#"+attr +" "+index).text(item.attr);
+					$("#item"+tab +""+index).html("<src img='" + item.itemImg +"'>");
+					
+					console.log("item.itemImg : " + item.itemImg);
+					console.log("item.itemDTO.itemImg : " + item.itemDTO.itemImg )
+					
 				})
 			},
 			error:function(err){
@@ -231,14 +185,20 @@ $(document).ready(function() {
 			}
 	    })
 	}
+    
+    
+    $(".backBtn").on("click",function(){
+		if(count>1) {
+			storeSelect(tabs, ++count)
+		}
+    })
+    
+    $(".nextBtn").on("click", function(){
+    	if(count>=1) {
+			storeSelect(tabs, ++count)
+		}	
+    })
+    
 });
 </script>
 </html>
-
-
-
-
-
-
-
-

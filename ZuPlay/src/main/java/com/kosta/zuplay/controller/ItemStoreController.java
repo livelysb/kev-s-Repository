@@ -24,6 +24,8 @@ public class ItemStoreController {
 	 @RequestMapping(value="itemStoreSelect" ,produces="text/plain;charset=UTF-8" )
 	 @ResponseBody
 	public String itemStoreSelect(HttpSession session, String itemClass, int page) {
+		 System.out.println(itemClass);
+		 System.out.println(page);
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		List<ItemDTO> list = itemStoreServiceImpl.itemStoreSelect(playerNickname, itemClass, page);
 		Gson gson = new Gson();

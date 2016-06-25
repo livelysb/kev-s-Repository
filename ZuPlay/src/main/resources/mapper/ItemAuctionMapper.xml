@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kosta.zuplay.model.dao.InventoryDAO">
+<mapper namespace="com.kosta.zuplay.model.dao.ItemAuctionDAO">
 	<resultMap type="itemMarketDTO" id="itemMarketMapper">
 		<id column="im_sq" property="imSq" />
 		<result column="player_nickname" property="playerNickname" />
@@ -64,7 +64,7 @@
 	<select id="auctionBring" parameterType="String" resultType="String">
 		select IM_AUCTION_END from item_market where im_sq=#{imSq}
 	</select>
-	<select id="auctionMyPage" parameterType="playerNickname" resultMap="itemMarketMapper">
+	<select id="auctionMyPage" parameterType="String" resultMap="itemMarketMapper">
 		select * from (select * from item_market where
 		im_auction_end='T' order by im_bid_time) m join item i on
 		m.item_code=i.item_code

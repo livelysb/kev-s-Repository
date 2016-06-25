@@ -40,9 +40,9 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		System.out.println(map);
 		List<ItemDTO> list = new ArrayList<ItemDTO>();
 			if(itemClass.equals("all")){
-				itemStoreDAO.itemStoreSelectAll(map);
+				list=itemStoreDAO.itemStoreSelectAll(map);
 			}else{
-				itemStoreDAO.itemStoreSelect(map);
+				list=itemStoreDAO.itemStoreSelect(map);
 			}
 		System.out.println("[ LOG ] list = " + list);
 		return list;

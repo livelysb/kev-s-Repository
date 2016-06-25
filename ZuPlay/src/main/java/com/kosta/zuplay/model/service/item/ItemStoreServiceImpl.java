@@ -26,10 +26,17 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		LoginDAO loginDAO = sqlSession.getMapper(LoginDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("playerGender", loginDAO.getGender(playerNickname));
+		String gender=null;
+		if(loginDAO.getGender(playerNickname).equals("M")){
+			gender="F";
+		}else{
+			gender="M";
+		}
+		map.put("playerGender", gender);
 		map.put("itemClass", itemClass);
 		map.put("startNo", 1 + ((page - 1) * 8) + "");
 		map.put("endNo", page * 8 + "");
+		System.out.println(map);
 		List<ItemDTO> list = itemStoreDAO.itemStoreSelect(map);
 		System.out.println("[ LOG ] list = " + list);
 		return list;

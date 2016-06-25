@@ -229,13 +229,11 @@ $(document).ready(function() {
 						if(typeof(next) === "undefined"){
 							next = $("#all").attr("id");
 						}
-						console.log("Nnext : "+next);
 					}else{
 						var next = $(".list-group>.active").prev().attr("id");
 						if(typeof(next) === "undefined"){
 							next = $("#acc").attr("id");
 						}
-						console.log("Bnext : "+next);
 					}
 					$("#"+next).trigger("click")
 					return;

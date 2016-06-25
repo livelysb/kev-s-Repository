@@ -95,41 +95,90 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
         <div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 bhoechie-tab-container">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
               <div class="list-group">
-                <a href="#" class="list-group-item active text-center">All</a>
-                <a href="#" class="list-group-item text-center">Hair</a>
-                 <a href="#" class="list-group-item text-center">Clothes</a>
-                <a href="#" class="list-group-item text-center">Acc</a>
-                <a href="#" class="list-group-item text-center">Eyes</a>
-                <a href="#" class="list-group-item text-center">Mouse</a>
-                <a href="#" class="list-group-item text-center">Earring </a>
+                <a href="#" class="list-group-item text-center active" id="all">All</a>
+                <a href="#" class="list-group-item text-center" id="hair">Hair</a>
+                 <a href="#" class="list-group-item text-center" id="clothes">Clothes</a>
+                <a href="#" class="list-group-item text-center" id="eyes">Eyes</a>
+                <a href="#" class="list-group-item text-center" id="mouse">Mouse</a>
+                <a href="#" class="list-group-item text-center" id="earring">Earring </a>
+                <a href="#" class="list-group-item text-center" id="acc">Acc</a>
               </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
                 <div class="bhoechie-tab-content active">
-					<div class="itemBox" id="itemAll0"></div>
-					<div class="itemBox" id="itemAll1"></div>
-					<div class="itemBox" id="itemAll2"></div>
-					<div class="itemBox" id="itemAll3"></div>
-					<div class="itemBox" id="itemAll4"> </div>
-					<div class="itemBox" id="itemAll5"></div>
-					<div class="itemBox" id="itemAll6"></div>
-					<div class="itemBox" id="itemAll7"></div>
-                	<button type="button" id="backAllBtn" class="backBtn">이전</button>
-                	<button type="button" id="nexAlltBtn" class="nextBtn">다음</button>
+					<div class="itemBox" id="itemall0"></div>
+					<div class="itemBox" id="itemall1"></div>
+					<div class="itemBox" id="itemall2"></div>
+					<div class="itemBox" id="itemall3"></div>
+					<div class="itemBox" id="itemall4"> </div>
+					<div class="itemBox" id="itemall5"></div>
+					<div class="itemBox" id="itemall6"></div>
+					<div class="itemBox" id="itemall7"></div>
                 </div>
                 <div class="bhoechie-tab-content">
-					<div class="itemBox" id="itemAll0"></div>
-					<div class="itemBox" id="itemAll1"></div>
-					<div class="itemBox" id="itemAll2"></div>
-					<div class="itemBox" id="itemAll3"></div>
-					<div class="itemBox" id="itemAll4"> </div>
-					<div class="itemBox" id="itemAll5"></div>
-					<div class="itemBox" id="itemAll6"></div>
-					<div class="itemBox" id="itemAll7"></div>
-                	<button type="button" id="backAllBtn" class="backBtn">이전</button>
-                	<button type="button" id="nexAlltBtn" class="nextBtn">다음</button>          
+					<div class="itemBox" id="itemhair0"></div>
+					<div class="itemBox" id="itemhair1"></div>
+					<div class="itemBox" id="itemhair2"></div>
+					<div class="itemBox" id="itemhair3"></div>
+					<div class="itemBox" id="itemhair4"> </div>
+					<div class="itemBox" id="itemhair5"></div>
+					<div class="itemBox" id="itemhair6"></div>
+					<div class="itemBox" id="itemhair7"></div>>          
                 </div>
-    
+                
+                <div class="bhoechie-tab-content">
+					<div class="itemBox" id="itemclothes0"></div>
+					<div class="itemBox" id="itemclothes1"></div>
+					<div class="itemBox" id="itemclothes2"></div>
+					<div class="itemBox" id="itemclothes3"></div>
+					<div class="itemBox" id="itemclothes4"> </div>
+					<div class="itemBox" id="itemclothes5"></div>
+					<div class="itemBox" id="itemclothes6"></div>
+					<div class="itemBox" id="itemclothes7"></div>   
+                </div>
+                  <div class="bhoechie-tab-content">
+					<div class="itemBox" id="itemeyes0"></div>
+					<div class="itemBox" id="itemeyes1"></div>
+					<div class="itemBox" id="itemeyes2"></div>
+					<div class="itemBox" id="itemeyes3"></div>
+					<div class="itemBox" id="itemeyes4"> </div>
+					<div class="itemBox" id="itemeyes5"></div>
+					<div class="itemBox" id="itemeyes6"></div>
+					<div class="itemBox" id="itemeyes7"></div>        
+                </div>
+                 <div class="bhoechie-tab-content">
+					<div class="itemBox" id="itemmouse0"></div>
+					<div class="itemBox" id="itemmouse1"></div>
+					<div class="itemBox" id="itemmouse2"></div>
+					<div class="itemBox" id="itemmouse3"></div>
+					<div class="itemBox" id="itemmouse4"> </div>
+					<div class="itemBox" id="itemmouse5"></div>
+					<div class="itemBox" id="itemmouse6"></div>
+					<div class="itemBox" id="itemmouse7"></div>         
+                </div>
+                <div class="bhoechie-tab-content">
+					<div class="itemBox" id="itemearring0"></div>
+					<div class="itemBox" id="itemearring1"></div>
+					<div class="itemBox" id="itemearring2"></div>
+					<div class="itemBox" id="itemearring3"></div>
+					<div class="itemBox" id="itemearring4"> </div>
+					<div class="itemBox" id="itemearring5"></div>
+					<div class="itemBox" id="itemearring6"></div>
+					<div class="itemBox" id="itemearring7"></div>
+                </div>
+                <div class="bhoechie-tab-content">
+					<div class="itemBox" id="itemacc0"></div>
+					<div class="itemBox" id="itemacc1"></div>
+					<div class="itemBox" id="itemacc2"></div>
+					<div class="itemBox" id="itemacc3"></div>
+					<div class="itemBox" id="itemacc4"> </div>
+					<div class="itemBox" id="itemacc5"></div>
+					<div class="itemBox" id="itemacc6"></div>
+					<div class="itemBox" id="itemacc7"></div>
+         
+                </div>
+    				 <button type="button" id="backAllBtn" class="backBtn">이전</button>
+                	<button type="button" id="nextAlltBtn" class="nextBtn">다음</button> 
             </div>
         </div>
   </div>
@@ -144,41 +193,60 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 
 <script type="text/javascript">
 $(document).ready(function() {
-	count="1";
-	tabs="";
-	storeSelect("hair",count)
-	
+	var count=1;
+	var tabs="";
+    var status = "next";
+	var tabAry = [ 'all', 'hair', 'clothes','eyes','mouse','earring','acc' ];
+	storeSelect(count)
 	//탭들을 클릭 했을 때 일어나는 이벤트
     $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
-    	
-    	count="1";
-    	tabs=($(this).text());
-    	
-        e.preventDefault();
+    	count=1;
+        //e.preventDefault();
         $(this).siblings('a.active').removeClass("active");
         $(this).addClass("active");
+            	
         var index = $(this).index();
+
         $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
         $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
-        
-        storeSelect(tabs,1);
+        storeSelect(1)
     });
-    
     //Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
-    function storeSelect(tab,page){
+    var shopIndex = 0;
+    function storeSelect(page){
+    	var itemClass = $(".active").attr("id");
+    	
 	    $.ajax({
 	    	url: "itemStoreSelect" ,
 			type:"post",
 			dataType:"json",  
-			data:"itemClass="+tab+"&page="+page,
+			data:"itemClass="+itemClass+"&page="+page,
 			success:function(data){
+				if(data.length==0){
+					count=1;
+					if(status == "next"){
+						var next = $(".list-group>.active").next().attr("id");
+						if(typeof(next) === "undefined"){
+							next = $("#all").attr("id");
+						}
+						console.log("Nnext : "+next);
+					}else{
+						var next = $(".list-group>.active").prev().attr("id");
+						if(typeof(next) === "undefined"){
+							next = $("#acc").attr("id");
+						}
+						console.log("Bnext : "+next);
+					}
+					$("#"+next).trigger("click")
+					return;
+				}else{
+				count=page;
+				
 				$.each(data, function(index, item){
-					$("#item"+tab +""+index).html("<src img='" + item.itemImg +"'>");
-					
-					console.log("item.itemImg : " + item.itemImg);
-					console.log("item.itemDTO.itemImg : " + item.itemDTO.itemImg )
-					
+					$("#item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:100%;'/>");  //
 				})
+				
+				}
 			},
 			error:function(err){
 				alert(err +"에러발생");
@@ -186,17 +254,15 @@ $(document).ready(function() {
 	    })
 	}
     
-    
     $(".backBtn").on("click",function(){
-		if(count>1) {
-			storeSelect(tabs, ++count)
-		}
+    		status = "back";
+			storeSelect(count-1)
+
     })
     
     $(".nextBtn").on("click", function(){
-    	if(count>=1) {
-			storeSelect(tabs, ++count)
-		}	
+    		status = "next";
+			storeSelect(count+1)
     })
     
 });

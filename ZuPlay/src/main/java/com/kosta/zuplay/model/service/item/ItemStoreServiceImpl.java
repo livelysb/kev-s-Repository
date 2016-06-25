@@ -44,7 +44,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 			}else{
 				list=itemStoreDAO.itemStoreSelect(map);
 			}
-		System.out.println("[ LOG ] list = " + list);
+		System.out.println("[ LOG ] list = " + list+" / list.size() = "+list.size());
 		return list;
 	}
 

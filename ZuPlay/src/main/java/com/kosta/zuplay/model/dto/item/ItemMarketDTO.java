@@ -8,9 +8,12 @@ public class ItemMarketDTO {
 	private String imBidTime;		//물건 등록 시간
 	private String imAuctionEnd;	//진행중 여부 (T=진행중/F=종료)
 	
+	private ItemDTO itemDTO;		//1:1 조인
+	
 	public ItemMarketDTO() {}
+
 	public ItemMarketDTO(int imSq, String playerNickname, String itemCode, int imPurchasePrice, String imBidTime,
-			String imAuctionEnd) {
+			String imAuctionEnd, ItemDTO itemDTO) {
 		super();
 		this.imSq = imSq;
 		this.playerNickname = playerNickname;
@@ -18,48 +21,71 @@ public class ItemMarketDTO {
 		this.imPurchasePrice = imPurchasePrice;
 		this.imBidTime = imBidTime;
 		this.imAuctionEnd = imAuctionEnd;
+		this.itemDTO = itemDTO;
 	}
+
 	public int getImSq() {
 		return imSq;
 	}
+
 	public void setImSq(int imSq) {
 		this.imSq = imSq;
 	}
+
 	public String getPlayerNickname() {
 		return playerNickname;
 	}
+
 	public void setPlayerNickname(String playerNickname) {
 		this.playerNickname = playerNickname;
 	}
+
 	public String getItemCode() {
 		return itemCode;
 	}
+
 	public void setItemCode(String itemCode) {
 		this.itemCode = itemCode;
 	}
+
 	public int getImPurchasePrice() {
 		return imPurchasePrice;
 	}
+
 	public void setImPurchasePrice(int imPurchasePrice) {
 		this.imPurchasePrice = imPurchasePrice;
 	}
+
 	public String getImBidTime() {
 		return imBidTime;
 	}
+
 	public void setImBidTime(String imBidTime) {
 		this.imBidTime = imBidTime;
 	}
+
 	public String getImAuctionEnd() {
 		return imAuctionEnd;
 	}
+
 	public void setImAuctionEnd(String imAuctionEnd) {
 		this.imAuctionEnd = imAuctionEnd;
 	}
+
+	public ItemDTO getItemDTO() {
+		return itemDTO;
+	}
+
+	public void setItemDTO(ItemDTO itemDTO) {
+		this.itemDTO = itemDTO;
+	}
+
 	@Override
 	public String toString() {
 		return "ItemMarketDTO [imSq=" + imSq + ", playerNickname=" + playerNickname + ", itemCode=" + itemCode
 				+ ", imPurchasePrice=" + imPurchasePrice + ", imBidTime=" + imBidTime + ", imAuctionEnd=" + imAuctionEnd
-				+ "]";
+				+ ", itemDTO=" + itemDTO + "]";
 	}
 
+	
 }

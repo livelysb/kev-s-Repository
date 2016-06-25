@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kosta.zuplay.model.service.PlayerInfo;
+import com.kosta.zuplay.model.service.PlayerInfoService;
 
 @Service
 public class StockTradeServiceImpl implements StockTradeService {
@@ -13,7 +13,7 @@ public class StockTradeServiceImpl implements StockTradeService {
 	private PlayerStockInfo playerStockInfo;
 	
 	@Autowired
-	private PlayerInfo playerInfo;
+	private PlayerInfoService playerInfo;
 	
 	@Autowired
 	private StockInfo stockInfo;

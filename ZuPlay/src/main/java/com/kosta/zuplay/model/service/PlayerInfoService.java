@@ -2,7 +2,7 @@ package com.kosta.zuplay.model.service;
 
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 
-public interface PlayerInfo {
+public interface PlayerInfoService {
 
 	
 	/**

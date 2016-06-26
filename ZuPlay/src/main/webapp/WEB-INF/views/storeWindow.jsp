@@ -123,7 +123,7 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 					<div class="itemBox" id="itemhair4"> </div>
 					<div class="itemBox" id="itemhair5"></div>
 					<div class="itemBox" id="itemhair6"></div>
-					<div class="itemBox" id="itemhair7"></div>>          
+					<div class="itemBox" id="itemhair7"></div>          
                 </div>
                 
                 <div class="bhoechie-tab-content">
@@ -211,6 +211,7 @@ $(document).ready(function() {
         $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
         storeSelect(1)
     });
+	
     //Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
     var shopIndex = 0;
     function storeSelect(page){
@@ -238,12 +239,10 @@ $(document).ready(function() {
 					$("#"+next).trigger("click")
 					return;
 				}else{
-				count=page;
-				
-				$.each(data, function(index, item){
-					$("#item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:100%;'/>");  //
+					count=page;
+					$.each(data, function(index, item){
+						$("#item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:50%;' id='"+item.itemCode+"'/><br>"+item.itemName+"<br>"+item.itemPrice);  //
 				})
-				
 				}
 			},
 			error:function(err){
@@ -252,17 +251,43 @@ $(document).ready(function() {
 	    })
 	}
     
+    //이전버튼
     $(".backBtn").on("click",function(){
     		status = "back";
 			storeSelect(count-1)
 
     })
     
+    //다음버튼
     $(".nextBtn").on("click", function(){
     		status = "next";
 			storeSelect(count+1)
     })
     
+    
+    
+    //아이템구매
+    $(".itemBox").on("click", function() {
+		var itemCode = $(this).children().attr("id");
+		if(typeof(itemCode)=='undefined'){
+			return
+		}
+    	var quantity = prompt("수량을 입력해 주십시오.");
+		
+		$.ajax({
+	    	url: "itemStoreBuy" ,
+			type:"post",
+			dataType:"text",  
+			data:"quantity="+quantity+"&itemCode="+itemCode,
+			success:function(data){
+				alert(data);
+			},
+			error:function(err){
+				alert(err +"에러발생");
+			}
+	    })
+		
+	})
 });
 </script>
 </html>

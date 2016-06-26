@@ -41,7 +41,7 @@ public class ItemStoreController {
 	public int itemStoreBuy(HttpSession session, ItemDTO itemDTO, int quantity){
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		int result=itemStoreServiceImpl.itemStoreBuy(playerNickname, itemDTO, quantity);// 1=정상 / 2=인벤토리부족 / 3=루비부족
-		
+		System.out.println(result);
 		return result;
 	}
 	 /**

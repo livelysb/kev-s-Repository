@@ -23,17 +23,18 @@ public class UtilServiceImpl implements UtilService {
 	@Override
 	public int indexSearch(String playerNickname) {
 		ItemStoreDAO itemStoreDAO=sqlSession.getMapper(ItemStoreDAO.class);
-		int[] indexPoolList={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
 		List<Integer> list=itemStoreDAO.getItemIndex(playerNickname);
 		System.out.println(list);
 		for(int i=0;i<list.size();i++){
 			
-			if(list.get(i)!=indexPoolList[i]){
-				return indexPoolList[i];
+			System.out.println(list.get(i)+" / "+i+1);
+			if(list.get(i)!=i+1){
+				return i+1;
 			}
-			if(list.size()<21){
-				return list.size()+1;
-			}
+			
+		}
+		if(list.size()<21){
+			return list.size()+1;
 		}
 		return 0;
 	}

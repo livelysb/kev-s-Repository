@@ -28,20 +28,22 @@
 	</resultMap>
 	<select id="auctionSearchAll" parameterType="java.util.Map"
 		resultMap="itemMarketMapper">
-		select * from (select * from item_market where
+		select * from (select row_number() over(order by IM_PURCHASE_PRICE desc) rnum,
+im_sq, player_nickname, item_code, im_purchase_price, im_bid_time, Im_auction_end
+from item_market where
 		im_auction_end='T') m join item i on
 		m.item_code=i.item_code
-		where item_name like '%${keyword}%'
-		order by IM_PURCHASE_PRICE
+		where item_name like '%${keyword}%' and rnum between #{startNo} and #{endNo};
 	</select>
 	<select id="auctionSearch" parameterType="java.util.Map"
 		resultMap="itemMarketMapper">
-		select * from (select * from item_market where
+		select * from (select row_number() over(order by IM_PURCHASE_PRICE desc) rnum,
+im_sq, player_nickname, item_code, im_purchase_price, im_bid_time, Im_auction_end
+from item_market where
 		im_auction_end='T') m join item i on
 		m.item_code=i.item_code
 		where item_name like '%${keyword}%' and
-		item_class=#{itemClass}
-		order by IM_PURCHASE_PRICE
+		item_class=#{itemClass} and rnum between #{startNo} and #{endNo};
 	</select>
 	<select id="bringItemInfoByImSq" parameterType="String"
 		resultMap="itemMarketMapper">

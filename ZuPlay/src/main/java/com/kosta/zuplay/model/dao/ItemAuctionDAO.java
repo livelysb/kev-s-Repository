@@ -21,12 +21,12 @@ public interface ItemAuctionDAO {
 	/**
 	 * 경매장 등록 가격 가져오기
 	 */
-	int auctionHowPrice(String imSq);
+	int auctionHowPrice(int imSq);
 
 	/**
 	 * 경매장의 해당 아이템 정보 가져오기
 	 */
-	ItemDTO bringItemInfoByImSq(String imSq);
+	ItemMarketDTO bringItemInfoByImSq(int imSq);
 
 	/**
 	 * 아이템정보 player_item 테이블에 삽입
@@ -36,14 +36,14 @@ public interface ItemAuctionDAO {
 	/**
 	 * 경매 종료물품으로 변경
 	 */
-	int auctionBuyFinish(String imSq);
+	int auctionBuyFinish(int imSq);
 
 	// 구매끝
 	// 판매시작
 	/**
 	 * player_item 테이블에서 아이템 정보 가져오기
 	 */
-	ItemDTO bringItemInfoByPiSq(String piSq);
+	ItemDTO bringItemInfoByPiSq(int piSq);
 
 	/**
 	 * item_market 테이블에 레코드 삽입
@@ -53,18 +53,18 @@ public interface ItemAuctionDAO {
 	/**
 	 * player_item 테이블 레코드 삭제
 	 */
-	int auctionDeletePlayerItem(String piSq);
+	int auctionDeletePlayerItem(int piSq);
 	// 판매 끝
 	/**
 	 * 경매 취소 item_market 테이블 해당 레코드 IM_AUCTION_END 컬럼 수정 (T -> X)
 	 */
-	int auctionCancel(String imSq);
+	int auctionCancel(int imSq);
 
 	/**
 	 * 경매장 유찰품/골드 수령 시작
 	 * IM_AUCTION_END  진행중 여부 (T=진행중/F=종료/X=유찰) 가져오기
 	 */
-	String auctionBring(String imSq);
+	String auctionBring(int imSq);
 	/**
 	 * 내 경매 물품 가져오기
 	 */

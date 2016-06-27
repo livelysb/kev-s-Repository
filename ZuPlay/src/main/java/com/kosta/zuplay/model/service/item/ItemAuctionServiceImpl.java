@@ -58,7 +58,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 */
 	@Override
 	@Transactional
-	public int auctionBuy(String playerNickname, String imSq) {
+	public int auctionBuy(String playerNickname, int imSq) {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		Map<String, String> payRubyMap = new HashMap<String, String>();
@@ -70,14 +70,12 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 			System.out.println("[ LOG ] : " + playerNickname + " 님의 인벤토리 빈 인덱스 = " + piIndex);
 			if (piIndex != 0) {
 				payRubyMap.put("playerNickname", playerNickname);
-				payRubyMap.put("price", price + "");
-				itemStoreDAO.payRuby(payRubyMap);
+				payRubyMap.put("updateRuby", ruby-price + "");
 				int payRubyResult = itemStoreDAO.payRuby(payRubyMap);
 				if (payRubyResult != 0) {
-					ItemDTO itemDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
-					System.out.println("-=-----"+imSq);
+					ItemMarketDTO itemMarketDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
 					int insertResult = itemAuctionDAO.auctionInsertPlayerItem(
-							new PlayerItemDTO(0, playerNickname, null, null, piIndex, itemDTO));
+							new PlayerItemDTO(0, playerNickname, itemMarketDTO.getItemCode(), null, piIndex, itemMarketDTO.getItemDTO()));
 					if (insertResult != 0) {
 						itemAuctionDAO.auctionBuyFinish(imSq);
 					} else {
@@ -106,7 +104,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 */
 	@Override
 	@Transactional
-	public boolean auctionSell(String playerNickname, String piSq, int imPurchasePrice) {
+	public boolean auctionSell(String playerNickname, int piSq, int imPurchasePrice) {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		ItemDTO itemDTO = itemAuctionDAO.bringItemInfoByPiSq(piSq);
 		Map<String, String> map = new HashMap<String,String>();
@@ -129,7 +127,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 * 경매장 경매 취소
 	 */
 	@Override
-	public boolean auctionCancel(String imSq) {
+	public boolean auctionCancel(int imSq) {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		int result = itemAuctionDAO.auctionCancel(imSq);
 		if (result == 0) {
@@ -143,7 +141,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 */
 	@Override
 	@Transactional
-	public boolean auctionBring(String playerNickname, String imSq) {
+	public boolean auctionBring(String playerNickname, int imSq) {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		String imAuctionEnd = itemAuctionDAO.auctionBring(imSq);
@@ -154,10 +152,10 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 			map.put("price", -price + "");
 			itemStoreDAO.payRuby(map);
 		} else if (imAuctionEnd.equals("X")) {
-			ItemDTO itemDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
+			ItemMarketDTO itemMarketDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
 			int piIndex = utilServiceImpl.indexSearch(playerNickname);
 			if (piIndex != 0) {
-				itemAuctionDAO.auctionInsertPlayerItem(new PlayerItemDTO(0, playerNickname, null, null, piIndex, itemDTO));
+				itemAuctionDAO.auctionInsertPlayerItem(new PlayerItemDTO(0, playerNickname, null, null, piIndex, itemMarketDTO.getItemDTO()));
 			} else {
 				return false;
 			}

@@ -50,41 +50,41 @@
 		where item_name like '%${keyword}%' and
 		item_class=#{itemClass} and rnum between #{startNo} and #{endNo}
 	</select>
-	<select id="bringItemInfoByImSq" parameterType="String"
+	<select id="bringItemInfoByImSq" parameterType="int"
 		resultMap="itemMarketMapper">
 		select * from item_market m join item i on
 		m.item_code=i.item_code
-		where im_sq=#{imSq}
+		where im_sq=#{value}
 	</select>
 	<insert id="auctionInsertPlayerItem" parameterType="playerItemDTO">
 		insert into
 		player_item values
 		(pi_sq.nextval,#{playerNickname},#{itemCode},'F',#{piIndex})
 	</insert>
-	<update id="auctionBuyFinish" parameterType="String">
+	<update id="auctionBuyFinish" parameterType="int">
 		update item_market
-		set (IM_AUCTION_END='F') where im_sq=#{imSq}
+		set IM_AUCTION_END='F' where im_sq=#{value}
 	</update>
-	<select id="bringItemInfoByPiSq" parameterType="String"
+	<select id="bringItemInfoByPiSq" parameterType="int"
 		resultMap="itemMapper">
 		select * from player_item p join item i on p.item_code=i.item_code where
-		pi_sq=#{piSq}
+		pi_sq=#{value}
 	</select>
 	<insert id="auctionInsertItemMarket" parameterType="java.util.Map">
 		insert into
 		item_market values
 		(im_sq.nextval,#{playerNickname},#{itemCode},#{imPurchasePrice},sysdate),'T')
 	</insert>
-	<delete id="auctionDeletePlayerItem" parameterType="String">
+	<delete id="auctionDeletePlayerItem" parameterType="int">
 		delete
-		player_item where pi_sq=#{piSq}
+		player_item where pi_sq=#{value}
 	</delete>
-	<update id="auctionCancel" parameterType="String">
+	<update id="auctionCancel" parameterType="int">
 		update item_market set
-		(im_auction_end='X') where im_sq=#{imSq}
+		(im_auction_end='X') where im_sq=#{value}
 	</update>
-	<select id="auctionBring" parameterType="String" resultType="String">
-		select IM_AUCTION_END from item_market where im_sq=#{imSq}
+	<select id="auctionBring" parameterType="int" resultType="String">
+		select IM_AUCTION_END from item_market where im_sq=#{value}
 	</select>
 	<select id="auctionMyPage" parameterType="String" resultMap="itemMarketMapper">
 		select * from (select * from item_market where
@@ -102,7 +102,7 @@
 		update item_market set
 		im_auction_end='X' where im_auction_end='T' and im_sq=${value}
 	</update>
-	<select id="auctionHowPrice" parameterType="String" resultType="int">
+	<select id="auctionHowPrice" parameterType="int" resultType="int">
 		select im_purchase_price from item_market where im_sq=#{value}
 	</select>
 </mapper>

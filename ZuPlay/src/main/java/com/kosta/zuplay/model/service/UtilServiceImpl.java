@@ -44,7 +44,7 @@ public class UtilServiceImpl implements UtilService {
 		 String currentDate = "";
 		 currentDate = Integer.toString(oCalendar.get(Calendar.YEAR));
 		 currentDate += (oCalendar.get(Calendar.MONTH) + 1)>9 ? ""+Integer.toString(oCalendar.get(Calendar.MONTH) + 1) : '0'+Integer.toString(oCalendar.get(Calendar.MONTH) + 1);
-		 currentDate += Integer.toString(oCalendar.get(Calendar.DAY_OF_MONTH));
+		 currentDate += '0'+Integer.toString(oCalendar.get(Calendar.DAY_OF_MONTH));
 		 return currentDate;
 		}
 

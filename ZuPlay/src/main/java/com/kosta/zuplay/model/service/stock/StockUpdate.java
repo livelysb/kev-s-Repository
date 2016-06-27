@@ -1,6 +1,7 @@
 package com.kosta.zuplay.model.service.stock;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -25,9 +26,10 @@ public class StockUpdate {
 
 	@Autowired
 	private StockInfo stockInfo;
+
 	/**
 	 * 실시간으로 주식정보를 업데이트 시킨다.
-	 * */
+	 */
 	public void updateStockPrice() {
 		List<ListsDTO> list = stockInfo.getLists();
 		for (ListsDTO listsDTO : list) {
@@ -53,26 +55,30 @@ public class StockUpdate {
 	public PriceDTO getPriceFromAPI(String isuSrtCd) {
 		URL url = null;
 		PriceDTO price = null;
+		BufferedReader br = null;
 		try {
 			url = new URL("https://testbed.koscom.co.kr:443/gateway/v1/market/stocks/price?isuSrtCd=" + isuSrtCd
 					+ "&apikey=fa8835c0-1c9c-4268-a5f0-e11448cfb3b2");
 			URLConnection conn = url.openConnection();
-			try(BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))){
+			br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 			Gson gson = new Gson();
 			price = gson.fromJson(br, PriceDTO.class);
-			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-		
+			try {
+				br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return price;
 	}
 
-	
 	/**
 	 * DB로부터 PRICE 받아와 REALTIME_PRICE에 삽입한다.
-	 * */
+	 */
 	public void insertRealtimePrice() {
 		List<PriceDTO> priceList = stockInfo.getPrices();
 		for (PriceDTO priceDTO : priceList) {
@@ -104,11 +110,11 @@ public class StockUpdate {
 				url = new URL("https://testbed.koscom.co.kr/gateway/v1/market/stocks/master?isuSrtCd="
 						+ listsDTO.getIsuSrtCd() + "&apikey=fa8835c0-1c9c-4268-a5f0-e11448cfb3b2");
 				URLConnection conn = url.openConnection();
-				try(BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))){
-				Gson gson = new Gson();
-				MasterDTO masterDTO = gson.fromJson(br, MasterDTO.class);			
-				StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-				stockUpdateDAO.mergeMaster(masterDTO);
+				try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
+					Gson gson = new Gson();
+					MasterDTO masterDTO = gson.fromJson(br, MasterDTO.class);
+					StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
+					stockUpdateDAO.mergeMaster(masterDTO);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -116,7 +122,7 @@ public class StockUpdate {
 		}
 		System.out.println("Master info is updated");
 	}
-	
+
 	@Transactional
 	public void resetRealtimePrice() {
 		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);

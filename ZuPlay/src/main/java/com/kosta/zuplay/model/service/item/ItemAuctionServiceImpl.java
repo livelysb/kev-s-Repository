@@ -174,7 +174,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	}
 
 	@Override
-	@Scheduled(cron = "00 00 00 * * *")
+	@Scheduled(cron = "00 00 12 * * *")
 	@Transactional
 	public void itemAuctionUpdate() {
 		System.out.println("아이템 경매장 목록 업데이트 시작");

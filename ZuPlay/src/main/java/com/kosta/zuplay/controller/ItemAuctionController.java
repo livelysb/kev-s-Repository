@@ -18,7 +18,14 @@ public class ItemAuctionController {
 	@Autowired
 	private ItemAuctionService itemAuctionServiceImpl;
 	
-	@RequestMapping("auctionSearch")
+	/**
+	 * 경매장 검색
+	 * @param keyword
+	 * @param itemClass
+	 * @param page
+	 * @return
+	 */
+	@RequestMapping(value="auctionSearch",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String auctionSearch(String keyword,String itemClass, int page){
 		List<ItemMarketDTO> list = itemAuctionServiceImpl.auctionSearch(keyword, itemClass, page);
@@ -28,7 +35,13 @@ public class ItemAuctionController {
 		return json;
 	}
 	
-	@RequestMapping("auctionBuy")
+	/**
+	 * 경매장 구매
+	 * @param session
+	 * @param imSq
+	 * @return
+	 */
+	@RequestMapping(value="auctionBuy",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public int auctionBuy(HttpSession session,String imSq){
 		String playerNickname=(String) session.getAttribute("playerNickname");
@@ -36,23 +49,53 @@ public class ItemAuctionController {
 		return result;
 	}
 	
-	@RequestMapping("auctionSell")
+	/**
+	 * 경매장 물품 등록
+	 * @param session
+	 * @param piSq
+	 * @param imPurchasePrice
+	 * @return
+	 */
+	@RequestMapping(value="auctionSell",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public boolean auctionSell(HttpSession session,String piSq,int imPurchasePrice){
 		String playerNickname=(String) session.getAttribute("playerNickname");
 		return itemAuctionServiceImpl.auctionSell(playerNickname, piSq, imPurchasePrice);
 	}
 	
-	@RequestMapping("auctionCancel")
+	/**
+	 * 경매장 물품 취소
+	 * @param imSq
+	 * @return
+	 */
+	@RequestMapping(value="auctionCancel",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public boolean auctionCancel(String imSq){
 		return itemAuctionServiceImpl.auctionCancel(imSq);
 	}
 	
-	@RequestMapping("auctionBring")
+	/**
+	 * 유찰/골드 수령
+	 */
+	@RequestMapping(value="auctionBring",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public boolean auctionBring(HttpSession session,String imSq){
 		String playerNickname=(String)session.getAttribute("playerNickname");
 		return itemAuctionServiceImpl.auctionBring(playerNickname, imSq);
+	}
+	
+	/**
+	 * 내판매목록
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="auctionMyPage",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String auctionMyPage(HttpSession session){
+		String playerNickname=(String)session.getAttribute("playerNickname");
+		List<ItemMarketDTO> list = itemAuctionServiceImpl.auctionMyPage(playerNickname);
+		Gson gson = new Gson();
+		String json = gson.toJson(list);
+		return json;
 	}
 }

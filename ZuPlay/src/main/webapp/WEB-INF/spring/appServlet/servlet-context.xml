@@ -43,9 +43,9 @@
 
 	<context:component-scan base-package="com.kosta.zuplay" />
 
-	<task:scheduler id="taskScheduler" />
-	<task:executor id="taskExecutor" pool-size="10" />
+	<task:scheduler id="taskScheduler" pool-size="10"/>
+	<task:executor id="taskExecutor" pool-size="10"  />
 	<task:annotation-driven executor="taskExecutor"
-		scheduler="taskScheduler" />
+		scheduler="taskScheduler"/>
 
 </beans:beans>

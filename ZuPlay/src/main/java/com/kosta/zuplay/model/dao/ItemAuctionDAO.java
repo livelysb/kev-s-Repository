@@ -65,4 +65,13 @@ public interface ItemAuctionDAO {
 	 * 내 경매 물품 가져오기
 	 */
 	List<ItemMarketDTO> auctionMyPage(String playerNickname);
+	
+	/**
+	 * 아이템 등록일자 가져오기
+	 */
+	List<ItemMarketDTO> auctionSelectBidTime();
+	/**
+	 * 아이템 목록 업데이트(종료물품 삭제)
+	 */
+	int auctionUpdate(int imSq);
 }

@@ -6,4 +6,5 @@ import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 
 public interface UtilService {
 	int indexSearch(String playerNickname);
+	String currentDate();
 }

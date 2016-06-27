@@ -71,4 +71,10 @@
 		m.item_code=i.item_code
 		where player_nickname=#{playerNickname}
 	</select>
+	<select id="auctionSelectBidTime" resultType="itemMarketMapper">
+		select im_Sq,to_char(im_bid_time+8, 'yyyymmdd') im_bid_time from item_market
+	</select>
+	<update id="auctionUpdate" parameterType="int">
+		update item_market set (im_auction_end='X') where im_auction_end='T' and im_sq=#{imSq}
+	</update>
 </mapper>

@@ -26,10 +26,18 @@
 		<result column="ITEM_IMG" property="itemImg" />
 
 	</resultMap>
+	<select id="auctionSearchAll" parameterType="java.util.Map"
+		resultMap="itemMarketMapper">
+		select * from (select * from item_market where
+		im_auction_end='T') m join item i on
+		m.item_code=i.item_code
+		where item_name like '%${keyword}%'
+		order by IM_PURCHASE_PRICE
+	</select>
 	<select id="auctionSearch" parameterType="java.util.Map"
 		resultMap="itemMarketMapper">
 		select * from (select * from item_market where
-		im_auction_end='T' order by im_bid_time) m join item i on
+		im_auction_end='T') m join item i on
 		m.item_code=i.item_code
 		where item_name like '%${keyword}%' and
 		item_class=#{itemClass}

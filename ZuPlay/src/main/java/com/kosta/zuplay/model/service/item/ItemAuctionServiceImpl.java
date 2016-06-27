@@ -38,13 +38,17 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	@Override
 	public List<ItemMarketDTO> auctionSearch(String keyword, String itemClass, int page) {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
+		List<ItemMarketDTO> list=null;
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("keyword", keyword);
 		map.put("itemClass", itemClass);
 		map.put("startNo", 1 + ((page - 1) * 10) + "");
 		map.put("endNo", page * 10 + "");
-		List<ItemMarketDTO> list =itemAuctionDAO.auctionSearch(map);
-		System.out.println(list);
+		if(itemClass.equals("all")){
+			list = itemAuctionDAO.auctionSearchAll(map);
+		}else{
+			list =itemAuctionDAO.auctionSearch(map);
+		}
 		return list;
 	}
 

@@ -75,6 +75,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 				int payRubyResult = itemStoreDAO.payRuby(payRubyMap);
 				if (payRubyResult != 0) {
 					ItemDTO itemDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
+					System.out.println("-=-----"+imSq);
 					int insertResult = itemAuctionDAO.auctionInsertPlayerItem(
 							new PlayerItemDTO(0, playerNickname, null, null, piIndex, itemDTO));
 					if (insertResult != 0) {

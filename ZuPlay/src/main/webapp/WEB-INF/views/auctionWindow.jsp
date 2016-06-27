@@ -16,7 +16,7 @@
 <style type="text/css">
 	/* #tabBtn {text-align: right} */
 	#searchBar {float: right}
-	.itemImg {width:100%; height:100%;}
+	.itemImg {width:100%;}
 </style>
 </head>
 
@@ -174,9 +174,9 @@
         
         
         //구매
-        $(document).on("click",'input[value=취소]', function() {
-        	alert("ㅇㅇㅇ");
-			/* $.ajax({
+        $(document).on("click",'input[value=구매]', function() {
+        	alert($(this).attr("id"));
+			$.ajax({
 				url:"auctionBuy",
 				type:"post",
 				dataType:"text",
@@ -192,13 +192,10 @@
 				error:function(err){
 					alert(err+"에러발생")
 				}
-			}) */
+			})
 		})
 		
-		$(document).on("click",'input[value=구매]', function() {
-        	alert("구매");
-			
-		})
+		
 		
 		
 		
@@ -242,6 +239,7 @@
 			search(count+1)
 		})
 		
+		//페이지에따른 검색
 		function search(page){
         	$.ajax({
         		url:"auctionSearch",

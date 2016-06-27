@@ -43,7 +43,9 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 		map.put("itemClass", itemClass);
 		map.put("startNo", 1 + ((page - 1) * 10) + "");
 		map.put("endNo", page * 10 + "");
-		return itemAuctionDAO.auctionSearch(map);
+		List<ItemMarketDTO> list =itemAuctionDAO.auctionSearch(map);
+		System.out.println(list);
+		return list;
 	}
 
 	/**

@@ -102,6 +102,7 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
                 <a href="#" class="list-group-item text-center" id="mouse">Mouse</a>
                 <a href="#" class="list-group-item text-center" id="earring">Earring </a>
                 <a href="#" class="list-group-item text-center" id="acc">Acc</a>
+                <a href="#" class="list-group-item text-center" id="etc">Etc</a>
               </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
@@ -175,8 +176,18 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 					<div class="itemBox" id="itemacc5"></div>
 					<div class="itemBox" id="itemacc6"></div>
 					<div class="itemBox" id="itemacc7"></div>
-         
                 </div>
+                <div class="bhoechie-tab-content">
+					<div class="itemBox" id="itemetc0"></div>
+					<div class="itemBox" id="itemetc1"></div>
+					<div class="itemBox" id="itemetc2"></div>
+					<div class="itemBox" id="itemetc3"></div>
+					<div class="itemBox" id="itemetc4"> </div>
+					<div class="itemBox" id="itemetc5"></div>
+					<div class="itemBox" id="itemetc6"></div>
+					<div class="itemBox" id="itemetc7"></div>
+                </div>
+                
     				 <button type="button" id="backAllBtn" class="backBtn">이전</button>
                 	<button type="button" id="nextAlltBtn" class="nextBtn">다음</button> 
             </div>
@@ -196,8 +207,9 @@ $(document).ready(function() {
 	var count=1;
 	var tabs="";
     var status = "next";
-	var tabAry = [ 'all', 'hair', 'clothes','eyes','mouse','earring','acc' ];
 	storeSelect(count)
+	
+	
 	//탭들을 클릭 했을 때 일어나는 이벤트
     $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
     	count=1;
@@ -258,6 +270,8 @@ $(document).ready(function() {
 
     })
     
+    
+    
     //다음버튼
     $(".nextBtn").on("click", function(){
     		status = "next";
@@ -286,7 +300,6 @@ $(document).ready(function() {
 				alert(err +"에러발생");
 			}
 	    })
-		
 	})
 });
 </script>

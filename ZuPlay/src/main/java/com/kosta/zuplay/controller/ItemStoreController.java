@@ -21,7 +21,7 @@ public class ItemStoreController {
 	/**
 	 * 상점아이템 리스트 가져오기
 	 */
-	 @RequestMapping(value="itemStoreSelect" ,produces="text/plain;charset=UTF-8" )
+	 @RequestMapping(value="itemStoreSelect" ,produces="application/json;charset=UTF-8" )
 	 @ResponseBody
 	public String itemStoreSelect(HttpSession session, String itemClass, int page) {
 		 System.out.println(itemClass);
@@ -36,18 +36,17 @@ public class ItemStoreController {
 	/**
 	 * 상점 아이템 구매하기
 	 */
-	 @RequestMapping(value="itemStoreBuy" ,produces="text/plain;charset=UTF-8" )
+	 @RequestMapping(value="itemStoreBuy" ,produces="application/json;charset=UTF-8" )
 	@ResponseBody
 	public int itemStoreBuy(HttpSession session, ItemDTO itemDTO, int quantity){
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		int result=itemStoreServiceImpl.itemStoreBuy(playerNickname, itemDTO, quantity);// 1=정상 / 2=인벤토리부족 / 3=루비부족
-		System.out.println(result);
 		return result;
 	}
 	 /**
 	  * 상점 아이템 판매하기
 	  */
-	 @RequestMapping(value="itemStoreSell" ,produces="text/plain;charset=UTF-8" )
+	 @RequestMapping(value="itemStoreSell" ,produces="application/json;charset=UTF-8" )
 		@ResponseBody
 		public boolean itemStoreSell(HttpSession session,int piSq,String itemCode){
 			String playerNickname = (String) session.getAttribute("playerNickname");

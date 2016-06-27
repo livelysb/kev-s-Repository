@@ -60,7 +60,7 @@
 									<th>구매</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="buyTBody">
 								<tr>
 									<td><img src="resources/img/avatar/body/clothes-05.png"></td>
 									<td>박스</td>
@@ -96,7 +96,7 @@
 									<th>취소</th>
 								</tr>
 							</thead>
-							<tbody id="auctionTBody">
+							<tbody id="sellTBody">
 								<tr>
 									<td><img src=""></td>
 									<td>한복</td>
@@ -136,14 +136,50 @@
         $('a[data-toggle="tab"]').on('hidden.bs.tab', function(e){
         });
         
+        /* <tr>
+		<td><img src="resources/img/avatar/body/clothes-05.png"></td>
+			<td>박스</td>
+			<td>150000</td>
+			<td>2015.05.05<br>20:00:00
+			</td>
+			<td>민수짱장님</td>
+			<td><button type="button" class="btn btn-primary btn-sm">구매</button></td>
+		</tr>
+         */
         
-        function stockAuction(){
+
+        //검색
+        function auctioSsearch(){
+        	$.ajax({
+        		url:"",
+        		type:"post",
+        		dataType:"json",
+        		success:function(data){
+        			$("#buyTBody").empty();
+        			str="";
+        			$.each(data, function(index,item){
+        				str+= "<tr><td><img src='resources/img/avatar/body/clothes-05.png'></td>";
+        				
+        			})
+        			
+        			$("#buyTBody").html(str);
+        		},
+        		error:function(){
+        			
+        		}
+        		
+        	})
+        }
+        
+        
+        //판매목록
+        function sellList(){
 	        $.ajax({
 	        	url: "stockAction" ,
 				type:"post",
-				dataType:"text",  
+				dataType:"json",  
 				success:function(result){
-					$("#auctionTBody").empty;
+					$("#sellTBody").empty;
 					$.each(data, function(index, item){
 						
 						

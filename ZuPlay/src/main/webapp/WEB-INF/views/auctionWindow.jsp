@@ -195,12 +195,8 @@
 			})
 		})
 		
-		
-		
-		
-		
 		//판매취소
-		$(".btnCancel").on("click",function(){
+		$(document).on("click",'input[value=취소]', function() {
 			$.ajax({
 				url:"auctionCancel",
 				type:"post",
@@ -214,7 +210,6 @@
 				}
 			})
 		})
-		
 		
         //검색
         $("#auctionSearch").on("keyup",function(){

@@ -16,7 +16,7 @@
 <style type="text/css">
 	/* #tabBtn {text-align: right} */
 	#searchBar {float: right}
-	.itemImg {width:100%; heigh:100%}
+	.itemImg {width:100%; height:100%;}
 </style>
 </head>
 
@@ -96,7 +96,7 @@
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr class="bg-primary">
-									<th>아이템</th>
+									<th width="10%">아이템</th>
 									<th>아이템 이름 <span class="caret"></span></th>
 									<th>판매가 <span class="caret"></span></th>
 									<th>남은시간 <span class="caret"></span></th>
@@ -158,11 +158,11 @@
 					$("#sellTBody").empty;
 					var str="";
 					$.each(data, function(index, item){
-						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"' class='itemImg'></td>";
+						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"' class='itemImg' ></td>";
 						str+="<td>"+item.itemDTO.itemName+"</td>";
 						str+="<td>"+item.imPurchasePrice+"</td>";
 						str+="<td>"+item.imBidTime+"</td>";
-						str+="<td><button type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnCancel'>취소</button></td></tr>"
+						str+="<td><input type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnCancel' value='취소'></td></tr>"
 					})
 					$("#sellTBody").html(str);
 				} ,
@@ -172,9 +172,11 @@
 	        })
         })
         
+        
         //구매
-        $(".btnBuy").on("click", function() {
-			$.ajax({
+        $(document).on("click",'input[value=취소]', function() {
+        	alert("ㅇㅇㅇ");
+			/* $.ajax({
 				url:"auctionBuy",
 				type:"post",
 				dataType:"text",
@@ -190,8 +192,15 @@
 				error:function(err){
 					alert(err+"에러발생")
 				}
-			})
+			}) */
 		})
+		
+		$(document).on("click",'input[value=구매]', function() {
+        	alert("구매");
+			
+		})
+		
+		
 		
 		//판매취소
 		$(".btnCancel").on("click",function(){
@@ -252,7 +261,7 @@
         				str+="<td>"+item.imPurchasePrice+"</td>";
         				str+="<td>"+item.imBidTime+"</td>";
         				str+="<td>"+item.playerNickname+"</td>";
-        				str+="<td><button type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnBuy'>등록</button></td>"
+        				str+="<td><input type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnBuy' value='구매'></td>"
         			})
         			$("#buyTBody").html(str);
         		},

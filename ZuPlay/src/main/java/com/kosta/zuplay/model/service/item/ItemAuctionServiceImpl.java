@@ -121,9 +121,9 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 * 경매장 경매 취소
 	 */
 	@Override
-	public boolean auctionCancle(String imSq) {
+	public boolean auctionCancel(String imSq) {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
-		int result = itemAuctionDAO.auctionCancle(imSq);
+		int result = itemAuctionDAO.auctionCancel(imSq);
 		if (result == 0) {
 			return false;
 		}

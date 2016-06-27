@@ -28,7 +28,7 @@ public interface ItemAuctionService {
 	/**
 	 * 경매장 경매 취소
 	 */
-	boolean auctionCancle(String imSq);
+	boolean auctionCancel(String imSq);
 	
 	/**
 	 * 경매장 유찰품/골드 수령									

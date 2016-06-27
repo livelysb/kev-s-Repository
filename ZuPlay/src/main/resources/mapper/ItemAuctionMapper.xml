@@ -58,7 +58,7 @@
 	<delete id="auctionDeletePlayerItem" parameterType="String">
 		delete player_item where pi_sq=#{piSq}
 	</delete>
-	<update id="auctionCancle" parameterType="String">
+	<update id="auctionCancel" parameterType="String">
 		update item_market set (im_auction_end='X') where im_sq=#{imSq}
 	</update>
 	<select id="auctionBring" parameterType="String" resultType="String">

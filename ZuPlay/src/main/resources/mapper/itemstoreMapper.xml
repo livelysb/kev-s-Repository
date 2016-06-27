@@ -12,10 +12,10 @@
 	</resultMap>
 	<select id="itemStoreSelectAll" parameterType="java.util.Map" resultMap="itemMapper">
 		select * from (select
-		rownum,item_code,item_name,item_price,item_class,item_grade,item_img,item_gender
+		row_number() over(order by item_class desc) rnum,item_code,item_name,item_price,item_class,item_grade,item_img,item_gender
 		from item
 		where upper(item_gender)!=#{playerGender} and item_grade='common') where
-		rownum between #{startNo} and #{endNo}
+		rnum between #{startNo} and #{endNo}
 	</select>
 	<select id="itemStoreSelect" parameterType="java.util.Map" resultMap="itemMapper">
 		select * from (select

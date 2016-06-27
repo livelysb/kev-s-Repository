@@ -84,6 +84,7 @@ public class ItemAuctionController {
 	@RequestMapping(value="auctionBring",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public boolean auctionBring(HttpSession session,int imSq){
+		System.out.println("imSq : " + imSq);
 		String playerNickname=(String)session.getAttribute("playerNickname");
 		return itemAuctionServiceImpl.auctionBring(playerNickname, imSq);
 	}

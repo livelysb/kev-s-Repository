@@ -87,8 +87,7 @@
 		select IM_AUCTION_END from item_market where im_sq=#{value}
 	</select>
 	<select id="auctionMyPage" parameterType="String" resultMap="itemMarketMapper">
-		select * from (select * from item_market where
-		im_auction_end='T' order
+		select * from (select * from item_market order
 		by im_bid_time) m join item i on
 		m.item_code=i.item_code
 		where

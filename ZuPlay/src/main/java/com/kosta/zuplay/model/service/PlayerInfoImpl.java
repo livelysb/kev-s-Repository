@@ -19,6 +19,9 @@ public class PlayerInfoImpl implements PlayerInfo {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	/**
+	 * 플레이어 정보 가져오기
+	 * */
 	@Override
 	public PlayerDTO getPlayer(String playerNickname) {
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
@@ -27,6 +30,9 @@ public class PlayerInfoImpl implements PlayerInfo {
 		return playerDTO;
 	}
 
+	/**
+	 * 모픈 플레이어의 닉네임 가져오기
+	 * */
 	@Override
 	public List<String> getAllPlayerNickName() {
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);

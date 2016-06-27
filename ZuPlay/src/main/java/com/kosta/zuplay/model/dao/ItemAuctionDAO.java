@@ -9,6 +9,10 @@ import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 
 public interface ItemAuctionDAO {
 	/**
+	 * 아이템 검색(모든클래스)
+	 */
+	List<ItemMarketDTO> auctionSearchAll(Map<String, String> map);
+	/**
 	 * 아이템 검색
 	 */
 	List<ItemMarketDTO> auctionSearch(Map<String, String> map);

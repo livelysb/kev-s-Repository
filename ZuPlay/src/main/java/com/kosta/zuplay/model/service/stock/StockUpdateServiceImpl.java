@@ -51,7 +51,7 @@ public class StockUpdateServiceImpl implements StockUpdateService {
 	 * 수행사항
 	 * 1. 현재 체결가를 조회하여 DAILY_PRICE 테이블에 저장한다.
 	 * */
-	@Scheduled(cron="0 0 15 * * *") //매일 세시반에 작동
+	@Scheduled(cron="0 0 16 * * *") //매일 세시반에 작동
 	@Override
 	public void actionAtFour() {
 		System.out.println("300");

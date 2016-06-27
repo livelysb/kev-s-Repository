@@ -28,6 +28,10 @@ public class ItemAuctionController {
 	@RequestMapping(value="auctionSearch",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String auctionSearch(String keyword,String itemClass, int page){
+		System.out.println(keyword);
+		System.out.println(itemClass);
+		System.out.println(page);
+		
 		List<ItemMarketDTO> list = itemAuctionServiceImpl.auctionSearch(keyword, itemClass, page);
 		Gson gson=new Gson();
 		String json =gson.toJson(list);

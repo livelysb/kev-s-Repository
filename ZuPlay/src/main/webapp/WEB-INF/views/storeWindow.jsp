@@ -209,7 +209,6 @@ $(document).ready(function() {
     var status = "next";
 	storeSelect(count)
 	
-	
 	//탭들을 클릭 했을 때 일어나는 이벤트
     $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
     	count=1;
@@ -302,7 +301,6 @@ $(document).ready(function() {
 					case 2 : alert("인벤토리가 부족합니다."); break;
 					case 3 : alert("루비가 부족합니다."); break;
 				}
-				
 			},
 			error:function(err){
 				alert(err +"에러발생");

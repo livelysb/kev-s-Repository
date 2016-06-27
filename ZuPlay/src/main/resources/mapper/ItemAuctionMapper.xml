@@ -31,7 +31,7 @@
 		select * from (select * from item_market where
 		im_auction_end='T' order by im_bid_time) m join item i on
 		m.item_code=i.item_code
-		where item_name like '% ${keyword} %' and
+		where item_name like '%${keyword}%' and
 		item_class=#{itemClass}
 		order by IM_PURCHASE_PRICE
 	</select>

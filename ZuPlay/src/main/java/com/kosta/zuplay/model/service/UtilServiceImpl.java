@@ -25,9 +25,14 @@ public class UtilServiceImpl implements UtilService {
 		ItemStoreDAO itemStoreDAO=sqlSession.getMapper(ItemStoreDAO.class);
 		int[] indexPoolList={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
 		List<Integer> list=itemStoreDAO.getItemIndex(playerNickname);
+		System.out.println(list);
 		for(int i=0;i<list.size();i++){
-			if(list.get(i)==indexPoolList[i]){
-				return list.get(i);
+			
+			if(list.get(i)!=indexPoolList[i]){
+				return indexPoolList[i];
+			}
+			if(list.size()<21){
+				return list.size()+1;
 			}
 		}
 		return 0;

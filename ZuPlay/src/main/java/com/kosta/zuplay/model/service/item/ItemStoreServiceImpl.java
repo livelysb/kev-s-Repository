@@ -66,11 +66,12 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 			System.out.println("[ LOG ] : " + playerNickname + " 님의 인벤토리 빈 인덱스 = " + piIndex);
 			if (piIndex != 0) {
 				payRubyMap.put("playerNickname", playerNickname);
-				payRubyMap.put("price", price + "");
+				payRubyMap.put("updateRuby", ruby-price + "");
+				System.out.println();
 				int payRubyResult = itemStoreDAO.payRuby(payRubyMap);
 				System.out.println(payRubyResult + " 개 행 수정(1개 = 정상실행)");
 				itemBuyMap.put("playerNickname", playerNickname);
-				itemBuyMap.put("price", price + "");
+				itemBuyMap.put("itemCode", itemDTO.getItemCode());
 				itemBuyMap.put("piIndex", piIndex + "");
 				int itembuyResult = itemStoreDAO.itemStoreBuy(itemBuyMap);
 				System.out.println(itembuyResult + " 개 행 수정(1개 = 정상실행)");

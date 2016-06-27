@@ -105,19 +105,26 @@ public class StockUpdate {
 	public void updateMaster() {
 		List<ListsDTO> lists = stockInfo.getLists();
 		URL url = null;
+		BufferedReader br = null;
 		for (ListsDTO listsDTO : lists) {
 			try {
 				url = new URL("https://testbed.koscom.co.kr/gateway/v1/market/stocks/master?isuSrtCd="
 						+ listsDTO.getIsuSrtCd() + "&apikey=fa8835c0-1c9c-4268-a5f0-e11448cfb3b2");
 				URLConnection conn = url.openConnection();
-				try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
-					Gson gson = new Gson();
-					MasterDTO masterDTO = gson.fromJson(br, MasterDTO.class);
-					StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-					stockUpdateDAO.mergeMaster(masterDTO);
-				}
+				br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+				Gson gson = new Gson();
+				MasterDTO masterDTO = gson.fromJson(br, MasterDTO.class);
+				StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
+				stockUpdateDAO.mergeMaster(masterDTO);
+
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		System.out.println("Master info is updated");

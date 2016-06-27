@@ -39,7 +39,7 @@ public class StockUpdateServiceImpl implements StockUpdateService {
 	 * 2. 어제의 실시간 체결가를 초기화한다.
 	 * 2. 장을 오픈한다. ( 거래 활성화 )
 	 * */
-	@Scheduled(cron="0 0 9 * * *") //매일 아홉시반에 작동
+	@Scheduled(cron="0 0 9 * * *") //매일 아홉시에 작동
 	@Override
 	public void actionAtNine() {
 		System.out.println("900");
@@ -51,7 +51,7 @@ public class StockUpdateServiceImpl implements StockUpdateService {
 	 * 수행사항
 	 * 1. 현재 체결가를 조회하여 DAILY_PRICE 테이블에 저장한다.
 	 * */
-	@Scheduled(cron="0 0 16 * * *") //매일 세시반에 작동
+	@Scheduled(cron="0 0 15 * * *") //매일 세시에 작동
 	@Override
 	public void actionAtFour() {
 		System.out.println("300");

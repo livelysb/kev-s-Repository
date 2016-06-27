@@ -36,6 +36,7 @@
 					  <option value="etc">Etc</option>
 					</select>
 					<input type="text" class="form-control" placeholder="Search" id="auctionSearch">
+					<input type="hidden" id="auctionHidden">
 				</div>
 			</div>
 
@@ -157,7 +158,7 @@
 					$("#sellTBody").empty;
 					var str="";
 					$.each(data, function(index, item){
-						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"'><td>";
+						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"'></td>";
 						str+="<td>"+item.itemDTO.itemName+"</td>";
 						str+="<td>"+item.imPurchasePrice+"</td>";
 						str+="<td>"+item.imBidTime+"</td>";
@@ -214,10 +215,10 @@
         	count=1;
         	
         	if(event.keyCode == 13) {
+        		$("#auctionHidden").val($(this).val())
         		search(count); 
         		$("#auctionSearch").val("");
         	}
-        	
         })
 	    
         //이전버튼
@@ -231,8 +232,6 @@
 		$("#nextBtn").on("click",function(){
 			search(count+1)
 		})
-		
-		 search(count);
 		
 		function search(page){
         	$.ajax({

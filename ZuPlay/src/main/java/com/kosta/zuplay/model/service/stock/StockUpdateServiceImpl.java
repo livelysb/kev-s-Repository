@@ -39,8 +39,7 @@ public class StockUpdateServiceImpl implements StockUpdateService {
 	 * 수행사항
 	 * 1. 마스터정보를 업데이트한다.
 	 * 2. 어제의 실시간 체결가를 초기화한다.
-	 * 3. 장을 오픈한다. ( 거래 활성화 )
-	 * 4. 모든 플레이어의 전일 가격을 저장시킨다.
+	 * 3. 모든 플레이어의 일일 수익률을 삽입시키고, 전일 가격을 업데이트시킨다
 	 * */
 	@Scheduled(cron="0 0 9 * * *") //매일 아홉시에 작동
 	@Override

@@ -283,18 +283,26 @@ $(document).ready(function() {
     //아이템구매
     $(".itemBox").on("click", function() {
 		var itemCode = $(this).children().attr("id");
-		if(typeof(itemCode)=='undefined'){
-			return
-		}
-    	var quantity = prompt("수량을 입력해 주십시오.");
+	
+		if(typeof(itemCode)=='undefined') return
+		
+    	var buyCheck = confirm("구매하시겠습니까?");
+    	
+    	if(buyCheck==false) return
 		
 		$.ajax({
 	    	url: "itemStoreBuy" ,
 			type:"post",
 			dataType:"text",  
-			data:"quantity="+quantity+"&itemCode="+itemCode,
-			success:function(data){
-				alert(data);
+			data:"quantity=1&itemCode="+itemCode,
+			success:function(result){
+
+				switch(result){
+					case 1 : alert("구매되었습니다."); break;
+					case 2 : alert("인벤토리가 부족합니다."); break;
+					case 3 : alert("루비가 부족합니다."); break;
+				}
+				
 			},
 			error:function(err){
 				alert(err +"에러발생");

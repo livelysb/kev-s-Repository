@@ -20,7 +20,11 @@
 
 
 	<select id="getPlayer" parameterType="String" resultMap="player">
-		
+		select * from player where player_nickname = #{value}
+	</select>
+	
+	<select id="getAllPlayerNickName" resultType="String">
+		select player_nickname from player
 	</select>
 
 </mapper>

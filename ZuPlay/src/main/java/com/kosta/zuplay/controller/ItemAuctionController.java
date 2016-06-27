@@ -47,7 +47,7 @@ public class ItemAuctionController {
 	 */
 	@RequestMapping(value="auctionBuy",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public int auctionBuy(HttpSession session,String imSq){
+	public int auctionBuy(HttpSession session,int imSq){
 		String playerNickname=(String) session.getAttribute("playerNickname");
 		int result = itemAuctionServiceImpl.auctionBuy(playerNickname, imSq);
 		return result;
@@ -62,7 +62,7 @@ public class ItemAuctionController {
 	 */
 	@RequestMapping(value="auctionSell",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public boolean auctionSell(HttpSession session,String piSq,int imPurchasePrice){
+	public boolean auctionSell(HttpSession session,int piSq,int imPurchasePrice){
 		String playerNickname=(String) session.getAttribute("playerNickname");
 		return itemAuctionServiceImpl.auctionSell(playerNickname, piSq, imPurchasePrice);
 	}
@@ -74,7 +74,7 @@ public class ItemAuctionController {
 	 */
 	@RequestMapping(value="auctionCancel",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public boolean auctionCancel(String imSq){
+	public boolean auctionCancel(int imSq){
 		return itemAuctionServiceImpl.auctionCancel(imSq);
 	}
 	
@@ -83,7 +83,7 @@ public class ItemAuctionController {
 	 */
 	@RequestMapping(value="auctionBring",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public boolean auctionBring(HttpSession session,String imSq){
+	public boolean auctionBring(HttpSession session,int imSq){
 		String playerNickname=(String)session.getAttribute("playerNickname");
 		return itemAuctionServiceImpl.auctionBring(playerNickname, imSq);
 	}

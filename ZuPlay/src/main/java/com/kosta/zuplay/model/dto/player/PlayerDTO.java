@@ -10,6 +10,7 @@ public class PlayerDTO {
 	private String playerAge;		//연령대
 	private int playerLike;			//캐릭터 좋아요 갯수
 	private int playerMoney;		//게임머니
+	private int playerPreMoney;		//전일 게임머니
 	private int playerRuby;			//루비(캐쉬)
 	private String playerGrade;		//계급
 	private int playerDailyRank;	//일간랭킹
@@ -17,6 +18,15 @@ public class PlayerDTO {
 	private int playerSeasonRank;	//시즌랭킹
 	private int playerTotalRank;	//종합랭킹
 	
+	private double earningRate; //수익률
+	
+	
+	public double getEarningRate() {
+		return earningRate;
+	}
+	public void setEarningRate(double earningRate) {
+		this.earningRate = earningRate;
+	}
 	public PlayerDTO() {}
 	public PlayerDTO(String playerNickname, String playerNaverId, String playerGender, String playerAge, int playerLike,
 			int playerMoney, int playerRuby, String playerGrade, int playerDailyRank, int playerWeeklyRank,
@@ -70,6 +80,12 @@ public class PlayerDTO {
 	}
 	public void setPlayerMoney(int playerMoney) {
 		this.playerMoney = playerMoney;
+	}
+	public int getPlayerPreMoney() {
+		return playerPreMoney;
+	}
+	public void setPlayerPreMoney(int playerPreMoney) {
+		this.playerPreMoney = playerPreMoney;
 	}
 	public int getPlayerRuby() {
 		return playerRuby;

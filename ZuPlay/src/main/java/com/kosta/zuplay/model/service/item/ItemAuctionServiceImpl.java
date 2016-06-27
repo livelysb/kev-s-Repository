@@ -169,13 +169,15 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 
 	@Override
 	@Scheduled(cron = "00 00 00 * * *")
+	@Transactional
 	public void itemAuctionUpdate() {
+		System.out.println("아이템 경매장 목록 업데이트 시작");
 		ItemAuctionDAO itemAuctionDAO=sqlSession.getMapper(ItemAuctionDAO.class);
 		List<ItemMarketDTO> list = itemAuctionDAO.auctionSelectBidTime();
 		String sysdate=utilServiceImpl.currentDate();
 		for(int i=0;i<list.size();i++){
-			System.out.println(list.get(i));
 			if(sysdate.equals(list.get(i).getImBidTime())){
+				System.out.println(list.get(i).getImSq());
 				int result = itemAuctionDAO.auctionUpdate(list.get(i).getImSq());
 				System.out.println(result);
 

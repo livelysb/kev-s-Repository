@@ -16,7 +16,7 @@
 <style type="text/css">
 	/* #tabBtn {text-align: right} */
 	#searchBar {float: right}
-	img {width:100%; heigh:100%}
+	.itemImg {width:100%; heigh:100%}
 </style>
 </head>
 
@@ -158,7 +158,7 @@
 					$("#sellTBody").empty;
 					var str="";
 					$.each(data, function(index, item){
-						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"'></td>";
+						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"' class='itemImg'></td>";
 						str+="<td>"+item.itemDTO.itemName+"</td>";
 						str+="<td>"+item.imPurchasePrice+"</td>";
 						str+="<td>"+item.imBidTime+"</td>";
@@ -247,7 +247,7 @@
         			$("#buyTBody").empty();
         			var str="";
         			$.each(data, function(index,item){
-        				str+="<tr><td><img src='"+item.itemDTO.itemImg+"'></td>";
+        				str+="<tr><td><img src='"+item.itemDTO.itemImg+"' class='itemImg'></td>";
         				str+="<td>"+item.itemDTO.itemName+"</td>";
         				str+="<td>"+item.imPurchasePrice+"</td>";
         				str+="<td>"+item.imBidTime+"</td>";

@@ -65,6 +65,7 @@ public class StockUpdate {
 			price = gson.fromJson(br, PriceDTO.class);
 
 		} catch (Exception e) {
+			System.out.println(e+"\n=>-------------------------------");
 			e.printStackTrace();
 		} finally {
 			try {

@@ -34,7 +34,7 @@
 		select pi_index from player_item where player_nickname=#{playerNickname} order by pi_index
 	</select>
 	<update id="payRuby" parameterType="java.util.Map">
-		update player set (player_ruby=player_ruby-#{price}) where player_nickname=#{playerNickname}
+		update player set player_ruby=#{updateRuby} where player_nickname=#{playerNickname}
 	</update>
 	<insert id="itemStoreBuy" parameterType="java.util.Map">
 		insert into player_item values(pi_sq.nextval,#{playerNickname},#{itemCode},'F',#{piIndex})

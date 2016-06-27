@@ -147,15 +147,19 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 		String imAuctionEnd = itemAuctionDAO.auctionBring(imSq);
 		if (imAuctionEnd.equals("F")) {
 			Map<String, String> map = new HashMap<String, String>();
+			int ruby=itemStoreDAO.getRuby(playerNickname);
 			int price = itemAuctionDAO.auctionHowPrice(imSq);
 			map.put("playerNickname", playerNickname);
-			map.put("price", -price + "");
-			itemStoreDAO.payRuby(map);
+			map.put("updateRuby", ruby+price + "");
+			int result=itemStoreDAO.payRuby(map);
+			if(result ==0){
+				return false;
+			}
 		} else if (imAuctionEnd.equals("X")) {
 			ItemMarketDTO itemMarketDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
 			int piIndex = utilServiceImpl.indexSearch(playerNickname);
 			if (piIndex != 0) {
-				itemAuctionDAO.auctionInsertPlayerItem(new PlayerItemDTO(0, playerNickname, null, null, piIndex, itemMarketDTO.getItemDTO()));
+				itemAuctionDAO.auctionInsertPlayerItem(new PlayerItemDTO(0, playerNickname, itemMarketDTO.getItemCode(), null, piIndex, itemMarketDTO.getItemDTO()));
 			} else {
 				return false;
 			}

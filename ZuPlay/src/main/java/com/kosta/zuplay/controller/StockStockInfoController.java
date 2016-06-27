@@ -18,7 +18,7 @@ public class StockStockInfoController {
 	private StockInfo stockInfo;
 	
 	@ResponseBody
-	@RequestMapping(value="realTimeStock" ,produces="text/plain;charset=UTF-8" )
+	@RequestMapping(value="realTimeStock" ,produces="application/json;charset=UTF-8" )
 	public String getStockList(String page) {
 		List<MasterDTO>masterList = stockInfo.getStockList(Integer.parseInt(page));
 		Gson gson = new Gson();

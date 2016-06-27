@@ -22,11 +22,6 @@
 
 <body>
 	<div>
-		<!-- <div id="tabBtn">
-			<button type="button" id="buyTabBtn" class="btn btn-default">구매</button>
-			<button type="button" id="sellTabBtn" class="btn btn-default">판매</button>
-			<button type="button" id="listTabBtn" class="btn btn-default">판매목록</button>
-		</div> -->
 		<div>
 			<div>
 				<div id="search">
@@ -38,16 +33,16 @@
 		<div class="container">
 			<ul id="myTab" class="nav nav-tabs " role="tablist">
 				<li role="presentation" class="active "><a data-target="#home"
-					id="home-tab" role="tab" data-toggle="tab" aria-controls="home" 
+					id="buyTab" role="tab" data-toggle="tab" aria-controls="home" 
 					aria-expanded="true">구매</a></li>
 				<li role="presentation" class=""><a data-target="#profile"
-					role="tab" id="profile-tab" data-toggle="tab"
+					role="tab" id="sellTab" data-toggle="tab"
 					aria-controls="profile" aria-expanded="false">판매목록</a></li>
 				<li role="presentation" class="dropdown"></li>
 			</ul>
 			<div id="myTabContent" class="tab-content">
 				<div role="tabpanel" class="tab-pane fade active in" id="home"
-					aria-labelledby="home-tab">
+					aria-labelledby="buyTab">
 					<div>
 						<table class="table table-bordered table-hover">
 							<thead>
@@ -68,7 +63,7 @@
 									<td>2015.05.05<br>20:00:00
 									</td>
 									<td>민수짱장님</td>
-									<td><button type="button" class="btn btn-primary btn-sm">구매</button></td>
+									<td><button type="button" class="btn btn-primary btn-sm btn-buy btnBuy" >구매</button></td>
 								</tr>
 								<tr>
 									<td><img src="resources/img/avatar/body/clothes-10.png"></td>
@@ -77,14 +72,14 @@
 									<td>2015.05.05<br>20:00:00
 									</td>
 									<td>석범짱장님</td>
-									<td><button type="button" class="btn btn-primary btn-sm">구매</button></td>
+									<td><button type="button" class="btn btn-primary btn-sm btnBuy">구매</button></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane fade" id="profile"
-					aria-labelledby="profile-tab">
+					aria-labelledby="sellTab">
 						<div>
 						<table class="table table-bordered table-hover">
 							<thead>
@@ -103,7 +98,7 @@
 									<td>150000</td>
 									<td>2015.05.05<br>20:00:00
 									</td>
-									<td><button type="button" class="btn btn-primary btn-sm" >취소</button></td>
+									<td><button type="button" class="btn btn-primary btn-sm btnCancel" >취소</button></td>
 								</tr>
 								<tr>
 									<td><img src=""></td>
@@ -111,7 +106,7 @@
 									<td>250000</td>
 									<td>2015.05.05<br>20:00:00
 									</td>
-									<td><button type="button" class="btn btn-primary btn-sm">취소</button></td>
+									<td><button type="button" class="btn btn-primary btn-sm btnCancel">취소</button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -136,61 +131,96 @@
         $('a[data-toggle="tab"]').on('hidden.bs.tab', function(e){
         });
         
-        /* <tr>
-		<td><img src="resources/img/avatar/body/clothes-05.png"></td>
-			<td>박스</td>
-			<td>150000</td>
-			<td>2015.05.05<br>20:00:00
-			</td>
-			<td>민수짱장님</td>
-			<td><button type="button" class="btn btn-primary btn-sm">구매</button></td>
-		</tr>
-         */
-        
-
+        //auctioSsearch()
+		
         //검색
         function auctioSsearch(){
         	$.ajax({
-        		url:"",
+        		url:"auctionSearch",
         		type:"post",
         		dataType:"json",
         		success:function(data){
         			$("#buyTBody").empty();
         			str="";
         			$.each(data, function(index,item){
-        				str+= "<tr><td><img src='resources/img/avatar/body/clothes-05.png'></td>";
-        				
+        				str+="<tr><td><img src='"+item.itemDTO.itemImg+"'></td>";
+        				str+="<td>"+item.itemDTO.itemName+"</td>";
+        				str+="<td>"+item.imPurchasePrice+"</td>";
+        				str+="<td>"+item.imBidTime+"</td>";
+        				str+="<td>"+item.playerNickname+"</td>";
+        				str+="<td><button type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnBuy'>등록</button></td>"
         			})
-        			
         			$("#buyTBody").html(str);
         		},
-        		error:function(){
-        			
+        		error:function(err){
+        			alert(err+"에러발생");
         		}
         		
         	})
         }
         
-        
         //판매목록
-        function sellList(){
-	        $.ajax({
-	        	url: "stockAction" ,
+        $("#sellTab").on("click",function(){
+        	$.ajax({
+	        	url: "" ,
 				type:"post",
 				dataType:"json",  
 				success:function(result){
 					$("#sellTBody").empty;
+					str=="";
 					$.each(data, function(index, item){
-						
-						
-					}
-
+						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"'><td>";
+						str+="<td>"+item.itemDTO.itemName+"</td>";
+						str+="<td>"+item.imPurchasePrice+"</td>";
+						str+="<td>"+item.imBidTime+"</td>";
+						str+="<td><button type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnCancel'>취소</button></td>"
+					})
 				} ,
 				error:function(err){
 					alert(err +"에러발생");
 				}
 	        })
-        }
+        })
+        
+        //구매
+        $(".btnBuy").on("click", function() {
+			$.ajax({
+				url:"auctionBuy",
+				type:"post",
+				dataType:"text",
+				data:"imSq="+$(this).attr("id"),
+				success:function(result){
+					switch(result){
+					case 1 : alert("구매되었습니다."); break;
+					case 2 : alert("인벤토리가 부족합니다."); break;
+					case 3 : alert("루비가 부족합니다."); break;
+					case 4 : alert("이미 판매 된 물품입니다.");break;
+				}
+				},
+				error:function(err){
+					alert(err+"에러발생")
+				}
+			})
+		})
+		
+		//판매취소
+		$(".btnCancel").on("click",function(){
+			$.ajax({
+				url:"auctionCancel",
+				type:"post",
+				dataType:"text",
+				data:"imSq="+$(this).attr("id"),
+				success:function(result){
+					alert("결과 : " + result)
+				},
+				error:function(err){
+					alert(err+"에러발생")
+				}
+			})
+		})
+	        
+	        
+	        
     });
 	
 </script> 

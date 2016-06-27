@@ -15,7 +15,7 @@
 		</association>
 	</resultMap>
 	
-	<resultMap type="playerListDTO" id="playerList">
+	<resultMap type="playerListsDTO" id="playerLists">
 		<id column="PL_SQ" property="plSq"/>
 		<result column="isuCd" property="isuCd"/>
 		<result column="PLAYER_NICKNAME" property="playerNickname"/>
@@ -204,11 +204,11 @@ krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, 
 		(#{isuCd},#{cmpprevddTpCd},#{cmpprevddPrc},#{trdPrc},#{trdvol},#{opnprc},#{hgprc},#{lwprc},#{trdTm},#{mktStatTpCd})
 	</update>
 	
-	<select id="getPlayerStocks" parameterType="String" resultMap="playerList">
+	<select id="getPlayerStocks" parameterType="String" resultMap="playerLists">
 		select * from player_lists where player_nickname = #{value}
 	</select>
 	
-	<select id="getPlayerStock" parameterType="java.util.Map" resultMap="playerList">
+	<select id="getPlayerStock" parameterType="java.util.Map" resultMap="playerLists">
 		select * from player_lists where player_nickname = #{playerNickname} and isuCd = #{isuCd}
 	</select>
 	<update id="setPlayerStock" parameterType="java.util.Map">

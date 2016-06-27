@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.zuplay.model.dao.PlayerInfoDAO">
+
+	<resultMap type="playerDTO" id="player">
+		<id column="PLAYER_NICKNAME" property="playerNickname" />
+		<result column="PLAYER_NAVER_ID" property="playerNaverId" />
+		<result column="PLAYER_GENDER" property="playerGender" />
+		<result column="PLAYER_AGE" property="playerAge" />
+		<result column="PLAYER_LIKE" property="playerLike" />
+		<result column="PLAYER_MONEY" property="playerMoney" />
+		<result column="PLAYER_RUBY" property="playerRuby" />
+		<result column="PLAYER_GRADE" property="playerGrade" />
+		<result column="PLAYER_DAILY_RANK" property="playerDailyRank" />
+		<result column="PLAYER_WEEKLY_RANK" property="playerWeeklyRank" />
+		<result column="PLAYER_SEASON_RANK" property="playerSeasonRank" />
+		<result column="PLAYER_TOTAL_RANK" property="playerTotalRank" />
+	</resultMap>
+
+
+	<select id="getPlayer" parameterType="String" resultMap="player">
+		
+	</select>
+
+</mapper>

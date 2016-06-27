@@ -28,22 +28,27 @@
 	</resultMap>
 	<select id="auctionSearchAll" parameterType="java.util.Map"
 		resultMap="itemMarketMapper">
-		select * from (select row_number() over(order by IM_PURCHASE_PRICE desc) rnum,
-im_sq, player_nickname, item_code, im_purchase_price, im_bid_time, Im_auction_end
-from item_market where
+		select * from (select row_number() over(order by
+		IM_PURCHASE_PRICE desc) rnum,
+		im_sq, player_nickname, item_code, im_purchase_price, im_bid_time,
+		Im_auction_end
+		from item_market where
 		im_auction_end='T') m join item i on
 		m.item_code=i.item_code
-		where item_name like '%${keyword}%' and rnum between #{startNo} and #{endNo};
+		where item_name like '%${keyword}%' and rnum
+		between #{startNo} and #{endNo}
 	</select>
 	<select id="auctionSearch" parameterType="java.util.Map"
 		resultMap="itemMarketMapper">
-		select * from (select row_number() over(order by IM_PURCHASE_PRICE desc) rnum,
-im_sq, player_nickname, item_code, im_purchase_price, im_bid_time, Im_auction_end
-from item_market where
+		select * from (select row_number() over(order by
+		IM_PURCHASE_PRICE desc) rnum,
+		im_sq, player_nickname, item_code, im_purchase_price, im_bid_time,
+		Im_auction_end
+		from item_market where
 		im_auction_end='T') m join item i on
 		m.item_code=i.item_code
 		where item_name like '%${keyword}%' and
-		item_class=#{itemClass} and rnum between #{startNo} and #{endNo};
+		item_class=#{itemClass} and rnum between #{startNo} and #{endNo}
 	</select>
 	<select id="bringItemInfoByImSq" parameterType="String"
 		resultMap="itemMarketMapper">
@@ -60,31 +65,44 @@ from item_market where
 		update item_market
 		set (IM_AUCTION_END='F') where im_sq=#{imSq}
 	</update>
-	<select id="bringItemInfoByPiSq" parameterType="String" resultMap="itemMapper">
-			select * from player_item p join item i on p.item_code=i.item_code where pi_sq=#{piSq}
+	<select id="bringItemInfoByPiSq" parameterType="String"
+		resultMap="itemMapper">
+		select * from player_item p join item i on p.item_code=i.item_code where
+		pi_sq=#{piSq}
 	</select>
 	<insert id="auctionInsertItemMarket" parameterType="java.util.Map">
-		insert into item_market values (im_sq.nextval,#{playerNickname},#{itemCode},#{imPurchasePrice},sysdate),'T')
+		insert into
+		item_market values
+		(im_sq.nextval,#{playerNickname},#{itemCode},#{imPurchasePrice},sysdate),'T')
 	</insert>
 	<delete id="auctionDeletePlayerItem" parameterType="String">
-		delete player_item where pi_sq=#{piSq}
+		delete
+		player_item where pi_sq=#{piSq}
 	</delete>
 	<update id="auctionCancel" parameterType="String">
-		update item_market set (im_auction_end='X') where im_sq=#{imSq}
+		update item_market set
+		(im_auction_end='X') where im_sq=#{imSq}
 	</update>
 	<select id="auctionBring" parameterType="String" resultType="String">
 		select IM_AUCTION_END from item_market where im_sq=#{imSq}
 	</select>
 	<select id="auctionMyPage" parameterType="String" resultMap="itemMarketMapper">
 		select * from (select * from item_market where
-		im_auction_end='T' order by im_bid_time) m join item i on
+		im_auction_end='T' order
+		by im_bid_time) m join item i on
 		m.item_code=i.item_code
-		where player_nickname=#{playerNickname}
+		where
+		player_nickname=#{playerNickname}
 	</select>
 	<select id="auctionSelectBidTime" resultMap="itemMarketMapper">
-		select im_Sq,to_char(im_bid_time+8, 'yyyymmdd') im_bid_time from item_market
+		select
+		im_Sq,to_char(im_bid_time+8, 'yyyymmdd') im_bid_time from item_market
 	</select>
 	<update id="auctionUpdate" parameterType="Integer">
-		update item_market set im_auction_end='X' where im_auction_end='T' and im_sq=${value}
+		update item_market set
+		im_auction_end='X' where im_auction_end='T' and im_sq=${value}
 	</update>
+	<select id="auctionHowPrice" parameterType="String" resultType="int">
+		select im_purchase_price from item_market where im_sq=#{value}
+	</select>
 </mapper>

@@ -64,11 +64,23 @@ public interface StockUpdateDAO {
 	/**
 	 * 플레이어가 가진 한 주식의 수량만을 가져오기
 	 * */
-	public PlayerListsDTO getPlayerStock(String playerNickname, String isuCd);
+	public PlayerListsDTO getPlayerStock(Map<String, String> map);
 	
 	/**
-	 * 플레이어의 일일 수익률 계산해서 insert 하기
+	 * 플레이어가 가진 한 주식의 수량을 수정하기
 	 * */
-	public double getEarningRate(String playerNickname);
+	public int setPlayerStock(Map<String, String> map);
+	
+	/**
+	 * 플레이어의 사이버머니 수정하기
+	 * */
+	public int setPlayerMoney(Map<String, String> map);
+	
+	/**
+	 * 주식 거래 히스토리
+	 * */
+	public int WriteStockHistory(Map<String, String> map);
+	
+	
 
 }

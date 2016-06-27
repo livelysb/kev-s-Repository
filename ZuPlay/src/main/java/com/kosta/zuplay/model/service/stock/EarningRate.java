@@ -3,6 +3,11 @@ package com.kosta.zuplay.model.service.stock;
 public interface EarningRate {
 
 	/**
+	 * 모든 플레이어들의 수익률 갱신 및 전일자산 업데이트
+	 * */
+	public int updateEarningRate();
+	
+	/**
 	 * 금액을 통한 해당시즌 수익률 구하기
 	 * */
 	public double calEarningRate(String playerNickname);

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.StockUpdateDAO;
 import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
+import com.kosta.zuplay.model.dto.stock.StockDealHistoryDTO;
+import com.kosta.zuplay.model.service.PlayerInfo;
 
 @Service
 public class PlayerStockInfoImpl implements PlayerStockInfo {
@@ -17,6 +19,14 @@ public class PlayerStockInfoImpl implements PlayerStockInfo {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@Autowired
+	private PlayerInfo playerInfo;
+	
+	@Autowired
+	private PlayerStockInfo playerStockInfo;
+	
+	@Autowired
+	private StockInfo stockInfo;
 	/**
 	 * 플레이어가 가지는 주식정보 보여주기
 	 * */
@@ -83,5 +93,30 @@ public class PlayerStockInfoImpl implements PlayerStockInfo {
 			return true;
 		return false;
 	}
+	
+	/**
+	 * 플레이어의 구매/판매 기록 가져오기
+	 * */
+	@Override
+	public List<StockDealHistoryDTO> getStockHistory(String playerNickname) {
+		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
+		return stockUpdateDAO.getStockHistory(playerNickname);
+	}
+
+	
+	/**
+	 * 주식을 포함한 현재 자산 구하기
+	 * */
+	@Override
+	public int getTotalMoney(String playerNickname) {
+		int currentMoney = playerInfo.getPlayer(playerNickname).getPlayerMoney();
+		List<PlayerListsDTO> playerLists =  playerStockInfo.getPlayerStocks(playerNickname);
+		for(PlayerListsDTO playerListsDTO : playerLists) {
+			currentMoney += stockInfo.getPrice(playerListsDTO.getIsuCd()).getTrdPrc() * playerListsDTO.getPlQuantity();
+		}
+		return currentMoney;
+	}
+
+	
 
 }

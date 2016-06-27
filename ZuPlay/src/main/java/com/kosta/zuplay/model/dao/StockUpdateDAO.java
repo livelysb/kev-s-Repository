@@ -7,6 +7,7 @@ import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
 import com.kosta.zuplay.model.dto.stock.ListsDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
 import com.kosta.zuplay.model.dto.stock.PriceDTO;
+import com.kosta.zuplay.model.dto.stock.StockDealHistoryDTO;
 
 public interface StockUpdateDAO {
 	
@@ -82,5 +83,19 @@ public interface StockUpdateDAO {
 	public int WriteStockHistory(Map<String, String> map);
 	
 	
+	/**
+	 * 플레이어의 구매/판매 기록 가져오기
+	 * */
+	public List<StockDealHistoryDTO> getStockHistory(String playerNickname);
 
+	
+	/**
+	 * 전일 총 자산 업데이트 시키기
+	 * */
+	public int updatePreMoney(Map<String, String> map);
+	
+	/**
+	 * 전일 수익률 삽입
+	 * */
+	public int insertEarningRate(Map<String, String> map);
 }

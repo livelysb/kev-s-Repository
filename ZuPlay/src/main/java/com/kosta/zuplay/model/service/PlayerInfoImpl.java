@@ -8,17 +8,23 @@ import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.PlayerInfoDAO;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
+import com.kosta.zuplay.model.service.stock.EarningRate;
 
 @Service
 public class PlayerInfoImpl implements PlayerInfo {
 
+	@Autowired
+	private EarningRate earningRate;
+	
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Override
 	public PlayerDTO getPlayer(String playerNickname) {
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
-		return playerInfoDAO.getPlayer(playerNickname);
+		PlayerDTO playerDTO = playerInfoDAO.getPlayer(playerNickname);
+		playerDTO.setEarningRate(earningRate.calEarningRate(playerNickname)); //전체 수익률
+		return playerDTO;
 	}
 
 	@Override

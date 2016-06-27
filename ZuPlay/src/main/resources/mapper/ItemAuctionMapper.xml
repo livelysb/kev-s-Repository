@@ -81,7 +81,7 @@
 	</delete>
 	<update id="auctionCancel" parameterType="int">
 		update item_market set
-		(im_auction_end='X') where im_sq=#{value}
+		im_auction_end='X' where im_sq=#{value}
 	</update>
 	<select id="auctionBring" parameterType="int" resultType="String">
 		select IM_AUCTION_END from item_market where im_sq=#{value}

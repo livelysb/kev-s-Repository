@@ -39,4 +39,8 @@ public interface ItemAuctionService {
 	 * 내 경매 물품 가져오기
 	 */
 	List<ItemMarketDTO> auctionMyPage(String playerNickname);
+	/**
+	 * 경매종료 물품 종료 
+	 */
+	public void itemAuctionUpdate();
 }

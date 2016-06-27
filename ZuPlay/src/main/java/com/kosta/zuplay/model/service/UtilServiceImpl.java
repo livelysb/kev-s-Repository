@@ -1,6 +1,6 @@
 package com.kosta.zuplay.model.service;
 
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.ItemStoreDAO;
-import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 
 @Service
 public class UtilServiceImpl implements UtilService {
@@ -38,5 +37,15 @@ public class UtilServiceImpl implements UtilService {
 		}
 		return 0;
 	}
+	
+	public String currentDate() {
+		 Calendar oCalendar = Calendar.getInstance( );
+		 // 현재 날짜/시간 등의 각종 정보 얻기
+		 String currentDate = "";
+		 currentDate = Integer.toString(oCalendar.get(Calendar.YEAR));
+		 currentDate += (oCalendar.get(Calendar.MONTH) + 1)>9 ? ""+Integer.toString(oCalendar.get(Calendar.MONTH) + 1) : '0'+Integer.toString(oCalendar.get(Calendar.MONTH) + 1);
+		 currentDate += Integer.toString(oCalendar.get(Calendar.DAY_OF_MONTH));
+		 return currentDate;
+		}
 
 }

@@ -43,7 +43,6 @@
 
 	<context:component-scan base-package="com.kosta.zuplay" />
 
-	<context:component-scan base-package="com.tistory.devyongsik"></context:component-scan>
 	<task:scheduler id="taskScheduler" />
 	<task:executor id="taskExecutor" pool-size="10" />
 	<task:annotation-driven executor="taskExecutor"

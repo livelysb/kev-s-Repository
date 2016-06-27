@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -164,6 +165,22 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	public List<ItemMarketDTO> auctionMyPage(String playerNickname) {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		return itemAuctionDAO.auctionMyPage(playerNickname);
+	}
+
+	@Override
+	@Scheduled(cron = "00 00 00 * * *")
+	public void itemAuctionUpdate() {
+		ItemAuctionDAO itemAuctionDAO=sqlSession.getMapper(ItemAuctionDAO.class);
+		List<ItemMarketDTO> list = itemAuctionDAO.auctionSelectBidTime();
+		String sysdate=utilServiceImpl.currentDate();
+		for(int i=0;i<list.size();i++){
+			System.out.println(list.get(i));
+			if(sysdate.equals(list.get(i).getImBidTime())){
+				int result = itemAuctionDAO.auctionUpdate(list.get(i).getImSq());
+				System.out.println(result);
+
+			}
+		}
 	}
 
 }

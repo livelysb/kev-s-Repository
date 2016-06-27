@@ -66,24 +66,6 @@
 								</tr>
 							</thead>
 							<tbody id="buyTBody">
-								<!-- <tr>
-									<td><img src="resources/img/avatar/body/clothes-05.png"></td>
-									<td>박스</td>
-									<td>150000</td>
-									<td>2015.05.05<br>20:00:00
-									</td>
-									<td>민수짱장님</td>
-									<td><button type="button" class="btn btn-primary btn-sm btn-buy btnBuy" >구매</button></td>
-								</tr>
-								<tr>
-									<td><img src="resources/img/avatar/body/clothes-10.png"></td>
-									<td>양복</td>
-									<td>250000</td>
-									<td>2015.05.05<br>20:00:00
-									</td>
-									<td>석범짱장님</td>
-									<td><button type="button" class="btn btn-primary btn-sm btnBuy">구매</button></td>
-								</tr> -->
 							</tbody>
 						</table>
 						<button type="button" class="btn btn-primary" id="backBtn" >이전</button>
@@ -104,22 +86,6 @@
 								</tr>
 							</thead>
 							<tbody id="sellTBody">
-								<!-- <tr>
-									<td><img src=""></td>
-									<td>한복</td>
-									<td>150000</td>
-									<td>2015.05.05<br>20:00:00
-									</td>
-									<td><button type="button" class="btn btn-primary btn-sm btnCancel" >취소</button></td>
-								</tr>
-								<tr>
-									<td><img src=""></td>
-									<td>양복</td>
-									<td>250000</td>
-									<td>2015.05.05<br>20:00:00
-									</td>
-									<td><button type="button" class="btn btn-primary btn-sm btnCancel">취소</button></td>
-								</tr> -->
 							</tbody>
 						</table>
 					</div>
@@ -142,14 +108,23 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+        //페이지 변수
+        var count=1;
+		
+		//탭 토글
         $('a[data-toggle="tab"]').on('hidden.bs.tab', function(e){
         });
         
-        var count=1;
-		
+		//구매탭
+		$("#buyTab").on("click",function(){
+			$("#auctionSearch").show();
+        	$("#auctionSelect").show();
+		})
         
-        //판매목록
+        //판매탭
         $("#sellTab").on("click",function(){
+        	$("#auctionSearch").hide();
+        	$("#auctionSelect").hide();
         	$.ajax({
 	        	url: "auctionMyPage" ,
 				type:"post",
@@ -171,6 +146,7 @@
 				}
 	        })
         })
+        
         
         
         //구매
@@ -224,18 +200,23 @@
 	    
         //이전버튼
 		$("#backBtn").on("click",function(){
+			if($("#buyTBody").children().length<=0) return
 			if(count>1){
 				search(count-1);
+			}else{
+				alert("첫 페이지 입니다.")
 			}
 		})
 		
 		//다음버튼
 		$("#nextBtn").on("click",function(){
+			if($("#buyTBody").children().length<=0) return
 			search(count+1)
 		})
-		
+		 
 		//페이지에따른 검색
 		function search(page){
+        	
         	$.ajax({
         		url:"auctionSearch",
         		type:"post",
@@ -243,6 +224,7 @@
         		data:"keyword=" + $("#auctionSearch").val()+"&itemClass="+$("#auctionSelect").val()+"&page="+page,
         		success:function(data){
         			if(data.length==0){
+        				alert("마지막 페이지입니다.");
         				return;
         			} 
         			count=page;

@@ -54,7 +54,7 @@ public interface ItemAuctionDAO {
 	/**
 	 * 경매 취소 item_market 테이블 해당 레코드 IM_AUCTION_END 컬럼 수정 (T -> X)
 	 */
-	int auctionCancle(String imSq);
+	int auctionCancel(String imSq);
 
 	/**
 	 * 경매장 유찰품/골드 수령 시작

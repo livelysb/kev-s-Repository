@@ -90,12 +90,12 @@
 						</table>
 					</div>
 				</div>
-
+				<button type="button" id="auctionRegister" class="btn btn-primary">등록하기</button>
 			</div>
 		</div>
-			
 		
 	</div>
+	
 </body>
 
 <script src="resources/js/jquery-2.2.4.min.js"></script>
@@ -110,6 +110,8 @@
 	$(document).ready(function() {
         //페이지 변수
         var count=1;
+		var sellBtn="";
+		var colorBtn="";
 		
 		//탭 토글
         $('a[data-toggle="tab"]').on('hidden.bs.tab', function(e){
@@ -125,33 +127,16 @@
         $("#sellTab").on("click",function(){
         	$("#auctionSearch").hide();
         	$("#auctionSelect").hide();
-        	$.ajax({
-	        	url: "auctionMyPage" ,
-				type:"post",
-				dataType:"json",  
-				success:function(data){
-					$("#sellTBody").empty;
-					var str="";
-					$.each(data, function(index, item){
-						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"' class='itemImg' ></td>";
-						str+="<td>"+item.itemDTO.itemName+"</td>";
-						str+="<td>"+item.imPurchasePrice+"</td>";
-						str+="<td>"+item.imBidTime+"</td>";
-						str+="<td><input type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnCancel' value='취소'></td></tr>"
-					})
-					$("#sellTBody").html(str);
-				} ,
-				error:function(err){
-					alert(err +"에러발생");
-				}
-	        })
+        	sellList();
         })
         
+        //경매장 아이템등록
+        $("#auctionRegister").on("click",function(){
+        	
+        })
         
-        
-        //구매
+        //아이템구매
         $(document).on("click",'input[value=구매]', function() {
-        	alert($(this).attr("id"));
 			$.ajax({
 				url:"auctionBuy",
 				type:"post",
@@ -159,11 +144,14 @@
 				data:"imSq="+$(this).attr("id"),
 				success:function(result){
 					switch(result){
-					case 1 : alert("구매되었습니다."); break;
-					case 2 : alert("인벤토리가 부족합니다."); break;
-					case 3 : alert("루비가 부족합니다."); break;
-					case 4 : alert("이미 판매 된 물품입니다.");break;
+					case "1" : alert("구매되었습니다."); break;
+					case "2" : alert("인벤토리가 부족합니다."); break;
+					case "3" : alert("루비가 부족합니다."); break;
+					case "4" : alert("이미 판매 된 물품입니다.");break;	
 					}
+					alert(count)
+					search(count)
+					
 				},
 				error:function(err){
 					alert(err+"에러발생")
@@ -179,7 +167,30 @@
 				dataType:"text",
 				data:"imSq="+$(this).attr("id"),
 				success:function(result){
-					alert("결과 : " + result)
+					alert("취소되었습니다.");
+					///판매탭 새로고침하기!!!
+					sellList();
+				},
+				error:function(err){
+					alert(err+"에러발생")
+				}
+			})
+		})
+		
+		//수령, 유찰
+		$(document).on("click",'input[value=수령],input[value=유찰]', function() {
+			$.ajax({
+				url:"auctionBring",
+				type:"post",
+				dataType:"text",
+				data:"imSq="+$(this).attr("id"),
+				success:function(result){
+					if($(this).val()=="수령"){
+						alert("판매금을 수령하셨습니다.")
+					}else{
+						alert("유찰 된 아이템을 수령하셨습니다.")
+					}
+					sellList();
 				},
 				error:function(err){
 					alert(err+"에러발생")
@@ -203,8 +214,6 @@
 			if($("#buyTBody").children().length<=0) return
 			if(count>1){
 				search(count-1);
-			}else{
-				alert("첫 페이지 입니다.")
 			}
 		})
 		
@@ -224,19 +233,20 @@
         		data:"keyword=" + $("#auctionSearch").val()+"&itemClass="+$("#auctionSelect").val()+"&page="+page,
         		success:function(data){
         			if(data.length==0){
-        				alert("마지막 페이지입니다.");
         				return;
         			} 
         			count=page;
         			$("#buyTBody").empty();
         			var str="";
         			$.each(data, function(index,item){
-        				str+="<tr><td><img src='"+item.itemDTO.itemImg+"' class='itemImg'></td>";
-        				str+="<td>"+item.itemDTO.itemName+"</td>";
-        				str+="<td>"+item.imPurchasePrice+"</td>";
-        				str+="<td>"+item.imBidTime+"</td>";
-        				str+="<td>"+item.playerNickname+"</td>";
-        				str+="<td><input type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnBuy' value='구매'></td>"
+        				if(item.imAuctionEnd="T"){
+	        				str+="<tr><td><img src='"+item.itemDTO.itemImg+"' class='itemImg'></td>";
+	        				str+="<td>"+item.itemDTO.itemName+"</td>";
+	        				str+="<td>"+item.imPurchasePrice+"</td>";
+	        				str+="<td>"+item.imBidTime+"</td>";
+	        				str+="<td>"+item.playerNickname+"</td>";
+	        				str+="<td><input type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnBuy' value='구매'></td>"
+        				}
         			})
         			$("#buyTBody").html(str);
         		},
@@ -246,12 +256,43 @@
         		
         	})
         }
-    	
-        
+		
+		function sellList(){
+			$.ajax({
+	        	url: "auctionMyPage" ,
+				type:"post",
+				dataType:"json",  
+				success:function(data){
+					
+					$("#sellTBody").empty;
+					var str="";
+					$.each(data, function(index, item){
+						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"' class='itemImg' ></td>";
+						str+="<td>"+item.itemDTO.itemName+"</td>";
+						str+="<td>"+item.imPurchasePrice+"</td>";
+						str+="<td>"+item.imBidTime+"</td>";
+						
+						if(item.imAuctionEnd=="T"){
+							sellBtn="취소";
+							colorBtn="btn-primary";
+						}else if(item.imAuctionEnd=="F"){
+							sellBtn="수령";
+							colorBtn="btn-success";
+						}else{
+							sellBtn="유찰";
+							colorBtn="btn-danger";
+						}
+												
+						str+="<td><input type='button' id='"+item.imSq+"' class='btn "+colorBtn+" btn-sm btnCancel' value='"+sellBtn+"'></td></tr>"
+					})
+					$("#sellTBody").html(str);
+				} ,
+				error:function(err){
+					alert(err +"에러발생");
+				}
+	        })
+		}
     });
-	
-	 
-	
 </script> 
 </html> 
 

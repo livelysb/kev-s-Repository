@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.StockUpdateDAO;
 import com.kosta.zuplay.model.dto.stock.StockDealHistoryDTO;
-import com.kosta.zuplay.model.service.PlayerInfo;
+import com.kosta.zuplay.model.service.community.PlayerInfo;
 
 
 @Service

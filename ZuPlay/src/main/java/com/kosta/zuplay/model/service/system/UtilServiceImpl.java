@@ -1,4 +1,4 @@
-package com.kosta.zuplay.model.service;
+package com.kosta.zuplay.model.service.system;
 
 import java.util.Calendar;
 import java.util.List;

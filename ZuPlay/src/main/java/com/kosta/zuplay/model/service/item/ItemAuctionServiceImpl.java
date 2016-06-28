@@ -17,7 +17,7 @@ import com.kosta.zuplay.model.dao.PlayerItemDAO;
 import com.kosta.zuplay.model.dto.item.ItemDTO;
 import com.kosta.zuplay.model.dto.item.ItemMarketDTO;
 import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
-import com.kosta.zuplay.model.service.UtilService;
+import com.kosta.zuplay.model.service.system.UtilService;
 
 @Service
 public class ItemAuctionServiceImpl implements ItemAuctionService {

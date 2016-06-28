@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosta.zuplay.model.dto.board.BoardCommentDTO;
 import com.kosta.zuplay.model.dto.board.BoardDTO;
-import com.kosta.zuplay.model.service.BoardService;
+import com.kosta.zuplay.model.service.community.BoardService;
 
 @Controller
 public class BoardController {

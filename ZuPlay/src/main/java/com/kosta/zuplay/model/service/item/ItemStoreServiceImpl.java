@@ -15,8 +15,8 @@ import com.kosta.zuplay.model.dao.LoginDAO;
 import com.kosta.zuplay.model.dao.PlayerInfoDAO;
 import com.kosta.zuplay.model.dao.PlayerItemDAO;
 import com.kosta.zuplay.model.dto.item.ItemDTO;
-import com.kosta.zuplay.model.service.PlayerInfo;
-import com.kosta.zuplay.model.service.UtilService;
+import com.kosta.zuplay.model.service.community.PlayerInfo;
+import com.kosta.zuplay.model.service.system.UtilService;
 
 @Service
 public class ItemStoreServiceImpl implements ItemStoreService {

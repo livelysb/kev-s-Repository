@@ -94,6 +94,7 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 		}
 		System.out.println("Master info is updated");
 	}
+	
 	public MasterDTO getMasterFromAPI(String isuSrtCd) {
 		URL url = null;
 		BufferedReader br = null;

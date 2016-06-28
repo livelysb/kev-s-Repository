@@ -12,7 +12,7 @@ public interface PlayerStockService {
 	public List<PlayerListsDTO> getPlayerStocks(String playerNickname);
 	
 	/**
-	 * 플레이어가 가진 한 주식의 수량을 가져오기
+	 * 플레이어가 가진 한 주식의 수량만을 가져오기
 	 * */
 	public PlayerListsDTO getPlayerStock(String playerNickname, String isuCd);
 	

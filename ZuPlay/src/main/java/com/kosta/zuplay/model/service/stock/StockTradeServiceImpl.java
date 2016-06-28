@@ -16,46 +16,38 @@ public class StockTradeServiceImpl implements StockTradeService {
 	private PlayerInfoService playerInfoService;
 
 	@Autowired
-	private StockInfoService stockInfo;
+	private StockInfoService stockInfoService;
 	
 	@Autowired
 	private DealHistoryService dealHistoryService;
 
-	/**
-	 * 주식 판매
-	 */
 	@Transactional
 	@Override
 	public boolean sellStock(String playerNickname, String isuCd, int quantity) {
 		int plQuantity = playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity();
 		int playerMoney = playerInfoService.getPlayer(playerNickname).getPlayerMoney();
-		int price = (int) (stockInfo.getPrice(isuCd).getTrdPrc() * quantity * (1 - 0.00315)); // 수수료
+		int price = (int) (stockInfoService.getPrice(isuCd).getTrdPrc() * quantity * (1 - 0.00315)); // 수수료
 																								// 0.315%
 																								// ->
 																								// 0.000315
 		if (plQuantity >= quantity) {
-			
 			if (playerStockService.setPlayerStock(playerNickname, isuCd, plQuantity - quantity))// 수량 빼기
 				if (playerInfoService.setPlayerMoney(playerNickname, playerMoney + price))// 돈 추가하기 ( 수수료 계산 )
-					if(dealHistoryService.WriteStockHistory(playerNickname, isuCd, plQuantity, price, "s"))
+					if(dealHistoryService.stockHistoryInsert(playerNickname, isuCd, plQuantity, price, "s"))
 						return true;
 		}
 
 		return false;
 	}
 
-	/**
-	 * 주식 구매
-	 */
 	@Transactional
 	@Override
 	public boolean buyStock(String playerNickname, String isuCd, int plQuantity) {
 		int playerMoney = playerInfoService.getPlayer(playerNickname).getPlayerMoney();
-		int price = (int) stockInfo.getPrice(isuCd).getTrdPrc();
+		int price = (int) stockInfoService.getPrice(isuCd).getTrdPrc();
 		int totalPrice = (int) (price * plQuantity * 1.00015); // 총 금액
 		int quantity = playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity();// 현재
 																								// 보유량
-
 		if (playerMoney >= totalPrice)
 			if (playerInfoService.setPlayerMoney(playerNickname, playerMoney - (totalPrice))) // 돈
 																							// 빼기
@@ -65,7 +57,7 @@ public class StockTradeServiceImpl implements StockTradeService {
 																							// ->
 																							// 0.00015)
 				if (playerStockService.setPlayerStock(playerNickname, isuCd, quantity + plQuantity)) // 주식수량
-					if(dealHistoryService.WriteStockHistory(playerNickname, isuCd, plQuantity, totalPrice, "b"))																				// 늘려주기
+					if(dealHistoryService.stockHistoryInsert(playerNickname, isuCd, plQuantity, totalPrice, "b"))																				// 늘려주기
 					return true;
 		return false;
 	}

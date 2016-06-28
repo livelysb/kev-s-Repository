@@ -9,18 +9,18 @@ public interface ScheduleTaskService {
 	 * 작동빈도 : 작업이 끝난 시점으로 1분 뒤 재시작한다.
 	 * 수행사항 : price 값 받아와서 PRICE, REALTIME_PRICE 테이블을 update, insert를 진행한다.
 	 * */
-	public void actionPer5Min();
+	public void actionPer10Min();
 	
 	/**
 	 * 수행사항 : 실시간 주식정보를 쌓아 일일 체결가 그래프를 그릴 수 있다.
 	 * */
-	public void actionPer10Min();
+	public void actionPer20Min();
 	
 	/**
 	 * 수행사항
 	 * 1. 마스터정보를 업데이트한다.
 	 * 2. 어제의 실시간 체결가를 초기화한다.
-	 * 2. 장을 오픈한다. ( 거래 활성화 )
+	 * 3. 모든 플레이어의 일일 수익률을 삽입시키고, 전일 가격을 업데이트시킨다
 	 * */
 	public void actionAtNine();
 	
@@ -28,6 +28,6 @@ public interface ScheduleTaskService {
 	 * 수행사항
 	 * 1. 현재 체결가를 조회하여 DAILY_PRICE 테이블에 저장한다.
 	 * */
-	public void actionAtFour();
+	public void actionAtThree();
 	
 }

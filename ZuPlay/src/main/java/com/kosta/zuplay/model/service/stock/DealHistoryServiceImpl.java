@@ -17,7 +17,7 @@ public class DealHistoryServiceImpl implements DealHistoryService {
 	private SqlSession sqlSession;
 	
 	@Override
-	public boolean WriteStockHistory(String playerNickname, String isuCd, int plQuantity, int price, String bs) {
+	public boolean stockHistoryInsert(String playerNickname, String isuCd, int plQuantity, int price, String bs) {
 		DealHistoryDAO dealHistoryDAO = sqlSession.getMapper(DealHistoryDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("playerNickname", playerNickname);

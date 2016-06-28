@@ -7,9 +7,9 @@ import com.kosta.zuplay.model.dto.stock.StockDealHistoryDTO;
 public interface DealHistoryService {
 
 	/**
-	 * 주식 거래 히스토리 쓰기
+	 * 주식 거래 히스토리  삽입하기
 	 * */
-	public boolean WriteStockHistory(String playerNickname, String isuCd, int plQuantity, int price, String bs);
+	public boolean stockHistoryInsert(String playerNickname, String isuCd, int plQuantity, int price, String bs);
 	
 	
 	/**

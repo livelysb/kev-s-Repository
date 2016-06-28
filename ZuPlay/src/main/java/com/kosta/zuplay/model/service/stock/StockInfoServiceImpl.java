@@ -19,39 +19,24 @@ public class StockInfoServiceImpl implements StockInfoService {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	
-	/**
-	 * DB의 모든 prices 가져오기
-	 */
 	@Override
 	public List<PriceDTO> getPrices() {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		return stockInfoDAO.getPrices();
 	}
 
-	/**
-	 * DB의 한 기업의 price 가져오기
-	 * */
 	@Override
 	public PriceDTO getPrice(String isuCd) {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		return stockInfoDAO.getPrice(isuCd);
 	}
 	
-	/**
-	 * DB의 모든 isuSerCd 가져오기
-	 */
 	@Override
 	public List<ListsDTO> getLists() {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		return stockInfoDAO.getLists();
 	}
-	
-	
-	
-	/**
-	 * DB의 모든 주식리스트 보여주기
-	 * */
+
 	@Override
 	public List<MasterDTO> getStockList(int page) {
 		int startPage = (page-1)*10+1;
@@ -71,10 +56,7 @@ public class StockInfoServiceImpl implements StockInfoService {
 		return masterList;
 	}
 
-	
-	/**
-	 * 기업의 상세정보 보여주기
-	 * */
+
 	@Override
 	public MasterDTO getStockDetail(String isuCd) {
 		// TODO Auto-generated method stub

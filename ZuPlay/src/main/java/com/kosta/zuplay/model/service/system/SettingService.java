@@ -11,4 +11,8 @@ public interface SettingService {
 	 * 초기화
 	 */
 	boolean settingReset(String playerNickname);
+	/**
+	 * 불러오기
+	 */
+	SettingDTO settingSelect(String playerNickname);
 }

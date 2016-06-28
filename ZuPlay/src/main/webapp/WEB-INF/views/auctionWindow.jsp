@@ -132,7 +132,18 @@
         
         //경매장 아이템등록
         $("#auctionRegister").on("click",function(){
-        	
+        	$.ajax({
+        		url:"auctionSell",
+        		type:"post",
+        		dataType:"text",
+        		data:"piSq=25&imPurchasePrice=15000",
+        		success:function(result){
+        			alert(result);
+        		},
+        		error:function(err){
+        			alert(err+"에러발생");
+        		}
+        	})
         })
         
         //아이템구매

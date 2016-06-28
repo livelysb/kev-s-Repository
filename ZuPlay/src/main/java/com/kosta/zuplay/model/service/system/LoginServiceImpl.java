@@ -1,4 +1,4 @@
-package com.kosta.zuplay.model.service;
+package com.kosta.zuplay.model.service.system;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

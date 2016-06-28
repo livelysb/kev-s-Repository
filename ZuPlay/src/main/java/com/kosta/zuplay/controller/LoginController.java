@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
-import com.kosta.zuplay.model.service.LoginService;
+import com.kosta.zuplay.model.service.system.LoginService;
 
 @Controller
 public class LoginController {

@@ -3,6 +3,18 @@
 
 <mapper namespace="com.kosta.zuplay.model.dao.stock.StockInfoDAO">
 
+	<resultMap type="masterDTO" id="master">
+		<result column="isuKorAbbrv" property="isuKorAbbrv" />
+		<association property="priceDTO" javaType="priceDTO">
+			<result column="cmpprevddPrc" property="cmpprevddPrc" />
+			<result column="trdPrc" property="trdPrc" />
+			<result column="trdvol" property="trdvol" />
+			<result column="openprc" property="openprc" />
+			<result column="hgprc" property="hgprc" />
+			<result column="lwprc" property="lwprc" />
+		</association>
+	</resultMap>
+
 	<select id="getLists" resultType="ListsDTO">
 		select * from lists
 	</select>

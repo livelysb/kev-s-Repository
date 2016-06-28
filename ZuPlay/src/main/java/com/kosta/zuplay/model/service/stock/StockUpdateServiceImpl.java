@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -36,7 +37,7 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 			stockUpdateDAO.priceUpdate(priceDTO);
 		}
-		System.out.println("stock price is updated");
+		System.out.println(new Date().toString() +" : Price is updated");
 
 	}
 
@@ -53,7 +54,6 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 			price = gson.fromJson(br, PriceDTO.class);
 
 		} catch (Exception e) {
-			System.out.println(e+"\n=>-------------------------------");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -74,14 +74,14 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 				stockUpdateDAO.realtimePriceInsert(priceDTO);
 			}
 		}
-		System.out.println("RealtimePrice is inserted");
+		System.out.println(new Date().toString() +" : RealtimePrice is inserted");
 	}
 	
 	@Transactional
 	public void realtimePriceReset() {
 		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 		stockUpdateDAO.realtimePriceReset();
-		System.out.println("RealtimePrice is reseted");
+		System.out.println(new Date().toString() + " : RealtimePrice is reseted");
 	}
 
 	@Transactional
@@ -92,7 +92,7 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 			stockUpdateDAO.masterUpdate(masterDTO);
 		}
-		System.out.println("Master info is updated");
+		System.out.println(new Date().toString() + " : Master is updated");
 	}
 	
 	public MasterDTO getMasterFromAPI(String isuSrtCd) {
@@ -126,6 +126,6 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 			stockUpdateDAO.dailyPriceInsert(priceDTO);
 		}
-		System.out.println("DailyPrice is inserted");
+		System.out.println(new Date().toString() + " : DailyPrice is inserted");
 	}
 }

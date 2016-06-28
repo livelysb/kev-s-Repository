@@ -1,64 +1,130 @@
 package com.kosta.zuplay.model.service.stock;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.google.gson.Gson;
+import com.kosta.zuplay.model.dao.stock.StockUpdateDAO;
+import com.kosta.zuplay.model.dto.stock.ListsDTO;
+import com.kosta.zuplay.model.dto.stock.MasterDTO;
+import com.kosta.zuplay.model.dto.stock.PriceDTO;
 
 @Service
-public class StockUpdateServiceImpl implements StockUpdateService {
-	
+public class StockUpdateServiceImpl implements StockUpdateService{
+
 	@Autowired
-	private StockUpdate stockUpdate;
-	
+	private SqlSession sqlSession;
+
 	@Autowired
-	private EarningRate earningRate;
+	private StockInfoService stockInfoService;
+
 	
-		
-	/**
-	 * 작동빈도 : 작업이 끝난 시점으로 1분 뒤 재시작한다.
-	 * 수행사항 : price 값 받아와서 PRICE, REALTIME_PRICE 테이블을 update, insert를 진행한다.
-	 * */
-	@Scheduled(fixedDelay=10*60*1000) //작업이 끝난지 5분 후 재시작
-	@Override
-	public void actionPer5Min() {
-		System.out.println("10분마다");
-		stockUpdate.updateStockPrice();
-	}
-	
-	/**
-	 * 수행사항 : 실시간 주식정보를 쌓아 일일 체결가 그래프를 그릴 수 있다.
-	 * */
-	@Scheduled(fixedDelay=20*60*1000)//10분
-	@Override
-	public void actionPer10Min() {
-		System.out.println("20분마다");
-		stockUpdate.insertRealtimePrice();
-	}
-	
-	/**
-	 * 수행사항
-	 * 1. 마스터정보를 업데이트한다.
-	 * 2. 어제의 실시간 체결가를 초기화한다.
-	 * 3. 모든 플레이어의 일일 수익률을 삽입시키고, 전일 가격을 업데이트시킨다
-	 * */
-	@Scheduled(cron="0 0 9 * * *") //매일 아홉시에 작동
-	@Override
-	public void actionAtNine() {
-		System.out.println("900");
-		stockUpdate.updateMaster();
-		stockUpdate.resetRealtimePrice();
-		earningRate.updateEarningRate();
+	@Transactional
+	public void stockPriceUpdate() {
+		List<ListsDTO> list = stockInfoService.getLists();
+		for (ListsDTO listsDTO : list) {
+			PriceDTO priceDTO = getPriceFromAPI(listsDTO.getIsuSrtCd());
+			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
+			stockUpdateDAO.priceUpdate(priceDTO);
+		}
+		System.out.println("stock price is updated");
+
 	}
 
-	/**
-	 * 수행사항
-	 * 1. 현재 체결가를 조회하여 DAILY_PRICE 테이블에 저장한다.
-	 * */
-	@Scheduled(cron="0 0 15 * * *") //매일 세시에 작동
-	@Override
-	public void actionAtFour() {
-		System.out.println("300");
-		stockUpdate.insertDailyPrice();
+	public PriceDTO getPriceFromAPI(String isuSrtCd) {
+		URL url = null;
+		PriceDTO price = null;
+		BufferedReader br = null;
+		try {
+			url = new URL("https://testbed.koscom.co.kr:443/gateway/v1/market/stocks/price?isuSrtCd=" + isuSrtCd
+					+ "&apikey=fa8835c0-1c9c-4268-a5f0-e11448cfb3b2");
+			URLConnection conn = url.openConnection();
+			br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+			Gson gson = new Gson();
+			price = gson.fromJson(br, PriceDTO.class);
+
+		} catch (Exception e) {
+			System.out.println(e+"\n=>-------------------------------");
+			e.printStackTrace();
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return price;
+	}
+
+	@Transactional
+	public void realtimePriceInsert() {
+		List<PriceDTO> priceList = stockInfoService.getPrices();
+		for (PriceDTO priceDTO : priceList) {
+			if (priceDTO.getTrdTm() != null) {
+				StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
+				stockUpdateDAO.realtimePriceInsert(priceDTO);
+			}
+		}
+		System.out.println("RealtimePrice is inserted");
 	}
 	
+	@Transactional
+	public void realtimePriceReset() {
+		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
+		stockUpdateDAO.realtimePriceReset();
+		System.out.println("RealtimePrice is reseted");
+	}
+
+	@Transactional
+	public void masterUpdate() {
+		List<ListsDTO> lists = stockInfoService.getLists();
+		for(ListsDTO listDTO : lists) {
+			MasterDTO masterDTO = getMasterFromAPI(listDTO.getIsuSrtCd());
+			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
+			stockUpdateDAO.masterUpdate(masterDTO);
+		}
+		System.out.println("Master info is updated");
+	}
+	public MasterDTO getMasterFromAPI(String isuSrtCd) {
+		URL url = null;
+		BufferedReader br = null;
+		MasterDTO masterDTO = null;
+			try {
+				url = new URL("https://testbed.koscom.co.kr/gateway/v1/market/stocks/master?isuSrtCd="
+						+ isuSrtCd + "&apikey=fa8835c0-1c9c-4268-a5f0-e11448cfb3b2");
+				URLConnection conn = url.openConnection();
+				br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+				Gson gson = new Gson();
+				masterDTO = gson.fromJson(br, MasterDTO.class);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			return masterDTO;
+	}
+
+	@Transactional
+	public void dailyPriceInsert() {
+		List<PriceDTO> priceList = stockInfoService.getPrices();
+		for (PriceDTO priceDTO : priceList) {
+			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
+			stockUpdateDAO.dailyPriceInsert(priceDTO);
+		}
+		System.out.println("DailyPrice is inserted");
+	}
 }

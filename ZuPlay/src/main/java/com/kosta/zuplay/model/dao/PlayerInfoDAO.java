@@ -16,6 +16,17 @@ public interface PlayerInfoDAO {
 	 * 모든 플레이어의 닉네임 가져오기
 	 * */
 	public List<String> getAllPlayerNickName();
+	
+	/**
+	 * 플레이어의 사이버머니 수정하기
+	 * */
+	public int setPlayerMoney(Map<String, String> map);
+	
+	/**
+	 * 전일 총 자산 업데이트 시키기
+	 * */
+	public int setPreMoney(Map<String, String> map);
+	
 	/**
 	 * 플레이어 루비 가져오기
 	 */

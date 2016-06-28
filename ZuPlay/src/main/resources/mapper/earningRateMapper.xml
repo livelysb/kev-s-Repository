@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.zuplay.model.dao.EarningRateDTO">
+
+	<insert id="earningRateInsert" parameterType="java.util.Map">
+		insert into
+		EARNING_RATE_HISTORY
+		(ERH_SQ, PLAYER_NICKNAME, ERH_PE, ERH_DATE)
+		VALUES(ERH_SQ.NEXTVAL, #{playerNickname}, #{erhPe}, sysdate)
+	</insert>
+</mapper>

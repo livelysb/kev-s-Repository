@@ -1,6 +1,6 @@
-package com.kosta.zuplay.model.service.stock;
+package com.kosta.zuplay.model.service.player;
 
-public interface EarningRate {
+public interface EarningRateService {
 
 	/**
 	 * 모든 플레이어들의 수익률 갱신 및 전일자산 업데이트

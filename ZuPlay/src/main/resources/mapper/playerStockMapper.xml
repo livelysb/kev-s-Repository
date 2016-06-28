@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.zuplay.model.dao.stock.PlayerStockDAO">
+
+	<resultMap type="playerListsDTO" id="playerLists">
+		<id column="PL_SQ" property="plSq" />
+		<result column="isuCd" property="isuCd" />
+		<result column="PLAYER_NICKNAME" property="playerNickname" />
+		<result column="PL_QUANTITY" property="plQuantity" />
+	</resultMap>
+
+	<select id="getPlayerStocks" parameterType="String" resultMap="playerLists">
+		select * from player_lists where player_nickname = #{value}
+	</select>
+
+	<select id="getPlayerStock" parameterType="java.util.Map"
+		resultMap="playerLists">
+		select * from player_lists where player_nickname =
+		#{playerNickname} and isuCd = #{isuCd}
+	</select>
+	
+	<update id="setPlayerStock" parameterType="java.util.Map">
+		update player_lists
+		set
+		pl_quantity = #{plQuantity}
+		where player_Nickname =
+		#{playerNickname}
+		and
+		isuCd = #{isuCd}
+	</update>
+</mapper>

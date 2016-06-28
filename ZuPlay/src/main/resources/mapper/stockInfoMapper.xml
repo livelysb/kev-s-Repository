@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.zuplay.model.dao.stock.StockInfoDAO">
+
+	<select id="getLists" resultType="ListsDTO">
+		select * from lists
+	</select>
+
+	<select id="getPrices" resultType="priceDTO">
+		select * from price
+	</select>
+
+	<select id="getPrice" parameterType="String" resultType="priceDTO">
+		select *
+		from price where isuCd=#{value}
+	</select>
+
+	<select id="getStockList" parameterType="java.util.Map"
+		resultMap="master">
+		<![CDATA[
+		select * from ( SELECT * FROM (          
+    SELECT ROW_NUMBER() OVER(ORDER BY  prevddAccTrdvol desc) rnum, isuCd, isuSrtCd, isuKorAbbrv, govncExcelYn, haltYn, mktcapScaleCd, mfindYn, krxAutosSectidxYn, krxSemiconSectidxYn, krxBioSectidxYn, krxFncSectidxYn, 
+krxInfoCommSectidxYn, krxEnergyChemSectidxYn, krxSteelSectidxYn, krxConsgoodSectidxYn, krxMediaCommSectidxYn, krxConstrSectidxYn, krxFncSvcSectidxYn, krxSecuSectidxYn,
+krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, listShrs, krxInsuSectidxYn, krxTransSectidxYn, krxRetailSectidxYn, krxLeisureSectidxYn FROM master
+	        ) WHERE rnum >= #{startPage} AND rnum <= #{endPage} ) m join price p on m.isucd = p.isucd
+	        ]]>
+	</select>
+</mapper>

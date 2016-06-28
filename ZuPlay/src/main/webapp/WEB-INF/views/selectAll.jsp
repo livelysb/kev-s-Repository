@@ -55,7 +55,7 @@
 					</div>
 				</div>
 				<br>
-				<a href = "<c:url value='insertBoard'/>"><button type="button" id="insertBoard" class="btn btn-primary">등록하기</button></a>
+				<a href = "<c:url value='write'/>"><button type="button" id="insertBoard" class="btn btn-primary">글쓰기</button></a>
 			</div>
 		</div>
 		

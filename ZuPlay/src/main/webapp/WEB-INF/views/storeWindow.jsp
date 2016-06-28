@@ -90,7 +90,7 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 </head>
 
 <body>
-	<c:set var="testVar">all,hair,값3,값4</c:set>
+	<c:set var="typeAry">randombox,hair,clothes,eyes,mouse,earring,acc</c:set>
 
 	<div class="container">
 	<div class="row">
@@ -119,79 +119,15 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 					<div class="itemBox" id="itemall7"></div>
                 </div>
                 
-                <!-- 
-                <div class="bhoechie-tab-content">
-					<div class="itemBox" id="itemhair0"></div>
-					<div class="itemBox" id="itemhair1"></div>
-					<div class="itemBox" id="itemhair2"></div>
-					<div class="itemBox" id="itemhair3"></div>
-					<div class="itemBox" id="itemhair4"> </div>
-					<div class="itemBox" id="itemhair5"></div>
-					<div class="itemBox" id="itemhair6"></div>
-					<div class="itemBox" id="itemhair7"></div>          
-                </div>
                 
-                <div class="bhoechie-tab-content">
-					<div class="itemBox" id="itemclothes0"></div>
-					<div class="itemBox" id="itemclothes1"></div>
-					<div class="itemBox" id="itemclothes2"></div>
-					<div class="itemBox" id="itemclothes3"></div>
-					<div class="itemBox" id="itemclothes4"> </div>
-					<div class="itemBox" id="itemclothes5"></div>
-					<div class="itemBox" id="itemclothes6"></div>
-					<div class="itemBox" id="itemclothes7"></div>   
-                </div>
-                  <div class="bhoechie-tab-content">
-					<div class="itemBox" id="itemeyes0"></div>
-					<div class="itemBox" id="itemeyes1"></div>
-					<div class="itemBox" id="itemeyes2"></div>
-					<div class="itemBox" id="itemeyes3"></div>
-					<div class="itemBox" id="itemeyes4"> </div>
-					<div class="itemBox" id="itemeyes5"></div>
-					<div class="itemBox" id="itemeyes6"></div>
-					<div class="itemBox" id="itemeyes7"></div>        
-                </div>
-                 <div class="bhoechie-tab-content">
-					<div class="itemBox" id="itemmouse0"></div>
-					<div class="itemBox" id="itemmouse1"></div>
-					<div class="itemBox" id="itemmouse2"></div>
-					<div class="itemBox" id="itemmouse3"></div>
-					<div class="itemBox" id="itemmouse4"> </div>
-					<div class="itemBox" id="itemmouse5"></div>
-					<div class="itemBox" id="itemmouse6"></div>
-					<div class="itemBox" id="itemmouse7"></div>         
-                </div>
-                <div class="bhoechie-tab-content">
-					<div class="itemBox" id="itemearring0"></div>
-					<div class="itemBox" id="itemearring1"></div>
-					<div class="itemBox" id="itemearring2"></div>
-					<div class="itemBox" id="itemearring3"></div>
-					<div class="itemBox" id="itemearring4"> </div>
-					<div class="itemBox" id="itemearring5"></div>
-					<div class="itemBox" id="itemearring6"></div>
-					<div class="itemBox" id="itemearring7"></div>
-                </div>
-                <div class="bhoechie-tab-content">
-					<div class="itemBox" id="itemacc0"></div>
-					<div class="itemBox" id="itemacc1"></div>
-					<div class="itemBox" id="itemacc2"></div>
-					<div class="itemBox" id="itemacc3"></div>
-					<div class="itemBox" id="itemacc4"> </div>
-					<div class="itemBox" id="itemacc5"></div>
-					<div class="itemBox" id="itemacc6"></div>
-					<div class="itemBox" id="itemacc7"></div>
-                </div>
-                <div class="bhoechie-tab-content">
-					<div class="itemBox" id="itemrandombox0"></div>
-					<div class="itemBox" id="itemetc1"></div>
-					<div class="itemBox" id="itemetc2"></div>
-					<div class="itemBox" id="itemetc3"></div>
-					<div class="itemBox" id="itemetc4"> </div>
-					<div class="itemBox" id="itemetc5"></div>
-					<div class="itemBox" id="itemetc6"></div>
-					<div class="itemBox" id="itemetc7"></div>
-                </div>
-                 -->
+               <c:forEach var="result" items="${typeAry}">
+	               		<div class="bhoechie-tab-content">
+		               		<c:forEach var="count"  begin="0" end="7" step="1">
+								<div class="itemBox" id="item${result}${count}"></div>
+							</c:forEach>
+		                </div>
+               </c:forEach>
+               
     				 <button type="button" id="backAllBtn" class="backBtn">이전</button>
                 	<button type="button" id="nextAlltBtn" class="nextBtn">다음</button> 
             </div>

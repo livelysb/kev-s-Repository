@@ -22,6 +22,7 @@ public class BoardController {
 	 */
 	@RequestMapping("write")
 	public String write(){
+		System.out.println(1);
 		return "writeBoard";
 	}
 	

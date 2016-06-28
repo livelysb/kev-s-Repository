@@ -1,4 +1,4 @@
-package com.kosta.zuplay.model.service.community;
+package com.kosta.zuplay.model.service.player;
 
 
 /**

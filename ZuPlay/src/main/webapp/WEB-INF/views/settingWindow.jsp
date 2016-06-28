@@ -185,13 +185,12 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		var myPage="";
-		var chatting="";
-		var friendAdd="";
+		var myPage=false;
+		var chatting=false;
+		var friendAdd=false;
 		
 		$("#saveOp").on("click", function(){
 			checkTF();
-			
 			$.ajax({
 				url:"settingSave",
 				type:"post",
@@ -207,23 +206,11 @@
 		})
 		
 		function checkTF(){
-			if($("#myInfoOp").is(":checked")==true){
-				myPage=="T"
-			}else{
-				myPage=="F"
-			}
-			
-			if($("#whisperOp").is(":checked")==true){
-				chatting=="T"
-			}else{
-				chatting=="F"
-			}
-			
-			if($("#friendOp").is(":checked")==true){
-				friendAdd=="T"
-			}else{
-				friendAdd=="F"
-			}
+ 
+			$("#myInfoOp").is(":checked") ? myPage="T" : myPage="F"
+			$("#whisperOp").is(":checked") ? chatting="T" : chatting="F"
+			$("#friendOp").is(":checked") ? friendAdd="T" : friendAdd="F" 
+					
 		}
 	})
 </script>

@@ -207,6 +207,21 @@
 			})
 		})
 		
+		$("#initializationOp").on("click",function(){
+			$.ajax({
+				url:"settingReset",
+				type:"post",
+				dataType:"text",
+				success:function(result){
+					alert(result);
+				},
+				error:function(err){
+					alert(err+"에러발생")
+				}
+			})
+		})
+		
+		
 		function checkTF(){
 			$("#myInfoOp").is(":checked") ? myPage="T" : myPage="F"
 			$("#whisperOp").is(":checked") ? chatting="T" : chatting="F"

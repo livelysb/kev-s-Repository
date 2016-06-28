@@ -66,4 +66,13 @@ public class LoginController {
 		return checkRepetiton;
 		
 	}
+	
+	/**
+	 * 로그아웃 (세션삭제)
+	 */
+	@RequestMapping("logout")
+	@ResponseBody
+	public void logout(HttpSession session){
+		session.invalidate();
+	}
 }

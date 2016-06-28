@@ -33,4 +33,12 @@ public class SettingServiceImpl implements SettingService {
 		return true;
 	}
 
+	@Override
+	public SettingDTO settingSelect(String playerNickname) {
+		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
+		SettingDTO dto=settingDAO.settingSelect(playerNickname);
+		System.out.println(dto);
+		return dto;
+	}
+
 }

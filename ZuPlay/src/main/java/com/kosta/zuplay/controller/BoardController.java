@@ -2,6 +2,8 @@ package com.kosta.zuplay.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,6 @@ public class BoardController {
 	 */
 	@RequestMapping("write")
 	public String write(){
-		System.out.println(1);
 		return "writeBoard";
 	}
 	
@@ -32,10 +33,10 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping("insertBoard")
-	@ResponseBody
-	public boolean insertBoard(BoardDTO dto){
-		System.out.println(dto);
-		return boardServiceImpl.insertBoard(dto);
+	public String insertBoard(HttpSession session,BoardDTO dto){
+		dto.setPlayerNickname((String) session.getAttribute("playerNickname"));
+		boardServiceImpl.insertBoard(dto);
+		return "selectAll";
 	}
 	/**
 	 * 게시판 글 수정

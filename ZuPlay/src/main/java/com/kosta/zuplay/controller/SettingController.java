@@ -20,7 +20,9 @@ public class SettingController {
 	 */
 	@RequestMapping("settingSave")
 	@ResponseBody
-	public boolean settingSave(SettingDTO dto){
+	public boolean settingSave(HttpSession session,SettingDTO dto){
+		dto.setPlayerNickname((String) session.getAttribute("playerNickname"));
+		System.out.println(dto);
 		return settingServiceImpl.settingSave(dto);
 	}
 	

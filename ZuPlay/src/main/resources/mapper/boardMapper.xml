@@ -28,7 +28,7 @@
 	<select id="selectDetail" parameterType="int" resultMap="boardMapper">
 		select * from board where board_no=#{boardNo}
 	</select>
-	<select id="selectAll" resultType="BoardDTO">
+	<select id="selectAll" resultMap="boardMapper">
 		select * from board
 	</select>
 	<delete id="deleteBoard" parameterType="int">

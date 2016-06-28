@@ -173,6 +173,7 @@
 		<span class="switch-handle"></span> 
 	</label><br>
 	<button type="button" id="saveOp">저장</button>
+	<button type="button" id="initializationOp">초기화</button>
 <body>
 </body>
 
@@ -191,6 +192,7 @@
 		
 		$("#saveOp").on("click", function(){
 			checkTF();
+			
 			$.ajax({
 				url:"settingSave",
 				type:"post",
@@ -206,11 +208,10 @@
 		})
 		
 		function checkTF(){
- 
 			$("#myInfoOp").is(":checked") ? myPage="T" : myPage="F"
 			$("#whisperOp").is(":checked") ? chatting="T" : chatting="F"
 			$("#friendOp").is(":checked") ? friendAdd="T" : friendAdd="F" 
-					
+			
 		}
 	})
 </script>

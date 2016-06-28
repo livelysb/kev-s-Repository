@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.zuplay.model.dto.board.BoardCommentDTO;
 import com.kosta.zuplay.model.dto.board.BoardDTO;
@@ -50,9 +51,11 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping("selectAll")
-	@ResponseBody
-	public List<BoardDTO> selectAll(){
-		return boardServiceImpl.selectAll();
+	public ModelAndView selectAll(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("selectAll");
+		mv.addObject("list", boardServiceImpl.selectAll());
+		return mv;
 	}
 	/**
 	 * 게시판 글 삭제

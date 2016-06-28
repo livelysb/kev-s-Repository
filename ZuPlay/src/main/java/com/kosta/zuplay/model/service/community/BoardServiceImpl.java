@@ -66,7 +66,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDTO> selectAll() {
 		BoardDAO dao = sqlSession.getMapper(BoardDAO.class);
-		return dao.selectAll();
+		List<BoardDTO> list = dao.selectAll();
+		System.out.println(list);
+		return list;
 	}
 
 	/**

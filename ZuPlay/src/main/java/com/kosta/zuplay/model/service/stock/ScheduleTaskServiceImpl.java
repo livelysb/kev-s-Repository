@@ -18,14 +18,14 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	@Scheduled(fixedDelay=10*60*1000)
 	@Override
 	public void actionPer10Min() {
-		System.out.println("10분마다");
+		System.out.println("10분마다 작업을 시작합니다.");
 		stockUpdateService.stockPriceUpdate();
 	}
 	
 	@Scheduled(fixedDelay=20*60*1000)
 	@Override
 	public void actionPer20Min() {
-		System.out.println("20분마다");
+		System.out.println("20분마다 작업을 시작합니다.");
 		stockUpdateService.realtimePriceInsert();
 	}
 	

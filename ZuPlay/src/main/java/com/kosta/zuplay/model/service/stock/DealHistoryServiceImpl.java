@@ -6,10 +6,12 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.stock.DealHistoryDAO;
 import com.kosta.zuplay.model.dto.stock.StockDealHistoryDTO;
 
+@Service
 public class DealHistoryServiceImpl implements DealHistoryService {
 
 	

@@ -104,4 +104,7 @@
 	<select id="auctionHowPrice" parameterType="int" resultType="int">
 		select im_purchase_price from item_market where im_sq=#{value}
 	</select>
+	<delete id="auctionDeleteFin" parameterType="int">
+		delete item_market where im_sq=#{value}
+	</delete>
 </mapper>

@@ -144,10 +144,10 @@
 				data:"imSq="+$(this).attr("id"),
 				success:function(result){
 					switch(result){
-					case "1" : alert("구매되었습니다."); break;
-					case "2" : alert("인벤토리가 부족합니다."); break;
-					case "3" : alert("루비가 부족합니다."); break;
-					case "4" : alert("이미 판매 된 물품입니다.");break;	
+						case "1" : alert("구매되었습니다."); break;
+						case "2" : alert("인벤토리가 부족합니다."); break;
+						case "3" : alert("루비가 부족합니다."); break;
+						case "4" : alert("이미 판매 된 물품입니다.");break;	
 					}
 					alert(count)
 					search(count)
@@ -221,7 +221,6 @@
 				search(count-1);
 			}
 		})
-		
 		//다음버튼
 		$("#nextBtn").on("click",function(){
 			if($("#buyTBody").children().length<=0) return

@@ -90,19 +90,21 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 </head>
 
 <body>
+	<c:set var="testVar">all,hair,값3,값4</c:set>
+
 	<div class="container">
 	<div class="row">
         <div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 bhoechie-tab-container">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
               <div class="list-group">
                 <a href="#" class="list-group-item text-center active" id="all">All</a>
+                <a href="#" class="list-group-item text-center" id="randombox">RandomBox</a>
                 <a href="#" class="list-group-item text-center" id="hair">Hair</a>
                  <a href="#" class="list-group-item text-center" id="clothes">Clothes</a>
                 <a href="#" class="list-group-item text-center" id="eyes">Eyes</a>
                 <a href="#" class="list-group-item text-center" id="mouse">Mouse</a>
                 <a href="#" class="list-group-item text-center" id="earring">Earring </a>
                 <a href="#" class="list-group-item text-center" id="acc">Acc</a>
-                <a href="#" class="list-group-item text-center" id="etc">Etc</a>
               </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
@@ -116,6 +118,8 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 					<div class="itemBox" id="itemall6"></div>
 					<div class="itemBox" id="itemall7"></div>
                 </div>
+                
+                <!-- 
                 <div class="bhoechie-tab-content">
 					<div class="itemBox" id="itemhair0"></div>
 					<div class="itemBox" id="itemhair1"></div>
@@ -178,7 +182,7 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 					<div class="itemBox" id="itemacc7"></div>
                 </div>
                 <div class="bhoechie-tab-content">
-					<div class="itemBox" id="itemetc0"></div>
+					<div class="itemBox" id="itemrandombox0"></div>
 					<div class="itemBox" id="itemetc1"></div>
 					<div class="itemBox" id="itemetc2"></div>
 					<div class="itemBox" id="itemetc3"></div>
@@ -187,7 +191,7 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 					<div class="itemBox" id="itemetc6"></div>
 					<div class="itemBox" id="itemetc7"></div>
                 </div>
-                
+                 -->
     				 <button type="button" id="backAllBtn" class="backBtn">이전</button>
                 	<button type="button" id="nextAlltBtn" class="nextBtn">다음</button> 
             </div>
@@ -207,6 +211,7 @@ $(document).ready(function() {
 	var count=1;
 	var tabs="";
     var status = "next";
+    
 	storeSelect(count)
 	
 	//탭들을 클릭 했을 때 일어나는 이벤트
@@ -251,9 +256,10 @@ $(document).ready(function() {
 					return;
 				}else{
 					count=page;
+					$(".bhoechie-tab-content div").empty();
 					$.each(data, function(index, item){
 						$("#item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:50%;' id='"+item.itemCode+"'/><br>"+item.itemName+"<br>"+item.itemPrice);  //
-				})
+					})
 				}
 			},
 			error:function(err){
@@ -264,8 +270,8 @@ $(document).ready(function() {
     
     //이전버튼
     $(".backBtn").on("click",function(){
-    		status = "back";
-			storeSelect(count-1)
+   		status = "back";
+		storeSelect(count-1)
 
     })
     
@@ -273,8 +279,8 @@ $(document).ready(function() {
     
     //다음버튼
     $(".nextBtn").on("click", function(){
-    		status = "next";
-			storeSelect(count+1)
+   		status = "next";
+		storeSelect(count+1)
     })
     
     

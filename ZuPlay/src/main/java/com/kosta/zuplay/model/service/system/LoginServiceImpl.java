@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.LoginDAO;
+import com.kosta.zuplay.model.dao.SettingDAO;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 
 @Service
@@ -32,8 +33,10 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean joinMember(PlayerDTO playerDTO) {
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
+		SettingDAO settingDAO=sqlSession.getMapper(SettingDAO.class);
 		int result=loginDAO.joinMember(playerDTO);
 		System.out.println("[ Log ] playerNaverId = " +playerDTO.getPlayerNaverId()+" | playerNickname = "+playerDTO.getPlayerNickname()+" | playerGender = "+playerDTO.getPlayerGender()+" | playerAge = "+playerDTO.getPlayerAge());
+		settingDAO.settingReset(playerDTO.getPlayerNickname());
 		if(result==0){
 			return false;
 		}

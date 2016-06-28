@@ -189,7 +189,11 @@
 					if(wordBtn=="수령"){
 						alert("판매금을 수령하셨습니다.")
 					}else{
-						alert("유찰 된 아이템을 수령하셨습니다.")
+						if(result!="false"){
+							alert("유찰 된 아이템을 수령하셨습니다.")
+						}else{
+							alert("인벤토리를 비워 주십시오.")
+						}
 					} 
 					sellList();
 				},
@@ -198,6 +202,7 @@
 				}
 			})
 		})
+		
 		
         //검색
         $("#auctionSearch").on("keyup",function(){

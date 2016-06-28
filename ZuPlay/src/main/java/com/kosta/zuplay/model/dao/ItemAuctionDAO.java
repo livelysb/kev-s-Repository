@@ -75,7 +75,12 @@ public interface ItemAuctionDAO {
 	 */
 	List<ItemMarketDTO> auctionSelectBidTime();
 	/**
-	 * 아이템 목록 업데이트(종료물품 삭제)
+	 * 아이템 목록 업데이트
 	 */
 	int auctionUpdate(int imSq);
+	
+	/**
+	 * 종료물품 삭제
+	 */
+	int auctionDeleteFin(int imSq);
 }

@@ -141,12 +141,14 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 */
 	@Override
 	@Transactional
-	public boolean auctionBring(String playerNickname, int imSq) {
+	public boolean auctionBring(String playerNickname, int imSq)  {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		String imAuctionEnd = itemAuctionDAO.auctionBring(imSq);
 		if (imAuctionEnd.equals("F")) {
+			System.out.println(imAuctionEnd);
 			Map<String, String> map = new HashMap<String, String>();
+			itemAuctionDAO.auctionDeleteFin(imSq);
 			int ruby=itemStoreDAO.getRuby(playerNickname);
 			int price = itemAuctionDAO.auctionHowPrice(imSq);
 			map.put("playerNickname", playerNickname);
@@ -160,10 +162,12 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 			int piIndex = utilServiceImpl.indexSearch(playerNickname);
 			if (piIndex != 0) {
 				itemAuctionDAO.auctionInsertPlayerItem(new PlayerItemDTO(0, playerNickname, itemMarketDTO.getItemCode(), null, piIndex, itemMarketDTO.getItemDTO()));
+				itemAuctionDAO.auctionDeleteFin(imSq);
 			} else {
 				return false;
 			}
 		}
+		System.out.println("성공");
 		return true;
 	}
 

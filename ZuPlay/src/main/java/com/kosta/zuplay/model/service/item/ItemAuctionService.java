@@ -32,8 +32,9 @@ public interface ItemAuctionService {
 	
 	/**
 	 * 경매장 유찰품/골드 수령									
+	 * @throws Exception 
 	 */
-	boolean auctionBring(String playerNickname,int imSq);
+	boolean auctionBring(String playerNickname,int imSq) ;
 	
 	/**
 	 * 내 경매 물품 가져오기

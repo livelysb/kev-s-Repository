@@ -200,8 +200,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="21" language="java" name="com.kosta.zuplay.model.service.community.PlayerInfoImpl" project="ZuPlay" 
-    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/community/PlayerInfoImpl.java" binary="false" 
+  <class id="21" language="java" name="com.kosta.zuplay.model.service.player.PlayerInfoImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/PlayerInfoImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="65" y="1136"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -250,8 +250,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="26" language="java" name="com.kosta.zuplay.model.service.community.PlayerInfo" project="ZuPlay" 
-    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/community/PlayerInfo.java" binary="false" 
+  <interface id="26" language="java" name="com.kosta.zuplay.model.service.player.PlayerInfo" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/PlayerInfo.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="28" y="950"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -270,8 +270,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="28" language="java" name="com.kosta.zuplay.model.service.community.RankService" project="ZuPlay" 
-    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/community/RankService.java" binary="false" 
+  <interface id="28" language="java" name="com.kosta.zuplay.model.service.player.RankService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/RankService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="158" y="1518"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -290,8 +290,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="30" language="java" name="com.kosta.zuplay.model.service.community.FriendService" project="ZuPlay" 
-    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/community/FriendService.java" binary="false" 
+  <interface id="30" language="java" name="com.kosta.zuplay.model.service.player.FriendService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/FriendService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="151" y="1438"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

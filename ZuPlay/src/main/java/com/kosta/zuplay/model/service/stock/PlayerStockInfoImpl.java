@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kosta.zuplay.model.dao.StockUpdateDAO;
 import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
 import com.kosta.zuplay.model.dto.stock.StockDealHistoryDTO;
-import com.kosta.zuplay.model.service.community.PlayerInfo;
+import com.kosta.zuplay.model.service.player.PlayerInfo;
 
 @Service
 public class PlayerStockInfoImpl implements PlayerStockInfo {

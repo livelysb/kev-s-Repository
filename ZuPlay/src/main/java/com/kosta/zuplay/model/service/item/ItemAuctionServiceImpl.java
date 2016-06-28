@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kosta.zuplay.model.dao.ItemAuctionDAO;
 import com.kosta.zuplay.model.dao.ItemStoreDAO;
+import com.kosta.zuplay.model.dao.PlayerInfoDAO;
+import com.kosta.zuplay.model.dao.PlayerItemDAO;
 import com.kosta.zuplay.model.dto.item.ItemDTO;
 import com.kosta.zuplay.model.dto.item.ItemMarketDTO;
 import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
@@ -61,20 +63,22 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	public int auctionBuy(String playerNickname, int imSq) {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
+		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
+		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		Map<String, String> payRubyMap = new HashMap<String, String>();
-		int ruby = itemStoreDAO.getRuby(playerNickname); // 보유루비 확인
+		int ruby = playerInfoDAO.getRuby(playerNickname); // 보유루비 확인
 		System.out.println("[ LOG ] : " + playerNickname + " 님의 루비 = " + ruby);
 		int price = itemAuctionDAO.auctionHowPrice(imSq);
-		if (ruby > price) {
+		if (ruby >= price) {
 			int piIndex = utilServiceImpl.indexSearch(playerNickname);
 			System.out.println("[ LOG ] : " + playerNickname + " 님의 인벤토리 빈 인덱스 = " + piIndex);
 			if (piIndex != 0) {
 				payRubyMap.put("playerNickname", playerNickname);
 				payRubyMap.put("updateRuby", ruby-price + "");
-				int payRubyResult = itemStoreDAO.payRuby(payRubyMap);
+				int payRubyResult = playerInfoDAO.updateRuby(payRubyMap);
 				if (payRubyResult != 0) {
 					ItemMarketDTO itemMarketDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
-					int insertResult = itemAuctionDAO.auctionInsertPlayerItem(
+					int insertResult = playerItemDAO.auctionInsertPlayerItem(
 							new PlayerItemDTO(0, playerNickname, itemMarketDTO.getItemCode(), null, piIndex, itemMarketDTO.getItemDTO()));
 					if (insertResult != 0) {
 						itemAuctionDAO.auctionBuyFinish(imSq);
@@ -106,14 +110,15 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	@Transactional
 	public boolean auctionSell(String playerNickname, int piSq, int imPurchasePrice) {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
-		ItemDTO itemDTO = itemAuctionDAO.bringItemInfoByPiSq(piSq);
+		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
+		ItemDTO itemDTO = playerItemDAO.bringItemInfoByPiSq(piSq);
 		Map<String, String> map = new HashMap<String,String>();
 		map.put("playerNickname", playerNickname);
 		map.put("imPurchasePrice", imPurchasePrice+"");
 		map.put("itemCode", itemDTO.getItemCode());
 		int insertResult = itemAuctionDAO.auctionInsertItemMarket(map);
 		if (insertResult != 0) {
-			int deleteResult = itemAuctionDAO.auctionDeletePlayerItem(piSq);
+			int deleteResult = playerItemDAO.itemDelete(piSq);
 			if (deleteResult == 0) {
 				System.out.println("[ LOG ] : player_item 레코드 삭제 실패하였습니다.");
 			}
@@ -144,17 +149,19 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	public boolean auctionBring(String playerNickname, int imSq)  {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
+		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
+		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		String imAuctionEnd = itemAuctionDAO.auctionBring(imSq);
 		if (imAuctionEnd.equals("F")) {
 			System.out.println(imAuctionEnd);
 			Map<String, String> map = new HashMap<String, String>();
-			int ruby=itemStoreDAO.getRuby(playerNickname);
+			int ruby=playerInfoDAO.getRuby(playerNickname);
 			int price = itemAuctionDAO.auctionHowPrice(imSq);
 			itemAuctionDAO.auctionDeleteFin(imSq);
 
 			map.put("playerNickname", playerNickname);
 			map.put("updateRuby", ruby+price + "");
-			int result=itemStoreDAO.payRuby(map);
+			int result=playerInfoDAO.updateRuby(map);
 			System.out.println(map);
 			if(result ==0){
 				return false;
@@ -163,7 +170,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 			ItemMarketDTO itemMarketDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
 			int piIndex = utilServiceImpl.indexSearch(playerNickname);
 			if (piIndex != 0) {
-				itemAuctionDAO.auctionInsertPlayerItem(new PlayerItemDTO(0, playerNickname, itemMarketDTO.getItemCode(), null, piIndex, itemMarketDTO.getItemDTO()));
+				playerItemDAO.auctionInsertPlayerItem(new PlayerItemDTO(0, playerNickname, itemMarketDTO.getItemCode(), null, piIndex, itemMarketDTO.getItemDTO()));
 				itemAuctionDAO.auctionDeleteFin(imSq);
 			} else {
 				return false;

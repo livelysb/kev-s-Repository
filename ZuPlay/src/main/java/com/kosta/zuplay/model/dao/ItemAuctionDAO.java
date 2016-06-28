@@ -29,11 +29,6 @@ public interface ItemAuctionDAO {
 	ItemMarketDTO bringItemInfoByImSq(int imSq);
 
 	/**
-	 * 아이템정보 player_item 테이블에 삽입
-	 */
-	int auctionInsertPlayerItem(PlayerItemDTO playerItemDTO);
-
-	/**
 	 * 경매 종료물품으로 변경
 	 */
 	int auctionBuyFinish(int imSq);
@@ -41,19 +36,10 @@ public interface ItemAuctionDAO {
 	// 구매끝
 	// 판매시작
 	/**
-	 * player_item 테이블에서 아이템 정보 가져오기
-	 */
-	ItemDTO bringItemInfoByPiSq(int piSq);
-
-	/**
 	 * item_market 테이블에 레코드 삽입
 	 */
 	int auctionInsertItemMarket(Map<String, String> map);
 
-	/**
-	 * player_item 테이블 레코드 삭제
-	 */
-	int auctionDeletePlayerItem(int piSq);
 	// 판매 끝
 	/**
 	 * 경매 취소 item_market 테이블 해당 레코드 IM_AUCTION_END 컬럼 수정 (T -> X)

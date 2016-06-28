@@ -12,7 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kosta.zuplay.model.dao.ItemStoreDAO;
 import com.kosta.zuplay.model.dao.LoginDAO;
+import com.kosta.zuplay.model.dao.PlayerInfoDAO;
+import com.kosta.zuplay.model.dao.PlayerItemDAO;
 import com.kosta.zuplay.model.dto.item.ItemDTO;
+import com.kosta.zuplay.model.service.PlayerInfo;
 import com.kosta.zuplay.model.service.UtilService;
 
 @Service
@@ -55,25 +58,27 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 	@Transactional
 	public int itemStoreBuy(String playerNickname, ItemDTO itemDTO, int quantity) {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
+		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
+		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
 		Map<String, String> payRubyMap = new HashMap<String, String>();
 		Map<String, String> itemBuyMap = new HashMap<String, String>();
-		int ruby = itemStoreDAO.getRuby(playerNickname);
+		int ruby = playerInfoDAO.getRuby(playerNickname);
 		System.out.println("[ LOG ] : " + playerNickname + " 님의 루비 = " + ruby);
 		int price = itemStoreDAO.getPrice(itemDTO.getItemCode());
 		System.out.println("[ LOG ] : " + itemDTO.getItemCode() + " 아이템의 가격 = " + price);
-		if (ruby > price) {
+		if (ruby >= price) {
 			int piIndex = utilServiceImpl.indexSearch(playerNickname);
 			System.out.println("[ LOG ] : " + playerNickname + " 님의 인벤토리 빈 인덱스 = " + piIndex);
 			if (piIndex != 0) {
 				payRubyMap.put("playerNickname", playerNickname);
 				payRubyMap.put("updateRuby", ruby-price + "");
 				System.out.println();
-				int payRubyResult = itemStoreDAO.payRuby(payRubyMap);
+				int payRubyResult = playerInfoDAO.updateRuby(payRubyMap);
 				System.out.println(payRubyResult + " 개 행 수정(1개 = 정상실행)");
 				itemBuyMap.put("playerNickname", playerNickname);
 				itemBuyMap.put("itemCode", itemDTO.getItemCode());
 				itemBuyMap.put("piIndex", piIndex + "");
-				int itembuyResult = itemStoreDAO.itemStoreBuy(itemBuyMap);
+				int itembuyResult = playerItemDAO.itemStoreBuy(itemBuyMap);
 				System.out.println(itembuyResult + " 개 행 수정(1개 = 정상실행)");
 			} else {
 				System.out.println("[ LOG ] : 인벤토리 가득 참");
@@ -92,12 +97,14 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 	@Transactional
 	public boolean itemStoreSell(String playerNickname, int piSq, String itemCode) {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
+		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
+		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
 		int price = itemStoreDAO.getPrice(itemCode);
 		map.put("playerNickname", playerNickname);
 		map.put("price", -price + "");
-		itemStoreDAO.payRuby(map);
-		int result = itemStoreDAO.itemDelete(piSq);
+		playerInfoDAO.updateRuby(map);
+		int result = playerItemDAO.itemDelete(piSq);
 		if (result == 0) {
 			return false;
 		}

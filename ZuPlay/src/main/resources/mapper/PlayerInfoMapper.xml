@@ -26,5 +26,10 @@
 	<select id="getAllPlayerNickName" resultType="String">
 		select player_nickname from player
 	</select>
-
+	<update id="updateRuby" parameterType="java.util.Map">
+		update player set player_ruby=#{updateRuby} where player_nickname=#{playerNickname}
+	</update>
+	<select id="getRuby" parameterType="String" resultType="int">
+		select player_ruby from player where player_nickname=#{playerNickname}
+	</select>
 </mapper>

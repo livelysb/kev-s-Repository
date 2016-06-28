@@ -6,7 +6,7 @@ import com.kosta.zuplay.model.dto.stock.ListsDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
 import com.kosta.zuplay.model.dto.stock.PriceDTO;
 
-public interface StockInfo {
+public interface StockInfoService {
 	
 	/**
 	 * DB의 모든 prices 가져오기

@@ -15,7 +15,7 @@ import com.kosta.zuplay.model.dao.LoginDAO;
 import com.kosta.zuplay.model.dao.PlayerInfoDAO;
 import com.kosta.zuplay.model.dao.PlayerItemDAO;
 import com.kosta.zuplay.model.dto.item.ItemDTO;
-import com.kosta.zuplay.model.service.player.PlayerInfo;
+import com.kosta.zuplay.model.service.player.PlayerInfoService;
 import com.kosta.zuplay.model.service.system.UtilService;
 
 @Service

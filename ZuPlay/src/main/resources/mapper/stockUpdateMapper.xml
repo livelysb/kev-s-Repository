@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kosta.zuplay.model.dao.StockUpdateDAO">
+<mapper namespace="com.kosta.zuplay.model.dao.stock.StockUpdateDAO">
 
 	<resultMap type="masterDTO" id="master">
 		<result column="isuKorAbbrv" property="isuKorAbbrv"/>
@@ -15,83 +15,41 @@
 		</association>
 	</resultMap>
 	
-	<resultMap type="playerListsDTO" id="playerLists">
-		<id column="PL_SQ" property="plSq"/>
-		<result column="isuCd" property="isuCd"/>
-		<result column="PLAYER_NICKNAME" property="playerNickname"/>
-		<result column="PL_QUANTITY" property="plQuantity"/>
-	</resultMap>
-
-	<resultMap type="stockDealHistoryDTO" id="stockDealHistory">
-		<id column="SDH_SQ" property="sdhSq"/>
-		<result column="isuCd" property="isuCd"/>
-		<result column="PLAYER_NICKNAME" property="playerNickname"/>
-		<result column="SDH_DEAL_PRICE" property="sdhDealPrice"/>
-		<result column="SDH_DEAL_TIME" property="sdhDealTime"/>
-		<result column="SDH_QUANTITY" property="sdhQuantity"/>
-		<result column="SDH_BUY_SELL" property="sdhBuySell"/>
-	</resultMap>
-
-	<select id="getLists" resultType="ListsDTO">
-		select * from lists
-	</select>
-
-	<select id="getPrices" resultType="priceDTO">
-		select * from price
-	</select>
+	<update id="priceUpdate" parameterType="priceDTO">
+		merge into price
+		using dual
+		on (isuCd=#{isuCd})
+		when matched then
+		update set
+		cmpprevddTpCd =
+		#{cmpprevddTpCd},
+		cmpprevddPrc = #{cmpprevddPrc},
+		trdPrc = #{trdPrc},
+		trdvol = #{trdvol},
+		opnprc = #{opnprc},
+		hgprc = #{hgprc},
+		lwprc =
+		#{lwprc},
+		trdTm = #{trdTm},
+		mktStatTpCd = #{mktStatTpCd}
+		when not matched
+		then
+		insert(isuCd,cmpprevddTpCd,cmpprevddPrc,trdPrc,trdvol,opnprc,hgprc,lwprc,trdTm,mktStatTpCd)
+		values
+		(#{isuCd},#{cmpprevddTpCd},#{cmpprevddPrc},#{trdPrc},#{trdvol},#{opnprc},#{hgprc},#{lwprc},#{trdTm},#{mktStatTpCd})
+	</update>
 	
-	<select id="getPrice" parameterType="String" resultType="priceDTO">
-		select * from price where isuCd=#{value}
-	</select>
-
-	<select id="getStockList" parameterType="java.util.Map"
-		resultMap="master">
-		<![CDATA[
-		select * from ( SELECT * FROM (          
-    SELECT ROW_NUMBER() OVER(ORDER BY  prevddAccTrdvol desc) rnum, 
-	    			isuCd, isuSrtCd, isuKorAbbrv, govncExcelYn, haltYn, mktcapScaleCd, mfindYn, krxAutosSectidxYn, krxSemiconSectidxYn, krxBioSectidxYn, krxFncSectidxYn, 
-krxInfoCommSectidxYn, krxEnergyChemSectidxYn, krxSteelSectidxYn, krxConsgoodSectidxYn, krxMediaCommSectidxYn, krxConstrSectidxYn, krxFncSvcSectidxYn, krxSecuSectidxYn,
-krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, listShrs, krxInsuSectidxYn, krxTransSectidxYn, krxRetailSectidxYn, krxLeisureSectidxYn FROM master
-	        ) WHERE rnum >= #{startPage} AND rnum <= #{endPage} ) m join price p on m.isucd = p.isucd
-	        ]]>
-	</select>
-
-
-	<insert id="insertDailyPrice" parameterType="priceDTO">
-		insert into
-		daily_price(dp_sq, isuCd, dp_clsprc, dp_date) values(rp_sq.nextval,
-		#{isuCd}, #{trdPrc}, sysdate)
-	</insert>
-
-	<insert id="insertRealtimePrice" parameterType="priceDTO">
+	<insert id="realtimePriceInsert" parameterType="priceDTO">
 		insert into
 		realtime_price(RP_SQ, isuCd, RP_trdPrc, RP_trdTm)
 		values(rp_sq.nextval, #{isuCd}, #{trdPrc}, #{trdTm})
 	</insert>
-
-	<delete id="resetRealtimePrice">
-		delete from realtime_price where 1=1
+	
+	<delete id="realtimePriceReset">
+		delete from realtime_price
 	</delete>
-
-	<update id="mergeIsu" parameterType="ListsDTO">
-		merge into lists
-		using
-		dual
-		on
-		(isuCd=#{isuCd})
-		when matched then
-		update set
-		mktTpCd=#{mktTpCd,
-		jdbcType=VARCHAR},isuSrtCd=#{isuSrtCd},isuKorNm=#{isuKorNm},isuKorAbbrv=#{isuKorAbbrv}
-		when not matched then
-		insert
-		(mktTpCd,isuCd,isuSrtCd,isuKorNm,isuKorAbbrv)
-		values (#{mktTpCd,
-		jdbcType=VARCHAR},#{isuCd},#{isuSrtCd},#{isuKorNm},#{isuKorAbbrv})
-	</update>
-
-
-	<update id="mergeMaster" parameterType="masterDTO">
+	
+	<update id="masterUpdate" parameterType="masterDTO">
 		merge into master
 		using
 		dual
@@ -189,74 +147,11 @@ krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, 
 		#{krxRetailSectidxYn},
 		#{krxLeisureSectidxYn})
 	</update>
+	
+	<insert id="dailyPriceInsert" parameterType="priceDTO">
+		insert into
+		daily_price(dp_sq, isuCd, dp_clsprc, dp_date) values(rp_sq.nextval,
+		#{isuCd}, #{trdPrc}, sysdate)
+	</insert>
 
-	<update id="mergePrice" parameterType="priceDTO">
-		merge into price
-		using dual
-		on (isuCd=#{isuCd})
-		when matched then
-		update set
-		cmpprevddTpCd =
-		#{cmpprevddTpCd},
-		cmpprevddPrc = #{cmpprevddPrc},
-		trdPrc = #{trdPrc},
-		trdvol = #{trdvol},
-		opnprc = #{opnprc},
-		hgprc = #{hgprc},
-		lwprc =
-		#{lwprc},
-		trdTm = #{trdTm},
-		mktStatTpCd = #{mktStatTpCd}
-		when not matched
-		then
-		insert(isuCd,cmpprevddTpCd,cmpprevddPrc,trdPrc,trdvol,opnprc,hgprc,lwprc,trdTm,mktStatTpCd)
-		values
-		(#{isuCd},#{cmpprevddTpCd},#{cmpprevddPrc},#{trdPrc},#{trdvol},#{opnprc},#{hgprc},#{lwprc},#{trdTm},#{mktStatTpCd})
-	</update>
-	
-	<select id="getPlayerStocks" parameterType="String" resultMap="playerLists">
-		select * from player_lists where player_nickname = #{value}
-	</select>
-	
-	<select id="getPlayerStock" parameterType="java.util.Map" resultMap="playerLists">
-		select * from player_lists where player_nickname = #{playerNickname} and isuCd = #{isuCd}
-	</select>
-	<update id="setPlayerStock" parameterType="java.util.Map">
-		update player_lists
-		set
-		pl_quantity = #{plQuantity}
-		where player_Nickname = #{playerNickname}
-		and
-		isuCd = #{isuCd}
-	</update>
-	
-	<update id="setPlayerMoney" parameterType="java.util.Map">
-		update player
-		set
-		PLAYER_MONEY = #{playerMoney}
-		where player_Nickname = #{playerNickname}
-	</update>
-	
-	<insert id="WriteStockHistory" parameterType="java.util.Map">
-		insert into STOCK_DEAL_HISTORY
-		(SDH_SQ, isuCd, PLAYER_NICKNAME, SDH_DEAL_PRICE, SDH_DEAL_TIME, SDH_QUANTITY, SDH_BUY_SELL)
-		values(SDH_SQ.nextval, #{isuCd}, #{playerNickname}, #{price}, sysdate, #{plQuantity}, #{bs} )
-	</insert>
-	
-	<select id="getStockHistory" parameterType="String" resultMap="stockDealHistory">
-		select * from stock_deal_history where player_nickname = #{String}
-	</select>
-	
-	<insert id="insertEarningRate" parameterType="java.util.Map">
-		insert into EARNING_RATE_HISTORY
-		(ERH_SQ, PLAYER_NICKNAME, ERH_PE, ERH_DATE)
-		VALUES(ERH_SQ.NEXTVAL, #{playerNickname}, #{erhPe}, sysdate)
-	</insert>
-	
-	<update id="updatePreMoney" parameterType="java.util.Map">
-		update player
-		set
-		player_premoney = #{preMoney}
-		where player_nickname = #{playerNickname}
-	</update>
 </mapper>

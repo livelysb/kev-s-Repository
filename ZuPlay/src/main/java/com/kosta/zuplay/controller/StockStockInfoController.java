@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
-import com.kosta.zuplay.model.service.stock.StockInfo;
+import com.kosta.zuplay.model.service.stock.StockInfoService;
 
 @Controller
 public class StockStockInfoController {
 	
 	@Autowired
-	private StockInfo stockInfo;
+	private StockInfoService stockInfo;
 	
 	@ResponseBody
 	@RequestMapping(value="realTimeStock" ,produces="application/json;charset=UTF-8" )

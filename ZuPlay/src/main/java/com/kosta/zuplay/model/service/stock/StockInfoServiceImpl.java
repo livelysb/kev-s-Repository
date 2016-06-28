@@ -8,14 +8,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-import com.kosta.zuplay.model.dao.StockUpdateDAO;
+import com.kosta.zuplay.model.dao.stock.StockInfoDAO;
 import com.kosta.zuplay.model.dto.stock.ListsDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
 import com.kosta.zuplay.model.dto.stock.PriceDTO;
 
 @Service
-public class StockInfoImpl implements StockInfo {
+public class StockInfoServiceImpl implements StockInfoService {
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -26,8 +25,8 @@ public class StockInfoImpl implements StockInfo {
 	 */
 	@Override
 	public List<PriceDTO> getPrices() {
-		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-		return stockUpdateDAO.getPrices();
+		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
+		return stockInfoDAO.getPrices();
 	}
 
 	/**
@@ -35,8 +34,8 @@ public class StockInfoImpl implements StockInfo {
 	 * */
 	@Override
 	public PriceDTO getPrice(String isuCd) {
-		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-		return stockUpdateDAO.getPrice(isuCd);
+		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
+		return stockInfoDAO.getPrice(isuCd);
 	}
 	
 	/**
@@ -44,12 +43,11 @@ public class StockInfoImpl implements StockInfo {
 	 */
 	@Override
 	public List<ListsDTO> getLists() {
-		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-		return stockUpdateDAO.getLists();
+		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
+		return stockInfoDAO.getLists();
 	}
 	
 	
-
 	
 	/**
 	 * DB의 모든 주식리스트 보여주기
@@ -62,8 +60,8 @@ public class StockInfoImpl implements StockInfo {
 		map.put("startPage", startPage);
 		map.put("endPage", endPage);
 		
-		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-		List<MasterDTO> masterList = stockUpdateDAO.getStockList(map);		
+		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
+		List<MasterDTO> masterList = stockInfoDAO.getStockList(map);		
 		for(MasterDTO masterDTO : masterList) {
 			double fr = (masterDTO.getPriceDTO().getTrdPrc()*100)/(masterDTO.getPriceDTO().getTrdPrc()-masterDTO.getPriceDTO().getCmpprevddPrc())-100;
 			int fr2 = (int)(fr*100);

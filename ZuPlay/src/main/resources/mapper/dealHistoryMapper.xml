@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.zuplay.model.dao.stock.DealHistoryDAO">
+
+	<resultMap type="stockDealHistoryDTO" id="stockDealHistory">
+		<id column="SDH_SQ" property="sdhSq" />
+		<result column="isuCd" property="isuCd" />
+		<result column="PLAYER_NICKNAME" property="playerNickname" />
+		<result column="SDH_DEAL_PRICE" property="sdhDealPrice" />
+		<result column="SDH_DEAL_TIME" property="sdhDealTime" />
+		<result column="SDH_QUANTITY" property="sdhQuantity" />
+		<result column="SDH_BUY_SELL" property="sdhBuySell" />
+	</resultMap>
+
+	<insert id="stockHistoryInsert" parameterType="java.util.Map">
+		insert into
+		STOCK_DEAL_HISTORY
+		(SDH_SQ, isuCd, PLAYER_NICKNAME, SDH_DEAL_PRICE,
+		SDH_DEAL_TIME, SDH_QUANTITY, SDH_BUY_SELL)
+		values(SDH_SQ.nextval,
+		#{isuCd}, #{playerNickname}, #{price}, sysdate, #{plQuantity}, #{bs} )
+	</insert>
+
+	<select id="getStockHistory" parameterType="String" resultMap="stockDealHistory">
+		select * from stock_deal_history where player_nickname = #{String}
+	</select>
+</mapper>

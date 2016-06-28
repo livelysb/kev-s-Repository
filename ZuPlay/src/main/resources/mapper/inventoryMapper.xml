@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kosta.zuplay.model.dao.InventoryDAO">
+<mapper namespace="com.kosta.zuplay.model.dao.PlayerItemDAO">
 
 	<resultMap type="playerItemDTO" id="playerItemMapper">
 		<id column="pi_sq" property="piSq" />
@@ -30,5 +30,25 @@
 		pi_isused=#{pi_isused},pi_index=#{pi_index} where
 		pi_sq=#{piSq}
 	</update>
-
+	<insert id="auctionInsertPlayerItem" parameterType="playerItemDTO">
+		insert into
+		player_item values
+		(pi_sq.nextval,#{playerNickname},#{itemCode},'F',#{piIndex})
+	</insert>
+	<select id="bringItemInfoByPiSq" parameterType="int"
+		resultMap="playerItemMapper">
+		select * from player_item p join item i on p.item_code=i.item_code where
+		pi_sq=#{value}
+	</select>
+	
+	<select id="getItemIndex" parameterType="String" resultType="int">
+		select pi_index from player_item where player_nickname=#{playerNickname} order by pi_index
+	</select>
+	
+	<insert id="itemStoreBuy" parameterType="java.util.Map">
+		insert into player_item values(pi_sq.nextval,#{playerNickname},#{itemCode},'F',#{piIndex})
+	</insert>
+	<delete id="itemDelete" parameterType="int">
+		delete player_item where pi_sq=#{piSq}
+	</delete>
 </mapper>

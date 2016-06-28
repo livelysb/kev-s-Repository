@@ -6,12 +6,16 @@ import java.util.Map;
 import com.kosta.zuplay.model.dto.item.ItemDTO;
 
 public interface ItemStoreDAO {
+	/**
+	 * 아이템 상점 목록 가져오기(전체)
+	 */
 	List<ItemDTO> itemStoreSelectAll(Map<String, String> map);
+	/**
+	 * 아이템 상점 목록 가져오기(클래스별)
+	 */
 	List<ItemDTO> itemStoreSelect(Map<String, String> map);
-	int getRuby(String playerNickname);
+	/**
+	 * 아이템 가격 가져오기
+	 */
 	int getPrice(String itemCode);
-	List<Integer> getItemIndex(String playerNickname);
-	int payRuby(Map<String, String> map);
-	int itemStoreBuy(Map<String, String> map);
-	int itemDelete(int piSq);
 }

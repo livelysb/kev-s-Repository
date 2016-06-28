@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.ItemStoreDAO;
+import com.kosta.zuplay.model.dao.PlayerInfoDAO;
+import com.kosta.zuplay.model.dao.PlayerItemDAO;
 
 @Service
 public class UtilServiceImpl implements UtilService {
@@ -21,8 +23,8 @@ public class UtilServiceImpl implements UtilService {
 	 */
 	@Override
 	public int indexSearch(String playerNickname) {
-		ItemStoreDAO itemStoreDAO=sqlSession.getMapper(ItemStoreDAO.class);
-		List<Integer> list=itemStoreDAO.getItemIndex(playerNickname);
+		PlayerItemDAO playerItemDAO=sqlSession.getMapper(PlayerItemDAO.class);
+		List<Integer> list=playerItemDAO.getItemIndex(playerNickname);
 		System.out.println(list);
 		for(int i=0;i<list.size();i++){
 			

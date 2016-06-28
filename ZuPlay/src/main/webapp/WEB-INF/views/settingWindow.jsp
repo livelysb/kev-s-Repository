@@ -156,22 +156,23 @@
 	
 	내정보<br>
 	<label class="switch switch-flat">
-		<input class="switch-input" type="checkbox" />
+		<input class="switch-input" type="checkbox" id="myInfoOp"/>
 		<span class="switch-label" data-on="On" data-off="Off"></span> 
 		<span class="switch-handle"></span> 
 	</label><br>
 	귓속말<br>
 	<label class="switch switch-flat">
-		<input class="switch-input" type="checkbox" />
+		<input class="switch-input" type="checkbox" id="whisperOp"/>
 		<span class="switch-label" data-on="On" data-off="Off"></span> 
 		<span class="switch-handle"></span> 
 	</label><br>
 	친구<br>
 	<label class="switch switch-flat">
-		<input class="switch-input" type="checkbox" />
+		<input class="switch-input" type="checkbox" id="friendOp"/>
 		<span class="switch-label" data-on="On" data-off="Off"></span> 
 		<span class="switch-handle"></span> 
-	</label>
+	</label><br>
+	<button type="button" id="saveOp">저장</button>
 <body>
 </body>
 
@@ -182,5 +183,55 @@
 <script src="resources/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+	$(document).ready(function() {
+		
+		var myPage="";
+		var chatting="";
+		var friendAdd="";
+		
+		$("#saveOp").on("click", function(){
+			checkTF();
+			
+			$.ajax({
+				url:"settingSave",
+				type:"post",
+				dataType:"text",
+				data:"myPage="+myPage+"&chatting="+chatting+"&friendAdd="+friendAdd,
+				success:function(result){
+					alert(result);
+				},
+				error:function(err){
+					alert(err+"에러발생")
+				}
+			})
+		})
+		
+		function checkTF(){
+			if($("#myInfoOp").is(":checked")==true){
+				myPage=="T"
+			}else{
+				myPage=="F"
+			}
+			
+			if($("#whisperOp").is(":checked")==true){
+				chatting=="T"
+			}else{
+				chatting=="F"
+			}
+			
+			if($("#friendOp").is(":checked")==true){
+				friendAdd=="T"
+			}else{
+				friendAdd=="F"
+			}
+		}
+	})
 </script>
 </html>
+
+
+
+
+
+
+

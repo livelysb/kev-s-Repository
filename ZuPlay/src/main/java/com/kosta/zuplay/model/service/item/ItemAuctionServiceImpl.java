@@ -148,12 +148,14 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 		if (imAuctionEnd.equals("F")) {
 			System.out.println(imAuctionEnd);
 			Map<String, String> map = new HashMap<String, String>();
-			itemAuctionDAO.auctionDeleteFin(imSq);
 			int ruby=itemStoreDAO.getRuby(playerNickname);
 			int price = itemAuctionDAO.auctionHowPrice(imSq);
+			itemAuctionDAO.auctionDeleteFin(imSq);
+
 			map.put("playerNickname", playerNickname);
 			map.put("updateRuby", ruby+price + "");
 			int result=itemStoreDAO.payRuby(map);
+			System.out.println(map);
 			if(result ==0){
 				return false;
 			}

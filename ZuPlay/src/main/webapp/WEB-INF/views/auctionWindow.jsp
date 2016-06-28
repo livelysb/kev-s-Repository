@@ -90,6 +90,7 @@
 						</table>
 					</div>
 				</div>
+				<br>
 				<button type="button" id="auctionRegister" class="btn btn-primary">등록하기</button>
 			</div>
 		</div>
@@ -112,7 +113,6 @@
         var count=1;
 		var sellBtn="";
 		var colorBtn="";
-		
 		//탭 토글
         $('a[data-toggle="tab"]').on('hidden.bs.tab', function(e){
         });
@@ -179,17 +179,18 @@
 		
 		//수령, 유찰
 		$(document).on("click",'input[value=수령],input[value=유찰]', function() {
+			var wordBtn =  $(this).val();
 			$.ajax({
 				url:"auctionBring",
 				type:"post",
 				dataType:"text",
 				data:"imSq="+$(this).attr("id"),
 				success:function(result){
-					if($(this).val()=="수령"){
+					if(wordBtn=="수령"){
 						alert("판매금을 수령하셨습니다.")
 					}else{
 						alert("유찰 된 아이템을 수령하셨습니다.")
-					}
+					} 
 					sellList();
 				},
 				error:function(err){
@@ -201,7 +202,6 @@
         //검색
         $("#auctionSearch").on("keyup",function(){
         	count=1;
-        	
         	if(event.keyCode == 13) {
         		$("#auctionHidden").val($(this).val())
         		search(count); 

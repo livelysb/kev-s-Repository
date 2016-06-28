@@ -16,6 +16,15 @@ import com.kosta.zuplay.model.service.community.BoardService;
 public class BoardController {
 	@Autowired
 	private BoardService boardServiceImpl;
+	
+	/**
+	 * 게시글 작성 페이지 이동
+	 */
+	@RequestMapping("write")
+	public String write(){
+		return "writeBoard";
+	}
+	
 	/**
 	 * 게시판 글 작성
 	 * @param dto
@@ -24,6 +33,7 @@ public class BoardController {
 	@RequestMapping("insertBoard")
 	@ResponseBody
 	public boolean insertBoard(BoardDTO dto){
+		System.out.println(dto);
 		return boardServiceImpl.insertBoard(dto);
 	}
 	/**

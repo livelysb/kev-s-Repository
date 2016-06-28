@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosta.zuplay.model.dao.SettingDAO">
 
-	<update id='settingSave' parameterType='settindDTO'>
+	<update id='settingSave' parameterType='settingDTO'>
 		update player_setting set
 		bgm_sound=#{bgmSound},my_page=#{myPage},friend_add=#{friendAdd} where
 		player_nickname=#{playerNickname}

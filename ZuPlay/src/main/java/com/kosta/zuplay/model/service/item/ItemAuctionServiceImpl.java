@@ -111,21 +111,23 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	public boolean auctionSell(String playerNickname, int piSq, int imPurchasePrice) {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
-		ItemDTO itemDTO = playerItemDAO.bringItemInfoByPiSq(piSq);
+		PlayerItemDTO playerItemDTO = playerItemDAO.bringItemInfoByPiSq(piSq);
 		Map<String, String> map = new HashMap<String,String>();
 		map.put("playerNickname", playerNickname);
 		map.put("imPurchasePrice", imPurchasePrice+"");
-		map.put("itemCode", itemDTO.getItemCode());
+		map.put("itemCode", playerItemDTO.getItemCode());
 		int insertResult = itemAuctionDAO.auctionInsertItemMarket(map);
 		if (insertResult != 0) {
 			int deleteResult = playerItemDAO.itemDelete(piSq);
 			if (deleteResult == 0) {
 				System.out.println("[ LOG ] : player_item 레코드 삭제 실패하였습니다.");
+				return false;
 			}
 		} else {
 			System.out.println("[ LOG ] : 경매장에 아이템 등록을 실패하였습니다.");
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	/**

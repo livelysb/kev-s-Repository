@@ -64,7 +64,7 @@
 	<insert id="auctionInsertItemMarket" parameterType="java.util.Map">
 		insert into
 		item_market values
-		(im_sq.nextval,#{playerNickname},#{itemCode},#{imPurchasePrice},sysdate),'T')
+		(im_sq.nextval,#{playerNickname},#{itemCode},#{imPurchasePrice},sysdate,'T')
 	</insert>
 	
 	<update id="auctionCancel" parameterType="int">

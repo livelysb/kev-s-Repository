@@ -16,7 +16,7 @@ public interface PlayerItemDAO {
 	/**
 	 * player_item 테이블에서 아이템 정보 가져오기
 	 */
-	ItemDTO bringItemInfoByPiSq(int piSq);
+	PlayerItemDTO bringItemInfoByPiSq(int piSq);
 	/**
 	 * player_item 테이블 레코드 삭제
 	 */

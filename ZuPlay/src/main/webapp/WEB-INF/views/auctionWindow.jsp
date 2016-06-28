@@ -136,7 +136,7 @@
         		url:"auctionSell",
         		type:"post",
         		dataType:"text",
-        		data:"piSq=25&imPurchasePrice=15000",
+        		data:"piSq=30&imPurchasePrice=15000",
         		success:function(result){
         			alert(result);
         		},

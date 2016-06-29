@@ -54,7 +54,7 @@
 	<!-- http://docs.spring.io/spring/docs/current/spring-framework-reference/html/websocket.html 
 		https://github.com/dilbertside/sandbox/tree/master/extjs-websocket -->
 	<websocket:handlers>
-		<websocket:mapping path="/echo" handler="websocketEndPoint" />
+		<websocket:mapping path="/server" handler="websocketEndPoint" />
 
 		<!-- <websocket:handshake-interceptors> <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/> 
 			</websocket:handshake-interceptors> -->
@@ -66,4 +66,5 @@
 		<beans:property name="maxTextMessageBufferSize" value="8192" />
 		<beans:property name="maxBinaryMessageBufferSize" value="8192" />
 	</beans:bean>
+
 </beans:beans>

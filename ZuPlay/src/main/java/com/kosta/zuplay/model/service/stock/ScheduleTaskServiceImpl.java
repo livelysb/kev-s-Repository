@@ -10,7 +10,7 @@ import com.kosta.zuplay.model.service.player.EarningRateService;
 public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	
 	@Autowired
-	private StockUpdateServiceImpl stockUpdateService;
+	private StockUpdateService stockUpdateService;
 	
 	@Autowired
 	private EarningRateService earningRateService;

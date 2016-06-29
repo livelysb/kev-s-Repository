@@ -34,9 +34,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	
 
-	
 	/**
 	 * 모든 플레이어들의 수익률 갱신 및 전일자산 업데이트
 	 * */

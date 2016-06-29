@@ -68,7 +68,7 @@
 	<!-- http://docs.spring.io/spring/docs/current/spring-framework-reference/html/websocket.html 
 		https://github.com/dilbertside/sandbox/tree/master/extjs-websocket -->
 	<websocket:handlers>
-		<websocket:mapping path="/server" handler="websocketEndPoint" />
+		<websocket:mapping path="/echo" handler="websocketEndPoint" />
 
 		<!-- <websocket:handshake-interceptors> <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/> 
 			</websocket:handshake-interceptors> -->

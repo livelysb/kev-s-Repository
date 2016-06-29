@@ -12,50 +12,57 @@
   </head>
 
   <body>
-  <textarea id="messageWindow" rows="10" cols="50" readonly="true"></textarea>
-  <br/>
-  <input id="inputMessage" type="text"/>
-  <input type="submit" value="send" onclick="send()" />
-  </body>
-  <script type="text/javascript">
-   var textarea = document.getElementById("messageWindow");
-    var webSocket = new WebSocket('ws://localhost:8000/zuplay/server');
-    
-    var inputMessage = document.getElementById('inputMessage');
-    
-    webSocket.onerror = function(event) {
-      onError(event)
-    };
-    webSocket.onopen = function(event) {
-      onOpen(event)
-    };
-    webSocket.onmessage = function(event) {
-      onMessage(event)
-    };
-    function onMessage(event) {
-      textarea.value += "상대 : " + event.data + "\n";
+  <button id="connect">connect</button>
+<button id="disconnect" disabled="">disconnect</button>
+<input type="text" id="message">
+<textarea id="messages" style="width: 100%; height: 200px;" readonly=""></textarea>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script type="text/javascript">
+    var ws;
+ 
+    function connect() {
+        ws = new WebSocket('ws://127.0.0.1:8000/zuplay/echo');
+        ws.onopen = function () {
+            console.log('websocket opened');
+        };
+        ws.onmessage = function (message) {
+            console.log(message);
+            console.log('receive message : ' + message.data);
+            $('#messages').val($('#messages').val() + message.data + '\n');
+            document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+        };
+        ws.onclose = function (event) {
+            console.log(event);
+            console.log('websocket closed');
+        };
     }
-    function onOpen(event) {
-      textarea.value += "연결 성공\n";
+ 
+    function disconnect() {
+        if (ws) {
+            ws.close();
+            ws = null;
+        }
     }
-    function onError(event) {
-      alert(event.data);
-    }
-
-    function send() {
-
-      var bytes = new ArrayBuffer();
-
-      for (var i = 0; i < inputMessage.value.length; ++i) {
-    	  var c = inputMessage.value.charCodeAt(i);
-    	  while(c) {
-    		bytes += (c & 0xFF);
-    	    c >>= 8;
-    	 }
-      }
-      textarea.value += "나 : " + inputMessage.value + "\n";
-      webSocket.send(bytes);
-      inputMessage.value = "";
-    }
-  </script>
+ 
+    $(function () {
+        $('#connect').click(function () {
+            connect();
+            $(this).attr('disabled', true);
+            $('#disconnect').removeAttr('disabled');
+        });
+ 
+        $('#disconnect').click(function () {
+            disconnect();
+            $(this).attr('disabled', true);
+            $('#connect').removeAttr('disabled');
+        });
+ 
+        $('#message').keydown(event, function () {
+            if (event.keyCode === 13) {
+                ws.send($(this).val());
+                $(this).val('');
+            }
+        });
+    });
+</script>
 </html>

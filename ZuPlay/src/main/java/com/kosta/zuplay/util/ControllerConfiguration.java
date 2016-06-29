@@ -23,13 +23,12 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebMvc
 @ComponentScan(basePackages={"com.kosta.zuplay"})
 public class ControllerConfiguration extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
-	
-	@Autowired
-	  private EchoHandler echoHandler;
-    
-	@Override
+    @Autowired
+    private EchoHandler echoHandler;
+
+    @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new EchoHandler(), "/server");
+        registry.addHandler(echoHandler, "/echo");
     }
  
 }

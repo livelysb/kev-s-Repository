@@ -11,7 +11,6 @@ public interface PlayerInfoService {
 	 * */
 	public PlayerDTO getPlayer(String playerNickname);
 
-	
 	/**
 	 * 모픈 플레이어의 닉네임 가져오기
 	 * */
@@ -26,5 +25,9 @@ public interface PlayerInfoService {
 	 * 주식을 포함한 현재 자산 구하기
 	 * */
 	public int getTotalMoney(String playerNickname);
+	
+	/**
+	 * 접속자의 최종 접속시간을 확인하여 하루에 한번씩 1000루비 주기 
+	 * */
 
 }

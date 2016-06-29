@@ -2,15 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosta.zuplay.model.dao.SettingDAO">
 
+	<resultMap type="settingDTO" id="settingMapper">
+		<id column="ps_sq" property="psSq" />
+		<result column="player_nickname" property="playerNickname" />
+		<result column="bgm_sound" property="bgmSound" />
+		<result column="my_page" property="myPage" />
+		<result column="chatting" property="chatting" />
+		<result column="friend_add" property="friendAdd" />
+
+	</resultMap>
 	<update id='settingSave' parameterType='settingDTO'>
 		update player_setting set
 		bgm_sound=#{bgmSound},my_page=#{myPage},friend_add=#{friendAdd} where
 		player_nickname=#{playerNickname}
 	</update>
-	
+
 	<update id='settingReset' parameterType='String'>
-		update player_setting set
+		update player_setting
+		set
 		bgm_sound=30,my_page='T',friend_add='T' where
 		player_nickname=#{value}
 	</update>
+
+	<select id="settingSelect" resultMap="settingMapper" parameterType="String">
+		select *
+		from player_setting where player_nickname=#{value}
+	</select>
 </mapper>

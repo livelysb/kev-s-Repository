@@ -41,6 +41,10 @@
 			<td colspan="4">${boardDTO.content}</td>
 		</tr>
 		</table>
+		<div align="right">
+			<input type = "button" id = "update" value = "수정">
+			<input type = "button" id = "delete" value = "삭제">
+		</div>
 	</div>
 </body>
 

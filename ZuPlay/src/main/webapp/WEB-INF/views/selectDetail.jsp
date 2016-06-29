@@ -43,7 +43,7 @@
 		</table>
 		<div align="right">
 			<input type = "button" id = "update" value = "수정">
-			<input type = "button" id = "delete" value = "삭제">
+			<a href = "deleteBoard"><input type = "button" id = "delete" value = "삭제"></a>
 		</div>
 	</div>
 </body>

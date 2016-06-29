@@ -195,7 +195,7 @@
 		
 		//설정 완료
 		$("#saveOp").on("click", function(){
-			checkBox();
+			confirmCheckBox();
 			$.ajax({
 				url:"settingSave",
 				type:"post",
@@ -237,10 +237,24 @@
 					console.log(result.chatting)
 					console.log(result.friendAdd)
 					
-					result.myPage ? $("#myInfoOp").prop("checked",true) : $("#myInfoOp").prop("checked",false)
-					result.chatting ? $("#whisperOp").prop("checked",true) : $("#whisperOp").prop("checked",false)
-					result.friendAdd ? $("#friendOp").prop("checked",true) : $("#friendOp").prop("checked",false)
-							
+					if(result.myPage=="T"){
+						$("#myInfoOp").prop("checked",true)
+					}else{
+						$("#myInfoOp").prop("checked",false)
+					}
+					
+					if(result.chatting=="T"){
+						$("#whisperOp").prop("checked",true)
+					}else{
+						$("#whisperOp").prop("checked",false)
+					}
+					
+					if(result.friendAdd=="T"){
+						$("#friendOp").prop("checked",true)
+					}else{
+						$("#friendOp").prop("checked",false)
+					}
+					
 				},
 				error:function(err){
 					alert(err+"에러발생")
@@ -253,7 +267,6 @@
 			$("#myInfoOp").is(":checked") ? myPage="T" : myPage="F"
 			$("#whisperOp").is(":checked") ? chatting="T" : chatting="F"
 			$("#friendOp").is(":checked") ? friendAdd="T" : friendAdd="F" 
-			
 		}
 	})
 </script>

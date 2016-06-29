@@ -192,17 +192,17 @@
 		
 		loadOp()
 		
+		
 		//설정 완료
 		$("#saveOp").on("click", function(){
 			checkBox();
-			
 			$.ajax({
 				url:"settingSave",
 				type:"post",
 				dataType:"text",
 				data:"myPage="+myPage+"&chatting="+chatting+"&friendAdd="+friendAdd,
 				success:function(result){
-					alert(result);
+					
 				},
 				error:function(err){
 					alert(err+"에러발생")
@@ -233,6 +233,10 @@
 				type:"post",
 				dataType:"json",
 				success:function(result){
+					console.log(result.myPage)
+					console.log(result.chatting)
+					console.log(result.friendAdd)
+					
 					if(result.myPage==true){
 						$("#myInfoOp").is(":checked")==true
 					}else if(result.chatting==true){

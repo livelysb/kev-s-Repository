@@ -43,6 +43,7 @@ public class SettingController {
 	@RequestMapping("settingSelect")
 	@ResponseBody
 	public String settingSelect(HttpSession session){
+		System.out.println("11111");
 		String playerNickname=(String) session.getAttribute("playerNickname");
 		SettingDTO dto = settingServiceImpl.settingSelect(playerNickname);
 		Gson gson = new Gson();

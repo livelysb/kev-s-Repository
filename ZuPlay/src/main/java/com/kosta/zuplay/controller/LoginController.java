@@ -48,8 +48,7 @@ public class LoginController {
 	@RequestMapping(value="joinMember")
 	public String joinMember(String playerNickname,String playerNaverId,String playerGender,String playerAge,HttpSession session){
 		System.out.println(playerNickname);
-		boolean joinMember=loginServiceImpl.joinMember(new PlayerDTO(playerNickname, playerNaverId, playerGender, playerAge, 0, 0, 0, "마스터", 1, 1, 1, 1));
-		System.out.println("[ LOG ] : 회원가입 성공 " +joinMember);
+		boolean joinMember=loginServiceImpl.joinMember(new PlayerDTO(playerNickname, playerNaverId, playerGender, playerAge, 0, 100000000, 0, "b", 0, 0, 0, 0));
 		session.setAttribute("playerNickname", playerNickname);
 		return "index";
 	}

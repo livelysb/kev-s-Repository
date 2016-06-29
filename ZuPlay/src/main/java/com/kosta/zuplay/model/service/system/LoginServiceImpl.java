@@ -29,7 +29,6 @@ public class LoginServiceImpl implements LoginService {
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
 		SettingDAO settingDAO=sqlSession.getMapper(SettingDAO.class);
 		int result=loginDAO.joinMember(playerDTO);
-		System.out.println("[ Log ] playerNaverId = " +playerDTO.getPlayerNaverId()+" | playerNickname = "+playerDTO.getPlayerNickname()+" | playerGender = "+playerDTO.getPlayerGender()+" | playerAge = "+playerDTO.getPlayerAge());
 		settingDAO.settingReset(playerDTO.getPlayerNickname());
 		if(result==0){
 			return false;
@@ -51,5 +50,11 @@ public class LoginServiceImpl implements LoginService {
 	public String getNickname(String playerNaverId) {
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
 		return loginDAO.getNickname(playerNaverId);
+	}
+
+	@Override
+	public boolean getRubyPerDay(String playerNickname) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

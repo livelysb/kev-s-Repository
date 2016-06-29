@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kosta.zuplay.model.dao.EarningRateDAO;
 import com.kosta.zuplay.model.dao.PlayerInfoDAO;
@@ -40,6 +41,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 	 * 2. 수익률 만큼 루비 추가
 	 * 3. 전일자산 업데이트
 	 * */
+	@Transactional
 	@Override
 	public int updateEarningRate() {
 		int result = 0;
@@ -55,8 +57,9 @@ public class EarningRateServiceImpl implements EarningRateService {
 					//earingRate를 이용한 루비 추가
 					int ruby = playerInfoService.getPlayer(playerNickname).getPlayerRuby();
 					ruby += (int)(earningRate*100000000);
-					//루비 업데이트
-					result ++;
+					if(playerInfoService.updateRuby(playerNickname, ruby)) {
+						result ++;
+					}
 				}
 	
 		}

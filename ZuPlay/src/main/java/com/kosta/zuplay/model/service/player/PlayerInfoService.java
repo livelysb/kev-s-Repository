@@ -29,5 +29,13 @@ public interface PlayerInfoService {
 	/**
 	 * 접속자의 최종 접속시간을 확인하여 하루에 한번씩 1000루비 주기 
 	 * */
+	/**
+	 * 플레이어 루비 가져오기
+	 */
+	public int getRuby(String playerNickname);
+	/**
+	 * 플레이어 루비 업데이트
+	 */
+	public boolean updateRuby(String playerNickname,int ruby);
 
 }

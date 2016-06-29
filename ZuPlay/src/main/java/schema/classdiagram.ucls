@@ -553,16 +553,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="58" language="java" name="com.kosta.zuplay.controller.PlayerController" project="ZuPlay" 
-    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/PlayerController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1214" y="5502"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="59" language="java" name="com.kosta.zuplay.controller.RankController" project="ZuPlay" 
+  <class id="58" language="java" name="com.kosta.zuplay.controller.RankController" project="ZuPlay" 
     file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/RankController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1505" y="5589"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -571,7 +562,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="60" language="java" name="com.kosta.zuplay.controller.ItemAuctionController" project="ZuPlay" 
+  <class id="59" language="java" name="com.kosta.zuplay.controller.ItemAuctionController" project="ZuPlay" 
     file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/ItemAuctionController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="339" y="1238"/>    
@@ -581,7 +572,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="61" language="java" name="com.kosta.zuplay.controller.ChattingController" project="ZuPlay" 
+  <class id="60" language="java" name="com.kosta.zuplay.controller.ChattingController" project="ZuPlay" 
     file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/ChattingController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1370" y="5591"/>    
@@ -591,8 +582,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="62" language="java" name="com.kosta.zuplay.controller.StockStockInfoController" project="ZuPlay" 
-    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/StockStockInfoController.java" binary="false" 
+  <class id="61" language="java" name="com.kosta.zuplay.controller.StockInfoController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/StockInfoController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="958" y="507"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -601,7 +592,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="63" language="java" name="com.kosta.zuplay.controller.InventoryController" project="ZuPlay" 
+  <class id="62" language="java" name="com.kosta.zuplay.controller.InventoryController" project="ZuPlay" 
     file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/InventoryController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1930" y="930"/>    
@@ -611,7 +602,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="64" language="java" name="com.kosta.zuplay.controller.ItemStoreController" project="ZuPlay" 
+  <class id="63" language="java" name="com.kosta.zuplay.controller.ItemStoreController" project="ZuPlay" 
     file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/ItemStoreController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="476" y="2024"/>    
@@ -621,7 +612,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="65" language="java" name="com.kosta.zuplay.controller.BoardController" project="ZuPlay" 
+  <class id="64" language="java" name="com.kosta.zuplay.controller.BoardController" project="ZuPlay" 
     file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/BoardController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1187" y="2214"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -630,7 +621,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="66" language="java" name="com.kosta.zuplay.controller.StockTradeController" project="ZuPlay" 
+  <class id="65" language="java" name="com.kosta.zuplay.controller.StockTradeController" project="ZuPlay" 
     file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/StockTradeController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1215" y="5595"/>    
@@ -640,7 +631,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="67" language="java" name="com.kosta.zuplay.controller.QuestController" project="ZuPlay" 
+  <class id="66" language="java" name="com.kosta.zuplay.controller.QuestController" project="ZuPlay" 
     file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/QuestController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1783" y="2083"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -649,7 +640,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="68" language="java" name="com.kosta.zuplay.controller.IndexController" project="ZuPlay" 
+  <class id="67" language="java" name="com.kosta.zuplay.controller.IndexController" project="ZuPlay" 
     file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/IndexController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1513" y="5481"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -658,7 +649,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="69" language="java" name="com.kosta.zuplay.controller.FriendController" project="ZuPlay" 
+  <class id="68" language="java" name="com.kosta.zuplay.controller.FriendController" project="ZuPlay" 
     file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/FriendController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1372" y="5498"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -667,272 +658,223 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="70">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <association id="71">    
-    <end type="SOURCE" refId="40" navigable="false">      
-      <attribute id="72" name="itemDTO">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="73" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="43" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="74">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
-  <association id="75">    
-    <end type="SOURCE" refId="60" navigable="false">      
-      <attribute id="76" name="itemAuctionServiceImpl">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="77" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="78">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="79" name="utilServiceImpl">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="80" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="81">    
-    <end type="SOURCE" refId="44" navigable="false">      
-      <attribute id="82" name="itemDTO">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="83" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="43" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="84">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="85">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <association id="86">    
-    <end type="SOURCE" refId="37" navigable="false">      
-      <attribute id="87" name="priceDTO">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="88" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="32" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="89">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="20"/>  
-  </realization>  
-  <realization id="90">    
+  <realization id="69">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="17"/>  
   </realization>  
-  <association id="91">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="92" name="stockInfo">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="93" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="94">    
-    <end type="SOURCE" refId="41" navigable="false">      
-      <attribute id="95" name="masterDTO">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="96" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="37" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="97">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="6"/>  
-  </realization>  
-  <association id="98">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="99" name="stockUpdate">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="100" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="101">    
-    <end type="SOURCE" refId="63" navigable="false">      
-      <attribute id="102" name="inventoryServiceImpl">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="103" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="104">    
-    <end type="SOURCE" refId="64" navigable="false">      
-      <attribute id="105" name="itemStoreServiceImpl">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="106" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="107">    
-    <end type="SOURCE" refId="27"/>    
-    <end type="TARGET" refId="18"/>  
-  </realization>  
-  <association id="108">    
-    <end type="SOURCE" refId="65" navigable="false">      
-      <attribute id="109" name="boardServiceImpl">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="110" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="111">    
-    <bendpoint x="1046" y="131"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="112" name="earningRate">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="113" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="114">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="24"/>  
-  </realization>  
-  <association id="115">    
-    <end type="SOURCE" refId="62" navigable="false">      
-      <attribute id="116" name="stockInfo">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="117" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="118">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="14"/>  
-  </realization>  
-  <association id="119">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="120" name="stockInfo">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="121" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="122">    
-    <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="123" name="earningRate">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="124" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="125">    
-    <end type="SOURCE" refId="67" navigable="false">      
-      <attribute id="126" name="questServiceImpl">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="127" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="128">    
+  <association id="70">    
     <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="129" name="utilServiceImpl">        
+      <attribute id="71" name="utilServiceImpl">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="130" minimum="0" maximum="1">        
+      <multiplicity id="72" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="23" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="131">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="23"/>  
-  </realization>  
-  <realization id="132">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
-  <association id="133">    
+  <association id="73">    
     <end type="SOURCE" refId="57" navigable="false">      
-      <attribute id="134" name="loginServiceImpl">        
+      <attribute id="74" name="loginServiceImpl">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="135" minimum="0" maximum="1">        
+      <multiplicity id="75" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="20" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="136">    
+  <association id="76">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="77" name="priceDTO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="78" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="79">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <association id="80">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="81" name="masterDTO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="82" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="83">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="84">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <realization id="85">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="86">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <realization id="87">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <association id="88">    
+    <end type="SOURCE" refId="63" navigable="false">      
+      <attribute id="89" name="itemStoreServiceImpl">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="90" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="92" name="utilServiceImpl">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="93" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="95" name="itemAuctionServiceImpl">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="96" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="98" name="earningRate">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="99" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="100">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <association id="101">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="102" name="boardServiceImpl">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="103" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="104">    
+    <end type="SOURCE" refId="61" navigable="false">      
+      <attribute id="105" name="stockInfo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="106" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="107">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <realization id="108">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="109">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="110" name="itemDTO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="111" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="113" name="itemDTO">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="114" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="115">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="116">    
+    <end type="SOURCE" refId="62" navigable="false">      
+      <attribute id="117" name="inventoryServiceImpl">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="118" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="119">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <association id="120">    
+    <end type="SOURCE" refId="66" navigable="false">      
+      <attribute id="121" name="questServiceImpl">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="122" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="123">    
     <end type="SOURCE" refId="21"/>    
     <end type="TARGET" refId="26"/>  
   </realization>  

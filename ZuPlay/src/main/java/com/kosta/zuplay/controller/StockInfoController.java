@@ -12,7 +12,7 @@ import com.kosta.zuplay.model.dto.stock.MasterDTO;
 import com.kosta.zuplay.model.service.stock.StockInfoService;
 
 @Controller
-public class StockStockInfoController {
+public class StockInfoController {
 	
 	@Autowired
 	private StockInfoService stockInfo;

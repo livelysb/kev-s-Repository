@@ -190,7 +190,7 @@
 		var chatting=false;
 		var friendAdd=false;
 		
-		confirmCheckBox()
+		loadOp()
 		
 		//설정 완료
 		$("#saveOp").on("click", function(){

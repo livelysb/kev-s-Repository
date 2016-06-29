@@ -237,13 +237,10 @@
 					console.log(result.chatting)
 					console.log(result.friendAdd)
 					
-					if(result.myPage==true){
-						$("#myInfoOp").is(":checked")==true
-					}else if(result.chatting==true){
-						$("#whisperOp").is(":checked")==true
-					}else{
-						$("#friendOp").is(":checked")==true
-					}
+					result.myPage ? $("#myInfoOp").prop("checked",true) : $("#myInfoOp").prop("checked",false)
+					result.chatting ? $("#whisperOp").prop("checked",true) : $("#whisperOp").prop("checked",false)
+					result.friendAdd ? $("#friendOp").prop("checked",true) : $("#friendOp").prop("checked",false)
+							
 				},
 				error:function(err){
 					alert(err+"에러발생")

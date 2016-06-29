@@ -13,7 +13,7 @@
 	</resultMap>
 	<update id='settingSave' parameterType='settingDTO'>
 		update player_setting set
-		bgm_sound=#{bgmSound},my_page=#{myPage},friend_add=#{friendAdd} where
+		bgm_sound=#{bgmSound},my_page=#{myPage},chatting=#{chatting},friend_add=#{friendAdd} where
 		player_nickname=#{playerNickname}
 	</update>
 

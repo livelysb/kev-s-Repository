@@ -14,44 +14,44 @@
 <link href="resources/css/zuplay.css" rel="stylesheet">
 
 <style type="text/css">
-	/* #tabBtn {text-align: right} */
+   /* #tabBtn {text-align: right} */
 </style>
 </head>
 
 <body>
-	<table border="0" width="100%">
-	<tr>
-		<td width="100%" style="padding:10px 50px; vertical-align:top">
-			<form  class="form-horizontal" method="post" action = "insertBoard">
-				<fieldset>
-					<legend>글쓰기</legend>
-					<div class="form-group">
-						<div>
-							<input type="text" class="form-control" name="boardTitle" id="boardTitle"
-								placeholder="제목">
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<div>
-							<textarea class="form-control" rows="3" name="boardContent" id="boardContent" placeholder="내용"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<div>
-							<input type="file" class="form-control" name="" id="imageFile"
-								placeholder="파일첨부">
-						</div>
-					</div>
-						<div align="center">
-							<input type="submit" class="btn btn-primary" value="등록">
-							<button class="btn btn-default">취소</button>
-						</div>
-					
-				</fieldset>
-			</form>
-		</td>
-	</table>
+   <table border="0" width="100%">
+   <tr>
+      <td width="100%" style="padding:10px 50px; vertical-align:top">
+         <form  class="form-horizontal" method="post" action = "insertBoard">
+            <fieldset>
+               <legend>글쓰기</legend>
+               <div class="form-group">
+                  <div>
+                     <input type="text" class="form-control" name="boardTitle" id="boardTitle"
+                        placeholder="제목">
+                  </div>
+               </div>
+               
+               <div class="form-group">
+                  <div>
+                     <textarea class="form-control" rows="3" name="boardContent" id="boardContent" placeholder="내용"></textarea>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <div>
+                     <input type="file" class="form-control" name="" id="imageFile"
+                        placeholder="파일첨부">
+                  </div>
+               </div>
+                  <div align="center">
+                     <input type="submit" class="btn btn-primary" value="등록">
+                     <button class="btn btn-default">취소</button>
+                  </div>
+               
+            </fieldset>
+         </form>
+      </td>
+   </table>
 </body>
 
 <script src="resources/js/jquery-2.2.4.min.js"></script>
@@ -63,4 +63,3 @@
 <script src="resources/js/zuplay.js"></script>
 
 
-</html>

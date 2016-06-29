@@ -190,8 +190,11 @@
 		var chatting=false;
 		var friendAdd=false;
 		
+		confirmCheckBox()
+		
+		//설정 완료
 		$("#saveOp").on("click", function(){
-			checkTF();
+			checkBox();
 			
 			$.ajax({
 				url:"settingSave",
@@ -207,6 +210,7 @@
 			})
 		})
 		
+		//설정 초기화
 		$("#initializationOp").on("click",function(){
 			$.ajax({
 				url:"settingReset",
@@ -214,6 +218,7 @@
 				dataType:"text",
 				success:function(result){
 					alert(result);
+					//초기화 상태 파악하고 체크해줄 것
 				},
 				error:function(err){
 					alert(err+"에러발생")
@@ -221,8 +226,29 @@
 			})
 		})
 		
+		//셋팅정보 로드
+		function loadOp(){
+			$.ajax({
+				url:"settingSelect",
+				type:"post",
+				dataType:"json",
+				success:function(result){
+					if(result.myPage==true){
+						$("#myInfoOp").is(":checked")==true
+					}else if(result.chatting==true){
+						$("#whisperOp").is(":checked")==true
+					}else{
+						$("#friendOp").is(":checked")==true
+					}
+				},
+				error:function(err){
+					alert(err+"에러발생")
+				}
+			})
+		}
 		
-		function checkTF(){
+		//체크박스 상태변수
+		function confirmCheckBox(){
 			$("#myInfoOp").is(":checked") ? myPage="T" : myPage="F"
 			$("#whisperOp").is(":checked") ? chatting="T" : chatting="F"
 			$("#friendOp").is(":checked") ? friendAdd="T" : friendAdd="F" 

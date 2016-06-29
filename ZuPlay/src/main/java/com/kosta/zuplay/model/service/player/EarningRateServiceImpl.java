@@ -36,20 +36,28 @@ public class EarningRateServiceImpl implements EarningRateService {
 	
 
 	/**
-	 * 모든 플레이어들의 수익률 갱신 및 전일자산 업데이트
+	 * 1. 모든 플레이어들의 수익률 갱신
+	 * 2. 수익률 만큼 루비 추가
+	 * 3. 전일자산 업데이트
 	 * */
 	@Override
 	public int updateEarningRate() {
 		int result = 0;
 		List<String> playerList = playerInfoService.getAllPlayerNickName();
 		for(String playerNickname : playerList) {
+			double earningRate = calDailyEarningRate(playerNickname);
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("playerNickname", playerNickname);
-			map.put("erhPe", Double.toString(calDailyEarningRate(playerNickname)));
+			map.put("erhPe", Double.toString(earningRate));
 			EarningRateDAO earningRateDAO = sqlSession.getMapper(EarningRateDAO.class);
 			if(earningRateDAO.earningRateInsert(map)>0)
-				if(updatePreMoney(playerNickname))
+				if(updatePreMoney(playerNickname)) {
+					//earingRate를 이용한 루비 추가
+					int ruby = playerInfoService.getPlayer(playerNickname).getPlayerRuby();
+					ruby += (int)(earningRate*100000000);
+					//루비 업데이트
 					result ++;
+				}
 	
 		}
 		
@@ -79,8 +87,8 @@ public class EarningRateServiceImpl implements EarningRateService {
 	public double calEarningRate(String playerNickname) {
 		int startMoney = 100000000;
 		int currentMoney = playerInfoService.getTotalMoney(playerNickname);
-		int rate = (int)((currentMoney - startMoney) / (double)(startMoney) * 10000);
-		return rate /100.0;
+		int rate = (int)((currentMoney - startMoney) / (double)(startMoney) * 100000000);
+		return rate /100000000.0;
 	}
 
 	/**
@@ -90,8 +98,8 @@ public class EarningRateServiceImpl implements EarningRateService {
 	public double calDailyEarningRate(String playerNickname) {
 		int preMoney = playerInfoService.getPlayer(playerNickname).getPlayerPreMoney();
 		int currentMoney = playerInfoService.getTotalMoney(playerNickname);
-		int rate = (int)(( currentMoney- preMoney)/(double)(preMoney) * 10000);
-		return rate/100.0;
+		int rate = (int)(( currentMoney- preMoney)/(double)(preMoney) * 100000000);
+		return rate/100000000.0;
 	}
 
 	/**
@@ -109,8 +117,8 @@ public class EarningRateServiceImpl implements EarningRateService {
 				sell += stockDealHistory.getSdhDealPrice();
 		}
 		sell += playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity() * stockInfoService.getPrice(isuCd).getTrdPrc();
-		int rate = (int)((sell - buy) / (double)(buy) * 10000);
-		return rate/100.0;
+		int rate = (int)((sell - buy) / (double)(buy) * 100000000);
+		return rate/100000000.0;
 	}
 
 	/**

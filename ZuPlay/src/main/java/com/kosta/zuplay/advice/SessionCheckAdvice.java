@@ -19,12 +19,10 @@ public class SessionCheckAdvice {
 
 	@Before("pointCut()")
 	public void before(JoinPoint point) throws Throwable {
-		System.out.println("before came");
 		Object obj = point.getArgs()[0];
 		HttpSession session = null;
 		if (obj instanceof HttpSession) {
 			session = (HttpSession) obj;
-			System.out.println(session.getAttribute("playerNickname"));
 			if (session.getAttribute("playerNickname") == null) {
 				throw new LoginException();
 			}

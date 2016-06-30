@@ -29,7 +29,7 @@
 					Login <!-- 에러뷰 생기면 일로! -->
 				</beans:prop>				
 				<beans:prop key="com.kosta.zuplay.exception.LoginException">
-					Login
+					redirect:Login
 				</beans:prop>
 			</beans:props>
 		</beans:property>

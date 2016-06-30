@@ -14,7 +14,7 @@ import com.kosta.zuplay.exception.LoginException;
 @Aspect
 public class SessionCheckAdvice {
 
-	@Pointcut("bean(*Controller) && !execution(* getStockList(..))")
+	@Pointcut("bean(*Controller) && args(javax.servlet.http.HttpSession,..)")
 	public void pointCut() {}
 
 	@Before("pointCut()")

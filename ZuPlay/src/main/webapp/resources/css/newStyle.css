@@ -1,1 +1,80 @@
+html, body{width:100%; height:100%; overflow:hidden; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+
+div.vertical-line{width: 2px; background-color: black; height: 100%; float: left; margin-right: 10px; margin-left: 10px; }
+
+/* 실시간 정보 */
 #rta-data{padding: 0 0 0 0}
+
+/* 인벤토리 */
+#inven-content{overflow: hidden;}
+#inven-content>table tr td{width: 80px; height: 80px; padding: 0 0 0 0; margine: 0 0 0 0; border:1px black solid; overflow:hidden; white-space: nowrap; display: inline-block;}
+#inven-content>table tr td .item-img{width: 75px; height: 75px;}
+#inven-content>table{table-layout: fixed; border-spacing:100px;}
+
+#inven-player-avatar{width: 240px; height: 240px;}
+#inven-player{float: left;}
+#inven-player-avatar-view{position: relative; width:100%; height:100%}
+#inven-player-avatar img{position: absolute; height: 100%; width: 100%}
+
+/* 기업 정보 */
+  .company-title{
+    margin-bottom: 15px;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .company-title-name{
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  .company-title-stock{
+    font-size: 25px;
+  }
+
+  .company-title-no{
+    font-size: 15px;
+  }
+  .company-info .col-xs-3 {
+    font-size: 12px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    height: 10%;
+  }
+
+  .company-info .company-info-basic div{
+    font-size: 18px;
+  }
+
+  .company-chart-warpper{
+    overflow: hidden;
+  }
+
+  .company-chart{
+    text-align: center;
+    overflow: hidden;
+    max-height: 45%;
+  }
+
+  .company-chart li{
+    float: none !important;
+    display: inline-block;
+  }
+  .company-content hr{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  button.btn{
+    width:100%;
+    height:35px
+  }
+
+  .row-fluid .company-buy{
+    padding: 3 3 3 3
+  }
+
+  .company-buy .col-xs-2, .company-buy .col-xs-6{
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }

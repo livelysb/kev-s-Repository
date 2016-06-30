@@ -36,4 +36,9 @@ public interface PlayerInfoDAO {
 	 * 플레이어 루비 업데이트
 	 */
 	int updateRuby(Map<String, String> map);
+	
+	/**
+	 * 수익률 업데이트 
+	 * */
+	int earningRateUpdate(Map<String, String> map);
 }

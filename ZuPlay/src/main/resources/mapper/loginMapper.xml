@@ -7,9 +7,8 @@
 	<result column="player_Naver_Id" property="playerNaverId"/>	
 	<result column="player_Gender" property="playerGender"/>
 	<result column="player_age" property="playerAge"/>
-	<result column="player_Like" property="playerLike"/>
 	<result column="player_Money" property="playerMoney"/>
-	<result column="player_Premoney" property="playerPremoney"/>
+	<result column="player_Premoney" property="playerPreMoney"/>
 	<result column="player_Ruby" property="playerRuby"/>
 	<result column="player_Grade" property="playerGrade"/>
 	<result column="player_Daily_Rank" property="playerDailyRank"/>

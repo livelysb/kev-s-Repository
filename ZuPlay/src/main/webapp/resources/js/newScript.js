@@ -1,8 +1,7 @@
 $(function(){
 	
-
 	var rtaInit = function(){
-		
+
 		var localData = {
 			data : [
 				{d1:"삼성전자",d2:"+10000",d3:"+3%",d4:"3000"},
@@ -40,7 +39,8 @@ $(function(){
                     source: dataAdapter,
                     selectionmode: 'multiplecellsextended',
                     autoheight: true,
-                    columns: columns
+                    columns: columns,
+                    theme:"kokomo"
                 });
         
 		$("#rta-Window").jqxWindow({
@@ -48,9 +48,54 @@ $(function(){
             height:"auto",
             resizable:true,
             showCollapseButton: true,
-            autoOpen:false
+            autoOpen:false,
+            theme:"kokomo"
           });
 	}
 	rtaInit();
 	
+	var companyInfo = function(){
+		$(".company-window").jqxWindow({
+	          theme:"kokomo",
+	          minWidth:500,
+	          width:1000,
+	          height:400,
+	          showCollapseButton: true,
+	          closeButtonAction: 'close'
+	        });
+
+	    $(".company-chart").jqxTabs({
+	      scrollable:false,
+	       width: '100%',
+	       autoHeight: false,
+	       height: 150,
+	       theme:"kokomo"
+	    });
+
+	    $(".company-sell-slider, .company-buy-slider").jqxSlider({
+	        width:"100%",
+	        showTickLabels: true,
+	        tooltip: true,
+	        mode: "fixed",
+	        min: 0,
+	        max: 100,
+	        ticksFrequency: 10,
+	        value: 50,
+	        step: 1,
+	        theme : "kokomo",
+	        tooltipPosition: "far"
+	    });
+
+	    $(".company-sell-input, .company-buy-input").jqxNumberInput({
+	      width: "100%",
+	      spinButtons: true,
+	      inputMode: 'simple',
+	      min:0,
+	      max:100,
+	      textAlign:"center",
+	      decimalDigits: 0
+	    });
+	}
+	
+	companyInfo();
 });

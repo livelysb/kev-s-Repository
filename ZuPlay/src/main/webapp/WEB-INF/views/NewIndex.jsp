@@ -14,9 +14,9 @@
 <link href="resources/css/newStyle.css" rel="stylesheet" />
 <style>
 #inven-content{overflow: hidden;}
-	#inven-content>table tr td{width: 80px; height: 80px; padding: 0 0 0 0; 
+	#inven-content>table tr td{width: 80px; height: 107.5px; padding: 0 0 0 0; 
 	margine: 0 0 0 0; border:1px black solid; overflow:hidden; white-space: nowrap; display: inline-block;}
-	#inven-content>table tr td .item-img{width: 75px; height: 75px;}
+	#inven-content>table tr td .item-img{width: 75px; height: 97.5px;}
 	#inven-player-avatar{width: 240px; height: 240px;}
 	#inven-content>table{table-layout: fixed; border-spacing:100px;}
 	#inven-player{float: left;}
@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	
-	<div id="inven-Window" >
+	<div id="inven-Window">
 		<div id="inven-Header">인벤토리</div>
 		<div id="inven-content">
 			<table id="inven-player" class="item-socket">
@@ -59,49 +59,50 @@
 					</th>
 				</tr>
 				<tr>
-					<td id="inven-socket-colthes"></td>
-					<td id="inven-socket-hair"></td>
-					<td id="inven-socket-eyes"></td>
+					<td id="inven-player-1"></td>
+					<td id="inven-player-2"></td>
+					<td id="inven-player-3"></td>
 				</tr>
 				<tr>
-					<td id="inven-socket-mouse"></td>
-					<td id="inven-socket-earring"></td>
-					<td id="inven-socket-acc"></td>
+					<td id="inven-player-4"></td>
+					<td id="inven-player-5"></td>
+					<td id="inven-player-6"></td>
 				</tr>
 			</table>
 			<div class="vertical-line"></div>
 			<table id="inven-items" class="item-socket">
 				<tr>
-					<td><img src="resources/img/avatar/acc/acc-02.png" class="item-img"></td>
-					<td><img src="resources/img/avatar/eyes/eyes-02.png" class="item-img"></td>
-					<td><img src="resources/img/avatar/hair/hair-09.png" class="item-img"></td>
-					<td><img src="resources/img/avatar/clothes/clothes-05.png" class="item-img"></td>
+					<td id="inven-player-11" ></td>
+					<td id="inven-player-12"></td>
+					<td id="inven-player-13"></td>
+					<td id="inven-player-14"></td>
 				</tr>
 				<tr>
-					<td><img src="resources/img/avatar/earring/earring-02.png" class="item-img"></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td id="inven-player-15"></td>
+					<td id="inven-player-16"></td>
+					<td id="inven-player-17"></td>
+					<td id="inven-player-18"></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td id="inven-player-19"></td>
+					<td id="inven-player-20"></td>
+					<td id="inven-player-21"></td>
+					<td id="inven-player-22"></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td id="inven-player-23"></td>
+					<td id="inven-player-24"></td>
+					<td id="inven-player-25"></td>
+					<td id="inven-player-26"></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td id="inven-player-27"></td>
+					<td id="inven-player-28"></td>
+					<td id="inven-player-29"></td>
+					<td id="inven-player-30"></td>
 				</tr>
 			</table>
+			<button type="button"  id="inven-player-saveBtn">저장</button>
 		</div>
 	</div>
 	
@@ -126,15 +127,18 @@
 <script>
 	(function ( $ ) {
 		
+		//버튼클릭했을 때 이벤트 설정
 		$.fn.setBtn = function(window){
 			$(this).on("click",function(){
 				$(window).jqxWindow("show");
 			})
 		}
-
+		
 		var gender = "m";
 		var parts = ["clothes","hair","eyes","mouse","earring","acc"];
-
+		
+		
+		//옮기는 거
     	var con = $(".item-socket td").sortable({
             connectWith: ".item-socket td",
             cursor: "move",
@@ -142,13 +146,14 @@
             forceHelperSize: true
     	});
     	
-    	
+    	//옮겼을 때 반응
     	$("#inven-items td").on("sortreceive",function(e,ui){
         	if($(this).children().length>=2){
         		$(ui.sender).sortable("cancel");
         	}
     	});
     	
+		//장비칸에 두개 이상이 못 들어가는 것
     	$("#inven-player td").on("sortupdate", function(e,ui){
         	if($(this).children().length>=2){
         		$(ui.sender).sortable("cancel");
@@ -157,7 +162,7 @@
         	updateAvatar();
     	})
     	
-    	var updateAvatar = function(gd){
+    	var updateAvatar = function(){
     		for(var i=0; i<parts.length; i++){
     			var partSrc = $("#inven-socket-"+parts[i]+">.item-img").attr("src");
     			if(partSrc === "" || typeof(partSrc) === "undefined"){
@@ -185,6 +190,61 @@
     		$("#inven-Window").jqxWindow("show");
     	}); */
     	 
+    	
+    	//내아이템 목록 조회
+    	$.ajax({
+    		url:"playerItemSelectAll",
+    		type:"post",
+    		dataType:"json",
+    		success:function(data){
+				$.each(data,function(index,item){
+					var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item)
+					$("#inven-player-"+item.piIndex).html(items);
+				})
+    		},
+    		error:function(err){
+    			alert(err+"에러발생");
+    		}
+    	})
+    	
+    	//인덱스 값 파싱
+    	function passingJson(){
+			var jsonArr = new Array();
+			var jsonObj = new Object();
+			for(var i=1;i<=30;i++){
+				if(i>=7 && i<=10) {continue;}
+				var invenPlayerItem = $("#inven-player-"+i).children().data("item");
+				
+				
+				if(typeof(invenPlayerItem)!="undefined"){
+					jsonObj.piSq=$("#inven-player-"+i).children().data("item").piSq;
+					jsonObj.piIndex=$("#inven-player-"+i).children().data("item").piIndex;
+					jsonArr.push(jsonObj)
+				}
+			}
+			return jsonArr;
+			
+    	}
+    	
+    	
+    	//내 아이템 인덱스 저장
+    	$("#inven-player-saveBtn").on("click",function(){
+    		var jsonList = passingJson();
+    		console.log(JSON.stringify(jsonList));
+    		$.ajax({
+        		url:"playerItemInsert", 
+        		type:"post",
+        		data:"itemParam="+(JSON.stringify(jsonList)).toString() ,
+        		success:function(data){ 	
+        			alert("정상실행")
+        		},
+        		error:function(err){
+        			alert(err+"에러발생");
+        		}
+        	})
+    	})
+    	
 	}( jQuery ));
+	
 </script>
 </html>

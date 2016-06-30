@@ -9,7 +9,7 @@
 			<result column="cmpprevddPrc" property="cmpprevddPrc" />
 			<result column="trdPrc" property="trdPrc" />
 			<result column="trdvol" property="trdvol" />
-			<result column="openprc" property="openprc" />
+			<result column="opnprc" property="opnprc" />
 			<result column="hgprc" property="hgprc" />
 			<result column="lwprc" property="lwprc" />
 		</association>

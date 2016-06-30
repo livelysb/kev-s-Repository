@@ -8,7 +8,6 @@ public class PlayerDTO {
 	private String playerNaverId;	//네이버아이디
 	private String playerGender;	//성별
 	private String playerAge;		//연령대
-	private int playerLike;			//캐릭터 좋아요 갯수
 	private int playerMoney;		//게임머니
 	private int playerPreMoney;		//전일 게임머니
 	private int playerRuby;			//루비(캐쉬)
@@ -28,16 +27,17 @@ public class PlayerDTO {
 		this.earningRate = earningRate;
 	}
 	public PlayerDTO() {}
-	public PlayerDTO(String playerNickname, String playerNaverId, String playerGender, String playerAge, int playerLike,
-			int playerMoney, int playerRuby, String playerGrade, int playerDailyRank, int playerWeeklyRank,
-			int playerSeasonRank, int playerTotalRank) {
+	
+	public PlayerDTO(String playerNickname, String playerNaverId, String playerGender, String playerAge,
+			int playerMoney, int playerPreMoney, int playerRuby, String playerGrade, int playerDailyRank,
+			int playerWeeklyRank, int playerSeasonRank, int playerTotalRank) {
 		super();
 		this.playerNickname = playerNickname;
 		this.playerNaverId = playerNaverId;
 		this.playerGender = playerGender;
 		this.playerAge = playerAge;
-		this.playerLike = playerLike;
 		this.playerMoney = playerMoney;
+		this.playerPreMoney = playerPreMoney;
 		this.playerRuby = playerRuby;
 		this.playerGrade = playerGrade;
 		this.playerDailyRank = playerDailyRank;
@@ -45,6 +45,7 @@ public class PlayerDTO {
 		this.playerSeasonRank = playerSeasonRank;
 		this.playerTotalRank = playerTotalRank;
 	}
+	
 	public String getPlayerNickname() {
 		return playerNickname;
 	}
@@ -69,12 +70,7 @@ public class PlayerDTO {
 	public void setPlayerAge(String playerAge) {
 		this.playerAge = playerAge;
 	}
-	public int getPlayerLike() {
-		return playerLike;
-	}
-	public void setPlayerLike(int playerLike) {
-		this.playerLike = playerLike;
-	}
+
 	public int getPlayerMoney() {
 		return playerMoney;
 	}
@@ -122,14 +118,6 @@ public class PlayerDTO {
 	}
 	public void setPlayerTotalRank(int playerTotalRank) {
 		this.playerTotalRank = playerTotalRank;
-	}
-	@Override
-	public String toString() {
-		return "PlayerDTO [playerNickname=" + playerNickname + ", playerNaverId=" + playerNaverId + ", playerGender="
-				+ playerGender + ", playerAge=" + playerAge + ", playerLike=" + playerLike + ", playerMoney="
-				+ playerMoney + ", playerRuby=" + playerRuby + ", playerGrade=" + playerGrade + ", playerDailyRank="
-				+ playerDailyRank + ", playerWeeklyRank=" + playerWeeklyRank + ", playerSeasonRank=" + playerSeasonRank
-				+ ", playerTotalRank=" + playerTotalRank + "]";
 	}
 	
 	

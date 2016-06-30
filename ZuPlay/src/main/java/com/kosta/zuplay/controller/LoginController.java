@@ -27,8 +27,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value="firstLoginCheck",method=RequestMethod.POST)
 	@ResponseBody
-	public boolean firstLoginCheck(HttpSession session, String playerNaverId){
-		System.out.println(playerNaverId);
+	public boolean firstLoginCheck(String playerNaverId, HttpSession session){
 		boolean firstLogin=loginServiceImpl.firstLoginCheck(playerNaverId);
 		if(firstLogin==false){
 			session.setAttribute("playerNickname", loginServiceImpl.getNickname(playerNaverId));
@@ -46,8 +45,7 @@ public class LoginController {
 	 * @return true=회원정보 DB 삽입 성공/false=회원정보 DB 삽입 실패
 	 */
 	@RequestMapping(value="joinMember")
-	public String joinMember(HttpSession session, String playerNickname,String playerNaverId,String playerGender,String playerAge){
-		System.out.println(playerNickname);
+	public String joinMember(String playerNickname,String playerNaverId,String playerGender,String playerAge, HttpSession session){
 		loginServiceImpl.joinMember(new PlayerDTO(playerNickname, playerNaverId, playerGender, playerAge, 100000000, 100000000, 1000, "B", 0, 0, 0, 0));
 		session.setAttribute("playerNickname", playerNickname);
 		return "index";
@@ -60,7 +58,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value="checkRepetition")
 	@ResponseBody
-	public boolean checkRepetition(HttpSession session, String playerNickname){
+	public boolean checkRepetition(String playerNickname, HttpSession session){
 		boolean checkRepetiton=loginServiceImpl.checkRepetition(playerNickname);
 		return checkRepetiton;
 		

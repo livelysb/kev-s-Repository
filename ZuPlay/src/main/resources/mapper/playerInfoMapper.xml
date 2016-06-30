@@ -53,4 +53,9 @@
 		player_ruby=#{updateRuby} where player_nickname=#{playerNickname}
 	</update>
 
+	<update id="earningRateUpdate" parameterType="java.util.Map">
+		update player set
+		${kind}=#{EarningRate}
+		where player_nickname=#{playerNickname}
+	</update>
 </mapper>

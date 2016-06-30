@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 import com.kosta.zuplay.model.dao.LoginDAO;
 import com.kosta.zuplay.model.dao.SettingDAO;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
+import com.kosta.zuplay.model.service.player.PlayerInfoService;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Autowired
+	private PlayerInfoService playerInfoService;
 	
 	@Override
 	public boolean firstLoginCheck(String naverId) {
@@ -54,7 +58,8 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public boolean getRubyPerDay(String playerNickname) {
-		// TODO Auto-generated method stub
+		if(playerInfoService.updateRuby(playerNickname,playerInfoService.getRuby(playerNickname) + 1000))
+			return true;
 		return false;
 	}
 }

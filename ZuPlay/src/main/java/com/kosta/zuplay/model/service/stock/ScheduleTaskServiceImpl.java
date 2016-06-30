@@ -5,6 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.service.player.EarningRateService;
+import com.kosta.zuplay.model.service.player.RankService;
 
 @Service
 public class ScheduleTaskServiceImpl implements ScheduleTaskService {
@@ -14,6 +15,9 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	
 	@Autowired
 	private EarningRateService earningRateService;
+	
+	@Autowired
+	private RankService rankService;
 	
 	@Scheduled(fixedDelay=10*60*1000)
 	@Override
@@ -36,6 +40,8 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 		System.out.println("AM 09:00, 작업을 시작합니다.");
 		stockUpdateService.masterUpdate();
 		stockUpdateService.realtimePriceReset();
+		rankService.calRank("PLAYER_DAILY_RANK");
+		rankService.calRank("PLAYER_SEASON_RANK");
 		earningRateService.updateEarningRate();
 	}
 

@@ -21,7 +21,7 @@
     var ws;
  
     function connect() {
-        ws = new WebSocket('ws://127.0.0.1:8000/zuplay/echo');
+        ws = new WebSocket('ws://127.0.0.1:8000/zuplay/echo/test');
         ws.onopen = function () {
             console.log('websocket opened');
         };

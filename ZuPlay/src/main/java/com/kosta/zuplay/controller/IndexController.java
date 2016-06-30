@@ -13,6 +13,10 @@ public class IndexController {
 		return "index";
 	}
 	
+	
+	
 	@RequestMapping("{url}")
-	public void call(HttpSession session){}
+	public void call(HttpSession session){
+		
+	}
 }

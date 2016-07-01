@@ -1,5 +1,7 @@
 package com.kosta.zuplay.model.dto.stock;
 
+import java.util.List;
+
 public class MasterDTO {
 	private String krxBioSectidxYn; // KRX바이오섹터 지수여부
 	private String mktcapScaleCd; // 시가총액규모코드
@@ -32,6 +34,12 @@ public class MasterDTO {
 	private String krxFncSvcSectidxYn; // KRX금융서비스섹터 지수여부
 	private String krxMediaCommSectidxYn; // KRX미디어통신섹터 지수여부
 	private String isuCd; // 종목코드
+	
+	private String kind; //분류
+	private boolean like; //좋아요
+	
+	private List<RealTimePriceDTO> rtpList; // 실시간 주식정보 (일간용) 1:다 조인
+	private List<DailyPriceDTO> dpList; //일별 주식 정보 (월간용) 1:다 조인
 	
 	private PriceDTO priceDTO; // 1:1조인
 
@@ -338,6 +346,40 @@ public class MasterDTO {
 
 	public void setIsuCd(String isuCd) {
 		this.isuCd = isuCd;
+	}
+	
+	
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public boolean isLike() {
+		return like;
+	}
+
+	public void setLike(boolean like) {
+		this.like = like;
+	}
+
+	public List<RealTimePriceDTO> getRtpList() {
+		return rtpList;
+	}
+
+	public void setRtpList(List<RealTimePriceDTO> rtpList) {
+		this.rtpList = rtpList;
+	}
+
+	public List<DailyPriceDTO> getDpList() {
+		return dpList;
+	}
+
+	public void setDpList(List<DailyPriceDTO> dpList) {
+		this.dpList = dpList;
 	}
 
 	@Override

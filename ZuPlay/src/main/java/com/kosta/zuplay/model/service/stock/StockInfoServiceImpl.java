@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kosta.zuplay.model.dao.PlayerInfoDAO;
+import com.kosta.zuplay.model.dao.stock.PlayerStockDAO;
 import com.kosta.zuplay.model.dao.stock.StockInfoDAO;
 import com.kosta.zuplay.model.dto.stock.ListsDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
@@ -45,7 +47,6 @@ public class StockInfoServiceImpl implements StockInfoService {
 		map.put("startPage", Integer.toString(startPage));
 		map.put("endPage", Integer.toString(endPage));
 		map.put("isuKorAbbrv", keyword);
-		System.out.println("startPage : " + startPage + ", endPage : " + endPage + ", keyword : " + keyword);
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		List<MasterDTO> masterList = stockInfoDAO.getStockList(map);		
 		for(MasterDTO masterDTO : masterList) {
@@ -60,8 +61,17 @@ public class StockInfoServiceImpl implements StockInfoService {
 
 	@Override
 	public MasterDTO getStockDetail(String isuCd) {
-		// TODO Auto-generated method stub
-		return null;
+		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
+		MasterDTO masterDTO = stockInfoDAO.getStock(isuCd);
+		masterDTO.setDpList(stockInfoDAO.getDPList(isuCd));
+		masterDTO.setRtpList(stockInfoDAO.getRTPList(isuCd));
+		PlayerStockDAO playerStockDAO = sqlSession.getMapper(PlayerStockDAO.class);
+		List<String> stockLikeList = playerStockDAO.getLikeStock(isuCd);
+		for(String isuCd2 : stockLikeList) {
+			if(isuCd2.equals(isuCd))
+				masterDTO.setLike(true);
+		}
+		return masterDTO;
 	}
 
 	@Override

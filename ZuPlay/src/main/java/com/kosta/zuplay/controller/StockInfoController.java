@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
@@ -20,7 +21,6 @@ public class StockInfoController {
 	@ResponseBody
 	@RequestMapping(value = "realTimeStock", produces = "application/json;charset=UTF-8")
 	public String getStockList(String page, String keyword) {
-		System.out.println("page : " + page + ", keyword : " + keyword);
 		List<MasterDTO> masterList = stockInfo.getStockList(Integer.parseInt(page), keyword);
 		Gson gson = new Gson();
 		String json = gson.toJson(masterList);
@@ -33,5 +33,12 @@ public class StockInfoController {
 			return json;
 		}
 		return json2;
+	}
+	
+	@RequestMapping(value = "stock", produces = "application/json;charset=UTF-8")
+	public ModelAndView getStock(String isuCd) {
+		ModelAndView mv = new ModelAndView("stockList");
+		mv.addObject("masterDTO", stockInfo.getStockDetail(isuCd));
+		return mv;
 	}
 }

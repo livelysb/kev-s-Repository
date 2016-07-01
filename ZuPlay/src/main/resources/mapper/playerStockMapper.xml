@@ -24,9 +24,12 @@
 		update player_lists
 		set
 		pl_quantity = #{plQuantity}
-		where player_Nickname =
-		#{playerNickname}
+		where player_Nickname = #{playerNickname}
 		and
 		isuCd = #{isuCd}
 	</update>
+	
+	<select id="getLikeStock" parameterType="String" resultType="String">
+		select isuCd from stock_like where player_nickname = #{value}
+	</select>
 </mapper>

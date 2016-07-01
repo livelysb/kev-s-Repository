@@ -33,4 +33,9 @@ public interface StockInfoService {
 	 * */
 	public MasterDTO getStockDetail(String isuCd);
 	
+	/**
+	 * 해당 종목 관련 개수 구하기
+	 * */
+	int getListSize(String isuKorAbbrv);
+	
 }

@@ -13,16 +13,23 @@ import com.kosta.zuplay.model.service.stock.StockInfoService;
 
 @Controller
 public class StockInfoController {
-	
+
 	@Autowired
 	private StockInfoService stockInfo;
-		
+
 	@ResponseBody
-	@RequestMapping(value="realTimeStock" ,produces="application/json;charset=UTF-8" )
+	@RequestMapping(value = "realTimeStock", produces = "application/json;charset=UTF-8")
 	public String getStockList(String page, String keyword) {
-		List<MasterDTO>masterList = stockInfo.getStockList(Integer.parseInt(page), keyword);
+		List<MasterDTO> masterList = stockInfo.getStockList(Integer.parseInt(page), keyword);
 		Gson gson = new Gson();
 		String json = gson.toJson(masterList);
-		return json;
+		System.out.println(json);
+		int amount = 877;
+		if(keyword != "undefined") {
+			amount = stockInfo.getListSize(keyword);
+		}
+		String json2 = json.replace("[", "[{\"amount\":" + amount + "},");
+
+		return json2;
 	}
 }

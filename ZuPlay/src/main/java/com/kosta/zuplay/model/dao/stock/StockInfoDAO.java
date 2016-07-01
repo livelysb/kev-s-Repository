@@ -29,4 +29,9 @@ public interface StockInfoDAO {
 	 * */
 	List<MasterDTO> getStockList(Map<String, String> map);
 	
+	/**
+	 * 해당 종목 관련 개수 구하기
+	 * */
+	int getListSize(String isuKorAbbrv);
+	
 }

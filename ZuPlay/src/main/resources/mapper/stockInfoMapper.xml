@@ -43,5 +43,8 @@ krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, 
 	       ) WHERE rnum >= #{startPage} AND rnum &lt;= #{endPage} ) m join price p on m.isucd = p.isucd
 	        
 	</select>
+	<select id="getListSize" parameterType="String" resultType="Integer">
+		select count(*) from master where isuKorAbbrv like '%{value}%'
+	</select>
 	
 </mapper>

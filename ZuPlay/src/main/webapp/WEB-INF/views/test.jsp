@@ -19,12 +19,19 @@
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script type="text/javascript">
     var ws;
+    var json = {
+    	flag : "",
+    	nick : "",
+    	data : {
+    		test : [ {},{} ]	
+    	}
+    }
  
     function connect() {
         ws = new WebSocket('ws://127.0.0.1:8000/zuplay/echo/test');
         ws.onopen = function () {
             console.log('websocket opened');
-            ws.send(json)
+            
         };
         ws.onmessage = function (message) {
             console.log(message);
@@ -60,8 +67,11 @@
  
         $('#message').keydown(event, function () {
             if (event.keyCode === 13) {
-                ws.send($(this).val());
-                $(this).val('');
+            	var openJson="open#/fuckWebSocket/#김경원#/fuckWebSocket/#null"
+            	//ws.send(openJson);
+            	//alert(openJson)
+            	ws.send(openJson);
+                console.log('전송성공');
             }
         });
     });

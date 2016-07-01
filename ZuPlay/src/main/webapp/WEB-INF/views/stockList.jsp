@@ -22,6 +22,7 @@
 	<div id="stock-header">전체 종목</div>
 	<div id="stock-content">
 	<input type="text" class="form-control" placeholder="Search" id="stock-search">
+	<input type="hidden" id="stock-search-keyword">
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
@@ -55,22 +56,26 @@
 <script src="resources/js/jquery.cookie.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
 <script src="resources/js/jquery.bootpag.min.js"></script>
-
 <script type="text/javascript">
 	$(document).ready(function(){
-		stockPageSelect(1)
+		
 		
 		//종목 보여주기
 		function stockPageSelect(page,keyword){
+			console.log("page : " +page);
+			console.log("keyword : " + keyword)
 			$.ajax({  
 				url:"realTimeStock",
 				type:"post",
 				dataType:"json",
 				data:"page="+page+"&keyword="+keyword	,
 				success:function(data){
-					console.log(data);
 					str="";
+					console.log(data.amount);
+					pagenation(data.amount); 
+							
 					$.each(data, function(index,item){
+						
 						str+="<tr><td class='stock-select'><a href='#'>"+item.isuKorAbbrv+"</a></td>"
 						str+="<td>"+item.priceDTO.trdPrc +"</td>";
 						str+="<td>"+item.priceDTO.cmpprevddPrc +"</td>";
@@ -88,28 +93,42 @@
 				}
 			})
 		}
+
+		//마지막 페이지
+		function pagenation(pageNo){ 
+	        $('#page-selection').bootpag({
+	            total: pageNo, maxVisible: 10
+	        })
+		 }
 		
-		 // 페이지네이션
-        $('#page-selection').bootpag({
-            total: 88, maxVisible: 10
-        }).on("page", function(event, num){
-        	stockPageSelect(num)
+		//페이지 클릭
+		$('#page-selection').on("page", function(event, num){
+			
+			if($("#stock-search-keyword").val()==""){
+				$("#stock-search-keyword").val("undefined");
+			}
+        	stockPageSelect(num,$("#stock-search-keyword").val())
         });
 		
 		//종목명 클릭 시 상세정보 띄어줌.
 		$(document).on("click", ".stock-select",function(){
 			
 		})
-		 
 		
 		//검색
 		$("#stock-search").on("keyup",function(){
 			if(event.keyCode == 13) {
 				
 				if($(this).val()=="") return;
-				stockPageSelect(0,$(this).val())
+				
+				$("#stock-search-keyword").val($(this).val());
+				stockPageSelect(1,$(this).val())
 			}
 		})
+		
+		
+		stockPageSelect(1)
+		//pagenation(88)
 	})
 </script>
 </html>

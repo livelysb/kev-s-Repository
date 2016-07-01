@@ -37,7 +37,7 @@ krxInfoCommSectidxYn, krxEnergyChemSectidxYn, krxSteelSectidxYn, krxConsgoodSect
 krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, listShrs, krxInsuSectidxYn, krxTransSectidxYn, krxRetailSectidxYn, krxLeisureSectidxYn FROM master
 <where>
 		<if test="isuKorAbbrv!='undefined'">
-			isuKorAbbrv like '%${isuKorAbbrv}%'
+			isuKorAbbrv like '%{isuKorAbbrv}%'
 		</if>
 </where>
 	       ) WHERE rnum >= #{startPage} AND rnum &lt;= #{endPage} ) m join price p on m.isucd = p.isucd

@@ -3,9 +3,11 @@ package com.kosta.zuplay.model.dao.stock;
 import java.util.List;
 import java.util.Map;
 
+import com.kosta.zuplay.model.dto.stock.DailyPriceDTO;
 import com.kosta.zuplay.model.dto.stock.ListsDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
 import com.kosta.zuplay.model.dto.stock.PriceDTO;
+import com.kosta.zuplay.model.dto.stock.RealTimePriceDTO;
 
 public interface StockInfoDAO {
 
@@ -33,5 +35,26 @@ public interface StockInfoDAO {
 	 * 해당 종목 관련 개수 구하기
 	 * */
 	int getListSize(String isuKorAbbrv);
+	
+	/**
+	 * 기업의 상세정보 가져오기
+	 * */
+	MasterDTO getStock(String isuCd);
+	
+	/**
+	 * 기업의 실시간 주가 가져오기
+	 * */
+	List<RealTimePriceDTO> getRTPList(String isuCd);
+	
+	/**
+	 * 기업의 한달간 주가 가져오기
+	 * */
+	List<DailyPriceDTO> getDPList(String isuCd);
+	
+	/**
+	 * 기업의 분류 얻어오기
+	 * */
+	
+	
 	
 }

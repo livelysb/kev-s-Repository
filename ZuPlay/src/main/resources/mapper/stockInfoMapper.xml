@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kosta.zuplay.model.dao.stock.StockInfoDAO">
 
-	<resultMap type="masterDTO" id="master">
+	<resultMap type="masterDTO" id="master2">
 		<result column="isuKorAbbrv" property="isuKorAbbrv" />
 		<association property="priceDTO" javaType="priceDTO">
 			<result column="cmpprevddPrc" property="cmpprevddPrc" />
@@ -13,6 +13,32 @@
 			<result column="hgprc" property="hgprc" />
 			<result column="lwprc" property="lwprc" />
 		</association>
+	</resultMap>
+	
+	<resultMap type="masterDTO" id="master">
+		<id column="isuCd" property="isuCd"/>
+		<result column="isuKorAbbrv" property="isuKorAbbrv" />
+		<result column="listShrs" property="listShrs" />
+		<result column="uplmtprc" property="uplmtprc" />
+		<result column="lwlmtprc" property="lwlmtprc" />
+		<association property="priceDTO" javaType="priceDTO">
+			<result column="cmpprevddPrc" property="cmpprevddPrc" />
+			<result column="trdPrc" property="trdPrc" />
+			<result column="trdvol" property="trdvol" />
+			<result column="opnprc" property="opnprc" />
+			<result column="hgprc" property="hgprc" />
+			<result column="lwprc" property="lwprc" />
+		</association>
+	</resultMap>
+	
+	<resultMap type="realTimePriceDTO" id="realTimePrice">
+		<result column="RP_trdPrc" property="rpTrdPrc"/>
+		<result column="RP_trdTm" property="rpTrdTm"/>
+	</resultMap>
+	
+	<resultMap type="dailyPriceDTO" id="dailyPrice">
+	<result column="DP_clsprc" property="dpClsprc"/>
+	<result column="DP_DATE" property="dpDate"/>
 	</resultMap>
 
 	<select id="getLists" resultType="ListsDTO">
@@ -32,9 +58,8 @@
 		resultMap="master">
 		
 		select * from ( SELECT * FROM (          
-    SELECT ROW_NUMBER() OVER(ORDER BY  prevddAccTrdvol desc) rnum, isuCd, isuSrtCd, isuKorAbbrv, govncExcelYn, haltYn, mktcapScaleCd, mfindYn, krxAutosSectidxYn, krxSemiconSectidxYn, krxBioSectidxYn, krxFncSectidxYn, 
-krxInfoCommSectidxYn, krxEnergyChemSectidxYn, krxSteelSectidxYn, krxConsgoodSectidxYn, krxMediaCommSectidxYn, krxConstrSectidxYn, krxFncSvcSectidxYn, krxSecuSectidxYn,
-krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, listShrs, krxInsuSectidxYn, krxTransSectidxYn, krxRetailSectidxYn, krxLeisureSectidxYn FROM master
+    SELECT ROW_NUMBER() OVER(ORDER BY  prevddAccTrdvol desc) rnum, isuCd, isuKorAbbrv, prevddAccTrdvol
+    FROM master
 <where>
 		<if test="isuKorAbbrv!='undefined'">
 			isuKorAbbrv like '%${isuKorAbbrv}%'
@@ -43,9 +68,26 @@ krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, 
 	       ) WHERE rnum >= #{startPage} AND rnum &lt;= #{endPage} ) m join price p on m.isucd = p.isucd
 	        
 	</select>
+	
 	<select id="getListSize" parameterType="String" resultType="Integer">
 		select count(*) from master
 		where isuKorAbbrv like '%${value}%'
+	</select>
+	
+	<select id="getStock" parameterType="String" resultMap="master2">
+	select * from 
+	(select isuKorAbbrv, isuCd, listShrs, uplmtprc, lwlmtprc from master where isucd = #{value}) 
+	m join price p on m.isucd = p.isucd;
+	</select>
+	
+	<select id="getRTPList" parameterType="String" resultMap="realTimePrice">
+		select rp_trdPrc, rp_trdtm from realtime_price
+		where isucd = #{value}
+	</select>
+	
+	<select id="getDPList" parameterType="String" resultMap="dailyPrice">
+		select dp_clsprc, dp_date from daily_price
+		where isucd = #{value} and dp_date >= ADD_MONTHS(TRUNC(SYSDATE), -1)
 	</select>
 	
 </mapper>

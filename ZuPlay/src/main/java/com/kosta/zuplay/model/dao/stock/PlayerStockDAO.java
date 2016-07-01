@@ -22,4 +22,9 @@ public interface PlayerStockDAO {
 	 * */
 	public int setPlayerStock(Map<String, String> map);
 	
+	/**
+	 * 사용자가 즐겨찾는 기업코드 가져오기
+	 * */
+	List<String> getLikeStock(String isuCd);
+	
 }

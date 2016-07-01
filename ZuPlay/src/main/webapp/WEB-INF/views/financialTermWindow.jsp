@@ -11,7 +11,6 @@
 <title>Home</title>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="resources/css/jquery-ui/jquery-ui.css" rel="stylesheet">
-<link href="resources/css/zuplay.css" rel="stylesheet">
 
 <style type="text/css">
 	/*----- Accordion -----*/
@@ -99,6 +98,7 @@
     padding:15px;
     display:none;
 }
+
 </style>
 </head>
 
@@ -163,14 +163,12 @@
 <script src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script src="resources/js/jquery.cookie.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/zuplay.js"></script>
 
 <script type="text/javascript">
 	$(function() {
 	    $( "#accordion" ).accordion({
 	      collapsible: true,
 	      active: false
-
 	    });
 	  });
 </script>

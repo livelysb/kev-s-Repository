@@ -26,7 +26,7 @@ public interface StockInfoService {
 	/**
 	 * DB의 모든 주식리스트 보여주기
 	 * */
-	public List<MasterDTO> getStockList(int page);
+	public List<MasterDTO> getStockList(int page, String keyword);
 	
 	/**
 	 * 기업의 상세정보 보여주기

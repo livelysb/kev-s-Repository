@@ -21,7 +21,7 @@
 <div id="stock-window">
 	<div id="stock-header">전체 종목</div>
 	<div id="stock-content">
-	<input type="text" class="form-control" placeholder="Search">
+	<input type="text" class="form-control" placeholder="Search" id="stock-search">
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
@@ -60,13 +60,13 @@
 	$(document).ready(function(){
 		stockPageSelect(1)
 		
-		//페이지에 따른 종목명 보여주기
-		function stockPageSelect(page){
-			$.ajax({
+		//종목 보여주기
+		function stockPageSelect(page,keyword){
+			$.ajax({  
 				url:"realTimeStock",
 				type:"post",
 				dataType:"json",
-				data:"page="+page	,
+				data:"page="+page+"&keyword="+keyword	,
 				success:function(data){
 					str="";
 					$.each(data, function(index,item){
@@ -95,12 +95,18 @@
         	stockPageSelect(num)
         });
 		
-		//종목명 클릭 시 상세정보 모달 띄어줌.
+		//종목명 클릭 시 상세정보 띄어줌.
 		$(document).on("click", ".stock-select",function(){
 			
 		})
 		 
 		
+		//검색
+		$("#stock-search").on("keyup",function(){
+			if(event.keyCode == 13) {
+				stockPageSelect(0,$(this).val())
+			}
+		})
 	})
 </script>
 </html>

@@ -122,128 +122,35 @@
 <script type="text/javascript" src="resources/js/jqwidgets/jqxsortable.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 
-<script src="resources/js/newScript.js"></script>
+<script src="resources/js/set.js"></script>
+<script src="resources/js/script.js"></script>
 
 <script>
 	(function ( $ ) {
+		/* 유저 기본 정보 */
+		var userInfo = {
+			nickName : "",
+			gender : "",
+			theme : "kokomo",
+			money : 0,
+			ruby : 0,
+			friends : {
+				
+			}
+		}
+		/* 셋팅 정보 */		
+		var setting = {
+			parts : ["clothes","hair","eyes","mouse","earring","acc"]
+		};
 		
-		//버튼클릭했을 때 이벤트 설정
+		/*버튼클릭했을 때 이벤트 설정*/
 		$.fn.setBtn = function(window){
 			$(this).on("click",function(){
 				$(window).jqxWindow("show");
 			})
 		}
 		
-		var gender = "m";
-		var parts = ["clothes","hair","eyes","mouse","earring","acc"];
 		
-		
-		//옮기는 거
-    	var con = $(".item-socket td").sortable({
-            connectWith: ".item-socket td",
-            cursor: "move",
-            scroll : false,
-            forceHelperSize: true
-    	});
-    	
-    	//옮겼을 때 반응
-    	$("#inven-items td").on("sortreceive",function(e,ui){
-        	if($(this).children().length>=2){
-        		$(ui.sender).sortable("cancel");
-        	}
-    	});
-    	
-		//장비칸에 두개 이상이 못 들어가는 것
-    	$("#inven-player td").on("sortupdate", function(e,ui){
-        	if($(this).children().length>=2){
-        		$(ui.sender).sortable("cancel");
-        		return;
-        	}
-        	updateAvatar();
-    	})
-    	
-    	var updateAvatar = function(){
-    		for(var i=0; i<parts.length; i++){
-    			var partSrc = $("#inven-socket-"+parts[i]+">.item-img").attr("src");
-    			if(partSrc === "" || typeof(partSrc) === "undefined"){
-    				$("#inven-player-"+parts[i]).attr("src","resources/img/avatar/"+parts[i]+"/"+parts[i]+"-01.png");
-    			}else{
-    				$("#inven-player-"+parts[i]).attr("src", partSrc);
-    			}
-    		}
-    	}
-    	updateAvatar();
-    	
-    	$("#inven-Window").jqxWindow({
-            minWidth:600,
-            minHeight:420,
-            resizable:false,
-            showCollapseButton: true,
-            autoOpen:false
-          });
-    	
-    	
-    	$("#inven-btn").setBtn($("#inven-Window"));
-    	$("#rta-btn").setBtn($("#rta-Window"));
-    	
-/*      	$("#inven-btn").click(function(e){
-    		$("#inven-Window").jqxWindow("show");
-    	}); */
-    	 
-    	
-    	//내아이템 목록 조회
-    	$.ajax({
-    		url:"playerItemSelectAll",
-    		type:"post",
-    		dataType:"json",
-    		success:function(data){
-				$.each(data,function(index,item){
-					var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item)
-					$("#inven-player-"+item.piIndex).html(items);
-				})
-    		},
-    		error:function(err){
-    			alert(err+"에러발생");
-    		}
-    	})
-    	
-    	//인덱스 값 파싱
-    	function passingJson(){
-			var jsonArr = new Array();
-			var jsonObj = new Object();
-			for(var i=1;i<=30;i++){
-				if(i>=7 && i<=10) {continue;}
-				var invenPlayerItem = $("#inven-player-"+i).children().data("item");
-				
-				
-				if(typeof(invenPlayerItem)!="undefined"){
-					jsonObj.piSq=$("#inven-player-"+i).children().data("item").piSq;
-					jsonObj.piIndex=$("#inven-player-"+i).children().data("item").piIndex;
-					jsonArr.push(jsonObj)
-				}
-			}
-			return jsonArr;
-			
-    	}
-    	
-    	
-    	//내 아이템 인덱스 저장
-    	$("#inven-player-saveBtn").on("click",function(){
-    		var jsonList = passingJson();
-    		console.log(JSON.stringify(jsonList));
-    		$.ajax({
-        		url:"playerItemInsert", 
-        		type:"post",
-        		data:"itemParam="+(JSON.stringify(jsonList)).toString() ,
-        		success:function(data){ 	
-        			alert("정상실행")
-        		},
-        		error:function(err){
-        			alert(err+"에러발생");
-        		}
-        	})
-    	})
-    	
 	}( jQuery ));
 	
 </script>

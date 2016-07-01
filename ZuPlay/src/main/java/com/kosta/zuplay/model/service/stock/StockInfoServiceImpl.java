@@ -66,14 +66,18 @@ public class StockInfoServiceImpl implements StockInfoService {
 			StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 			MasterDTO masterDTO = stockInfoDAO.getStock(isuCd);
 
-			System.out.println(masterDTO.getIsuKorAbbrv());
 			masterDTO.setDpList(stockInfoDAO.getDPList(isuCd));
-			System.out.println(masterDTO.getDpList().get(0));
 			masterDTO.setRtpList(stockInfoDAO.getRTPList(isuCd));
-			System.out.println(masterDTO.getRtpList().get(0));
 			PlayerStockDAO playerStockDAO = sqlSession.getMapper(PlayerStockDAO.class);
 			List<String> stockLikeList = playerStockDAO.getLikeStock(isuCd);
-			System.out.println(stockLikeList.size());
+			
+			//등락률
+			double fr = (masterDTO.getPriceDTO().getTrdPrc() * 100)
+					/ (masterDTO.getPriceDTO().getTrdPrc() - masterDTO.getPriceDTO().getCmpprevddPrc()) - 100;
+			int fr2 = (int) (fr * 100);
+			fr = (double) (fr2 / 100.0);
+			masterDTO.getPriceDTO().setFluctuationRate(fr);
+			
 			for (String isuCd2 : stockLikeList) {
 				if (isuCd2.equals(isuCd))
 					masterDTO.setLike(true);

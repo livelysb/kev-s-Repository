@@ -68,6 +68,7 @@
 				dataType:"json",
 				data:"page="+page+"&keyword="+keyword	,
 				success:function(data){
+					console.log(data);
 					str="";
 					$.each(data, function(index,item){
 						str+="<tr><td class='stock-select'><a href='#'>"+item.isuKorAbbrv+"</a></td>"
@@ -104,6 +105,8 @@
 		//검색
 		$("#stock-search").on("keyup",function(){
 			if(event.keyCode == 13) {
+				
+				if($(this).val()=="") return;
 				stockPageSelect(0,$(this).val())
 			}
 		})

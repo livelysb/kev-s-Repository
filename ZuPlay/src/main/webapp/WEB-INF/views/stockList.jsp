@@ -59,7 +59,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		
 		//종목 보여주기
 		function stockPageSelect(page,keyword){
 			console.log("page : " +page);
@@ -70,14 +69,15 @@
 				dataType:"json",
 				data:"page="+page+"&keyword="+keyword	,
 				success:function(data){
-					console.log(data);
 					str="";
-					//console.log(data.amount);
 							
 					$.each(data, function(index,item){
 						if(index==0){
-							console.log(item.amount);
-							pagenation(item.amount);
+							if(item.amount%10==0){
+								pagenation(item.amount/10);
+							}else{
+								pagenation(item.amount/10+1)
+							}
 						}else{
 							str+="<tr><td class='stock-select'><a href='#'>"+item.isuKorAbbrv+"</a></td>"
 							str+="<td>"+item.priceDTO.trdPrc +"</td>";
@@ -120,19 +120,19 @@
 		})
 		
 		//검색
-		$("#stock-search").on("keyup",function(){
+		$(document).on("keyup","#stock-search",function(){
 			if(event.keyCode == 13) {
 				
 				if($(this).val()=="") return;
+				$(".pagination bootpag li").removeClass();
 				
+				//$(".pagination bootpag").children().eq(2).attr("class","active")
+								
 				$("#stock-search-keyword").val($(this).val());
 				stockPageSelect(1,$(this).val())
 			}
 		})
-		
-		
 		stockPageSelect(1)
-		//pagenation(88)
 	})
 </script>
 </html>

@@ -44,7 +44,8 @@ krxShipSectidxYn, prevddAccTrdvol, prevddAccTrdval, uplmtprc, lwlmtprc, parval, 
 	        
 	</select>
 	<select id="getListSize" parameterType="String" resultType="Integer">
-		select count(*) from master where isuKorAbbrv like '%{value}%'
+		select count(*) from master
+		where isuKorAbbrv like '%${value}%'
 	</select>
 	
 </mapper>

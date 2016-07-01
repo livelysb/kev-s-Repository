@@ -25,10 +25,11 @@ public class StockInfoController {
 		String json = gson.toJson(masterList);
 		System.out.println(json);
 		int amount = 877;
-		if(keyword != "undefined") {
+		if(!keyword.equals("undefined")) {
 			amount = stockInfo.getListSize(keyword);
 		}
 		String json2 = json.replace("[", "[{\"amount\":" + amount + "},");
+		System.out.println(json2);
 
 		return json2;
 	}

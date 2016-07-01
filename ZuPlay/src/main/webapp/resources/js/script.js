@@ -57,7 +57,7 @@ $(function(){
 	            resizable:true,
 	            showCollapseButton: true,
 	            autoOpen:false,
-	            theme:"kokomo"
+	            theme:userInfo.theme
 	          });
 	   }
 	   
@@ -77,7 +77,7 @@ $(function(){
 	          width: '100%',
 	          autoHeight: false,
 	          height: 150,
-	          theme:"kokomo"
+	          theme : userInfo.theme
 	       });
 
 	       $(".company-sell-slider, .company-buy-slider").jqxSlider({
@@ -203,7 +203,8 @@ $(function(){
 	            minHeight:420,
 	            resizable:false,
 	            showCollapseButton: true,
-	            autoOpen:false
+	            autoOpen:false,
+	            theme : userInfo.theme
 	          });
 	    	
 	    	updateAvatar();

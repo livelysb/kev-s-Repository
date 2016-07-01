@@ -20,7 +20,7 @@ public class StockInfoServiceImpl implements StockInfoService {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
 	public List<PriceDTO> getPrices() {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
@@ -32,7 +32,7 @@ public class StockInfoServiceImpl implements StockInfoService {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		return stockInfoDAO.getPrice(isuCd);
 	}
-	
+
 	@Override
 	public List<ListsDTO> getLists() {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
@@ -41,37 +41,48 @@ public class StockInfoServiceImpl implements StockInfoService {
 
 	@Override
 	public List<MasterDTO> getStockList(int page, String keyword) {
-		int startPage = (page-1)*10+1;
+		int startPage = (page - 1) * 10 + 1;
 		int endPage = startPage + 9;
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("startPage", Integer.toString(startPage));
 		map.put("endPage", Integer.toString(endPage));
 		map.put("isuKorAbbrv", keyword);
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
-		List<MasterDTO> masterList = stockInfoDAO.getStockList(map);		
-		for(MasterDTO masterDTO : masterList) {
-			double fr = (masterDTO.getPriceDTO().getTrdPrc()*100)/(masterDTO.getPriceDTO().getTrdPrc()-masterDTO.getPriceDTO().getCmpprevddPrc())-100;
-			int fr2 = (int)(fr*100);
-			fr = (double)(fr2/100.0);
+		List<MasterDTO> masterList = stockInfoDAO.getStockList(map);
+		for (MasterDTO masterDTO : masterList) {
+			double fr = (masterDTO.getPriceDTO().getTrdPrc() * 100)
+					/ (masterDTO.getPriceDTO().getTrdPrc() - masterDTO.getPriceDTO().getCmpprevddPrc()) - 100;
+			int fr2 = (int) (fr * 100);
+			fr = (double) (fr2 / 100.0);
 			masterDTO.getPriceDTO().setFluctuationRate(fr);
-		}		
+		}
 		return masterList;
 	}
 
-
 	@Override
 	public MasterDTO getStockDetail(String isuCd) {
-		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
-		MasterDTO masterDTO = stockInfoDAO.getStock(isuCd);
-		masterDTO.setDpList(stockInfoDAO.getDPList(isuCd));
-		masterDTO.setRtpList(stockInfoDAO.getRTPList(isuCd));
-		PlayerStockDAO playerStockDAO = sqlSession.getMapper(PlayerStockDAO.class);
-		List<String> stockLikeList = playerStockDAO.getLikeStock(isuCd);
-		for(String isuCd2 : stockLikeList) {
-			if(isuCd2.equals(isuCd))
-				masterDTO.setLike(true);
+		System.out.println(isuCd);
+		try {
+			StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
+			MasterDTO masterDTO = stockInfoDAO.getStock(isuCd);
+
+			System.out.println(masterDTO.getIsuKorAbbrv());
+			masterDTO.setDpList(stockInfoDAO.getDPList(isuCd));
+			System.out.println(masterDTO.getDpList().get(0));
+			masterDTO.setRtpList(stockInfoDAO.getRTPList(isuCd));
+			System.out.println(masterDTO.getRtpList().get(0));
+			PlayerStockDAO playerStockDAO = sqlSession.getMapper(PlayerStockDAO.class);
+			List<String> stockLikeList = playerStockDAO.getLikeStock(isuCd);
+			System.out.println(stockLikeList.size());
+			for (String isuCd2 : stockLikeList) {
+				if (isuCd2.equals(isuCd))
+					masterDTO.setLike(true);
+			}
+			return masterDTO;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return masterDTO;
+		return null;
 	}
 
 	@Override
@@ -79,8 +90,5 @@ public class StockInfoServiceImpl implements StockInfoService {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		return stockInfoDAO.getListSize(isuKorAbbrv);
 	}
-
-
-	
 
 }

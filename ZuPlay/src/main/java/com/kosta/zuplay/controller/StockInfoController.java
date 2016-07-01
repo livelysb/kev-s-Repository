@@ -35,10 +35,14 @@ public class StockInfoController {
 		return json2;
 	}
 	
-	@RequestMapping(value = "stock", produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "stockList", produces = "application/json;charset=UTF-8")
 	public ModelAndView getStock(String isuCd) {
+		System.out.println(isuCd);
+		System.out.println("came");
+		MasterDTO masterDTO = stockInfo.getStockDetail(isuCd);
+		System.out.println(masterDTO.getIsuKorAbbrv());
 		ModelAndView mv = new ModelAndView("stockList");
-		mv.addObject(stockInfo.getStockDetail(isuCd));
+		mv.addObject(masterDTO);
 		return mv;
 	}
 }

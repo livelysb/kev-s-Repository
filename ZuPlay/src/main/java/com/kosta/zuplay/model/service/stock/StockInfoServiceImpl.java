@@ -45,7 +45,6 @@ public class StockInfoServiceImpl implements StockInfoService {
 		map.put("startPage", Integer.toString(startPage));
 		map.put("endPage", Integer.toString(endPage));
 		map.put("isuKorAbbrv", keyword);
-		
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		List<MasterDTO> masterList = stockInfoDAO.getStockList(map);		
 		for(MasterDTO masterDTO : masterList) {

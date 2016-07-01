@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-  <div class="container-row-fluid">
+	pageEncoding="UTF-8"%>
+
+
   <div class="company-window">
     <div class="company-header">Hello!</div>
 
@@ -12,19 +13,34 @@
         </div>
       </div>
 
-        <div class="row-fluid">
-          <div class="col-xs-6 company-chart-warpper">
-            <div class="company-chart">
-              <ul class="company-chart-tabs">
-                <li>오늘</li>
-                <li>1주</li>
-                <li>1달</li>
-              </ul>
-              <div></div>
-              <div>2</div>
-              <div>3</div>
-            </div>
-          </div>
+
+      <div class="row-fluid">
+         <div class="col-xs-6 company-chart-warpper">
+         <div class="company-chart">
+		<ul class="nav nav-tabs">
+		  <li class="active"><a data-toggle="tab" href="#company-chart-today">오늘</a></li>
+		  <li><a data-toggle="tab" href="#company-chart-week">1주</a></li>
+		  <li><a data-toggle="tab" href="#company-chart-month">한달</a></li>
+		</ul>
+		
+		<div class="tab-content">
+		  <div id="company-chart-today" class="tab-pane fade in active">
+		    <h3>TODAY</h3>
+		   <p>Some content.</p>
+		</div>
+		  
+		  <div id="company-chart-week" class="tab-pane fade">
+		    <h3>WEEK</h3>
+		    <p>Some content in menu 1.</p>
+		  </div>
+		  
+		  <div id="company-chart-month" class="tab-pane fade">
+		    <h3>MONTH</h3>
+		    <p>Some content in menu 1.</p>
+		  </div>
+		</div>
+	  </div>
+	  </div>
 
           <div class="col-xs-6">
             <table class="table table-condensed">
@@ -72,4 +88,3 @@
       </div>
     </div>
   </div>
-</div>

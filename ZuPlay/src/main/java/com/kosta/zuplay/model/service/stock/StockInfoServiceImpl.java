@@ -38,12 +38,13 @@ public class StockInfoServiceImpl implements StockInfoService {
 	}
 
 	@Override
-	public List<MasterDTO> getStockList(int page) {
+	public List<MasterDTO> getStockList(int page, String keyword) {
 		int startPage = (page-1)*10+1;
 		int endPage = startPage + 9;
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("startPage", startPage);
-		map.put("endPage", endPage);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("startPage", Integer.toString(startPage));
+		map.put("endPage", Integer.toString(endPage));
+		map.put("isuKorAbbrv", keyword);
 		
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		List<MasterDTO> masterList = stockInfoDAO.getStockList(map);		

@@ -27,6 +27,6 @@ public interface StockInfoDAO {
 	/**
 	 * DB의 페이지 별 주식리스트 보여주기
 	 * */
-	List<MasterDTO> getStockList(Map<String, Integer> map);
+	List<MasterDTO> getStockList(Map<String, String> map);
 	
 }

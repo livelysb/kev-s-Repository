@@ -16,11 +16,11 @@ public class StockInfoController {
 	
 	@Autowired
 	private StockInfoService stockInfo;
-	
+		
 	@ResponseBody
 	@RequestMapping(value="realTimeStock" ,produces="application/json;charset=UTF-8" )
-	public String getStockList(String page) {
-		List<MasterDTO>masterList = stockInfo.getStockList(Integer.parseInt(page));
+	public String getStockList(String page, String keyword) {
+		List<MasterDTO>masterList = stockInfo.getStockList(Integer.parseInt(page), keyword);
 		Gson gson = new Gson();
 		String json = gson.toJson(masterList);
 		return json;

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kosta.zuplay.model.dao.stock.StockInfoDAO">
 
-	<resultMap type="masterDTO" id="master2">
+	<resultMap type="masterDTO" id="master">
 		<result column="isuKorAbbrv" property="isuKorAbbrv" />
 		<association property="priceDTO" javaType="priceDTO">
 			<result column="cmpprevddPrc" property="cmpprevddPrc" />
@@ -15,7 +15,7 @@
 		</association>
 	</resultMap>
 	
-	<resultMap type="masterDTO" id="master">
+	<resultMap type="masterDTO" id="master2">
 		<id column="isuCd" property="isuCd"/>
 		<result column="isuKorAbbrv" property="isuKorAbbrv" />
 		<result column="listShrs" property="listShrs" />
@@ -77,7 +77,7 @@
 	<select id="getStock" parameterType="String" resultMap="master2">
 	select * from 
 	(select isuKorAbbrv, isuCd, listShrs, uplmtprc, lwlmtprc from master where isucd = #{value}) 
-	m join price p on m.isucd = p.isucd;
+	m join price p on m.isucd = p.isucd
 	</select>
 	
 	<select id="getRTPList" parameterType="String" resultMap="realTimePrice">

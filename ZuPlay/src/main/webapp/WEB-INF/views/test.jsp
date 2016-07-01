@@ -24,6 +24,7 @@
         ws = new WebSocket('ws://127.0.0.1:8000/zuplay/echo/test');
         ws.onopen = function () {
             console.log('websocket opened');
+            ws.send(json)
         };
         ws.onmessage = function (message) {
             console.log(message);

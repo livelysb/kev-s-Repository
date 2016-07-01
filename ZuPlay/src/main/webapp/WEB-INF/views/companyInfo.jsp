@@ -27,19 +27,19 @@
 		<div class="tab-content">
 		  <div id="company-chart-today" class="tab-pane fade in active">
 		   <c:forEach items="${masterDTO.rtpList}" var="rtp" varStatus="stu">
-		   		$(rtp.rpTrdtm) : ${rtp.rpTrdPrc}
+		   		${rtp.rpTrdTm} : ${rtp.rpTrdPrc}
 		   </c:forEach>
 		</div>
 		  
 		  <div id="company-chart-week" class="tab-pane fade">
 		   <c:forEach items="${masterDTO.dpList}" var="dp" varStatus="stu">
-		   		${dp.dpDate} : $(dp.dpClsprc)
+		   		${dp.dpDate} : ${dp.dpClsprc}
 		   </c:forEach>
 		  </div>
 		  
 		  <div id="company-chart-month" class="tab-pane fade">
 		   <c:forEach items="${masterDTO.dpList}" var="dp" varStatus="stu">
-		   		${dp.dpDate} : $(dp.dpClsprc)
+		   		${dp.dpDate} : ${dp.dpClsprc}
 		   </c:forEach>
 		  </div>
 		</div>
@@ -53,7 +53,7 @@
                   <th>전일비</th>
                   <td><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></td>
                   <th>등락</th>
-                  <td>$(masterDTO.priceDTO.fluctuationRate)%</td>
+                  <td>${masterDTO.priceDTO.fluctuationRate}%</td>
                 </tr>
                 <tr>
                   <th>전일</th>

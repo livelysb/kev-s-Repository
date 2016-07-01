@@ -7,14 +7,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home</title>
-<link href="jqwidgets/styles/jqx.base.css" rel="stylesheet" />
-<link href="jqwidgets/styles/jqx.kokomo.css" rel="stylesheet" />
-<link href="bootstrap.css" rel="stylesheet" />
+<link href="resources/css/jqwidgets/jqx.base.css" rel="stylesheet" />
+<link href="resources/css/jqwidgets/jqx.kokomo.css" rel="stylesheet" />
+<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 
-<script type="text/javascript" src="script/jquery-1.11.2.js"></script>
-<script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
-<script type="text/javascript" src="jqwidgets/jqxwindow.js"></script>
-<script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="resources/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="resources/js/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="resources/js/jqwidgets/jqxwindow.js"></script>
+<script type="text/javascript" src="resources/js/jqwidgets/jqxscrollbar.js"></script>
 
 <style>
 

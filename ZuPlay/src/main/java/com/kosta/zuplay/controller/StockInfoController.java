@@ -24,14 +24,14 @@ public class StockInfoController {
 		List<MasterDTO> masterList = stockInfo.getStockList(Integer.parseInt(page), keyword);
 		Gson gson = new Gson();
 		String json = gson.toJson(masterList);
-		System.out.println(json);
 		int amount = 877;
 		if(!keyword.equals("undefined")) {
 			amount = stockInfo.getListSize(keyword);
 		}
 		String json2 = json.replace("[", "[{\"amount\":" + amount + "},");
-		System.out.println(json2);
-
+		if(amount == 0) {
+			return json;
+		}
 		return json2;
 	}
 }

@@ -1,4 +1,4 @@
-package com.kosta.zuplay.controller.vo;
+package com.kosta.zuplay.util.vo;
 
 import java.util.ArrayList;
 import java.util.List;

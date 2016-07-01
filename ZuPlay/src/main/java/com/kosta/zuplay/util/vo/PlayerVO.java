@@ -1,19 +1,15 @@
 package com.kosta.zuplay.util.vo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.web.socket.WebSocketSession;
 
 public class PlayerVO {
-	
-	
+		
 	private String playerNickname;
 	private WebSocketSession session;
-	private List<ChatRoomVO> chatRoomList = new ArrayList<>();
 	
 	
 	public PlayerVO() {
+		
 	}
 	
 	public PlayerVO(String playerNickname, WebSocketSession session) {
@@ -34,9 +30,5 @@ public class PlayerVO {
 	public void setSession(WebSocketSession session) {
 		this.session = session;
 	}
-	
-	public void AddChatRoom(ChatRoomVO chatRoomVO) {
-		chatRoomList.add(chatRoomVO);
-	}
-
 }
+

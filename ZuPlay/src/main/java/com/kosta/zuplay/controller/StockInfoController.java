@@ -38,7 +38,7 @@ public class StockInfoController {
 	@RequestMapping(value = "stock", produces = "application/json;charset=UTF-8")
 	public ModelAndView getStock(String isuCd) {
 		ModelAndView mv = new ModelAndView("stockList");
-		mv.addObject("masterDTO", stockInfo.getStockDetail(isuCd));
+		mv.addObject(stockInfo.getStockDetail(isuCd));
 		return mv;
 	}
 }

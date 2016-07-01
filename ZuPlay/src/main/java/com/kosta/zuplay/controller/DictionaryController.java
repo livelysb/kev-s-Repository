@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +17,7 @@ public class DictionaryController {
 	
 	@ResponseBody
 	@RequestMapping(value = "searchFinancialTerm", produces = "application/json;charset=UTF-8")
-	public String getStockList(String term) {
+	public String getStockList(HttpSession session, String term) {
 		URL url = null;
 		BufferedReader br = null;
 		StringBuilder sb = new StringBuilder();

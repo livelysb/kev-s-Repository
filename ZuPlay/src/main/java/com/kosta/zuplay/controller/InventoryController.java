@@ -3,6 +3,7 @@ package com.kosta.zuplay.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 import com.kosta.zuplay.model.service.item.InventoryService;
+import com.sun.media.jfxmedia.events.PlayerTimeListener;
 
 @Controller
 public class InventoryController {
@@ -41,9 +43,14 @@ public class InventoryController {
 	/**
 	 * 아이템 목록 업데이트
 	 */
-	 @RequestMapping(value="playerItemInsert" ,produces="text/plain;charset=UTF-8" )
+	 @SuppressWarnings("serial")
+	@RequestMapping(value="playerItemInsert" ,produces="text/plain;charset=UTF-8" )
 	@ResponseBody
-	public boolean playerItemInsert(HttpSession session, List<PlayerItemDTO> jsonList) {
+	public boolean playerItemInsert(HttpSession session, String itemParam) {
+		System.out.println(itemParam);
+		Gson gson = new Gson();
+		
+		List<PlayerItemDTO> jsonList = gson.fromJson(itemParam, new ArrayList<PlayerItemDTO>(){}.getClass());
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		ArrayList<PlayerItemDTO> list = new ArrayList<PlayerItemDTO>();
 		for (int i = 0; i < jsonList.size(); i++) {

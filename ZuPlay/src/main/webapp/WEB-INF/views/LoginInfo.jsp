@@ -73,6 +73,7 @@
 	    	    Logincheck();
 	    	 } 
 	
+		//모달 확인 버튼
 		 $("#nickConfirm").on("click",function(){
 			 $("#nickForm").submit();
 		 })

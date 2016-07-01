@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
   <div class="company-window">
-    <div class="company-header">Hello!</div>
+    <div class="company-header">기업정보 - {masterDTO.isuCd}</div>
 
     <div class="company-content">
       <div class="row-fluid">
         <div class="col-xs-12 company-title">
-          <span class="company-title-name">삼성전자</span>
-          <span class="company-title-stock">(768,000)</span>
+          <span class="company-title-name">{masterDTO.isuKorAbbrv}</span>
+          <span class="company-title-stock">{masterDTO.priceDTO.trdPrc}</span>
         </div>
       </div>
 
@@ -25,18 +25,21 @@
 		
 		<div class="tab-content">
 		  <div id="company-chart-today" class="tab-pane fade in active">
-		    <h3>TODAY</h3>
-		   <p>Some content.</p>
+		   <c:forEach items="${masterDTO.rtpList}" var="rtp" varStatus="stu">
+		   		$(rtp.rpTrdtm) : ${rtp.rpTrdPrc}
+		   </c:forEach>
 		</div>
 		  
 		  <div id="company-chart-week" class="tab-pane fade">
-		    <h3>WEEK</h3>
-		    <p>Some content in menu 1.</p>
+		   <c:forEach items="${masterDTO.dpList}" var="dp" varStatus="stu">
+		   		${dp.dpDate} : $(dp.dpClsprc)
+		   </c:forEach>
 		  </div>
 		  
 		  <div id="company-chart-month" class="tab-pane fade">
-		    <h3>MONTH</h3>
-		    <p>Some content in menu 1.</p>
+		   <c:forEach items="${masterDTO.dpList}" var="dp" varStatus="stu">
+		   		${dp.dpDate} : $(dp.dpClsprc)
+		   </c:forEach>
 		  </div>
 		</div>
 	  </div>
@@ -47,27 +50,27 @@
               <tbody>
                 <tr>
                   <th>전일비</th>
-                  <td>669.15</td>
+                  <td>${masterDTO.priceDTO.cmpprevddPrc}</td>
                   <th>등락</th>
-                  <td>9.85(+1.49%)</td>
+                  <td>$(masterDTO.priceDTO.fluctuationRate)%</td>
                 </tr>
                 <tr>
                   <th>전일</th>
-                  <td>819,162</td>
+                  <td>${masterDTO.priceDTO.trdPrc - masterDTO.priceDTO.cmpprevddPrc}</td>
                   <th>거래량</th>
-                  <td>3,571,653</td>
+                  <td>${masterDTO.priceDTO.trdvol}</td>
                 </tr>
                 <tr>
                   <th>저가</th>
-                  <td>123,456</td>
+                  <td>${masterDTO.priceDTO.lwprc}</td>
                   <th>고가</th>
-                  <td>123,456</td>
+                  <td>${masterDTO.priceDTO.hgprc}</td>
                 </tr>
                 <tr>
-                  <th>기준가격</th>
-                  <td>1,000,000</td>
+                  <th>시가</th>
+                  <td>${masterDTO.priceDTO.opnprc}</td>
                   <th>기준가액</th>
-                  <td>1,000,000</td>
+                  <td>${masterDTO.priceDTO.trdPrc}</td>
                 </tr>
               </tbody>
             </table>

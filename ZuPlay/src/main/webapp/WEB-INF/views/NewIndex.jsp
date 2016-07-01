@@ -10,27 +10,9 @@
 <title>Home</title>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 <link href="resources/css/jqwidgets/jqx.base.css" rel="stylesheet" />
+<link href="resources/css/jqwidgets/jqx.kokomo.css" rel="stylesheet"/>
 <link href="resources/css/jquery-ui/jquery-ui.css" rel="stylesheet"/>
-<link href="resources/css/newStyle.css" rel="stylesheet" />
-<style>
-#inven-content{overflow: hidden;}
-	#inven-content>table tr td{width: 80px; height: 107.5px; padding: 0 0 0 0; 
-	margine: 0 0 0 0; border:1px black solid; overflow:hidden; white-space: nowrap; display: inline-block;}
-	#inven-content>table tr td .item-img{width: 75px; height: 97.5px;}
-	#inven-player-avatar{width: 240px; height: 240px;}
-	#inven-content>table{table-layout: fixed; border-spacing:100px;}
-	#inven-player{float: left;}
-	div.vertical-line{
-	  width: 2px;
-	  background-color: black;
-	  height: 100%;
-	  float: left;
-	  margin-right: 10px;
-	  margin-left: 10px;
-	}
-	#inven-player-avatar-view{position: relative; width:100%; height:100%}
-	#inven-player-avatar img{position: absolute; height: 100%; width: 100%}
-</style>
+<link href="resources/css/style.css" rel="stylesheet" />
 </head>
 <body class='default'>
 	<button id="rta-btn">실시간 주가 정보</button>
@@ -127,29 +109,7 @@
 
 <script>
 	(function ( $ ) {
-		/* 유저 기본 정보 */
-		var userInfo = {
-			nickName : "",
-			gender : "",
-			theme : "kokomo",
-			money : 0,
-			ruby : 0,
-			friends : {
-				
-			}
-		}
-		/* 셋팅 정보 */		
-		var setting = {
-			parts : ["clothes","hair","eyes","mouse","earring","acc"]
-		};
-		
-		/*버튼클릭했을 때 이벤트 설정*/
-		$.fn.setBtn = function(window){
-			$(this).on("click",function(){
-				$(window).jqxWindow("show");
-			})
-		}
-		
+
 		
 	}( jQuery ));
 	

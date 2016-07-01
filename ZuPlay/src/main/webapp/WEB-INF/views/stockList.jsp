@@ -70,20 +70,24 @@
 				dataType:"json",
 				data:"page="+page+"&keyword="+keyword	,
 				success:function(data){
+					console.log(data);
 					str="";
-					console.log(data.amount);
-					pagenation(data.amount); 
+					//console.log(data.amount);
 							
 					$.each(data, function(index,item){
-						
-						str+="<tr><td class='stock-select'><a href='#'>"+item.isuKorAbbrv+"</a></td>"
-						str+="<td>"+item.priceDTO.trdPrc +"</td>";
-						str+="<td>"+item.priceDTO.cmpprevddPrc +"</td>";
-						str+="<td>"+item.priceDTO.fluctuationRate +"</td>";
-						str+="<td>"+item.priceDTO.trdvol +"</td>";
-						str+="<td>"+item.priceDTO.opnprc +"</td>";
-						str+="<td>"+item.priceDTO.hgprc +"</td>";
-						str+="<td>"+item.priceDTO.lwprc +"</td><tr>";
+						if(index==0){
+							console.log(item.amount);
+							pagenation(item.amount);
+						}else{
+							str+="<tr><td class='stock-select'><a href='#'>"+item.isuKorAbbrv+"</a></td>"
+							str+="<td>"+item.priceDTO.trdPrc +"</td>";
+							str+="<td>"+item.priceDTO.cmpprevddPrc +"</td>";
+							str+="<td>"+item.priceDTO.fluctuationRate +"</td>";
+							str+="<td>"+item.priceDTO.trdvol +"</td>";
+							str+="<td>"+item.priceDTO.opnprc +"</td>";
+							str+="<td>"+item.priceDTO.hgprc +"</td>";
+							str+="<td>"+item.priceDTO.lwprc +"</td><tr>";
+						}
 					})
 					
 					$("#stockListTBody").html(str);

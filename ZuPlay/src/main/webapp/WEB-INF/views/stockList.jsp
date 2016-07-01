@@ -116,18 +116,26 @@
 		
 		//종목명 클릭 시 상세정보 띄어줌.
 		$(document).on("click", ".stock-select",function(){
-			
+			$.ajax({
+				url:"",
+				type:"post",
+				dataType:"",
+				data:"",
+				success:function(data){
+					
+				},
+				error:function(err){
+					alert(err+"에러발생")
+				}
+			})
 		})
 		
-		//검색
+		//검색( 2,3페이지에있을때 1페이지로 다시 이동하게!)
 		$(document).on("keyup","#stock-search",function(){
 			if(event.keyCode == 13) {
 				
 				if($(this).val()=="") return;
-				$(".pagination bootpag li").removeClass();
-				
-				//$(".pagination bootpag").children().eq(2).attr("class","active")
-								
+				$("#page-selection ul li").eq(1).trigger("click");
 				$("#stock-search-keyword").val($(this).val());
 				stockPageSelect(1,$(this).val())
 			}

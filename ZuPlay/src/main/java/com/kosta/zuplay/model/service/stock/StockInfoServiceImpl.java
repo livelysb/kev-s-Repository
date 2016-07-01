@@ -64,6 +64,12 @@ public class StockInfoServiceImpl implements StockInfoService {
 		return null;
 	}
 
+	@Override
+	public int getListSize(String isuKorAbbrv) {
+		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
+		return stockInfoDAO.getListSize(isuKorAbbrv);
+	}
+
 
 	
 

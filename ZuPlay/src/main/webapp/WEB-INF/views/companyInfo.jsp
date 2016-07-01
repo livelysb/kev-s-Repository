@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
   <div class="company-window">
-    <div class="company-header">기업정보 - {masterDTO.isuCd}</div>
-
+    <div class="company-header">기업정보 - ${masterDTO.isuCd}</div>
+	<input type="hidden" value="${masterDTO.isuCd}">
     <div class="company-content">
       <div class="row-fluid">
         <div class="col-xs-12 company-title">
-          <span class="company-title-name">{masterDTO.isuKorAbbrv}</span>
-          <span class="company-title-stock">{masterDTO.priceDTO.trdPrc}</span>
+          <span class="company-title-name">${masterDTO.isuKorAbbrv}</span>
+          <span class="company-title-stock">${masterDTO.priceDTO.trdPrc}</span>
         </div>
       </div>
 
@@ -50,27 +51,27 @@
               <tbody>
                 <tr>
                   <th>전일비</th>
-                  <td>${masterDTO.priceDTO.cmpprevddPrc}</td>
+                  <td><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></td>
                   <th>등락</th>
                   <td>$(masterDTO.priceDTO.fluctuationRate)%</td>
                 </tr>
                 <tr>
                   <th>전일</th>
-                  <td>${masterDTO.priceDTO.trdPrc - masterDTO.priceDTO.cmpprevddPrc}</td>
+                  <td><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc - masterDTO.priceDTO.cmpprevddPrc}"/></td>
                   <th>거래량</th>
-                  <td>${masterDTO.priceDTO.trdvol}</td>
+                  <td><fmt:formatNumber value="${masterDTO.priceDTO.trdvol}"/></td>
                 </tr>
                 <tr>
                   <th>저가</th>
-                  <td>${masterDTO.priceDTO.lwprc}</td>
+                  <td><fmt:formatNumber value="${masterDTO.priceDTO.lwprc}"/></td>
                   <th>고가</th>
-                  <td>${masterDTO.priceDTO.hgprc}</td>
+                  <td><fmt:formatNumber value="${masterDTO.priceDTO.hgprc}"/></td>
                 </tr>
                 <tr>
                   <th>시가</th>
-                  <td>${masterDTO.priceDTO.opnprc}</td>
-                  <th>기준가액</th>
-                  <td>${masterDTO.priceDTO.trdPrc}</td>
+                  <td><fmt:formatNumber value="${masterDTO.priceDTO.opnprc}"/></td>
+                  <th>시가총액</th>
+                  <td><fmt:formatNumber value="${masterDTO.listShrs * masterDTO.priceDTO.trdPrc}"/></td>
                 </tr>
               </tbody>
             </table>

@@ -8,6 +8,7 @@ $(function(){
 		})
 	}
 	
+	/* 실시간 주가 정보 */
 	   var rtaInit = function(){
 
 	      var localData = {
@@ -62,47 +63,41 @@ $(function(){
 	   }
 	   
 	   
+	   /* 기업 정보 조회 */
 	   var companyInfo = function(){
-	      $(".company-window").jqxWindow({
-	             theme:"kokomo",
-	             minWidth:500,
-	             width:1000,
-	             height:400,
-	             showCollapseButton: true,
-	             closeButtonAction: 'close'
-	           });
+		    $(".company-window").jqxWindow({
+		          theme:"kokomo",
+		          minWidth:500,
+		          width:1000,
+		          height:400,
+		          showCollapseButton: true,
+		          closeButtonAction: 'close'
+		        });
 
-	       $(".company-chart").jqxTabs({
-	         scrollable:false,
-	          width: '100%',
-	          autoHeight: false,
-	          height: 150,
-	          theme : userInfo.theme
-	       });
 
-	       $(".company-sell-slider, .company-buy-slider").jqxSlider({
-	           width:"100%",
-	           showTickLabels: true,
-	           tooltip: true,
-	           mode: "fixed",
-	           min: 0,
-	           max: 100,
-	           ticksFrequency: 10,
-	           value: 50,
-	           step: 1,
-	           theme : "kokomo",
-	           tooltipPosition: "far"
-	       });
+		    $(".company-sell-slider, .company-buy-slider").jqxSlider({
+		        width:"100%",
+		        showTickLabels: true,
+		        tooltip: true,
+		        mode: "fixed",
+		        min: 0,
+		        max: 100,
+		        ticksFrequency: 10,
+		        value: 50,
+		        step: 1,
+		        theme : "kokomo",
+		        tooltipPosition: "far"
+		    });
 
-	       $(".company-sell-input, .company-buy-input").jqxNumberInput({
-	         width: "100%",
-	         spinButtons: true,
-	         inputMode: 'simple',
-	         min:0,
-	         max:100,
-	         textAlign:"center",
-	         decimalDigits: 0
-	       });
+		    $(".company-sell-input, .company-buy-input").jqxNumberInput({
+		      width: "100%",
+		      spinButtons: true,
+		      inputMode: 'simple',
+		      min:0,
+		      max:100,
+		      textAlign:"center",
+		      decimalDigits: 0
+		    });
 	   }
 	   
 
@@ -213,7 +208,7 @@ $(function(){
 		
 		invenInit();
 		rtaInit();
-		//companyInfo();
+		companyInfo();
 		
 		var setBtn = function(){
 			

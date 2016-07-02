@@ -45,11 +45,9 @@ public class PlayerInfoController {
 	public String updatePI(HttpSession session) throws Exception {
 		try {
 			String playerNickname = (String) session.getAttribute("playerNickname");
-			System.out.println("came dddd" + playerNickname);
 			PlayerDTO playerDTO = playerInfoService.getPlayer(playerNickname);
 			Gson gson = new Gson();
 			String json = gson.toJson(playerDTO);
-			System.out.println("updatePI json" + json);
 			return json;
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.getMessage());

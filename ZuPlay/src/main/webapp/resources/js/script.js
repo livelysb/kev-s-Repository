@@ -67,9 +67,10 @@ $(function(){
       /* 기업 정보 조회 */
       var companyInfo = function(code){
             var companyId = "#company-"+code;
-          $(companyId + " .company-window").jqxWindow({
+          $(companyId).jqxWindow({
                 theme:userInfo.theme,
-                minWidth:500,
+                minWidth:700,
+                width:"auto",
                 height:380,
                 showCollapseButton: true,
                 resizable : false,
@@ -270,7 +271,7 @@ $(function(){
                      
                      $("#stockListTBody").html(str);
                      $(document).on("click", "#stock-window tr",function(e){
-                    	var cd = $(this).children("hidden").val();
+                    	var cd = $(this).find(":hidden").val();
                     	console.log(cd);
                     	showCompanyInfo(cd);
                      })
@@ -299,6 +300,7 @@ $(function(){
             
             /*종목명 클릭 시 상세정보 띄어줌.*/
             var showCompanyInfo = function(code){
+            	alert(code);
                $.ajax({
                   url:"companyInfo",
                   type:"post",

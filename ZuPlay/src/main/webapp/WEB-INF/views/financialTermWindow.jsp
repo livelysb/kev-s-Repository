@@ -105,12 +105,7 @@
 <body>
 	<input type="text" id="stockSearch" name="stockSearch" class="form-control" placeholder="Search">
 <div id="accordion">
-  <!-- <h3 class="accordion-section-title">제목</h3>
-  <div class="accordion-section-content">
-    내용
-    
-  </div> -->
- 
+
 </div>
  
   
@@ -126,16 +121,15 @@
 
 <script type="text/javascript">
 	$(function() {
-	    $( "#accordion" ).accordion({
-	      collapsible: true,
-	      active: false
+		$( "#accordion" ).accordion({
+		      collapsible: true,
+		      active: false
 	    });
 	    
 	    $("#stockSearch").on("keyup",function(){
 	    	
 	    	var term = $(this).val()
 	    	if(event.keyCode == 13) {
-	    		alert("엔터클릭!");
 	    		if(term =="") return;
 	    		
 		    	$.ajax({ 
@@ -144,11 +138,20 @@
 					dataType:"xml",
 					data:"term="+term,
 					success:function(data){
-						console.log(data)
-						$.each(data,function(index,item){ 
-							$("#accordion").append("<h3 class='accordion-section-title'>"+ item.fnceDictNm+"</h3>");
-							$("#accordion").append("<div class='accordion-section-content'>"+ item.ksdFnceDictDescContent +"</div>");
-						}) 
+						console.log(data);
+						str="";
+						$(data).find("item").each(function(index,item){ 
+							var fnceDictNm = $(this).find('fnceDictNm') ? $(this).find('fnceDictNm').text() : "";
+							var ksdFnceDictDescContent = $(this).find('ksdFnceDictDescContent') ? $(this).find('ksdFnceDictDescContent').text() : "";
+							console.log(ksdFnceDictDescContent)
+							str+="<h3 class='accordion-section-title'>"+ fnceDictNm+"</h3>";
+							str+="<div class='accordion-section-content'>"+ ksdFnceDictDescContent +"</div>";
+						})  
+						$("#accordion").empty();
+						$("#accordion").html(str);
+						$('#accordion').accordion("refresh");
+						
+						
 					},
 					error:function(err){
 						alert(err+"에러발생")
@@ -156,6 +159,8 @@
 			    })
 	    	}
 	    })
+	    
+	   
 	  });
 </script>
 </html>

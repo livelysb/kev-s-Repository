@@ -28,7 +28,7 @@ public class DictionaryController {
 		urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "="
 				+ URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="
-				+ URLEncoder.encode("5", "UTF-8")); /* 한 페이지 결과 수 */
+				+ URLEncoder.encode("100", "UTF-8")); /* 한 페이지 결과 수 */
 		System.out.println(urlBuilder.toString());
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();

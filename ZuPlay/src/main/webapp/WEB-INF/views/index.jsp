@@ -136,11 +136,8 @@
 			ws.send(open);
 		};
 		ws.onmessage = function(message) {
-			console.log(message);
 			console.log('receive message : ' + message.data);
-			$('#messages').val($('#messages').val() + message.data + '\n');
-			document.getElementById('messages').scrollTop = document
-					.getElementById('messages').scrollHeight;
+			
 		};
 		ws.onclose = function(event) {
 			console.log(event);

@@ -81,9 +81,9 @@ div.vertical-line{
     padding: 3 3 3 3
   }
 
- .company-buy .col-xs-2, .company-buy .col-xs-6{
-    margin-top: 25px;
-    margin-bottom: 25px;
+ .company-buy .col-xs-2, .company-buy .col-xs-8{
+    margin-top: 27px;
+    margin-bottom: 27px;
   }
   
 .company-chart .nav-tabs > li > a
@@ -101,6 +101,10 @@ div.vertical-line{
 }
 .company-chart .nav-tabs > li.active {
     margin-bottom: -1px;    
+}
+
+.company-buy h5, .company-sell h5{
+   text-align: center;
 }
 
 /* 아이템 상점 */

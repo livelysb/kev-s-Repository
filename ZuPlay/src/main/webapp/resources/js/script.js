@@ -477,6 +477,25 @@ $(function(){
     	      maxHeight:900,
     	      showCollapseButton: true
     	    });
+    	  
+    	  //친구검색
+    	  $("#friend-add-search").on("click",function(){
+    		 /* $.ajax({
+    			  url:"",
+    			  data
+    		  })*/
+    	  })
+    	  
+    	  
+    	  /*친구추가 버튼*/
+    	  $("#friend-add").on("click",function(){
+    		  $("#friend-add-text").focus();
+    		  var friendId=$("#friend-add-text").val();
+    		  var myId=$("#friend-add-test").val()
+    		  if(friendId=="") return
+    		  
+    		  ws.send("friendAdd#/fuckWebSocket/#"+myId+"#/fuckWebSocket/#"+friendId)
+    	  })
       }
       
       invenInit();

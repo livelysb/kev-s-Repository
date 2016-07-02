@@ -23,7 +23,8 @@
 	<button id="store-btn">상점</button>
 	<button id="friend-btn">친구</button>
 	
-
+	<!-- TEST -->
+	<input type="hidden" value="${playerNickname}" id="friend-add-test">
 	<div id="rta-Window">
 		<div id="rta-Header">
 			<span>실시간 주가 정보</span>
@@ -130,36 +131,6 @@
 <script src="resources/js/script.js"></script>
 
 <script>
-	function connect() {
-
-		ws = new WebSocket('ws://127.0.0.1:8000/zuplay/echo/test');
-		ws.onopen = function() {
-			console.log('websocket opened');
-			var open = "open#/fuckWebSocket/#김경원#/fuckWebSocket/#null";
-			ws.send(open);
-		};
-		ws.onmessage = function(message) {
-			console.log('receive message : ' + message.data);
-			
-		};
-		ws.onclose = function(event) {
-			console.log(event);
-			console.log('websocket closed');
-		};
-	}
-	function disconnect() {
-		if (ws) {
-			ws.close();
-			ws = null;
-		}
-	}
-	$(function() {
-		connect();
-
-		$('#logout').click(function() {
-			disconnect();
-			location.href="Login";
-		});
-	})
+	
 </script>
 </html>

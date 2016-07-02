@@ -1,8 +1,7 @@
 $(function(){
-   
+
 	/*플레이어 정보 업데이트*/
     var updatePlayerStatus = function(){
-    	console.log("실행")
        $.ajax({
          url : "updatePI",
          type: "post",
@@ -18,7 +17,7 @@ $(function(){
        });
     }
     updatePlayerStatus();
-   
+
    /*버튼클릭했을 때 이벤트 설정*/
    $.fn.setBtn = function(window){
       $(this).on("click",function(){

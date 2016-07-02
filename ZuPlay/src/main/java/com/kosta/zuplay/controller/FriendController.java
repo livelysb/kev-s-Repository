@@ -60,7 +60,7 @@ public class FriendController {
 		FriendDTO dto = friendServiceImpl.friendAdd(playerNickname, playerNickname2);
 		Gson gson = new Gson();
 		String json = gson.toJson(dto);
-		json = "{type:'friendAdd',data:" + json + "}";
+		json = "{type:'notiFriendAdd',data:" + json + "}";
 		System.out.println(json);
 		TextMessage tx = new TextMessage(json);
 		System.out.println(tx);
@@ -95,8 +95,8 @@ public class FriendController {
 		boolean result = friendServiceImpl.friendAccept(friendSq);
 		if (result) {
 			Gson gson = new Gson();
-			String json = "{type:'friendAcceptMe',data:" + gson.toJson(result) + "}";
-			String json2 = "{type:'friendAcceptYou',data:" + gson.toJson(result) + "}";
+			String json = "{type:'notiFriendAcceptMe',data:" + gson.toJson(result) + "}";
+			String json2 = "{type:'notiFriendAcceptYou',data:" + gson.toJson(result) + "}";
 
 			try {
 				session.sendMessage(new TextMessage(json));

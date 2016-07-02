@@ -90,19 +90,14 @@ public class FriendServiceImpl implements FriendService {
 	public boolean friendCheck(String playerNickname, String playerNickname2) {
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println(3333);
 		map.put("playerNickname", playerNickname);
 		map.put("playerNickname2", playerNickname2);
-		System.out.println(map);
 		FriendDTO dtoA = null;
 		dtoA = friendDAO.friendCheck(map);
 		map.clear();
 		map.put("playerNickname2", playerNickname);
 		map.put("playerNickname", playerNickname2);
-		System.out.println(map);
 		FriendDTO dtoB = friendDAO.friendCheck(map);
-		System.out.println("dtoA : " + dtoA + "// dtoB : " + dtoB);
-
 		if (dtoA == null && dtoB == null) {
 			return false;
 		}

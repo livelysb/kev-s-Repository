@@ -89,4 +89,12 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 		return true;
 	}
 
+	@Override
+	public List<PlayerDTO> playerInfoSelectAll(String keyword) {
+		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
+		List<PlayerDTO> list = playerInfoDAO.playerInfoSelectAll(keyword);
+		System.out.println(list);
+		return list;
+	}
+
 }

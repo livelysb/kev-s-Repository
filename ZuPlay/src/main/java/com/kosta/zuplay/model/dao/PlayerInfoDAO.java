@@ -6,7 +6,10 @@ import java.util.Map;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 
 public interface PlayerInfoDAO {
-
+	/**
+	 * 플레이어 리스트 가져오기(검색)
+	 */
+	public List<PlayerDTO> playerInfoSelectAll(String keyword);
 	/**
 	 * 플레이어가 가지고있는 기본정보 가져오기 ( PLAYER Table )
 	 * */

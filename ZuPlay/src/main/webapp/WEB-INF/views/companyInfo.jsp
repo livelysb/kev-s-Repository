@@ -79,15 +79,13 @@
         </div>
       <hr>
       <div class="row-fluid company-buy">
-        <div class="col-xs-6"><div class="company-buy-slider"></div></div>
-        <div class="col-xs-2"><div class="company-buy-input"></div></div>
-        <div class="col-xs-2"><h5 class="company-buy-value">100,000</h5></div>
+        <div class="col-xs-8"><div class="company-buy-slider"></div></div>
+        <div class="col-xs-2"><h5 class="company-buy-value">0</h5></div>
         <div class="col-xs-2"><button class="company-buy-btn btn btn-primary">구매</button></div>
       </div>
       <div class="row-fluid company-sell">
-        <div class="col-xs-6"><div class="company-sell-slider"></div></div>
-        <div class="col-xs-2"><div class="company-sell-input"></div></div>
-        <div class="col-xs-2"><h5 class="company-sell-value">100,000</h5></div>
+        <div class="col-xs-8"><div class="company-sell-slider"></div></div>
+        <div class="col-xs-2"><h5 class="company-sell-value">0</h5></div>
         <div class="col-xs-2"><button class="company-sell-btn btn btn-danger">판매</button></div>
       </div>
     </div>

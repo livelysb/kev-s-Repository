@@ -12,15 +12,36 @@
 		<result column="PLAYER_MONEY" property="playerMoney" />
 		<result column="PLAYER_RUBY" property="playerRuby" />
 		<result column="PLAYER_GRADE" property="playerGrade" />
-		<result column="PLAYER_LASTACCESS" property="playerLastAccess"/>
+		<result column="PLAYER_LASTACCESS" property="playerLastAccess" />
 		<result column="PLAYER_DAILY_RANK" property="playerDailyRank" />
 		<result column="PLAYER_WEEKLY_RANK" property="playerWeeklyRank" />
 		<result column="PLAYER_SEASON_RANK" property="playerSeasonRank" />
 		<result column="PLAYER_TOTAL_RANK" property="playerTotalRank" />
+		<association property="playerItemDTO">
+			<id column="pi_sq" property="piSq" />
+			<result column="player_nickname" property="playerNickname" />
+			<result column="item_code" property="itemCode" />
+			<result column="pi_isused" property="piIsused" />
+			<result column="pi_index" property="piIndex" />
+			<association property="itemDTO" javaType="itemDTO">
+				<id column="item_code" property="itemCode" />
+				<result column="item_name" property="itemName" />
+				<result column="item_price" property="itemPrice" />
+				<result column="item_class" property="itemClass" />
+				<result column="item_grade" property="itemGrade" />
+				<result column="item_img" property="itemImg" />
+
+			</association>
+		</association>
 	</resultMap>
 
-	<select id="playerInfoSelectAll" parameterType="String" resultMap="player">
-		select * from player where player_nickname='%${value}$'
+	<select id="playerInfoSelectAll" parameterType="String"
+		resultMap="player">
+		select * from player p join player_item pi on
+		p.player_nickname=pi.player_nickname join item i on
+		pi.item_code=i.item_code
+		where
+		p.player_nickname like '%${value}%'
 	</select>
 	<select id="getPlayer" parameterType="String" resultMap="player">
 		select *
@@ -31,25 +52,25 @@
 		select
 		player_nickname from player
 	</select>
-	
+
 	<update id="setPlayerMoney" parameterType="java.util.Map">
 		update player
 		set
 		PLAYER_MONEY = #{playerMoney}
 		where player_Nickname = #{playerNickname}
 	</update>
-	
+
 	<update id="setPreMoney" parameterType="java.util.Map">
 		update player
 		set
 		player_premoney = #{preMoney}
 		where player_nickname = #{playerNickname}
 	</update>
-	
+
 	<select id="getRuby" parameterType="String" resultType="int">
 		select
 		player_ruby from player where player_nickname=#{playerNickname}
-	</select>	
+	</select>
 
 	<update id="updateRuby" parameterType="java.util.Map">
 		update player set

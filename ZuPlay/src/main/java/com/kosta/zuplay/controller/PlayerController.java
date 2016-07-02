@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.service.player.PlayerInfoService;
 
@@ -18,9 +19,12 @@ public class PlayerController {
 	
 	@RequestMapping("updatePI")
 	@ResponseBody
-	public PlayerDTO updatePI(HttpSession session) {
+	public String updatePI(HttpSession session) {
 		String playerNickname = (String)session.getAttribute("playerNickname");
-		return playerInfoService.getPlayer(playerNickname);
+		PlayerDTO playerDTO = playerInfoService.getPlayer(playerNickname);
+		Gson gson = new Gson();
+		String json = gson.toJson(playerDTO);
+		return json;
 	}
 	
 	

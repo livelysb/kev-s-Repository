@@ -44,7 +44,8 @@
 
 	      $('#logout').click(function() {
 	         disconnect();
-	         location.href="Login";
+	         
+	         location.href="logout";
 	      });
 	   })
 	

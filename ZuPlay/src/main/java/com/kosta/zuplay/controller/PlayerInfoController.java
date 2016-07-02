@@ -36,6 +36,7 @@ public class PlayerInfoController {
 		}
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
+		System.out.println(json);
 		return json;
 	}
 	

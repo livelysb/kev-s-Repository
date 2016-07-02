@@ -52,11 +52,6 @@ public class EchoHandler extends TextWebSocketHandler {
 		
 	}
 	
-	@Override
-	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		application.removeAttribute(name);
-		super.afterConnectionClosed(session, status);
-	}
 	
 
 

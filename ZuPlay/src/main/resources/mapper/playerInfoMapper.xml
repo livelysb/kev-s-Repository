@@ -19,7 +19,9 @@
 		<result column="PLAYER_TOTAL_RANK" property="playerTotalRank" />
 	</resultMap>
 
-
+	<select id="playerInfoSelectAll" parameterType="String" resultMap="player">
+		select * from player where player_nickname='%${value}$'
+	</select>
 	<select id="getPlayer" parameterType="String" resultMap="player">
 		select *
 		from player where player_nickname = #{value}

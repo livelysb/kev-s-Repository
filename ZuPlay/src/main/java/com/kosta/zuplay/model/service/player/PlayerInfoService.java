@@ -5,14 +5,17 @@ import java.util.List;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 
 public interface PlayerInfoService {
-
+	/**
+	 * 플레이어 리스트 가져오기
+	 */
+	public List<PlayerDTO> playerInfoSelectAll(String keyword);
 	/**
 	 * 플레이어 정보 가져오기
 	 * */
 	public PlayerDTO getPlayer(String playerNickname);
 
 	/**
-	 * 모픈 플레이어의 닉네임 가져오기
+	 * 모든 플레이어의 닉네임 가져오기
 	 * */
 	public List<String> getAllPlayerNickName();
 	

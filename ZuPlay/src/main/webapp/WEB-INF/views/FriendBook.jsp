@@ -93,12 +93,20 @@
 			    	 		<input type="text" id="friend-add-text">
 			    	 		<button type="button" id="friend-add-search">검색</button>
 		    	 	</div>
-					<div id="friend-search-list">
-						
-					</div>
+							<table class="table table-bordered table-hover">
+						         <thead>
+						            <tr>
+						               <th>아바타</th>
+						               <th>닉네임</th>
+						               <th>계급</th>
+						            </tr>
+						         </thead>
+						            <tbody id="friend-list-tbody">
+						               
+						            </tbody>
+			     		 </table>
 		    	 </div>
 		    	 <div class="modal-footer">
-			        <button type="button" class="btn btn-primary"  id="friend-add">Add</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		      </div>
 		    </div>

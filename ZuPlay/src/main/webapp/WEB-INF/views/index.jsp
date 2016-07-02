@@ -21,6 +21,8 @@
 	<button id="inven-btn">인벤토리</button>
 	<button id="stockList-btn">주가 보기</button>
 	<button id="store-btn">상점</button>
+	<button id="friend-btn">친구</button>
+	
 
 	<div id="rta-Window">
 		<div id="rta-Header">
@@ -31,6 +33,7 @@
 
 	<jsp:include page="stockList.jsp" />
 	<jsp:include page="storeWindow.jsp" />
+	<jsp:include page="FriendBook.jsp"/>
 	<div id="inven-Window">
 		<div id="inven-Header">인벤토리</div>
 		<div id="inven-content">

@@ -472,6 +472,7 @@ $(function(){
     	      maxWidth:400,
     	      minWidth:400,
     	      minHeight:400,
+    	      autoOpen:false,
     	      height:"auto",
     	      maxHeight:900,
     	      showCollapseButton: true
@@ -490,6 +491,7 @@ $(function(){
             $("#rta-btn").setBtn($("#rta-Window"));
             $("#stockList-btn").setBtn($("#stock-window"));
             $("#store-btn").setBtn($("#store-window"));
+            $("#friend-btn").setBtn($("#friend-window"))
       }();
       
 });

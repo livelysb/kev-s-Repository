@@ -464,10 +464,25 @@ $(function(){
       }
       
       
+      /*친구창*/
+      var friendBook = function(){
+    	  $("#friend-window").jqxWindow({
+    	      theme:"kokomo",
+    	      width:400,
+    	      maxWidth:400,
+    	      minWidth:400,
+    	      minHeight:400,
+    	      height:"auto",
+    	      maxHeight:900,
+    	      showCollapseButton: true
+    	    });
+      }
+      
       invenInit();
       rtaInit();
       stockListInit();
       storeInit();
+      friendBook();
       
       var setBtn = function(){
          

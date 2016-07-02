@@ -6,21 +6,28 @@ import com.kosta.zuplay.model.dto.player.FriendDTO;
 
 public interface FriendService {
 	/**
-	 * 친구목록조회
+	 * 접속중 친구목록조회
+	 */
+	List<FriendDTO> friendSelectOnline(String playerNickname);
+	/**
+	 * 친구목록 전체 조회
 	 */
 	List<FriendDTO> friendSelect(String playerNickname);
-	
+	/**
+	 * 친구여부 체크
+	 */
+	boolean friendCheck(String playerNickname,String playerNickname2);
 	/**
 	 * 친구신청
 	 */
-	
+	FriendDTO friendAdd(String playerNickname,String playerNickname2);
 	/**
 	 * 친구삭제,거절
 	 */
-
+	boolean friendDel(int friendSq);
 	/**
 	 * 친구수락
 	 */
-	
+	boolean friendAccept(int friendSq);
 
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosta.zuplay.model.dao.FriendDAO">
+
+	<resultMap type="friendDTO" id="friendMap">
+		<id column="friend_sq" property="friendSq" />
+		<result column="player_nickname" property="playerNickname" />
+		<result column="player_nickname2" property="playerNickname2" />
+		<result column="friend_isacepted" property="friendIsAccepted" />
+		<result column="friend_date" property="friendDate" />
+
+	</resultMap>
+	<!--친구조회 -->
+	<select id="friendSelectA" parameterType="String" resultMap="friendMap">
+		select * from friend where player_nickname=#{playerNickname}
+	</select>
+	<select id="friendSelectB" parameterType="String" resultMap="friendMap">
+		select * from friend where player_nickname2=#{playerNickname}
+	</select>
+	<!-- 친구체크 -->
+	<select id="friendCheck" parameterType="java.util.Map"
+		resultType="friendDTO">
+		select * from friend where player_nickname=#{playerNickname}
+		and
+		player_nickname2=#{playerNickname2}
+	</select>
+	<!-- 친구요청 -->
+	<insert id="friendAdd" parameterType="java.util.Map">
+		insert into friend
+		(friend_sq,player_nickname,player_nickname2,friend_isacepted,friend_date)
+		values(friend_sq.nextval,#{playerNickname},#{playerNickname2},'F',sysdate)
+	</insert>
+	<!-- 친구삭제 -->
+	<delete id="friendDel" parameterType="int">
+		delete friend where
+		friend_sq=#{friendSq}
+	</delete>
+	<!-- 친구수락 -->
+	<update id="friendAccept" parameterType="int">
+		update friend set
+		friend_is_accepted='T' where friend_sq=#{friendSq}
+	</update>
+
+</mapper>

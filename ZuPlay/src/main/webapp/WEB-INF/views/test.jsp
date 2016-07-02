@@ -31,7 +31,8 @@
         ws = new WebSocket('ws://127.0.0.1:8000/zuplay/echo/test');
         ws.onopen = function () {
             console.log('websocket opened');
-            
+            var open="open#/fuckWebSocket/#김경원#/fuckWebSocket/#null"
+           	ws.send(open);
         };
         ws.onmessage = function (message) {
             console.log(message);
@@ -67,11 +68,12 @@
  
         $('#message').keydown(event, function () {
             if (event.keyCode === 13) {
-            	var openJson="open#/fuckWebSocket/#김경원#/fuckWebSocket/#null"
-            	//ws.send(openJson);
-            	//alert(openJson)
-            	ws.send(openJson);
-                console.log('전송성공');
+            	/* var friendSelect="friendSelect#/fuckWebSocket/#김경원#/fuckWebSocket/#null"
+            	ws.send(friendSelect); */
+            	 var friendAdd="friendAdd#/fuckWebSocket/#경원#/fuckWebSocket/#김경원"
+                 	ws.send(friendAdd);
+                console.log('전송성공'); 
+            	
             }
         });
     });

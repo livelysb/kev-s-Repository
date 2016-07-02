@@ -1,23 +1,6 @@
 $(function(){
-
-	/*플레이어 정보 업데이트*/
-    var updatePlayerStatus = function(){
-       $.ajax({
-         url : "updatePI",
-         type: "post",
-         dataType : "json",
-         success : function(data){
-            console.log("update player status");
-            console.log(data);
-         },
-         error:function(err){
-            console.log("플레이어 업데이트 정보 오류 발생");
-            console.log(err);
-         }
-       });
-    }
-    updatePlayerStatus();
-
+   
+   
    /*버튼클릭했을 때 이벤트 설정*/
    $.fn.setBtn = function(window){
       $(this).on("click",function(){
@@ -488,17 +471,22 @@ $(function(){
     	  
     	  //친구검색
     	  $("#friend-add-search").on("click",function(){
+    		  console.log($("#friend-add-text").val());
     		 $.ajax({
     			  url:"playerInfoSelectAll",
     			  type:"post",
     			  data:"keyword="+$("#friend-add-text").val(),
     			  dataType:"json",
     			  success:function(data){
-    				  console.log(data);
     				  str="";
     				  $.each(data,function(index,item){
-    					  str+="<p>"+item+"</p>"
+    					  
+    					  str+="<tr class='friend-add-tr'><td>아바타</td>";
+    					  str+="<td>"+item.playerNickname+"</td>"
+    					  str+="<td>"+item.playerGrade+"</td></tr>"
     				  })
+    				  $("#friend-list-tbody").empty();
+    				  $("#friend-list-tbody").html(str);
     			  },
     			  error:function(err){
     				  alert(err+"에러발생")
@@ -512,12 +500,12 @@ $(function(){
     		  $("#friend-add-text").focus();
     	  })
     	  
-    	  /*친구추가 버튼*/
-    	  $("#friend-add").on("click",function(){
-    		  var friendId=$("#friend-add-text").val();
+    	  /*친구추가*/
+    	  $(document).on("click",".friend-add-tr",function(){
+    		  var friendId=$(this).children("td").eq(1).text();
     		  var myId=$("#friend-add-test").val()
-    		  if(friendId=="") return
-    		  
+    		  console.log($(this))
+    		  if(confirm(friendId+"님을 친구로 추가하시겠습니까?")==false || friendId=="") return;
     		  ws.send("friendAdd#/fuckWebSocket/#"+myId+"#/fuckWebSocket/#"+friendId)
     	  })
       }

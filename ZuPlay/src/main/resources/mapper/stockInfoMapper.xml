@@ -4,6 +4,7 @@
 <mapper namespace="com.kosta.zuplay.model.dao.stock.StockInfoDAO">
 
 	<resultMap type="masterDTO" id="master">
+		<id column="isuCd" property="isuCd"/>
 		<result column="isuKorAbbrv" property="isuKorAbbrv" />
 		<association property="priceDTO" javaType="priceDTO">
 			<result column="cmpprevddPrc" property="cmpprevddPrc" />

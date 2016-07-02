@@ -19,7 +19,7 @@ public class LoginServiceImpl implements LoginService {
 	private PlayerInfoService playerInfoService;
 	
 	@Override
-	public boolean firstLoginCheck(String naverId) {
+	public boolean firstLoginCheck(String naverId) throws Exception{
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);	
 		PlayerDTO playerDTO=loginDAO.firstLoginCheck(naverId);
 		if(playerDTO!=null){
@@ -29,7 +29,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public boolean joinMember(PlayerDTO playerDTO) {
+	public boolean joinMember(PlayerDTO playerDTO) throws Exception{
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
 		SettingDAO settingDAO=sqlSession.getMapper(SettingDAO.class);
 		int result=loginDAO.joinMember(playerDTO);
@@ -41,7 +41,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public boolean checkRepetition(String playerNickname) {
+	public boolean checkRepetition(String playerNickname) throws Exception{
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
 		String playerNaverId=loginDAO.checkRepetiton(playerNickname);
 		if(playerNaverId!=null){
@@ -51,13 +51,13 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String getNickname(String playerNaverId) {
+	public String getNickname(String playerNaverId) throws Exception{
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
 		return loginDAO.getNickname(playerNaverId);
 	}
 
 	@Override
-	public boolean getRubyPerDay(String playerNickname) {
+	public boolean getRubyPerDay(String playerNickname) throws Exception{
 		if(playerInfoService.updateRuby(playerNickname,playerInfoService.getRuby(playerNickname) + 1000))
 			return true;
 		return false;

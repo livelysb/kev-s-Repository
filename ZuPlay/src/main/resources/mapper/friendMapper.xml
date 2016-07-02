@@ -19,7 +19,7 @@
 	</select>
 	<!-- 친구체크 -->
 	<select id="friendCheck" parameterType="java.util.Map"
-		resultType="friendDTO">
+		resultMap="friendMap">
 		select * from friend where player_nickname=#{playerNickname}
 		and
 		player_nickname2=#{playerNickname2}

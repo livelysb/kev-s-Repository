@@ -21,14 +21,14 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	
 	@Scheduled(fixedDelay=10*60*1000)
 	@Override
-	public void actionPer10Min() {
+	public void actionPer10Min() throws Exception {
 		System.out.println("10분마다 작업을 시작합니다.");
 		stockUpdateService.stockPriceUpdate();
 	}
 	
 	@Scheduled(fixedDelay=20*60*1000)
 	@Override
-	public void actionPer20Min() {
+	public void actionPer20Min() throws Exception{
 		System.out.println("20분마다 작업을 시작합니다.");
 		stockUpdateService.realtimePriceInsert();
 	}
@@ -36,7 +36,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 
 	@Scheduled(cron="0 0 9 * * *")
 	@Override
-	public void actionAtNine() {
+	public void actionAtNine() throws Exception{
 		System.out.println("AM 09:00, 작업을 시작합니다.");
 		stockUpdateService.masterUpdate();
 		stockUpdateService.realtimePriceReset();
@@ -48,7 +48,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	
 	@Scheduled(cron="0 0 15 * * *")
 	@Override
-	public void actionAtThree() {
+	public void actionAtThree() throws Exception{
 		System.out.println("PM 03:00, 작업을 시작합니다.");
 		stockUpdateService.dailyPriceInsert();
 	}

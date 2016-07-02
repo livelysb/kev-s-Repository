@@ -5,27 +5,31 @@ public interface EarningRateService {
 	/**
 	 * 모든 플레이어들의 수익률 갱신 및 전일자산 업데이트
 	 * */
-	public int updateEarningRate();
+	public int updateEarningRate() throws Exception;
 	
 	/**
 	 * 금액을 통한 해당시즌 수익률 구하기
 	 * */
-	public double calEarningRate(String playerNickname);
+	public double calEarningRate(String playerNickname) throws Exception;
 	
 	/**
 	 * 플레이어의 일일 수익률 계산하기
 	 * */
-	public double calDailyEarningRate(String playerNickname);
+	public double calDailyEarningRate(String playerNickname) throws Exception;
 
 	
 	/**
 	 * 플레이어의 종목별 수익률 계산하기
 	 * */
-	public double calItemEarningRate(String playerNickname, String isuCd);
+	public double calItemEarningRate(String playerNickname, String isuCd) throws Exception;
 	
+	/**
+	 * 전일 자산 업데이트
+	 * */
+	boolean updatePreMoney(String playerNickname) throws Exception;
 	
 	/**
 	 * 플레이어의 분야별 수익률 계산하기
 	 * */
-	public double calKindEarningRate(String playerNickname, int kind);
+	public double calKindEarningRate(String playerNickname, int kind) throws Exception;
 }

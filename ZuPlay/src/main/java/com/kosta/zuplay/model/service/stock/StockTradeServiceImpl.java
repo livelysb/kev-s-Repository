@@ -23,7 +23,7 @@ public class StockTradeServiceImpl implements StockTradeService {
 
 	@Transactional
 	@Override
-	public boolean sellStock(String playerNickname, String isuCd, int quantity) {
+	public boolean sellStock(String playerNickname, String isuCd, int quantity) throws Exception{
 		int plQuantity = playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity();
 		int playerMoney = playerInfoService.getPlayer(playerNickname).getPlayerMoney();
 		int price = (int) (stockInfoService.getPrice(isuCd).getTrdPrc() * quantity * (1 - 0.00315)); // 수수료
@@ -42,7 +42,7 @@ public class StockTradeServiceImpl implements StockTradeService {
 
 	@Transactional
 	@Override
-	public boolean buyStock(String playerNickname, String isuCd, int plQuantity) {
+	public boolean buyStock(String playerNickname, String isuCd, int plQuantity) throws Exception{
 		int playerMoney = playerInfoService.getPlayer(playerNickname).getPlayerMoney();
 		int price = (int) stockInfoService.getPrice(isuCd).getTrdPrc();
 		int totalPrice = (int) (price * plQuantity * 1.00015); // 총 금액

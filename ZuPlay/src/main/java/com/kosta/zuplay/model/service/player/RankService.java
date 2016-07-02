@@ -11,7 +11,7 @@ public interface RankService {
 	/**
 	 * 일일/시즌 랭크 매기기 - 매일 세시반에 모든 Player의 를 정렬하여 랭크 결정
 	 * */
-	void calRank(String kind);
+	void calRank(String kind) throws Exception;
 
 	
 	

@@ -63,7 +63,6 @@ public class LoginController {
 			throw new Exception();
 		}
 		session.setAttribute("playerNickname", playerNickname);
-		System.out.println("ㅋㅋ");
 
 		return "index";
 	}

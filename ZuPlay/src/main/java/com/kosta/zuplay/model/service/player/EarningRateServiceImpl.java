@@ -43,7 +43,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 	 * */
 	@Transactional
 	@Override
-	public int updateEarningRate() {
+	public int updateEarningRate() throws Exception {
 		int result = 0;
 		List<String> playerList = playerInfoService.getAllPlayerNickName();
 		for(String playerNickname : playerList) {
@@ -70,7 +70,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 	/**
 	 * 전일 자산 업데이트
 	 * */
-	public boolean updatePreMoney(String playerNickname) {
+	public boolean updatePreMoney(String playerNickname) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
 		int totalMoney = playerInfoService.getTotalMoney(playerNickname);
 		map.put("playerNickname", playerNickname);
@@ -87,9 +87,11 @@ public class EarningRateServiceImpl implements EarningRateService {
 	 * 현재 금액, 보유주식의 현재 체결가를 이용한 금액
 	 * */
 	@Override
-	public double calEarningRate(String playerNickname) {
+	public double calEarningRate(String playerNickname) throws Exception {
+		System.out.println("cal");
 		int startMoney = 100000000;
 		int currentMoney = playerInfoService.getTotalMoney(playerNickname);
+		System.out.println("startMoney = "+startMoney+", currentMoney = " + currentMoney);
 		int rate = (int)((currentMoney - startMoney) / (double)(startMoney) * 100000000);
 		return rate /100000000.0;
 	}
@@ -98,7 +100,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 	 * 플레이어의 일일 수익률 계산하기
 	 * */
 	@Override
-	public double calDailyEarningRate(String playerNickname) {
+	public double calDailyEarningRate(String playerNickname) throws Exception {
 		int preMoney = playerInfoService.getPlayer(playerNickname).getPlayerPreMoney();
 		int currentMoney = playerInfoService.getTotalMoney(playerNickname);
 		int rate = (int)(( currentMoney- preMoney)/(double)(preMoney) * 100000000);
@@ -109,7 +111,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 	 * 플레이어의 종목별 수익률 계산하기
 	 * */
 	@Override
-	public double calItemEarningRate(String playerNickname, String isuCd) {
+	public double calItemEarningRate(String playerNickname, String isuCd) throws Exception {
 		int buy = 0;
 		int sell = 0;
 		List<StockDealHistoryDTO> stockDealHistoryList = dealHistoryService.getStockHistory(playerNickname);
@@ -128,7 +130,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 	 * 플레이어의 분야별 수익률 계산하기
 	 * */
 	@Override
-	public double calKindEarningRate(String playerNickname, int kind) {
+	public double calKindEarningRate(String playerNickname, int kind) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -31,6 +31,11 @@ public interface PlayerInfoDAO {
 	public int setPreMoney(Map<String, String> map);
 	
 	/**
+	 * 플레이어 머니 가져오기
+	 * */
+	int getMoney(String playerNickname);
+	
+	/**
 	 * 플레이어 루비 가져오기
 	 */
 	int getRuby(String playerNickname);

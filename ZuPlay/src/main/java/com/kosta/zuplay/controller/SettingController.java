@@ -19,6 +19,7 @@ public class SettingController {
 	/**
 	 * 세팅정보 저장
 	 */
+	
 	@RequestMapping("settingSave")
 	@ResponseBody
 	public boolean settingSave(HttpSession session,SettingDTO dto){
@@ -39,7 +40,7 @@ public class SettingController {
 	/**
 	 * 세팅정보 불러오기
 	 */
-	@RequestMapping("settingSelect")
+	@RequestMapping(value = "settingSelect", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String settingSelect(HttpSession session){
 		String playerNickname=(String) session.getAttribute("playerNickname");

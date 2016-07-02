@@ -16,15 +16,43 @@ import com.kosta.zuplay.model.service.player.PlayerInfoService;
 @Controller
 public class PlayerInfoController {
 
+	
+	@Autowired
+	private PlayerInfoService playerInfoService;
+	
+	
 	@Autowired
 	private PlayerInfoService playerInfoServiceImpl;
-	@RequestMapping("playerInfoSelectAll")
+	@RequestMapping(value={"playerInfoSelectAll"}, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String playerInfoSelectAll(HttpSession session, String keyword){
+	public String playerInfoSelectAll(HttpSession session, String keyword) throws Exception{
 		System.out.println("키워드 : " + keyword);
-		List<PlayerDTO> list = playerInfoServiceImpl.playerInfoSelectAll(keyword);
+		List<PlayerDTO> list;
+		try {
+			list = playerInfoServiceImpl.playerInfoSelectAll(keyword);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
 		return json;
+	}
+	
+	@RequestMapping(value={"updatePI"}, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String updatePI(HttpSession session) throws Exception {
+		try {
+			String playerNickname = (String) session.getAttribute("playerNickname");
+			System.out.println("came dddd" + playerNickname);
+			PlayerDTO playerDTO = playerInfoService.getPlayer(playerNickname);
+			Gson gson = new Gson();
+			String json = gson.toJson(playerDTO);
+			System.out.println("updatePI json" + json);
+			return json;
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.getMessage());
+			throw new Exception();
+		}
 	}
 }

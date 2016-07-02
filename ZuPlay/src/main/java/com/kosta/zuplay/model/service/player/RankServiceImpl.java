@@ -29,7 +29,7 @@ public class RankServiceImpl implements RankService{
 	
 	@Transactional
 	@Override
-	public void calRank(String kind) {
+	public void calRank(String kind) throws Exception {
 		List<PlayerDTO> playerList2 = new ArrayList<PlayerDTO>();
 		List<String> playerList = playerInfoService.getAllPlayerNickName();
 		for(String playerNickname : playerList) {

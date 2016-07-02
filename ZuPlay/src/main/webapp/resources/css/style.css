@@ -174,3 +174,116 @@ div.vertical-line{
 }
 
 #store-window .itemBox {border:solid 2px black; margin: 3px 3px 3px 0; padding: 1px; float: left; width: 70px; height: 70px; text-align: center; } 
+
+/*친구박스*/
+
+
+#friend-content .list-group-item img {
+    height:50px;
+    width:50px;
+}
+
+#friend-content .list-group .list-group-item{
+  padding: 5 5 5 5;
+}
+
+#friend-content .list-group{
+  margin-bottom: 3;
+}
+
+#friend-content .name {
+    font-size: 15px;
+    color:black;
+}
+
+#friend-content .friend-icon{
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+  border-radius: 30px;
+}
+
+#friend-list-group{
+  height: 73%;
+}
+
+#friend-content{
+  overflow: auto;
+}
+
+#friend-list-que{
+  max-height: 25%;
+  height: auto;
+}
+
+#friend-content .list-group .title{
+  border:2px solid #DDDDDD;
+}
+
+#friend-content .pull-right{
+  line-height: 4vh;
+}
+
+.title>label{
+  font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#friend-content .friend-sendBtn{
+  width: 35px;
+  height: 35px;
+  padding: 8px 0;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 8px;
+  margin-top: 7px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
+
+#friend-content .friend-menu{
+  min-height: 35px;
+  height: 5%;
+  text-align: center;
+}
+
+.green{
+  background-color: green;
+}
+
+.red{
+  background-color: red;
+}
+
+.orange{
+  background-color: orange;
+}
+
+

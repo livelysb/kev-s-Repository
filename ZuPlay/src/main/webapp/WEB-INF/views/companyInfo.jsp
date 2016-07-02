@@ -71,7 +71,7 @@
                   <th>시가</th>
                   <td><fmt:formatNumber value="${masterDTO.priceDTO.opnprc}"/></td>
                   <th>시가총액</th>
-                  <td><fmt:formatNumber value="${masterDTO.listShrs * masterDTO.priceDTO.trdPrc}"/></td>
+                  <td><fmt:formatNumber value="${masterDTO.listShrs * masterDTO.priceDTO.trdPrc/100000000}"/></td>
                 </tr>
               </tbody>
             </table>

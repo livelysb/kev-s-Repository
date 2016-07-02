@@ -98,9 +98,14 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 	}
 
 	@Override
-	public List<PlayerDTO> playerInfoSelectAll(String keyword) {
+	public List<PlayerDTO> playerInfoSelectAll(String keyword) throws Exception {
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
-		List<PlayerDTO> list = playerInfoDAO.playerInfoSelectAll(keyword);
+		List<PlayerDTO> list=null;
+		try{
+			list = playerInfoDAO.playerInfoSelectAll(keyword);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		System.out.println(list);
 		return list;
 	}

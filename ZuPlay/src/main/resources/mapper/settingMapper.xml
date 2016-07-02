@@ -28,4 +28,9 @@
 		select *
 		from player_setting where player_nickname=#{value}
 	</select>
+	<insert id="settingInsert" parameterType="String">
+		insert into player_setting
+		(ps_sq,player_nickname,bgm_sound,my_page,chatting,friendAdd)
+		value (ps_sq.nextval,#{value},30},'T','T','T')
+	</insert>
 </mapper>

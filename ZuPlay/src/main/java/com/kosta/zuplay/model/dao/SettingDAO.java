@@ -6,4 +6,5 @@ public interface SettingDAO {
 	int settingSave(SettingDTO dto);
 	int settingReset(String playerNickname);
 	SettingDTO settingSelect(String playerNickname);
+	int settingInsert(String playerNickname);
 }

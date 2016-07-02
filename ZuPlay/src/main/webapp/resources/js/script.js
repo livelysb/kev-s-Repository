@@ -66,8 +66,8 @@ $(function(){
       
       /* 기업 정보 조회 */
       var companyInfo = function(code){
-            
-          $(code + " .company-window").jqxWindow({
+            var companyId = "#company-"+code;
+          $(companyId + " .company-window").jqxWindow({
                 theme:userInfo.theme,
                 minWidth:500,
                 height:380,
@@ -76,7 +76,7 @@ $(function(){
                 closeButtonAction: 'close'
               });
 
-          $(code + " .company-sell-slider, .company-buy-slider").jqxSlider({
+          $(companyId + " .company-sell-slider, .company-buy-slider").jqxSlider({
               width:"100%",
               showTickLabels: true,
               tooltip: true,
@@ -91,7 +91,7 @@ $(function(){
               theme:userInfo.theme
           });
           
-          $(code + " .company-buy-slider").jqxSlider({
+          $(companyId + " .company-buy-slider").jqxSlider({
               width:"100%",
               showTickLabels: true,
               tooltip: true,
@@ -106,7 +106,7 @@ $(function(){
               theme:userInfo.theme
           });
 
-          $(code + ".company-sell-input, .company-buy-input").jqxNumberInput({
+          $(companyId + " .company-sell-input, .company-buy-input").jqxNumberInput({
             width: "100%",
             spinButtons: true,
             inputMode: 'simple',
@@ -117,7 +117,7 @@ $(function(){
             theme:userInfo.theme
           });
           
-          $(code + ".company-buy-input").jqxNumberInput({
+          $(companyId + " .company-buy-input").jqxNumberInput({
                width: "100%",
                spinButtons: true,
                inputMode: 'simple',
@@ -127,6 +127,7 @@ $(function(){
                decimalDigits: 0,
                theme:userInfo.theme
              });
+          
       }
       
 
@@ -243,6 +244,8 @@ $(function(){
                   dataType:"json",
                   data:"page="+page+"&keyword="+keyword,
                   success:function(data){
+                	  console.log("데이타!!")
+                	  console.log(data);
                      str="";
                            
                      $.each(data, function(index,item){
@@ -253,18 +256,24 @@ $(function(){
                               pagenation(item.amount/10+1)
                            }
                         }else{
-                           str+="<tr><td class='stock-select'><a href='#'>"+item.isuKorAbbrv+"</a></td>"
+                           str+="<tr><td class='stock-select'>"+item.isuKorAbbrv+"</a></td>"
                            str+="<td>"+item.priceDTO.trdPrc +"</td>";
                            str+="<td>"+item.priceDTO.cmpprevddPrc +"</td>";
                            str+="<td>"+item.priceDTO.fluctuationRate +"</td>";
                            str+="<td>"+item.priceDTO.trdvol +"</td>";
                            str+="<td>"+item.priceDTO.opnprc +"</td>";
                            str+="<td>"+item.priceDTO.hgprc +"</td>";
-                           str+="<td>"+item.priceDTO.lwprc +"</td><tr>";
+                           str+="<td>"+item.priceDTO.lwprc +"</td>";
+                           str+="<input type='hidden' value='"+item.isuCd+"'/></tr>"
                         }
                      })
                      
                      $("#stockListTBody").html(str);
+                     $(document).on("click", "#stock-window tr",function(e){
+                    	var cd = $(this).children("hidden").val();
+                    	console.log(cd);
+                    	showCompanyInfo(cd);
+                     })
                   },
                   error:function(err){
                      alert(err+"에러발생");
@@ -289,20 +298,21 @@ $(function(){
               });
             
             /*종목명 클릭 시 상세정보 띄어줌.*/
-            $(document).on("click", ".stock-select",function(){
+            var showCompanyInfo = function(code){
                $.ajax({
-                  url:"",
+                  url:"companyInfo",
                   type:"post",
-                  dataType:"",
-                  data:"",
+                  dataType:"html",
+                  data:"isuCd="+code,
                   success:function(data){
-                     
+                     $(setting.content).append(data);
+                     companyInfo(code);
                   },
                   error:function(err){
                      alert(err+"에러발생");
                   }
-               })
-            })
+               });
+            }
 
             /*검색*/
             $(document).on("keyup","#stock-search",function(){
@@ -315,6 +325,7 @@ $(function(){
                }
             })
             stockPageSelect(1);
+            
             
          $("#stock-window").jqxWindow({
              width:750,
@@ -445,16 +456,13 @@ $(function(){
     				}
     		    })
     		})
-    		
-
       }
+      
       
       invenInit();
       rtaInit();
       stockListInit();
       storeInit();
-      
-      //companyInfo();
       
       var setBtn = function(){
          

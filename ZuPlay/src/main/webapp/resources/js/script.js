@@ -66,67 +66,58 @@ $(function(){
       
       /* 기업 정보 조회 */
       var companyInfo = function(companyId){
+              var price = $(companyId + " .company-title-stock").text();
+              
+             $(companyId).jqxWindow({
+                   theme:userInfo.theme,
+                   minWidth:700,
+                   width:"auto",
+                   height:380,
+                   showCollapseButton: true,
+                   resizable : false
+                 });
+              
+              
+              var sellSlider = $(companyId + " .company-buy-slider");
+              var buySlider = $(companyId + " .company-sell-slider");
+            
 
-	          $(companyId).jqxWindow({
-	                theme:userInfo.theme,
-	                minWidth:700,
-	                width:"auto",
-	                height:380,
-	                showCollapseButton: true,
-	                resizable : false
-	              });
-	
-	          $(companyId + " .company-sell-slider, .company-buy-slider").jqxSlider({
-	              width:"100%",
-	              showTickLabels: true,
-	              tooltip: true,
-	              mode: "fixed",
-	              min: 0,
-	              max: 100,
-	              ticksFrequency: 10,
-	              value: 50,
-	              step: 1,
-	              theme : userInfo.theme,
-	              tooltipPosition: "far",
-	              theme:userInfo.theme
-	          });
-	          
-	          $(companyId + " .company-buy-slider").jqxSlider({
-	              width:"100%",
-	              showTickLabels: true,
-	              tooltip: true,
-	              mode: "fixed",
-	              min: 0,
-	              max: 100,
-	              ticksFrequency: 10,
-	              value: 50,
-	              step: 1,
-	              theme : userInfo.theme,
-	              tooltipPosition: "far",
-	              theme:userInfo.theme
-	          });
-	
-	          $(companyId + " .company-sell-input, .company-buy-input").jqxNumberInput({
-	            width: "100%",
-	            spinButtons: true,
-	            inputMode: 'simple',
-	            min:0,
-	            max:100,
-	            textAlign:"center",
-	            decimalDigits: 0,
-	            theme:userInfo.theme
-	          });
-	          
-	          $(companyId + " .company-buy-input").jqxNumberInput({
-	               width: "100%",
-	               spinButtons: true,
-	               inputMode: 'simple',
-	               min:0,
-	               max:100,
-	               textAlign:"center",
-	               decimalDigits: 0,
-	               theme:userInfo.theme
-	             });
+             $(companyId + " .company-sell-slider").jqxSlider({
+                 width:"100%",
+                 showTickLabels: true,
+                 tooltip: true,
+                 mode: "fixed",
+                 min: 0,
+                 max: 100,
+                 ticksFrequency: 10,
+                 value: 0,
+                 step: 1,
+                 theme : userInfo.theme,
+                 tooltipPosition: "far",
+                 theme:userInfo.theme
+             });
+              
+             $(companyId + " .company-buy-slider").jqxSlider({
+                 width:"100%",
+                 showTickLabels: true,
+                 tooltip: true,
+                 mode: "fixed",
+                 min: 0,
+                 ticksFrequency: 10,
+                 step: 1,
+                 theme : userInfo.theme,
+                 tooltipPosition: "far",
+                 theme:userInfo.theme,
+                 max: 100,
+                 value: 0
+             });
+             
+             $(document).on("change",companyId + " .company-buy-slider",function(event){
+                $(companyId + " .company-buy-value").text(price * event.args.value);
+             });
+             $(document).on("change",companyId + " .company-sell-slider",function(event){
+                $(companyId + " .company-sell-value").text(price * event.args.value);
+             });
       }
       
 

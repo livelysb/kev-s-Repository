@@ -9,7 +9,7 @@ public interface PlayerInfoDAO {
 	/**
 	 * 플레이어 리스트 가져오기(검색)
 	 */
-	public List<PlayerDTO> playerInfoSelectAll(String keyword);
+	public List<PlayerDTO> playerInfoSelectAll(String keyword) throws Exception;
 	/**
 	 * 플레이어가 가지고있는 기본정보 가져오기 ( PLAYER Table )
 	 * */

@@ -65,70 +65,68 @@ $(function(){
       
       
       /* 기업 정보 조회 */
-      var companyInfo = function(code){
-            var companyId = "#company-"+code;
-          $(companyId).jqxWindow({
-                theme:userInfo.theme,
-                minWidth:700,
-                width:"auto",
-                height:380,
-                showCollapseButton: true,
-                resizable : false,
-                closeButtonAction: 'close'
-              });
+      var companyInfo = function(companyId){
 
-          $(companyId + " .company-sell-slider, .company-buy-slider").jqxSlider({
-              width:"100%",
-              showTickLabels: true,
-              tooltip: true,
-              mode: "fixed",
-              min: 0,
-              max: 100,
-              ticksFrequency: 10,
-              value: 50,
-              step: 1,
-              theme : "kokomo",
-              tooltipPosition: "far",
-              theme:userInfo.theme
-          });
-          
-          $(companyId + " .company-buy-slider").jqxSlider({
-              width:"100%",
-              showTickLabels: true,
-              tooltip: true,
-              mode: "fixed",
-              min: 0,
-              max: 100,
-              ticksFrequency: 10,
-              value: 50,
-              step: 1,
-              theme : "kokomo",
-              tooltipPosition: "far",
-              theme:userInfo.theme
-          });
-
-          $(companyId + " .company-sell-input, .company-buy-input").jqxNumberInput({
-            width: "100%",
-            spinButtons: true,
-            inputMode: 'simple',
-            min:0,
-            max:100,
-            textAlign:"center",
-            decimalDigits: 0,
-            theme:userInfo.theme
-          });
-          
-          $(companyId + " .company-buy-input").jqxNumberInput({
-               width: "100%",
-               spinButtons: true,
-               inputMode: 'simple',
-               min:0,
-               max:100,
-               textAlign:"center",
-               decimalDigits: 0,
-               theme:userInfo.theme
-             });
-          
+	          $(companyId).jqxWindow({
+	                theme:userInfo.theme,
+	                minWidth:700,
+	                width:"auto",
+	                height:380,
+	                showCollapseButton: true,
+	                resizable : false
+	              });
+	
+	          $(companyId + " .company-sell-slider, .company-buy-slider").jqxSlider({
+	              width:"100%",
+	              showTickLabels: true,
+	              tooltip: true,
+	              mode: "fixed",
+	              min: 0,
+	              max: 100,
+	              ticksFrequency: 10,
+	              value: 50,
+	              step: 1,
+	              theme : userInfo.theme,
+	              tooltipPosition: "far",
+	              theme:userInfo.theme
+	          });
+	          
+	          $(companyId + " .company-buy-slider").jqxSlider({
+	              width:"100%",
+	              showTickLabels: true,
+	              tooltip: true,
+	              mode: "fixed",
+	              min: 0,
+	              max: 100,
+	              ticksFrequency: 10,
+	              value: 50,
+	              step: 1,
+	              theme : userInfo.theme,
+	              tooltipPosition: "far",
+	              theme:userInfo.theme
+	          });
+	
+	          $(companyId + " .company-sell-input, .company-buy-input").jqxNumberInput({
+	            width: "100%",
+	            spinButtons: true,
+	            inputMode: 'simple',
+	            min:0,
+	            max:100,
+	            textAlign:"center",
+	            decimalDigits: 0,
+	            theme:userInfo.theme
+	          });
+	          
+	          $(companyId + " .company-buy-input").jqxNumberInput({
+	               width: "100%",
+	               spinButtons: true,
+	               inputMode: 'simple',
+	               min:0,
+	               max:100,
+	               textAlign:"center",
+	               decimalDigits: 0,
+	               theme:userInfo.theme
+	             });
       }
       
 
@@ -300,7 +298,12 @@ $(function(){
             
             /*종목명 클릭 시 상세정보 띄어줌.*/
             var showCompanyInfo = function(code){
-            	alert(code);
+                var companyId = "#company-"+code;
+                if(setting.page.indexOf(companyId) > -1){
+                	$(companyId).jqxWindow("show");
+                	return;
+                }
+                setting.page.push(companyId);
                $.ajax({
                   url:"companyInfo",
                   type:"post",
@@ -308,7 +311,7 @@ $(function(){
                   data:"isuCd="+code,
                   success:function(data){
                      $(setting.content).append(data);
-                     companyInfo(code);
+                     companyInfo(companyId);
                   },
                   error:function(err){
                      alert(err+"에러발생");

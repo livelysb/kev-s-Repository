@@ -11,5 +11,6 @@
 		/* 셋팅 정보 */		
 		var setting = {
 			parts : ["clothes","hair","eyes","mouse","earring","acc"],
-			content : "body"
+			page : [],
+			content : "body",
 		};

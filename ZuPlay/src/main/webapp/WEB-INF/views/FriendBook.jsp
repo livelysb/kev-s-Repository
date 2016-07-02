@@ -15,7 +15,7 @@
         <ul class="list-group">
 
           <li class="list-group-item title">
-            <div class="friend-icon orange"></div><label>ì¹êµ¬ ìì²­ : 2</label>
+            <div class="friend-icon orange"></div><label>친구요청</label>
           </li>
 
           <li href="#" class="list-group-item text-left">
@@ -38,7 +38,7 @@
       <div id="friend-list-group">
         <ul class="list-group">
           <li class="list-group-item title">
-            <div class="friend-icon green"></div><label>ì¹êµ¬ ëª©ë¡ - 2/3</label>
+            <div class="friend-icon green"></div><label>친구목록 - 2/5</label>
           </li>
           <li href="#" class="list-group-item text-left">
             <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
@@ -76,8 +76,8 @@
           </li>
         </ul>
         <div class="friend-menu">
-          <button type="button" class="btn btn-success">ì¹êµ¬ ì¶ê°</button>
-          <button type="button" class="btn btn-danger">ì¹êµ¬ ì­ì </button>
+          <button type="button" class="btn btn-success">친구추가</button>
+          <button type="button" class="btn btn-danger">친구삭제</button>
         </div>
       </div>
 

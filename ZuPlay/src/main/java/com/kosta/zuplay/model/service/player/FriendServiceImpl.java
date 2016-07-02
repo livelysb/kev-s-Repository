@@ -90,14 +90,14 @@ public class FriendServiceImpl implements FriendService {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("playerNickname", playerNickname);
 		map.put("playerNickname2", playerNickname2);
-		FriendDTO dtoA= friendDAO.friendCheck(map);
+		FriendDTO dtoA = friendDAO.friendCheck(map);
 		map.clear();
 		map.put("playerNickname2", playerNickname);
 		map.put("playerNickname", playerNickname2);
 		FriendDTO dtoB = friendDAO.friendCheck(map);
 		System.out.println("dtoA : " + dtoA + "// dtoB : " + dtoB);
-		if (dtoA==null) {
-			if (dtoB==null) {
+		if (dtoA == null) {
+			if (dtoB == null) {
 				return false;
 			}
 		}

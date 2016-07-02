@@ -471,16 +471,28 @@ $(function(){
     	  
     	  //친구검색
     	  $("#friend-add-search").on("click",function(){
-    		 /* $.ajax({
+    		 $.ajax({
     			  url:"",
-    			  data
-    		  })*/
+    			  data:"",
+    			  dataType:"json",
+    			  type:"post",
+    			  success:function(data){
+    				  //$.each(data,)
+    			  },
+    			  error:function(err){
+    				  alert(err+"에러발생")
+    			  }
+    			  
+    		  })
     	  })
     	  
+    	  /*친구추가 모달*/
+    	  $("#friend-add-modal-btn").on("click",function(){
+    		  $("#friend-add-text").val("제발 ㅠ");
+    	  })
     	  
     	  /*친구추가 버튼*/
     	  $("#friend-add").on("click",function(){
-    		  $("#friend-add-text").focus();
     		  var friendId=$("#friend-add-text").val();
     		  var myId=$("#friend-add-test").val()
     		  if(friendId=="") return

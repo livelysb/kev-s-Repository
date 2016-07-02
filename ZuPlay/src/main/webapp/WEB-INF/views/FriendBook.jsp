@@ -76,7 +76,7 @@
           </li> -->
         </ul>
         <div class="friend-menu">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target=".friend-add-modal">친구추가</button>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target=".friend-add-modal" id="friend-add-modal-btn">친구추가</button>
           <button type="button" class="btn btn-danger" id="friend-del">친구삭제</button>
         </div>
       </div>
@@ -85,16 +85,17 @@
 		  <div class="modal-dialog modal-sm">
 		    <div class="modal-content">
 		    	 <div class="modal-header">
-		    	 	 <h5 class="modal-title">FriendAdd</h5>
+		    	 	 <div class="modal-title">FriendAdd</div>
 		    	 </div>
 		    	 <div class="modal-body">
 		    	 	<div class="form-group">
-			    	 	<h5>
 			    	 		<label>Nickname : </label>
 			    	 		<input type="text" id="friend-add-text">
 			    	 		<button type="button" id="friend-add-search">검색</button>
-		    	 		</h5>
 		    	 	</div>
+					<div id="friend-search-list">
+						
+					</div>
 		    	 </div>
 		    	 <div class="modal-footer">
 			        <button type="button" class="btn btn-primary"  id="friend-add">Add</button>

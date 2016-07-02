@@ -2,6 +2,7 @@ package com.kosta.zuplay.model.dto.player;
 
 import org.springframework.stereotype.Component;
 
+
 @Component("playerDTO")
 public class PlayerDTO {
 	private String playerNickname;	//닉네임
@@ -19,14 +20,9 @@ public class PlayerDTO {
 	private int playerTotalRank;	//종합랭킹
 	
 	private double earningRate; //수익률
+	private PlayerItemDTO playerItemDTO;
 	
 	
-	public double getEarningRate() {
-		return earningRate;
-	}
-	public void setEarningRate(double earningRate) {
-		this.earningRate = earningRate;
-	}
 	public PlayerDTO() {}
 	
 	public PlayerDTO(String playerNickname, String playerNaverId, String playerGender, String playerAge,
@@ -125,6 +121,30 @@ public class PlayerDTO {
 	}
 	public void setPlayerTotalRank(int playerTotalRank) {
 		this.playerTotalRank = playerTotalRank;
+	}
+	public double getEarningRate() {
+		return earningRate;
+	}
+	public void setEarningRate(double earningRate) {
+		this.earningRate = earningRate;
+	}
+
+	public PlayerItemDTO getPlayerItemDTO() {
+		return playerItemDTO;
+	}
+
+	public void setPlayerItemDTO(PlayerItemDTO playerItemDTO) {
+		this.playerItemDTO = playerItemDTO;
+	}
+
+	@Override
+	public String toString() {
+		return "PlayerDTO [playerNickname=" + playerNickname + ", playerNaverId=" + playerNaverId + ", playerGender="
+				+ playerGender + ", playerAge=" + playerAge + ", playerMoney=" + playerMoney + ", playerPreMoney="
+				+ playerPreMoney + ", playerRuby=" + playerRuby + ", playerLastAccess=" + playerLastAccess
+				+ ", playerGrade=" + playerGrade + ", playerDailyRank=" + playerDailyRank + ", playerWeeklyRank="
+				+ playerWeeklyRank + ", playerSeasonRank=" + playerSeasonRank + ", playerTotalRank=" + playerTotalRank
+				+ ", earningRate=" + earningRate + ", playerItemDTO=" + playerItemDTO + "]";
 	}
 	
 	

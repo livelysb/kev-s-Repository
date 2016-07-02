@@ -1,5 +1,23 @@
 $(function(){
    
+	/*플레이어 정보 업데이트*/
+    var updatePlayerStatus = function(){
+    	console.log("실행")
+       $.ajax({
+         url : "updatePI",
+         type: "post",
+         dataType : "json",
+         success : function(data){
+            console.log("update player status");
+            console.log(data);
+         },
+         error:function(err){
+            console.log("플레이어 업데이트 정보 오류 발생");
+            console.log(err);
+         }
+       });
+    }
+    updatePlayerStatus();
    
    /*버튼클릭했을 때 이벤트 설정*/
    $.fn.setBtn = function(window){

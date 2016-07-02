@@ -31,7 +31,7 @@
         ws = new WebSocket('ws://127.0.0.1:8000/zuplay/echo/test');
         ws.onopen = function () {
             console.log('websocket opened');
-            var open="open#/fuckWebSocket/#김경원#/fuckWebSocket/#null"
+            var open="open#/fuckWebSocket/#김경원#/fuckWebSocket/#null";
            	ws.send(open);
         };
         ws.onmessage = function (message) {

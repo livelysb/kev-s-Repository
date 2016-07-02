@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService {
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
 		SettingDAO settingDAO=sqlSession.getMapper(SettingDAO.class);
 		int result=loginDAO.joinMember(playerDTO);
-		settingDAO.settingReset(playerDTO.getPlayerNickname());
+		settingDAO.settingInsert(playerDTO.getPlayerNickname());
 		if(result==0){
 			return false;
 		}

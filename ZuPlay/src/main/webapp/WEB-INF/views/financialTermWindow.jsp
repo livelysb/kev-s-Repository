@@ -132,6 +132,7 @@
 	    });
 	    
 	    $("#stockSearch").on("keyup",function(){
+	    	
 	    	var term = $(this).val()
 	    	if(event.keyCode == 13) {
 	    		alert("엔터클릭!");

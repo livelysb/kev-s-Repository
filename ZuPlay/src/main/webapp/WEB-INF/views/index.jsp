@@ -18,12 +18,16 @@
    <button id="rta-btn">실시간 주가 정보</button>
    <button id="inven-btn">인벤토리</button>
    <button id="stockList-btn">주가 보기</button>
+    <button id="store-btn">상점</button>
+  
    <div id="rta-Window">
       <div id="rta-Header"><span>실시간 주가 정보</span></div>
          <div id="rta-data">
       </div>
    </div>
+   
    <jsp:include page="stockList.jsp" />
+   <jsp:include page="storeWindow.jsp" />
    <div id="inven-Window">
       <div id="inven-Header">인벤토리</div>
       <div id="inven-content">

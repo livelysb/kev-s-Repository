@@ -6,6 +6,7 @@ $(function(){
       $(this).on("click",function(){
          $(window).jqxWindow("show");
       })
+      return this;
    };
    
    /* 실시간 주가 정보 */
@@ -303,7 +304,7 @@ $(function(){
                })
             })
 
-            /*검색( 2,3페이지에있을때 1페이지로 다시 이동하게!)*/
+            /*검색*/
             $(document).on("keyup","#stock-search",function(){
                if(event.keyCode == 13) {
                   
@@ -326,9 +327,133 @@ $(function(){
       
       }
       
+      /*상점 윈도우*/
+      var storeInit = function(){
+    		var count=1;
+    		var tabs="";
+    	    var status = "next";
+
+    	      $("#store-window").jqxWindow({
+    	          width:750,
+    	          height:600,
+    	          resizable:false,
+    	          showCollapseButton: true,
+    	          autoOpen:false,
+    	          theme:userInfo.theme
+    	     });
+    		
+    		
+    		//탭들을 클릭 했을 때 일어나는 이벤트
+    	    $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+    	    	count=1;
+    	        //e.preventDefault();
+    	        $(this).siblings('a.active').removeClass("active");
+    	        $(this).addClass("active");
+    	            	
+    	        var index = $(this).index();
+
+    	        $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+    	        $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+    	        storeSelect(1)
+    	    });
+    		
+    	    //Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
+    	    var shopIndex = 0;
+    	    function storeSelect(page){
+    	    	var itemClass = $(".active").attr("id");
+    	    	
+    		    $.ajax({
+    		    	url: "itemStoreSelect" ,
+    				type:"post",
+    				dataType:"json",  
+    				data:"itemClass="+itemClass+"&page="+page,
+    				success:function(data){
+    					if(data.length==0){
+    						count=1;
+    						if(status == "next"){
+    							var next = $(".list-group>.active").next().attr("id");
+    							if(typeof(next) === "undefined"){
+    								next = $("#all").attr("id");
+    							}
+    						}else{
+    							var next = $(".list-group>.active").prev().attr("id");
+    							if(typeof(next) === "undefined"){
+    								next = $("#acc").attr("id");
+    							}
+    						}
+    						$("#"+next).trigger("click")
+    						return;
+    					}else{
+    						count=page;
+    						$(".bhoechie-tab-content div").empty();
+    						$.each(data, function(index, item){
+    							$("#item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:50%;' id='"+item.itemCode+"'/><br>"+item.itemName+"<br>"+item.itemPrice);  //
+    						})
+    					}
+    				},
+    				error:function(err){
+    					alert(err +"에러발생");
+    				}
+    		    })
+    		}
+    	    
+    	    storeSelect(count);
+    	    
+    	    
+    	    //이전버튼
+    	    $(".backBtn").on("click",function(){
+    	   		status = "back";
+    			storeSelect(count-1)
+
+    	    })
+    	    
+    	    
+    	    
+    	    //다음버튼
+    	    $(".nextBtn").on("click", function(){
+    	   		status = "next";
+    			storeSelect(count+1)
+    	    })
+    	    
+    	    
+    	    
+    	    //아이템구매
+    	    $(".itemBox").on("click", function() {
+    			var itemCode = $(this).children().attr("id");
+    		
+    			if(typeof(itemCode)=='undefined') return
+    			
+    	    	var buyCheck = confirm("구매하시겠습니까?");
+    	    	
+    	    	if(buyCheck==false) return
+    			
+    			$.ajax({
+    		    	url: "itemStoreBuy" ,
+    				type:"post",
+    				dataType:"text",  
+    				data:"quantity=1&itemCode="+itemCode,
+    				success:function(result){
+
+    					switch(result){
+    						case 1 : alert("구매되었습니다."); break;
+    						case 2 : alert("인벤토리가 부족합니다."); break;
+    						case 3 : alert("루비가 부족합니다."); break;
+    					}
+    				},
+    				error:function(err){
+    					alert(err +"에러발생");
+    				}
+    		    })
+    		})
+    		
+
+      }
+      
       invenInit();
       rtaInit();
       stockListInit();
+      storeInit();
+      
       //companyInfo();
       
       var setBtn = function(){
@@ -336,7 +461,7 @@ $(function(){
             $("#inven-btn").setBtn($("#inven-Window"));
             $("#rta-btn").setBtn($("#rta-Window"));
             $("#stockList-btn").setBtn($("#stock-window"));
-            
+            $("#store-btn").setBtn($("#store-window"));
       }();
       
 });

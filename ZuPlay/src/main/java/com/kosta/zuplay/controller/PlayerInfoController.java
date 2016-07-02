@@ -21,6 +21,7 @@ public class PlayerInfoController {
 	@RequestMapping("playerInfoSelectAll")
 	@ResponseBody
 	public String playerInfoSelectAll(HttpSession session, String keyword){
+		System.out.println("키워드 : " + keyword);
 		List<PlayerDTO> list = playerInfoServiceImpl.playerInfoSelectAll(keyword);
 		Gson gson = new Gson();
 		String json = gson.toJson(list);

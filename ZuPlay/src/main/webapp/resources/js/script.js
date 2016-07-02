@@ -472,12 +472,16 @@ $(function(){
     	  //친구검색
     	  $("#friend-add-search").on("click",function(){
     		 $.ajax({
-    			  url:"",
-    			  data:"",
-    			  dataType:"json",
+    			  url:"playerInfoSelectAll",
     			  type:"post",
+    			  data:"keyword="+$("#friend-add-text").val(),
+    			  dataType:"json",
     			  success:function(data){
-    				  //$.each(data,)
+    				  console.log(data);
+    				  str="";
+    				  $.each(data,function(index,item){
+    					  str+="<p>"+item+"</p>"
+    				  })
     			  },
     			  error:function(err){
     				  alert(err+"에러발생")
@@ -488,7 +492,7 @@ $(function(){
     	  
     	  /*친구추가 모달*/
     	  $("#friend-add-modal-btn").on("click",function(){
-    		  $("#friend-add-text").val("제발 ㅠ");
+    		  $("#friend-add-text").focus();
     	  })
     	  
     	  /*친구추가 버튼*/

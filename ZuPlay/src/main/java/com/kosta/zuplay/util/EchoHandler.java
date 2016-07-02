@@ -37,7 +37,13 @@ public class EchoHandler extends TextWebSocketHandler {
 		}else if(mesArr[0].equals("friendSelect")){
 			friendController.friendSelect(playerNickname);
 		}else if(mesArr[0].equals("friendAdd")){
-			friendController.friendAdd(playerNickname, mesArr[2]);
+			friendController.friendAdd(playerNickname, mesArr[2]);//param : playerNickname,playerNickname2
+		}else if(mesArr[0].equals("friendSelectOnline")){
+			friendController.friendSelectOnline(playerNickname);
+		}else if(mesArr[0].equals("friendDel")){
+			friendController.friendDel(playerNickname, Integer.parseInt(mesArr[2]));//param : playerNickname,friendSq
+		}else if (mesArr[0].equals("friendAccept")) {
+			friendController.friendAccept(playerNickname, mesArr[2],Integer.parseInt( mesArr[3]));//param : playerNickname,playerNickname,friendSq
 		}
 		
 		

@@ -11,6 +11,7 @@ public class PlayerDTO {
 	private int playerMoney;		//게임머니
 	private int playerPreMoney;		//전일 게임머니
 	private int playerRuby;			//루비(캐쉬)
+	private String playerLastAccess;//최종접속일
 	private String playerGrade;		//계급
 	private int playerDailyRank;	//일간랭킹
 	private int playerWeeklyRank;	//주간랭킹
@@ -88,6 +89,12 @@ public class PlayerDTO {
 	}
 	public void setPlayerRuby(int playerRuby) {
 		this.playerRuby = playerRuby;
+	}
+	public String getPlayerLastAccess() {
+		return playerLastAccess;
+	}
+	public void setPlayerLastAccess(String playerLastAccess) {
+		this.playerLastAccess = playerLastAccess;
 	}
 	public String getPlayerGrade() {
 		return playerGrade;

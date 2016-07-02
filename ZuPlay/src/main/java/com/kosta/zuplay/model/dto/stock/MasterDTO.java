@@ -38,6 +38,8 @@ public class MasterDTO {
 	private String kind; //분류
 	private boolean like; //좋아요
 	
+	private int plQuantity;//수량
+	
 	private List<RealTimePriceDTO> rtpList; // 실시간 주식정보 (일간용) 1:다 조인
 	private List<DailyPriceDTO> dpList; //일별 주식 정보 (월간용) 1:다 조인
 	
@@ -380,6 +382,15 @@ public class MasterDTO {
 
 	public void setDpList(List<DailyPriceDTO> dpList) {
 		this.dpList = dpList;
+	}
+	
+
+	public int getPlQuantity() {
+		return plQuantity;
+	}
+
+	public void setPlQuantity(int plQuantity) {
+		this.plQuantity = plQuantity;
 	}
 
 	@Override

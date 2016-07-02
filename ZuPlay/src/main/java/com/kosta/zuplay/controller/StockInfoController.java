@@ -2,6 +2,8 @@ package com.kosta.zuplay.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,11 +38,8 @@ public class StockInfoController {
 	}
 	
 	@RequestMapping(value = "companyInfo", produces = "application/json;charset=UTF-8")
-	public ModelAndView getStock(String isuCd) {
-		System.out.println(isuCd);
-		System.out.println("came");
-		MasterDTO masterDTO = stockInfo.getStockDetail(isuCd);
-		System.out.println(masterDTO.getIsuKorAbbrv());
+	public ModelAndView getStock(HttpSession session, String isuCd) {
+		MasterDTO masterDTO = stockInfo.getStockDetail((String)session.getAttribute("playerNickname"), isuCd);
 		ModelAndView mv = new ModelAndView("companyInfo");
 		mv.addObject("masterDTO", masterDTO);
 		return mv;

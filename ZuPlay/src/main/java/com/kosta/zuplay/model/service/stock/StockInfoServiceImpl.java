@@ -20,6 +20,9 @@ public class StockInfoServiceImpl implements StockInfoService {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Autowired
+	private PlayerStockService playerStockService;
 
 	@Override
 	public List<PriceDTO> getPrices() {
@@ -60,7 +63,7 @@ public class StockInfoServiceImpl implements StockInfoService {
 	}
 
 	@Override
-	public MasterDTO getStockDetail(String isuCd) {
+	public MasterDTO getStockDetail(String playerNickname, String isuCd) {
 		System.out.println(isuCd);
 		try {
 			StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
@@ -82,6 +85,9 @@ public class StockInfoServiceImpl implements StockInfoService {
 				if (isuCd2.equals(isuCd))
 					masterDTO.setLike(true);
 			}
+			
+			//플레이어가 가진 해당 주식 수량
+			masterDTO.setPlQuantity(playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity()); 
 			return masterDTO;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,7 +1,6 @@
 package com.kosta.zuplay.model.dto.player;
 
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
-import com.kosta.zuplay.model.dto.stock.PriceDTO;
 
 public class PlayerListsDTO {
 	private int plSq;				//시퀀스

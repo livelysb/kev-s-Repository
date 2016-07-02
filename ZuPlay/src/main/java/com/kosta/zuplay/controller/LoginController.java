@@ -46,7 +46,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value="joinMember")
 	public String joinMember(String playerNickname,String playerNaverId,String playerGender,String playerAge, HttpSession session){
-		loginServiceImpl.joinMember(new PlayerDTO(playerNickname, playerNaverId, playerGender, playerAge, 100000000, 100000000, 1000, "B", 0, 0, 0, 0));
+		loginServiceImpl.joinMember(new PlayerDTO(playerNickname, playerNaverId, playerGender, playerAge, 100000000, 100000000, 1000,"B", 0, 0, 0, 0));
 		session.setAttribute("playerNickname", playerNickname);
 		return "index";
 	}

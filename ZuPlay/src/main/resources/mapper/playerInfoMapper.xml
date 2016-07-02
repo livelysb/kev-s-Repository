@@ -12,6 +12,7 @@
 		<result column="PLAYER_MONEY" property="playerMoney" />
 		<result column="PLAYER_RUBY" property="playerRuby" />
 		<result column="PLAYER_GRADE" property="playerGrade" />
+		<result column="PLAYER_LASTACCESS" property="playerLastAccess"/>
 		<result column="PLAYER_DAILY_RANK" property="playerDailyRank" />
 		<result column="PLAYER_WEEKLY_RANK" property="playerWeeklyRank" />
 		<result column="PLAYER_SEASON_RANK" property="playerSeasonRank" />

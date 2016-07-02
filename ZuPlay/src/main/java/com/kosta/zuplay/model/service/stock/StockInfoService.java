@@ -31,7 +31,7 @@ public interface StockInfoService {
 	/**
 	 * 기업의 상세정보 보여주기
 	 * */
-	public MasterDTO getStockDetail(String isuCd);
+	public MasterDTO getStockDetail(String playerNickname, String isuCd);
 	
 	/**
 	 * 해당 종목 관련 개수 구하기

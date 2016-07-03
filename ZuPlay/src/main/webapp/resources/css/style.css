@@ -113,13 +113,22 @@ div.vertical-line{
 	border: solid 2px black;
 	margin: 3px 3px 3px 0;
 	padding: 1px;
-	float: left;
+	/* float: left; */
 	width: 130px;
 	height: 130px;
 	text-align: center;
 }
 
-*/
+
+#store-prev-div{
+	top: 300px;
+	float:left;
+}
+
+#store-next-div{
+	top: 300px;
+	float:right;
+}
  
 
 /* #store-window div.bhoechie-tab-container{
@@ -196,6 +205,26 @@ div.vertical-line{
  
 /*친구박스*/
 
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+    pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events: all;
+}
 
 #friend-content .list-group-item img {
     height:50px;
@@ -316,8 +345,8 @@ div.vertical-line{
  
 .accordion {
     overflow:hidden;
-    box-shadow:0px 1px 3px rgba(0,0,0,0.25);
-    border-radius:3px;
+    /* box-shadow:0px 1px 3px rgba(0,0,0,0.25); */
+    border-radius:8px;
     background:#FFFFFF;
 }
  

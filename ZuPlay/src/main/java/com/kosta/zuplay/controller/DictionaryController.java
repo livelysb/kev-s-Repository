@@ -20,8 +20,7 @@ public class DictionaryController {
 		StringBuilder urlBuilder = new StringBuilder(
 				"http://api.seibro.or.kr/openapi/service/FnTermSvc/getFinancialTermMeaning"); /* URL */
 		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8")
-				+ "=pZqmiyxvoN2Gs3%2BDlr4F0vaxjytfFV3%2FIlnklIFqPoyNZvux7gwoAycn7VfKYPbdcZaFzlA2EWcTdIKRBM%2F4jw%3D%3D"); /*
-																															 * Service
+				+ "=pZqmiyxvoN2Gs3%2BDlr4F0vaxjytfFV3%2FIlnklIFqPoyNZvux7gwoAycn7VfKYPbdcZaFzlA2EWcTdIKRBM%2F4jw%3D%3D"); 
 		urlBuilder.append("&" + URLEncoder.encode("term", "UTF-8") + "=" + URLEncoder.encode(term, "UTF-8")); /* 용어명 */
 		urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "="
 				+ URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */

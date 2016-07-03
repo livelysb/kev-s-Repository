@@ -13,102 +13,16 @@
 <link href="resources/css/jquery-ui/jquery-ui.css" rel="stylesheet">
 
 <style type="text/css">
-	/*----- Accordion -----*/
-.accordion, .accordion * {
-    -webkit-box-sizing:border-box; 
-    -moz-box-sizing:border-box; 
-    box-sizing:border-box;
-}
- 
-.accordion {
-    overflow:hidden;
-    box-shadow:0px 1px 3px rgba(0,0,0,0.25);
-    border-radius:3px;
-    background:#f7f7f7;
-}
- 
-/*----- Section Titles -----*/
-.accordion-section-title {
-    width:100%;
-    padding:15px;
-    display:inline-block;
-    border-bottom:1px solid #1a1a1a;
-    background:#333;
-    transition:all linear 0.15s;
-    /* Type */
-    font-size:1.200em;
-    text-shadow:0px 1px 0px #1a1a1a;
-    color:#fff;
-}
- 
-.accordion-section-title.active, .accordion-section-title:hover {
-    background:#4c4c4c;
-    /* Type */
-    text-decoration:none;
-}
- 
-.accordion-section:last-child .accordion-section-title {
-    border-bottom:none;
-}
-  
-/*----- Section Content -----*/
-.accordion-section-content {
-    padding:15px;
-    display:none;
-}/*----- Accordion -----*/
-.accordion, .accordion * {
-    -webkit-box-sizing:border-box; 
-    -moz-box-sizing:border-box; 
-    box-sizing:border-box;
-}
- 
-.accordion {
-    overflow:hidden;
-    box-shadow:0px 1px 3px rgba(0,0,0,0.25);
-    border-radius:3px;
-    background:#f7f7f7;
-}
- 
-/*----- Section Titles -----*/
-.accordion-section-title {
-    width:100%;
-    padding:15px;
-    display:inline-block;
-    border-bottom:1px solid #1a1a1a;
-    background:#333;
-    transition:all linear 0.15s;
-    /* Type */ 
-    font-size:1.200em;
-    text-shadow:0px 1px 0px #1a1a1a;
-    color:#fff;
-}
- 
-.accordion-section-title.active, .accordion-section-title:hover {
-    background:#4c4c4c;
-    /* Type */
-    text-decoration:none;
-}
- 
-.accordion-section:last-child .accordion-section-title {
-    border-bottom:none;
-}
- 
-/*----- Section Content -----*/
-.accordion-section-content {
-    padding:15px;
-    display:none;
-}
 
 </style>
 </head>
 
 <body>
-	<input type="text" id="stockSearch" name="stockSearch" class="form-control" placeholder="Search">
-<div id="accordion">
-
-</div>
- 
-  
+	<div id="financial-window">
+		<div id="financial-header">용어사전</div><br>
+		<input type="text" id="financial-search" name="financial-search" class="form-control" placeholder="Search">
+		<div id="financial-accordion"></div>
+	</div>
 </body>
 
 	
@@ -121,44 +35,7 @@
 
 <script type="text/javascript">
 	$(function() {
-		$( "#accordion" ).accordion({
-		      collapsible: true,
-		      active: false
-	    });
-	    
-	    $("#stockSearch").on("keyup",function(){
-	    	
-	    	var term = $(this).val()
-	    	if(event.keyCode == 13) {
-	    		if(term =="") return;
-	    		
-		    	$.ajax({ 
-			    	url:"searchFinancialTerm",
-			    	type:"get",
-					dataType:"xml",
-					data:"term="+term,
-					success:function(data){
-						console.log(data);
-						str="";
-						$(data).find("item").each(function(index,item){ 
-							var fnceDictNm = $(this).find('fnceDictNm') ? $(this).find('fnceDictNm').text() : "";
-							var ksdFnceDictDescContent = $(this).find('ksdFnceDictDescContent') ? $(this).find('ksdFnceDictDescContent').text() : "";
-							console.log(ksdFnceDictDescContent)
-							str+="<h3 class='accordion-section-title'>"+ fnceDictNm+"</h3>";
-							str+="<div class='accordion-section-content'>"+ ksdFnceDictDescContent +"</div>";
-						})  
-						$("#accordion").empty();
-						$("#accordion").html(str);
-						$('#accordion').accordion("refresh");
-						
-						
-					},
-					error:function(err){
-						alert(err+"에러발생")
-					}
-			    })
-	    	}
-	    })
+		
 	    
 	   
 	  });

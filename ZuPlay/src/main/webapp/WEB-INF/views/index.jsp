@@ -22,6 +22,7 @@
 	<button id="stockList-btn">주가 보기</button>
 	<button id="store-btn">상점</button>
 	<button id="friend-btn">친구</button>
+	<button id="financial-btn">용어사전</button>
 	
 	<!-- TEST -->
 	<input type="hidden" value="${playerNickname}" id="friend-add-test">
@@ -31,7 +32,7 @@
 		</div>
 		<div id="rta-data"></div>
 	</div>
-
+	<jsp:include page="financialTermWindow.jsp"/>
 	<jsp:include page="stockList.jsp" />
 	<jsp:include page="storeWindow.jsp" />
 	<jsp:include page="FriendBook.jsp"/>

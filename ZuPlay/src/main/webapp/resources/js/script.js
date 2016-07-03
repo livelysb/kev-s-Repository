@@ -334,9 +334,9 @@ $(function(){
       
       }
       
-      /*상점 윈도우*/
+      /*상점*/
       var storeInit = function(){
-    		var count=1;
+    	/*	var count=1;
     		var tabs="";
     	    var status = "next";
 
@@ -451,7 +451,21 @@ $(function(){
     					alert(err +"에러발생");
     				}
     		    })
-    		})
+    		})*/
+    	  $("#store-window").jqxWindow({
+	          width:580,
+	          height:450,
+	          resizable:true,
+	          showCollapseButton: true,
+	          autoOpen:false,
+	          theme:userInfo.theme
+	     });
+    	  
+    	  $(document).ready(function(){
+    	      $(".nav-tabs a").click(function(){
+    	          $(this).tab('show');
+    	      });
+    	  });
       }
       
       
@@ -510,11 +524,61 @@ $(function(){
     	  })
       }
       
+      /*경제용어사전*/
+      var financialInit = function(){
+    	  $("#financial-window").jqxWindow({
+    	      theme:"kokomo",
+    	      width:800,
+    	      autoOpen:false,
+    	      height:800,
+    	      showCollapseButton: true
+    	    });
+    	  
+    	  $( "#financial-accordion" ).accordion({
+		      active: false,
+		      collapsible: true
+	    });
+	    
+	    $("#financial-search").on("keyup",function(){
+	    	
+	    	var term = $(this).val()
+	    	if(event.keyCode == 13) {
+	    		if(term =="") return;
+	    		
+		    	$.ajax({ 
+			    	url:"searchFinancialTerm",
+			    	type:"get",
+					dataType:"xml",
+					data:"term="+term,
+					success:function(data){
+						str="";
+						$(data).find("item").each(function(index,item){ 
+							var fnceDictNm = $(this).find('fnceDictNm') ? $(this).find('fnceDictNm').text() : "";
+							var ksdFnceDictDescContent = $(this).find('ksdFnceDictDescContent') ? $(this).find('ksdFnceDictDescContent').text() : "";
+							str+="<h3 class='accordion-section-title'>"+ fnceDictNm+"</h3>";
+							str+="<div class='accordion-section-content'>"+ ksdFnceDictDescContent +"</div>";
+						})  
+						$("#financial-accordion").empty();
+						$("#financial-accordion").html(str);
+						$('#financial-accordion').accordion("refresh");
+						$("#financial-accordion" ).accordion( "option", "active", 0 );
+						
+					},
+					error:function(err){
+						alert(err+"에러발생")
+					}
+			    })
+	    	}
+	    })
+    	  
+      }
+      
       invenInit();
       rtaInit();
       stockListInit();
       storeInit();
       friendBook();
+      financialInit();
       
       var setBtn = function(){
          
@@ -523,6 +587,7 @@ $(function(){
             $("#stockList-btn").setBtn($("#stock-window"));
             $("#store-btn").setBtn($("#store-window"));
             $("#friend-btn").setBtn($("#friend-window"))
+            $("#financial-btn").setBtn($("#financial-window"))
       }();
       
 });

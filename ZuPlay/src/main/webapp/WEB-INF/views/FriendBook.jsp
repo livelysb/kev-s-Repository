@@ -1,24 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 
-<script>
-</script>
-
-</head>
-
 <body class="default">
-  <div id="friend-window">
-    <div id="friend-header">Friend List</div>
-    <div id="friend-content">
+	<div id="friend-window">
+		<div id="friend-header">Friend List</div>
+		<div id="friend-content">
 
-      <div id="friend-list-que">
-        <ul class="list-group">
+			<div id="friend-list-que">
+				<ul class="list-group">
 
-          <li class="list-group-item title">
-            <div class="friend-icon orange"></div><label>친구요청</label>
-          </li>
+					<li class="list-group-item title">
+						<div class="friend-icon orange"></div>
+						<label>친구요청</label>
+					</li>
 
-          <!-- <li href="#" class="list-group-item text-left">
+					<!-- <li href="#" class="list-group-item text-left">
             <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
             <div class="friend-icon green"> </div>
             <label class="name">Peter</label>
@@ -32,15 +28,16 @@
             </div>
           </li> -->
 
-        </ul>
-      </div>
+				</ul>
+			</div>
 
-      <div id="friend-list-group">
-        <ul class="list-group">
-          <li class="list-group-item title">
-            <div class="friend-icon green"></div><label>친구목록 - 2/5</label>
-          </li>
-         <!--  <li href="#" class="list-group-item text-left">
+			<div id="friend-list-group">
+				<ul class="list-group">
+					<li class="list-group-item title">
+						<div class="friend-icon green"></div>
+						<label>친구목록 - 2/5</label>
+					</li>
+					<!--  <li href="#" class="list-group-item text-left">
             <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
             <div class="friend-icon green"> </div>
             <label class="name">Park</label>
@@ -74,47 +71,47 @@
             <div class="friend-icon red"> </div>
             <label class="name">Juan guillermo cuadrado</label>
           </li> -->
-        </ul>
-        <div class="friend-menu">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target=".friend-add-modal" id="friend-add-modal-btn">친구추가</button>
-          <button type="button" class="btn btn-danger" id="friend-del">친구삭제</button>
-        </div>
-      </div>
-		<!-- 친구 추가 모달 -->
-		<div class="modal fade friend-add-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-sm">
-		    <div class="modal-content">
-		    	 <div class="modal-header">
-		    	 	 <div class="modal-title">FriendAdd</div>
-		    	 </div>
-		    	 <div class="modal-body">
-		    	 	<div class="form-group">
-			    	 		<label>Nickname : </label>
-			    	 		<input type="text" id="friend-add-text">
-			    	 		<button type="button" id="friend-add-search">검색</button>
-		    	 	</div>
-							<table class="table table-bordered table-hover">
-						         <thead>
-						            <tr>
-						               <th>아바타</th>
-						               <th>닉네임</th>
-						               <th>계급</th>
-						            </tr>
-						         </thead>
-						            <tbody id="friend-list-tbody">
-						               
-						            </tbody>
-			     		 </table>
-		    	 </div>
-		    	 <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		      </div>
-		    </div>
-		  </div>
+				</ul>
+				<div class="friend-menu">
+					<button type="button" class="btn btn-success" data-toggle="modal"
+						data-target=".friend-add-modal" id="friend-add-modal-btn">친구추가</button>
+					<button type="button" class="btn btn-danger" id="friend-del">친구삭제</button>
+				</div>
+			</div>
+			<!-- 친구 추가 모달 -->
+			<div class="modal fade friend-add-modal" tabindex="-1" role="dialog"
+				aria-labelledby="mySmallModalLabel" aria-hidden="true">
+				<div class="vertical-alignment-helper">
+					<div class="modal-dialog vertical-align-center">
+
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4>
+										<div class="modal-title">친구추가</div>
+									</h4>
+								</div>
+								<div class="modal-body">
+									<div class="input-group">
+										<input type="text" id="friend-add-text" class="form-control" style="float:left" placeholder="NickName">
+										<span class="input-group-btn">
+											<button type="button" id="friend-add-search" class="btn btn-success">검색</button>
+										</span>
+									</div>
+									<table class="table table-bordered table-hover" id="friend-list-table">
+									</table>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-    </div>
-</div>
+	</div>
 
 
 </body>
-</html>

@@ -453,7 +453,7 @@ $(function(){
     		    })
     		})*/
     	  $("#store-window").jqxWindow({
-	          width:580,
+	          width:600,
 	          height:450,
 	          resizable:true,
 	          showCollapseButton: true,
@@ -499,8 +499,8 @@ $(function(){
     					  str+="<td>"+item.playerNickname+"</td>"
     					  str+="<td>"+item.playerGrade+"</td></tr>"
     				  })
-    				  $("#friend-list-tbody").empty();
-    				  $("#friend-list-tbody").html(str);
+    				  $("#friend-list-table").empty();
+    				  $("#friend-list-table").html(str);
     			  },
     			  error:function(err){
     				  alert(err+"에러발생")
@@ -528,9 +528,9 @@ $(function(){
       var financialInit = function(){
     	  $("#financial-window").jqxWindow({
     	      theme:"kokomo",
-    	      width:800,
+    	      width:500,
+    	      height:600,
     	      autoOpen:false,
-    	      height:800,
     	      showCollapseButton: true
     	    });
     	  
@@ -543,8 +543,10 @@ $(function(){
 	    	
 	    	var term = $(this).val()
 	    	if(event.keyCode == 13) {
-	    		if(term =="") return;
-	    		
+	    		if(term =="") {
+	    			alert("검색어를 입력하여 주십시오.")
+	    			return;
+	    		}
 		    	$.ajax({ 
 			    	url:"searchFinancialTerm",
 			    	type:"get",
@@ -568,8 +570,10 @@ $(function(){
 						alert(err+"에러발생")
 					}
 			    })
+			    $("#financial-search").val("");
 	    	}
 	    })
+	
     	  
       }
       

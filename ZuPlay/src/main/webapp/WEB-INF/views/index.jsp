@@ -107,6 +107,7 @@
 
 <script type="text/javascript" src="resources/js/jqwidgets/jqxcore.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxwindow.js"></script>
+<script type="text/javascript" src="resources/js/jqwidgets/jqxtooltip.js"></script>
 <script type="text/javascript"
 	src="resources/js/jqwidgets/jqxbuttons.js"></script>
 <script type="text/javascript"

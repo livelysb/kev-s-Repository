@@ -234,8 +234,6 @@ $(function(){
                   dataType:"json",
                   data:"page="+page+"&keyword="+keyword,
                   success:function(data){
-                	  console.log("데이타!!")
-                	  console.log(data);
                      str="";
                            
                      $.each(data, function(index,item){
@@ -336,39 +334,18 @@ $(function(){
       
       /*상점*/
       var storeInit = function(){
-    	/*	var count=1;
+    		var count=1;
     		var tabs="";
     	    var status = "next";
 
-    	      $("#store-window").jqxWindow({
-    	          width:750,
-    	          height:600,
-    	          resizable:false,
-    	          showCollapseButton: true,
-    	          autoOpen:false,
-    	          theme:userInfo.theme
-    	     });
     		
-    		
-    		//탭들을 클릭 했을 때 일어나는 이벤트
-    	    $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
-    	    	count=1;
-    	        //e.preventDefault();
-    	        $(this).siblings('a.active').removeClass("active");
-    	        $(this).addClass("active");
-    	            	
-    	        var index = $(this).index();
-
-    	        $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
-    	        $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
-    	        storeSelect(1)
+    	    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    	    	  storeSelect(1)
     	    });
     		
     	    //Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
-    	    var shopIndex = 0;
     	    function storeSelect(page){
-    	    	var itemClass = $(".active").attr("id");
-    	    	
+    	    	var itemClass = $("#store-content .active").attr("id");
     		    $.ajax({
     		    	url: "itemStoreSelect" ,
     				type:"post",
@@ -378,23 +355,26 @@ $(function(){
     					if(data.length==0){
     						count=1;
     						if(status == "next"){
-    							var next = $(".list-group>.active").next().attr("id");
+    							var next = $("#store-nav-tabs .active").next().attr("id");
     							if(typeof(next) === "undefined"){
     								next = $("#all").attr("id");
     							}
     						}else{
-    							var next = $(".list-group>.active").prev().attr("id");
+    							var next = $("#store-nav-tabs .active").prev().attr("id");
     							if(typeof(next) === "undefined"){
     								next = $("#acc").attr("id");
     							}
     						}
-    						$("#"+next).trigger("click")
+    						$('.nav-tabs a[href="#store-tab-' + next + '"]').tab('show');
     						return;
     					}else{
     						count=page;
-    						$(".bhoechie-tab-content div").empty();
+    						$(".tab-content div img").empty();
     						$.each(data, function(index, item){
-    							$("#item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:50%;' id='"+item.itemCode+"'/><br>"+item.itemName+"<br>"+item.itemPrice);  //
+    							$("#store-item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:100%;' id='"+item.itemCode+"'/>");  
+    							$("#store-item"+itemClass+""+index+" img").jqxTooltip({ content: item.itemName+"("+item.itemGrade+")"+"<br>"+item.itemPrice+"<br>", position: 'bottom', autoHide: true, 
+    								name: 'movieTooltip', theme : userInfo.theme });
+    							console.log($("#store-item"+itemClass+""+index+" img"));
     						})
     					}
     				},
@@ -405,34 +385,25 @@ $(function(){
     		}
     	    
     	    storeSelect(count);
-    	    
-    	    
     	    //이전버튼
-    	    $(".backBtn").on("click",function(){
+    	    $("#store-prev-btn").on("click",function(){
     	   		status = "back";
     			storeSelect(count-1)
-
     	    })
     	    
-    	    
-    	    
     	    //다음버튼
-    	    $(".nextBtn").on("click", function(){
+    	    $("#store-next-btn").on("click", function(){
     	   		status = "next";
     			storeSelect(count+1)
     	    })
     	    
-    	    
-    	    
     	    //아이템구매
-    	    $(".itemBox").on("click", function() {
+    	    $(".store-itemBox").on("click", function() {
     			var itemCode = $(this).children().attr("id");
     		
     			if(typeof(itemCode)=='undefined') return
     			
-    	    	var buyCheck = confirm("구매하시겠습니까?");
-    	    	
-    	    	if(buyCheck==false) return
+    	    	if(confirm("구매하시겠습니까?")==false) return
     			
     			$.ajax({
     		    	url: "itemStoreBuy" ,
@@ -440,32 +411,28 @@ $(function(){
     				dataType:"text",  
     				data:"quantity=1&itemCode="+itemCode,
     				success:function(result){
-
     					switch(result){
-    						case 1 : alert("구매되었습니다."); break;
-    						case 2 : alert("인벤토리가 부족합니다."); break;
-    						case 3 : alert("루비가 부족합니다."); break;
+    						case "1" : alert("구매되었습니다."); break;
+    						case "2" : alert("인벤토리가 부족합니다."); break;
+    						case "3" : alert("루비가 부족합니다."); break;
     					}
     				},
     				error:function(err){
     					alert(err +"에러발생");
     				}
     		    })
-    		})*/
+    		})
     	  $("#store-window").jqxWindow({
-	          width:600,
-	          height:450,
+	          width:614.3,
+	          height:380,
 	          resizable:true,
 	          showCollapseButton: true,
 	          autoOpen:false,
 	          theme:userInfo.theme
 	     });
-    	  
-    	  $(document).ready(function(){
-    	      $(".nav-tabs a").click(function(){
-    	          $(this).tab('show');
-    	      });
-    	  });
+	      $(".nav-tabs a").click(function(){
+	          $(this).tab('show');
+	      });
       }
       
       

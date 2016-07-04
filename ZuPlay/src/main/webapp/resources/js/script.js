@@ -11,56 +11,43 @@ $(function(){
    
    /* 실시간 주가 정보 */
       var rtaInit = function(){
-
-         var localData = {
-            data : [
-               {d1:"삼성전자",d2:"+10000",d3:"+3%",d4:"3000"},
-               {d1:"삼성전자",d2:"+10000",d3:"+3%",d4:"3000"},
-               {d1:"삼성전자",d2:"+10000",d3:"+3%",d4:"3000"},
-               {d1:"삼성전자",d2:"+10000",d3:"+3%",d4:"3000"},
-               {d1:"삼성전자",d2:"+10000",d3:"+3%",d4:"3000"}
-            ]
-            };
-         
-           var source =
-           {
-            localdata : localData.data,
-               datafields:
-               [
-                   { name: 'd1', type: 'string'},
-                   { name: 'd2', type: 'string' },
-                   { name: 'd3', type: 'string' },
-                   { name: 'd4', type: 'string' }
-               ],
-               datatype: "array"
-           };
-         
-         var columns = [
-                           { text: '종목명', datafield: 'd1', width: "30%", cellsalign: 'center', align: 'center' },
-                           { text: '전일비', datafield: 'd2', width: "30%", cellsalign: 'center', align: 'center' },
-                           { text: '등락률', datafield: 'd3', width: "15%", cellsalign: 'center', align: 'center' },
-                           { text: '거래량', datafield: 'd4', width: "25%", cellsalign: 'center', align: 'center' }
-                         ];
-         
-         var dataAdapter = new $.jqx.dataAdapter(source);
-           $("#rta-data").jqxGrid(
-                   {
-                      width:"100%",
-                       source: dataAdapter,
-                       selectionmode: 'multiplecellsextended',
-                       autoheight: true,
-                       columns: columns,
-                       theme:"kokomo"
-                   });
-           
+    	  	
          $("#rta-Window").jqxWindow({
-               width:"300",
+               width:"400",
                height:"auto",
                resizable:true,
                showCollapseButton: true,
                autoOpen:false,
                theme:userInfo.theme
              });
+         
+
+     	var stockPage = 1;
+     	var getRealTimeStock = function(){
+     	   $.ajax({
+     	       url:'realTimeStock',
+     	       type:'post',
+     	       dataType:'json',
+     	       contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+     	       data: {"page":stockPage},
+     	       success:function(data){
+     	    	   
+     	    	   //console.log(stockPage);
+     	    	   //console.log(data);
+     	    	   stockPage++;
+     	    	   var tbd = $("#rta-tbody").empty();
+     	    	   $(data).each(function(index, item) {
+     	    		   $(tbd).append("<tr> <td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"</td> <td>"+item.priceDTO.trdvol+"</td> </tr>")
+     	    	   });
+     	       },
+     	       error:function(e){
+     	    	   console.log(stockPage);
+     	    	   console.log("error" + e);
+     	       }
+     	    });
+     	};
+     	//getRealTimeStock();
+     	setInterval(getRealTimeStock, 1000);
       }
       
       

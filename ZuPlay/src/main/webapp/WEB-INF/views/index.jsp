@@ -26,16 +26,12 @@
 	
 	<!-- TEST -->
 	<input type="hidden" value="${playerNickname}" id="friend-add-test">
-	<div id="rta-Window">
-		<div id="rta-Header">
-			<span>실시간 주가 정보</span>
-		</div>
-		<div id="rta-data"></div>
-	</div>
+	
 	<jsp:include page="financialTermWindow.jsp"/>
 	<jsp:include page="stockList.jsp" />
 	<jsp:include page="storeWindow.jsp" />
 	<jsp:include page="FriendBook.jsp"/>
+	<jsp:include page="realTimeListWindow.jsp"/>
 	<div id="inven-Window">
 		<div id="inven-Header">인벤토리</div>
 		<div id="inven-content">

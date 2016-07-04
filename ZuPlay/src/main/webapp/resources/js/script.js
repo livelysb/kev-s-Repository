@@ -374,7 +374,6 @@ $(function(){
     							$("#store-item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:100%;' id='"+item.itemCode+"'/>");  
     							$("#store-item"+itemClass+""+index+" img").jqxTooltip({ content: item.itemName+"("+item.itemGrade+")"+"<br>"+item.itemPrice+"<br>", position: 'bottom', autoHide: true, 
     								name: 'movieTooltip', theme : userInfo.theme });
-    							console.log($("#store-item"+itemClass+""+index+" img"));
     						})
     					}
     				},
@@ -503,18 +502,13 @@ $(function(){
     	  
     	  $( "#financial-accordion" ).accordion({
 		      active: false,
-		      collapsible: true
+		      autoHeight: false, 
+		      collapsible: true,
 	    });
 	    
-	    $("#financial-search").on("keyup",function(){
-	    	
-	    	var term = $(this).val()
-	    	if(event.keyCode == 13) {
-	    		if(term =="") {
-	    			alert("검색어를 입력하여 주십시오.")
-	    			return;
-	    		}
-		    	$.ajax({ 
+    	
+    	  var financialSearch = function(term){
+    		  $.ajax({ 
 			    	url:"searchFinancialTerm",
 			    	type:"get",
 					dataType:"xml",
@@ -538,10 +532,29 @@ $(function(){
 					}
 			    })
 			    $("#financial-search").val("");
+    	  }
+    	  
+    	  
+	    $("#financial-search").on("keyup",function(){
+	    	var term = $(this).val()
+	    	if(event.keyCode == 13) {
+	    		if(term =="") {
+	    			alert("검색어를 입력하여 주십시오.")
+	    			return;
+	    		}
+	    		
+	    		financialSearch(term);
 	    	}
 	    })
-	
-    	  
+	    
+	    $("#financial-add-search").on("click",function(){
+	    	var term = $("#financial-search").val()
+	    	if(term =="") {
+    			alert("검색어를 입력하여 주십시오.")
+    			return;
+    		}
+    		financialSearch(term);
+	    })
       }
       
       invenInit();

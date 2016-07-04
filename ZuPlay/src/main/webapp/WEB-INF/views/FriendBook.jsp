@@ -10,8 +10,7 @@
 				<ul class="list-group">
 
 					<li class="list-group-item title">
-						<div class="friend-icon orange"></div>
-						<label>친구요청</label>
+						<div class="friend-icon orange"></div> <label>친구요청</label>
 					</li>
 
 					<!-- <li href="#" class="list-group-item text-left">
@@ -34,8 +33,7 @@
 			<div id="friend-list-group">
 				<ul class="list-group">
 					<li class="list-group-item title">
-						<div class="friend-icon green"></div>
-						<label>친구목록 - 2/5</label>
+						<div class="friend-icon green"></div> <label>친구목록 - 2/5</label>
 					</li>
 					<!--  <li href="#" class="list-group-item text-left">
             <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
@@ -93,12 +91,15 @@
 								</div>
 								<div class="modal-body">
 									<div class="input-group">
-										<input type="text" id="friend-add-text" class="form-control" style="float:left" placeholder="NickName">
-										<span class="input-group-btn">
-											<button type="button" id="friend-add-search" class="btn btn-success">검색</button>
+										<input type="text" id="friend-add-text" class="form-control"
+											placeholder="NickName">
+											<span class="input-group-btn">
+												<button type="button" id="friend-add-search"
+													class="btn btn-success">검색</button>
 										</span>
 									</div>
-									<table class="table table-bordered table-hover" id="friend-list-table">
+									<table class="table table-bordered table-hover"
+										id="friend-list-table">
 									</table>
 								</div>
 								<div class="modal-footer">

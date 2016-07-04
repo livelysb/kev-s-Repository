@@ -11,6 +11,7 @@ div.vertical-line{
 
 /* 실시간 정보 */
 #rta-data{padding: 0 0 0 0}
+#rta-th-name{width:130px;}
 
 /* 인벤토리 */
 #inven-content{overflow: hidden;}

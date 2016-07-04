@@ -14,7 +14,7 @@ $(function(){
     	  	
          $("#rta-Window").jqxWindow({
                width:"400",
-               height:"auto",
+               height:"450",
                resizable:true,
                showCollapseButton: true,
                autoOpen:false,
@@ -29,15 +29,14 @@ $(function(){
      	       type:'post',
      	       dataType:'json',
      	       contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-     	       data: {"page":stockPage},
+     	       data: {"page":stockPage,"keyword":"undefined"},
      	       success:function(data){
-     	    	   
-     	    	   //console.log(stockPage);
-     	    	   //console.log(data);
      	    	   stockPage++;
      	    	   var tbd = $("#rta-tbody").empty();
      	    	   $(data).each(function(index, item) {
-     	    		   $(tbd).append("<tr> <td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"</td> <td>"+item.priceDTO.trdvol+"</td> </tr>")
+     	    		  if(index!=0){
+     	    			  $(tbd).append("<tr> <td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"</td><td>"+item.priceDTO.trdvol+"</td></tr>")
+     	    		  }
      	    	   });
      	       },
      	       error:function(e){
@@ -46,8 +45,19 @@ $(function(){
      	       }
      	    });
      	};
-     	//getRealTimeStock();
-     	setInterval(getRealTimeStock, 1000);
+     	
+     	var realTimeHover = function(){
+     		$("#rta-content").hover(
+ 				function(){
+ 					clearInterval(getRealTimeStock)
+ 				},
+ 				function(){
+ 					setInterval(getRealTimeStock, 3000);
+ 				}
+     		)
+     	}
+     	
+     	setInterval(getRealTimeStock, 3000);
       }
       
       
@@ -135,10 +145,11 @@ $(function(){
           
           var updateAvatar = function(){
              for(var i=1; i<=6; i++){
+            	
                 var partSrc = $("#inven-player-"+i+">.item-img").attr("src");
                 
                 if(partSrc === "" || typeof(partSrc) === "undefined"){
-                   $("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/m_"+setting.parts[i-1]+"_01.png");
+                   $("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/m_"+setting.parts[i-1]+"_00.png");
                 }else{
                    $("#inven-player-"+setting.parts[i-1]).attr("src", partSrc);
                 }
@@ -332,7 +343,6 @@ $(function(){
     		
     	    //Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
     	    function storeSelect(page){
-    	    	console.log(page);
     	    	var itemClass = $("#store-content .active").attr("id");
     		    $.ajax({
     		    	url: "itemStoreSelect" ,
@@ -340,7 +350,6 @@ $(function(){
     				dataType:"json",  
     				data:"itemClass="+itemClass+"&page="+page,
     				success:function(data){
-    					console.log(data);
     					if(data.length==0){
     						count=1;
     						if(status == "next"){

@@ -14,8 +14,12 @@
 
 <style type="text/css">
 /* #tabBtn {text-align: right} */
-.itemImg {
+.auction-itemImg {
 	width: 100%;
+}
+
+#auction-register{
+	float:right;
 }
 </style>
 </head>
@@ -25,15 +29,15 @@
 	<div id="auction-window">
 		<div id="auction-header">Auction List</div>
 		<div id="auction-content">
-						
 				<div class="container">
-					<ul id="myTab" class="nav nav-tabs col-md-6">
+				<div class="row">
+					<ul id="myTab" class="nav nav-tabs">
 						<li class="active "><a
 							data-target="#home" id="auction-buytab" data-toggle="tab">구매</a></li>
 						<li class=""><a data-target="#profile"
 							id="auction-selltab" data-toggle="tab">판매목록</a></li>
-					</ul>
-					<div id="searchBar" class="col-md-6">
+					</ul>	
+					<div id="searchBar">
 						<div class="input-group">
 						<span class="input-group-btn">
 							<select class="form-control" id="auction-select">
@@ -47,9 +51,10 @@
 								<option value="etc">Etc</option>
 							</select> 
 							</span>
-								<input type="text" class="form-control" placeholder="Search" id="auction-search"> 
+								<input type="text" class="form-control " placeholder="Search" id="auction-search"> 
 								<input type="hidden" id="auction-hidden">
 							</div>
+						</div>
 						</div>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="home">
@@ -70,8 +75,7 @@
 								</table>
 								<button type="button" class="btn btn-default" id="auction-back-btn">이전</button>
 								<button type="button" class="btn btn-default" id="auction-next-btn">다음</button>
-								<button type="button" id="auction-register" class="btn btn-success">판매</button>
-								
+								<button type="button" class="btn btn-success" id="auction-register">판매</button>
 							</div>
 						</div>
 						<div class="tab-pane fade" id="profile">
@@ -253,7 +257,7 @@
         			var str="";
         			$.each(data, function(index,item){
         				if(item.imAuctionEnd="T"){
-	        				str+="<tr><td><img src='"+item.itemDTO.itemImg+"' class='itemImg'></td>";
+	        				str+="<tr><td><img src='"+item.itemDTO.itemImg+"' class='auction-itemImg'></td>";
 	        				str+="<td>"+item.itemDTO.itemName+"</td>";
 	        				str+="<td>"+item.imPurchasePrice+"</td>";
 	        				str+="<td>"+item.imBidTime+"</td>";
@@ -280,7 +284,7 @@
 					$("#auction-sell-tbody").empty;
 					var str="";
 					$.each(data, function(index, item){
-						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"' class='itemImg' ></td>";
+						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"' class='auction-itemImg' ></td>";
 						str+="<td>"+item.itemDTO.itemName+"</td>";
 						str+="<td>"+item.imPurchasePrice+"</td>";
 						str+="<td>"+item.imBidTime+"</td>";

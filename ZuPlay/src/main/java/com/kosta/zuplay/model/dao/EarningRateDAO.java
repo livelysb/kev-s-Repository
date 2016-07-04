@@ -7,5 +7,5 @@ public interface EarningRateDAO {
 	/**
 	 * 전일 수익률 삽입
 	 * */
-	public int earningRateInsert(Map<String, String> map);
+	public int earningRateInsert(Map<String, String> map) throws Exception;
 }

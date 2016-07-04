@@ -11,31 +11,31 @@ public interface StockInfoService {
 	/**
 	 * DB의 모든 prices 가져오기
 	 */
-	public List<PriceDTO> getPrices();
+	public List<PriceDTO> getPrices() throws Exception;
 	
 	/**
 	 * DB의 한 기업의 price 가져오기
 	 * */
-	public PriceDTO getPrice(String isuCd);
+	public PriceDTO getPrice(String isuCd) throws Exception;
 	
 	/**
 	 * DB의 모든 리스트정보 가져오기
 	 */
-	public List<ListsDTO> getLists();
+	public List<ListsDTO> getLists() throws Exception;
 	
 	/**
 	 * DB의 모든 주식리스트 보여주기
 	 * */
-	public List<MasterDTO> getStockList(int page, String keyword);
+	public List<MasterDTO> getStockList(int page, String keyword) throws Exception;
 	
 	/**
 	 * 기업의 상세정보 보여주기
 	 * */
-	public MasterDTO getStockDetail(String playerNickname, String isuCd);
+	public MasterDTO getStockDetail(String playerNickname, String isuCd) throws Exception;
 	
 	/**
 	 * 해당 종목 관련 개수 구하기
 	 * */
-	int getListSize(String isuKorAbbrv);
+	int getListSize(String isuKorAbbrv) throws Exception;
 	
 }

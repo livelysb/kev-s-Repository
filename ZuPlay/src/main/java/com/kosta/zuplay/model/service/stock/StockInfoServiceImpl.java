@@ -25,25 +25,25 @@ public class StockInfoServiceImpl implements StockInfoService {
 	private PlayerStockService playerStockService;
 
 	@Override
-	public List<PriceDTO> getPrices() {
+	public List<PriceDTO> getPrices() throws Exception {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		return stockInfoDAO.getPrices();
 	}
 
 	@Override
-	public PriceDTO getPrice(String isuCd) {
+	public PriceDTO getPrice(String isuCd) throws Exception {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		return stockInfoDAO.getPrice(isuCd);
 	}
 
 	@Override
-	public List<ListsDTO> getLists() {
+	public List<ListsDTO> getLists() throws Exception {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		return stockInfoDAO.getLists();
 	}
 
 	@Override
-	public List<MasterDTO> getStockList(int page, String keyword) {
+	public List<MasterDTO> getStockList(int page, String keyword) throws Exception {
 		int startPage = (page - 1) * 10 + 1;
 		int endPage = startPage + 9;
 		Map<String, String> map = new HashMap<String, String>();
@@ -63,7 +63,7 @@ public class StockInfoServiceImpl implements StockInfoService {
 	}
 
 	@Override
-	public MasterDTO getStockDetail(String playerNickname, String isuCd) {
+	public MasterDTO getStockDetail(String playerNickname, String isuCd) throws Exception {
 		System.out.println(isuCd);
 		try {
 			StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
@@ -96,7 +96,7 @@ public class StockInfoServiceImpl implements StockInfoService {
 	}
 
 	@Override
-	public int getListSize(String isuKorAbbrv) {
+	public int getListSize(String isuKorAbbrv) throws Exception {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		return stockInfoDAO.getListSize(isuKorAbbrv);
 	}

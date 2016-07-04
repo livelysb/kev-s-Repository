@@ -22,13 +22,24 @@ public class StockInfoController {
 
 	@ResponseBody
 	@RequestMapping(value = "realTimeStock", produces = "application/json;charset=UTF-8")
-	public String getStockList(String page, String keyword) {
-		List<MasterDTO> masterList = stockInfo.getStockList(Integer.parseInt(page), keyword);
+	public String getStockList(HttpSession session, String page, String keyword) throws Exception{
+		List<MasterDTO> masterList = null;
+		try {
+			masterList = stockInfo.getStockList(Integer.parseInt(page), keyword);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 		Gson gson = new Gson();
 		String json = gson.toJson(masterList);
 		int amount = 877;
 		if(!keyword.equals("undefined")) {
-			amount = stockInfo.getListSize(keyword);
+			try {
+				amount = stockInfo.getListSize(keyword);
+			} catch (Exception e) {
+				session.setAttribute("errorMsg", e.toString());
+				throw new Exception();
+			}
 		}
 		String json2 = json.replace("[", "[{\"amount\":" + amount + "},");
 		if(amount == 0) {
@@ -38,8 +49,14 @@ public class StockInfoController {
 	}
 	
 	@RequestMapping(value = "companyInfo", produces = "application/json;charset=UTF-8")
-	public ModelAndView getStock(HttpSession session, String isuCd) {
-		MasterDTO masterDTO = stockInfo.getStockDetail((String)session.getAttribute("playerNickname"), isuCd);
+	public ModelAndView getStock(HttpSession session, String isuCd) throws Exception{
+		MasterDTO masterDTO;
+		try {
+			masterDTO = stockInfo.getStockDetail((String)session.getAttribute("playerNickname"), isuCd);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 		ModelAndView mv = new ModelAndView("companyInfo");
 		mv.addObject("masterDTO", masterDTO);
 		return mv;

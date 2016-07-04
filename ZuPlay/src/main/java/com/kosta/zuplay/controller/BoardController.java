@@ -33,9 +33,14 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping("insertBoard")
-	public String insertBoard(HttpSession session,BoardDTO dto){
+	public String insertBoard(HttpSession session,BoardDTO dto) throws Exception{
 		dto.setPlayerNickname((String) session.getAttribute("playerNickname"));
-		boardServiceImpl.insertBoard(dto);
+		try {
+			boardServiceImpl.insertBoard(dto);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 		return "selectAll";
 	}
 	/**
@@ -45,8 +50,13 @@ public class BoardController {
 	 */
 	@RequestMapping("updateBoard")
 	@ResponseBody
-	public boolean updateBoard(BoardDTO dto){
-		return boardServiceImpl.updateBoard(dto);
+	public boolean updateBoard(HttpSession session, BoardDTO dto) throws Exception{
+		try {
+			return boardServiceImpl.updateBoard(dto);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	/**
 	 * 게시판 디테일뷰
@@ -55,18 +65,28 @@ public class BoardController {
 	 */
 	@RequestMapping("selectDetail")
 	@ResponseBody
-	public BoardDTO selectDetail(int boardNo){
-		return boardServiceImpl.selectDetail(boardNo);
+	public BoardDTO selectDetail(HttpSession session, int boardNo) throws Exception{
+		try {
+			return boardServiceImpl.selectDetail(boardNo);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	/**
 	 * 게시판 리스트 뷰
 	 * @return
 	 */
 	@RequestMapping("selectAll")
-	public ModelAndView selectAll(){
+	public ModelAndView selectAll(HttpSession session) throws Exception{
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("selectAll");
-		mv.addObject("list", boardServiceImpl.selectAll());
+		try {
+			mv.addObject("list", boardServiceImpl.selectAll());
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 		return mv;
 	}
 	/**
@@ -77,8 +97,13 @@ public class BoardController {
 	 */
 	@RequestMapping("deleteBoard")
 	@ResponseBody
-	public boolean deleteBoard(String playerNickname, int boardNo){
-		return boardServiceImpl.deleteBoard(playerNickname, boardNo);
+	public boolean deleteBoard(HttpSession session, String playerNickname, int boardNo) throws Exception{
+		try {
+			return boardServiceImpl.deleteBoard(playerNickname, boardNo);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	
 	/**
@@ -88,8 +113,13 @@ public class BoardController {
 	 */
 	@RequestMapping("insertComment")
 	@ResponseBody
-	public boolean insertComment(BoardCommentDTO boardCommentDTO){
-		return boardServiceImpl.insertComment(boardCommentDTO);
+	public boolean insertComment(HttpSession session, BoardCommentDTO boardCommentDTO) throws Exception{
+		try {
+			return boardServiceImpl.insertComment(boardCommentDTO);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	/**
 	 * 코멘트 수정
@@ -98,8 +128,13 @@ public class BoardController {
 	 */
 	@RequestMapping("updateComment")
 	@ResponseBody
-	public boolean updateComment(BoardCommentDTO dto){
-		return boardServiceImpl.updateComment(dto);
+	public boolean updateComment(HttpSession session, BoardCommentDTO dto) throws Exception{
+		try {
+			return boardServiceImpl.updateComment(dto);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	/**
 	 * 코멘트 읽기
@@ -108,8 +143,13 @@ public class BoardController {
 	 */
 	@RequestMapping("selectComment")
 	@ResponseBody
-	public List<BoardCommentDTO> selectComment(int boardNo){
-		return boardServiceImpl.selectComment(boardNo);
+	public List<BoardCommentDTO> selectComment(HttpSession session, int boardNo) throws Exception{
+		try {
+			return boardServiceImpl.selectComment(boardNo);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	/**
 	 * 코멘트 삭제
@@ -119,7 +159,12 @@ public class BoardController {
 	 */
 	@RequestMapping("deleteComment")
 	@ResponseBody
-	public boolean deleteComment(String playerNickname,int bcSq){
-		return boardServiceImpl.deleteComment(playerNickname, bcSq);
+	public boolean deleteComment(HttpSession session, String playerNickname,int bcSq) throws Exception{
+		try {
+			return boardServiceImpl.deleteComment(playerNickname, bcSq);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 }

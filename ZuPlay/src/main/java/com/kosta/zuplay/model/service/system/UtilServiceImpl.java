@@ -22,7 +22,7 @@ public class UtilServiceImpl implements UtilService {
 	 * return 1~20 번 인덱스 / 0 = 자리 없음 (인벤토리 가득참)
 	 */
 	@Override
-	public int indexSearch(String playerNickname) {
+	public int indexSearch(String playerNickname) throws Exception {
 		PlayerItemDAO playerItemDAO=sqlSession.getMapper(PlayerItemDAO.class);
 		List<Integer> list=playerItemDAO.getItemIndex(playerNickname);
 		System.out.println(list);
@@ -40,7 +40,7 @@ public class UtilServiceImpl implements UtilService {
 		return 0;
 	}
 	
-	public String currentDate() {
+	public String currentDate() throws Exception {
 		 Calendar oCalendar = Calendar.getInstance( );
 		 // 현재 날짜/시간 등의 각종 정보 얻기
 		 String currentDate = "";

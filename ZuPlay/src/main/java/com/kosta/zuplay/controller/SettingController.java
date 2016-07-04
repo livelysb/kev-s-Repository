@@ -22,9 +22,14 @@ public class SettingController {
 	
 	@RequestMapping("settingSave")
 	@ResponseBody
-	public boolean settingSave(HttpSession session,SettingDTO dto){
+	public boolean settingSave(HttpSession session,SettingDTO dto) throws Exception{
 		dto.setPlayerNickname((String) session.getAttribute("playerNickname"));
-		return settingServiceImpl.settingSave(dto);
+		try {
+			return settingServiceImpl.settingSave(dto);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	
 	/**
@@ -32,9 +37,14 @@ public class SettingController {
 	 */
 	@RequestMapping("settingReset")
 	@ResponseBody
-	public boolean settingReset(HttpSession session){
+	public boolean settingReset(HttpSession session) throws Exception{
 		String playerNickname=(String) session.getAttribute("playerNickname");
-		return settingServiceImpl.settingReset(playerNickname);
+		try {
+			return settingServiceImpl.settingReset(playerNickname);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	
 	/**
@@ -42,9 +52,15 @@ public class SettingController {
 	 */
 	@RequestMapping(value = "settingSelect", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String settingSelect(HttpSession session){
+	public String settingSelect(HttpSession session) throws Exception{
 		String playerNickname=(String) session.getAttribute("playerNickname");
-		SettingDTO dto = settingServiceImpl.settingSelect(playerNickname);
+		SettingDTO dto = null;
+		try {
+			dto = settingServiceImpl.settingSelect(playerNickname);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 		Gson gson = new Gson();
 		String json=gson.toJson(dto);
 		System.out.println(json);

@@ -23,11 +23,17 @@ public class ItemStoreController {
 	 */
 	 @RequestMapping(value="itemStoreSelect" ,produces="application/json;charset=UTF-8" )
 	 @ResponseBody
-	public String itemStoreSelect(HttpSession session, String itemClass, int page) {
+	public String itemStoreSelect(HttpSession session, String itemClass, int page) throws Exception{
 		 System.out.println(itemClass);
 		 System.out.println(page);
 		String playerNickname = (String) session.getAttribute("playerNickname");
-		List<ItemDTO> list = itemStoreServiceImpl.itemStoreSelect(playerNickname, itemClass, page);
+		List<ItemDTO> list;
+		try {
+			list = itemStoreServiceImpl.itemStoreSelect(playerNickname, itemClass, page);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 		Gson gson = new Gson();
 		String json=gson.toJson(list);
 		return json;
@@ -38,9 +44,15 @@ public class ItemStoreController {
 	 */
 	 @RequestMapping(value="itemStoreBuy" ,produces="application/json;charset=UTF-8" )
 	@ResponseBody
-	public int itemStoreBuy(HttpSession session, ItemDTO itemDTO, int quantity){
+	public int itemStoreBuy(HttpSession session, ItemDTO itemDTO, int quantity) throws Exception{
 		String playerNickname = (String) session.getAttribute("playerNickname");
-		int result=itemStoreServiceImpl.itemStoreBuy(playerNickname, itemDTO, quantity);// 1=정상 / 2=인벤토리부족 / 3=루비부족
+		int result;
+		try {
+			result = itemStoreServiceImpl.itemStoreBuy(playerNickname, itemDTO, quantity);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}// 1=정상 / 2=인벤토리부족 / 3=루비부족
 		return result;
 	}
 	 /**
@@ -48,8 +60,13 @@ public class ItemStoreController {
 	  */
 	 @RequestMapping(value="itemStoreSell" ,produces="application/json;charset=UTF-8" )
 		@ResponseBody
-		public boolean itemStoreSell(HttpSession session,int piSq,String itemCode){
+		public boolean itemStoreSell(HttpSession session,int piSq,String itemCode) throws Exception{
 			String playerNickname = (String) session.getAttribute("playerNickname");
-			return itemStoreServiceImpl.itemStoreSell(playerNickname, piSq, itemCode);
+			try {
+				return itemStoreServiceImpl.itemStoreSell(playerNickname, piSq, itemCode);
+			} catch (Exception e) {
+				session.setAttribute("errorMsg", e.toString());
+				throw new Exception();
+			}
 	 }
 }

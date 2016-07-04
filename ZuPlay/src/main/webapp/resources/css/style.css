@@ -110,10 +110,9 @@ div.vertical-line{
 /* 아이템 상점 */
 
 #store-window .store-itemBox {
-	border: solid 2px black;
+	border: solid 3px #DDDDDD;
 	margin: 3px 3px 3px 0;
 	padding: 1px;
-	/* float: left; */
 	width: 130px;
 	height: 130px;
 	text-align: center;
@@ -121,15 +120,27 @@ div.vertical-line{
 
 
 #store-prev-div{
-	top: 300px;
 	float:left;
+	height:270px;
+	line-height: 20;
+	
 }
 
 #store-next-div{
-	top: 300px;
 	float:right;
+	height:270px;
+	line-height:20;
 }
  
+.store-container{
+	float:left;
+}
+
+#store-content a{
+    text-decoration:none;
+    color:black;
+    font-weight:bold;
+}
 
 /* #store-window div.bhoechie-tab-container{
   z-index: 10;
@@ -357,57 +368,15 @@ div.vertical-line{
     padding:15px;
     display:inline-block;
     /* border-bottom:1px solid #1a1a1a; */
-    background:#333;
+    background:#ffffff;
     transition:all linear 0.15s;
     /* Type */
     font-size:1.200em;
    /*  text-shadow:0px 1px 0px #1a1a1a; */
-    color:#fff; 
-}
- 
-.accordion-section-title.active, .accordion-section-title:hover {
-    background:#FFFFFF;
-    /* Type */
-    text-decoration:none;
-}
- 
-.accordion-section:last-child .accordion-section-title {
-    border-bottom:none;
-}
-  
-/*----- Section Content -----*/
-.accordion-section-content {
-    padding:15px;
-    display:none;
-}/*----- Accordion -----*/
-.accordion, .accordion * {
-    -webkit-box-sizing:border-box; 
-    -moz-box-sizing:border-box; 
-    box-sizing:border-box;
-}
- 
-.accordion {
-    overflow:hidden;
-    box-shadow:0px 1px 3px rgba(0,0,0,0.25);
-    border-radius:8px;
-    background:#FFFFFF;
-}
- 
-/*----- Section Titles -----*/
-.accordion-section-title {
-    width:100%;
-    padding:15px;
-    display:inline-block;
-    /* border:1px solid #1a1a1a; */
-    background:#ffffff; 
-    transition:all linear 0.15s;
-    border-bottom:1px solid #cccccc;
-    /* Type */ 
-    font-size:1.200em;
-   /* text-shadow:0px 1px 0px #1a1a1a; */
     color:#000000; 
     font-weight:bold;
 }
+
  
 .accordion-section-title.active, .accordion-section-title:hover {
     background:#FFFFFF;
@@ -416,11 +385,11 @@ div.vertical-line{
     color:#5CB85C;
     font-weight:bold;
 }
- 
+
 .accordion-section:last-child .accordion-section-title {
     border-bottom:none;
 }
- 
+  
 /*----- Section Content -----*/
 .accordion-section-content {
     padding:15px;
@@ -428,4 +397,8 @@ div.vertical-line{
 }
 
 
+.ui-accordion-content-active{
+	height:auto !important;
+    overflow:auto;
+}
 

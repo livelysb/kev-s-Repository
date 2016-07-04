@@ -21,36 +21,53 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	
 	@Scheduled(fixedDelay=10*60*1000)
 	@Override
-	public void actionPer10Min() throws Exception {
+	public void actionPer10Min() {
 		System.out.println("10분마다 작업을 시작합니다.");
-		stockUpdateService.stockPriceUpdate();
+		try {
+			stockUpdateService.stockPriceUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Scheduled(fixedDelay=20*60*1000)
 	@Override
-	public void actionPer20Min() throws Exception{
+	public void actionPer20Min(){
 		System.out.println("20분마다 작업을 시작합니다.");
-		stockUpdateService.realtimePriceInsert();
+		try {
+			stockUpdateService.realtimePriceInsert();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 
 	@Scheduled(cron="0 0 9 * * *")
 	@Override
-	public void actionAtNine() throws Exception{
+	public void actionAtNine(){
 		System.out.println("AM 09:00, 작업을 시작합니다.");
-		stockUpdateService.masterUpdate();
-		stockUpdateService.realtimePriceReset();
-		rankService.calRank("PLAYER_DAILY_RANK");
-		rankService.calRank("PLAYER_SEASON_RANK");
-		earningRateService.updateEarningRate();
+		try {
+			stockUpdateService.masterUpdate();
+			stockUpdateService.realtimePriceReset();
+			rankService.calRank("PLAYER_DAILY_RANK");
+			rankService.calRank("PLAYER_SEASON_RANK");
+			earningRateService.updateEarningRate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	
 	@Scheduled(cron="0 0 15 * * *")
 	@Override
-	public void actionAtThree() throws Exception{
+	public void actionAtThree(){
 		System.out.println("PM 03:00, 작업을 시작합니다.");
-		stockUpdateService.dailyPriceInsert();
+		try {
+			stockUpdateService.dailyPriceInsert();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

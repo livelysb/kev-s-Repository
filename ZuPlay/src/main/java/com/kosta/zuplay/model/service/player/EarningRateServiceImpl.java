@@ -55,7 +55,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 			if(earningRateDAO.earningRateInsert(map)>0)
 				if(updatePreMoney(playerNickname)) {
 					//earingRate를 이용한 루비 추가
-					int ruby = playerInfoService.getPlayer(playerNickname).getPlayerRuby();
+					int ruby = playerInfoService.getRuby(playerNickname);
 					ruby += (int)(earningRate*100000000);
 					if(playerInfoService.updateRuby(playerNickname, ruby)) {
 						result ++;

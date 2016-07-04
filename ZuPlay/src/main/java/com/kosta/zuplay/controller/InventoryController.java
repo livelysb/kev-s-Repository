@@ -36,6 +36,7 @@ public class InventoryController {
 			list = inventoryServiceImpl.playerItemSelectAll(playerNickname);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		Gson gson = new Gson();
@@ -67,6 +68,7 @@ public class InventoryController {
 			return inventoryServiceImpl.playerItemInsert(list);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}

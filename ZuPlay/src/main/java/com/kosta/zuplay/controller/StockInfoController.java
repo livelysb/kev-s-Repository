@@ -28,6 +28,7 @@ public class StockInfoController {
 			masterList = stockInfo.getStockList(Integer.parseInt(page), keyword);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		Gson gson = new Gson();
@@ -38,6 +39,7 @@ public class StockInfoController {
 				amount = stockInfo.getListSize(keyword);
 			} catch (Exception e) {
 				session.setAttribute("errorMsg", e.toString());
+				e.printStackTrace();
 				throw new Exception();
 			}
 		}
@@ -55,6 +57,7 @@ public class StockInfoController {
 			masterDTO = stockInfo.getStockDetail((String)session.getAttribute("playerNickname"), isuCd);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		ModelAndView mv = new ModelAndView("companyInfo");

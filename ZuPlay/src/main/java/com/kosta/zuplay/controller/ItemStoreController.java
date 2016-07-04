@@ -32,6 +32,7 @@ public class ItemStoreController {
 			list = itemStoreServiceImpl.itemStoreSelect(playerNickname, itemClass, page);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		Gson gson = new Gson();
@@ -51,6 +52,7 @@ public class ItemStoreController {
 			result = itemStoreServiceImpl.itemStoreBuy(playerNickname, itemDTO, quantity);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}// 1=정상 / 2=인벤토리부족 / 3=루비부족
 		return result;
@@ -66,6 +68,7 @@ public class ItemStoreController {
 				return itemStoreServiceImpl.itemStoreSell(playerNickname, piSq, itemCode);
 			} catch (Exception e) {
 				session.setAttribute("errorMsg", e.toString());
+				e.printStackTrace();
 				throw new Exception();
 			}
 	 }

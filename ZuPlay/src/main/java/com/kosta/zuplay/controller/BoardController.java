@@ -39,6 +39,7 @@ public class BoardController {
 			boardServiceImpl.insertBoard(dto);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		return "selectAll";
@@ -55,6 +56,7 @@ public class BoardController {
 			return boardServiceImpl.updateBoard(dto);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
@@ -70,6 +72,7 @@ public class BoardController {
 			return boardServiceImpl.selectDetail(boardNo);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
@@ -85,6 +88,7 @@ public class BoardController {
 			mv.addObject("list", boardServiceImpl.selectAll());
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		return mv;
@@ -102,6 +106,7 @@ public class BoardController {
 			return boardServiceImpl.deleteBoard(playerNickname, boardNo);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
@@ -118,6 +123,7 @@ public class BoardController {
 			return boardServiceImpl.insertComment(boardCommentDTO);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
@@ -133,6 +139,7 @@ public class BoardController {
 			return boardServiceImpl.updateComment(dto);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
@@ -148,6 +155,7 @@ public class BoardController {
 			return boardServiceImpl.selectComment(boardNo);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
@@ -164,6 +172,7 @@ public class BoardController {
 			return boardServiceImpl.deleteComment(playerNickname, bcSq);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}

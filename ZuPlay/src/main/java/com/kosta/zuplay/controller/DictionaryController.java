@@ -41,6 +41,7 @@ public class DictionaryController {
 		}
 		} catch(Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		StringBuilder sb = new StringBuilder();

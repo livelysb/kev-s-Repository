@@ -32,6 +32,7 @@ public class FriendController {
 			list = friendServiceImpl.friendSelect(playerNickname);
 		} catch (Exception e1) {
 			session.setAttribute("errorMsg", e1.toString());
+			e1.printStackTrace();
 			throw new Exception();
 		}
 		Gson gson = new Gson();
@@ -56,6 +57,7 @@ public class FriendController {
 			list = friendServiceImpl.friendSelectOnline(playerNickname);
 		} catch (Exception e1) {
 			session.setAttribute("errorMsg", e1.toString());
+			e1.printStackTrace();
 			throw new Exception();
 		}
 		String json = "{type:'friendSelectOnline',data:" + gson.toJson(list) + "}";
@@ -76,6 +78,7 @@ public class FriendController {
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			session.setAttribute("errorMsg", e1.toString());
+			e1.printStackTrace();
 			throw new Exception();
 		}
 		Gson gson = new Gson();
@@ -99,6 +102,7 @@ public class FriendController {
 			result = friendServiceImpl.friendDel(friendSq);
 		} catch (Exception e1) {
 			session.setAttribute("errorMsg", e1.toString());
+			e1.printStackTrace();
 			throw new Exception();
 		}
 		Gson gson = new Gson();
@@ -123,6 +127,7 @@ public class FriendController {
 			result = friendServiceImpl.friendAccept(friendSq);
 		} catch (Exception e1) {
 			session.setAttribute("errorMsg", e1.toString());
+			e1.printStackTrace();
 			throw new Exception();
 		}
 		if (result) {

@@ -28,6 +28,7 @@ public class SettingController {
 			return settingServiceImpl.settingSave(dto);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
@@ -43,6 +44,7 @@ public class SettingController {
 			return settingServiceImpl.settingReset(playerNickname);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
@@ -59,6 +61,7 @@ public class SettingController {
 			dto = settingServiceImpl.settingSelect(playerNickname);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		Gson gson = new Gson();

@@ -38,6 +38,7 @@ public class LoginController {
 			}
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		return firstLogin;
@@ -60,6 +61,7 @@ public class LoginController {
 					100000000, 1000, "B", 0, 0, 0, 0));
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		session.setAttribute("playerNickname", playerNickname);
@@ -81,6 +83,7 @@ public class LoginController {
 			checkRepetiton = loginServiceImpl.checkRepetition(playerNickname);
 		} catch(Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		return checkRepetiton;

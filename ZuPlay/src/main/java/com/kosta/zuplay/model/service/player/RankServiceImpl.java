@@ -34,7 +34,10 @@ public class RankServiceImpl implements RankService{
 		List<String> playerList = playerInfoService.getAllPlayerNickName();
 		for(String playerNickname : playerList) {
 			PlayerDTO playerDTO = playerInfoService.getPlayer(playerNickname);
-			playerDTO.setEarningRate(earningRateService.calDailyEarningRate(playerNickname));
+			if(kind.equals("PLAYER_DAILY_RANK"))
+				playerDTO.setEarningRate(earningRateService.calDailyEarningRate(playerNickname));
+			else
+				playerDTO.setEarningRate(earningRateService.calEarningRate(playerNickname));
 			playerList2.add(playerDTO);
 		}
 		

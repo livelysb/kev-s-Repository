@@ -93,6 +93,7 @@
     				}
     			} ,
     			error:function(err){
+    				alert("여기")
     				alert(err +"에러발생");
     			}
     		}) 

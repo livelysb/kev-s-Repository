@@ -35,7 +35,8 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 		for (ListsDTO listsDTO : list) {
 			PriceDTO priceDTO = getPriceFromAPI(listsDTO.getIsuSrtCd());
 			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-			stockUpdateDAO.priceUpdate(priceDTO);
+			if(priceDTO != null)
+				stockUpdateDAO.priceUpdate(priceDTO);
 		}
 		System.out.println(new Date().toString() +" : Price is updated");
 
@@ -53,11 +54,17 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 			Gson gson = new Gson();
 			price = gson.fromJson(br, PriceDTO.class);
 
-		} catch (Exception e) {
+		}catch(IOException ioe) {
+			System.out.println("429(불량) 응답으로 인한 한 종목 업데이트 갱신되지 않음");
+			//429에러이니 무시하기^^;
+			//System.out.println(ioe.getMessage());
+		}	
+		catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				br.close();
+				if(br!=null)
+					br.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

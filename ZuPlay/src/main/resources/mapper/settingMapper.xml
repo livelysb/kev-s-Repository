@@ -5,15 +5,16 @@
 	<resultMap type="settingDTO" id="settingMapper">
 		<id column="ps_sq" property="psSq" />
 		<result column="player_nickname" property="playerNickname" />
-		<result column="bgm_sound" property="bgmSound" />
-		<result column="my_page" property="myPage" />
-		<result column="chatting" property="chatting" />
-		<result column="friend_add" property="friendAdd" />
+		<result column="ps_bgm_sound" property="bgmSound" />
+		<result column="ps_my_page" property="myPage" />
+		<result column="ps_chatting" property="chatting" />
+		<result column="ps_friend_add" property="friendAdd" />
 
 	</resultMap>
 	<update id='settingSave' parameterType='settingDTO'>
 		update player_setting set
-		bgm_sound=#{bgmSound},my_page=#{myPage},chatting=#{chatting},friend_add=#{friendAdd} where
+		bgm_sound=#{bgmSound},my_page=#{myPage},chatting=#{chatting},friend_add=#{friendAdd}
+		where
 		player_nickname=#{playerNickname}
 	</update>
 
@@ -24,13 +25,16 @@
 		player_nickname=#{value}
 	</update>
 
-	<select id="settingSelect" resultMap="settingMapper" parameterType="String">
+	<select id="settingSelect" resultMap="settingMapper"
+		parameterType="String">
 		select *
-		from player_setting where player_nickname=#{value}
+		from player_setting where
+		player_nickname=#{value}
 	</select>
 	<insert id="settingInsert" parameterType="String">
-		insert into player_setting
-		(ps_sq,player_nickname,bgm_sound,my_page,chatting,friendAdd)
-		value (ps_sq.nextval,#{value},30},'T','T','T')
+		insert into
+		player_setting
+		(ps_sq,player_nickname,ps_bgm_sound,ps_my_page,ps_chatting,ps_friend_Add)
+		values (ps_sq.nextval,#{value},30,'T','T','T')
 	</insert>
 </mapper>

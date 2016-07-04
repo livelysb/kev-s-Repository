@@ -32,6 +32,7 @@ public class PlayerInfoController {
 			list = playerInfoServiceImpl.playerInfoSelectAll(keyword);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		Gson gson = new Gson();
@@ -51,6 +52,7 @@ public class PlayerInfoController {
 			return json;
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}

@@ -37,6 +37,7 @@ public class ItemAuctionController {
 			list = itemAuctionServiceImpl.auctionSearch(keyword, itemClass, page);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		Gson gson=new Gson();
@@ -60,6 +61,7 @@ public class ItemAuctionController {
 			result = itemAuctionServiceImpl.auctionBuy(playerNickname, imSq);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		return result;
@@ -80,6 +82,7 @@ public class ItemAuctionController {
 			return itemAuctionServiceImpl.auctionSell(playerNickname, piSq, imPurchasePrice);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
@@ -96,6 +99,7 @@ public class ItemAuctionController {
 			return itemAuctionServiceImpl.auctionCancel(imSq);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
@@ -112,6 +116,7 @@ public class ItemAuctionController {
 			return itemAuctionServiceImpl.auctionBring(playerNickname, imSq);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 	}
@@ -130,6 +135,7 @@ public class ItemAuctionController {
 			list = itemAuctionServiceImpl.auctionMyPage(playerNickname);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
 			throw new Exception();
 		}
 		Gson gson = new Gson();

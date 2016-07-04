@@ -58,7 +58,6 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 			System.out.println("429(불량) 응답으로 인한 한 종목 업데이트 갱신되지 않음");
 			//429에러이니 무시하기^^;
 			//System.out.println(ioe.getMessage());
-			throw new Exception();
 		}	
 		catch (Exception e) {
 			e.printStackTrace();

@@ -151,7 +151,7 @@ $(function(){
                 var partSrc = $("#inven-player-"+i+">.item-img").attr("src");
                 
                 if(partSrc === "" || typeof(partSrc) === "undefined"){
-                   $("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/"+setting.parts[i-1]+"-01.png");
+                   $("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/m_"+setting.parts[i-1]+"_01.png");
                 }else{
                    $("#inven-player-"+setting.parts[i-1]).attr("src", partSrc);
                 }
@@ -345,6 +345,7 @@ $(function(){
     		
     	    //Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
     	    function storeSelect(page){
+    	    	console.log(page);
     	    	var itemClass = $("#store-content .active").attr("id");
     		    $.ajax({
     		    	url: "itemStoreSelect" ,
@@ -352,6 +353,7 @@ $(function(){
     				dataType:"json",  
     				data:"itemClass="+itemClass+"&page="+page,
     				success:function(data){
+    					console.log(data);
     					if(data.length==0){
     						count=1;
     						if(status == "next"){
@@ -368,11 +370,12 @@ $(function(){
     						$('.nav-tabs a[href="#store-tab-' + next + '"]').tab('show');
     						return;
     					}else{
+    						
     						count=page;
     						$(".tab-content div img").empty();
     						$.each(data, function(index, item){
     							$("#store-item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:100%;' id='"+item.itemCode+"'/>");  
-    							$("#store-item"+itemClass+""+index+" img").jqxTooltip({ content: item.itemName+"("+item.itemGrade+")"+"<br>"+item.itemPrice+"<br>", position: 'bottom', autoHide: true, 
+    							$("#store-item"+itemClass+""+index+" img").jqxTooltip({ content: item.itemName+"("+item.itemGrade+")"+"<br>₩"+item.itemPrice+"<br>", position: 'bottom', autoHide: true, 
     								name: 'movieTooltip', theme : userInfo.theme });
     						})
     					}

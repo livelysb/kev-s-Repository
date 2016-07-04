@@ -19,7 +19,7 @@ public class DealHistoryServiceImpl implements DealHistoryService {
 	private SqlSession sqlSession;
 	
 	@Override
-	public boolean stockHistoryInsert(String playerNickname, String isuCd, int plQuantity, int price, String bs) {
+	public boolean stockHistoryInsert(String playerNickname, String isuCd, int plQuantity, int price, String bs) throws Exception {
 		DealHistoryDAO dealHistoryDAO = sqlSession.getMapper(DealHistoryDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("playerNickname", playerNickname);
@@ -33,7 +33,7 @@ public class DealHistoryServiceImpl implements DealHistoryService {
 	}
 	
 	@Override
-	public List<StockDealHistoryDTO> getStockHistory(String playerNickname) {
+	public List<StockDealHistoryDTO> getStockHistory(String playerNickname) throws Exception {
 		DealHistoryDAO dealHistoryDAO = sqlSession.getMapper(DealHistoryDAO.class);
 		return dealHistoryDAO.getStockHistory(playerNickname);
 	}

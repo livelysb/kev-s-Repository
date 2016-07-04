@@ -15,14 +15,14 @@ public class InventoryServiceImpl implements InventoryService {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<PlayerItemDTO> playerItemSelectAll(String playerNickname) {
+	public List<PlayerItemDTO> playerItemSelectAll(String playerNickname) throws Exception {
 		PlayerItemDAO dao=sqlSession.getMapper(PlayerItemDAO.class);
 		List<PlayerItemDTO> list=dao.playerItemSelectAll(playerNickname);
 		return list;
 	}
 
 	@Override
-	public boolean playerItemInsert(List<PlayerItemDTO> list) {
+	public boolean playerItemInsert(List<PlayerItemDTO> list) throws Exception {
 		PlayerItemDAO dao=sqlSession.getMapper(PlayerItemDAO.class);
 		int result=dao.playerItemInsert(list);
 		if(result!=0){

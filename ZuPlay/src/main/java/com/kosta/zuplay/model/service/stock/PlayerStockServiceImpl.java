@@ -19,13 +19,13 @@ public class PlayerStockServiceImpl implements PlayerStockService {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<PlayerListsDTO> getPlayerStocks(String playerNickname) {
+	public List<PlayerListsDTO> getPlayerStocks(String playerNickname) throws Exception {
 		PlayerStockDAO playerStockDAO = sqlSession.getMapper(PlayerStockDAO.class);
 		return playerStockDAO.getPlayerStocks(playerNickname);
 	}
 
 	@Override
-	public PlayerListsDTO getPlayerStock(String playerNickname, String isuCd) {
+	public PlayerListsDTO getPlayerStock(String playerNickname, String isuCd) throws Exception {
 		PlayerStockDAO playerStockDAO = sqlSession.getMapper(PlayerStockDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("playerNickname", playerNickname);
@@ -34,7 +34,7 @@ public class PlayerStockServiceImpl implements PlayerStockService {
 	}
 
 	@Override
-	public boolean setPlayerStock(String playerNickname, String isuCd, int plQuantity) {
+	public boolean setPlayerStock(String playerNickname, String isuCd, int plQuantity) throws Exception {
 		PlayerStockDAO playerStockDAO = sqlSession.getMapper(PlayerStockDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("playerNickname", playerNickname);

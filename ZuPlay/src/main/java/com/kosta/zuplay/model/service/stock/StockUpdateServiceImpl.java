@@ -30,7 +30,7 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 
 	
 	@Transactional
-	public void stockPriceUpdate() {
+	public void stockPriceUpdate() throws Exception {
 		List<ListsDTO> list = stockInfoService.getLists();
 		for (ListsDTO listsDTO : list) {
 			PriceDTO priceDTO = getPriceFromAPI(listsDTO.getIsuSrtCd());
@@ -41,7 +41,7 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 
 	}
 
-	public PriceDTO getPriceFromAPI(String isuSrtCd) {
+	public PriceDTO getPriceFromAPI(String isuSrtCd) throws Exception {
 		URL url = null;
 		PriceDTO price = null;
 		BufferedReader br = null;
@@ -66,7 +66,7 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 	}
 
 	@Transactional
-	public void realtimePriceInsert() {
+	public void realtimePriceInsert() throws Exception {
 		List<PriceDTO> priceList = stockInfoService.getPrices();
 		for (PriceDTO priceDTO : priceList) {
 			if (priceDTO.getTrdTm() != null) {
@@ -78,14 +78,14 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 	}
 	
 	@Transactional
-	public void realtimePriceReset() {
+	public void realtimePriceReset() throws Exception {
 		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 		stockUpdateDAO.realtimePriceReset();
 		System.out.println(new Date().toString() + " : RealtimePrice is reseted");
 	}
 
 	@Transactional
-	public void masterUpdate() {
+	public void masterUpdate() throws Exception {
 		List<ListsDTO> lists = stockInfoService.getLists();
 		for(ListsDTO listDTO : lists) {
 			MasterDTO masterDTO = getMasterFromAPI(listDTO.getIsuSrtCd());
@@ -95,7 +95,7 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 		System.out.println(new Date().toString() + " : Master is updated");
 	}
 	
-	public MasterDTO getMasterFromAPI(String isuSrtCd) {
+	public MasterDTO getMasterFromAPI(String isuSrtCd) throws Exception {
 		URL url = null;
 		BufferedReader br = null;
 		MasterDTO masterDTO = null;
@@ -120,7 +120,7 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 	}
 
 	@Transactional
-	public void dailyPriceInsert() {
+	public void dailyPriceInsert() throws Exception {
 		List<PriceDTO> priceList = stockInfoService.getPrices();
 		for (PriceDTO priceDTO : priceList) {
 			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);

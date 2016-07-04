@@ -8,26 +8,26 @@ public interface FriendService {
 	/**
 	 * 접속중 친구목록조회
 	 */
-	List<FriendDTO> friendSelectOnline(String playerNickname);
+	List<FriendDTO> friendSelectOnline(String playerNickname) throws Exception;
 	/**
 	 * 친구목록 전체 조회
 	 */
-	List<FriendDTO> friendSelect(String playerNickname);
+	List<FriendDTO> friendSelect(String playerNickname) throws Exception;
 	/**
 	 * 친구여부 체크
 	 */
-	boolean friendCheck(String playerNickname,String playerNickname2);
+	boolean friendCheck(String playerNickname,String playerNickname2) throws Exception;
 	/**
 	 * 친구신청
 	 */
-	FriendDTO friendAdd(String playerNickname,String playerNickname2);
+	FriendDTO friendAdd(String playerNickname,String playerNickname2) throws Exception;
 	/**
 	 * 친구삭제,거절
 	 */
-	boolean friendDel(int friendSq);
+	boolean friendDel(int friendSq) throws Exception;
 	/**
 	 * 친구수락
 	 */
-	boolean friendAccept(int friendSq);
+	boolean friendAccept(int friendSq) throws Exception;
 
 }

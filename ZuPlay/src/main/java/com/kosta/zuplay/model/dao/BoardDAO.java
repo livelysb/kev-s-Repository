@@ -6,15 +6,15 @@ import com.kosta.zuplay.model.dto.board.BoardCommentDTO;
 import com.kosta.zuplay.model.dto.board.BoardDTO;
 
 public interface BoardDAO {
-	int insertBoard(BoardDTO dto);
-	int updateBoard(BoardDTO dto);
-	BoardDTO selectDetail(int boardNo);
-	List<BoardDTO> selectAll();
-	int deleteBoard(String playerNickname, int boardNo);
-	String boardNicknameCheck(int boardNo);
-	String CommentNicknameCheck(int bcSq);
-	int insertComment(BoardCommentDTO dto);
-	int updateComment(BoardCommentDTO dto);
-	List<BoardCommentDTO> selectComment(int boardNo);
-	int deleteComment(int bcSq);
+	int insertBoard(BoardDTO dto) throws Exception;
+	int updateBoard(BoardDTO dto) throws Exception;
+	BoardDTO selectDetail(int boardNo) throws Exception;
+	List<BoardDTO> selectAll() throws Exception;
+	int deleteBoard(String playerNickname, int boardNo) throws Exception;
+	String boardNicknameCheck(int boardNo) throws Exception;
+	String CommentNicknameCheck(int bcSq) throws Exception;
+	int insertComment(BoardCommentDTO dto) throws Exception;
+	int updateComment(BoardCommentDTO dto) throws Exception;
+	List<BoardCommentDTO> selectComment(int boardNo) throws Exception;
+	int deleteComment(int bcSq) throws Exception;
 }

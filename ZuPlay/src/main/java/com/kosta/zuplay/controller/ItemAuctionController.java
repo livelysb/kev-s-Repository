@@ -27,12 +27,18 @@ public class ItemAuctionController {
 	 */
 	@RequestMapping(value="auctionSearch",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String auctionSearch(String keyword,String itemClass, int page){
+	public String auctionSearch(HttpSession session, String keyword,String itemClass, int page) throws Exception{
 		System.out.println(keyword);
 		System.out.println(itemClass);
 		System.out.println(page);
 		
-		List<ItemMarketDTO> list = itemAuctionServiceImpl.auctionSearch(keyword, itemClass, page);
+		List<ItemMarketDTO> list = null;
+		try {
+			list = itemAuctionServiceImpl.auctionSearch(keyword, itemClass, page);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 		Gson gson=new Gson();
 		String json =gson.toJson(list);
 		System.out.println(json);
@@ -47,9 +53,15 @@ public class ItemAuctionController {
 	 */
 	@RequestMapping(value="auctionBuy",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public int auctionBuy(HttpSession session,int imSq){
+	public int auctionBuy(HttpSession session,int imSq) throws Exception { 
 		String playerNickname=(String) session.getAttribute("playerNickname");
-		int result = itemAuctionServiceImpl.auctionBuy(playerNickname, imSq);
+		int result;
+		try {
+			result = itemAuctionServiceImpl.auctionBuy(playerNickname, imSq);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 		return result;
 	}
 	
@@ -62,9 +74,14 @@ public class ItemAuctionController {
 	 */
 	@RequestMapping(value="auctionSell",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public boolean auctionSell(HttpSession session,int piSq,int imPurchasePrice){
+	public boolean auctionSell(HttpSession session,int piSq,int imPurchasePrice) throws Exception{
 		String playerNickname=(String) session.getAttribute("playerNickname");
-		return itemAuctionServiceImpl.auctionSell(playerNickname, piSq, imPurchasePrice);
+		try {
+			return itemAuctionServiceImpl.auctionSell(playerNickname, piSq, imPurchasePrice);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	
 	/**
@@ -74,8 +91,13 @@ public class ItemAuctionController {
 	 */
 	@RequestMapping(value="auctionCancel",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public boolean auctionCancel(int imSq){
-		return itemAuctionServiceImpl.auctionCancel(imSq);
+	public boolean auctionCancel(HttpSession session, int imSq) throws Exception{
+		try {
+			return itemAuctionServiceImpl.auctionCancel(imSq);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	
 	/**
@@ -83,10 +105,15 @@ public class ItemAuctionController {
 	 */
 	@RequestMapping(value="auctionBring",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public boolean auctionBring(HttpSession session,int imSq){
+	public boolean auctionBring(HttpSession session, int imSq) throws Exception{
 		System.out.println("imSq : " + imSq);
 		String playerNickname=(String)session.getAttribute("playerNickname");
-		return itemAuctionServiceImpl.auctionBring(playerNickname, imSq);
+		try {
+			return itemAuctionServiceImpl.auctionBring(playerNickname, imSq);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	
 	/**
@@ -96,9 +123,15 @@ public class ItemAuctionController {
 	 */
 	@RequestMapping(value="auctionMyPage",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String auctionMyPage(HttpSession session){
+	public String auctionMyPage(HttpSession session) throws Exception{
 		String playerNickname=(String)session.getAttribute("playerNickname");
-		List<ItemMarketDTO> list = itemAuctionServiceImpl.auctionMyPage(playerNickname);
+		List<ItemMarketDTO> list = null;
+		try {
+			list = itemAuctionServiceImpl.auctionMyPage(playerNickname);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
 		return json;

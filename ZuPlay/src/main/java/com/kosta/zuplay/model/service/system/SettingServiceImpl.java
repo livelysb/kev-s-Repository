@@ -14,7 +14,7 @@ public class SettingServiceImpl implements SettingService {
 	private SqlSession sqlSession;
 
 	@Override
-	public boolean settingSave(SettingDTO dto) {
+	public boolean settingSave(SettingDTO dto) throws Exception {
 		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
 		int result = settingDAO.settingSave(dto);
 		if (result == 0) {
@@ -24,7 +24,7 @@ public class SettingServiceImpl implements SettingService {
 	}
 
 	@Override
-	public boolean settingReset(String playerNickname) {
+	public boolean settingReset(String playerNickname) throws Exception {
 		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
 		int result = settingDAO.settingReset(playerNickname);
 		if (result == 0) {
@@ -34,7 +34,7 @@ public class SettingServiceImpl implements SettingService {
 	}
 
 	@Override
-	public SettingDTO settingSelect(String playerNickname) {
+	public SettingDTO settingSelect(String playerNickname) throws Exception {
 		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
 		SettingDTO dto=settingDAO.settingSelect(playerNickname);
 		System.out.println(dto);

@@ -9,13 +9,13 @@ import com.kosta.zuplay.model.dto.board.BoardDTO;
 
 public interface BoardService {
 	
-	boolean insertBoard(BoardDTO dto);
-	boolean updateBoard(BoardDTO dto);
-	BoardDTO selectDetail(int boardNo);
-	List<BoardDTO> selectAll();
-	boolean deleteBoard(String playerNickname, int boardNo);
-	boolean insertComment(BoardCommentDTO dto);
-	boolean updateComment(BoardCommentDTO dto);
-	List<BoardCommentDTO> selectComment(int boardNo);
-	boolean deleteComment(String playerNickname,int bcSq);
+	boolean insertBoard(BoardDTO dto) throws Exception;
+	boolean updateBoard(BoardDTO dto) throws Exception;
+	BoardDTO selectDetail(int boardNo) throws Exception;
+	List<BoardDTO> selectAll() throws Exception;
+	boolean deleteBoard(String playerNickname, int boardNo) throws Exception;
+	boolean insertComment(BoardCommentDTO dto) throws Exception;
+	boolean updateComment(BoardCommentDTO dto) throws Exception;
+	List<BoardCommentDTO> selectComment(int boardNo) throws Exception;
+	boolean deleteComment(String playerNickname,int bcSq) throws Exception;
 }

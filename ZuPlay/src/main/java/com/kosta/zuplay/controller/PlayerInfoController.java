@@ -50,7 +50,7 @@ public class PlayerInfoController {
 			String json = gson.toJson(playerDTO);
 			return json;
 		} catch (Exception e) {
-			session.setAttribute("errorMsg", e.getMessage());
+			session.setAttribute("errorMsg", e.toString());
 			throw new Exception();
 		}
 	}

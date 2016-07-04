@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-	
-	@RequestMapping({"/", "index"})
-	public String index(HttpSession session){
+
+	@RequestMapping({ "/", "index" })
+	public String index(HttpSession session) {
 		return "index";
 	}
-	
+
 	@RequestMapping("{url}")
-	public void call(HttpSession session){
+	public void call(HttpSession session) {
 	}
 }

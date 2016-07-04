@@ -11,37 +11,37 @@ public interface ItemAuctionService {
 	 * @param itemClass : If you want to search for some parts
 	 * @param page : eight units in one page
 	 */
-	List<ItemMarketDTO> auctionSearch(String keyword,String itemClass,int page);
+	List<ItemMarketDTO> auctionSearch(String keyword,String itemClass,int page) throws Exception;
 	
 	/**
 	 * buy item in item auction
 	 * return int(1=success/2=not enough inventory/3=not enough Ruby/4=sold out item)
 	 */
-	int auctionBuy(String playerNickname,int imSq);
+	int auctionBuy(String playerNickname,int imSq) throws Exception;
 	
 	/**
 	 * sell item in item auction
 	 * return boolean(true=success/fail=fail)
 	 */
-	boolean auctionSell(String playerNickname,int piSq,int imPurchasePrice);
+	boolean auctionSell(String playerNickname,int piSq,int imPurchasePrice) throws Exception;
 	
 	/**
 	 * 경매장 경매 취소
 	 */
-	boolean auctionCancel(int imSq);
+	boolean auctionCancel(int imSq) throws Exception;
 	
 	/**
 	 * 경매장 유찰품/골드 수령									
 	 * @throws Exception 
 	 */
-	boolean auctionBring(String playerNickname,int imSq) ;
+	boolean auctionBring(String playerNickname,int imSq) throws Exception;
 	
 	/**
 	 * 내 경매 물품 가져오기
 	 */
-	List<ItemMarketDTO> auctionMyPage(String playerNickname);
+	List<ItemMarketDTO> auctionMyPage(String playerNickname) throws Exception;
 	/**
 	 * 경매종료 물품 종료 
 	 */
-	public void itemAuctionUpdate();
+	public void itemAuctionUpdate() throws Exception;
 }

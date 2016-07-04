@@ -19,7 +19,7 @@ public class BoardServiceImpl implements BoardService {
 	 * 게시글 삽입
 	 */
 	@Override
-	public boolean insertBoard(BoardDTO dto) {
+	public boolean insertBoard(BoardDTO dto) throws Exception {
 		BoardDAO dao = sqlSession.getMapper(BoardDAO.class);
 		int result = dao.insertBoard(dto);
 		if (result == 0) {
@@ -32,7 +32,7 @@ public class BoardServiceImpl implements BoardService {
 	 * 게시글 수정
 	 */
 	@Override
-	public boolean updateBoard(BoardDTO dto) {
+	public boolean updateBoard(BoardDTO dto) throws Exception {
 		BoardDAO dao = sqlSession.getMapper(BoardDAO.class);
 		String nicknameInDB = dao.boardNicknameCheck(dto.getBoardNo());
 		System.out.println("[ LOG ] : " + dto.getBoardNo() + " 번 게시글의 작성자 : " + nicknameInDB + " 서비스 요청자 : "
@@ -55,7 +55,7 @@ public class BoardServiceImpl implements BoardService {
 	 * 게시글 디테일 뷰
 	 */
 	@Override
-	public BoardDTO selectDetail(int boardNo) {
+	public BoardDTO selectDetail(int boardNo) throws Exception {
 		BoardDAO dao = sqlSession.getMapper(BoardDAO.class);
 		return dao.selectDetail(boardNo);
 	}
@@ -64,7 +64,7 @@ public class BoardServiceImpl implements BoardService {
 	 * 게시글 리스트 뷰
 	 */
 	@Override
-	public List<BoardDTO> selectAll() {
+	public List<BoardDTO> selectAll() throws Exception {
 		BoardDAO dao = sqlSession.getMapper(BoardDAO.class);
 		List<BoardDTO> list = dao.selectAll();
 		System.out.println(list);
@@ -75,7 +75,7 @@ public class BoardServiceImpl implements BoardService {
 	 * 게시글 삭제
 	 */
 	@Override
-	public boolean deleteBoard(String playerNickname, int boardNo) {
+	public boolean deleteBoard(String playerNickname, int boardNo) throws Exception {
 		BoardDAO dao = sqlSession.getMapper(BoardDAO.class);
 		String nicknameInDB = dao.boardNicknameCheck(boardNo);
 		System.out.println("[ LOG ] : " + boardNo + " 번 게시글의 작성자 : " + nicknameInDB + " 서비스 요청자 : " + playerNickname);
@@ -97,7 +97,7 @@ public class BoardServiceImpl implements BoardService {
 	 * 코멘트 삽입
 	 */
 	@Override
-	public boolean insertComment(BoardCommentDTO dto) {
+	public boolean insertComment(BoardCommentDTO dto) throws Exception {
 		BoardDAO dao = sqlSession.getMapper(BoardDAO.class);
 		int result = dao.insertComment(dto);
 		if (result == 0) {
@@ -110,7 +110,7 @@ public class BoardServiceImpl implements BoardService {
 	 * 코멘트 수정
 	 */
 	@Override
-	public boolean updateComment(BoardCommentDTO dto) {
+	public boolean updateComment(BoardCommentDTO dto) throws Exception {
 		BoardDAO dao = sqlSession.getMapper(BoardDAO.class);
 		String nicknameInDB = dao.CommentNicknameCheck(dto.getBcSq());
 		System.out.println(
@@ -134,7 +134,7 @@ public class BoardServiceImpl implements BoardService {
 	 * 코멘트 조회
 	 */
 	@Override
-	public List<BoardCommentDTO> selectComment(int boardNo) {
+	public List<BoardCommentDTO> selectComment(int boardNo) throws Exception {
 		BoardDAO dao = sqlSession.getMapper(BoardDAO.class);
 		return dao.selectComment(boardNo);
 	}
@@ -143,7 +143,7 @@ public class BoardServiceImpl implements BoardService {
 	 * 코멘트 삭제
 	 */
 	@Override
-	public boolean deleteComment(String playerNickname, int bcSq) {
+	public boolean deleteComment(String playerNickname, int bcSq) throws Exception {
 		BoardDAO dao = sqlSession.getMapper(BoardDAO.class);
 		String nicknameInDB=dao.CommentNicknameCheck(bcSq);
 		System.out.println("[ LOG ] : " + bcSq + " 번 댓글 작성자 : " + nicknameInDB + " 서비스 요청자 : " + playerNickname);

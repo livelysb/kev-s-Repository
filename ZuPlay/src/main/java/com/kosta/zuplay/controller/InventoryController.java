@@ -27,11 +27,17 @@ public class InventoryController {
 	 */
 	 @RequestMapping(value="playerItemSelectAll" ,produces="text/plain;charset=UTF-8" )
 	@ResponseBody
-	public String playerItemSelectAll(HttpSession session) {
+	public String playerItemSelectAll(HttpSession session) throws Exception{
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		System.out.println("playerNickname : " + playerNickname);
 
-		List<PlayerItemDTO> list = inventoryServiceImpl.playerItemSelectAll(playerNickname);
+		List<PlayerItemDTO> list;
+		try {
+			list = inventoryServiceImpl.playerItemSelectAll(playerNickname);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
 		System.out.println(json);
@@ -46,7 +52,7 @@ public class InventoryController {
 	 @SuppressWarnings("serial")
 	@RequestMapping(value="playerItemInsert" ,produces="text/plain;charset=UTF-8" )
 	@ResponseBody
-	public boolean playerItemInsert(HttpSession session, String itemParam) {
+	public boolean playerItemInsert(HttpSession session, String itemParam) throws Exception{
 		System.out.println(itemParam);
 		Gson gson = new Gson();
 		
@@ -57,6 +63,11 @@ public class InventoryController {
 			list.add(new PlayerItemDTO(jsonList.get(i).getPiSq(), playerNickname, jsonList.get(i).getItemCode(),
 					jsonList.get(i).getPiIsused(), jsonList.get(i).getPiIndex(), null));
 		}
-		return inventoryServiceImpl.playerItemInsert(list);
+		try {
+			return inventoryServiceImpl.playerItemInsert(list);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 }

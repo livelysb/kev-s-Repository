@@ -38,7 +38,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 *            : eight units in one page
 	 */
 	@Override
-	public List<ItemMarketDTO> auctionSearch(String keyword, String itemClass, int page) {
+	public List<ItemMarketDTO> auctionSearch(String keyword, String itemClass, int page) throws Exception {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		List<ItemMarketDTO> list=null;
 		Map<String, String> map = new HashMap<String, String>();
@@ -60,7 +60,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 */
 	@Override
 	@Transactional
-	public int auctionBuy(String playerNickname, int imSq) {
+	public int auctionBuy(String playerNickname, int imSq) throws Exception {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
@@ -108,7 +108,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 */
 	@Override
 	@Transactional
-	public boolean auctionSell(String playerNickname, int piSq, int imPurchasePrice) {
+	public boolean auctionSell(String playerNickname, int piSq, int imPurchasePrice) throws Exception {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
 		PlayerItemDTO playerItemDTO = playerItemDAO.bringItemInfoByPiSq(piSq);
@@ -134,7 +134,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 * 경매장 경매 취소
 	 */
 	@Override
-	public boolean auctionCancel(int imSq) {
+	public boolean auctionCancel(int imSq) throws Exception {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		int result = itemAuctionDAO.auctionCancel(imSq);
 		if (result == 0) {
@@ -148,7 +148,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 */
 	@Override
 	@Transactional
-	public boolean auctionBring(String playerNickname, int imSq)  {
+	public boolean auctionBring(String playerNickname, int imSq) throws Exception  {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
@@ -186,7 +186,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 * 내 경매 물품 가져오기
 	 */
 	@Override
-	public List<ItemMarketDTO> auctionMyPage(String playerNickname) {
+	public List<ItemMarketDTO> auctionMyPage(String playerNickname) throws Exception {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		return itemAuctionDAO.auctionMyPage(playerNickname);
 	}
@@ -194,7 +194,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	@Override
 	@Scheduled(cron = "00 00 12 * * *")
 	@Transactional
-	public void itemAuctionUpdate() {
+	public void itemAuctionUpdate() throws Exception {
 		System.out.println("아이템 경매장 목록 업데이트 시작");
 		ItemAuctionDAO itemAuctionDAO=sqlSession.getMapper(ItemAuctionDAO.class);
 		List<ItemMarketDTO> list = itemAuctionDAO.auctionSelectBidTime();

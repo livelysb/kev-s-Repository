@@ -5,7 +5,7 @@ import java.util.List;
 import com.kosta.zuplay.model.dto.item.ItemDTO;
 
 public interface ItemStoreService {
-	List<ItemDTO> itemStoreSelect(String playerNickname,String itemClass,int page);
-	int itemStoreBuy(String playerNickname,ItemDTO itemDTO, int quantity);
-	boolean itemStoreSell(String playerNickname,int piSq,String itemCode);
+	List<ItemDTO> itemStoreSelect(String playerNickname,String itemClass,int page) throws Exception;
+	int itemStoreBuy(String playerNickname,ItemDTO itemDTO, int quantity) throws Exception;
+	boolean itemStoreSell(String playerNickname,int piSq,String itemCode) throws Exception;
 }

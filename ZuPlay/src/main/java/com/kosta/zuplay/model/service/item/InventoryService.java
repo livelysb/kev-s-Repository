@@ -5,6 +5,6 @@ import java.util.List;
 import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 
 public interface InventoryService {
-	List<PlayerItemDTO> playerItemSelectAll(String playerNickname);
-	boolean playerItemInsert(List<PlayerItemDTO> list);
+	List<PlayerItemDTO> playerItemSelectAll(String playerNickname) throws Exception;
+	boolean playerItemInsert(List<PlayerItemDTO> list) throws Exception;
 }

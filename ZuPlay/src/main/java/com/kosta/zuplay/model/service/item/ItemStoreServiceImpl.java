@@ -26,7 +26,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 	private UtilService utilServiceImpl;
 
 	@Override
-	public List<ItemDTO> itemStoreSelect(String playerNickname, String itemClass, int page) {
+	public List<ItemDTO> itemStoreSelect(String playerNickname, String itemClass, int page) throws Exception {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		LoginDAO loginDAO = sqlSession.getMapper(LoginDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
@@ -56,7 +56,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 	 */
 	@Override
 	@Transactional
-	public int itemStoreBuy(String playerNickname, ItemDTO itemDTO, int quantity) {
+	public int itemStoreBuy(String playerNickname, ItemDTO itemDTO, int quantity) throws Exception {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
@@ -95,7 +95,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 
 	@Override
 	@Transactional
-	public boolean itemStoreSell(String playerNickname, int piSq, String itemCode) {
+	public boolean itemStoreSell(String playerNickname, int piSq, String itemCode) throws Exception {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);

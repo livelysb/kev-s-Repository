@@ -166,6 +166,16 @@ $(function(){
           $("#inven-items td").on("sortreceive",function(e,ui){
               if($(this).children().length>=2){
                  $(ui.sender).sortable("cancel");
+              }else{
+            	  var jsonList = passingJson();
+                  $.ajax({
+                      url:"playerItemInsert", 
+                      type:"post",
+                      data:"itemParam="+(JSON.stringify(jsonList)).toString() ,
+                      error:function(err){
+                         alert(err+"에러발생");
+                      }
+                   })
               }
           });
           
@@ -242,9 +252,8 @@ $(function(){
           
           
           //내 아이템 인덱스 저장
-          $("#inven-player-saveBtn").on("click",function(){
+          /*$("#inven-player-saveBtn").on("click",function(){
              var jsonList = passingJson();
-             console.log(JSON.stringify(jsonList));
              $.ajax({
                  url:"playerItemInsert", 
                  type:"post",
@@ -256,7 +265,7 @@ $(function(){
                     alert(err+"에러발생");
                  }
               })
-          })
+          })*/
           
           $("#inven-Window").jqxWindow({
                minWidth:600,

@@ -88,10 +88,8 @@ public class EarningRateServiceImpl implements EarningRateService {
 	 * */
 	@Override
 	public double calEarningRate(String playerNickname) throws Exception {
-		System.out.println("cal");
 		int startMoney = 100000000;
 		int currentMoney = playerInfoService.getTotalMoney(playerNickname);
-		System.out.println("startMoney = "+startMoney+", currentMoney = " + currentMoney);
 		int rate = (int)((currentMoney - startMoney) / (double)(startMoney) * 100000000);
 		return rate /100000000.0;
 	}

@@ -48,5 +48,5 @@ public interface PlayerInfoDAO {
 	/**
 	 * 수익률 업데이트 
 	 * */
-	int earningRateUpdate(Map<String, String> map) throws Exception;
+	int rankUpdate(Map<String, String> map) throws Exception;
 }

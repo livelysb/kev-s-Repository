@@ -39,7 +39,7 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 		PlayerDTO playerDTO = playerInfoDAO.getPlayer(playerNickname);
 		System.out.println(playerDTO.getPlayerLastAccess());
 		playerDTO.setEarningRate(earningRate.calEarningRate(playerNickname)); // 전체
-																				// 수익률
+		playerDTO.setTotalMoney(getTotalMoney(playerNickname));																// 수익률
 		System.out.println(playerDTO.getEarningRate());
 		return playerDTO;
 	}

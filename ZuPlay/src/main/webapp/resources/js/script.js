@@ -185,6 +185,7 @@ $(function(){
           
           //옮겼을 때 반응
           $("#inven-items td").on("sortreceive",function(e,ui){
+        	 
               if($(this).children().length>=2){
                  $(ui.sender).sortable("cancel");
               }else{
@@ -210,7 +211,11 @@ $(function(){
               updatePI(updateAvatar);
           })
           
-          
+          //인벤토리 판매
+        	  $("#inven-items td").contextmenu(function() {
+        		  alert( "Handler for .contextmenu() called." );
+        		  return false;
+        	  });
           
           var playerItemUpdate = function(){
         	  var jsonList = passingJson();
@@ -490,8 +495,8 @@ $(function(){
     		    })
     		})
     	  $("#store-window").jqxWindow({
-	          width:614.3,
-	          height:380,
+	          width:640,
+	          height:390,
 	          resizable:true,
 	          showCollapseButton: true,
 	          autoOpen:false,

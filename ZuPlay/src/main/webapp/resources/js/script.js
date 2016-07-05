@@ -193,7 +193,7 @@ $(function(){
           
           
           //내아이템 목록 조회
-          var playerItemSelectAll = function(){
+          playerItemSelectAll = function(){
 	          $.ajax({
 	             url:"playerItemSelectAll",
 	             type:"post",

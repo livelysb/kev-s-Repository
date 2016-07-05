@@ -19,7 +19,7 @@
 
 	<body>
   <!-- 컨테이너 시작 -->
-  <div class="container-fluid test">
+  <div class="container-fluid main-container test">
     <div class="row-fluid">
 
       <!-- 사이드 섹션 시작 -->
@@ -64,7 +64,7 @@
         <div class="row-fluid footer-section">
 
           <!-- 채팅 영역 시작 -->
-          <div class="col-md-5 chat-area">
+          <div class="col-md-5 chat-area">	
             Chat Area
           </div>
           <!-- 채팅 영역 종료 -->

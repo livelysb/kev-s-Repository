@@ -27,7 +27,7 @@
 			<beans:props>
 			
 				<beans:prop key="java.lang.reflect.UndeclaredThrowableException">
-					Login
+					redirect:Login
 				</beans:prop>
 				
 				 <beans:prop key="java.lang.Exception">

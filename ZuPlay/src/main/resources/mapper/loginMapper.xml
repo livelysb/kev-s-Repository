@@ -20,7 +20,7 @@
 	</select>
 
 	<insert id="joinMember" parameterType="playerDTO">
-		insert into player(player_Nickname,player_Naver_Id,player_Gender,player_age,player_Money,player_premoney,player_Ruby,player_Grade,player_last_access,player_Daily_Rank,player_Weekly_Rank,player_Season_Rank,player_Total_Rank) values 
+		insert into player(player_Nickname,player_Naver_Id,player_Gender,player_age,player_Money,player_premoney,player_Ruby,player_Grade,player_last_access,player_Daily_Rank,player_Season_Rank) values 
 		(#{playerNickname},#{playerNaverId},#{playerGender},#{playerAge},#{playerMoney},#{playerPreMoney},#{playerRuby},#{playerGrade},sysdate,#{playerDailyRank},#{playerSeasonRank})
 	</insert>
 	

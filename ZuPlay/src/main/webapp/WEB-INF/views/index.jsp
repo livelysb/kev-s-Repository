@@ -28,7 +28,7 @@
         <div class="side-id">
           <label>${playerNickname}</label>
         </div>
-        <div class="side-avatar">
+        <div class="side-avatar" >
           <img src="resources/img/avatar/clothes/a_clothes_01.png" id="avatar-clothes">
           <img src="resources/img/avatar/hair/a_hair_01.png" id="avatar-hair">
           <img src="resources/img/avatar/eyes/a_eyes_01.png" id="avatar-eyes">
@@ -46,7 +46,7 @@
         <!-- 메인 영역 시작 -->
         <div class="row-fluid main-row">
           <div class="col-md-12 main-area">
-              <!-- TEST -->
+         <!-- TEST -->
          <input type="hidden" value="${playerNickname}" id="friend-add-test">
          
          <jsp:include page="realTimeListWindow.jsp"/>
@@ -55,7 +55,7 @@
          <jsp:include page="storeWindow.jsp" />
          <jsp:include page="FriendBook.jsp"/>
          <jsp:include page="inventory.jsp" />
-         
+         <jsp:include page="userInfo.jsp" />
           </div>
         </div>
         <!-- 메인 영역 종료 -->
@@ -131,10 +131,7 @@
 <script src="resources/js/script.js"></script>
       <script type="text/javascript">
         $(function() {
-          $(".side-avatar").css({
-            width : $("#avatar-clothes").css("width"),
-            height : $("#avatar-clothes").css("height")
-          });
+
         });
       </script>
 </html>

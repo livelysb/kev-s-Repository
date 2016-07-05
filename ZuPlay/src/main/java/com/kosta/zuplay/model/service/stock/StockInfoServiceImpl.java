@@ -8,9 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kosta.zuplay.model.dao.PlayerInfoDAO;
 import com.kosta.zuplay.model.dao.stock.PlayerStockDAO;
 import com.kosta.zuplay.model.dao.stock.StockInfoDAO;
+import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
 import com.kosta.zuplay.model.dto.stock.ListsDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
 import com.kosta.zuplay.model.dto.stock.PriceDTO;
@@ -87,7 +87,12 @@ public class StockInfoServiceImpl implements StockInfoService {
 			}
 			
 			//플레이어가 가진 해당 주식 수량
-			masterDTO.setPlQuantity(playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity()); 
+			PlayerListsDTO playerListsDTO = playerStockService.getPlayerStock(playerNickname, isuCd);
+			if(playerListsDTO == null) 
+				masterDTO.setPlQuantity(0);
+			else 
+				masterDTO.setPlQuantity(playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity());
+			
 			return masterDTO;
 		} catch (Exception e) {
 			e.printStackTrace();

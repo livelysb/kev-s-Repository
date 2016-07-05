@@ -68,6 +68,10 @@ public class PlayerInfoController {
 		ModelAndView mv = new ModelAndView("userInfo");
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		PlayerDTO playerDTO = playerInfoService.getPlayer(playerNickname);
+		if(playerDTO.getPlayerGender().equals("M"))
+			playerDTO.setPlayerGender("남성");
+		else
+			playerDTO.setPlayerGender("여성");
 		List<PlayerItemDTO> playerItemList = inventoryService.playerItemSelectAll(playerNickname);
 		mv.addObject("playerDTO", playerDTO);
 		mv.addObject("playerItemList", playerItemList);

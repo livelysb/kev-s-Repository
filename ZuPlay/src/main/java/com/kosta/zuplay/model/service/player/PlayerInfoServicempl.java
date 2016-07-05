@@ -38,7 +38,6 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 
 	@Override
 	public PlayerDTO getPlayer(String playerNickname) throws Exception{
-		System.out.println("플레이어 닉네임 : " + playerNickname);
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		PlayerDTO playerDTO = playerInfoDAO.getPlayer(playerNickname);
 		

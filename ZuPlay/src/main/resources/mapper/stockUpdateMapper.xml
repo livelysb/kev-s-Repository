@@ -38,6 +38,20 @@
 	</delete>
 	
 	<update id="masterUpdate" parameterType="masterDTO">
+	
+		update master set
+
+		prevddAccTrdvol = #{prevddAccTrdvol},
+		prevddAccTrdval = #{prevddAccTrdval},
+		uplmtprc = #{uplmtprc},
+		lwlmtprc = #{lwlmtprc},
+		parval = #{parval},
+		listShrs = #{listShrs},
+		
+		where isuCd=#{isuCd}
+		
+		<!--
+		머지
 		merge into master
 		using
 		dual
@@ -45,64 +59,25 @@
 		when matched then
 		update
 		set
-		isuSrtCd =
-		#{isuSrtCd},
+		isuSrtCd = #{isuSrtCd},
 		isuKorAbbrv = #{isuKorAbbrv},
-		govncExcelYn=
-		#{govncExcelYn},
+		govncExcelYn = #{govncExcelYn},
 		haltYn = #{haltYn},
 		mktcapScaleCd = #{mktcapScaleCd},
 		mfindYn = #{mfindYn},
-		krxAutosSectidxYn = #{krxAutosSectidxYn},
-		krxSemiconSectidxYn = #{krxSemiconSectidxYn},
-		krxBioSectidxYn =
-		#{krxBioSectidxYn},
-		krxFncSectidxYn = #{krxFncSectidxYn},
-		krxInfoCommSectidxYn = #{krxInfoCommSectidxYn},
-		krxEnergyChemSectidxYn
-		= #{krxEnergyChemSectidxYn},
-		krxSteelSectidxYn = #{krxSteelSectidxYn},
-		krxConsgoodSectidxYn = #{krxConsgoodSectidxYn},
-		krxMediaCommSectidxYn =
-		#{krxMediaCommSectidxYn},
-		krxConstrSectidxYn = #{krxConstrSectidxYn},
-		krxFncSvcSectidxYn = #{krxFncSvcSectidxYn},
-		krxSecuSectidxYn =
-		#{krxSecuSectidxYn},
-		krxShipSectidxYn = #{krxShipSectidxYn},
 		prevddAccTrdvol = #{prevddAccTrdvol},
-		prevddAccTrdval =
-		#{prevddAccTrdval},
+		prevddAccTrdval = #{prevddAccTrdval},
 		uplmtprc = #{uplmtprc},
 		lwlmtprc = #{lwlmtprc},
 		parval = #{parval},
 		listShrs = #{listShrs},
-		krxInsuSectidxYn =
-		#{krxInsuSectidxYn},
-		krxTransSectidxYn = #{krxTransSectidxYn},
-		krxRetailSectidxYn = #{krxRetailSectidxYn},
-		krxLeisureSectidxYn =
-		#{krxLeisureSectidxYn}
-
+		kind = #{kind}
 		when not matched then
 		insert(isuCd, isuSrtCd
 		,isuKorAbbrv ,govncExcelYn ,haltYn ,mktcapScaleCd ,mfindYn
-		,krxAutosSectidxYn ,krxSemiconSectidxYn
-		,krxBioSectidxYn
-		,krxFncSectidxYn ,
-		krxInfoCommSectidxYn
-		,krxEnergyChemSectidxYn
-		,krxSteelSectidxYn ,krxConsgoodSectidxYn
-		,krxMediaCommSectidxYn
-		,krxConstrSectidxYn ,
-		krxFncSvcSectidxYn
-		,krxSecuSectidxYn
-		,krxShipSectidxYn ,prevddAccTrdvol ,prevddAccTrdval
+		,prevddAccTrdvol ,prevddAccTrdval
 		,uplmtprc ,lwlmtprc
-		,
-		parval ,listShrs ,krxInsuSectidxYn
-		,krxTransSectidxYn
-		,krxRetailSectidxYn ,krxLeisureSectidxYn)
+		,parval ,listShrs , kind)
 		values(
 		#{isuCd},
 		#{isuSrtCd},
@@ -111,29 +86,13 @@
 		#{haltYn},
 		#{mktcapScaleCd},
 		#{mfindYn},
-		#{krxAutosSectidxYn},
-		#{krxSemiconSectidxYn},
-		#{krxBioSectidxYn},
-		#{krxFncSectidxYn},
-		#{krxInfoCommSectidxYn},
-		#{krxEnergyChemSectidxYn},
-		#{krxSteelSectidxYn},
-		#{krxConsgoodSectidxYn},
-		#{krxMediaCommSectidxYn},
-		#{krxConstrSectidxYn},
-		#{krxFncSvcSectidxYn},
-		#{krxSecuSectidxYn},
-		#{krxShipSectidxYn},
 		#{prevddAccTrdvol},
 		#{prevddAccTrdval},
 		#{uplmtprc},
 		#{lwlmtprc},
 		#{parval},
 		#{listShrs},
-		#{krxInsuSectidxYn},
-		#{krxTransSectidxYn},
-		#{krxRetailSectidxYn},
-		#{krxLeisureSectidxYn})
+		#{kind}) -->
 	</update>
 	
 	<insert id="dailyPriceInsert" parameterType="priceDTO">

@@ -6,7 +6,6 @@
 		<id column="pi_sq" property="piSq" />
 		<result column="player_nickname" property="playerNickname" />
 		<result column="item_code" property="itemCode" />
-		<result column="pi_isused" property="piIsused" />
 		<result column="pi_index" property="piIndex" />
 		<association property="itemDTO" javaType="itemDTO">
 			<id column="item_code" property="itemCode" />
@@ -33,7 +32,7 @@
 	<insert id="auctionInsertPlayerItem" parameterType="playerItemDTO">
 		insert into
 		player_item values
-		(pi_sq.nextval,#{playerNickname},#{itemCode},'F',#{piIndex})
+		(pi_sq.nextval,#{playerNickname},#{itemCode},#{piIndex})
 	</insert>
 	<select id="bringItemInfoByPiSq" parameterType="int"
 		resultMap="playerItemMapper">
@@ -49,7 +48,7 @@
 
 	<insert id="itemStoreBuy" parameterType="java.util.Map">
 		insert into player_item
-		values(pi_sq.nextval,#{playerNickname},#{itemCode},'F',#{piIndex})
+		values(pi_sq.nextval,#{playerNickname},#{itemCode},#{piIndex})
 	</insert>
 	<delete id="itemDelete" parameterType="int">
 		delete player_item where

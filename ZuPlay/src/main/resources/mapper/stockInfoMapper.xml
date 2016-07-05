@@ -6,6 +6,7 @@
 	<resultMap type="masterDTO" id="master">
 		<id column="isuCd" property="isuCd"/>
 		<result column="isuKorAbbrv" property="isuKorAbbrv" />
+		<result column="kind" property="kind"/>
 		<association property="priceDTO" javaType="priceDTO">
 			<result column="cmpprevddPrc" property="cmpprevddPrc" />
 			<result column="trdPrc" property="trdPrc" />
@@ -13,6 +14,7 @@
 			<result column="opnprc" property="opnprc" />
 			<result column="hgprc" property="hgprc" />
 			<result column="lwprc" property="lwprc" />
+			
 		</association>
 	</resultMap>
 	
@@ -22,6 +24,7 @@
 		<result column="listShrs" property="listShrs" />
 		<result column="uplmtprc" property="uplmtprc" />
 		<result column="lwlmtprc" property="lwlmtprc" />
+		<result column="kind" property="kind"/>
 		<association property="priceDTO" javaType="priceDTO">
 			<result column="cmpprevddPrc" property="cmpprevddPrc" />
 			<result column="trdPrc" property="trdPrc" />
@@ -59,7 +62,7 @@
 		resultMap="master">
 		
 		select * from ( SELECT * FROM (          
-    SELECT ROW_NUMBER() OVER(ORDER BY  prevddAccTrdvol desc) rnum, isuCd, isuKorAbbrv, prevddAccTrdvol
+    SELECT ROW_NUMBER() OVER(ORDER BY  prevddAccTrdvol desc) rnum, isuCd, isuKorAbbrv, prevddAccTrdvol, kind
     FROM master
 <where>
 		<if test="isuKorAbbrv!='undefined'">
@@ -77,7 +80,7 @@
 	
 	<select id="getStock" parameterType="String" resultMap="master2">
 	select * from 
-	(select isuKorAbbrv, isuCd, listShrs, uplmtprc, lwlmtprc from master where isucd = #{value}) 
+	(select isuKorAbbrv, isuCd, listShrs, uplmtprc, lwlmtprc, kind from master where isucd = #{value}) 
 	m join price p on m.isucd = p.isucd
 	</select>
 	

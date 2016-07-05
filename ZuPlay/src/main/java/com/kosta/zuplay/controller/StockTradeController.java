@@ -32,7 +32,13 @@ public class StockTradeController {
 	@ResponseBody
 	public boolean sellStock(HttpSession session, String isuCd, int plQuantity) throws Exception {
 		String playerNickname = (String)session.getAttribute("playerNickname");
-		return false;
+		try {
+			return stockTradeService.sellStock(playerNickname, isuCd, plQuantity);
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMsg", e.toString());
+			throw new Exception();
+		}
 	}
 	
 }

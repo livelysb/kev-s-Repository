@@ -35,6 +35,7 @@ public class LoginController {
 			firstLogin = loginServiceImpl.firstLoginCheck(playerNaverId);
 			if (firstLogin == false) {
 				session.setAttribute("playerNickname", loginServiceImpl.getNickname(playerNaverId));
+				
 			}
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());

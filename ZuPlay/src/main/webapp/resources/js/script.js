@@ -167,15 +167,7 @@ $(function(){
               if($(this).children().length>=2){
                  $(ui.sender).sortable("cancel");
               }else{
-            	  var jsonList = passingJson();
-                  $.ajax({
-                      url:"playerItemInsert", 
-                      type:"post",
-                      data:"itemParam="+(JSON.stringify(jsonList)).toString() ,
-                      error:function(err){
-                         alert(err+"에러발생");
-                      }
-                   })
+            	  playerItemUpdate()
               }
           });
           
@@ -184,10 +176,26 @@ $(function(){
               if($(this).children().length>=2){
                  $(ui.sender).sortable("cancel");
                  return;
+              }else{
+            	  console.log($(ui.sender).children().attr("src"))
+            	  playerItemUpdate()
               }
               updatePI(updateAvatar);;
           })
           
+          
+          
+          var playerItemUpdate = function(){
+        	  var jsonList = passingJson();
+              $.ajax({
+                  url:"playerItemInsert", 
+                  type:"post",
+                  data:"itemParam="+(JSON.stringify(jsonList)).toString() ,
+                  error:function(err){
+                     alert(err+"에러발생");
+                  }
+               })
+          }
           
           var updateAvatar = function(){
              for(var i=1; i<=6; i++){
@@ -245,27 +253,9 @@ $(function(){
                   jsonArr.push(jsonObj)
                }
             }
-            console.log(jsonArr);
             return jsonArr;
             
           }
-          
-          
-          //내 아이템 인덱스 저장
-          /*$("#inven-player-saveBtn").on("click",function(){
-             var jsonList = passingJson();
-             $.ajax({
-                 url:"playerItemInsert", 
-                 type:"post",
-                 data:"itemParam="+(JSON.stringify(jsonList)).toString() ,
-                 success:function(data){
-                    alert("정상실행")
-                 },
-                 error:function(err){
-                    alert(err+"에러발생");
-                 }
-              })
-          })*/
           
           $("#inven-Window").jqxWindow({
                minWidth:600,

@@ -37,18 +37,22 @@
 	</insert>
 	<select id="bringItemInfoByPiSq" parameterType="int"
 		resultMap="playerItemMapper">
-		select * from player_item p join item i on p.item_code=i.item_code where
+		select * from player_item p join item i on
+		p.item_code=i.item_code where
 		pi_sq=#{value}
 	</select>
-	
+
 	<select id="getItemIndex" parameterType="String" resultType="int">
-		select pi_index from player_item where player_nickname=#{playerNickname} order by pi_index
+		select pi_index from player_item where
+		player_nickname=#{playerNickname} and pi_index>10 order by pi_index
 	</select>
-	
+
 	<insert id="itemStoreBuy" parameterType="java.util.Map">
-		insert into player_item values(pi_sq.nextval,#{playerNickname},#{itemCode},'F',#{piIndex})
+		insert into player_item
+		values(pi_sq.nextval,#{playerNickname},#{itemCode},'F',#{piIndex})
 	</insert>
 	<delete id="itemDelete" parameterType="int">
-		delete player_item where pi_sq=#{piSq}
+		delete player_item where
+		pi_sq=#{piSq}
 	</delete>
 </mapper>

@@ -59,7 +59,7 @@ public class LoginController {
 			HttpSession session) throws Exception{
 		try {
 			loginServiceImpl.joinMember(new PlayerDTO(playerNickname, playerNaverId, playerGender, playerAge, 100000000,
-					100000000, 1000, "B", 0, 0, 0, 0));
+					100000000, 1000, "B", 0, 0));
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
 			e.printStackTrace();

@@ -55,7 +55,9 @@
          <jsp:include page="storeWindow.jsp" />
          <jsp:include page="FriendBook.jsp"/>
          <jsp:include page="inventory.jsp" />
-         <jsp:include page="userInfo.jsp" />
+         <!-- ///////////////////////////////////////////////// -->
+         <jsp:include page="auctionWindow.jsp"/>
+         <!-- ///////////////////////////////////////////////// -->
           </div>
         </div>
         <!-- 메인 영역 종료 -->
@@ -82,6 +84,10 @@
 				   <button id="store-btn">상점</button>
 				   <button id="friend-btn">친구</button>
 				   <button id="financial-btn">용어사전</button>
+				   <!-- ///////////////////////////////////////////////// -->
+				   <button id="auction-btn">경매장</button>
+				   <button id="myinfo-btn">내 정보</button>
+				   <!-- ///////////////////////////////////////////////// -->
               </div>
             </div>
             <!-- 버튼 영역 종료 -->

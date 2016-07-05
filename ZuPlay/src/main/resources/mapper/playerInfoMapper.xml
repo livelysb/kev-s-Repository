@@ -14,9 +14,7 @@
 		<result column="PLAYER_GRADE" property="playerGrade" />
 		<result column="PLAYER_LAST_ACCESS" property="playerLastAccess"/>
 		<result column="PLAYER_DAILY_RANK" property="playerDailyRank" />
-		<result column="PLAYER_WEEKLY_RANK" property="playerWeeklyRank" />
 		<result column="PLAYER_SEASON_RANK" property="playerSeasonRank" />
-		<result column="PLAYER_TOTAL_RANK" property="playerTotalRank" />
 		<association property="playerItemDTO" javaType="playerItemDTO">
 			<id column="pi_sq" property="piSq" />
 			<result column="player_nickname" property="playerNickname" />

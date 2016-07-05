@@ -13,9 +13,7 @@
 	<result column="player_Grade" property="playerGrade"/>
 	<result column="PLAYER_LASTACCESS" property="playerLastAccess"/>
 	<result column="player_Daily_Rank" property="playerDailyRank"/>
-	<result column="player_Weekly_Rank" property="playerWeeklyRank"/>
 	<result column="player_Season_Rank" property="playerSeasonRank"/>
-	<result column="player_Total_Rank" property="playerTotalRank"/>	
 </resultMap>
 	<select id="firstLoginCheck" resultMap="firstLoginCheckMap" parameterType="String">
 		select * from player where player_Naver_Id=#{playerNaverId}
@@ -23,7 +21,7 @@
 
 	<insert id="joinMember" parameterType="playerDTO">
 		insert into player(player_Nickname,player_Naver_Id,player_Gender,player_age,player_Money,player_premoney,player_Ruby,player_Grade,player_last_access,player_Daily_Rank,player_Weekly_Rank,player_Season_Rank,player_Total_Rank) values 
-		(#{playerNickname},#{playerNaverId},#{playerGender},#{playerAge},#{playerMoney},#{playerPreMoney},#{playerRuby},#{playerGrade},sysdate,#{playerDailyRank},#{playerWeeklyRank},#{playerSeasonRank},#{playerTotalRank})
+		(#{playerNickname},#{playerNaverId},#{playerGender},#{playerAge},#{playerMoney},#{playerPreMoney},#{playerRuby},#{playerGrade},sysdate,#{playerDailyRank},#{playerSeasonRank})
 	</insert>
 	
 	<select id="checkRepetiton" parameterType="String" resultType="String">

@@ -43,6 +43,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		System.out.println(map);
 		List<ItemDTO> list = new ArrayList<ItemDTO>();
 			if(itemClass.equals("all")){
+				list.clear();
 				list=itemStoreDAO.itemStoreSelectAll(map);
 			}else{
 				list=itemStoreDAO.itemStoreSelect(map);

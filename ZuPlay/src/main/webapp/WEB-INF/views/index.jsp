@@ -90,7 +90,6 @@
 					<td id="inven-player-30"></td>
 				</tr>
 			</table>
-			<button type="button" id="inven-player-saveBtn">저장</button>
 		</div>
 	</div>
 	<%-- 

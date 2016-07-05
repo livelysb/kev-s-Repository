@@ -71,7 +71,16 @@ public class PlayerInfoController {
 		List<PlayerItemDTO> playerItemList = inventoryService.playerItemSelectAll(playerNickname);
 		mv.addObject("playerDTO", playerDTO);
 		mv.addObject("playerItemList", playerItemList);
-		//mv.addObject("isOn", (context.getAttribute(playerNickname))
+		
+		if(playerDTO.getLikerList().contains(playerNickname)) {
+			mv.addObject("isLike", "true");
+		}else {
+			mv.addObject("isLike","false");
+		}
+		
+		mv.addObject("likeNum",playerDTO.getLikerList().size());
+		//mv.addObject("isOn", (context.getAttribute(playerNickname));
+		
 		
 		return mv;
 	}

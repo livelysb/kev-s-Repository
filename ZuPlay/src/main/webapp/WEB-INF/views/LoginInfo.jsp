@@ -89,7 +89,7 @@
     				if(result=="true"){
     					$("#nickModal").modal("show");
     				}else{
-    					location.href="index";
+    					location.href="redirect:index";
     				}
     			} ,
     			error:function(err){

@@ -35,9 +35,6 @@ public class LoginController {
 			firstLogin = loginServiceImpl.firstLoginCheck(playerNaverId);
 			if (firstLogin == false) {
 				session.setAttribute("playerNickname", loginServiceImpl.getNickname(playerNaverId));
-				//현재시간 최종접속시간 확인
-				System.out.println();
-				
 			}
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());

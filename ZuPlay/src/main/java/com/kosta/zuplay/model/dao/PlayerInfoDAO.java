@@ -49,4 +49,9 @@ public interface PlayerInfoDAO {
 	 * 수익률 업데이트 
 	 * */
 	int rankUpdate(Map<String, String> map) throws Exception;
+	
+	/**
+	 * 최종접속일 업데이트
+	 * */
+	int lastAccessUpdate(String playerNickname) throws Exception;
 }

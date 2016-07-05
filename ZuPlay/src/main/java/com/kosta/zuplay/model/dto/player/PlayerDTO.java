@@ -17,7 +17,10 @@ public class PlayerDTO {
 	private int playerDailyRank;	//일간랭킹
 	private int playerSeasonRank;	//시즌랭킹
 	
-	private int totalMoney;
+	private boolean todayFirst;
+
+
+	private int totalMoney; //총 자산
 	private double earningRate; //수익률
 	private PlayerItemDTO playerItemDTO;
 	
@@ -128,6 +131,14 @@ public class PlayerDTO {
 
 	public void setPlayerItemDTO(PlayerItemDTO playerItemDTO) {
 		this.playerItemDTO = playerItemDTO;
+	}
+	
+	public boolean isTodayFirst() {
+		return todayFirst;
+	}
+
+	public void setTodayFirst(boolean todayFirst) {
+		this.todayFirst = todayFirst;
 	}
 
 	

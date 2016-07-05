@@ -84,4 +84,10 @@
 		${kind}=#{rank}
 		where player_nickname=#{playerNickname}
 	</update>
+	
+	<update id="lastAccessUpdate" parameterType="String">
+		update player set
+		PLAYER_LAST_ACCESS = sysdate
+		where player_nickname=#{value}
+	</update>
 </mapper>

@@ -1,6 +1,29 @@
 $(function(){
-   
-   
+	
+	var updatePI = function(callBack){
+		$.ajax({
+			url:"updatePI",
+			dataType:"json",
+			success:function(data){
+				userInfo.nickName=data.playerNickname
+				userInfo.gender =data.playerGender
+				userInfo.money =data.playerMoney
+				userInfo.ruby =data.playerRuby
+				userInfo.grade=data.playerGrade
+				userInfo.dailyRank=data.playerDailyRank
+				userInfo.seasonRank=data.playerSeasonRank
+				if(callBack)
+					callBack();
+				//userInfo.friends =data.
+				//userInfo.theme =data.
+			},
+			error:function(){
+				
+			}
+		})
+	}
+	
+	updatePI();
    /*버튼클릭했을 때 이벤트 설정*/
    $.fn.setBtn = function(window){
       $(this).on("click",function(){
@@ -140,8 +163,9 @@ $(function(){
                  $(ui.sender).sortable("cancel");
                  return;
               }
-              updateAvatar();
+              updatePI(updateAvatar);;
           })
+          
           
           var updateAvatar = function(){
              for(var i=1; i<=6; i++){
@@ -149,7 +173,12 @@ $(function(){
                 var partSrc = $("#inven-player-"+i+">.item-img").attr("src");
                 
                 if(partSrc === "" || typeof(partSrc) === "undefined"){
-                   $("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/m_"+setting.parts[i-1]+"_00.png");
+                	if(i<=2){ 
+                		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/"+(userInfo.gender).toLowerCase()+"_"+setting.parts[i-1]+"_00.png");
+                	}else if(i<=4){
+                		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/a_"+setting.parts[i-1]+"_00.png");
+                	}
+                	
                 }else{
                    $("#inven-player-"+setting.parts[i-1]).attr("src", partSrc);
                 }
@@ -220,7 +249,7 @@ $(function(){
                theme : userInfo.theme
              });
           
-          updateAvatar();
+          updatePI(updateAvatar);
 
       }
       
@@ -366,9 +395,9 @@ $(function(){
     						$('.nav-tabs a[href="#store-tab-' + next + '"]').tab('show');
     						return;
     					}else{
-    						
     						count=page;
-    						$(".tab-content div img").remove();
+    						
+    						$(".store-itemBox").empty();
     						$.each(data, function(index, item){
     							$("#store-item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:100%;' id='"+item.itemCode+"'/>");  
     							$("#store-item"+itemClass+""+index+" img").jqxTooltip({ content: item.itemName+"("+item.itemGrade+")"+"<br>₩"+item.itemPrice+"<br>", position: 'bottom', autoHide: true, 
@@ -555,14 +584,13 @@ $(function(){
     		financialSearch(term);
 	    })
       }
-      
       invenInit();
       rtaInit();
       stockListInit();
       storeInit();
       friendBook();
       financialInit();
-      
+
       var setBtn = function(){
          
             $("#inven-btn").setBtn($("#inven-Window"));

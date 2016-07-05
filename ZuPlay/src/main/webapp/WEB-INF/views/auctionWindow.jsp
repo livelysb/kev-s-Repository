@@ -18,8 +18,8 @@
 	width: 100%;
 }
 
-#auction-register{
-	float:right;
+#auction-register {
+	float: right;
 }
 </style>
 </head>
@@ -29,76 +29,87 @@
 	<div id="auction-window">
 		<div id="auction-header">Auction List</div>
 		<div id="auction-content">
-				<div class="container">
-				<div class="row">
+			<div class="container" style="margin-left: 0;padding-left: 0;">
+				 <!-- tab -->
+				  <div style=";float:left">
 					<ul id="myTab" class="nav nav-tabs">
-						<li class="active "><a
-							data-target="#home" id="auction-buytab" data-toggle="tab">구매</a></li>
-						<li class=""><a data-target="#profile"
-							id="auction-selltab" data-toggle="tab">판매목록</a></li>
-					</ul>	
-					<div id="searchBar">
-						<div class="input-group">
-						<span class="input-group-btn">
-							<select class="form-control" id="auction-select">
-								<option value="all">전체</option>
-								<option value="hair">Hair</option>
-								<option value="clothes">Clothes</option>
-								<option value="eyes">Eyes</option>
-								<option value="mouse">Mouse</option>
-								<option value="earring">Earring</option>
-								<option value="acc">Acc</option>
-								<option value="etc">Etc</option>
-							</select> 
-							</span>
-								<input type="text" class="form-control " placeholder="Search" id="auction-search"> 
-								<input type="hidden" id="auction-hidden">
-							</div>
-						</div>
-						</div>
-					<div id="myTabContent" class="tab-content">
-						<div class="tab-pane fade active in" id="home">
-							<div>
-								<table class="table table-bordered table-hover">
-									<thead>
-										<tr>
-											<th width="10%">아이템</th>
-											<th>아이템 이름 </th>
-											<th>판매가 </th>
-											<th>남은시간</th>
-											<th>판매자이름</th>
-											<th>구매</th>
-										</tr>
-									</thead>
-									<tbody id="auction-buy-tbody">
-									</tbody>
-								</table>
-								<button type="button" class="btn btn-default" id="auction-back-btn">이전</button>
-								<button type="button" class="btn btn-default" id="auction-next-btn">다음</button>
-								<button type="button" class="btn btn-success" id="auction-register">판매</button>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="profile">
-							<div>
-								<table class="table table-bordered table-hover">
-									<thead>
-										<tr>
-											<th width="10%">아이템</th>
-											<th>아이템 이름</th>
-											<th>판매가</th>
-											<th>남은시간</th>
-											<th>취소</th>
-										</tr>
-									</thead>
-									<tbody id="auction-sell-tbody">
-									</tbody>
-								</table>
-							</div>
-						</div>
+						<li class="active ">
+						<a data-target="#home"
+							id="auction-buytab" data-toggle="tab">구매</a>
+						</li>
+						<li class=""><a data-target="#profile" id="auction-selltab"
+							data-toggle="tab">판매목록</a>
+						</li>
+					</ul>
+                 </div>
+                 
+                   <!-- 검색 -->
+					<div id="searchBar" style=";float:right;">
+						<select class="form-control" id="auction-select" style="width: auto;float:left">
+							<option value="all">전체</option>
+							<option value="hair">Hair</option>
+							<option value="clothes">Clothes</option>
+							<option value="eyes">Eyes</option>
+							<option value="mouse">Mouse</option>
+							<option value="earring">Earring</option>
+							<option value="acc">Acc</option>
+							<option value="etc">Etc</option>
+						</select>
+						 <input type="text" class="form-control " placeholder="Search"
+							id="auction-search" style="width: auto"> 
+							<input type="hidden"
+id="auction-hidden">
+					</div>
+
+				
+
+			</div>
+			
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade active in" id="home">
+					<div>
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th width="10%">아이템</th>
+									<th>아이템 이름</th>
+									<th>판매가</th>
+									<th>남은시간</th>
+									<th>판매자이름</th>
+									<th>구매</th>
+								</tr>
+							</thead>
+							<tbody id="auction-buy-tbody">
+							</tbody>
+						</table>
+						<button type="button" class="btn btn-default"
+							id="auction-back-btn">이전</button>
+						<button type="button" class="btn btn-default"
+							id="auction-next-btn">다음</button>
+						<button type="button" class="btn btn-success"
+							id="auction-register">판매</button>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="profile">
+					<div>
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th width="10%">아이템</th>
+									<th>아이템 이름</th>
+									<th>판매가</th>
+									<th>남은시간</th>
+									<th>취소</th>
+								</tr>
+							</thead>
+							<tbody id="auction-sell-tbody">
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
 </body>
 

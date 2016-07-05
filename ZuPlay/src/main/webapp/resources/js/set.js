@@ -4,9 +4,12 @@
 		theme : "kokomo",
 		money : 0,
 		ruby : 0,
+		grade:"",
+		seasonRank:0,
+		dailyRank:0,
 		friends : {
 			
-		}
+		}	
 	}
 	/* 셋팅 정보 */		
 	var setting = {

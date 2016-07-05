@@ -56,19 +56,13 @@ public class InventoryController {
 	public boolean playerItemInsert(HttpSession session, String itemParam) throws Exception {
 		PlayerItemDTO[] jsonList = null;
 		Gson gson = new Gson();
-		try {
-			jsonList = gson.fromJson(itemParam, PlayerItemDTO[].class);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(jsonList);
+		jsonList = gson.fromJson(itemParam, PlayerItemDTO[].class);
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		ArrayList<PlayerItemDTO> list = new ArrayList<PlayerItemDTO>();
 		for (int i = 0; i < jsonList.length; i++) {
 			list.add(new PlayerItemDTO(jsonList[i].getPiSq(), playerNickname, jsonList[i].getItemCode(),
 					jsonList[i].getPiIsused(), jsonList[i].getPiIndex(), null));
 		}
-		System.out.println(list);
 		try {
 			boolean result = inventoryServiceImpl.playerItemInsert(list);
 			return result;

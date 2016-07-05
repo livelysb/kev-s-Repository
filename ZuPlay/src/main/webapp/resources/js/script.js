@@ -154,6 +154,27 @@ $(function(){
       
 
       var invenInit = function(){
+    	  
+    	//내아이템 목록 조회
+          playerItemSelectAll = function(){
+	          $.ajax({
+	             url:"playerItemSelectAll",
+	             type:"post",
+	             dataType:"json",
+	             success:function(data){
+	               $.each(data,function(index,item){
+	                  var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item)
+	                  $("#inven-player-"+item.piIndex).html(items);
+	               })
+	             },
+	             error:function(err){
+	                alert(err+"에러발생");
+	             }
+	          })
+          }
+          
+          playerItemSelectAll();
+          
          //옮기는 거
           var con = $(".item-socket td").sortable({
                connectWith: ".item-socket td",
@@ -172,15 +193,21 @@ $(function(){
           });
           
          //장비칸에 두개 이상이 못 들어가는 것
-          $("#inven-player td").on("sortupdate", function(e,ui){
+          $(document).on("sortupdate", "#inven-player td",function(e,ui){
               if($(this).children().length>=2){
                  $(ui.sender).sortable("cancel");
                  return;
+              }else if($(this).children().length==0){
+            	  playerItemUpdate()
               }else{
-            	  console.log($(ui.sender).children().attr("src"))
+            	  var changeInven=$(this).children("img").data("item").itemDTO.itemClass;
+            	  var index = $(this).attr("id").substr(-1);
+            	  if(changeInven != setting.parts[index-1]){
+            		  $(ui.sender).sortable("cancel");
+            	  }
             	  playerItemUpdate()
               }
-              updatePI(updateAvatar);;
+              updatePI(updateAvatar);
           })
           
           
@@ -218,25 +245,6 @@ $(function(){
          
           
           
-          //내아이템 목록 조회
-          playerItemSelectAll = function(){
-	          $.ajax({
-	             url:"playerItemSelectAll",
-	             type:"post",
-	             dataType:"json",
-	             success:function(data){
-	               $.each(data,function(index,item){
-	                  var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item)
-	                  $("#inven-player-"+item.piIndex).html(items);
-	               })
-	             },
-	             error:function(err){
-	                alert(err+"에러발생");
-	             }
-	          })
-          }
-          
-          playerItemSelectAll();
           
           //인덱스 값 파싱
           function passingJson(){

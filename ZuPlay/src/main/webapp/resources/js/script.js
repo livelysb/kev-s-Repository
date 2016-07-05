@@ -336,15 +336,26 @@ $(function(){
             }
 
             /*검색*/
-            $(document).on("keyup","#stock-search",function(){
+            $("#stock-search").on("keyup",function(){
                if(event.keyCode == 13) {
-                  
-                  if($(this).val()=="") return;
-                  $("#page-selection ul li").eq(1).trigger("click");
-                  $("#stock-search-keyword").val($(this).val());
-                  stockPageSelect(1,$(this).val());
+            	   stockListSearch()
                }
             })
+            
+            $("#stock-list-search").on("click",function(){
+            	stockListSearch()
+            })
+            
+            var stockListSearch = function(){
+            	if($("#stock-search").val()=="") return;
+                $("#page-selection ul li").eq(1).trigger("click");
+                $("#stock-search-keyword").val($("#stock-search").val());
+                stockPageSelect(1,$("#stock-search").val());
+            }
+            
+            
+            
+            
             stockPageSelect(1);
             
             

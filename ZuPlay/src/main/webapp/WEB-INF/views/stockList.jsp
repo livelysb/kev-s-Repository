@@ -4,8 +4,13 @@
 <div id="stock-window">
   <div id="stock-header">전체 종목</div>
    <div id="stock-content">
-   <input type="text" class="form-control" placeholder="Search" id="stock-search">
-   <input type="hidden" id="stock-search-keyword">
+	<div class="input-group">
+	   <input type="text" class="form-control" placeholder="Search" id="stock-search">
+	   <span class="input-group-btn">
+				<button type="button" id="stock-list-search" class="btn btn-success">검색</button>
+			</span>
+     	<input type="hidden" id="stock-search-keyword">
+    </div>
       <table class="table table-bordered table-hover">
          <thead>
             <tr>

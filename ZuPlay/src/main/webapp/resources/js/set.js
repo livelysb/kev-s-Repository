@@ -8,7 +8,6 @@
 		seasonRank:0,
 		dailyRank:0,
 		friends : {
-			
 		}	
 	}
 	/* 셋팅 정보 */		

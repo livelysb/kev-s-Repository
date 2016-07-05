@@ -193,20 +193,24 @@ $(function(){
           
           
           //내아이템 목록 조회
-          $.ajax({
-             url:"playerItemSelectAll",
-             type:"post",
-             dataType:"json",
-             success:function(data){
-               $.each(data,function(index,item){
-                  var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item)
-                  $("#inven-player-"+item.piIndex).html(items);
-               })
-             },
-             error:function(err){
-                alert(err+"에러발생");
-             }
-          })
+          var playerItemSelectAll = function(){
+	          $.ajax({
+	             url:"playerItemSelectAll",
+	             type:"post",
+	             dataType:"json",
+	             success:function(data){
+	               $.each(data,function(index,item){
+	                  var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item)
+	                  $("#inven-player-"+item.piIndex).html(items);
+	               })
+	             },
+	             error:function(err){
+	                alert(err+"에러발생");
+	             }
+	          })
+          }
+          
+          playerItemSelectAll();
           
           //인덱스 값 파싱
           function passingJson(){
@@ -237,7 +241,7 @@ $(function(){
                  url:"playerItemInsert", 
                  type:"post",
                  data:"itemParam="+(JSON.stringify(jsonList)).toString() ,
-                 success:function(data){    
+                 success:function(data){
                     alert("정상실행")
                  },
                  error:function(err){
@@ -462,6 +466,8 @@ $(function(){
     						case "2" : alert("인벤토리가 부족합니다."); break;
     						case "3" : alert("루비가 부족합니다."); break;
     					}
+    					playerItemSelectAll()
+    					
     				},
     				error:function(err){
     					alert(err +"에러발생");

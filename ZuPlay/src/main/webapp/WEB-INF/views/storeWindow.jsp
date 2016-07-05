@@ -159,8 +159,7 @@
 			</div>
 		</div>
 		<div id="store-next-div">
-			<button type="button" id="store-next-btn"
-				class="btn btn-default">></button>
+			<button type="button" id="store-next-btn" class="btn btn-default">></button>
 		</div>
 	</div>
 </div>

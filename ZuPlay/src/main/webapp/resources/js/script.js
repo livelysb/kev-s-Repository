@@ -211,7 +211,6 @@ $(function(){
             for(var i=1;i<=30;i++){
                if(i>=7 && i<=10) {continue;}
                var invenPlayerItem = $("#inven-player-"+i).children().data("item");
-               
       
                if(typeof(invenPlayerItem)!="undefined"){
                   jsonObj.piSq=$("#inven-player-"+i).children().data("item").piSq;
@@ -219,6 +218,8 @@ $(function(){
                   jsonArr.push(jsonObj)
                }
             }
+            console.log("제이슨");
+            console.log(jsonArr);
             return jsonArr;
             
           }

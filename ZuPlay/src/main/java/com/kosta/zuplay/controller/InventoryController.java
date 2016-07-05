@@ -29,7 +29,6 @@ public class InventoryController {
 	@ResponseBody
 	public String playerItemSelectAll(HttpSession session) throws Exception {
 		String playerNickname = (String) session.getAttribute("playerNickname");
-		System.out.println("playerNickname : " + playerNickname);
 
 		List<PlayerItemDTO> list;
 		try {

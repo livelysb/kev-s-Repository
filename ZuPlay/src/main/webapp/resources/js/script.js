@@ -177,8 +177,9 @@ $(function(){
                 		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/"+(userInfo.gender).toLowerCase()+"_"+setting.parts[i-1]+"_00.png");
                 	}else if(i<=4){
                 		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/a_"+setting.parts[i-1]+"_00.png");
+                	}else{
+                		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/empty.png");
                 	}
-                	
                 }else{
                    $("#inven-player-"+setting.parts[i-1]).attr("src", partSrc);
                 }

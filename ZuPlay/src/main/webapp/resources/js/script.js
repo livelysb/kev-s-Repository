@@ -31,6 +31,11 @@ $(function(){
 
 			location.href = "logout";
 		});
+		
+       $(".side-avatar").css({
+           width : $("#avatar-clothes").css("width"),
+           height : $("#avatar-clothes").css("height")
+        });
 	});
    /*버튼클릭했을 때 이벤트 설정*/
    $.fn.setBtn = function(window){
@@ -211,11 +216,62 @@ $(function(){
               updatePI(updateAvatar);
           })
           
-          //인벤토리 판매
+////////////////////////////////////////////////////////////////////////////////////          
+          	  //인벤토리 판매
         	  $("#inven-items td").contextmenu(function() {
-        		  alert( "Handler for .contextmenu() called." );
+        		  var storeIsOpen = $("#store-window").jqxWindow("isOpen");
+        		  var auctionIsOpen = false //$("#auction-window").jqxWindow("isOpen");
+        		  
+        		  if(storeIsOpen==true && auctionIsOpen==true) {
+        			  
+        		  }else if(storeIsOpen==true){
+        			  //상점에 아이템 판매
+        			  if(confirm("판매하시겠습니까?")){
+        				  storeSell($(this).children().data("item"))
+        			  };
+        		  }else if(auctionIsOpen==true){
+        			  //경매장에 아이템 판매
+        			  if(confirm("판매하시겠습니까?")) {
+        				  auctionSell($(this).children().data("item"))
+        			  };
+        		  }
         		  return false;
         	  });
+          
+          
+          //상점판매
+          var storeSell = function(imgData){
+        	  console.log(imgData)
+        	  $.ajax({
+        		  url:"itemStoreSell",
+        		  type:"post",
+        		  data:"piSq="+imgData.piSq+"&itemCode="+imgData.itemDTO.itemCode,
+        		  dataType:"text",
+        		  success:function(result){
+        			  alert(result)
+        		  },
+        		  error:function(err){
+        			  alert(err+"에러발생")
+        		  }
+        	  })
+          }
+          
+          //경매판매 
+          var auctionSell = function(){
+        	  $.ajax({
+        		  url:"",
+        		  type:"",
+        		  data:"",
+        		  dataType:"",
+        		  success:function(){
+        			  
+        		  },
+        		  error:function(){
+        			  
+        		  }
+        	  })
+          }
+///////////////////////////////////////////////////////////////////////////////////          
           
           var playerItemUpdate = function(){
         	  var jsonList = passingJson();
@@ -629,21 +685,264 @@ $(function(){
     		financialSearch(term);
 	    })
       }
+      
+      /*경매장*/
+      var auctionInit = function(){
+    	  //페이지 변수
+          var count=1;
+  		var sellBtn="";
+  		var colorBtn="";
+  		//탭 토글
+          $('a[data-toggle="tab"]').on('hidden.bs.tab', function(e){
+          });
+          
+  		//구매탭
+  		$("#auction-buytab").on("click",function(){
+  			$("#auction-search").show();
+          	$("#auction-select").show();
+  		})
+          
+          //판매탭
+          $("#auction-selltab").on("click",function(){
+          	$("#auction-search").hide();
+          	$("#auction-select").hide();
+          	auctionSellList();
+          })
+          
+          //경매장 아이템등록
+          $("#auction-register").on("click",function(){
+          	$.ajax({
+          		url:"auctionSell",
+          		type:"post",
+          		dataType:"text",
+          		data:"piSq=90&imPurchasePrice=15000",
+          		success:function(result){
+          			alert(result);
+          		},
+          		error:function(err){
+          			alert(err+"에러발생");
+          		}
+          	})
+          })
+          
+          //아이템구매
+          $(document).on("click",'input[value=구매]', function() {
+  			$.ajax({
+  				url:"auctionBuy",
+  				type:"post",
+  				dataType:"text",
+  				data:"imSq="+$(this).attr("id"),
+  				success:function(result){
+  					switch(result){
+  						case "1" : alert("구매되었습니다."); break;
+  						case "2" : alert("인벤토리가 부족합니다."); break;
+  						case "3" : alert("루비가 부족합니다."); break;
+  						case "4" : alert("이미 판매 된 물품입니다.");break;	
+  					}
+  					alert(count)
+  					search(count)
+  					
+  				},
+  				error:function(err){
+  					alert(err+"에러발생")
+  				}
+  			})
+  		})
+  		
+  		//판매취소
+  		$(document).on("click",'input[value=취소]', function() {
+  			$.ajax({
+  				url:"auctionCancel",
+  				type:"post",
+  				dataType:"text",
+  				data:"imSq="+$(this).attr("id"),
+  				success:function(result){
+  					alert("취소되었습니다.");
+  					///판매탭 새로고침하기!!!
+  					auctionSellList();
+  				},
+  				error:function(err){
+  					alert(err+"에러발생")
+  				}
+  			})
+  		})
+  		
+  		//수령, 유찰
+  		$(document).on("click",'input[value=수령],input[value=유찰]', function() {
+  			var wordBtn =  $(this).val();
+  			$.ajax({
+  				url:"auctionBring",
+  				type:"post",
+  				dataType:"text",
+  				data:"imSq="+$(this).attr("id"),
+  				success:function(result){
+  					if(wordBtn=="수령"){
+  						alert("판매금을 수령하셨습니다.")
+  					}else{
+  						if(result!="false"){
+  							alert("유찰 된 아이템을 수령하셨습니다.")
+  						}else{
+  							alert("인벤토리를 비워 주십시오.")
+  						}
+  					} 
+  					auctionSellList();
+  				},
+  				error:function(err){
+  					alert(err+"에러발생")
+  				}
+  			})
+  		})
+  		
+  		
+          //검색
+          $("#auction-search").on("keyup",function(){
+          	count=1;
+          	if(event.keyCode == 13) {
+          		$("#auction-hidden").val($(this).val())
+          		search(count); 
+          		$("#auction-search").val("");
+          	}
+          })
+  	    
+          //이전버튼
+  		$("#auction-back-btn").on("click",function(){
+  			if($("#auction-buy-tbody").children().length<=0) return
+  			if(count>1){
+  				search(count-1);
+  			}
+  		})
+  		//다음버튼
+  		$("#auction-next-btn").on("click",function(){
+  			if($("#auction-buy-tbody").children().length<=0) return
+  			search(count+1)
+  		})
+  		 
+  		//페이지에따른 검색
+  		function search(page){
+          	$.ajax({
+          		url:"auctionSearch",
+          		type:"post",
+          		dataType:"json",
+          		data:"keyword=" + $("#auction-search").val()+"&itemClass="+$("#auction-select").val()+"&page="+page,
+          		success:function(data){
+          			console.log(data);
+          			if(data.length==0){
+          				return;
+          			} 
+          			count=page;
+          			$("#auction-buy-tbody").empty();
+          			var str="";
+          			$.each(data, function(index,item){
+          				if(item.imAuctionEnd="T"){
+  	        				str+="<tr><td><img src='"+item.itemDTO.itemImg+"' class='auction-itemImg'></td>";
+  	        				str+="<td>"+item.itemDTO.itemName+"</td>";
+  	        				str+="<td>"+item.imPurchasePrice+"</td>";
+  	        				str+="<td>"+item.imBidTime+"</td>";
+  	        				str+="<td>"+item.playerNickname+"</td>";
+  	        				str+="<td><input type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnBuy' value='구매'></td>"
+          				}
+          			})
+          			$("#auction-buy-tbody").html(str);
+          		},
+          		error:function(err){
+          			alert(err+"에러발생");
+          		}
+          		
+          	})
+          }
+  		
+  		//판매탭 접속
+  		function auctionSellList(){
+  			$.ajax({
+  	        	url: "auctionMyPage" ,
+  				type:"post",
+  				dataType:"json",  
+  				success:function(data){
+  					$("#auction-sell-tbody").empty;
+  					var str="";
+  					$.each(data, function(index, item){
+  						str+="<tr><td><img src='"+ item.itemDTO.itemImg +"' class='auction-itemImg' ></td>";
+  						str+="<td>"+item.itemDTO.itemName+"</td>";
+  						str+="<td>"+item.imPurchasePrice+"</td>";
+  						str+="<td>"+item.imBidTime+"</td>";
+  						
+  						if(item.imAuctionEnd=="T"){
+  							sellBtn="취소";
+  							colorBtn="btn-primary";
+  						}else if(item.imAuctionEnd=="F"){
+  							sellBtn="수령";
+  							colorBtn="btn-success";
+  						}else{
+  							sellBtn="유찰";
+  							colorBtn="btn-danger";
+  						}
+  												
+  						str+="<td><input type='button' id='"+item.imSq+"' class='btn "+colorBtn+" btn-sm btnCancel' value='"+sellBtn+"'></td></tr>"
+  					})
+  					$("#auction-sell-tbody").html(str);
+  				} ,
+  				error:function(err){
+  					alert(err +"에러발생");
+  				}
+  	        })
+  		}
+  		
+  		$("#auction-window").jqxWindow({
+            minWidth:600,
+            minHeight:420,
+            resizable:true,
+            showCollapseButton: true,
+            autoOpen:false,
+            theme : userInfo.theme
+          });
+       
+      }
+      
+      /* 유저 정보 보기 */
+      var userInfo = function(nickName){
+          $.ajax({
+             url:"userInfo",
+             data:{targetPlayer:nickName},
+             dataType:"html",
+             success:function(data){
+
+              $(".main-area").append(data);
+                $("#userinfo-player-"+nickName).jqxWindow({
+                     width:"450",
+                     height:"400",
+                     showCollapseButton: true,
+                     autoOpen:true,
+                     closeButtonAction: 'close',
+                     theme:"kokomo"
+                });
+                
+             },
+             error:function(err){
+                
+             }
+          })
+       }
+      
+      
       invenInit();
       rtaInit();
       stockListInit();
       storeInit();
       friendBook();
       financialInit();
-
+      auctionInit();
+      
       var setBtn = function(){
-         
             $("#inven-btn").setBtn($("#inven-Window"));
             $("#rta-btn").setBtn($("#rta-Window"));
             $("#stockList-btn").setBtn($("#stock-window"));
             $("#store-btn").setBtn($("#store-window"));
             $("#friend-btn").setBtn($("#friend-window"))
             $("#financial-btn").setBtn($("#financial-window"))
+            $("#auction-btn").setBtn($("#auction-window"))
+    		$("#myinfo-btn").click(function(){
+    			userInfo(userInfo.nickName);
+    		});
       }();
       
 });

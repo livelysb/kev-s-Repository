@@ -23,7 +23,15 @@ $(function(){
 		})
 	}
 	
-	updatePI();
+	updatePI(function(){
+		connect();
+
+		$('#logout').click(function() {
+			disconnect();
+
+			location.href = "logout";
+		});
+	});
    /*버튼클릭했을 때 이벤트 설정*/
    $.fn.setBtn = function(window){
       $(this).on("click",function(){

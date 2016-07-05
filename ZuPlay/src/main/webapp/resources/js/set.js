@@ -42,13 +42,3 @@ function disconnect() {
 		ws = null;
 	}
 }
-
-$(function() {
-	connect();
-
-	$('#logout').click(function() {
-		disconnect();
-
-		location.href = "logout";
-	});
-})

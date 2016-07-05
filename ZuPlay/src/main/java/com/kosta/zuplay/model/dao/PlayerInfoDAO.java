@@ -54,4 +54,9 @@ public interface PlayerInfoDAO {
 	 * 최종접속일 업데이트
 	 * */
 	int lastAccessUpdate(String playerNickname) throws Exception;
+	
+	/**
+	 * 플레이어의 좋아요 누른사람 목록 가져오기
+	 * */
+	List<String> getLikeList(String playerNickname) throws Exception;
 }

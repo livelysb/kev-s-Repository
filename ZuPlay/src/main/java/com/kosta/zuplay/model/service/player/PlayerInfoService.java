@@ -32,6 +32,7 @@ public interface PlayerInfoService {
 	/**
 	 * 접속자의 최종 접속시간을 확인하여 하루에 한번씩 1000루비 주기 
 	 * */
+	public PlayerDTO getRubyPerDay(PlayerDTO playerDTO) throws Exception;
 	
 	
 	/**

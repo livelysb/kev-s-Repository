@@ -109,14 +109,14 @@ $(document).ready(function() {
 								<img alt="User Pic" src="resources/user.png" class="img-responsive">
                 <label class="userinfo-favorite">
                   <c:choose>
-                  	<c:when test="${like.isLike}">
+                  	<c:when test="${isLike}">
                   		<span class="glyphicon glyphicon-heart">
                   	</c:when>
                   	<c:otherwise>
                   		<span class="glyphicon glyphicon-heart-empty">
                   	</c:otherwise>
                   </c:choose>
-                  ${like.num}</span>
+                  ${likeNum}</span>
                 </label>
                 <label class="toppad"><span class="glyphicon glyphicon-king"></span>${playerDTO.playerDailyRank}</label>
                 <label><span class="glyphicon glyphicon-queen"></span>${playerDTO.playerSeasonRank}</label>

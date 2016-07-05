@@ -15,10 +15,9 @@ public class PlayerDTO {
 	private String playerLastAccess;//최종접속일
 	private String playerGrade;		//계급
 	private int playerDailyRank;	//일간랭킹
-	private int playerWeeklyRank;	//주간랭킹
 	private int playerSeasonRank;	//시즌랭킹
-	private int playerTotalRank;	//종합랭킹
 	
+	private int totalMoney;
 	private double earningRate; //수익률
 	private PlayerItemDTO playerItemDTO;
 	
@@ -38,9 +37,16 @@ public class PlayerDTO {
 		this.playerRuby = playerRuby;
 		this.playerGrade = playerGrade;
 		this.playerDailyRank = playerDailyRank;
-		this.playerWeeklyRank = playerWeeklyRank;
 		this.playerSeasonRank = playerSeasonRank;
-		this.playerTotalRank = playerTotalRank;
+	}
+	
+	
+	public int getTotalMoney() {
+		return totalMoney;
+	}
+
+	public void setTotalMoney(int totalMoney) {
+		this.totalMoney = totalMoney;
 	}
 	
 	public String getPlayerNickname() {
@@ -104,23 +110,11 @@ public class PlayerDTO {
 	public void setPlayerDailyRank(int playerDailyRank) {
 		this.playerDailyRank = playerDailyRank;
 	}
-	public int getPlayerWeeklyRank() {
-		return playerWeeklyRank;
-	}
-	public void setPlayerWeeklyRank(int playerWeeklyRank) {
-		this.playerWeeklyRank = playerWeeklyRank;
-	}
 	public int getPlayerSeasonRank() {
 		return playerSeasonRank;
 	}
 	public void setPlayerSeasonRank(int playerSeasonRank) {
 		this.playerSeasonRank = playerSeasonRank;
-	}
-	public int getPlayerTotalRank() {
-		return playerTotalRank;
-	}
-	public void setPlayerTotalRank(int playerTotalRank) {
-		this.playerTotalRank = playerTotalRank;
 	}
 	public double getEarningRate() {
 		return earningRate;
@@ -137,15 +131,5 @@ public class PlayerDTO {
 		this.playerItemDTO = playerItemDTO;
 	}
 
-	@Override
-	public String toString() {
-		return "PlayerDTO [playerNickname=" + playerNickname + ", playerNaverId=" + playerNaverId + ", playerGender="
-				+ playerGender + ", playerAge=" + playerAge + ", playerMoney=" + playerMoney + ", playerPreMoney="
-				+ playerPreMoney + ", playerRuby=" + playerRuby + ", playerLastAccess=" + playerLastAccess
-				+ ", playerGrade=" + playerGrade + ", playerDailyRank=" + playerDailyRank + ", playerWeeklyRank="
-				+ playerWeeklyRank + ", playerSeasonRank=" + playerSeasonRank + ", playerTotalRank=" + playerTotalRank
-				+ ", earningRate=" + earningRate + ", playerItemDTO=" + playerItemDTO + "]";
-	}
-	
 	
 }

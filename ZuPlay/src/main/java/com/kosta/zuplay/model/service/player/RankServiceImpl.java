@@ -36,7 +36,7 @@ public class RankServiceImpl implements RankService{
 			PlayerDTO playerDTO = playerInfoService.getPlayer(playerNickname);
 			if(kind.equals("PLAYER_DAILY_RANK"))
 				playerDTO.setEarningRate(earningRateService.calDailyEarningRate(playerNickname));
-			else
+			else if(kind.equals("PLAYER_SEASON_RANK"))
 				playerDTO.setEarningRate(earningRateService.calEarningRate(playerNickname));
 			playerList2.add(playerDTO);
 		}
@@ -49,8 +49,9 @@ public class RankServiceImpl implements RankService{
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("playerNickname", playerDTO.getPlayerNickname());
 			map.put("kind", kind);
-			map.put("EarningRate", Integer.toString(i));
-			playerInfoDAO.earningRateUpdate(map);
+			map.put("rank",Integer.toString(i));
+			playerInfoDAO.rankUpdate(map);
+
 		}
 	}
 

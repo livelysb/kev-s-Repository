@@ -2,15 +2,19 @@ package com.kosta.zuplay.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
+import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
+import com.kosta.zuplay.model.service.item.InventoryService;
 import com.kosta.zuplay.model.service.player.PlayerInfoService;
 
 @Controller
@@ -20,15 +24,18 @@ public class PlayerInfoController {
 	@Autowired
 	private PlayerInfoService playerInfoService;
 	
+	@Autowired
+	private InventoryService inventoryService;
 	
 	@Autowired
-	private PlayerInfoService playerInfoServiceImpl;
+	private ServletContext context;
+	
 	@RequestMapping(value={"playerInfoSelectAll"}, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String playerInfoSelectAll(HttpSession session, String keyword) throws Exception{
 		List<PlayerDTO> list;
 		try {
-			list = playerInfoServiceImpl.playerInfoSelectAll(keyword);
+			list = playerInfoService.playerInfoSelectAll(keyword);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
 			e.printStackTrace();
@@ -53,5 +60,19 @@ public class PlayerInfoController {
 			e.printStackTrace();
 			throw new Exception();
 		}
+		
+	}
+	
+	@RequestMapping(value={"userInfo"})
+	public ModelAndView userInfo(HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView("userInfo");
+		String playerNickname = (String) session.getAttribute("playerNickname");
+		PlayerDTO playerDTO = playerInfoService.getPlayer(playerNickname);
+		List<PlayerItemDTO> playerItemList = inventoryService.playerItemSelectAll(playerNickname);
+		mv.addObject("playerDTO", playerDTO);
+		mv.addObject("playerItemList", playerItemList);
+		//mv.addObject("isOn", (context.getAttribute(playerNickname))
+		
+		return mv;
 	}
 }

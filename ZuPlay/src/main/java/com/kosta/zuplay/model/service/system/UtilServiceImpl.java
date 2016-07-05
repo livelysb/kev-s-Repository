@@ -33,7 +33,6 @@ public class UtilServiceImpl implements UtilService {
 		} else {
 			for (int i = 0; i < list.size(); i++) {
 
-				System.out.println(list.get(i) + " / " + (i + 11));
 
 				if (list.get(i) != i + 11) {
 					return i + 11;

@@ -37,7 +37,6 @@ public class SettingServiceImpl implements SettingService {
 	public SettingDTO settingSelect(String playerNickname) throws Exception {
 		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
 		SettingDTO dto=settingDAO.settingSelect(playerNickname);
-		System.out.println(dto);
 		return dto;
 	}
 

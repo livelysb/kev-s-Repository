@@ -70,16 +70,16 @@ $(function(){
      	    });
      	};
      	
-     	var realTimeHover = function(){
+     		//실시간 마우스 호버 이벤트
      		$("#rta-content").hover(
  				function(){
+ 					console.log("하ㅣ하하하하")
  					clearInterval(getRealTimeStock)
  				},
  				function(){
  					setInterval(getRealTimeStock, 3000);
  				}
      		)
-     	}
      	
      	setInterval(getRealTimeStock, 3000);
       }
@@ -216,13 +216,10 @@ $(function(){
                if(typeof(invenPlayerItem)!="undefined"){
             	  var jsonObj = new Object();
                   jsonObj.piSq=$("#inven-player-"+i).children().data("item").piSq;
-                  console.log(jsonObj.piSq)
-                  jsonObj.piIndex=$("#inven-player-"+i).children().data("item").piIndex;
-                  console.log(jsonObj.piIndex)
+                  jsonObj.piIndex=i;
                   jsonArr.push(jsonObj)
                }
             }
-            console.log("제이슨");
             console.log(jsonArr);
             return jsonArr;
             

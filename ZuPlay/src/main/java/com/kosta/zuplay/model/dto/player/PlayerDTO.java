@@ -25,8 +25,7 @@ public class PlayerDTO {
 	public PlayerDTO() {}
 	
 	public PlayerDTO(String playerNickname, String playerNaverId, String playerGender, String playerAge,
-			int playerMoney, int playerPreMoney, int playerRuby, String playerGrade, int playerDailyRank,
-			int playerWeeklyRank, int playerSeasonRank, int playerTotalRank) {
+			int playerMoney, int playerPreMoney, int playerRuby, String playerGrade, int playerDailyRank, int playerSeasonRank) {
 		super();
 		this.playerNickname = playerNickname;
 		this.playerNaverId = playerNaverId;

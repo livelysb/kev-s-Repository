@@ -368,7 +368,7 @@ $(function(){
     					}else{
     						
     						count=page;
-    						$(".tab-content div img").empty();
+    						$(".tab-content div img").remove();
     						$.each(data, function(index, item){
     							$("#store-item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:100%;' id='"+item.itemCode+"'/>");  
     							$("#store-item"+itemClass+""+index+" img").jqxTooltip({ content: item.itemName+"("+item.itemGrade+")"+"<br>₩"+item.itemPrice+"<br>", position: 'bottom', autoHide: true, 

@@ -51,7 +51,7 @@ public class InventoryController {
 	 * 아이템 목록 업데이트
 	 */
 	@SuppressWarnings("serial")
-	@RequestMapping(value = "playerItemInsert", produces = "text/plain;charset=UTF-8")
+	@RequestMapping(value = "playerItemInsert", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public boolean playerItemInsert(HttpSession session, String itemParam) throws Exception {
 		PlayerItemDTO[] jsonList = null;
@@ -70,7 +70,8 @@ public class InventoryController {
 		}
 		System.out.println(list);
 		try {
-			return inventoryServiceImpl.playerItemInsert(list);
+			boolean result = inventoryServiceImpl.playerItemInsert(list);
+			return result;
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
 			e.printStackTrace();

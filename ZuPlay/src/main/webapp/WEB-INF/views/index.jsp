@@ -26,7 +26,7 @@
       <div class="col-md-1 side-section">
         <!-- 사이드 아바타 선언 -->
         <div class="side-id">
-          <label>HyoSeung</label>
+          <label>${playerNickname}</label>
         </div>
         <div class="side-avatar">
           <img src="resources/img/avatar/clothes/a_clothes_01.png" id="avatar-clothes">

@@ -64,6 +64,7 @@ public class InventoryController {
 			list.add(new PlayerItemDTO(jsonList.get(i).getPiSq(), playerNickname, jsonList.get(i).getItemCode(),
 					jsonList.get(i).getPiIsused(), jsonList.get(i).getPiIndex(), null));
 		}
+		System.out.println(list);
 		try {
 			return inventoryServiceImpl.playerItemInsert(list);
 		} catch (Exception e) {

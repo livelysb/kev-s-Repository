@@ -33,11 +33,10 @@ public class MasterDTO {
 	private String krxShipSectidxYn; // KRX섹터지수 선박여부
 	private String krxFncSvcSectidxYn; // KRX금융서비스섹터 지수여부
 	private String krxMediaCommSectidxYn; // KRX미디어통신섹터 지수여부
-	private String isuCd; // 종목코드
-	
+	private String isuCd; // 종목코드	
 	private String kind; //분류
-	private boolean like; //좋아요
 	
+	private boolean like; //좋아요
 	private int plQuantity;//수량
 	
 	private List<RealTimePriceDTO> rtpList; // 실시간 주식정보 (일간용) 1:다 조인
@@ -45,17 +44,6 @@ public class MasterDTO {
 	
 	private PriceDTO priceDTO; // 1:1조인
 
-	public PriceDTO getPriceDTO() {
-		return priceDTO;
-	}
-
-	public void setPriceDTO(PriceDTO priceDTO) {
-		this.priceDTO = priceDTO;
-	}
-
-	public double getPrevddAccTrdvol() {
-		return prevddAccTrdvol;
-	}
 
 	public MasterDTO() {
 	}
@@ -150,7 +138,7 @@ public class MasterDTO {
 		this.uplmtprc = uplmtprc;
 	}
 
-	public double getprevddClsprc() {
+	public double getPrevddAccTrdvol() {
 		return prevddAccTrdvol;
 	}
 
@@ -349,8 +337,6 @@ public class MasterDTO {
 	public void setIsuCd(String isuCd) {
 		this.isuCd = isuCd;
 	}
-	
-	
 
 	public String getKind() {
 		return kind;
@@ -368,6 +354,14 @@ public class MasterDTO {
 		this.like = like;
 	}
 
+	public int getPlQuantity() {
+		return plQuantity;
+	}
+
+	public void setPlQuantity(int plQuantity) {
+		this.plQuantity = plQuantity;
+	}
+
 	public List<RealTimePriceDTO> getRtpList() {
 		return rtpList;
 	}
@@ -383,31 +377,14 @@ public class MasterDTO {
 	public void setDpList(List<DailyPriceDTO> dpList) {
 		this.dpList = dpList;
 	}
+
+	public PriceDTO getPriceDTO() {
+		return priceDTO;
+	}
+
+	public void setPriceDTO(PriceDTO priceDTO) {
+		this.priceDTO = priceDTO;
+	}
 	
 
-	public int getPlQuantity() {
-		return plQuantity;
-	}
-
-	public void setPlQuantity(int plQuantity) {
-		this.plQuantity = plQuantity;
-	}
-
-	@Override
-	public String toString() {
-		return "ClassPojo [krxBioSectidxYn = " + krxBioSectidxYn + ", mktcapScaleCd = " + mktcapScaleCd
-				+ ", lwlmtprc = " + lwlmtprc + ", krxSteelSectidxYn = " + krxSteelSectidxYn + ", krxInsuSectidxYn = "
-				+ krxInsuSectidxYn + ", uplmtprc = " + uplmtprc + ", prevddAccTrdvol = " + prevddAccTrdvol
-				+ ", krxEnergyChemSectidxYn = " + krxEnergyChemSectidxYn + ", haltYn = " + haltYn
-				+ ", krxTransSectidxYn = " + krxTransSectidxYn + ", isuSrtCd = " + isuSrtCd + ", govncExcelYn = "
-				+ govncExcelYn + ", parval = " + parval + ", krxConstrSectidxYn = " + krxConstrSectidxYn
-				+ ", kospiYn = " + kospiYn + ", krxConsgoodSectidxYn = " + krxConsgoodSectidxYn + ", listShrs = "
-				+ listShrs + ", krxSecuSectidxYn = " + krxSecuSectidxYn + ", krxInfoCommSectidxYn = "
-				+ krxInfoCommSectidxYn + ", prevddAccTrdval = " + prevddAccTrdval + ", krxRetailSectidxYn = "
-				+ krxRetailSectidxYn + ", krxSemiconSectidxYn = " + krxSemiconSectidxYn + ", mfindYn = " + mfindYn
-				+ ", krxLeisureSectidxYn = " + krxLeisureSectidxYn + ", krxAutosSectidxYn = " + krxAutosSectidxYn
-				+ ", isuKorAbbrv = " + isuKorAbbrv + ", krxFncSectidxYn = " + krxFncSectidxYn + ", krxShipSectidxYn = "
-				+ krxShipSectidxYn + ", krxFncSvcSectidxYn = " + krxFncSvcSectidxYn + ", krxMediaCommSectidxYn = "
-				+ krxMediaCommSectidxYn + ", isuCd = " + isuCd + "]";
-	}
 }

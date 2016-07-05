@@ -123,6 +123,7 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 					e.printStackTrace();
 				}
 			}
+			//return masterMatchKind(masterDTO); - kind 분류시킬때 사용 
 			return masterDTO;
 	}
 
@@ -134,5 +135,46 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 			stockUpdateDAO.dailyPriceInsert(priceDTO);
 		}
 		System.out.println(new Date().toString() + " : DailyPrice is inserted");
+	}
+
+	@Override
+	public MasterDTO masterMatchKind(MasterDTO masterDTO) throws Exception {
+		if(masterDTO.getKrxAutosSectidxYn().equals("Y")) {
+			masterDTO.setKind("자동차");
+		} else if(masterDTO.getKrxTransSectidxYn().equals("Y")) {
+			masterDTO.setKind("운송");
+		} else if(masterDTO.getKrxSteelSectidxYn().equals("Y")) {
+			masterDTO.setKind("철강");
+		} else if(masterDTO.getKrxBioSectidxYn().equals("Y")) {
+			masterDTO.setKind("바이오");
+		} else if(masterDTO.getKrxConsgoodSectidxYn().equals("Y")) {
+			masterDTO.setKind("소비재");
+		} else if(masterDTO.getKrxConstrSectidxYn().equals("Y")) {
+			masterDTO.setKind("건설");
+		} else if(masterDTO.getKrxEnergyChemSectidxYn().equals("Y")) {
+			masterDTO.setKind("에너지화학");
+		} else if(masterDTO.getKrxFncSectidxYn().equals("Y")) {
+			masterDTO.setKind("금융");
+		} else if(masterDTO.getKrxFncSvcSectidxYn().equals("Y")) {
+			masterDTO.setKind("금융서비스");
+		} else if(masterDTO.getKrxInfoCommSectidxYn().equals("Y")) {
+			masterDTO.setKind("정보통신");
+		} else if(masterDTO.getKrxInsuSectidxYn().equals("Y")) {
+			masterDTO.setKind("보험");
+		} else if(masterDTO.getKrxLeisureSectidxYn().equals("Y")) {
+			masterDTO.setKind("레저엔터테인먼트");
+		} else if(masterDTO.getKrxMediaCommSectidxYn().equals("Y")) {
+			masterDTO.setKind("미디어통신");
+		} else if(masterDTO.getKrxRetailSectidxYn().equals("Y")) {
+			masterDTO.setKind("소비자유통");
+		} else if(masterDTO.getKrxSecuSectidxYn().equals("Y")) {
+			masterDTO.setKind("증권");
+		} else if(masterDTO.getKrxSemiconSectidxYn().equals("Y")) {
+			masterDTO.setKind("반도체");
+		} else if(masterDTO.getKrxShipSectidxYn().equals("Y")) {
+			masterDTO.setKind("선박");
+		} else
+			masterDTO.setKind("기타");
+		return masterDTO;
 	}
 }

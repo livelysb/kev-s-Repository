@@ -48,40 +48,43 @@ $(function(){
      	var stockPage = 1;
      	var getRealTimeStock = function(){
      		if(stockPage==89) stockPage=1;
-     	   $.ajax({
-     	       url:'realTimeStock',
-     	       type:'post',
-     	       dataType:'json',
-     	       contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-     	       data: {"page":stockPage,"keyword":"undefined"},
-     	       success:function(data){
-     	    	   stockPage++;
-     	    	   var tbd = $("#rta-tbody").empty();
-     	    	   $(data).each(function(index, item) {
-     	    		  if(index!=0){
-     	    			  $(tbd).append("<tr> <td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"</td><td>"+item.priceDTO.trdvol+"</td></tr>")
-     	    		  }
-     	    	   });
-     	       },
-     	       error:function(e){
-     	    	   console.log(stockPage);
-     	    	   console.log("error" + e);
-     	       }
-     	    });
+     		if(!isHover){
+	     	   $.ajax({
+	     	       url:'realTimeStock',
+	     	       type:'post',
+	     	       dataType:'json',
+	     	       contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+	     	       data: {"page":stockPage,"keyword":"undefined"},
+	     	       success:function(data){
+	     	    	   stockPage++;
+	     	    	   var tbd = $("#rta-tbody").empty();
+	     	    	   $(data).each(function(index, item) {
+	     	    		  if(index!=0){
+	     	    			  $(tbd).append("<tr> <td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"</td><td>"+item.priceDTO.trdvol+"</td></tr>")
+	     	    		  }
+	     	    	   });
+	     	       },
+	     	       error:function(e){
+	     	    	   console.log(stockPage);
+	     	    	   console.log("error" + e);
+	     	       }
+	     	    });
+     		}
      	};
      	
-     		//실시간 마우스 호버 이벤트
-     		$("#rta-content").hover(
- 				function(){
- 					console.log("하ㅣ하하하하")
- 					clearInterval(getRealTimeStock)
- 				},
- 				function(){
- 					setInterval(getRealTimeStock, 3000);
- 				}
-     		)
+     	//실시간 마우스 호버 이벤트
+     	var rtaRefresh=setInterval(getRealTimeStock, 3000);
+     	var isHover = false;
      	
-     	setInterval(getRealTimeStock, 3000);
+ 		$("#rta-content").hover(
+			function(){
+				isHover = true;
+			},
+			function(){
+				isHover = false;
+			}
+ 		)
+     	
       }
       
       

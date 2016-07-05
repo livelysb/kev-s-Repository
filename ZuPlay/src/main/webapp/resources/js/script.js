@@ -47,6 +47,7 @@ $(function(){
 
      	var stockPage = 1;
      	var getRealTimeStock = function(){
+     		if(stockPage==89) stockPage=1;
      	   $.ajax({
      	       url:'realTimeStock',
      	       type:'post',
@@ -207,14 +208,17 @@ $(function(){
           //인덱스 값 파싱
           function passingJson(){
             var jsonArr = new Array();
-            var jsonObj = new Object();
+            
             for(var i=1;i<=30;i++){
                if(i>=7 && i<=10) {continue;}
                var invenPlayerItem = $("#inven-player-"+i).children().data("item");
       
                if(typeof(invenPlayerItem)!="undefined"){
+            	  var jsonObj = new Object();
                   jsonObj.piSq=$("#inven-player-"+i).children().data("item").piSq;
+                  console.log(jsonObj.piSq)
                   jsonObj.piIndex=$("#inven-player-"+i).children().data("item").piIndex;
+                  console.log(jsonObj.piIndex)
                   jsonArr.push(jsonObj)
                }
             }

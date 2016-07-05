@@ -26,7 +26,6 @@ public class PlayerInfoController {
 	@RequestMapping(value={"playerInfoSelectAll"}, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String playerInfoSelectAll(HttpSession session, String keyword) throws Exception{
-		System.out.println("키워드 : " + keyword);
 		List<PlayerDTO> list;
 		try {
 			list = playerInfoServiceImpl.playerInfoSelectAll(keyword);
@@ -37,7 +36,6 @@ public class PlayerInfoController {
 		}
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
-		System.out.println(json);
 		return json;
 	}
 	

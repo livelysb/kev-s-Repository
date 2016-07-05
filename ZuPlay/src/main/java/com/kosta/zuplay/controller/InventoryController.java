@@ -40,7 +40,6 @@ public class InventoryController {
 		}
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
-		System.out.println(json);
 
 		return "null".equals(json) ? "{}" : json;
 

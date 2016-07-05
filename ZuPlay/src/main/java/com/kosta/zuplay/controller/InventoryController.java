@@ -25,9 +25,9 @@ public class InventoryController {
 	/**
 	 * 보유 아이템 리스트 조회
 	 */
-	 @RequestMapping(value="playerItemSelectAll" ,produces="text/plain;charset=UTF-8" )
+	@RequestMapping(value = "playerItemSelectAll", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
-	public String playerItemSelectAll(HttpSession session) throws Exception{
+	public String playerItemSelectAll(HttpSession session) throws Exception {
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		System.out.println("playerNickname : " + playerNickname);
 
@@ -50,19 +50,23 @@ public class InventoryController {
 	/**
 	 * 아이템 목록 업데이트
 	 */
-	 @SuppressWarnings("serial")
-	@RequestMapping(value="playerItemInsert" ,produces="text/plain;charset=UTF-8" )
+	@SuppressWarnings("serial")
+	@RequestMapping(value = "playerItemInsert", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
-	public boolean playerItemInsert(HttpSession session, String itemParam) throws Exception{
-		System.out.println(itemParam);
+	public boolean playerItemInsert(HttpSession session, String itemParam) throws Exception {
+		PlayerItemDTO[] jsonList = null;
 		Gson gson = new Gson();
-		
-		List<PlayerItemDTO> jsonList = gson.fromJson(itemParam, new ArrayList<PlayerItemDTO>(){}.getClass());
+		try {
+			jsonList = gson.fromJson(itemParam, PlayerItemDTO[].class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(jsonList);
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		ArrayList<PlayerItemDTO> list = new ArrayList<PlayerItemDTO>();
-		for (int i = 0; i < jsonList.size(); i++) {
-			list.add(new PlayerItemDTO(jsonList.get(i).getPiSq(), playerNickname, jsonList.get(i).getItemCode(),
-					jsonList.get(i).getPiIsused(), jsonList.get(i).getPiIndex(), null));
+		for (int i = 0; i < jsonList.length; i++) {
+			list.add(new PlayerItemDTO(jsonList[i].getPiSq(), playerNickname, jsonList[i].getItemCode(),
+					jsonList[i].getPiIsused(), jsonList[i].getPiIndex(), null));
 		}
 		System.out.println(list);
 		try {

@@ -26,8 +26,8 @@
 		m.item_code=i.item_code
 	</select>
 	<update id="playerItemInsert" parameterType="playerItemDTO">
-		update player_item
-		pi_isused=#{pi_isused},pi_index=#{pi_index} where
+		update player_item set
+		pi_index=#{piIndex} where
 		pi_sq=#{piSq}
 	</update>
 	<insert id="auctionInsertPlayerItem" parameterType="playerItemDTO">

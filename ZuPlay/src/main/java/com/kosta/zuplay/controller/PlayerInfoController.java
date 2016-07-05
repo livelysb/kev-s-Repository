@@ -64,7 +64,7 @@ public class PlayerInfoController {
 	}
 	
 	@RequestMapping(value={"userInfo"})
-	public ModelAndView userInfo(HttpSession session) throws Exception {
+	public ModelAndView userInfo(HttpSession session, String targetPlayer) throws Exception {
 		ModelAndView mv = new ModelAndView("userInfo");
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		PlayerDTO playerDTO = playerInfoService.getPlayer(playerNickname);

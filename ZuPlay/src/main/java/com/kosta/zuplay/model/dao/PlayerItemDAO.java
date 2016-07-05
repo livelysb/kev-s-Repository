@@ -8,7 +8,7 @@ import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 
 public interface PlayerItemDAO {
 	List<PlayerItemDTO> playerItemSelectAll(String playerNickname) throws Exception;
-	int playerItemInsert(List<PlayerItemDTO> list) throws Exception;
+	int playerItemInsert(PlayerItemDTO dto) throws Exception;
 	/**
 	 * 아이템정보 player_item 테이블에 삽입
 	 */

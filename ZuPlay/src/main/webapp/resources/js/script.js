@@ -272,7 +272,7 @@ $(function(){
                               pagenation(item.amount/10+1)
                            }
                         }else{
-                           str+="<tr><td class='stock-select'>"+item.isuKorAbbrv+"</a></td>"
+                           str+="<tr class='stock-evt'><td class='stock-select'>"+item.isuKorAbbrv+"</a></td>"
                            str+="<td>"+item.priceDTO.trdPrc +"</td>";
                            str+="<td>"+item.priceDTO.cmpprevddPrc +"</td>";
                            str+="<td>"+item.priceDTO.fluctuationRate +"</td>";
@@ -315,6 +315,8 @@ $(function(){
             
             /*종목명 클릭 시 상세정보 띄어줌.*/
             var showCompanyInfo = function(code){
+            	if(!code)
+            		return;
                 var companyId = "#company-"+code;
                 if(setting.page.indexOf(companyId) > -1){
                 	$(companyId).jqxWindow("show");

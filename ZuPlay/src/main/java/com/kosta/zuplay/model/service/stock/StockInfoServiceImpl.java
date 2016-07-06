@@ -53,11 +53,21 @@ public class StockInfoServiceImpl implements StockInfoService {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		List<MasterDTO> masterList = stockInfoDAO.getStockList(map);
 		for (MasterDTO masterDTO : masterList) {
+			
+			//등락률
 			double fr = (masterDTO.getPriceDTO().getTrdPrc() * 100)
 					/ (masterDTO.getPriceDTO().getTrdPrc() - masterDTO.getPriceDTO().getCmpprevddPrc()) - 100;
 			int fr2 = (int) (fr * 100);
 			fr = (double) (fr2 / 100.0);
 			masterDTO.getPriceDTO().setFluctuationRate(fr);
+			
+			//좋아하는 기업인지
+			PlayerStockDAO playerStockDAO = sqlSession.getMapper(PlayerStockDAO.class);
+			List<String> stockLikeList = playerStockDAO.getLikeStock(masterDTO.getIsuCd());
+			for (String isuCd2 : stockLikeList) {
+				if (isuCd2.equals(masterDTO.getIsuCd()))
+					masterDTO.setLike(true);
+			}
 		}
 		return masterList;
 	}
@@ -71,8 +81,14 @@ public class StockInfoServiceImpl implements StockInfoService {
 
 			masterDTO.setDpList(stockInfoDAO.getDPList(isuCd));
 			masterDTO.setRtpList(stockInfoDAO.getRTPList(isuCd));
+			
+			//좋아하는 기업인지
 			PlayerStockDAO playerStockDAO = sqlSession.getMapper(PlayerStockDAO.class);
 			List<String> stockLikeList = playerStockDAO.getLikeStock(isuCd);
+			for (String isuCd2 : stockLikeList) {
+				if (isuCd2.equals(isuCd))
+					masterDTO.setLike(true);
+			}
 			
 			//등락률
 			double fr = (masterDTO.getPriceDTO().getTrdPrc() * 100)
@@ -81,10 +97,6 @@ public class StockInfoServiceImpl implements StockInfoService {
 			fr = (double) (fr2 / 100.0);
 			masterDTO.getPriceDTO().setFluctuationRate(fr);
 			
-			for (String isuCd2 : stockLikeList) {
-				if (isuCd2.equals(isuCd))
-					masterDTO.setLike(true);
-			}
 			
 			//플레이어가 가진 해당 주식 수량
 			PlayerListsDTO playerListsDTO = playerStockService.getPlayerStock(playerNickname, isuCd);

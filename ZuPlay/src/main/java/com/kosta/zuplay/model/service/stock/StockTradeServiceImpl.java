@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
 import com.kosta.zuplay.model.service.player.PlayerInfoService;
 
 @Service
@@ -50,8 +51,10 @@ public class StockTradeServiceImpl implements StockTradeService {
 		int playerMoney = playerInfoService.getMoney(playerNickname);
 		int price = (int) stockInfoService.getPrice(isuCd).getTrdPrc();
 		int totalPrice = (int) (price * plQuantity * 1.00015); // 총 금액
-		int quantity = playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity();// 현재
-																								// 보유량
+		int quantity = 0;
+		PlayerListsDTO playerListsDTO = playerStockService.getPlayerStock(playerNickname, isuCd);// 현재보유량
+		if(playerListsDTO!=null)
+			quantity = playerListsDTO.getPlQuantity();
 		System.out.println("playerMoney : " + playerMoney);
 		System.out.println("price : " + price);
 		System.out.println("totalPrice : " + totalPrice);

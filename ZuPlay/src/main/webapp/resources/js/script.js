@@ -11,13 +11,12 @@ $(function(){
 				userInfo.grade=data.playerGrade;
 				userInfo.dailyRank=data.playerDailyRank;
 				userInfo.seasonRank=data.playerSeasonRank;
-
+				userInfo.theme = "kokomo";
+				
 				if(callBack){
 					callBack();
 				}
-				// userInfo.friends =data.
-				// userInfo.theme =data.
-				
+
 			},
 			error:function(){
 				console.log("Exception : updatePI");
@@ -37,7 +36,6 @@ $(function(){
 	
 	var initContent = function(){
 		console.log("start init content");
-		console.log(userInfo);
 		
 		var initWs = function(){
 			connect();
@@ -56,7 +54,7 @@ $(function(){
    
     /* 실시간 주가 정보 */
     var rtaInit = function(){
-	  	
+	  
      $("#rta-Window").jqxWindow({
            width:"400",
            height:"450",
@@ -78,7 +76,6 @@ $(function(){
 	     	       contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 	     	       data: {"page":stockPage,"keyword":"undefined"},
 	     	       success:function(data){
-	     	    	   console.log(data)
 	     	    	   stockPage++;
 	     	    	   var tbd = $("#rta-tbody").empty();
 	     	    	   $(data).each(function(index, item) {
@@ -300,12 +297,12 @@ $(function(){
           
           var updateAvatar = function(){
              for(var i=1; i<=6; i++){
-            	
                 var partSrc = $("#inven-player-"+i+">.item-img").attr("src");
+                console.log(userInfo.gender)
 
                 if(partSrc === "" || typeof(partSrc) === "undefined"){
                 	if(i<=2){ 
-                		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/"+userInfo.gender.toLowerCase()+"_"+setting.parts[i-1]+"_00.png");
+                		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/"+(userInfo.gender).toLowerCase()+"_"+setting.parts[i-1]+"_00.png");
                 	}else if(i<=4){
                 		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/a_"+setting.parts[i-1]+"_00.png");
                 	}else{
@@ -941,7 +938,7 @@ $(function(){
       friendBook();
       financialInit();
       auctionInit();
-      
+
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
             $("#rta-btn").setBtn($("#rta-Window"));
@@ -960,5 +957,5 @@ $(function(){
       
 	};
 	
-	updatePI(initContent());
+	updatePI(initContent);
 });

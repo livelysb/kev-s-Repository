@@ -12,20 +12,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
+import com.kosta.zuplay.model.service.stock.PlayerStockService;
 import com.kosta.zuplay.model.service.stock.StockInfoService;
 
 @Controller
 public class StockInfoController {
 
 	@Autowired
-	private StockInfoService stockInfo;
+	private StockInfoService stockInfoService;
+	
+	@Autowired
+	private PlayerStockService playerStockService;
 
 	@ResponseBody
 	@RequestMapping(value = "realTimeStock", produces = "application/json;charset=UTF-8")
 	public String getStockList(HttpSession session, String page, String keyword) throws Exception{
 		List<MasterDTO> masterList = null;
 		try {
-			masterList = stockInfo.getStockList(Integer.parseInt(page), keyword);
+			masterList = stockInfoService.getStockList(Integer.parseInt(page), keyword);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
 			e.printStackTrace();
@@ -36,7 +40,7 @@ public class StockInfoController {
 		int amount = 877;
 		if(!keyword.equals("undefined")) {
 			try {
-				amount = stockInfo.getListSize(keyword);
+				amount = stockInfoService.getListSize(keyword);
 			} catch (Exception e) {
 				session.setAttribute("errorMsg", e.toString());
 				e.printStackTrace();
@@ -53,8 +57,9 @@ public class StockInfoController {
 	@RequestMapping(value = "companyInfo", produces = "application/json;charset=UTF-8")
 	public ModelAndView getStock(HttpSession session, String isuCd) throws Exception{
 		MasterDTO masterDTO;
+		String playerNickname = (String)session.getAttribute("playerNickname");
 		try {
-			masterDTO = stockInfo.getStockDetail((String)session.getAttribute("playerNickname"), isuCd);
+			masterDTO = stockInfoService.getStockDetail(playerNickname, isuCd);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
 			e.printStackTrace();
@@ -62,6 +67,7 @@ public class StockInfoController {
 		}
 		ModelAndView mv = new ModelAndView("companyInfo");
 		mv.addObject("masterDTO", masterDTO);
+		mv.addObject("plQuantity", playerStockService.getPlayerStock(playerNickname, isuCd));
 		return mv;
 	}
 }

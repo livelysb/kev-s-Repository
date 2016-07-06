@@ -29,12 +29,12 @@
           <label>${playerNickname}</label>
         </div>
         <div class="side-avatar" >
-          <img src="resources/img/avatar/clothes/a_clothes_01.png" id="avatar-clothes">
-          <img src="resources/img/avatar/hair/a_hair_01.png" id="avatar-hair">
-          <img src="resources/img/avatar/eyes/a_eyes_01.png" id="avatar-eyes">
-          <img src="resources/img/avatar/mouse/a_mouse_01.png" id="avatar-mouse">
-          <img src="resources/img/avatar/earring/a_earring_01.png" id="avatar-earring">
-          <img src="resources/img/avatar/acc/a_acc_01.png" id="avatar-acc">
+          <img src="" id="side-avatar-player-clothes">
+          <img src="" id="side-avatar-player-hair">
+          <img src="" id="side-avatar-player-eyes">
+          <img src="" id="side-avatar-player-mouse">
+          <img src="" id="side-avatar-player-earring">
+          <img src="" id="side-avatar-player-acc">
         </div>
         <!-- 사이드 아바타 종료 -->
       </div>

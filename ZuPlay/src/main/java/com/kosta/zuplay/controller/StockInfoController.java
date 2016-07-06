@@ -58,8 +58,10 @@ public class StockInfoController {
 	public ModelAndView getStock(HttpSession session, String isuCd) throws Exception{
 		MasterDTO masterDTO;
 		String playerNickname = (String)session.getAttribute("playerNickname");
+		int plQuantity = 0;
 		try {
 			masterDTO = stockInfoService.getStockDetail(playerNickname, isuCd);
+			plQuantity = playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity();
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
 			e.printStackTrace();
@@ -67,7 +69,7 @@ public class StockInfoController {
 		}
 		ModelAndView mv = new ModelAndView("companyInfo");
 		mv.addObject("masterDTO", masterDTO);
-		mv.addObject("plQuantity", playerStockService.getPlayerStock(playerNickname, isuCd));
+		mv.addObject("plQuantity", plQuantity);
 		return mv;
 	}
 }

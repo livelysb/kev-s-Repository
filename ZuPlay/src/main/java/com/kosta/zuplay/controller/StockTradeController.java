@@ -20,6 +20,7 @@ public class StockTradeController {
 	public boolean butStock(HttpSession session, String isuCd, int plQuantity) throws Exception{
 		System.out.println("isuCd : " + isuCd);
 		System.out.println("plQuantity : " + plQuantity);
+		
 		String playerNickname = (String)session.getAttribute("playerNickname");
 		try {
 			return stockTradeService.buyStock(playerNickname, isuCd, plQuantity);
@@ -33,6 +34,8 @@ public class StockTradeController {
 	@RequestMapping(value="sellStock", produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public boolean sellStock(HttpSession session, String isuCd, int plQuantity) throws Exception {
+		System.out.println("isuCd : " + isuCd);
+		System.out.println("plQuantity : " + plQuantity);
 		String playerNickname = (String)session.getAttribute("playerNickname");
 		try {
 			return stockTradeService.sellStock(playerNickname, isuCd, plQuantity);

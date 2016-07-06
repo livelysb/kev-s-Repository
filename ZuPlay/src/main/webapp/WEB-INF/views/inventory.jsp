@@ -58,5 +58,31 @@
 					<td id="inven-player-30"></td>
 				</tr>
 			</table>
+			<!-- 경매장 판매 모달 -->
+			<div class="modal fade inven-auction-modal" tabindex="-1" role="dialog"
+				aria-labelledby="mySmallModalLabel" aria-hidden="true">
+				<div class="vertical-alignment-helper">
+					<div class="modal-dialog vertical-align-center">
+
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content" id="inven-auction-conten">
+								<div class="modal-header">
+									<h4>
+										<div class="modal-title">경매장판매</div>
+									</h4>
+								</div>
+								<div class="modal-body">
+									
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 		</div>
 	</div>

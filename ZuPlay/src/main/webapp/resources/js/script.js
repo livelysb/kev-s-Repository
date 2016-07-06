@@ -231,9 +231,11 @@ $(function(){
         			  };
         		  }else if(auctionIsOpen==true){
         			  //경매장에 아이템 판매
-        			  if(confirm("판매하시겠습니까?")) {
-        				  auctionSell($(this).children().data("item"))
-        			  };
+        			  $(".inven-auction-conten").modal("show");
+        			  
+        			  
+        				  //auctionSell($(this).children().data("item"))
+        			  
         		  }
         		  return false;
         	  });

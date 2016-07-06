@@ -605,9 +605,10 @@ $(function(){
          //추가 된 친구조회
          var friendselectAll = function(){
         	 var data = ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#")
-        	 
+        	 console.log("친구조회")
+        	 console.log(data)
          }
-         
+         friendselectAll()
          
          // 친구검색
          $("#friend-add-search").on("click",function(){

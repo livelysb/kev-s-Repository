@@ -21,10 +21,11 @@ public class PlayerDTO {
 	
 	private boolean todayFirst;
 
-
 	private int totalMoney; //총 자산
 	private double earningRate; //수익률
-	private PlayerItemDTO playerItemDTO;
+	private double totalEarningRate; //전체수익률
+	
+	private List<PlayerItemDTO> playerItemDTO;
 	private List<String> likerList;
 	
 	
@@ -152,16 +153,25 @@ public class PlayerDTO {
 	public double getEarningRate() {
 		return earningRate;
 	}
+	
+	
+	public double getTotalEarningRate() {
+		return totalEarningRate;
+	}
+
+	public void setTotalEarningRate(double totalEarningRate) {
+		this.totalEarningRate = totalEarningRate;
+	}
 
 	public void setEarningRate(double earningRate) {
 		this.earningRate = earningRate;
 	}
 
-	public PlayerItemDTO getPlayerItemDTO() {
+	public List<PlayerItemDTO> getPlayerItemDTO() {
 		return playerItemDTO;
 	}
 
-	public void setPlayerItemDTO(PlayerItemDTO playerItemDTO) {
+	public void setPlayerItemDTO(List<PlayerItemDTO> playerItemDTO) {
 		this.playerItemDTO = playerItemDTO;
 	}
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kosta.zuplay.model.dao.PlayerInfoDAO;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
+import com.kosta.zuplay.model.service.item.InventoryService;
 import com.kosta.zuplay.model.service.stock.PlayerStockService;
 import com.kosta.zuplay.model.service.stock.StockInfoService;
 import com.kosta.zuplay.model.service.system.UtilService;
@@ -19,7 +20,7 @@ import com.kosta.zuplay.model.service.system.UtilService;
 public class PlayerInfoServicempl implements PlayerInfoService {
 
 	@Autowired
-	private EarningRateService earningRate;
+	private EarningRateService earningRateService;
 
 	@Autowired
 	private PlayerInfoService playerInfoService;
@@ -29,23 +30,32 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 
 	@Autowired
 	private StockInfoService stockInfoService;
+	
+	@Autowired
+	private InventoryService inventoryService;
 
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Autowired
 	private UtilService utilService;
-
+	
 	@Override
 	public PlayerDTO getPlayer(String playerNickname) throws Exception{
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		PlayerDTO playerDTO = playerInfoDAO.getPlayer(playerNickname);
-		
-		playerDTO = getRubyPerDay(playerDTO); //첫접속인지 확인하여 루비 지급
-		playerInfoDAO.lastAccessUpdate(playerNickname);//최종접속일 갱신
+		return playerDTO;
+	}
+	
+	@Override
+	public PlayerDTO getPlayerDetail(String playerNickname) throws Exception {
+		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
+		PlayerDTO playerDTO = getPlayer(playerNickname);
+		playerDTO.setPlayerItemDTO(inventoryService.playerItemSelectAll(playerNickname));
 		playerDTO.setLikerList(playerInfoDAO.getLikeList(playerNickname));//좋아하는사람 목록
-		playerDTO.setEarningRate(earningRate.calEarningRate(playerNickname)); // 전체수익률
-		playerDTO.setTotalMoney(getTotalMoney(playerNickname));	//총 자산								// 수익률
+		playerDTO.setEarningRate(earningRateService.calDailyEarningRate(playerNickname)); // 일일수익률
+		playerDTO.setTotalEarningRate(earningRateService.calEarningRate(playerNickname)); // 전체수익률
+		playerDTO.setTotalMoney(getTotalMoney(playerNickname));	//총 자산		
 		return playerDTO;
 	}
 	
@@ -79,7 +89,10 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 	}
 	
 	@Override
-	public PlayerDTO getRubyPerDay(PlayerDTO playerDTO) throws Exception {
+	public Boolean getRubyPerDay(String playerNickname) throws Exception {
+		boolean result = false;
+		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
+		PlayerDTO playerDTO = playerInfoDAO.getPlayer(playerNickname);
 		String lastAccess = playerDTO.getPlayerLastAccess().replaceAll("-", "");
 		if(!utilService.currentDate().equals(lastAccess.substring(0, 8))) {
 			System.out.println(playerDTO.getPlayerNickname() + "님, 오늘의 최초접속 5000원 드립니다.");	
@@ -87,8 +100,10 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 			playerDTO.setPlayerRuby(playerDTO.getPlayerRuby()+5000); 
 			playerInfoService.updateRuby(playerDTO.getPlayerNickname(), playerDTO.getPlayerRuby());
 			playerDTO.setTodayFirst(true);// 첫 접속인 경우 뷰에 알리기 위함;
+			result = true;
 		}
-		return playerDTO;
+		playerInfoDAO.lastAccessUpdate(playerNickname);//최종접속일 갱신
+		return result;
 	}
 	
 	
@@ -130,6 +145,9 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 		System.out.println(list);
 		return list;
 	}
+
+
+
 
 
 	

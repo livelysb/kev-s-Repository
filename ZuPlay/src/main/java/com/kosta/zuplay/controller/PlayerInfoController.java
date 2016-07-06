@@ -67,7 +67,7 @@ public class PlayerInfoController {
 	public ModelAndView userInfo(HttpSession session, String targetPlayer) throws Exception {
 		ModelAndView mv = new ModelAndView("userInfo");
 		String playerNickname = (String) session.getAttribute("playerNickname");
-		PlayerDTO playerDTO = playerInfoService.getPlayer(playerNickname);
+		PlayerDTO playerDTO = playerInfoService.getPlayerDetail(playerNickname);
 		if(playerDTO.getPlayerGender().equals("M"))
 			playerDTO.setPlayerGender("남성");
 		else
@@ -85,7 +85,15 @@ public class PlayerInfoController {
 		mv.addObject("likeNum",playerDTO.getLikerList().size());
 		//mv.addObject("isOn", (context.getAttribute(playerNickname));
 		
-		
 		return mv;
+	}
+	
+	@RequestMapping(value={"playerStock"}, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String playerStock(HttpSession session) {
+		String playerNickname = (String)session.getAttribute("playerNickname");
+		Gson gson = new Gson();
+		String json = gson.toJson(null);
+		return json;
 	}
 }

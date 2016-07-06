@@ -15,6 +15,11 @@ public interface PlayerInfoService {
 	public PlayerDTO getPlayer(String playerNickname) throws Exception;
 
 	/**
+	 * 플레이어 상세정보 포함 가져오기
+	 * */
+	public PlayerDTO getPlayerDetail(String playerNickname) throws Exception;
+	
+	/**
 	 * 모든 플레이어의 닉네임 가져오기
 	 * */
 	public List<String> getAllPlayerNickName() throws Exception;
@@ -32,7 +37,7 @@ public interface PlayerInfoService {
 	/**
 	 * 접속자의 최종 접속시간을 확인하여 하루에 한번씩 1000루비 주기 
 	 * */
-	public PlayerDTO getRubyPerDay(PlayerDTO playerDTO) throws Exception;
+	public Boolean getRubyPerDay(String playerNickname) throws Exception;
 	
 	
 	/**

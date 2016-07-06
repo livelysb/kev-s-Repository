@@ -15,7 +15,7 @@
 		<result column="PLAYER_LAST_ACCESS" property="playerLastAccess"/>
 		<result column="PLAYER_DAILY_RANK" property="playerDailyRank" />
 		<result column="PLAYER_SEASON_RANK" property="playerSeasonRank" />
-		<association property="playerItemDTO" javaType="playerItemDTO">
+		<collection property="playerItemDTO" javaType="playerItemDTO">
 			<id column="pi_sq" property="piSq" />
 			<result column="player_nickname" property="playerNickname" />
 			<result column="item_code" property="itemCode" />
@@ -28,9 +28,8 @@
 				<result column="item_class" property="itemClass" />
 				<result column="item_grade" property="itemGrade" />
 				<result column="item_img" property="itemImg" />
-
 			</association>
-		</association>
+		</collection>
 	</resultMap>
 
 	<select id="playerInfoSelectAll" parameterType="String"

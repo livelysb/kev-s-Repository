@@ -5,9 +5,9 @@
 
 	<!-- 주식 리스트로 볼때 -->
 	<resultMap type="masterDTO" id="master">
-		<id column="isuCd" property="isuCd"/>
+		<id column="isuCd" property="isuCd" />
 		<result column="isuKorAbbrv" property="isuKorAbbrv" />
-		<result column="kind" property="kind"/>
+		<result column="kind" property="kind" />
 		<association property="priceDTO" javaType="priceDTO">
 			<result column="cmpprevddPrc" property="cmpprevddPrc" />
 			<result column="trdPrc" property="trdPrc" />
@@ -15,18 +15,18 @@
 			<result column="opnprc" property="opnprc" />
 			<result column="hgprc" property="hgprc" />
 			<result column="lwprc" property="lwprc" />
-			
+
 		</association>
 	</resultMap>
-	
+
 	<!-- 주식 상세하게 볼때 -->
 	<resultMap type="masterDTO" id="master2">
-		<id column="isuCd" property="isuCd"/>
+		<id column="isuCd" property="isuCd" />
 		<result column="isuKorAbbrv" property="isuKorAbbrv" />
 		<result column="listShrs" property="listShrs" />
 		<result column="uplmtprc" property="uplmtprc" />
 		<result column="lwlmtprc" property="lwlmtprc" />
-		<result column="kind" property="kind"/>
+		<result column="kind" property="kind" />
 		<association property="priceDTO" javaType="priceDTO">
 			<result column="cmpprevddPrc" property="cmpprevddPrc" />
 			<result column="trdPrc" property="trdPrc" />
@@ -36,15 +36,15 @@
 			<result column="lwprc" property="lwprc" />
 		</association>
 	</resultMap>
-	
+
 	<resultMap type="realTimePriceDTO" id="realTimePrice">
-		<result column="RP_trdPrc" property="rpTrdPrc"/>
-		<result column="RP_trdTm" property="rpTrdTm"/>
+		<result column="RP_trdPrc" property="rpTrdPrc" />
+		<result column="RP_trdTm" property="rpTrdTm" />
 	</resultMap>
-	
+
 	<resultMap type="dailyPriceDTO" id="dailyPrice">
-	<result column="DP_clsprc" property="dpClsprc"/>
-	<result column="DP_DATE" property="dpDate"/>
+		<result column="DP_clsprc" property="dpClsprc" />
+		<result column="DP_DATE" property="dpDate" />
 	</resultMap>
 
 	<select id="getLists" resultType="ListsDTO">
@@ -62,39 +62,45 @@
 
 	<select id="getStockList" parameterType="java.util.Map"
 		resultMap="master">
-		
-		select * from ( SELECT * FROM (          
-    SELECT ROW_NUMBER() OVER(ORDER BY  prevddAccTrdvol desc) rnum, isuCd, isuKorAbbrv, prevddAccTrdvol, kind
-    FROM master
-<where>
-		<if test="isuKorAbbrv!='undefined'">
-			upper(isuKorAbbrv) like upper('%${isuKorAbbrv}%')
-		</if>
-</where>
-	       ) WHERE rnum >= #{startPage} AND rnum &lt;= #{endPage} ) m join price p on m.isucd = p.isucd
-	        
+
+		select * from ( SELECT * FROM (
+		SELECT ROW_NUMBER() OVER(ORDER BY prevddAccTrdvol desc) rnum, isuCd,
+		isuKorAbbrv, prevddAccTrdvol, kind
+		FROM master
+		<where>
+			<if test="isuKorAbbrv!='undefined'">
+				upper(isuKorAbbrv) like upper('%${isuKorAbbrv}%')
+			</if>
+		</where>
+		) WHERE rnum >= #{startPage} AND rnum &lt;= #{endPage} ) m join price
+		p on m.isucd = p.isucd
+
 	</select>
-	
+
 	<select id="getListSize" parameterType="String" resultType="Integer">
 		select count(*) from master
 		where isuKorAbbrv like '%${value}%'
 	</select>
-	
-	
+
+
 	<select id="getStock" parameterType="String" resultMap="master2">
-	select * from 
-	(select isuKorAbbrv, isuCd, listShrs, uplmtprc, lwlmtprc, kind from master where isucd = #{value}) 
-	m join price p on m.isucd = p.isucd
+		select * from
+		(select isuKorAbbrv, isuCd, listShrs, uplmtprc, lwlmtprc, kind from master
+		where isucd = #{value})
+		m join price p on m.isucd = p.isucd
 	</select>
-	
+
 	<select id="getRTPList" parameterType="String" resultMap="realTimePrice">
-		select rp_trdPrc, rp_trdtm from realtime_price
+		select
+		rp_trdPrc, rp_trdtm from realtime_price
 		where isucd = #{value}
 	</select>
-	
+
 	<select id="getDPList" parameterType="String" resultMap="dailyPrice">
-		select dp_clsprc, dp_date from daily_price
-		where isucd = #{value} and dp_date >= ADD_MONTHS(TRUNC(SYSDATE), -1)
+		select
+		dp_clsprc, dp_date from daily_price
+		where isucd = #{value} and dp_date
+		>= ADD_MONTHS(TRUNC(SYSDATE), -1)
 	</select>
-	
+
 </mapper>

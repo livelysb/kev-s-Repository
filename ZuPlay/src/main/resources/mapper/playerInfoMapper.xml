@@ -15,7 +15,7 @@
 		<result column="PLAYER_LAST_ACCESS" property="playerLastAccess"/>
 		<result column="PLAYER_DAILY_RANK" property="playerDailyRank" />
 		<result column="PLAYER_SEASON_RANK" property="playerSeasonRank" />
-		<collection property="playerItemDTO" javaType="playerItemDTO">
+		<collection property="playerItemDTO" ofType="playerItemDTO">
 			<id column="pi_sq" property="piSq" />
 			<result column="player_nickname" property="playerNickname" />
 			<result column="item_code" property="itemCode" />

@@ -241,7 +241,6 @@ $(function(){
           
           //상점판매
           var storeSell = function(imgData){
-        	  console.log(imgData)
         	  $.ajax({
         		  url:"itemStoreSell",
         		  type:"post",
@@ -373,7 +372,6 @@ $(function(){
                      $("#stockListTBody").html(str);
                      $(document).on("click", "#stock-window tr",function(e){
                     	var cd = $(this).find(":hidden").val();
-                    	console.log(cd);
                     	showCompanyInfo(cd);
                      })
                   },
@@ -826,7 +824,6 @@ $(function(){
           		dataType:"json",
           		data:"keyword=" + $("#auction-search").val()+"&itemClass="+$("#auction-select").val()+"&page="+page,
           		success:function(data){
-          			console.log(data);
           			if(data.length==0){
           				return;
           			} 

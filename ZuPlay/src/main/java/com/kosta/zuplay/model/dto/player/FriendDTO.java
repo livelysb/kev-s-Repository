@@ -1,22 +1,28 @@
 package com.kosta.zuplay.model.dto.player;
 
-public class FriendDTO {
-	private int friendSq;				//친구코드
-	private String playerNickname;		//닉네임1
-	private String playerNickname2;		//닉네임2
-	private String friendIsAccepted;	//친구 수락여부(T=친구/F=친구수락대기중)
-	private String friendDate;			//친구신청일자
+import java.util.List;
 
-	public FriendDTO() {}
-	
+public class FriendDTO {
+	private int friendSq; // 친구코드
+	private String playerNickname; // 닉네임1
+	private String playerNickname2; // 닉네임2
+	private String friendIsAccepted; // 친구 수락여부(T=친구/F=친구수락대기중)
+	private String friendDate; // 친구신청일자
+
+	private List<PlayerItemDTO> list;
+
+	public FriendDTO() {
+	}
+
 	public FriendDTO(int friendSq, String playerNickname, String playerNickname2, String friendIsAccepted,
-			String friendDate) {
+			String friendDate, List<PlayerItemDTO> list) {
 		super();
 		this.friendSq = friendSq;
 		this.playerNickname = playerNickname;
 		this.playerNickname2 = playerNickname2;
 		this.friendIsAccepted = friendIsAccepted;
 		this.friendDate = friendDate;
+		this.list = list;
 	}
 
 	public int getFriendSq() {
@@ -59,12 +65,19 @@ public class FriendDTO {
 		this.friendDate = friendDate;
 	}
 
+	public List<PlayerItemDTO> getList() {
+		return list;
+	}
+
+	public void setList(List<PlayerItemDTO> list) {
+		this.list = list;
+	}
+
 	@Override
 	public String toString() {
 		return "FriendDTO [friendSq=" + friendSq + ", playerNickname=" + playerNickname + ", playerNickname2="
-				+ playerNickname2 + ", friendIsAccepted=" + friendIsAccepted + ", friendDate=" + friendDate + "]";
+				+ playerNickname2 + ", friendIsAccepted=" + friendIsAccepted + ", friendDate=" + friendDate + ", list="
+				+ list + "]";
 	}
-	
-	
-	
+
 }

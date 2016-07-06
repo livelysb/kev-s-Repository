@@ -1,7 +1,7 @@
 userInfo = {
 	nickName : "",
-	gender : "여자",
-	theme : "kokomo",
+	gender : "",
+	theme : "",
 	money : 0,
 	ruby : 0,
 	grade : "",

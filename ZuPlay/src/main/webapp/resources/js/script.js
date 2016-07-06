@@ -224,64 +224,64 @@ $(function(){
               updateAvatar();
           })
           
-// //////////////////////////////////////////////////////////////////////////////////
-          	  // 인벤토리 판매
-        	  $("#inven-items td").contextmenu(function() {
-        		  var storeIsOpen = $("#store-window").jqxWindow("isOpen");
-        		  var auctionIsOpen = $("#auction-window").jqxWindow("isOpen");
-        		  
-        		  if(storeIsOpen==true && auctionIsOpen==true) {
-        			  
-        		  }else if(storeIsOpen==true){
-        			  // 상점에 아이템 판매
-        			  if(confirm("판매하시겠습니까?")){
-        				  storeSell($(this).children().data("item"))
-        			  };
-        		  }else if(auctionIsOpen==true){
-        			  // 경매장에 아이템 판매
-        			  $(".inven-auction-conten").modal("show");
-        			  
-        			  
-        				  // auctionSell($(this).children().data("item"))
-        			  
-        		  }
-        		  return false;
-        	  });
+          //인벤토리 판매
+          $("#inven-items td").contextmenu(function() {
+             var storeIsOpen = $("#store-window").jqxWindow("isOpen");
+             var auctionIsOpen = $("#auction-window").jqxWindow("isOpen");
+             
+             if(storeIsOpen==true && auctionIsOpen==true) {
+             
+             }else if(storeIsOpen==true){
+                //상점에 아이템 판매
+                if(confirm("판매하시겠습니까?")){
+                   storeSell($(this).children().data("item"));
+                };
+             }else if(auctionIsOpen==true){
+                //경매장에 아이템 판매
+                $(".inven-auction-modal").modal("show");
+                $("#inven-auction-piSq").val($(this).children().data("item").piSq);
+             }
+             return false;
+          });
+       
+       //모달에서 판매등록
+       $("#inven-auction-sell-btn").on("click",function(){
+          auctionSell($("#inven-auction-piSq").val(),$("#inven-auction-imPurchasePrice").val())
+       })
+       
+       //상점판매
+       var storeSell = function(imgData){
+          $.ajax({
+             url:"itemStoreSell",
+             type:"post",
+             data:"piSq="+imgData.piSq+"&itemCode="+imgData.itemDTO.itemCode,
+             dataType:"text",
+             success:function(result){
+                alert(result)
+             },
+             error:function(err){
+            	 console.log("Exception : itemStoreSell");
+             }
+          })
+       }
+       
+       //경매판매 
+       var auctionSell = function(piSq,imPurchasePrice){
           
-          
-          // 상점판매
-          var storeSell = function(imgData){
-        	  $.ajax({
-        		  url:"itemStoreSell",
-        		  type:"post",
-        		  data:"piSq="+imgData.piSq+"&itemCode="+imgData.itemDTO.itemCode,
-        		  dataType:"text",
-        		  success:function(result){
-        			  alert(result)
-        		  },
-        		  error:function(err){
-        			 console.log("Exception : storeSell");
-        		  }
-        	  })
-          }
-          
-          // 경매판매
-          var auctionSell = function(imgData,imPurchasePrice){
-        	  
-        	  $.ajax({
-        		  url:"auctionSell",
-        		  type:"post",
-        		  data:"piSq="+imgData.piSq+"&imPurchasePrice="+imPurchasePrice,
-        		  dataType:"",
-        		  success:function(result){
-        			  alert(result)
-        		  },
-        		  error:function(err){
-        			  console.log("Exception : auctionSell");
-        		  }
-        	  })
-          }
-// /////////////////////////////////////////////////////////////////////////////////
+          $.ajax({
+             url:"auctionSell",
+             type:"post",
+             data:"piSq="+piSq+"&imPurchasePrice="+imPurchasePrice,
+             dataType:"",
+             success:function(result){
+                alert(result)
+             },
+             error:function(err){
+            	 console.log("Exception : auctionSell");
+             }
+          })
+       }
+       
           
           var playerItemUpdate = function(){
         	  var jsonList = passingJson();

@@ -184,7 +184,8 @@ $(function(){
                   $.each(data,function(index,item){
                      var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item);
                      $("#inven-player-"+item.piIndex).html(items);
-                  })
+                  });
+                  updateAvatar()
                 },
                 error:function(err){
                    console.log("Exception : invenInit");

@@ -56,12 +56,13 @@ public class StockInfoController {
 	
 	@RequestMapping(value = "companyInfo", produces = "application/json;charset=UTF-8")
 	public ModelAndView getStock(HttpSession session, String isuCd) throws Exception{
-		MasterDTO masterDTO;
+		MasterDTO masterDTO = null;
 		String playerNickname = (String)session.getAttribute("playerNickname");
 		int plQuantity = 0;
 		try {
 			masterDTO = stockInfoService.getStockDetail(playerNickname, isuCd);
 			plQuantity = playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity();
+		} catch(NullPointerException ne) {
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
 			e.printStackTrace();

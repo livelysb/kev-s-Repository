@@ -21,11 +21,11 @@ public class ItemStoreController {
 	/**
 	 * 상점아이템 리스트 가져오기
 	 */
-	 @RequestMapping(value="itemStoreSelect" ,produces="application/json;charset=UTF-8" )
-	 @ResponseBody
-	public String itemStoreSelect(HttpSession session, String itemClass, int page) throws Exception{
-		 System.out.println(itemClass);
-		 System.out.println(page);
+	@RequestMapping(value = "itemStoreSelect", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String itemStoreSelect(HttpSession session, String itemClass, int page) throws Exception {
+		System.out.println(itemClass);
+		System.out.println(page);
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		List<ItemDTO> list;
 		try {
@@ -36,16 +36,16 @@ public class ItemStoreController {
 			throw new Exception();
 		}
 		Gson gson = new Gson();
-		String json=gson.toJson(list);
+		String json = gson.toJson(list);
 		return json;
 	}
-	
+
 	/**
 	 * 상점 아이템 구매하기
 	 */
-	 @RequestMapping(value="itemStoreBuy" ,produces="application/json;charset=UTF-8" )
+	@RequestMapping(value = "itemStoreBuy", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public int itemStoreBuy(HttpSession session, ItemDTO itemDTO, int quantity) throws Exception{
+	public int itemStoreBuy(HttpSession session, ItemDTO itemDTO, int quantity) throws Exception {
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		int result;
 		try {
@@ -54,22 +54,23 @@ public class ItemStoreController {
 			session.setAttribute("errorMsg", e.toString());
 			e.printStackTrace();
 			throw new Exception();
-		}// 1=정상 / 2=인벤토리부족 / 3=루비부족
+		} // 1=정상 / 2=인벤토리부족 / 3=루비부족
 		return result;
 	}
-	 /**
-	  * 상점 아이템 판매하기
-	  */
-	 @RequestMapping(value="itemStoreSell" ,produces="application/json;charset=UTF-8" )
-		@ResponseBody
-		public boolean itemStoreSell(HttpSession session,int piSq,String itemCode) throws Exception{
-			String playerNickname = (String) session.getAttribute("playerNickname");
-			try {
-				return itemStoreServiceImpl.itemStoreSell(playerNickname, piSq, itemCode);
-			} catch (Exception e) {
-				session.setAttribute("errorMsg", e.toString());
-				e.printStackTrace();
-				throw new Exception();
-			}
-	 }
+
+	/**
+	 * 상점 아이템 판매하기
+	 */
+	@RequestMapping(value = "itemStoreSell", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public boolean itemStoreSell(HttpSession session, int piSq, String itemCode) throws Exception {
+		String playerNickname = (String) session.getAttribute("playerNickname");
+		try {
+			return itemStoreServiceImpl.itemStoreSell(playerNickname, piSq, itemCode);
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", e.toString());
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
 }

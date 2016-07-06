@@ -968,9 +968,12 @@ $(function(){
       initWs(function(){
           //추가 된 친구조회
           var friendselectAll = function(){
-         	 var data = ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
-         	 console.log("친구조회");
-         	 console.log(data);
+         	 ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
+     		 ws.onmessage = function (event) {
+     			 console.log(event.data );
+     			 //alert(1)
+     			 //console.log(jQuery.parseJSON(JSON.stringify(event.data)));
+         	 }
           }	
           friendselectAll();
           

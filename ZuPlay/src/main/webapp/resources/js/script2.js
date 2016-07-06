@@ -42,14 +42,15 @@ $(function(){
          return false;
       })
       
-      var initWs = function(){
-         connect();
+      var initWs = function(wsCallBack){
+         connect(wsCallBack);
          $('#logout').click(function() {
             disconnect();
             location.href = "logout";
          });
       }
-   
+      
+
    
     $(".side-avatar").css({
         width : $("#avatar-clothes").css("width"),
@@ -602,13 +603,7 @@ $(function(){
              showCollapseButton: true
            });
          
-         //추가 된 친구조회
-         var friendselectAll = function(){
-        	 var data = ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#")
-        	 console.log("친구조회")
-        	 console.log(data)
-         }
-         friendselectAll()
+
          
          // 친구검색
          $("#friend-add-search").on("click",function(){
@@ -948,7 +943,6 @@ $(function(){
           })
        };
       
-      initWs();
       invenInit();
       rtaInit();
       stockListInit();
@@ -969,6 +963,19 @@ $(function(){
              showUserInfo(userInfo.nickName);
           });
       }();
+      
+      /*======================Set WebSocket=============================*/
+      initWs(function(){
+          //추가 된 친구조회
+          var friendselectAll = function(){
+         	 var data = ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
+         	 console.log("친구조회");
+         	 console.log(data);
+          }	
+          friendselectAll();
+          
+          
+      });
       
       $(".main-container").css("visibility","visible");
       $("#loading-content").remove();

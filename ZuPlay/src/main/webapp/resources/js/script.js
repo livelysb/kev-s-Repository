@@ -220,7 +220,7 @@ $(function(){
           	  //인벤토리 판매
         	  $("#inven-items td").contextmenu(function() {
         		  var storeIsOpen = $("#store-window").jqxWindow("isOpen");
-        		  var auctionIsOpen = false //$("#auction-window").jqxWindow("isOpen");
+        		  var auctionIsOpen = $("#auction-window").jqxWindow("isOpen");
         		  
         		  if(storeIsOpen==true && auctionIsOpen==true) {
         			  
@@ -688,7 +688,7 @@ $(function(){
       /*경매장*/
       var auctionInit = function(){
     	  //페이지 변수
-          var count=1;
+         var count=1;
   		var sellBtn="";
   		var colorBtn="";
   		//탭 토글
@@ -757,7 +757,6 @@ $(function(){
   				data:"imSq="+$(this).attr("id"),
   				success:function(result){
   					alert("취소되었습니다.");
-  					///판매탭 새로고침하기!!!
   					auctionSellList();
   				},
   				error:function(err){
@@ -942,5 +941,4 @@ $(function(){
     			userInfo(userInfo.nickName);
     		});
       }();
-      
 });

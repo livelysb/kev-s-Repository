@@ -36,6 +36,7 @@ public class MasterDTO {
 	private String isuCd; // 종목코드	
 	private String kind; //분류
 	
+	private double earningRate; //종목별 수익률
 	private boolean like; //좋아요
 	private int plQuantity;//수량
 	
@@ -352,6 +353,14 @@ public class MasterDTO {
 
 	public void setLike(boolean like) {
 		this.like = like;
+	}
+	
+	public double getEarningRate() {
+		return earningRate;
+	}
+
+	public void setEarningRate(double earningRate) {
+		this.earningRate = earningRate;
 	}
 
 	public int getPlQuantity() {

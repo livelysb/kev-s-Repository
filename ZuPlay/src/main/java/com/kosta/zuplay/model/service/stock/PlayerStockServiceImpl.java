@@ -1,5 +1,6 @@
 package com.kosta.zuplay.model.service.stock;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,14 +8,21 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.kosta.zuplay.model.dao.stock.PlayerStockDAO;
 import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
+import com.kosta.zuplay.model.dto.stock.MasterDTO;
+import com.kosta.zuplay.model.service.player.EarningRateService;
 
 @Service
 public class PlayerStockServiceImpl implements PlayerStockService {
 
+	@Autowired
+	private StockInfoService stockInfoService;
+	
+	@Autowired
+	private EarningRateService earningRateService;
+	
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -43,6 +51,19 @@ public class PlayerStockServiceImpl implements PlayerStockService {
 		if(playerStockDAO.setPlayerStock(map)>0)
 			return true;
 		return false;
+	}
+
+	@Override
+	public List<MasterDTO> getPlayerStocksDetail(String playerNickname) throws Exception {
+		List<MasterDTO> masterList = new ArrayList<MasterDTO>();
+		List<PlayerListsDTO> playerStockList = getPlayerStocks(playerNickname);
+		for(PlayerListsDTO playerLists : playerStockList) {
+			MasterDTO masterDTO = stockInfoService.getStockDetail(playerNickname, playerLists.getIsuCd());
+			masterDTO.setPlQuantity(playerLists.getPlQuantity());
+			masterDTO.setEarningRate(earningRateService.calItemEarningRate(playerNickname, playerLists.getIsuCd()));
+			masterList.add(masterDTO);
+		}
+		return masterList;
 	}
 
 }

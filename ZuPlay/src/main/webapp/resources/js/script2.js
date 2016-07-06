@@ -5,20 +5,21 @@ $(function(){
 			url:"updatePI",
 			dataType:"json",
 			success:function(data){
-				userInfo.nickName=data.playerNickname
-				userInfo.gender =data.playerGender
-				userInfo.money =data.playerMoney
-				userInfo.ruby =data.playerRuby
-				userInfo.grade=data.playerGrade
-				userInfo.dailyRank=data.playerDailyRank
-				userInfo.seasonRank=data.playerSeasonRank
+				console.log(data);
+				userInfo.nickName=data.playerNickname;
+				userInfo.gender =data.playerGender;
+				userInfo.money =data.playerMoney;
+				userInfo.ruby =data.playerRuby;
+				userInfo.grade=data.playerGrade;
+				userInfo.dailyRank=data.playerDailyRank;
+				userInfo.seasonRank=data.playerSeasonRank;
 				if(callBack)
 					callBack();
 				//userInfo.friends =data.
 				//userInfo.theme =data.
 			},
 			error:function(){
-				
+				console.log("Exception : 업데이트 플레이어 정보(updatePI)");
 			}
 		})
 	}
@@ -78,8 +79,7 @@ $(function(){
 	     	    	   });
 	     	       },
 	     	       error:function(e){
-	     	    	   console.log(stockPage);
-	     	    	   console.log("error" + e);
+	     	    	   console.log("Exception : 실시간 주가 정보(getRealTimeStock)");
 	     	       }
 	     	    });
      		}
@@ -103,7 +103,7 @@ $(function(){
       
       /* 기업 정보 조회 */
       var companyInfo = function(companyId){
-              var price = $(companyId + " .company-title-stock").text();
+         var price = $(companyId + " .company-title-stock").text();
               
              $(companyId).jqxWindow({
                    theme:userInfo.theme,
@@ -173,7 +173,7 @@ $(function(){
 	               })
 	             },
 	             error:function(err){
-	                alert(err+"에러발생");
+	            	console.log("Exception : 인벤토리 정보 로드(playerItemSelectAll)");
 	             }
 	          })
           }
@@ -213,7 +213,7 @@ $(function(){
             	  }
             	  playerItemUpdate()
               }
-              updatePI(updateAvatar);
+              updateAvatar();
           })
           
 ////////////////////////////////////////////////////////////////////////////////////          
@@ -251,7 +251,7 @@ $(function(){
         			  alert(result)
         		  },
         		  error:function(err){
-        			  alert(err+"에러발생")
+        			  console.log("Exception : 아이템 판매(storeSell)");
         		  }
         	  })
           }
@@ -267,7 +267,7 @@ $(function(){
         			  
         		  },
         		  error:function(){
-        			  
+        			  console.log("Exception : 경매장 판매(auctionSell)");
         		  }
         	  })
           }
@@ -280,7 +280,7 @@ $(function(){
                   type:"post",
                   data:"itemParam="+(JSON.stringify(jsonList)).toString() ,
                   error:function(err){
-                     alert(err+"에러발생");
+                	  console.log("Exception : 업데이트 플레이어 아이템(playerItemUpdate)");
                   }
                })
           }
@@ -292,14 +292,14 @@ $(function(){
                 
                 if(partSrc === "" || typeof(partSrc) === "undefined"){
                 	if(i<=2){ 
-                		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/"+(userInfo.gender).toLowerCase()+"_"+setting.parts[i-1]+"_00.png");
+                		//$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/"+(userInfo.gender).toLowerCase()+"_"+setting.parts[i-1]+"_00.png");
                 	}else if(i<=4){
-                		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/a_"+setting.parts[i-1]+"_00.png");
+                		//$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/a_"+setting.parts[i-1]+"_00.png");
                 	}else{
-                		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/empty.png");
+                		//$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/empty.png");
                 	}
                 }else{
-                   $("#inven-player-"+setting.parts[i-1]).attr("src", partSrc);
+                  // $("#inven-player-"+setting.parts[i-1]).attr("src", partSrc);
                 }
              }
           }
@@ -377,7 +377,7 @@ $(function(){
                      })
                   },
                   error:function(err){
-                     alert(err+"에러발생");
+                	  console.log("Exception : 주가 리스트 정보(stockListInit)");
                   }
                })
             }
@@ -418,7 +418,7 @@ $(function(){
                      companyInfo(companyId);
                   },
                   error:function(err){
-                     alert(err+"에러발생");
+                	 console.log("Exception : 기업 상세 정보(showCompanyInfo)");
                   }
                });
             }
@@ -505,7 +505,7 @@ $(function(){
     					}
     				},
     				error:function(err){
-    					alert(err +"에러발생");
+    					console.log("Exception : 상점 정보(storeSelect)");
     				}
     		    })
     		}
@@ -524,7 +524,7 @@ $(function(){
     	    })
     	    
     	    //아이템구매
-    	    $(".store-itemBox").on("click", function() {
+    	    var buyItems = function() {
     			var itemCode = $(this).children().attr("id");
     		
     			if(typeof(itemCode)=='undefined') return
@@ -546,10 +546,12 @@ $(function(){
     					
     				},
     				error:function(err){
-    					alert(err +"에러발생");
+    					console.log("Exception : 아이템구매(buyItems)");
     				}
     		    })
-    		})
+    		}
+    	    $(".store-itemBox").on("click", buyItems);
+    	    
     	  $("#store-window").jqxWindow({
 	          width:640,
 	          height:390,
@@ -567,7 +569,7 @@ $(function(){
       /*친구창*/
       var friendBook = function(){
     	  $("#friend-window").jqxWindow({
-    	      theme:"kokomo",
+    	      theme:userInfo.theme,
     	      width:400,
     	      maxWidth:400,
     	      minWidth:400,
@@ -598,7 +600,7 @@ $(function(){
     				  $("#friend-list-table").html(str);
     			  },
     			  error:function(err){
-    				  alert(err+"에러발생")
+    				  console.log("Exception : 친구  검색(friend-add-search)");
     			  }
     			  
     		  })

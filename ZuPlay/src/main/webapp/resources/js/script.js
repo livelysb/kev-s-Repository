@@ -167,11 +167,11 @@ $(function(){
                  });
               
               
-              var sellSlider = $(companyId + " .company-buy-slider");
-              var buySlider = $(companyId + " .company-sell-slider");
-
-              if($(companyId + " .company-sell-slider").length > 0){
-	              $(companyId + " .company-sell-slider").jqxSlider({
+              var buySlider = $(companyId + " .company-buy-slider");
+              var sellSlider = $(companyId + " .company-sell-slider");
+              
+              if($(sellSlider).length > 0){
+	              $(sellSlider).jqxSlider({
 	                  width:"100%",
 	                  showTickLabels: true,
 	                  tooltip: true,
@@ -195,7 +195,7 @@ $(function(){
               }
               
               
-              $(companyId + " .company-buy-slider").jqxSlider({
+              $(buySlider).jqxSlider({
                   width:"100%",
                   showTickLabels: true,
                   tooltip: true,
@@ -209,13 +209,13 @@ $(function(){
                   value: 0
               });
               
-              $(document).on("click", companyId + " .company-buy-btn", function(evt){
-            	  console.log(isuCd);
+              $(document).on("click", companyId + " .company-buy-btn", function(event){
             	  buyStock(isuCd,$(buySlider).val());
               })
               
               $(document).on("change",companyId + " .company-buy-slider",function(event){
                  $(companyId + " .company-buy-value").text(price * event.args.value);
+          
               });
 
       }

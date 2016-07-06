@@ -37,6 +37,11 @@ $(function(){
    var initContent = function(){
       console.log("start init content");
       
+    //전체 우클릭 제어
+      $("body").contextmenu(function(){
+         return false;
+      })
+      
       var initWs = function(){
          connect();
          $('#logout').click(function() {
@@ -168,21 +173,21 @@ $(function(){
 
       var invenInit = function(){
          
-       // 내아이템 목록 조회
+    	  // 내아이템 목록 조회
           playerItemSelectAll = function(){
              $.ajax({
                 url:"playerItemSelectAll",
                 type:"post",
                 dataType:"json",
                 success:function(data){
+                  $("td").empty();   
                   $.each(data,function(index,item){
-                     var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item)
+                     var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item);
                      $("#inven-player-"+item.piIndex).html(items);
-                  });
-                  updateAvatar();
+                  })
                 },
                 error:function(err){
-                   console.log("Exception : playerItemSelectAll");
+                   console.log("Exception : invenInit");
                 }
              })
           }
@@ -258,24 +263,31 @@ $(function(){
           })
           
           //인벤토리 판매
+
           $("#inven-items td").contextmenu(function() {
              var storeIsOpen = $("#store-window").jqxWindow("isOpen");
              var auctionIsOpen = $("#auction-window").jqxWindow("isOpen");
+             var dataItem=$(this).children().data("item");
              
              if(storeIsOpen==true && auctionIsOpen==true) {
              
              }else if(storeIsOpen==true){
                 //상점에 아이템 판매
-                if(confirm("판매하시겠습니까?")){
-                   storeSell($(this).children().data("item"));
-                };
+                if(dataItem){
+                   if(confirm("판매하시겠습니까?")){
+                      storeSell($(this).children().data("item"));
+                   };
+                }
              }else if(auctionIsOpen==true){
                 //경매장에 아이템 판매
-                $(".inven-auction-modal").modal("show");
-                $("#inven-auction-piSq").val($(this).children().data("item").piSq);
+                if(dataItem){
+                   $(".inven-auction-modal").modal("show");
+                   $("#inven-auction-piSq").val(dataItem.piSq);
+                }
              }
              return false;
           });
+
        
        //모달에서 판매등록
        $("#inven-auction-sell-btn").on("click",function(){
@@ -298,22 +310,26 @@ $(function(){
           })
        }
        
+
        //경매판매 
-       var auctionSell = function(piSq,imPurchasePrice){
-          
-          $.ajax({
-             url:"auctionSell",
-             type:"post",
-             data:"piSq="+piSq+"&imPurchasePrice="+imPurchasePrice,
-             dataType:"",
-             success:function(result){
-                alert(result)
-             },
-             error:function(err){
-                console.log("Exception : auctionSell");
-             }
-          })
-       }
+           var auctionSell = function(piSq,imPurchasePrice){
+              
+              $.ajax({
+                 url:"auctionSell",
+                 type:"post",
+                 data:"piSq="+piSq+"&imPurchasePrice="+imPurchasePrice,
+                 dataType:"",
+                 success:function(result){ 
+                    $(".inven-auction-modal").modal("hide");
+                    $("#inven-auction-imPurchasePrice").val("");
+                    playerItemSelectAll();
+                    $("#auction-selltab").trigger("click");
+                 }, 
+                 error:function(err){
+                    console.log("Exception : auctionSell");
+                 }
+              })
+           }
        
           // 인덱스 값 파싱
           function passingJson(){
@@ -556,14 +572,15 @@ $(function(){
                 }
               })
           })
-         $("#store-window").jqxWindow({
-             width:640,
-             height:390,
-             resizable:true,
-             showCollapseButton: true,
-             autoOpen:false,
-             theme:userInfo.theme
-        });
+          $("#store-window").jqxWindow({
+              width:640,
+              height:390,
+              resizable:false,
+              showCollapseButton: true,
+              autoOpen:false,
+              theme:userInfo.theme
+          });
+           
          $(".nav-tabs a").click(function(){
              $(this).tab('show');
          });
@@ -772,7 +789,7 @@ $(function(){
            })
         })
         
-        // 수령, 유찰
+         // 수령, 유찰
         $(document).on("click",'input[value=수령],input[value=유찰]', function() {
            var wordBtn =  $(this).val();
            $.ajax({
@@ -782,12 +799,13 @@ $(function(){
               data:"imSq="+$(this).attr("id"),
               success:function(result){
                  if(wordBtn=="수령"){
-                    alert("판매금을 수령하셨습니다.")
+                    alert("판매금을 수령하셨습니다.");
                  }else{
                     if(result!="false"){
-                       alert("유찰 된 아이템을 수령하셨습니다.")
+                       playerItemSelectAll();
+                       alert("유찰 된 아이템을 수령하셨습니다.");
                     }else{
-                       alert("인벤토리를 비워 주십시오.")
+                       alert("인벤토리를 비워 주십시오.");
                     }
                  } 
                  auctionSellList();
@@ -797,6 +815,7 @@ $(function(){
               }
            })
         })
+
         
         
           // 검색

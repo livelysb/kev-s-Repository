@@ -27,7 +27,7 @@ public class FriendServiceImpl implements FriendService {
 	 * 접속중 친구목록 가져오기
 	 */
 	@Override
-	public List<FriendDTO> friendSelectOnline(String playerNickname) throws Exception {
+	public List<FriendDTO> friendSelectOnline(String playerNickname){
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
 		List<FriendDTO> list = new ArrayList<FriendDTO>();
 		List<FriendDTO> listA = friendDAO.friendSelectA(playerNickname);
@@ -53,7 +53,7 @@ public class FriendServiceImpl implements FriendService {
 	 * 친구목록 전체 조회
 	 */
 	@Override
-	public List<FriendDTO> friendSelect(String playerNickname) throws Exception {
+	public List<FriendDTO> friendSelect(String playerNickname){
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
 		List<FriendDTO> listA = friendDAO.friendSelectA(playerNickname);
 		List<FriendDTO> listB = friendDAO.friendSelectB(playerNickname);
@@ -67,7 +67,7 @@ public class FriendServiceImpl implements FriendService {
 	 * 친구추가
 	 */
 	@Override
-	public FriendDTO friendAdd(String playerNickname, String playerNickname2) throws Exception {
+	public FriendDTO friendAdd(String playerNickname, String playerNickname2) {
 		System.out.println("friendAdd");
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
 		FriendDTO dto = null;
@@ -87,7 +87,7 @@ public class FriendServiceImpl implements FriendService {
 	 * 친구여부 체크
 	 */
 	@Override
-	public boolean friendCheck(String playerNickname, String playerNickname2) throws Exception {
+	public boolean friendCheck(String playerNickname, String playerNickname2){
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("playerNickname", playerNickname);
@@ -109,7 +109,7 @@ public class FriendServiceImpl implements FriendService {
 	 * 친구거절/친구삭제
 	 */
 	@Override
-	public boolean friendDel(int friendSq) throws Exception {
+	public boolean friendDel(int friendSq){
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
 		int result = friendDAO.friendDel(friendSq);
 		if (result != 0) {
@@ -122,7 +122,7 @@ public class FriendServiceImpl implements FriendService {
 	 * 친구수락
 	 */
 	@Override
-	public boolean friendAccept(int friendSq) throws Exception {
+	public boolean friendAccept(int friendSq){
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
 		int result = friendDAO.friendAccept(friendSq);
 		if (result != 0) {

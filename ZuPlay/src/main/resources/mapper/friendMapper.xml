@@ -25,15 +25,19 @@
 	</resultMap>
 	<!--친구조회 -->
 	<select id="friendSelectA" parameterType="String" resultMap="friendMap">
-		select * from friend f join player_item pi on
-		f.player_nickname2=pi.player_nickname join item i on
+		select * from
+		friend f join player_item pi on
+		f.player_nickname2=pi.player_nickname
+		join item i on
 		pi.item_code=i.item_code where
 		f.player_nickname=#{playerNickname} and
 		7>pi_index
 	</select>
 	<select id="friendSelectB" parameterType="String" resultMap="friendMap">
-		select * from friend f join player_item pi on
-		f.player_nickname=pi.player_nickname join item i on
+		select * from
+		friend f join player_item pi on
+		f.player_nickname=pi.player_nickname join
+		item i on
 		pi.item_code=i.item_code where
 		f.player_nickname2=#{playerNickname} and
 		7>pi_index

@@ -9,20 +9,20 @@ public class FriendDTO {
 	private String friendIsAccepted; // 친구 수락여부(T=친구/F=친구수락대기중)
 	private String friendDate; // 친구신청일자
 
-	private List<PlayerItemDTO> list;
+	private List<PlayerItemDTO> playerItemDTO;
 
 	public FriendDTO() {
 	}
 
 	public FriendDTO(int friendSq, String playerNickname, String playerNickname2, String friendIsAccepted,
-			String friendDate, List<PlayerItemDTO> list) {
+			String friendDate, List<PlayerItemDTO> playerItemDTO) {
 		super();
 		this.friendSq = friendSq;
 		this.playerNickname = playerNickname;
 		this.playerNickname2 = playerNickname2;
 		this.friendIsAccepted = friendIsAccepted;
 		this.friendDate = friendDate;
-		this.list = list;
+		this.playerItemDTO = playerItemDTO;
 	}
 
 	public int getFriendSq() {
@@ -66,18 +66,18 @@ public class FriendDTO {
 	}
 
 	public List<PlayerItemDTO> getList() {
-		return list;
+		return playerItemDTO;
 	}
 
-	public void setList(List<PlayerItemDTO> list) {
-		this.list = list;
+	public void setList(List<PlayerItemDTO> playerItemDTO) {
+		this.playerItemDTO = playerItemDTO;
 	}
 
 	@Override
 	public String toString() {
 		return "FriendDTO [friendSq=" + friendSq + ", playerNickname=" + playerNickname + ", playerNickname2="
-				+ playerNickname2 + ", friendIsAccepted=" + friendIsAccepted + ", friendDate=" + friendDate + ", list="
-				+ list + "]";
+				+ playerNickname2 + ", friendIsAccepted=" + friendIsAccepted + ", friendDate=" + friendDate + ", playerItemDTO="
+				+ playerItemDTO + "]";
 	}
 
 }

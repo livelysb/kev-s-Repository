@@ -106,6 +106,5 @@ public class PlayerInfoController {
 			session.setAttribute("errorMsg", e.getMessage());
 			throw new Exception();
 		}
-		
 	}
 }

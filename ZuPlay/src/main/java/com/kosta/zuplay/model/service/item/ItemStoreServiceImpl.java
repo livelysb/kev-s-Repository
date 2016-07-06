@@ -101,9 +101,10 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
+		int ruby=playerInfoDAO.getRuby(playerNickname);
 		int price = itemStoreDAO.getPrice(itemCode);
 		map.put("playerNickname", playerNickname);
-		map.put("price", -price + "");
+		map.put("updateRuby", ruby-price + "");
 		playerInfoDAO.updateRuby(map);
 		int result = playerItemDAO.itemDelete(piSq);
 		if (result == 0) {

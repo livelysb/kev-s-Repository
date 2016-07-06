@@ -58,8 +58,7 @@ public class InventoryController {
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		ArrayList<PlayerItemDTO> list = new ArrayList<PlayerItemDTO>();
 		for (int i = 0; i < jsonList.length; i++) {
-			list.add(new PlayerItemDTO(jsonList[i].getPiSq(), playerNickname, jsonList[i].getItemCode(),
-					jsonList[i].getPiIsused(), jsonList[i].getPiIndex(), null));
+			list.add(new PlayerItemDTO(jsonList[i].getPiSq(), playerNickname, jsonList[i].getItemCode(), jsonList[i].getPiIndex(), null));
 		}
 		try {
 			boolean result = inventoryServiceImpl.playerItemInsert(list);

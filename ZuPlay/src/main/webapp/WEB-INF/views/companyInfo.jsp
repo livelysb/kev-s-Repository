@@ -5,7 +5,8 @@
 
   <div id="company-${masterDTO.isuCd}" class="company-window">
     <div class="company-header">기업정보 - ${masterDTO.isuCd}</div>
-	<input type="hidden" value="${masterDTO.isuCd}">
+	<input type="hidden" value="${masterDTO.isuCd}" class="company-isuCd">
+	<input type="hidden" value="${plQuantity}" class="company-qty">
     <div class="company-content">
       <div class="row-fluid">
         <div class="col-xs-12 company-title">
@@ -83,10 +84,13 @@
         <div class="col-xs-2"><h5 class="company-buy-value">0</h5></div>
         <div class="col-xs-2"><button class="company-buy-btn btn btn-primary">구매</button></div>
       </div>
-      <div class="row-fluid company-sell">
-        <div class="col-xs-8"><div class="company-sell-slider"></div></div>
-        <div class="col-xs-2"><h5 class="company-sell-value">0</h5></div>
-        <div class="col-xs-2"><button class="company-sell-btn btn btn-danger">판매</button></div>
-      </div>
+      
+      <c:if test="${plQuantity} <= 0">
+	     <div class="row-fluid company-sell">
+	       <div class="col-xs-8"><div class="company-sell-slider"></div></div>
+	       <div class="col-xs-2"><h5 class="company-sell-value">0</h5></div>
+	       <div class="col-xs-2"><button class="company-sell-btn btn btn-danger">판매</button></div>
+	     </div>
+      </c:if>
     </div>
   </div>

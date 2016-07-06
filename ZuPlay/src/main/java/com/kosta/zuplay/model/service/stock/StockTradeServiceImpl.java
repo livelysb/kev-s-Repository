@@ -52,6 +52,11 @@ public class StockTradeServiceImpl implements StockTradeService {
 		int totalPrice = (int) (price * plQuantity * 1.00015); // 총 금액
 		int quantity = playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity();// 현재
 																								// 보유량
+		System.out.println("playerMoney : " + playerMoney);
+		System.out.println("price : " + price);
+		System.out.println("totalPrice : " + totalPrice);
+		System.out.println("quantity : " + quantity);
+		
 		if (playerMoney >= totalPrice)
 			if (playerInfoService.setPlayerMoney(playerNickname, playerMoney - (totalPrice))) // 돈
 																							// 빼기

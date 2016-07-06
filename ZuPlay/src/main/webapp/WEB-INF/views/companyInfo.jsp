@@ -85,7 +85,7 @@
         <div class="col-xs-2"><button class="company-buy-btn btn btn-primary">구매</button></div>
       </div>
       
-      <c:if test="${plQuantity} <= 0">
+      <c:if test="${plQuantity gt 0}">
 	     <div class="row-fluid company-sell">
 	       <div class="col-xs-8"><div class="company-sell-slider"></div></div>
 	       <div class="col-xs-2"><h5 class="company-sell-value">0</h5></div>

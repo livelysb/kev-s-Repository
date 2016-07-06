@@ -52,7 +52,7 @@
                      </tr>
                      <tr>
                         <th>수익률</th>
-                        <td>${playerDTO.earningRate}%</td>
+                        <td><fmt:formatNumber value="${playerDTO.earningRate}" maxFractionDigits="6"/>%</td>
                      </tr>
                      <tr>
                         <th>루비</th>

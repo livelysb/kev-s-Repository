@@ -101,6 +101,8 @@ public class EarningRateServiceImpl implements EarningRateService {
 	public double calDailyEarningRate(String playerNickname) throws Exception {
 		int preMoney = playerInfoService.getPlayer(playerNickname).getPlayerPreMoney();
 		int currentMoney = playerInfoService.getTotalMoney(playerNickname);
+		System.out.println("preMoney : " + preMoney);
+		System.out.println("currentMoney : " + currentMoney);
 		int rate = (int)(( currentMoney- preMoney)/(double)(preMoney) * 100000000);
 		return rate/100000000.0;
 	}

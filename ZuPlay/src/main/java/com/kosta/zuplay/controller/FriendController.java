@@ -58,7 +58,6 @@ public class FriendController {
 	}
 
 	public void friendAdd(String playerNickname, String playerNickname2){
-		System.out.println(playerNickname+"//"+playerNickname2);
 		PlayerVO pv = (PlayerVO) application.getAttribute(playerNickname2);
 		WebSocketSession webSession = pv.getSession();
 		FriendDTO dto = null;

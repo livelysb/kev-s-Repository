@@ -112,12 +112,51 @@ $(function(){
        )
         
       }
-      
-      
+      /* 주식 구매*/
+	   var buyStock = function(companyId, qty){
+		   console.log(companyId + " " + qty)
+		      $.ajax({
+		    	  url:"buyStock",
+		    	  dataType:"text",
+		    	  data:{isuCd:companyId, plQuantity:qty},
+		    	  success:function(data){
+		    		  console.log(data);
+		    		  if(data == "true"){
+		    			  alert("구매 성공하였습니다.");
+		    		  }else{
+		    			  alert("구매 실패하였습니다.");
+		    		  }
+		    		  updatePI();
+		    	  },
+		    	  error:function(){
+		    		  console.log("Exception : buyStock");
+		    	  }
+		      });
+		  };
+		  
+		   var sellStock = function(companyId, qty){
+			      $.ajax({
+			    	  url:"sellStock",
+			    	  dataType:"text",
+			    	  data:{isuCd:companyId, plQuantity:qty},
+			    	  success:function(data){
+			    		  if(data == "true"){
+			    			  alert("판매 하였습니다.");
+			    		  }else{
+			    			  alert("판매 실패하였습니다.");
+			    		  }
+			    		  updatePI();
+			    	  },
+			    	  error:function(){
+			    		  console.log("Exception : sellStock");
+			    	  }
+			      });
+			  };
       /* 기업 정보 조회 */
       var companyInfo = function(companyId){
-              var price = $(companyId + " .company-title-stock").text();
-              
+             var price = $(companyId + " .company-title-stock").text();
+             var ticks = parseInt(userInfo.money/price);
+             var isuCd = $(companyId + " .company-isuCd").val();
              $(companyId).jqxWindow({
                    theme:userInfo.theme,
                    minWidth:700,
@@ -130,45 +169,57 @@ $(function(){
               
               var sellSlider = $(companyId + " .company-buy-slider");
               var buySlider = $(companyId + " .company-sell-slider");
-            
 
-             $(companyId + " .company-sell-slider").jqxSlider({
-                 width:"100%",
-                 showTickLabels: true,
-                 tooltip: true,
-                 mode: "fixed",
-                 min: 0,
-                 max: 100,
-                 ticksFrequency: 10,
-                 value: 0,
-                 step: 1,
-                 theme : userInfo.theme,
-                 tooltipPosition: "far",
-                 theme:userInfo.theme
-             });
+              if($(companyId + " .company-sell-slider").length > 0){
+	              $(companyId + " .company-sell-slider").jqxSlider({
+	                  width:"100%",
+	                  showTickLabels: true,
+	                  tooltip: true,
+	                  mode: "fixed",
+	                  min: 0,
+	                  max: $(companyId + ".company-qty").val(),
+	                  ticksFrequency: 500,
+	                  value: 0,
+	                  step: 1,
+	                  theme : userInfo.theme,
+	                  tooltipPosition: "far"
+	              });
+	              
+	              $(document).on("change",companyId + " .company-sell-slider",function(event){
+	                  $(companyId + " .company-sell-value").text(price * event.args.value);
+	               });
+	              
+	              $(companyId + "company-sell-btn").on("click",function(evt){
+	            	  sellStock(isuCd,$(sellSlider).val());
+	              })
+              }
               
-             $(companyId + " .company-buy-slider").jqxSlider({
-                 width:"100%",
-                 showTickLabels: true,
-                 tooltip: true,
-                 mode: "fixed",
-                 min: 0,
-                 ticksFrequency: 10,
-                 step: 1,
-                 theme : userInfo.theme,
-                 tooltipPosition: "far",
-                 theme:userInfo.theme,
-                 max: 100,
-                 value: 0
-             });
-             
-             $(document).on("change",companyId + " .company-buy-slider",function(event){
-                $(companyId + " .company-buy-value").text(price * event.args.value);
-             });
-             $(document).on("change",companyId + " .company-sell-slider",function(event){
-                $(companyId + " .company-sell-value").text(price * event.args.value);
-             });
+              
+              $(companyId + " .company-buy-slider").jqxSlider({
+                  width:"100%",
+                  showTickLabels: true,
+                  tooltip: true,
+                  mode: "fixed",
+                  min: 0,
+                  ticksFrequency: ticks/10,
+                  step: 1,
+                  theme : userInfo.theme,
+                  tooltipPosition: "far",
+                  max: parseInt(userInfo.money/price),
+                  value: 0
+              });
+              
+              $(document).on("click", companyId + " .company-buy-btn", function(evt){
+            	  console.log(isuCd);
+            	  buyStock(isuCd,$(buySlider).val());
+              })
+              
+              $(document).on("change",companyId + " .company-buy-slider",function(event){
+                 $(companyId + " .company-buy-value").text(price * event.args.value);
+              });
+
       }
+
       
 
       var invenInit = function(){
@@ -972,6 +1023,10 @@ $(function(){
       $(".main-container").css("visibility","visible");
       $("#loading-content").remove();
       
+      console.log(setting.fristLoginToday);
+      if(setting.fristLoginToday){
+    	  alert("오늘의 루비 +5000");
+      }
    };
    
    updatePI(initContent);

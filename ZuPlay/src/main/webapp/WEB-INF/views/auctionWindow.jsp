@@ -59,8 +59,6 @@
 							id="auction-back-btn">이전</button>
 						<button type="button" class="btn btn-default"
 							id="auction-next-btn">다음</button>
-						<button type="button" class="btn btn-success"
-							id="auction-register">판매</button>
 					</div>
 				</div>
 				<div class="tab-pane fade" id="profile">

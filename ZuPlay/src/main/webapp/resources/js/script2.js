@@ -602,6 +602,13 @@ $(function(){
              showCollapseButton: true
            });
          
+         //추가 된 친구조회
+         var friendselectAll = function(){
+        	 var data = ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#")
+        	 
+         }
+         
+         
          // 친구검색
          $("#friend-add-search").on("click",function(){
             console.log($("#friend-add-text").val());
@@ -639,7 +646,7 @@ $(function(){
             var myId=$("#friend-add-test").val()
             console.log($(this))
             if(confirm(friendId+"님을 친구로 추가하시겠습니까?")==false || friendId=="") return;
-            ws.send("friendAdd#/fuckWebSocket/#"+myId+"#/fuckWebSocket/#"+friendId)
+            ws.send("friendAdd#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendId)
          })
       }
       

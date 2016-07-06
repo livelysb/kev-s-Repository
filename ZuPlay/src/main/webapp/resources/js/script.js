@@ -257,17 +257,18 @@ $(function(){
           }
           
           //경매판매 
-          var auctionSell = function(){
+          var auctionSell = function(imgData,imPurchasePrice){
+        	  
         	  $.ajax({
-        		  url:"",
-        		  type:"",
-        		  data:"",
+        		  url:"auctionSell",
+        		  type:"post",
+        		  data:"piSq="+imgData.piSq+"&imPurchasePrice="+imPurchasePrice,
         		  dataType:"",
-        		  success:function(){
-        			  
+        		  success:function(result){
+        			  alert(result)
         		  },
-        		  error:function(){
-        			  
+        		  error:function(err){
+        			  alert(err+"에러발생")
         		  }
         	  })
           }

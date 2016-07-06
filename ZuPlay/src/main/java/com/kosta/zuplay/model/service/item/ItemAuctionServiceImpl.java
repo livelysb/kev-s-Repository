@@ -79,7 +79,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 				if (payRubyResult != 0) {
 					ItemMarketDTO itemMarketDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
 					int insertResult = playerItemDAO.auctionInsertPlayerItem(
-							new PlayerItemDTO(0, playerNickname, itemMarketDTO.getItemCode(), null, piIndex, itemMarketDTO.getItemDTO()));
+							new PlayerItemDTO(0, playerNickname, itemMarketDTO.getItemCode(), piIndex, itemMarketDTO.getItemDTO()));
 					if (insertResult != 0) {
 						itemAuctionDAO.auctionBuyFinish(imSq);
 					} else {
@@ -172,7 +172,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 			ItemMarketDTO itemMarketDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
 			int piIndex = utilServiceImpl.indexSearch(playerNickname);
 			if (piIndex != 0) {
-				playerItemDAO.auctionInsertPlayerItem(new PlayerItemDTO(0, playerNickname, itemMarketDTO.getItemCode(), null, piIndex, itemMarketDTO.getItemDTO()));
+				playerItemDAO.auctionInsertPlayerItem(new PlayerItemDTO(0, playerNickname, itemMarketDTO.getItemCode(), piIndex, itemMarketDTO.getItemDTO()));
 				itemAuctionDAO.auctionDeleteFin(imSq);
 			} else {
 				return false;

@@ -19,7 +19,6 @@
 			<id column="pi_sq" property="piSq" />
 			<result column="player_nickname" property="playerNickname" />
 			<result column="item_code" property="itemCode" />
-			<result column="pi_isused" property="piIsused" />
 			<result column="pi_index" property="piIndex" />
 			<association property="itemDTO" javaType="itemDTO">
 				<id column="item_code" property="itemCode" />

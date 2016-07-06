@@ -21,12 +21,19 @@
 	</select>
 	
 	<update id="setPlayerStock" parameterType="java.util.Map">
-		update player_lists
-		set
+	
+	merge into player_lists
+		using dual
+		on (isuCd = #{isuCd} and PLAYER_NICKNAME = #{playerNickname})
+		when matched then
+		update set
 		pl_quantity = #{plQuantity}
-		where player_Nickname = #{playerNickname}
-		and
-		isuCd = #{isuCd}
+		when not matched
+		then
+		insert(pl_sq, isuCd, PLAYER_NICKNAME, pl_quantity)
+		values
+		(pl_sq.nextval, #{isuCd}, #{playerNickname}, #{plQuantity})
+		
 	</update>
 	
 	<select id="getLikeStock" parameterType="String" resultType="String">

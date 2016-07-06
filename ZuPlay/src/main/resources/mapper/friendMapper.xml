@@ -8,14 +8,35 @@
 		<result column="player_nickname2" property="playerNickname2" />
 		<result column="friend_isacepted" property="friendIsAccepted" />
 		<result column="friend_date" property="friendDate" />
-
+		<collection property="playerItemDTO" ofType="playerItemDTO">
+			<id column="pi_sq" property="piSq" />
+			<result column="player_nickname" property="playerNickname" />
+			<result column="item_code" property="itemCode" />
+			<result column="pi_index" property="piIndex" />
+			<association property="itemDTO" javaType="itemDTO">
+				<id column="item_code" property="itemCode" />
+				<result column="item_name" property="itemName" />
+				<result column="item_price" property="itemPrice" />
+				<result column="item_class" property="itemClass" />
+				<result column="item_grade" property="itemGrade" />
+				<result column="item_img" property="itemImg" />
+			</association>
+		</collection>
 	</resultMap>
 	<!--친구조회 -->
 	<select id="friendSelectA" parameterType="String" resultMap="friendMap">
-		select * from friend where player_nickname=#{playerNickname}
+		select * from friend f join player_item pi on
+		f.player_nickname2=pi.player_nickname join item i on
+		pi.item_code=i.item_code where
+		f.player_nickname=#{playerNickname} and
+		7>pi_index
 	</select>
 	<select id="friendSelectB" parameterType="String" resultMap="friendMap">
-		select * from friend where player_nickname2=#{playerNickname}
+		select * from friend f join player_item pi on
+		f.player_nickname=pi.player_nickname join item i on
+		pi.item_code=i.item_code where
+		f.player_nickname2=#{playerNickname} and
+		7>pi_index
 	</select>
 	<!-- 친구체크 -->
 	<select id="friendCheck" parameterType="java.util.Map"

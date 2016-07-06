@@ -26,9 +26,9 @@ public class SessionCheckAdvice {
 			session = (HttpSession) obj;
 			if (session.getAttribute("playerNickname") == null) {
 				try {
+					System.out.println("로그인");
 					throw new LoginException();
 				} catch (LoginException e) {
-					
 					  throw new LoginException();
 				}
 			}

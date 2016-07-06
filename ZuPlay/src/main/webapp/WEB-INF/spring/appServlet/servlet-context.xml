@@ -26,8 +26,8 @@
 		<beans:property name="exceptionMappings">
 			<beans:props>
 			
-				<beans:prop key="java.lang.reflect.UndeclaredThrowableException">
-					redirect:Login
+				<beans:prop key="com.kosta.zuplay.exception.LoginException">
+					Login
 				</beans:prop>
 				
 				 <beans:prop key="java.lang.Exception">

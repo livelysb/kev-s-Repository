@@ -19,10 +19,12 @@ public class IndexController {
 	public ModelAndView index(HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView("index");
 		try {
-			mv.addObject("firstLoginToday", playerInfoService.getRubyPerDay((String)session.getAttribute("playerNickname"))) ;
+			if(session.getAttribute("playerNickname")!=null)
+				mv.addObject("firstLoginToday", playerInfoService.getRubyPerDay((String)session.getAttribute("playerNickname"))) ;
 		} catch(Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMsg", e.toString());
+			System.out.println(e.getMessage());
 			throw new Exception();
 		}
 		

@@ -16,8 +16,8 @@
 
 </head>
 <body class='default'>
+<img src="resources/img/loading.gif" id="loading-content">
 
-   <body>
   <!-- 컨테이너 시작 -->
   <div class="container-fluid main-container test">
     <div class="row-fluid">

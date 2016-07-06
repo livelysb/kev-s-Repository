@@ -1,43 +1,32 @@
 $(function(){
-	
 	var updatePI = function(callBack){
 		$.ajax({
 			url:"updatePI",
 			dataType:"json",
 			success:function(data){
-				userInfo.nickName=data.playerNickname
-				userInfo.gender =data.playerGender
-				userInfo.money =data.playerMoney
-				userInfo.ruby =data.playerRuby
-				userInfo.grade=data.playerGrade
-				userInfo.dailyRank=data.playerDailyRank
-				userInfo.seasonRank=data.playerSeasonRank
-				if(callBack)
+				userInfo.nickName=data.playerNickname;
+				userInfo.gender =data.playerGender;
+				userInfo.money =data.playerMoney;
+				userInfo.ruby =data.playerRuby;
+				userInfo.grade=data.playerGrade;
+				userInfo.dailyRank=data.playerDailyRank;
+				userInfo.seasonRank=data.playerSeasonRank;
+
+				if(callBack){
 					callBack();
-				//userInfo.friends =data.
-				//userInfo.theme =data.
+				}
+				// userInfo.friends =data.
+				// userInfo.theme =data.
+				
 			},
 			error:function(){
-				
+				console.log("Exception : updatePI");
+				alert("유저 정보 로드를 실패했습니다. 잠시 후 다시 시도해주세요.");
 			}
 		})
 	}
 	
-	updatePI(function(){
-		connect();
-
-		$('#logout').click(function() {
-			disconnect();
-
-			location.href = "logout";
-		});
-		
-       $(".side-avatar").css({
-           width : $("#avatar-clothes").css("width"),
-           height : $("#avatar-clothes").css("height")
-        });
-	});
-   /*버튼클릭했을 때 이벤트 설정*/
+   /* 버튼클릭했을 때 이벤트 설정 */
    $.fn.setBtn = function(window){
       $(this).on("click",function(){
          $(window).jqxWindow("show");
@@ -45,22 +34,42 @@ $(function(){
       return this;
    };
    
-   /* 실시간 주가 정보 */
-      var rtaInit = function(){
-    	  	
-         $("#rta-Window").jqxWindow({
-               width:"400",
-               height:"450",
-               resizable:true,
-               showCollapseButton: true,
-               autoOpen:false,
-               theme:userInfo.theme
-             });
+	
+	var initContent = function(){
+		console.log("start init content");
+		console.log(userInfo);
+		
+		var initWs = function(){
+			connect();
+			$('#logout').click(function() {
+				disconnect();
+				location.href = "logout";
+			});
+		}
+	
+	
+    $(".side-avatar").css({
+        width : $("#avatar-clothes").css("width"),
+        height : $("#avatar-clothes").css("height")
+     });
+
+   
+    /* 실시간 주가 정보 */
+    var rtaInit = function(){
+	  	
+     $("#rta-Window").jqxWindow({
+           width:"400",
+           height:"450",
+           resizable:true,
+           showCollapseButton: true,
+           autoOpen:false,
+           theme:userInfo.theme
+         });
          
 
      	var stockPage = 1;
      	var getRealTimeStock = function(){
-     		if(stockPage==89) stockPage=1;
+     		
      		if(!isHover){
 	     	   $.ajax({
 	     	       url:'realTimeStock',
@@ -69,6 +78,7 @@ $(function(){
 	     	       contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 	     	       data: {"page":stockPage,"keyword":"undefined"},
 	     	       success:function(data){
+	     	    	   console.log(data)
 	     	    	   stockPage++;
 	     	    	   var tbd = $("#rta-tbody").empty();
 	     	    	   $(data).each(function(index, item) {
@@ -76,16 +86,17 @@ $(function(){
 	     	    			  $(tbd).append("<tr> <td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"</td><td>"+item.priceDTO.trdvol+"</td></tr>")
 	     	    		  }
 	     	    	   });
+	     	    	  if(data.length < 11) stockPage=1;
 	     	       },
 	     	       error:function(e){
-	     	    	   console.log(stockPage);
-	     	    	   console.log("error" + e);
+	     	    	  console.log("Exception : getRealTimeStock");
+	     	    	  stockPage = 1;
 	     	       }
 	     	    });
      		}
      	};
      	
-     	//실시간 마우스 호버 이벤트
+     	// 실시간 마우스 호버 이벤트
      	var rtaRefresh=setInterval(getRealTimeStock, 3000);
      	var isHover = false;
      	
@@ -160,7 +171,7 @@ $(function(){
 
       var invenInit = function(){
     	  
-    	//내아이템 목록 조회
+    	// 내아이템 목록 조회
           playerItemSelectAll = function(){
 	          $.ajax({
 	             url:"playerItemSelectAll",
@@ -173,14 +184,14 @@ $(function(){
 	               })
 	             },
 	             error:function(err){
-	                alert(err+"에러발생");
+	            	 console.log("Exception : invenInit");
 	             }
 	          })
           }
           
           playerItemSelectAll();
           
-         //옮기는 거
+         // 옮기는 거
           var con = $(".item-socket td").sortable({
                connectWith: ".item-socket td",
                cursor: "move",
@@ -188,7 +199,7 @@ $(function(){
                forceHelperSize: true
           });
           
-          //옮겼을 때 반응
+          // 옮겼을 때 반응
           $("#inven-items td").on("sortreceive",function(e,ui){
         	 
               if($(this).children().length>=2){
@@ -198,7 +209,7 @@ $(function(){
               }
           });
           
-         //장비칸에 두개 이상이 못 들어가는 것
+         // 장비칸에 두개 이상이 못 들어가는 것
           $(document).on("sortupdate", "#inven-player td",function(e,ui){
               if($(this).children().length>=2){
                  $(ui.sender).sortable("cancel");
@@ -213,11 +224,11 @@ $(function(){
             	  }
             	  playerItemUpdate()
               }
-              updatePI(updateAvatar);
+              updateAvatar();
           })
           
-////////////////////////////////////////////////////////////////////////////////////          
-          	  //인벤토리 판매
+// //////////////////////////////////////////////////////////////////////////////////
+          	  // 인벤토리 판매
         	  $("#inven-items td").contextmenu(function() {
         		  var storeIsOpen = $("#store-window").jqxWindow("isOpen");
         		  var auctionIsOpen = $("#auction-window").jqxWindow("isOpen");
@@ -225,23 +236,23 @@ $(function(){
         		  if(storeIsOpen==true && auctionIsOpen==true) {
         			  
         		  }else if(storeIsOpen==true){
-        			  //상점에 아이템 판매
+        			  // 상점에 아이템 판매
         			  if(confirm("판매하시겠습니까?")){
         				  storeSell($(this).children().data("item"))
         			  };
         		  }else if(auctionIsOpen==true){
-        			  //경매장에 아이템 판매
+        			  // 경매장에 아이템 판매
         			  $(".inven-auction-conten").modal("show");
         			  
         			  
-        				  //auctionSell($(this).children().data("item"))
+        				  // auctionSell($(this).children().data("item"))
         			  
         		  }
         		  return false;
         	  });
           
           
-          //상점판매
+          // 상점판매
           var storeSell = function(imgData){
         	  $.ajax({
         		  url:"itemStoreSell",
@@ -252,12 +263,12 @@ $(function(){
         			  alert(result)
         		  },
         		  error:function(err){
-        			  alert(err+"에러발생")
+        			 console.log("Exception : storeSell");
         		  }
         	  })
           }
           
-          //경매판매 
+          // 경매판매
           var auctionSell = function(imgData,imPurchasePrice){
         	  
         	  $.ajax({
@@ -269,11 +280,11 @@ $(function(){
         			  alert(result)
         		  },
         		  error:function(err){
-        			  alert(err+"에러발생")
+        			  console.log("Exception : auctionSell");
         		  }
         	  })
           }
-///////////////////////////////////////////////////////////////////////////////////          
+// /////////////////////////////////////////////////////////////////////////////////
           
           var playerItemUpdate = function(){
         	  var jsonList = passingJson();
@@ -282,7 +293,7 @@ $(function(){
                   type:"post",
                   data:"itemParam="+(JSON.stringify(jsonList)).toString() ,
                   error:function(err){
-                     alert(err+"에러발생");
+                	  console.log("Exception : playerItemUpdate");
                   }
                })
           }
@@ -291,17 +302,17 @@ $(function(){
              for(var i=1; i<=6; i++){
             	
                 var partSrc = $("#inven-player-"+i+">.item-img").attr("src");
-                
+
                 if(partSrc === "" || typeof(partSrc) === "undefined"){
                 	if(i<=2){ 
-                		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/"+(userInfo.gender).toLowerCase()+"_"+setting.parts[i-1]+"_00.png");
+                		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/"+userInfo.gender.toLowerCase()+"_"+setting.parts[i-1]+"_00.png");
                 	}else if(i<=4){
                 		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/"+setting.parts[i-1]+"/a_"+setting.parts[i-1]+"_00.png");
                 	}else{
                 		$("#inven-player-"+setting.parts[i-1]).attr("src","resources/img/avatar/empty.png");
                 	}
                 }else{
-                   $("#inven-player-"+setting.parts[i-1]).attr("src", partSrc);
+                  $("#inven-player-"+setting.parts[i-1]).attr("src", partSrc);
                 }
              }
           }
@@ -309,7 +320,7 @@ $(function(){
           
           
           
-          //인덱스 값 파싱
+          // 인덱스 값 파싱
           function passingJson(){
             var jsonArr = new Array();
             
@@ -321,7 +332,7 @@ $(function(){
             	  var jsonObj = new Object();
                   jsonObj.piSq=$("#inven-player-"+i).children().data("item").piSq;
                   jsonObj.piIndex=i;
-                  jsonArr.push(jsonObj)
+                  jsonArr.push(jsonObj);
                }
             }
             return jsonArr;
@@ -337,7 +348,7 @@ $(function(){
                theme : userInfo.theme
              });
           
-          updatePI(updateAvatar);
+          updateAvatar();
 
       }
       
@@ -378,19 +389,19 @@ $(function(){
                      })
                   },
                   error:function(err){
-                     alert(err+"에러발생");
+                	  console.log("Exception : stockListInit");
                   }
                })
             }
 
-            /*마지막 페이지*/
+            /* 마지막 페이지 */
             function pagenation(pageNo){ 
                  $('#page-selection').bootpag({
                      total: pageNo, maxVisible: 10
                  })
              }
             
-            /*페이지 클릭*/
+            /* 페이지 클릭 */
             $('#page-selection').on("page", function(event, num){
                
                if($("#stock-search-keyword").val()==""){
@@ -399,7 +410,7 @@ $(function(){
                  stockPageSelect(num,$("#stock-search-keyword").val());
               });
             
-            /*종목명 클릭 시 상세정보 띄어줌.*/
+            /* 종목명 클릭 시 상세정보 띄어줌. */
             var showCompanyInfo = function(code){
             	if(!code)
             		return;
@@ -419,12 +430,12 @@ $(function(){
                      companyInfo(companyId);
                   },
                   error:function(err){
-                     alert(err+"에러발생");
+                	  console.log("Exception : showCompanyInfo");
                   }
                });
             }
 
-            /*검색*/
+            /* 검색 */
             $("#stock-search").on("keyup",function(){
                if(event.keyCode == 13) {
             	   stockListSearch()
@@ -459,7 +470,7 @@ $(function(){
       
       }
       
-      /*상점*/
+      /* 상점 */
       var storeInit = function(){
     		var count=1;
     		var tabs="";
@@ -470,7 +481,7 @@ $(function(){
     	    	  storeSelect(1)
     	    });
     		
-    	    //Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
+    	    // Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
     	    function storeSelect(page){
     	    	var itemClass = $("#store-content .active").attr("id");
     		    $.ajax({
@@ -506,25 +517,25 @@ $(function(){
     					}
     				},
     				error:function(err){
-    					alert(err +"에러발생");
+    					console.log("Exception : storeSelect");
     				}
     		    })
     		}
     	    
     	    storeSelect(count);
-    	    //이전버튼
+    	    // 이전버튼
     	    $("#store-prev-btn").on("click",function(){
     	   		status = "back";
     			storeSelect(count-1)
     	    })
     	    
-    	    //다음버튼
+    	    // 다음버튼
     	    $("#store-next-btn").on("click", function(){
     	   		status = "next";
     			storeSelect(count+1)
     	    })
     	    
-    	    //아이템구매
+    	    // 아이템구매
     	    $(".store-itemBox").on("click", function() {
     			var itemCode = $(this).children().attr("id");
     		
@@ -547,7 +558,7 @@ $(function(){
     					
     				},
     				error:function(err){
-    					alert(err +"에러발생");
+    					console.log("Exception : 아이템 구매");
     				}
     		    })
     		})
@@ -565,10 +576,10 @@ $(function(){
       }
       
       
-      /*친구창*/
+      /* 친구창 */
       var friendBook = function(){
     	  $("#friend-window").jqxWindow({
-    	      theme:"kokomo",
+    	      theme:userInfo.theme,
     	      width:400,
     	      maxWidth:400,
     	      minWidth:400,
@@ -579,7 +590,7 @@ $(function(){
     	      showCollapseButton: true
     	    });
     	  
-    	  //친구검색
+    	  // 친구검색
     	  $("#friend-add-search").on("click",function(){
     		  console.log($("#friend-add-text").val());
     		 $.ajax({
@@ -599,18 +610,18 @@ $(function(){
     				  $("#friend-list-table").html(str);
     			  },
     			  error:function(err){
-    				  alert(err+"에러발생")
+    				  console.log("Exception : 친구 검색");
     			  }
     			  
     		  })
     	  })
     	  
-    	  /*친구추가 모달*/
+    	  /* 친구추가 모달 */
     	  $("#friend-add-modal-btn").on("click",function(){
     		  $("#friend-add-text").focus();
     	  })
     	  
-    	  /*친구추가*/
+    	  /* 친구추가 */
     	  $(document).on("click",".friend-add-tr",function(){
     		  var friendId=$(this).children("td").eq(1).text();
     		  var myId=$("#friend-add-test").val()
@@ -620,10 +631,10 @@ $(function(){
     	  })
       }
       
-      /*경제용어사전*/
+      /* 경제용어사전 */
       var financialInit = function(){
     	  $("#financial-window").jqxWindow({
-    	      theme:"kokomo",
+    	      theme:userInfo.theme,
     	      width:500,
     	      height:600,
     	      autoOpen:false,
@@ -658,7 +669,7 @@ $(function(){
 						
 					},
 					error:function(err){
-						alert(err+"에러발생")
+						console.log("Exception : financialSearch");
 					}
 			    })
 			    $("#financial-search").val("");
@@ -687,30 +698,30 @@ $(function(){
 	    })
       }
       
-      /*경매장*/
+      /* 경매장 */
       var auctionInit = function(){
-    	  //페이지 변수
+    	  // 페이지 변수
          var count=1;
   		var sellBtn="";
   		var colorBtn="";
-  		//탭 토글
+  		// 탭 토글
           $('a[data-toggle="tab"]').on('hidden.bs.tab', function(e){
           });
           
-  		//구매탭
+  		// 구매탭
   		$("#auction-buytab").on("click",function(){
   			$("#auction-search").show();
           	$("#auction-select").show();
   		})
           
-          //판매탭
+          // 판매탭
           $("#auction-selltab").on("click",function(){
           	$("#auction-search").hide();
           	$("#auction-select").hide();
           	auctionSellList();
           })
           
-          //경매장 아이템등록
+          // 경매장 아이템등록
           $("#auction-register").on("click",function(){
           	$.ajax({
           		url:"auctionSell",
@@ -721,12 +732,12 @@ $(function(){
           			alert(result);
           		},
           		error:function(err){
-          			alert(err+"에러발생");
+          			console.log("Exception : 경매장 아이템등록");
           		}
           	})
           })
           
-          //아이템구매
+          // 아이템구매
           $(document).on("click",'input[value=구매]', function() {
   			$.ajax({
   				url:"auctionBuy",
@@ -740,17 +751,17 @@ $(function(){
   						case "3" : alert("루비가 부족합니다."); break;
   						case "4" : alert("이미 판매 된 물품입니다.");break;	
   					}
-  					alert(count)
-  					search(count)
+  					alert(count);
+  					search(count);
   					
   				},
   				error:function(err){
-  					alert(err+"에러발생")
+  					console.log("Exception : 아이템 구매");
   				}
   			})
   		})
   		
-  		//판매취소
+  		// 판매취소
   		$(document).on("click",'input[value=취소]', function() {
   			$.ajax({
   				url:"auctionCancel",
@@ -762,12 +773,12 @@ $(function(){
   					auctionSellList();
   				},
   				error:function(err){
-  					alert(err+"에러발생")
+  					console.log("Exception : 판매 취소");
   				}
   			})
   		})
   		
-  		//수령, 유찰
+  		// 수령, 유찰
   		$(document).on("click",'input[value=수령],input[value=유찰]', function() {
   			var wordBtn =  $(this).val();
   			$.ajax({
@@ -788,13 +799,13 @@ $(function(){
   					auctionSellList();
   				},
   				error:function(err){
-  					alert(err+"에러발생")
+  					console.log("Exception : 수령 유찰");
   				}
   			})
   		})
   		
   		
-          //검색
+          // 검색
           $("#auction-search").on("keyup",function(){
           	count=1;
           	if(event.keyCode == 13) {
@@ -804,20 +815,20 @@ $(function(){
           	}
           })
   	    
-          //이전버튼
+          // 이전버튼
   		$("#auction-back-btn").on("click",function(){
   			if($("#auction-buy-tbody").children().length<=0) return
   			if(count>1){
   				search(count-1);
   			}
   		})
-  		//다음버튼
+  		// 다음버튼
   		$("#auction-next-btn").on("click",function(){
   			if($("#auction-buy-tbody").children().length<=0) return
   			search(count+1)
   		})
   		 
-  		//페이지에따른 검색
+  		// 페이지에따른 검색
   		function search(page){
           	$.ajax({
           		url:"auctionSearch",
@@ -844,13 +855,13 @@ $(function(){
           			$("#auction-buy-tbody").html(str);
           		},
           		error:function(err){
-          			alert(err+"에러발생");
+          			console.log("Exception : search");
           		}
           		
           	})
           }
   		
-  		//판매탭 접속
+  		// 판매탭 접속
   		function auctionSellList(){
   			$.ajax({
   	        	url: "auctionMyPage" ,
@@ -881,7 +892,7 @@ $(function(){
   					$("#auction-sell-tbody").html(str);
   				} ,
   				error:function(err){
-  					alert(err +"에러발생");
+  					console.log("Exception : auctionSellList");
   				}
   	        })
   		}
@@ -898,7 +909,7 @@ $(function(){
       }
       
       /* 유저 정보 보기 */
-      var userInfo = function(nickName){
+      var showUserInfo = function(nickName){
           $.ajax({
              url:"userInfo",
              data:{targetPlayer:nickName},
@@ -912,17 +923,17 @@ $(function(){
                      showCollapseButton: true,
                      autoOpen:true,
                      closeButtonAction: 'close',
-                     theme:"kokomo"
+                     theme:userInfo.theme
                 });
                 
              },
              error:function(err){
-                
+            	 console.log("Exception : showUserInfo");
              }
           })
-       }
+       };
       
-      
+      initWs();
       invenInit();
       rtaInit();
       stockListInit();
@@ -940,7 +951,14 @@ $(function(){
             $("#financial-btn").setBtn($("#financial-window"))
             $("#auction-btn").setBtn($("#auction-window"))
     		$("#myinfo-btn").click(function(){
-    			userInfo(userInfo.nickName);
+    			showUserInfo(userInfo.nickName);
     		});
       }();
+      
+      $(".main-container").css("visibility","visible");
+      $("#loading-content").remove();
+      
+	};
+	
+	updatePI(initContent());
 });

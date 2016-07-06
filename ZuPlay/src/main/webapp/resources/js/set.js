@@ -1,6 +1,6 @@
-var userInfo = {
+userInfo = {
 	nickName : "",
-	gender : "",
+	gender : "여자",
 	theme : "kokomo",
 	money : 0,
 	ruby : 0,

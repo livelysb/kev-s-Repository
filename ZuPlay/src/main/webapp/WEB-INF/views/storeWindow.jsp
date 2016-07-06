@@ -161,6 +161,5 @@
       <div id="store-next-div">
          <button type="button" id="store-next-btn" class="btn btn-default">></button>
       </div>
-         <button type="button" id="store-item-sell" class="btn btn-primary">판매</button>
    </div>
 </div>

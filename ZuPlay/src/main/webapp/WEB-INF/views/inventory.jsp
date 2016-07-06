@@ -65,18 +65,20 @@
 					<div class="modal-dialog vertical-align-center">
 
 						<div class="modal-dialog modal-sm">
-							<div class="modal-content" id="inven-auction-conten">
+							<div class="modal-content">
 								<div class="modal-header">
 									<h4>
 										<div class="modal-title">경매장판매</div>
 									</h4>
 								</div>
 								<div class="modal-body">
-									
+									<label>판매가</label>
+									<input type="text" id="inven-auction-imPurchasePrice">
+									<input type="hidden" id="inven-auction-piSq">
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-success" id="inven-auction-sell-btn">Sell</button>
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 								</div>
 							</div>
 						</div>

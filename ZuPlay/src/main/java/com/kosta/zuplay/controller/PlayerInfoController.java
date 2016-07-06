@@ -16,6 +16,7 @@ import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 import com.kosta.zuplay.model.service.item.InventoryService;
 import com.kosta.zuplay.model.service.player.PlayerInfoService;
+import com.kosta.zuplay.model.service.stock.PlayerStockService;
 
 @Controller
 public class PlayerInfoController {
@@ -26,6 +27,9 @@ public class PlayerInfoController {
 	
 	@Autowired
 	private InventoryService inventoryService;
+	
+	@Autowired
+	private PlayerStockService playerStockService;
 	
 	@Autowired
 	private ServletContext context;
@@ -90,10 +94,18 @@ public class PlayerInfoController {
 	
 	@RequestMapping(value={"playerStock"}, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String playerStock(HttpSession session) {
+	public String playerStock(HttpSession session) throws Exception{
 		String playerNickname = (String)session.getAttribute("playerNickname");
-		Gson gson = new Gson();
-		String json = gson.toJson(null);
-		return json;
+		try {
+			Gson gson = new Gson();
+			String json = gson.toJson(playerStockService.getPlayerStocksDetail(playerNickname));
+			System.out.println(json);
+			return json;		
+		} catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMsg", e.getMessage());
+			throw new Exception();
+		}
+		
 	}
 }

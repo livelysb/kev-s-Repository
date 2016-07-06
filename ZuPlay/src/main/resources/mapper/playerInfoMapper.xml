@@ -10,6 +10,7 @@
 		<result column="PLAYER_AGE" property="playerAge" />
 		<result column="PLAYER_LIKE" property="playerLike" />
 		<result column="PLAYER_MONEY" property="playerMoney" />
+		<result column="PLAYER_PREMONEY" property="playerPreMoney"/>
 		<result column="PLAYER_RUBY" property="playerRuby" />
 		<result column="PLAYER_GRADE" property="playerGrade" />
 		<result column="PLAYER_LAST_ACCESS" property="playerLastAccess"/>

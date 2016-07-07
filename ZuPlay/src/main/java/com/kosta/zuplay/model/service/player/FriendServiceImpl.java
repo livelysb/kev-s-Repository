@@ -27,13 +27,14 @@ public class FriendServiceImpl implements FriendService {
 	/**
 	 * 접속중 친구목록 가져오기
 	 */
+	@SuppressWarnings("null")
 	@Override
 	public List<FriendDTO> friendSelectOnline(String playerNickname) {
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
 		List<FriendDTO> list = new ArrayList<FriendDTO>();
 		List<FriendDTO> listA = friendDAO.friendSelectA(playerNickname);
 		List<FriendDTO> listB = friendDAO.friendSelectB(playerNickname);
-		List<String> listApp = null;
+		List<String> listApp = new ArrayList<String>();
 		Enumeration<String> enumr = application.getAttributeNames();
 		while (enumr.hasMoreElements()) {
 			String el = enumr.nextElement();

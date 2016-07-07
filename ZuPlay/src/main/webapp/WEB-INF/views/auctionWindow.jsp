@@ -55,10 +55,12 @@
 							<tbody id="auction-buy-tbody">
 							</tbody>
 						</table>
-						<button type="button" class="btn btn-default"
-							id="auction-back-btn">이전</button>
-						<button type="button" class="btn btn-default"
-							id="auction-next-btn">다음</button>
+						<div id="auction-page-btn">
+							<button type="button" class="btn btn-default"
+								id="auction-back-btn">이전</button>
+							<button type="button" class="btn btn-default"
+								id="auction-next-btn">다음</button>
+						</div>
 					</div>
 				</div>
 				<div class="tab-pane fade" id="profile">

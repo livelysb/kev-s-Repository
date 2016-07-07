@@ -138,16 +138,17 @@ public class FriendController {
 		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname);
 		PlayerVO pv2 = null;
 		WebSocketSession webSession2 = null;
-		if (application.getAttribute(playerNickname2) != null) {
+		if (application.getAttribute("#"+playerNickname2) != null) {
 			pv2 = (PlayerVO) application.getAttribute("#" + playerNickname2);
 			webSession2 = pv2.getSession();
 		}
 		WebSocketSession webSession = pv.getSession();
 
 		boolean result = true;
-		System.out.println(result);
 		try {
 			result = friendServiceImpl.friendAccept(friendSq);
+			System.out.println(result);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

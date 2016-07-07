@@ -23,6 +23,13 @@
 			</association>
 		</collection>
 	</resultMap>
+	<!-- 친구명 조회 -->
+	<select id="friendSelectOnlyNicknameA" parameterType="String" resultType="String">
+		select player_nickname from friend where player_nickname2=#{value}
+	</select>
+	<select id="friendSelectOnlyNicknameB" parameterType="String" resultType="String">
+		select player_nickname2 from friend where player_nickname=#{value}
+	</select>
 	<!--친구조회 -->
 	<select id="friendSelectA" parameterType="String" resultMap="friendMap">
 		select * from

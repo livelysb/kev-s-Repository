@@ -22,7 +22,35 @@ public class FriendServiceImpl implements FriendService {
 	private ServletContext application;
 	@Autowired
 	private SqlSession sqlSession;
-
+	/**
+	 * 접속중 친구명 가져오기
+	 */
+	@Override
+	public List<String> friendSelectOnlyNickname(String playerNickname){
+		FriendDAO friendDAO=sqlSession.getMapper(FriendDAO.class);
+		List<String> listA=friendDAO.friendSelectOnlyNicknameA(playerNickname);
+		List<String> listB=friendDAO.friendSelectOnlyNicknameB(playerNickname);
+		List<String> listX=new ArrayList<String>();
+		Enumeration<String> enumr=application.getAttributeNames();
+		while (enumr.hasMoreElements()) {
+			String el = enumr.nextElement();
+			if(el.charAt(0)=='#'){
+				String ell=el.substring(1);
+				listX.add(ell);
+			};
+		}
+		for(int i=0;i<listB.size();i++){
+			listA.add(listB.get(i));
+		}
+		for(int i=0;i<listA.size();i++){
+			if (listX.contains(listA.get(i))) {
+				
+			} else{
+				listA.remove(i);
+			}
+		}
+		return listA;
+	}
 	/**
 	 * 접속중 친구목록 가져오기
 	 */

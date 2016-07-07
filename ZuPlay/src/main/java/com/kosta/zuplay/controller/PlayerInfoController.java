@@ -87,9 +87,9 @@ public class PlayerInfoController {
 		mv.addObject("playerItemList", playerItemList);
 		
 		if(playerDTO.getLikerList().contains(playerNickname)) {
-			mv.addObject("isLike", "true");
+			mv.addObject("isLike", true);
 		}else {
-			mv.addObject("isLike","false");
+			mv.addObject("isLike",false);
 		}
 		
 		mv.addObject("likeNum",playerDTO.getLikerList().size());

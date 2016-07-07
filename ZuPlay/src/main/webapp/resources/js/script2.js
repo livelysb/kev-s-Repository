@@ -1075,7 +1075,7 @@ $(function(){
      						ListFriend+="<li href='#' class='list-group-item text-left'>";
      						ListFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
      						ListFriend+="<div class='friend-icon red'> </div>";
-     						ListFriend+="<label class='name'>"+item.playerNickname2+"</label>";
+     						ListFriend+="<label class='name'>"+friendNickname+"</label>";
      						ListFriend+="<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
      						ListFriend+="<div class='pull-right'>";
      						ListFriend+="<button type='button' class='btn btn-default friend-sendBtn '>";
@@ -1088,6 +1088,8 @@ $(function(){
      				 
      			 }else if(data.type=="friendAdd"){
      				$("#friend-request-noti").jqxNotification("open");
+     			 }else if(data.type=="friendDel"){
+     				 
      			 }
          	 }
           }	

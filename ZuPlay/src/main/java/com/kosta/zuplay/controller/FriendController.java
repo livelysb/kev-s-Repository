@@ -97,8 +97,8 @@ public class FriendController {
 	public void friendAdd(String playerNickname, String playerNickname2) {
 		PlayerVO pv = null;
 		WebSocketSession webSession = null;
-		if (application.getAttribute(playerNickname2) != null) {
-			pv = (PlayerVO) application.getAttribute("#" + playerNickname);
+		if (application.getAttribute("#"+playerNickname2) != null) {
+			pv = (PlayerVO) application.getAttribute("#" + playerNickname2);
 			webSession = pv.getSession();
 
 		}
@@ -110,7 +110,7 @@ public class FriendController {
 		System.out.println(json);
 		TextMessage tx = new TextMessage(json);
 		System.out.println(tx);
-		if (application.getAttribute(playerNickname2) != null) {
+		if (application.getAttribute("#"+playerNickname2) != null) {
 			try {
 				webSession.sendMessage(tx);
 			} catch (IOException e) {

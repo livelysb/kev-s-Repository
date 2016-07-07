@@ -66,7 +66,7 @@ public class LoginController {
 		}
 		session.setAttribute("playerNickname", playerNickname);
 
-		return "index";
+		return "redirect:index";
 	}
 
 	/**

@@ -264,6 +264,7 @@ div.vertical-line{
 
 #friend-list-group{
   height: 73%;
+  overflow: auto;
 }
 
 #friend-content{
@@ -273,6 +274,7 @@ div.vertical-line{
 #friend-list-que{
   max-height: 25%;
   height: auto;
+  overflow: auto;
 }
 
 #friend-content .list-group .title{

@@ -115,61 +115,115 @@ $(function(){
       }
       
       
-      /* 기업 정보 조회 */
-      var companyInfo = function(companyId){
-              var price = $(companyId + " .company-title-stock").text();
-              
-             $(companyId).jqxWindow({
-                   theme:userInfo.theme,
-                   minWidth:700,
-                   width:"auto",
-                   height:380,
-                   showCollapseButton: true,
-                   resizable : false
-                 });
-              
-              
-              var sellSlider = $(companyId + " .company-buy-slider");
-              var buySlider = $(companyId + " .company-sell-slider");
-            
-
-             $(companyId + " .company-sell-slider").jqxSlider({
-                 width:"100%",
-                 showTickLabels: true,
-                 tooltip: true,
-                 mode: "fixed",
-                 min: 0,
-                 max: 100,
-                 ticksFrequency: 10,
-                 value: 0,
-                 step: 1,
-                 theme : userInfo.theme,
-                 tooltipPosition: "far",
-                 theme:userInfo.theme
+    /* 주식 구매*/
+    var buyStock = function(companyId, qty){
+       console.log(companyId + " " + qty)
+          $.ajax({
+             url:"buyStock",
+             dataType:"text",
+             data:{isuCd:companyId, plQuantity:qty},
+             success:function(data){
+                console.log(data);
+                if(data == "true"){
+                   alert("구매 성공하였습니다.");
+                }else{
+                   alert("구매 실패하였습니다.");
+                }
+                updatePI();
+             },
+             error:function(){
+                console.log("Exception : buyStock");
+             }
+          });
+      };
+      /*주식 판매*/
+       var sellStock = function(companyId, qty){
+          console.log(companyId + " " + qty)
+             $.ajax({
+                url:"sellStock",
+                dataType:"text",
+                data:{isuCd:companyId, plQuantity:qty},
+                success:function(data){
+                   if(data == "true"){
+                      alert("판매 하였습니다.");
+                   }else{
+                      alert("판매 실패하였습니다.");
+                   }
+                   updatePI();
+                },
+                error:function(){
+                   console.log("Exception : sellStock");
+                }
              });
-              
-             $(companyId + " .company-buy-slider").jqxSlider({
-                 width:"100%",
-                 showTickLabels: true,
-                 tooltip: true,
-                 mode: "fixed",
-                 min: 0,
-                 ticksFrequency: 10,
-                 step: 1,
-                 theme : userInfo.theme,
-                 tooltipPosition: "far",
+         };
+    /* 기업 정보 조회 */
+    var companyInfo = function(companyId){
+           var price = $(companyId + " .company-title-stock").text();
+           var isuCd = $(companyId + " .company-isuCd").val();
+           var qty = $(companyId + " .company-qty").val();
+           var ticks = parseInt(userInfo.money/price);
+           
+           $(companyId).jqxWindow({
                  theme:userInfo.theme,
-                 max: 100,
-                 value: 0
-             });
-             
-             $(document).on("change",companyId + " .company-buy-slider",function(event){
-                $(companyId + " .company-buy-value").text(price * event.args.value);
-             });
-             $(document).on("change",companyId + " .company-sell-slider",function(event){
-                $(companyId + " .company-sell-value").text(price * event.args.value);
-             });
-      }
+                 minWidth:700,
+                 width:"auto",
+                 height:380,
+                 showCollapseButton: true,
+                 resizable : false
+               });
+            
+            var buySlider = $(companyId + " .company-buy-slider");
+            var sellSlider = $(companyId + " .company-sell-slider");
+            
+            if(qty>0){
+               $(sellSlider).jqxSlider({
+                   width:"100%",
+                   showTickLabels: true,
+                   tooltip: true,
+                   mode: "fixed",
+                   min: 0,
+                   max: qty,
+                   ticksFrequency: qty/10,
+                   value: 0,
+                   step: 1,
+                   theme : userInfo.theme,
+                   tooltipPosition: "far"
+               });
+               
+               $(document).on("change",$(sellSlider),function(event){
+                   $(companyId + " .company-sell-value").text(price * event.args.value);
+                   
+                });
+               
+               $(companyId + " .company-sell-btn").on("click",function(evt){
+                  sellStock(isuCd,$(sellSlider).val());
+               })
+            }
+
+            $(buySlider).jqxSlider({
+                width:"100%",
+                showTickLabels: true,
+                tooltip: true,
+                mode: "fixed",
+                min: 0,
+                ticksFrequency: ticks/10,
+                step: 1,
+                theme : userInfo.theme,
+                tooltipPosition: "far",
+                max: ticks,
+                value: 0
+            });
+            
+            $(document).on("click", companyId + " .company-buy-btn", function(event){
+               buyStock(isuCd,$(buySlider).val());
+            })
+            
+            $(document).on("change",$(buySlider),function(event){
+               $(companyId + " .company-buy-value").text(price * event.args.value);
+        
+            });
+
+    }
       
 
       var invenInit = function(){
@@ -446,6 +500,7 @@ $(function(){
                   }
                });
             }
+
 
             /* 검색 */
             $("#stock-search").on("keyup",function(){
@@ -970,16 +1025,29 @@ $(function(){
           var friendselectAll = function(){
          	 ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
      		 ws.onmessage = function (event) {
-     			 console.log(event.data );
-     			 //alert(1)
-     			 //console.log(jQuery.parseJSON(JSON.stringify(event.data)));
+     			 var data = JSON.parse(event.data);
+     			 console.log(data)
+     			 
+     			 requestedFriend="";
+     			 ListFriend="";
+     			 
+     			 if(data.type=="friendSelect"){
+     				 $.each(data.data,function(index,item){
+     					 if(item.friendIsAccepted=="F"){
+     						requestedFriend=""
+ 							requestedFriend=""
+							requestedFriend=""
+							requestedFriend=""
+							requestedFriend=""
+     					 }else{
+     						 
+     					 }
+     				 })
+     			 }
          	 }
           }	
           friendselectAll();
-          
-          
       });
-      
       $(".main-container").css("visibility","visible");
       $("#loading-content").remove();
       

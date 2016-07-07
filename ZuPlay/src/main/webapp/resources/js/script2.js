@@ -1103,7 +1103,8 @@ $(function(){
                ListFriend="";
                
                if(data.type=="friendSelect"){
-                  
+            	   $("#friend-list-que ul").children("gt 0").empty();
+            	   $("#friend-list-group ul").children("gt 0").empty();
                   $.each(data.data,function(index,item){
                      if(userInfo.nickName==item.playerNickname){
                         var friendNickname=item.playerNickname2

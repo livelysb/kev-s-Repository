@@ -31,6 +31,11 @@ public class EchoHandler extends TextWebSocketHandler {
 		String playerNickname = mesArr[1];
 		if (mesArr[0].equals("open")) {
 			application.setAttribute("#"+playerNickname, new PlayerVO(playerNickname, webSession));
+			try{
+			friendController.friendLogin(playerNickname);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		} else if (mesArr[0].equals("friendSelect")) {
 			friendController.friendSelect(playerNickname);
 		} else if (mesArr[0].equals("friendAdd")) {

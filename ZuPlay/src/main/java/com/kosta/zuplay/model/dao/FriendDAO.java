@@ -7,6 +7,14 @@ import com.kosta.zuplay.model.dto.player.FriendDTO;
 
 public interface FriendDAO {
 	/**
+	 * 친구명 조회A
+	 */
+	List<String> friendSelectOnlyNicknameA(String playerNickname);
+	/**
+	 * 친구명 조회B
+	 */
+	List<String> friendSelectOnlyNicknameB(String playerNickname);
+	/**
 	 * 친구조회A
 	 */
 	List<FriendDTO> friendSelectA(String playerNickname);

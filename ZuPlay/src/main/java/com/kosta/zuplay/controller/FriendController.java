@@ -1,6 +1,7 @@
 package com.kosta.zuplay.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -24,13 +25,40 @@ public class FriendController {
 	@Autowired
 	private ServletContext application;
 
+	public void friendLogin(String playerNickname) {
+		List<String> list = new ArrayList<>();
+		try {
+			list = friendServiceImpl.friendSelectOnlyNickname(playerNickname);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(list);
+		WebSocketSession webSocketSession = null;
+		String json = "{\"type\":\"notiFriendLogin\",\"data\":\"" + playerNickname + " 님이 로그인 하셨습니다.\"}";
+		TextMessage tx = new TextMessage(json);
+		for (int i = 0; i < list.size(); i++) {
+			String playerNickname1 = list.get(i);
+			PlayerVO pv = (PlayerVO) application.getAttribute("#"+playerNickname1);
+
+			if (pv != null) {
+				webSocketSession = pv.getSession();
+				try {
+					webSocketSession.sendMessage(tx);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
 	public void friendSelect(String playerNickname) {
-		PlayerVO pv = (PlayerVO) application.getAttribute("#"+playerNickname);
+		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname);
 		WebSocketSession webSession = pv.getSession();
 		List<FriendDTO> list = null;
-		try{
-		list = friendServiceImpl.friendSelect(playerNickname);
-		}catch(Exception e){
+		try {
+			list = friendServiceImpl.friendSelect(playerNickname);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		Gson gson = new Gson();
@@ -47,7 +75,7 @@ public class FriendController {
 	}
 
 	public void friendSelectOnline(String playerNickname) {
-		PlayerVO pv = (PlayerVO) application.getAttribute("#"+playerNickname);
+		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname);
 		WebSocketSession webSession = pv.getSession();
 		Gson gson = new Gson();
 		List<FriendDTO> list = null;
@@ -69,7 +97,7 @@ public class FriendController {
 		PlayerVO pv = null;
 		WebSocketSession webSession = null;
 		if (application.getAttribute(playerNickname2) != null) {
-			pv = (PlayerVO) application.getAttribute("#"+playerNickname);
+			pv = (PlayerVO) application.getAttribute("#" + playerNickname);
 			webSession = pv.getSession();
 
 		}
@@ -91,7 +119,7 @@ public class FriendController {
 	}
 
 	public void friendDel(String playerNickname, int friendSq) {
-		PlayerVO pv = (PlayerVO) application.getAttribute("#"+playerNickname);
+		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname);
 		WebSocketSession webSession = pv.getSession();
 		boolean result = false;
 		result = friendServiceImpl.friendDel(friendSq);
@@ -106,20 +134,20 @@ public class FriendController {
 	}
 
 	public void friendAccept(String playerNickname, String playerNickname2, int friendSq) {
-		PlayerVO pv = (PlayerVO) application.getAttribute("#"+playerNickname);
+		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname);
 		PlayerVO pv2 = null;
 		WebSocketSession webSession2 = null;
 		if (application.getAttribute(playerNickname2) != null) {
-			pv2 = (PlayerVO) application.getAttribute("#"+playerNickname2);
+			pv2 = (PlayerVO) application.getAttribute("#" + playerNickname2);
 			webSession2 = pv2.getSession();
 		}
 		WebSocketSession webSession = pv.getSession();
 
 		boolean result = true;
 		System.out.println(result);
-		try{
+		try {
 			result = friendServiceImpl.friendAccept(friendSq);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if (result) {

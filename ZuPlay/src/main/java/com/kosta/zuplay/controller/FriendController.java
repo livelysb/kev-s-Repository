@@ -48,7 +48,7 @@ public class FriendController {
 		Gson gson = new Gson();
 		List<FriendDTO> list;
 			list = friendServiceImpl.friendSelectOnline(playerNickname);
-		String json = "{type:'friendSelectOnline',data:" + gson.toJson(list) + "}";
+		String json = "{\"type\":\"friendSelectOnline\",\"data\":" + gson.toJson(list) + "}";
 		TextMessage tx = new TextMessage(json);
 		try {
 			webSession.sendMessage(tx);
@@ -64,7 +64,7 @@ public class FriendController {
 		dto = friendServiceImpl.friendAdd(playerNickname, playerNickname2);
 		Gson gson = new Gson();
 		String json = gson.toJson(dto);
-		json = "{type:'notiFriendAdd',data:" + json + "}";
+		json = "{\"type\":\"notiFriendAdd\",\"data\":" + json + "}";
 		System.out.println(json);
 		TextMessage tx = new TextMessage(json);
 		System.out.println(tx);
@@ -81,7 +81,7 @@ public class FriendController {
 		boolean result = false;
 			result = friendServiceImpl.friendDel(friendSq);
 		Gson gson = new Gson();
-		String json = "{type:'friendDel',data:" + gson.toJson(result) + "}";
+		String json = "{\"type\":\"friendDel\",\"data\":" + gson.toJson(result) + "}";
 		TextMessage tx = new TextMessage(json);
 		try {
 			webSession.sendMessage(tx);
@@ -101,8 +101,8 @@ public class FriendController {
 		result = friendServiceImpl.friendAccept(friendSq);
 		if (result) {
 			Gson gson = new Gson();
-			String json = "{type:'notiFriendAcceptMe',data:" + gson.toJson(result) + "}";
-			String json2 = "{type:'notiFriendAcceptYou',data:" + gson.toJson(result) + "}";
+			String json = "{\"type\":\"notiFriendAcceptMe\",\"data\":" + gson.toJson(result) + "}";
+			String json2 = "{\"type\":\"notiFriendAcceptYou\",\"data\":" + gson.toJson(result) + "}";
 
 			try {
 				webSession.sendMessage(new TextMessage(json));

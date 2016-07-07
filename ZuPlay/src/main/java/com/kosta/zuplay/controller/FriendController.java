@@ -31,7 +31,7 @@ public class FriendController {
 			list = friendServiceImpl.friendSelect(playerNickname);
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
-		json = "{type:'friendSelect',data:" + json + "}";
+		json = "{\"type\":\"friendSelect\",\"data\":\" "+ json + "\"}";
 		System.out.println(json);
 		TextMessage tx = new TextMessage(json);
 		System.out.println(tx);

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.FriendDAO;
 import com.kosta.zuplay.model.dto.player.FriendDTO;
-import com.kosta.zuplay.util.vo.PlayerVO;
 
 @Service
 public class FriendServiceImpl implements FriendService {
@@ -27,7 +26,6 @@ public class FriendServiceImpl implements FriendService {
 	/**
 	 * 접속중 친구목록 가져오기
 	 */
-	@SuppressWarnings("null")
 	@Override
 	public List<FriendDTO> friendSelectOnline(String playerNickname) {
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
@@ -38,7 +36,6 @@ public class FriendServiceImpl implements FriendService {
 		Enumeration<String> enumr = application.getAttributeNames();
 		while (enumr.hasMoreElements()) {
 			String el = enumr.nextElement();
-			System.out.println("name : " + el);
 			if(el.charAt(0)=='#'){
 				String ell=el.substring(1);
 				listApp.add(ell);
@@ -52,7 +49,6 @@ public class FriendServiceImpl implements FriendService {
 				list.add(listA.get(i));
 			}
 		}
-		System.out.println(list);
 		return list;
 	}
 

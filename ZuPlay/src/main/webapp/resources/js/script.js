@@ -179,7 +179,7 @@ $(function(){
 	                  tooltip: true,
 	                  mode: "fixed",
 	                  min: 0,
-	                  max: 50,
+	                  max: qty,
 	                  ticksFrequency: qty/10,
 	                  value: 0,
 	                  step: 1,

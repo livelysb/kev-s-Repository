@@ -79,17 +79,25 @@
             <div class="row-fluid buttons-row">
               <div class="col-md-12 buttons-area">
                    <button id="logout">로그아웃</button>
-				   <button id="rta-btn">실시간 주가 정보</button>
-				   <button id="inven-btn">인벤토리</button>
-				   <button id="stockList-btn">주가 보기</button>
-				   <button id="store-btn">상점</button>
-				   <button id="friend-btn">친구</button>
-				   <button id="financial-btn">용어사전</button>
-				   <!-- ///////////////////////////////////////////////// -->
-				   <button id="auction-btn">경매장</button>
-				   <button id="myinfo-btn">내 정보</button>
-				   <button id="mystock-btn">내 주식</button>
-				   <!-- ///////////////////////////////////////////////// -->
+               <button id="rta-btn">실시간 주가 정보</button>
+               <button id="inven-btn">인벤토리</button>
+               <button id="stockList-btn">주가 보기</button>
+               <button id="store-btn">상점</button>
+               <button id="friend-btn">친구</button>
+               <button id="financial-btn">용어사전</button>
+               <!-- ///////////////////////////////////////////////// -->
+               <button id="auction-btn">경매장</button>
+               <button id="myinfo-btn">내 정보</button>
+               <button id="mystock-btn">내 주식</button>
+               <!-- ///////////////////////////////////////////////// -->
+               <!--Notifications-->
+               <button id="friend-request-btn">노티파이</button>
+                  <div id="friend-request-noti">
+                      <div>
+                          친구요청!!!
+                      </div>
+                     </div> 
+               
               </div>
             </div>
             <!-- 버튼 영역 종료 -->
@@ -105,13 +113,6 @@
           </div>
           <!-- 툴바 영역 종료 -->
 
-		<!--Notifications-->
-		   <div id="friend-request-noti">
-		       <div>
-		           친구요청!!!
-		       </div>
-		   </div>
-		
 
         </div>
         <!-- 푸터 섹션 종료 -->
@@ -148,7 +149,7 @@
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script src="resources/js/set.js"></script>
-<script src="resources/js/script2.js"></script>
+<script src="resources/js/script.js"></script>
       <script type="text/javascript">
         $(function() {
 

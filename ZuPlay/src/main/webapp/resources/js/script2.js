@@ -643,34 +643,40 @@ $(function(){
              maxHeight:900,
              showCollapseButton: true
            });
-         
+         var friendSearch = function(){
+        	 $.ajax({
+                 url:"playerInfoSelectAll",
+                 type:"post",
+                 data:"keyword="+$("#friend-add-text").val(),
+                 dataType:"json",
+                 success:function(data){
+                    str="";
+                    $.each(data,function(index,item){
+                       
+                       str+="<tr class='friend-add-tr'><td>아바타</td>";
+                       str+="<td>"+item.playerNickname+"</td>"
+                       str+="<td>"+item.playerGrade+"</td></tr>"
+                    })
+                    $("#friend-list-table").empty();
+                    $("#friend-list-table").html(str);
+                 },
+                 error:function(err){
+                    console.log("Exception : 친구 검색");
+                 }
+                 
+              })
+         }
 
          
          // 친구검색
-         $("#friend-add-search").on("click",function(){
-            console.log($("#friend-add-text").val());
-           $.ajax({
-               url:"playerInfoSelectAll",
-               type:"post",
-               data:"keyword="+$("#friend-add-text").val(),
-               dataType:"json",
-               success:function(data){
-                  str="";
-                  $.each(data,function(index,item){
-                     
-                     str+="<tr class='friend-add-tr'><td>아바타</td>";
-                     str+="<td>"+item.playerNickname+"</td>"
-                     str+="<td>"+item.playerGrade+"</td></tr>"
-                  })
-                  $("#friend-list-table").empty();
-                  $("#friend-list-table").html(str);
-               },
-               error:function(err){
-                  console.log("Exception : 친구 검색");
-               }
-               
-            })
+         $("#friend-add-search").on("click", friendSearch);
+         $("#friend-add-text").on("keyup",function(){
+        	 if(event.keyCode == 13) {
+        		 friendSearch()
+              }
          })
+         
+         
          
          /* 친구추가 모달 */
          $("#friend-add-modal-btn").on("click",function(){

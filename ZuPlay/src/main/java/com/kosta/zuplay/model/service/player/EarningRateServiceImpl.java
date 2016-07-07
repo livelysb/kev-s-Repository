@@ -116,13 +116,21 @@ public class EarningRateServiceImpl implements EarningRateService {
 		int sell = 0;
 		List<StockDealHistoryDTO> stockDealHistoryList = dealHistoryService.getStockHistory(playerNickname);
 		for(StockDealHistoryDTO stockDealHistory : stockDealHistoryList) {
+			if(!stockDealHistory.getIsuCd().equals(isuCd))
+				continue;
 			if(stockDealHistory.getSdhBuySell().equals("b"))
 				buy += stockDealHistory.getSdhDealPrice();
 			else 
 				sell += stockDealHistory.getSdhDealPrice();
+			System.out.println(stockDealHistory.getIsuCd());
+			System.out.println("판매 총액 : " + sell);
+			System.out.println("구매 총액 : " + buy);
 		}
 		sell += playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity() * stockInfoService.getPrice(isuCd).getTrdPrc();
+		System.out.println("보유주식 포함한 총액 : " +sell);
 		int rate = (int)((sell - buy) / (double)(buy) * 100000000);
+		System.out.println("수익률 : " + rate);
+		System.out.println();
 		return rate/1000000.0;
 	}
 

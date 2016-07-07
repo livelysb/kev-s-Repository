@@ -7,7 +7,7 @@
 		<div id="friend-content">
 
 			<div id="friend-list-que">
-				<ul class="list-group">
+				<ul class="list-group" id="friend-list-request">
 
 					<li class="list-group-item title">
 						<div class="friend-icon orange"></div> <label>친구요청</label>
@@ -32,7 +32,7 @@
 			</div>
 
 			<div id="friend-list-group">
-				<ul class="list-group">
+				<ul class="list-group" id="friend-list-current">
 					<li class="list-group-item title">
 						<div class="friend-icon green"></div> <label>친구목록 - 2/5</label>
 					</li>

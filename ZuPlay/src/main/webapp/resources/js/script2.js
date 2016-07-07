@@ -1103,27 +1103,26 @@ $(function(){
                ListFriend="";
                
                if(data.type=="friendSelect"){
-            	   $("#friend-list-que ul").children("gt 0").empty();
-            	   $("#friend-list-group ul").children("gt 0").empty();
-                  $.each(data.data,function(index,item){
-                     if(userInfo.nickName==item.playerNickname){
-                        var friendNickname=item.playerNickname2
-                     }else{
-                       var friendNickname=item.playerNickname
-                     }
-                     
-                     if(item.friendIsAccepted=="F"){
-                         if(userInfo.nickName==item.playerNickname2){
-                            requestedFriend+="<li href='#' class='list-group-item text-left'>";
-                              requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
-                              
-                             requestedFriend+="<label class='name'>"+friendNickname+"</label>";
-                             requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
-                             requestedFriend+="<div class='pull-right'>";
-                             requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
-                             requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>";
-                             requestedFriend+="</div></li>";
-                         }
+                   
+                   $.each(data.data,function(index,item){
+                      if(userInfo.nickName==item.playerNickname){
+                         var friendNickname=item.playerNickname2
+                      }else{
+                        var friendNickname=item.playerNickname
+                      }
+                      
+                      if(item.friendIsAccepted=="F"){
+                          if(userInfo.nickName==item.playerNickname2){
+                             requestedFriend+="<li href='#' class='list-group-item text-left'>";
+                               requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
+                               
+                              requestedFriend+="<label class='name'>"+friendNickname+"</label>";
+                              requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
+                              requestedFriend+="<div class='pull-right'>";
+                              requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+                              requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>";
+                              requestedFriend+="</div></li>";
+                          }
                         
                       }else{
                        ListFriend+="<li href='#' class='list-group-item text-left'>";
@@ -1136,6 +1135,9 @@ $(function(){
                        ListFriend+="<i class='glyphicon glyphicon-send'></i></button></div></li>";
                      }
                   })
+                  console.log("시작")
+                  $("#friend-content .list-group > .title").siblings("li").remove();
+                   
                   $("#friend-list-que ul").append(requestedFriend);
                   $("#friend-list-group ul").append(ListFriend);
                }else if(data.type=="friendSelectOnline"){

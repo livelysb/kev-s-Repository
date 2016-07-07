@@ -648,11 +648,11 @@ $(function(){
          $("#friend-window").jqxWindow({
              theme:userInfo.theme,
              width:400,
-             maxWidth:400,
+             maxWidth:800,
              minWidth:400,
              minHeight:400,
              autoOpen:false,
-             height:"auto",
+             height:600,
              maxHeight:900,
              showCollapseButton: true
            });
@@ -700,9 +700,11 @@ $(function(){
          
          /*친구승락*/
          $(document).on("click",".friend-accept" ,function(){
-        	 var friendNickName = $(this).parent().prevAll(".requestedFSq").val();
-        	 var friendSq = $(this).parent().prevAll(".name").text();
-        	 ws.send("friendAccept#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#");
+        	 var friendSq = $(this).parent().prevAll(".requestedFSq").val();
+        	 var friendNickName = $(this).parent().prevAll(".name").text();
+        	 console.log(friendNickName);
+        	 console.log(friendSq);
+        	 ws.send("friendAccept#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendNickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#");
         	 
          })
          
@@ -1063,7 +1065,6 @@ $(function(){
      						requestedFriend+="<li href='#' class='list-group-item text-left'>";
  							requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
  							
-							requestedFriend+="<div class='friend-icon red'> </div>";
 							requestedFriend+="<label class='name'>"+friendNickname+"</label>";
 							requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
 							requestedFriend+="<div class='pull-right'>";

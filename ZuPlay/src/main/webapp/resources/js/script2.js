@@ -1112,16 +1112,19 @@ $(function(){
                      }
                      
                      if(item.friendIsAccepted=="F"){
-                       requestedFriend+="<li href='#' class='list-group-item text-left'>";
-                      requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
-                      
-                     requestedFriend+="<label class='name'>"+friendNickname+"</label>";
-                     requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
-                     requestedFriend+="<div class='pull-right'>";
-                     requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
-                     requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>";
-                     requestedFriend+="</div></li>";
-                     }else{
+                         if(userInfo.nickName==item.playerNickname2){
+                            requestedFriend+="<li href='#' class='list-group-item text-left'>";
+                              requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
+                              
+                             requestedFriend+="<label class='name'>"+friendNickname+"</label>";
+                             requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
+                             requestedFriend+="<div class='pull-right'>";
+                             requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+                             requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>";
+                             requestedFriend+="</div></li>";
+                         }
+                        
+                      }else{
                        ListFriend+="<li href='#' class='list-group-item text-left'>";
                        ListFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
                        ListFriend+="<div class='friend-icon red'> </div>";

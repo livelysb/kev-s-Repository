@@ -13,7 +13,7 @@
 		#{cmpprevddTpCd},
 		cmpprevddPrc = #{cmpprevddPrc},
 		trdPrc = #{trdPrc},
-		trdvol = #{trdvol},
+		accTrdvol = #{accTrdvol},
 		opnprc = #{opnprc},
 		hgprc = #{hgprc},
 		lwprc =
@@ -22,9 +22,9 @@
 		mktStatTpCd = #{mktStatTpCd}
 		when not matched
 		then
-		insert(isuCd,cmpprevddTpCd,cmpprevddPrc,trdPrc,trdvol,opnprc,hgprc,lwprc,trdTm,mktStatTpCd)
+		insert(isuCd,cmpprevddTpCd,cmpprevddPrc,trdPrc,accTrdvol,opnprc,hgprc,lwprc,trdTm,mktStatTpCd)
 		values
-		(#{isuCd},#{cmpprevddTpCd},#{cmpprevddPrc},#{trdPrc},#{trdvol},#{opnprc},#{hgprc},#{lwprc},#{trdTm},#{mktStatTpCd})
+		(#{isuCd},#{cmpprevddTpCd},#{cmpprevddPrc},#{trdPrc},#{accTrdvol},#{opnprc},#{hgprc},#{lwprc},#{trdTm},#{mktStatTpCd})
 	</update>
 	
 	<insert id="realtimePriceInsert" parameterType="priceDTO">

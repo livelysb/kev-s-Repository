@@ -1139,11 +1139,15 @@ $(function(){
                   $("#friend-list-group ul").append(ListFriend);
                }else if(data.type=="friendSelectOnline"){
                   
-               }else if(data.type=="friendAdd"){
-            	   $("#friend-request-noti").children().text("님께서 친구신청을 하셨습니다.")
+               }else if(data.type=="notiFriendAdd"){
+            	   console.log(data.data.playerNickname);
+            	   $("#friend-request-noti").children().text(data.data.playerNickname+"님께서 친구신청을 하셨습니다.")
             	   $("#friend-request-noti").jqxNotification("open");
+            	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
                }else if(data.type=="friendDel"){
-                  
+            	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
+               }else if(data.type=="notiFriendAcceptMe"){
+            	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
                }
              }
           }   

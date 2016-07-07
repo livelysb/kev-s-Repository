@@ -158,7 +158,7 @@ public class FriendController {
 
 			try {
 				webSession.sendMessage(new TextMessage(json));
-				if (application.getAttribute(playerNickname2) != null) {
+				if (application.getAttribute("#"+playerNickname2) != null) {
 					webSession2.sendMessage(new TextMessage(json2));
 				}
 			} catch (IOException e) {

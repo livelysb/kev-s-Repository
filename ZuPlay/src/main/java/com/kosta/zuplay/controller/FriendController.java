@@ -36,11 +36,12 @@ public class FriendController {
 		WebSocketSession webSocketSession = null;
 		String json = "{\"type\":\"notiFriendLogin\",\"data\":\"" + playerNickname + " 님이 로그인 하셨습니다.\"}";
 		TextMessage tx = new TextMessage(json);
+		PlayerVO pv =null;
 		for (int i = 0; i < list.size(); i++) {
 			String playerNickname1 = list.get(i);
-			PlayerVO pv = (PlayerVO) application.getAttribute("#"+playerNickname1);
 
 			if (pv != null) {
+				pv = (PlayerVO) application.getAttribute("#"+playerNickname1);
 				webSocketSession = pv.getSession();
 				try {
 					webSocketSession.sendMessage(tx);

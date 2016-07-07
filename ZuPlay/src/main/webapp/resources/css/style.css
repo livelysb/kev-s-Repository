@@ -180,6 +180,17 @@ div.vertical-line{
 }
 
 /* 아이템 상점 */
+#store-content .nav-tabs > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+#store-content .nav-tabs {
+    text-align:center;
+}
+
 
 #store-window .store-itemBox {
 	border: solid 3px #DDDDDD;

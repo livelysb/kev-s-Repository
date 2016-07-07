@@ -105,7 +105,6 @@ public class PlayerInfoController {
 		try {
 			Gson gson = new Gson();
 			String json = gson.toJson(playerStockService.getPlayerStocksDetail(playerNickname));
-			System.out.println(json);
 			return json;		
 		} catch(Exception e) {
 			e.printStackTrace();

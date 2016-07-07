@@ -55,7 +55,7 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 			price = gson.fromJson(br, PriceDTO.class);
 
 		}catch(IOException ioe) {
-			System.out.println("429(불량) 응답으로 인한 한 종목 업데이트 갱신되지 않음");
+			System.out.println("price - 429(불량) 응답으로 인한 한 종목 업데이트 갱신되지 않음");
 			//429에러이니 무시하기^^;
 			//System.out.println(ioe.getMessage());
 		}	
@@ -95,12 +95,9 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 	public void masterUpdate() throws Exception {
 		List<ListsDTO> lists = stockInfoService.getLists();
 		for(ListsDTO listDTO : lists) {
-			System.out.println("0-1");
 			MasterDTO masterDTO = getMasterFromAPI(listDTO.getIsuSrtCd());
-			System.out.println("0-2");
 			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 			stockUpdateDAO.masterUpdate(masterDTO);
-			System.out.println("0-3");
 		}
 		System.out.println(new Date().toString() + " : Master is updated");
 	}
@@ -117,11 +114,16 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 				Gson gson = new Gson();
 				masterDTO = gson.fromJson(br, MasterDTO.class);
 
-			} catch (Exception e) {
+			} catch(IOException ioe) {
+				System.out.println("master - 429(불량) 응답으로 인한 한 종목 업데이트 갱신되지 않음");
+				//429에러이니 무시하기^^;
+				//System.out.println(ioe.getMessage());
+			}catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 				try {
-					br.close();
+					if(br!=null)
+						br.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

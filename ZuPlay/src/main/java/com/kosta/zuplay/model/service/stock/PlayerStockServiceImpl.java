@@ -19,10 +19,10 @@ public class PlayerStockServiceImpl implements PlayerStockService {
 
 	@Autowired
 	private StockInfoService stockInfoService;
-	
+
 	@Autowired
 	private EarningRateService earningRateService;
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -48,7 +48,7 @@ public class PlayerStockServiceImpl implements PlayerStockService {
 		map.put("playerNickname", playerNickname);
 		map.put("isuCd", isuCd);
 		map.put("plQuantity", Integer.toString(plQuantity));
-		if(playerStockDAO.setPlayerStock(map)>0)
+		if (playerStockDAO.setPlayerStock(map) > 0)
 			return true;
 		return false;
 	}
@@ -57,11 +57,12 @@ public class PlayerStockServiceImpl implements PlayerStockService {
 	public List<MasterDTO> getPlayerStocksDetail(String playerNickname) throws Exception {
 		List<MasterDTO> masterList = new ArrayList<MasterDTO>();
 		List<PlayerListsDTO> playerStockList = getPlayerStocks(playerNickname);
-		for(PlayerListsDTO playerLists : playerStockList) {
+		for (PlayerListsDTO playerLists : playerStockList) {
 			MasterDTO masterDTO = stockInfoService.getStockDetail(playerNickname, playerLists.getIsuCd());
-			masterDTO.setPlQuantity(playerLists.getPlQuantity());
-			masterDTO.setEarningRate(earningRateService.calItemEarningRate(playerNickname, playerLists.getIsuCd()));
-			masterList.add(masterDTO);
+			if (masterDTO.getPlQuantity() != 0) {
+				masterDTO.setEarningRate(earningRateService.calItemEarningRate(playerNickname, playerLists.getIsuCd()));
+				masterList.add(masterDTO);
+			}
 		}
 		return masterList;
 	}

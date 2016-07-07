@@ -53,13 +53,14 @@ public class RankServiceImpl implements RankService{
 			playerInfoDAO.rankUpdate(map);
 
 		}
+		System.out.println(kind + "삽입 완료");
 	}
 
 	
 	
 	class EarningRateCompare implements Comparator<PlayerDTO> {
 		@Override
-		public int compare(PlayerDTO p1, PlayerDTO p2) {
+		public int compare(PlayerDTO p2, PlayerDTO p1) {
 			return p1.getEarningRate() > p2.getEarningRate() ? 1 : p1.getEarningRate() < p2.getEarningRate() ? -1 : 0;
 		}
 	}

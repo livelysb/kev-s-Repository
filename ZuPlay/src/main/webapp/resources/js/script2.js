@@ -415,8 +415,6 @@ $(function(){
                autoOpen:false,
                theme : userInfo.theme
              });
-          
-
       }
       
       var stockListInit = function(){
@@ -696,7 +694,6 @@ $(function(){
          $(document).on("click",".friend-add-tr",function(){
             var friendId=$(this).children("td").eq(1).text();
             var myId=$("#friend-add-test").val()
-            console.log($(this))
             if(confirm(friendId+"님을 친구로 추가하시겠습니까?")==false || friendId=="") return;
             ws.send("friendAdd#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendId)
          })
@@ -912,6 +909,7 @@ $(function(){
                 dataType:"json",
                 data:"keyword=" + $("#auction-search").val()+"&itemClass="+$("#auction-select").val()+"&page="+page,
                 success:function(data){
+                	
                    if(data.length==0){
                 	   if(sellFlag=true){
                 		   $("#auction-buy-tbody").empty();
@@ -1042,7 +1040,6 @@ $(function(){
       initWs(function(){
           //추가 된 친구조회
           var friendselectAll = function(){
-        	  console.log(userInfo.nickName);
          	 ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
          	 ws.send("friendSelectOnline#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
      		 
@@ -1054,13 +1051,20 @@ $(function(){
      			 ListFriend="";
      			 
      			 if(data.type=="friendSelect"){
+     				 
      				 $.each(data.data,function(index,item){
+     					 if(userInfo.nickName==item.playerNickname){
+     						 var friendNickname=item.playerNickname2
+     					 }else{
+     						var friendNickname=item.playerNickname
+     					 }
+     					 
      					 if(item.friendIsAccepted=="F"){
      						requestedFriend+="<li href='#' class='list-group-item text-left'>";
  							requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
  							
 							requestedFriend+="<div class='friend-icon red'> </div>";
-							requestedFriend+="<label class='name'>"+item.playerNickname2+"</label>";
+							requestedFriend+="<label class='name'>"+friendNickname+"</label>";
 							requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
 							requestedFriend+="<div class='pull-right'>";
 							requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";

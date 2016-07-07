@@ -36,7 +36,7 @@
 					<li class="list-group-item title">
 						<div class="friend-icon green"></div> <label>친구목록 - 2/5</label>
 					</li>
-					<li href="#" class="list-group-item text-left">
+					<!-- <li href="#" class="list-group-item text-left">
 			            <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
 			            <div class="friend-icon green"> </div>
 			            <label class="name">Park</label>
@@ -46,7 +46,6 @@
 			              </button>
 			            </div>
 			          </li>
-<!-- 
           <li href="#" class="list-group-item text-left">
             <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
             <div class="friend-icon green"> </div>

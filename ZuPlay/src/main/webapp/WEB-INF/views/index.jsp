@@ -105,6 +105,14 @@
           </div>
           <!-- 툴바 영역 종료 -->
 
+		<!--Notifications-->
+		   <div id="friend-request-noti">
+		       <div>
+		           친구요청!!!
+		       </div>
+		   </div>
+		
+
         </div>
         <!-- 푸터 섹션 종료 -->
 
@@ -123,6 +131,10 @@
 <script type="text/javascript" src="resources/js/jqwidgets/jqxwindow.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxtooltip.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxbuttons.js"></script>
+<!-- ============================================ -->
+<script type="text/javascript" src="resources/js/jqwidgets/jqxnotification.js"></script>
+
+
 <script type="text/javascript" src="resources/js/jqwidgets/jqxcheckbox.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxscrollbar.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxpanel.js"></script>

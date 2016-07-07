@@ -379,6 +379,7 @@ $(function(){
                     $(".inven-auction-modal").modal("hide");
                     playerItemSelectAll();
                     $("#inven-auction-imPurchasePrice").val("");
+                    search(1)
                     $("#auction-selltab").trigger("click");
                  }, 
                  error:function(err){
@@ -705,6 +706,13 @@ $(function(){
         	 var friendNickName = $(this).parent().prevAll(".requestedFSq").val();
         	 var friendSq = $(this).parent().prevAll(".name").text();
         	 ws.send("friendAccept#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#");
+        	 
+         })
+         
+         /*친구거절*/
+         $(document).on("click",".friend-reject",function(){
+        	 var friendSq = $(this).parent().prevAll(".name").text();
+        	 ws.send("friendDel#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#")
          })
          
       }
@@ -855,6 +863,7 @@ $(function(){
                  }else{
                     if(result!="false"){
                        playerItemSelectAll();
+                       search(1);
                        alert("유찰 된 아이템을 수령하셨습니다.");
                     }else{
                        alert("인벤토리를 비워 주십시오.");
@@ -896,7 +905,7 @@ $(function(){
         })
          
         // 페이지에따른 검색
-        function search(page){
+       search = function (page){
              $.ajax({
                 url:"auctionSearch",
                 type:"post",
@@ -978,6 +987,8 @@ $(function(){
             autoOpen:false,
             theme : userInfo.theme
           });
+        
+        search(1);
        
       }
       
@@ -1034,10 +1045,11 @@ $(function(){
         	  console.log(userInfo.nickName);
          	 ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
          	 ws.send("friendSelectOnline#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
-     		 ws.onmessage = function (event) {
+     		 
+         	 ws.onmessage = function (event) {
      			 var data = JSON.parse(event.data);
      			 console.log(data)
-     			 
+	     			 
      			 requestedFriend="";
      			 ListFriend="";
      			 
@@ -1069,6 +1081,8 @@ $(function(){
      				 $("#friend-list-group ul").append(ListFriend);
      			 }else if(data.type=="friendSelectOnline"){
      				 
+     			 }else if(data.type=="friendAdd"){
+     				$("#friend-request-noti").jqxNotification("open");
      			 }
          	 }
           }	

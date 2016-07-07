@@ -427,7 +427,11 @@ div.vertical-line{
 	float:left;
 }
 #auction-search{
-	width: auto
+	width: auto;
+}
+
+#auction-page-btn{
+	text-align: center;
 }
 
 /* 유저 정보 */
@@ -473,4 +477,10 @@ div.vertical-line{
 
 .toppad {
    margin-top: 20px;
+}
+
+/*주식 리스트*/
+
+#page-align{
+	text-align: center;
 }

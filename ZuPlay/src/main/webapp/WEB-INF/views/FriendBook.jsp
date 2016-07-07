@@ -13,20 +13,21 @@
 						<div class="friend-icon orange"></div> <label>친구요청</label>
 					</li>
 
-					<li href="#" class="list-group-item text-left">
+					<!-- <li href="#" class="list-group-item text-left">
 			            <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
 			            <div class="friend-icon green"> </div>
 			            <label class="name">Peter</label>
+			            <input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>
 			            <div class="pull-right">
-			              <button type="button" class="btn btn-success btn-circle">
+			              <button type="button" class="btn btn-success friend-accept btn-circle">
 			                <i class="glyphicon glyphicon-ok"></i>
 			              </button>
-			              <button type="button" class="btn btn-danger btn-circle">
+			              <button type="button" class="btn btn-danger friend-reject btn-circle">
 			                <i class="glyphicon glyphicon-remove"></i>
 			              </button>
 			            </div>
 			          </li>
-			          
+			           -->
 				</ul>
 			</div>
 
@@ -35,21 +36,22 @@
 					<li class="list-group-item title">
 						<div class="friend-icon green"></div> <label>친구목록 - 2/5</label>
 					</li>
-					<!--  <li href="#" class="list-group-item text-left">
-            <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
-            <div class="friend-icon green"> </div>
-            <label class="name">Park</label>
-            <div class="pull-right">
-              <button type="button" class="btn btn-default friend-sendBtn ">
-                <i class="glyphicon glyphicon-send"></i>
-              </button>
-            </div>
-          </li>
-
+					<li href="#" class="list-group-item text-left">
+			            <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
+			            <div class="friend-icon green"> </div>
+			            <label class="name">Park</label>
+			            <div class="pull-right">
+			              <button type="button" class="btn btn-default friend-sendBtn ">
+			                <i class="glyphicon glyphicon-send"></i>
+			              </button>
+			            </div>
+			          </li>
+<!-- 
           <li href="#" class="list-group-item text-left">
             <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
             <div class="friend-icon green"> </div>
             <label class="name">Kim</label>
+            <input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>;
           </li>
 
           <li href="#" class="list-group-item text-left">

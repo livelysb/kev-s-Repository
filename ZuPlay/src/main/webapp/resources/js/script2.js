@@ -699,6 +699,14 @@ $(function(){
             if(confirm(friendId+"님을 친구로 추가하시겠습니까?")==false || friendId=="") return;
             ws.send("friendAdd#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendId)
          })
+         
+         /*친구승락*/
+         $(document).on("click",".friend-accept" ,function(){
+        	 var friendNickName = $(this).parent().prevAll(".requestedFSq").val();
+        	 var friendSq = $(this).parent().prevAll(".name").text();
+        	 ws.send("friendAccept#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#");
+         })
+         
       }
       
       /* 경제용어사전 */
@@ -1023,7 +1031,9 @@ $(function(){
       initWs(function(){
           //추가 된 친구조회
           var friendselectAll = function(){
+        	  console.log(userInfo.nickName);
          	 ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
+         	 ws.send("friendSelectOnline#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
      		 ws.onmessage = function (event) {
      			 var data = JSON.parse(event.data);
      			 console.log(data)
@@ -1034,15 +1044,31 @@ $(function(){
      			 if(data.type=="friendSelect"){
      				 $.each(data.data,function(index,item){
      					 if(item.friendIsAccepted=="F"){
-     						requestedFriend=""
- 							requestedFriend=""
-							requestedFriend=""
-							requestedFriend=""
-							requestedFriend=""
+     						requestedFriend+="<li href='#' class='list-group-item text-left'>";
+ 							requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
+ 							
+							requestedFriend+="<div class='friend-icon red'> </div>";
+							requestedFriend+="<label class='name'>"+item.playerNickname2+"</label>";
+							requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
+							requestedFriend+="<div class='pull-right'>";
+							requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+							requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>";
+							requestedFriend+="</div></li>";
      					 }else{
-     						 
+     						ListFriend+="<li href='#' class='list-group-item text-left'>";
+     						ListFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
+     						ListFriend+="<div class='friend-icon red'> </div>";
+     						ListFriend+="<label class='name'>"+item.playerNickname2+"</label>";
+     						ListFriend+="<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
+     						ListFriend+="<div class='pull-right'>";
+     						ListFriend+="<button type='button' class='btn btn-default friend-sendBtn '>";
+     						ListFriend+="<i class='glyphicon glyphicon-send'></i></button></div></li>";
      					 }
      				 })
+     				 $("#friend-list-que ul").append(requestedFriend);
+     				 $("#friend-list-group ul").append(ListFriend);
+     			 }else if(data.type=="friendSelectOnline"){
+     				 
      			 }
          	 }
           }	

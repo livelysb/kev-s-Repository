@@ -93,7 +93,6 @@ public class PlayerInfoController {
 		}
 		
 		mv.addObject("likeNum",playerDTO.getLikerList().size());
-		mv.addObject("fmtRate",String.format("%.6f", playerDTO.getEarningRate()));
 		//mv.addObject("isOn", (context.getAttribute(playerNickname));
 		
 		return mv;

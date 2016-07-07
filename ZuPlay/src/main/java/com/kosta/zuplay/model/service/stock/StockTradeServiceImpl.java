@@ -30,11 +30,7 @@ public class StockTradeServiceImpl implements StockTradeService {
 		int price = (int) (stockInfoService.getPrice(isuCd).getTrdPrc() * quantity * (1 - 0.00315)); // 수수료
 																								// 0.315%
 																								// ->
-																								// 0.000315
-		System.out.println("plQuantity : "+ plQuantity);
-		System.out.println("playerMoney : " + playerMoney);
-		System.out.println("price" + price);
-		
+																								// 0.000315		
 		if (plQuantity >= quantity) {
 			if (playerStockService.setPlayerStock(playerNickname, isuCd, plQuantity - quantity))// 수량 빼기
 				if (playerInfoService.setPlayerMoney(playerNickname, playerMoney + price))// 돈 추가하기 ( 수수료 계산 )
@@ -55,11 +51,6 @@ public class StockTradeServiceImpl implements StockTradeService {
 		PlayerListsDTO playerListsDTO = playerStockService.getPlayerStock(playerNickname, isuCd);// 현재보유량
 		if(playerListsDTO!=null)
 			quantity = playerListsDTO.getPlQuantity();
-		System.out.println("playerMoney : " + playerMoney);
-		System.out.println("price : " + price);
-		System.out.println("totalPrice : " + totalPrice);
-		System.out.println("quantity : " + quantity);
-		
 		if (playerMoney >= totalPrice)
 			if (playerInfoService.setPlayerMoney(playerNickname, playerMoney - (totalPrice))) // 돈
 																							// 빼기

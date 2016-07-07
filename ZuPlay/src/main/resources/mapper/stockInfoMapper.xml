@@ -11,7 +11,7 @@
 		<association property="priceDTO" javaType="priceDTO">
 			<result column="cmpprevddPrc" property="cmpprevddPrc" />
 			<result column="trdPrc" property="trdPrc" />
-			<result column="trdvol" property="trdvol" />
+			<result column="accTrdvol" property="accTrdvol" />
 			<result column="opnprc" property="opnprc" />
 			<result column="hgprc" property="hgprc" />
 			<result column="lwprc" property="lwprc" />
@@ -30,7 +30,7 @@
 		<association property="priceDTO" javaType="priceDTO">
 			<result column="cmpprevddPrc" property="cmpprevddPrc" />
 			<result column="trdPrc" property="trdPrc" />
-			<result column="trdvol" property="trdvol" />
+			<result column="accTrdvol" property="accTrdvol" />
 			<result column="opnprc" property="opnprc" />
 			<result column="hgprc" property="hgprc" />
 			<result column="lwprc" property="lwprc" />

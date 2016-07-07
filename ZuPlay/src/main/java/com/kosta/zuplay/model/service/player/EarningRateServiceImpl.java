@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.net.SyslogAppender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,8 +57,11 @@ public class EarningRateServiceImpl implements EarningRateService {
 				if(updatePreMoney(playerNickname)) {
 					//earingRate를 이용한 루비 추가
 					int ruby = playerInfoService.getRuby(playerNickname);
-					ruby += (int)(earningRate*100000000);
+					int plusRuby = (int)(earningRate*100000000);
+					System.out.println("수익률 : " + earningRate + ", 수익률로 인한 루비 지급 : " + plusRuby);
+					ruby += plusRuby;
 					if(playerInfoService.updateRuby(playerNickname, ruby)) {
+						System.out.println(playerNickname + " 님, 루비지급 완료, 총 루비 : " + ruby);
 						result ++;
 					}
 				}

@@ -1,9 +1,10 @@
 package com.kosta.zuplay.model.dto.stock;
 
 public class PriceDTO {
+	
 	private String mktStatTpCd; // 장상태구분코드
 	private String trdTm; // 체결시각,거래시각
-	private double trdvol; // 체결수량,거래량
+	private double accTrdvol; // 체결수량,거래량
 	private double cmpprevddPrc; // 전일대비가격
 	private double trdPrc; // 체결가격
 	private double hgprc; // 고가
@@ -16,14 +17,15 @@ public class PriceDTO {
 
 
 	public PriceDTO() {
+		
 	}
-
-	public PriceDTO(String mktStatTpCd, String trdTm, double trdvol, double cmpprevddPrc, double trdPrc, double hgprc,
-			double lwprc, String cmpprevddTpCd, double opnprc, String isuCd) {
+	
+	public PriceDTO(String mktStatTpCd, String trdTm, double accTrdvol, double cmpprevddPrc, double trdPrc,
+			double hgprc, double lwprc, String cmpprevddTpCd, double opnprc, String isuCd) {
 		super();
 		this.mktStatTpCd = mktStatTpCd;
 		this.trdTm = trdTm;
-		this.trdvol = trdvol;
+		this.accTrdvol = accTrdvol;
 		this.cmpprevddPrc = cmpprevddPrc;
 		this.trdPrc = trdPrc;
 		this.hgprc = hgprc;
@@ -32,15 +34,7 @@ public class PriceDTO {
 		this.opnprc = opnprc;
 		this.isuCd = isuCd;
 	}
-	
-	public double getFluctuationRate() {
-		return fluctuationRate;				
-	}
 
-	public void setFluctuationRate(double fluctuationRate) {
-		this.fluctuationRate = fluctuationRate;
-	}
-	
 	public String getMktStatTpCd() {
 		return mktStatTpCd;
 	}
@@ -57,12 +51,12 @@ public class PriceDTO {
 		this.trdTm = trdTm;
 	}
 
-	public double getTrdvol() {
-		return trdvol;
+	public double getAccTrdvol() {
+		return accTrdvol;
 	}
 
-	public void setTrdvol(double trdvol) {
-		this.trdvol = trdvol;
+	public void setAccTrdvol(double accTrdvol) {
+		this.accTrdvol = accTrdvol;
 	}
 
 	public double getCmpprevddPrc() {
@@ -121,10 +115,14 @@ public class PriceDTO {
 		this.isuCd = isuCd;
 	}
 
-	@Override
-	public String toString() {
-		return "ClassPojo [mktStatTpCd = " + mktStatTpCd + ", trdTm = " + trdTm + ", trdvol = " + trdvol
-				+ ", cmpprevddPrc = " + cmpprevddPrc + ", trdPrc = " + trdPrc + ", hgprc = " + hgprc + ", lwprc = "
-				+ lwprc + ", cmpprevddTpCd = " + cmpprevddTpCd + ", opnprc = " + opnprc + ", isuCd = " + isuCd + "]";
+	public double getFluctuationRate() {
+		return fluctuationRate;
 	}
+
+	public void setFluctuationRate(double fluctuationRate) {
+		this.fluctuationRate = fluctuationRate;
+	}
+	
+	
+	
 }

@@ -60,7 +60,7 @@
                   <th>전일</th>
                   <td><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc - masterDTO.priceDTO.cmpprevddPrc}"/></td>
                   <th>거래량</th>
-                  <td><fmt:formatNumber value="${masterDTO.priceDTO.trdvol}"/></td>
+                  <td><fmt:formatNumber value="${masterDTO.priceDTO.accTrdvol}"/></td>
                 </tr>
                 <tr>
                   <th>저가</th>

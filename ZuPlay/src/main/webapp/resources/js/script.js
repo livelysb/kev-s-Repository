@@ -77,7 +77,7 @@ $(function(){
                      var tbd = $("#rta-tbody").empty();
                      $(data).each(function(index, item) {
                        if(index!=0){
-                          $(tbd).append("<tr> <td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"</td><td>"+item.priceDTO.trdvol+"</td></tr>")
+                          $(tbd).append("<tr> <td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"%</td><td>"+item.priceDTO.accTrdvol+"</td></tr>")
                        }
                      });
                     if(data.length < 11) stockPage=1;
@@ -701,11 +701,11 @@ $(function(){
             ws.send("friendDel#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#")
          })
          
-         /*notiTest*/
-        /* $("#friend-request-btn").on("click",function(){
-        	 $("#friend-request-noti").jqxNotification("open")
-         })*/
-         
+         /*친구신청 알림*/
+         $("#friend-request-noti").jqxNotification({
+                width: 250, position: "top-right", opacity: 0.9,
+                autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template: "info"
+            });
       }
       
       /* 경제용어사전 */
@@ -1125,7 +1125,8 @@ $(function(){
                }else if(data.type=="friendSelectOnline"){
                   
                }else if(data.type=="friendAdd"){
-                 $("#friend-request-noti").jqxNotification("open");
+            	   $("#friend-request-noti").children().text()
+            	   $("#friend-request-noti").jqxNotification("open");
                }else if(data.type=="friendDel"){
                   
                }

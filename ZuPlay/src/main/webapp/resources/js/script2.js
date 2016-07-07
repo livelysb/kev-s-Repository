@@ -1135,9 +1135,7 @@ $(function(){
                        ListFriend+="<i class='glyphicon glyphicon-send'></i></button></div></li>";
                      }
                   })
-                  console.log("시작")
                   $("#friend-content .list-group > .title").siblings("li").remove();
-                   
                   $("#friend-list-que ul").append(requestedFriend);
                   $("#friend-list-group ul").append(ListFriend);
                }else if(data.type=="friendSelectOnline"){
@@ -1151,6 +1149,10 @@ $(function(){
             	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
                }else if(data.type=="notiFriendAcceptMe"){
             	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
+               }else if(data.type=="notiFriendAcceptYou"){
+            	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
+            	   $("#friend-request-noti").children().text("님께서 친구수락을 하셨습니다.")
+            	   $("#friend-request-noti").jqxNotification("open");
                }
              }
           }   

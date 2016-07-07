@@ -107,13 +107,21 @@ public class FriendController {
 
 	public void friendAccept(String playerNickname, String playerNickname2, int friendSq) {
 		PlayerVO pv = (PlayerVO) application.getAttribute("#"+playerNickname);
-		PlayerVO pv2 = (PlayerVO) application.getAttribute("#"+playerNickname2);
-
+		PlayerVO pv2 = null;
+		WebSocketSession webSession2 = null;
+		if (application.getAttribute(playerNickname2) != null) {
+			pv2 = (PlayerVO) application.getAttribute("#"+playerNickname2);
+			webSession2 = pv2.getSession();
+		}
 		WebSocketSession webSession = pv.getSession();
-		WebSocketSession webSession2 = pv2.getSession();
 
-		boolean result;
-		result = friendServiceImpl.friendAccept(friendSq);
+		boolean result = true;
+		System.out.println(result);
+		try{
+			result = friendServiceImpl.friendAccept(friendSq);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		if (result) {
 			Gson gson = new Gson();
 			String json = "{\"type\":\"notiFriendAcceptMe\",\"data\":" + gson.toJson(result) + "}";
@@ -121,7 +129,9 @@ public class FriendController {
 
 			try {
 				webSession.sendMessage(new TextMessage(json));
-				webSession2.sendMessage(new TextMessage(json2));
+				if (application.getAttribute(playerNickname2) != null) {
+					webSession2.sendMessage(new TextMessage(json2));
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

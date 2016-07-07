@@ -63,7 +63,7 @@
 	<!-- 친구수락 -->
 	<update id="friendAccept" parameterType="int">
 		update friend set
-		friend_is_accepted='T' where friend_sq=#{friendSq}
+		friend_isacepted='T' where friend_sq=#{friendSq}
 	</update>
 
 </mapper>

@@ -429,7 +429,7 @@ $(function(){
                            str+="<td>"+item.priceDTO.trdPrc +"</td>";
                            str+="<td>"+item.priceDTO.cmpprevddPrc +"</td>";
                            str+="<td>"+item.priceDTO.fluctuationRate +"</td>";
-                           str+="<td>"+item.priceDTO.trdvol +"</td>";
+                           str+="<td>"+item.priceDTO.accTrdvol +"</td>";
                            str+="<td>"+item.priceDTO.opnprc +"</td>";
                            str+="<td>"+item.priceDTO.hgprc +"</td>";
                            str+="<td>"+item.priceDTO.lwprc +"</td>";
@@ -706,6 +706,12 @@ $(function(){
                 width: 250, position: "top-right", opacity: 0.9,
                 autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template: "info"
             });
+         
+         /*TEST*/
+         $("#friend-request-btn").on("click",function(){
+        	 $("#friend-request-noti").children().text("님께서 친구신청을 하셨습니다.")
+        	   $("#friend-request-noti").jqxNotification("open");
+         })
       }
       
       /* 경제용어사전 */
@@ -1125,7 +1131,7 @@ $(function(){
                }else if(data.type=="friendSelectOnline"){
                   
                }else if(data.type=="friendAdd"){
-            	   $("#friend-request-noti").children().text()
+            	   $("#friend-request-noti").children().text("님께서 친구신청을 하셨습니다.")
             	   $("#friend-request-noti").jqxNotification("open");
                }else if(data.type=="friendDel"){
                   

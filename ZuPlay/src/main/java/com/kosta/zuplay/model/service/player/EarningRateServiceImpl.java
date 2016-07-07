@@ -118,6 +118,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 		for(StockDealHistoryDTO stockDealHistory : stockDealHistoryList) {
 			if(!stockDealHistory.getIsuCd().equals(isuCd))
 				continue;
+			
 			if(stockDealHistory.getSdhBuySell().equals("b"))
 				buy += stockDealHistory.getSdhDealPrice();
 			else 

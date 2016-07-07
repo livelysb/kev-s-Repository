@@ -51,7 +51,11 @@
                         <td>${playerDTO.playerAge}</td>
                      </tr>
                      <tr>
-                        <th>수익률</th>
+                        <th>시즌 수익률</th>
+                        <td><fmt:formatNumber value="${playerDTO.totalEarningRate}" maxFractionDigits="6"/>%</td>
+                     </tr>
+                                          <tr>
+                        <th>일일 수익률</th>
                         <td><fmt:formatNumber value="${playerDTO.earningRate}" maxFractionDigits="6"/>%</td>
                      </tr>
                      <tr>

@@ -94,4 +94,6 @@
 		select PLAYER_NICKNAME2 from player_like
 		where player_nickname = #{value}
 	</select>
+	
+	
 </mapper>

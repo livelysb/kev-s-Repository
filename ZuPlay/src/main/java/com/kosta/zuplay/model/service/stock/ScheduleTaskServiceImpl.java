@@ -19,7 +19,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	@Autowired
 	private RankService rankService;
 	
-	@Scheduled(fixedDelay=10*60*1000)
+	@Scheduled(cron="0 0/5 9-18 * * MON-FRI")
 	@Override
 	public void actionPer10Min() {
 		System.out.println("10분마다 작업을 시작합니다.");
@@ -30,7 +30,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 		}
 	}
 	
-	@Scheduled(fixedDelay=20*60*1000)
+	@Scheduled(cron="0 0/10 9-18 * * MON-FRI")
 	@Override
 	public void actionPer20Min(){
 		System.out.println("20분마다 작업을 시작합니다.");
@@ -42,22 +42,16 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	}
 	
 
-	@Scheduled(cron="0 36 18 * * *")
+	@Scheduled(cron="0 57 9 * * *")
 	@Override
 	public void actionAtNine(){
-		System.out.println("AM 09:00, 작업을 시작합니다.");
+		System.out.println("AM 09:57, 작업을 시작합니다.");
 		try {
-			System.out.println("0");
 			stockUpdateService.masterUpdate();
-			System.out.println("1");
 			stockUpdateService.realtimePriceReset();
-			System.out.println("2");
 			rankService.calRank("PLAYER_DAILY_RANK");
-			System.out.println("3");
 			rankService.calRank("PLAYER_SEASON_RANK");
-			System.out.println("4");
 			earningRateService.updateEarningRate();
-			System.out.println("5");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

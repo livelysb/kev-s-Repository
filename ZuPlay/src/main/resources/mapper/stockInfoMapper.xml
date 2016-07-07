@@ -64,7 +64,7 @@
 		resultMap="master">
 
 		select * from ( SELECT * FROM (
-		SELECT ROW_NUMBER() OVER(ORDER BY prevddAccTrdvol desc) rnum, isuCd,
+		SELECT ROW_NUMBER() OVER(ORDER BY prevddAccTrdval desc) rnum, isuCd,
 		isuKorAbbrv, prevddAccTrdvol, kind
 		FROM master
 		<where>

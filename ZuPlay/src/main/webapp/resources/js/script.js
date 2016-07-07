@@ -196,19 +196,18 @@ $(function(){
 	            	  sellStock(isuCd,$(sellSlider).val());
 	              })
               }
-              parseInt(userInfo.money/price);
-              ticks/10;
+
               $(buySlider).jqxSlider({
                   width:"100%",
                   showTickLabels: true,
                   tooltip: true,
                   mode: "fixed",
                   min: 0,
-                  ticksFrequency: (userInfo.money/price)*10,
+                  ticksFrequency: ticks/10,
                   step: 1,
                   theme : userInfo.theme,
                   tooltipPosition: "far",
-                  max: 1000,
+                  max: ticks,
                   value: 0
               });
               

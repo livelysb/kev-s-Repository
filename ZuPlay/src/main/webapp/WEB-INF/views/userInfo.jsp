@@ -11,11 +11,11 @@
                <img alt="User Pic" src="resources/user.png" class="img-responsive">
                <label class="userinfo-favorite">
                   <c:choose>
-                     <c:when test="${like.isLike}">
-                        <span class="glyphicon glyphicon-heart">${like.num}</span>
+                     <c:when test="${isLike}">
+                        <span class="glyphicon glyphicon-heart">${likeNum}</span>
                      </c:when>
                      <c:otherwise>
-                        <span class="glyphicon glyphicon-heart-empty">${like.num}</span>
+                        <span class="glyphicon glyphicon-heart-empty">${likNum}</span>
                      </c:otherwise>
                   </c:choose>
                </label> 

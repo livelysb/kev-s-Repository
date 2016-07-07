@@ -15,7 +15,7 @@
                         <span class="glyphicon glyphicon-heart">${likeNum}</span>
                      </c:when>
                      <c:otherwise>
-                        <span class="glyphicon glyphicon-heart-empty">${likNum}</span>
+                        <span class="glyphicon glyphicon-heart-empty">${likeNum}</span>
                      </c:otherwise>
                   </c:choose>
                </label> 

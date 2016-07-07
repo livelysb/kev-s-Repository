@@ -415,7 +415,7 @@ CREATE TABLE PRICE (
 	cmpprevddTpCd VARCHAR2(100), /* 전일대비구분코드 */
 	cmpprevddPrc INTEGER, /* 전일대비가격 */
 	trdPrc INTEGER, /* 체결가격 */
-	trdvol INTEGER, /* 체결수량,거래량 */
+	accTrdvol INTEGER, /* 체결수량,거래량 */
 	opnprc INTEGER, /* 시가 */
 	hgprc INTEGER, /* 고가 */
 	lwprc INTEGER, /* 저가 */
@@ -433,7 +433,7 @@ COMMENT ON COLUMN PRICE.cmpprevddPrc IS '전일대비가격';
 
 COMMENT ON COLUMN PRICE.trdPrc IS '체결가격';
 
-COMMENT ON COLUMN PRICE.trdvol IS '체결수량,거래량';
+COMMENT ON COLUMN PRICE.accTrdvol IS '체결수량,거래량';
 
 COMMENT ON COLUMN PRICE.opnprc IS '시가';
 
@@ -743,7 +743,8 @@ CREATE TABLE PLAYER_SETTING (
 	PS_BGM_SOUND INTEGER NOT NULL, /* 음량설정 */
 	PS_MY_PAGE VARCHAR(1) NOT NULL, /* 내정보공개설정 */
 	PS_CHATTING VARCHAR(1) NOT NULL, /* 귓속말 설정 */
-	PS_FRIEND_ADD VARCHAR(1) NOT NULL /* 친구추가 설정 */
+	PS_FRIEND_ADD VARCHAR(1) NOT NULL, /* 친구추가 설정 */
+  PS_THEME VARCHAR2(30) default 'kokomo' NOT NULL /* 테마 */
 );
 
 COMMENT ON TABLE PLAYER_SETTING IS '설정';
@@ -759,6 +760,8 @@ COMMENT ON COLUMN PLAYER_SETTING.PS_MY_PAGE IS '내정보공개설정';
 COMMENT ON COLUMN PLAYER_SETTING.PS_CHATTING IS '귓속말 설정';
 
 COMMENT ON COLUMN PLAYER_SETTING.PS_FRIEND_ADD IS '친구추가 설정';
+
+COMMENT ON COLUMN PLAYER_SETTING.PS_THEME IS '테마';
 
 CREATE UNIQUE INDEX PK_PLAYER_SETTING
 	ON PLAYER_SETTING (

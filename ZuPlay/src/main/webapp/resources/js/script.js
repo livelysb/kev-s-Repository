@@ -42,14 +42,6 @@ $(function(){
          return false;
       })
       
-      var initWs = function(){
-         connect();
-         $('#logout').click(function() {
-            disconnect();
-            location.href = "logout";
-         });
-      }
-   
    
     $(".side-avatar").css({
         width : $("#avatar-clothes").css("width"),
@@ -709,6 +701,11 @@ $(function(){
             ws.send("friendDel#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#")
          })
          
+         /*notiTest*/
+        /* $("#friend-request-btn").on("click",function(){
+        	 $("#friend-request-noti").jqxNotification("open")
+         })*/
+         
       }
       
       /* 경제용어사전 */
@@ -1050,7 +1047,6 @@ $(function(){
        }
 
        
-      initWs();
       invenInit();
       rtaInit();
       stockListInit();
@@ -1074,12 +1070,14 @@ $(function(){
              showUserInfo(userInfo.nickName);
           });
       }();
-      
-      $(".main-container").css("visibility","visible");
-      $("#loading-content").remove();
-      
+
+   
       /*======================Set WebSocket=============================*/
-      initWs(function(){
+      connect(function(){
+          $('#logout').click(function() {
+              disconnect();
+              location.href = "logout";
+           });
           //추가 된 친구조회
           var friendselectAll = function(){
              ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
@@ -1137,8 +1135,6 @@ $(function(){
       });
       $(".main-container").css("visibility","visible");
       $("#loading-content").remove();
-
    };
-   
    updatePI(initContent);
 });

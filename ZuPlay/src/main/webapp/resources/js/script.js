@@ -135,6 +135,7 @@ $(function(){
 		  };
 		  
 		   var sellStock = function(companyId, qty){
+			   console.log(companyId + " " + qty)
 			      $.ajax({
 			    	  url:"sellStock",
 			    	  dataType:"text",
@@ -155,8 +156,10 @@ $(function(){
       /* 기업 정보 조회 */
       var companyInfo = function(companyId){
              var price = $(companyId + " .company-title-stock").text();
-             var ticks = parseInt(userInfo.money/price);
              var isuCd = $(companyId + " .company-isuCd").val();
+             var qty = $(companyId + " .company-qty").val();
+             var ticks = parseInt(userInfo.money/price);
+             
              $(companyId).jqxWindow({
                    theme:userInfo.theme,
                    minWidth:700,
@@ -166,46 +169,46 @@ $(function(){
                    resizable : false
                  });
               
-              
               var buySlider = $(companyId + " .company-buy-slider");
               var sellSlider = $(companyId + " .company-sell-slider");
               
-              if($(sellSlider).length > 0){
+              if(qty>0){
 	              $(sellSlider).jqxSlider({
 	                  width:"100%",
 	                  showTickLabels: true,
 	                  tooltip: true,
 	                  mode: "fixed",
 	                  min: 0,
-	                  max: $(companyId + ".company-qty").val(),
-	                  ticksFrequency: 500,
+	                  max: 50,
+	                  ticksFrequency: qty/10,
 	                  value: 0,
 	                  step: 1,
 	                  theme : userInfo.theme,
 	                  tooltipPosition: "far"
 	              });
 	              
-	              $(document).on("change",companyId + " .company-sell-slider",function(event){
+	              $(document).on("change",$(sellSlider),function(event){
 	                  $(companyId + " .company-sell-value").text(price * event.args.value);
+	                  
 	               });
 	              
-	              $(companyId + "company-sell-btn").on("click",function(evt){
+	              $(companyId + " .company-sell-btn").on("click",function(evt){
 	            	  sellStock(isuCd,$(sellSlider).val());
 	              })
               }
-              
-              
+              parseInt(userInfo.money/price);
+              ticks/10;
               $(buySlider).jqxSlider({
                   width:"100%",
                   showTickLabels: true,
                   tooltip: true,
                   mode: "fixed",
                   min: 0,
-                  ticksFrequency: ticks/10,
+                  ticksFrequency: (userInfo.money/price)*10,
                   step: 1,
                   theme : userInfo.theme,
                   tooltipPosition: "far",
-                  max: parseInt(userInfo.money/price),
+                  max: 1000,
                   value: 0
               });
               
@@ -213,7 +216,7 @@ $(function(){
             	  buyStock(isuCd,$(buySlider).val());
               })
               
-              $(document).on("change",companyId + " .company-buy-slider",function(event){
+              $(document).on("change",$(buySlider),function(event){
                  $(companyId + " .company-buy-value").text(price * event.args.value);
           
               });

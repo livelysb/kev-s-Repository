@@ -95,9 +95,12 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 	public void masterUpdate() throws Exception {
 		List<ListsDTO> lists = stockInfoService.getLists();
 		for(ListsDTO listDTO : lists) {
+			System.out.println("0-1");
 			MasterDTO masterDTO = getMasterFromAPI(listDTO.getIsuSrtCd());
+			System.out.println("0-2");
 			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 			stockUpdateDAO.masterUpdate(masterDTO);
+			System.out.println("0-3");
 		}
 		System.out.println(new Date().toString() + " : Master is updated");
 	}

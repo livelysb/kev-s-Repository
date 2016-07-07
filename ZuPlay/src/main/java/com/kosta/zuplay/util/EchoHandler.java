@@ -30,7 +30,7 @@ public class EchoHandler extends TextWebSocketHandler {
 		String[] mesArr = mes.split("#/fuckWebSocket/#");
 		String playerNickname = mesArr[1];
 		if (mesArr[0].equals("open")) {
-			application.setAttribute(playerNickname, new PlayerVO(playerNickname, webSession));
+			application.setAttribute("#"+playerNickname, new PlayerVO(playerNickname, webSession));
 		} else if (mesArr[0].equals("friendSelect")) {
 			friendController.friendSelect(playerNickname);
 		} else if (mesArr[0].equals("friendAdd")) {

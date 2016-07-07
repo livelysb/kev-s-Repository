@@ -25,10 +25,14 @@ public class FriendController {
 	private ServletContext application;
 
 	public void friendSelect(String playerNickname) {
-		PlayerVO pv = (PlayerVO) application.getAttribute(playerNickname);
+		PlayerVO pv = (PlayerVO) application.getAttribute("#"+playerNickname);
 		WebSocketSession webSession = pv.getSession();
 		List<FriendDTO> list = null;
+		try{
 		list = friendServiceImpl.friendSelect(playerNickname);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
 		json = "{\"type\":\"friendSelect\",\"data\": " + json + "}";
@@ -43,11 +47,15 @@ public class FriendController {
 	}
 
 	public void friendSelectOnline(String playerNickname) {
-		PlayerVO pv = (PlayerVO) application.getAttribute(playerNickname);
+		PlayerVO pv = (PlayerVO) application.getAttribute("#"+playerNickname);
 		WebSocketSession webSession = pv.getSession();
 		Gson gson = new Gson();
-		List<FriendDTO> list;
-		list = friendServiceImpl.friendSelectOnline(playerNickname);
+		List<FriendDTO> list = null;
+		try {
+			list = friendServiceImpl.friendSelectOnline(playerNickname);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		String json = "{\"type\":\"friendSelectOnline\",\"data\":" + gson.toJson(list) + "}";
 		TextMessage tx = new TextMessage(json);
 		try {
@@ -61,7 +69,7 @@ public class FriendController {
 		PlayerVO pv = null;
 		WebSocketSession webSession = null;
 		if (application.getAttribute(playerNickname2) != null) {
-			pv = (PlayerVO) application.getAttribute(playerNickname2);
+			pv = (PlayerVO) application.getAttribute("#"+playerNickname);
 			webSession = pv.getSession();
 
 		}
@@ -83,7 +91,7 @@ public class FriendController {
 	}
 
 	public void friendDel(String playerNickname, int friendSq) {
-		PlayerVO pv = (PlayerVO) application.getAttribute(playerNickname);
+		PlayerVO pv = (PlayerVO) application.getAttribute("#"+playerNickname);
 		WebSocketSession webSession = pv.getSession();
 		boolean result = false;
 		result = friendServiceImpl.friendDel(friendSq);
@@ -98,8 +106,8 @@ public class FriendController {
 	}
 
 	public void friendAccept(String playerNickname, String playerNickname2, int friendSq) {
-		PlayerVO pv = (PlayerVO) application.getAttribute(playerNickname);
-		PlayerVO pv2 = (PlayerVO) application.getAttribute(playerNickname2);
+		PlayerVO pv = (PlayerVO) application.getAttribute("#"+playerNickname);
+		PlayerVO pv2 = (PlayerVO) application.getAttribute("#"+playerNickname2);
 
 		WebSocketSession webSession = pv.getSession();
 		WebSocketSession webSession2 = pv2.getSession();

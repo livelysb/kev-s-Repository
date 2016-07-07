@@ -1,6 +1,7 @@
 package com.kosta.zuplay.model.service.player;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,20 +33,25 @@ public class FriendServiceImpl implements FriendService {
 		List<FriendDTO> list = new ArrayList<FriendDTO>();
 		List<FriendDTO> listA = friendDAO.friendSelectA(playerNickname);
 		List<FriendDTO> listB = friendDAO.friendSelectB(playerNickname);
-
-		List<PlayerVO> listApp = (List<PlayerVO>) application.getAttributeNames();
-		List<String> listAppPlayerNickname = new ArrayList<String>();
+		List<String> listApp = null;
+		Enumeration<String> enumr = application.getAttributeNames();
+		while (enumr.hasMoreElements()) {
+			String el = enumr.nextElement();
+			System.out.println("name : " + el);
+			if(el.charAt(0)=='#'){
+				String ell=el.substring(1);
+				listApp.add(ell);
+			};
+		}
 		for (int i = 0; i < listB.size(); i++) {
 			listA.add(listB.get(i));
 		}
-		for (int i = 0; i < listApp.size(); i++) {
-			listAppPlayerNickname.add(listApp.get(i).getPlayerNickname());
-		}
 		for (int i = 0; i < listA.size(); i++) {
-			if (listAppPlayerNickname.contains(listA.get(i).getPlayerNickname())) {
+			if (listApp.contains(listA.get(i).getPlayerNickname())) {
 				list.add(listA.get(i));
 			}
 		}
+		System.out.println(list);
 		return list;
 	}
 
@@ -57,6 +63,7 @@ public class FriendServiceImpl implements FriendService {
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
 		List<FriendDTO> listA = null;
 		List<FriendDTO> listB = null;
+		System.out.println(playerNickname);
 		try {
 			listA = friendDAO.friendSelectA(playerNickname);
 			listB = friendDAO.friendSelectB(playerNickname);
@@ -66,6 +73,7 @@ public class FriendServiceImpl implements FriendService {
 		for (int i = 0; i < listB.size(); i++) {
 			listA.add(listB.get(i));
 		}
+		System.out.println("listA : "+ listA);
 		return listA;
 	}
 

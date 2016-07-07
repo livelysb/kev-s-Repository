@@ -91,7 +91,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 		int startMoney = 100000000;
 		int currentMoney = playerInfoService.getTotalMoney(playerNickname);
 		int rate = (int)((currentMoney - startMoney) / (double)(startMoney) * 100000000);
-		return rate /100000000.0;
+		return rate /1000000.0;
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 		System.out.println("preMoney : " + preMoney);
 		System.out.println("currentMoney : " + currentMoney);
 		int rate = (int)(( currentMoney- preMoney)/(double)(preMoney) * 100000000);
-		return rate/100000000.0;
+		return rate/1000000.0;
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class EarningRateServiceImpl implements EarningRateService {
 		}
 		sell += playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity() * stockInfoService.getPrice(isuCd).getTrdPrc();
 		int rate = (int)((sell - buy) / (double)(buy) * 100000000);
-		return rate/100000000.0;
+		return rate/1000000.0;
 	}
 
 	/**

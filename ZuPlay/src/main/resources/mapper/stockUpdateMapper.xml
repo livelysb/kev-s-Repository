@@ -46,7 +46,7 @@
 		uplmtprc = #{uplmtprc},
 		lwlmtprc = #{lwlmtprc},
 		parval = #{parval},
-		listShrs = #{listShrs},
+		listShrs = #{listShrs}
 		
 		where isuCd=#{isuCd}
 		

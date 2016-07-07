@@ -24,14 +24,14 @@ public class FriendController {
 	@Autowired
 	private ServletContext application;
 
-	public void friendSelect(String playerNickname){
+	public void friendSelect(String playerNickname) {
 		PlayerVO pv = (PlayerVO) application.getAttribute(playerNickname);
 		WebSocketSession webSession = pv.getSession();
 		List<FriendDTO> list = null;
-			list = friendServiceImpl.friendSelect(playerNickname);
+		list = friendServiceImpl.friendSelect(playerNickname);
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
-		json = "{\"type\":\"friendSelect\",\"data\": "+ json + "}";
+		json = "{\"type\":\"friendSelect\",\"data\": " + json + "}";
 		System.out.println(json);
 		TextMessage tx = new TextMessage(json);
 		System.out.println(tx);
@@ -42,12 +42,12 @@ public class FriendController {
 		}
 	}
 
-	public void friendSelectOnline(String playerNickname){
+	public void friendSelectOnline(String playerNickname) {
 		PlayerVO pv = (PlayerVO) application.getAttribute(playerNickname);
 		WebSocketSession webSession = pv.getSession();
 		Gson gson = new Gson();
 		List<FriendDTO> list;
-			list = friendServiceImpl.friendSelectOnline(playerNickname);
+		list = friendServiceImpl.friendSelectOnline(playerNickname);
 		String json = "{\"type\":\"friendSelectOnline\",\"data\":" + gson.toJson(list) + "}";
 		TextMessage tx = new TextMessage(json);
 		try {
@@ -57,9 +57,14 @@ public class FriendController {
 		}
 	}
 
-	public void friendAdd(String playerNickname, String playerNickname2){
-		PlayerVO pv = (PlayerVO) application.getAttribute(playerNickname2);
-		WebSocketSession webSession = pv.getSession();
+	public void friendAdd(String playerNickname, String playerNickname2) {
+		PlayerVO pv = null;
+		WebSocketSession webSession = null;
+		if (application.getAttribute(playerNickname2) != null) {
+			pv = (PlayerVO) application.getAttribute(playerNickname2);
+			webSession = pv.getSession();
+
+		}
 		FriendDTO dto = null;
 		dto = friendServiceImpl.friendAdd(playerNickname, playerNickname2);
 		Gson gson = new Gson();
@@ -68,18 +73,20 @@ public class FriendController {
 		System.out.println(json);
 		TextMessage tx = new TextMessage(json);
 		System.out.println(tx);
-		try {
-			webSession.sendMessage(tx);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (application.getAttribute(playerNickname2) != null) {
+			try {
+				webSession.sendMessage(tx);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
-	public void friendDel(String playerNickname, int friendSq){
+	public void friendDel(String playerNickname, int friendSq) {
 		PlayerVO pv = (PlayerVO) application.getAttribute(playerNickname);
 		WebSocketSession webSession = pv.getSession();
 		boolean result = false;
-			result = friendServiceImpl.friendDel(friendSq);
+		result = friendServiceImpl.friendDel(friendSq);
 		Gson gson = new Gson();
 		String json = "{\"type\":\"friendDel\",\"data\":" + gson.toJson(result) + "}";
 		TextMessage tx = new TextMessage(json);
@@ -90,7 +97,7 @@ public class FriendController {
 		}
 	}
 
-	public void friendAccept(String playerNickname, String playerNickname2, int friendSq){
+	public void friendAccept(String playerNickname, String playerNickname2, int friendSq) {
 		PlayerVO pv = (PlayerVO) application.getAttribute(playerNickname);
 		PlayerVO pv2 = (PlayerVO) application.getAttribute(playerNickname2);
 

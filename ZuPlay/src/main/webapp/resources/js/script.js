@@ -133,7 +133,7 @@ $(function(){
 		    	  }
 		      });
 		  };
-		  
+		  /*주식 판매*/
 		   var sellStock = function(companyId, qty){
 			   console.log(companyId + " " + qty)
 			      $.ajax({
@@ -1000,6 +1000,44 @@ $(function(){
           })
        };
       
+       var myStockListUpdate = function(){
+    	   $.ajax({
+    		   url:"playerStock",
+    		   type:"post",
+    		   dataType:"json",
+    		   success:function(data){
+    			   str="";
+    			   console.log(data);
+    			   $("#mystockListTBody").empty();
+    			   $.each(data, function(index, item){
+    				   str+="<tr><td>"+item.isuKorAbbrv+"</td>";
+    				   str+="<td>"+item.kind+"</td>";
+    				   str+="<td>"+item.plQuantity+"</td>";
+    				   str+="<td>"+item.priceDTO.trdPrc+"</td>";
+    				   str+="<td>"+item.priceDTO.trdPrc * item.plQuantity+"</td>";
+    				   str+="<td>"+item.earningRate+"%"+"</td></tr>";
+    			   });
+    			   $("#mystockListTBody").html(str);
+    		   },
+    		   error:function(err){
+    			   console.log("Exception : myStockListUpdate");
+    		   }
+    	   });
+       }
+       
+       var myStockInit = function(){
+	     $("#mystock-window").jqxWindow({
+	           width:"400",
+	           height:"450",
+	           resizable:true,
+	           showCollapseButton: true,
+	           autoOpen:false,
+	           theme:userInfo.theme
+	         });
+	     myStockListUpdate();
+       }
+
+       
       initWs();
       invenInit();
       rtaInit();
@@ -1008,15 +1046,18 @@ $(function(){
       friendBook();
       financialInit();
       auctionInit();
-
+      myStockInit();
+      
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
             $("#rta-btn").setBtn($("#rta-Window"));
             $("#stockList-btn").setBtn($("#stock-window"));
             $("#store-btn").setBtn($("#store-window"));
-            $("#friend-btn").setBtn($("#friend-window"))
-            $("#financial-btn").setBtn($("#financial-window"))
-            $("#auction-btn").setBtn($("#auction-window"))
+            $("#friend-btn").setBtn($("#friend-window"));
+            $("#financial-btn").setBtn($("#financial-window"));
+            $("#auction-btn").setBtn($("#auction-window"));
+            $("#mystock-btn").setBtn($("#mystock-window"));
+            
           $("#myinfo-btn").click(function(){
              showUserInfo(userInfo.nickName);
           });

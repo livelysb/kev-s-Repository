@@ -57,6 +57,7 @@
          <jsp:include page="inventory.jsp" />
          <!-- ///////////////////////////////////////////////// -->
          <jsp:include page="auctionWindow.jsp"/>
+         <jsp:include page="myStock.jsp"/>
          <!-- ///////////////////////////////////////////////// -->
           </div>
         </div>
@@ -87,6 +88,7 @@
 				   <!-- ///////////////////////////////////////////////// -->
 				   <button id="auction-btn">경매장</button>
 				   <button id="myinfo-btn">내 정보</button>
+				   <button id="mystock-btn">내 주식</button>
 				   <!-- ///////////////////////////////////////////////// -->
               </div>
             </div>

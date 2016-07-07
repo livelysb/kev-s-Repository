@@ -34,7 +34,7 @@ public class StockTradeServiceImpl implements StockTradeService {
 		if (plQuantity >= quantity) {
 			if (playerStockService.setPlayerStock(playerNickname, isuCd, plQuantity - quantity))// 수량 빼기
 				if (playerInfoService.setPlayerMoney(playerNickname, playerMoney + price))// 돈 추가하기 ( 수수료 계산 )
-					if(dealHistoryService.stockHistoryInsert(playerNickname, isuCd, plQuantity, price, "s"))
+					if(dealHistoryService.stockHistoryInsert(playerNickname, isuCd, quantity, price, "s"))
 						return true;
 		}
 

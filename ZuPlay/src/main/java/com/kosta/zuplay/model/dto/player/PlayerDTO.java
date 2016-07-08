@@ -2,10 +2,7 @@ package com.kosta.zuplay.model.dto.player;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
 
-
-@Component("playerDTO")
 public class PlayerDTO {
 	private String playerNickname;	//닉네임
 	private String playerNaverId;	//네이버아이디

@@ -3,24 +3,24 @@ package com.kosta.zuplay.util.vo;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kosta.zuplay.model.dto.player.PlayerDTO;
+
 public class ChatRoomVO {
 
 	private int roomNo;
 	private String roomName;
-	private boolean oneByOne;
 	private String password;
 	private int maxNum;
 	
-	private List<String> playerList = new ArrayList<String>();
+	private List<PlayerDTO> playerList = new ArrayList<PlayerDTO>();
 	
 	public ChatRoomVO() {
 	}
 	
-	public ChatRoomVO(int roomNo, String roomName, boolean oneByOne, String password, List<String> playerList, int maxNum) {
+	public ChatRoomVO(int roomNo, String roomName, String password, List<PlayerDTO> playerList, int maxNum) {
 		super();
 		this.roomNo = roomNo;
 		this.roomName = roomName;
-		this.oneByOne = oneByOne;
 		this.password = password;
 		this.playerList = playerList;
 		this.maxNum = maxNum;
@@ -42,14 +42,6 @@ public class ChatRoomVO {
 		this.roomName = roomName;
 	}
 
-	public boolean isOneByOne() {
-		return oneByOne;
-	}
-
-	public void setOneByOne(boolean oneByOne) {
-		this.oneByOne = oneByOne;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -58,11 +50,11 @@ public class ChatRoomVO {
 		this.password = password;
 	}
 
-	public List<String> getPlayerList() {
+	public List<PlayerDTO> getPlayerList() {
 		return playerList;
 	}
 
-	public void setPlayerList(List<String> playerList) {
+	public void setPlayerList(List<PlayerDTO> playerList) {
 		this.playerList = playerList;
 	}
 

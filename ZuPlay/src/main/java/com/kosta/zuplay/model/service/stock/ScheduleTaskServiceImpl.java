@@ -23,9 +23,9 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	@Autowired
 	private ChattingService chattingService;
 	
-	//@Scheduled(fixedDelay=10000)
+	@Scheduled(fixedDelay=10000)
 	public void testfunction() {
-		//chattingService.chatOnebyOne("이석범짱", "이석범짱", "Hi");
+		chattingService.chatOnebyOne("이석범짱", "이석범짱", "Hi");
 	}
 	
 	@Scheduled(cron="0 0/5 9-18 * * MON-FRI")

@@ -11,22 +11,24 @@ public interface ChattingService {
 	/**
 	 * 채팅방 만들기
 	 * */
-	
+	void chatRoomCreate(String sender, String roomName, String password,int maxNum);
 	
 	/**
 	 * 채팅방 참가
 	 * */
+	void chatRoomJoin(String sender, int roomNo, String password);
 	
-	
-		
+			
 	/**
 	 * 대화 진행하기
 	 * */
+	void chatRoomChat(String sender, int roomNo, String msg);
 	
 	
 	/**
 	 * 채팅방 나가기
 	 * */
+	void chatRoomOut(String sender, int roomNo);
 	
 	
 	

@@ -707,7 +707,6 @@ $(function(){
          /*친구거절 및 삭제*/
          $(document).on("click",".friend-reject,.friend-sendBtn .glyphicon-trash",function(){
         	 var friendSq = $(this).parent().prevAll(".requestedFSq").val();
-        	 
         	 if(!friendSq){
         		 friendSq = $(this).parent().parent().prevAll(".ListFriendFSq").val();
         	 }
@@ -715,17 +714,10 @@ $(function(){
             ws.send("friendDel#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#")
          })
          
-         /*친구삭제*/
-         /*$(document).on("click",".friend-sendBtn .glyphicon-trash",function(){
-        	 var friendSq = $(this).parent().parent().prevAll(".ListFriendFSq").val();
-        	 console.log("친구삭제 : " + friendSq)
-        	 ws.send("friendDel#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#")
-         })*/
-         
          /*친구신청 알림*/
          $("#friend-request-noti").jqxNotification({
                 width: 250, position: "top-right", opacity: 0.9,
-                autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template: "info"
+                autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template:"info"
             });
          
          /*TEST*/
@@ -813,6 +805,9 @@ $(function(){
           }
           financialSearch(term);
        })
+       
+       /*가나다인척하기*/
+       //financialSearch("가")
       }
       
       /* 경매장 */
@@ -1180,7 +1175,6 @@ $(function(){
           //추가 된 친구조회
           var friendselectAll = function(){
              ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
-             ws.send("friendSelectOnline#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
             
              ws.onmessage = function (event) {
                var data = JSON.parse(event.data);
@@ -1225,8 +1219,6 @@ $(function(){
                   $("#friend-content .list-group > .title").siblings("li").remove();
                   $("#friend-list-que ul").append(requestedFriend);
                   $("#friend-list-group ul").append(ListFriend);
-               }else if(data.type=="friendSelectOnline"){
-                  
                }else if(data.type=="notiFriendAdd"){
             	   console.log(data.data.playerNickname);
             	   $("#friend-request-noti").children().text(data.data.playerNickname+"님께서 친구신청을 하셨습니다.")
@@ -1240,7 +1232,7 @@ $(function(){
             	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
             	   $("#friend-request-noti").children().text(data.data+"님께서 친구수락을 하셨습니다.")
             	   $("#friend-request-noti").jqxNotification("open");
-               }
+               }else if(data.type="")
              }
           }   
           friendselectAll();

@@ -37,8 +37,11 @@ public class LoginServiceImpl implements LoginService {
 		SettingDAO settingDAO=sqlSession.getMapper(SettingDAO.class);
 		int result=loginDAO.joinMember(playerDTO);
 		settingDAO.settingInsert(playerDTO.getPlayerNickname());
-		playerItemDAO.auctionInsertPlayerItem(new PlayerItemDTO(0,playerDTO.getPlayerNickname(),"m_hair_10",0,null));
-
+		if(playerDTO.getPlayerGender().equals("M")){
+			playerItemDAO.auctionInsertPlayerItem(new PlayerItemDTO(0,playerDTO.getPlayerNickname(),"m_hair_10",0,null));
+		}else{
+			playerItemDAO.auctionInsertPlayerItem(new PlayerItemDTO(0,playerDTO.getPlayerNickname(),"f_hair_00",0,null));
+		}
 		if(result==0){
 			return false;
 		}

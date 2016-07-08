@@ -1175,7 +1175,8 @@ $(function(){
           //추가 된 친구조회
           var friendselectAll = function(){
              ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
-            
+             /*내가접속했을때 친구에게 접속알림*/
+             ws.send("notiFriendLogin#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#")
              ws.onmessage = function (event) {
                var data = JSON.parse(event.data);
                console.log(data)
@@ -1186,18 +1187,18 @@ $(function(){
                if(data.type=="friendSelect"){
                    
                    $.each(data.data,function(index,item){
-                      if(userInfo.nickName==item.playerNickname){
+                     /* if(userInfo.nickName==item.playerNickname){
                          var friendNickname=item.playerNickname2
                       }else{
                         var friendNickname=item.playerNickname
-                      }
+                      }*/
                       
                       if(item.friendIsAccepted=="F"){
                           if(userInfo.nickName==item.playerNickname2){
                     	      requestedFriend+="<li href='#' class='list-group-item text-left'>";
                               requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
                                
-                              requestedFriend+="<label class='name'>"+friendNickname+"</label>";
+                              requestedFriend+="<label class='name'>"+item.playerNickname+"</label>";
                               requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
                               requestedFriend+="<div class='pull-right'>";
                               requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
@@ -1214,7 +1215,7 @@ $(function(){
                     	   friendBtnColor="red";
                        }
                        ListFriend+="<div class='friend-icon "+friendBtnColor+"'> </div>";
-                       ListFriend+="<label class='name'>"+friendNickname+"</label>";
+                       ListFriend+="<label class='name'>"+item.playerNickname+"</label>";
                        ListFriend+="<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
                        ListFriend+="<div class='pull-right'>";
                        ListFriend+="<button type='button' class='btn btn-default friend-sendBtn '>";
@@ -1238,6 +1239,9 @@ $(function(){
             	   $("#friend-request-noti").children().text(data.data+"님께서 친구수락을 하셨습니다.");
             	   $("#friend-request-noti").jqxNotification("open");
                }else if(data.type="notiFriendLogin"){
+            	   console.log("노티파이!!")
+            	   $("#friend-request-noti").children().text(data.data+"님께서 로그인을 하셨습니다.")
+            	   $("#friend-request-noti").jqxNotification("open");
             	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
                }
              }

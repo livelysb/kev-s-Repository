@@ -1,14 +1,14 @@
 package com.kosta.zuplay.util.vo;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 
 public class ChatMsgVO {
 	
 	private String sender;
-	private String action; //in, out, msg
-	private String roomNo;
+	private AtomicInteger roomNo;
 	private String time;
 	private String msg;
 	private String gender;
@@ -20,11 +20,10 @@ public class ChatMsgVO {
 	}
 
 
-	public ChatMsgVO(String sender, String action, String roomNo, String time, String msg, String gender,
+	public ChatMsgVO(String sender, AtomicInteger roomNo, String time, String msg, String gender,
 			List<PlayerItemDTO> playerItem) {
 		super();
 		this.sender = sender;
-		this.action = action;
 		this.roomNo = roomNo;
 		this.time = time;
 		this.msg = msg;
@@ -42,23 +41,12 @@ public class ChatMsgVO {
 		this.sender = sender;
 	}
 
-
-	public String getAction() {
-		return action;
-	}
-
-
-	public void setAction(String action) {
-		this.action = action;
-	}
-
-
-	public String getRoomNo() {
+	public AtomicInteger getRoomNo() {
 		return roomNo;
 	}
 
 
-	public void setRoomNo(String roomNo) {
+	public void setRoomNo(AtomicInteger roomNo) {
 		this.roomNo = roomNo;
 	}
 

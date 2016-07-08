@@ -5,15 +5,15 @@
 	<resultMap type="settingDTO" id="settingMapper">
 		<id column="ps_sq" property="psSq" />
 		<result column="player_nickname" property="playerNickname" />
-		<result column="ps_bgm_sound" property="bgmSound" />
-		<result column="ps_my_page" property="myPage" />
-		<result column="ps_chatting" property="chatting" />
-		<result column="ps_friend_add" property="friendAdd" />
-
+		<result column="ps_bgm_sound" property="psBgmSound" />
+		<result column="ps_my_page" property="psMyPage" />
+		<result column="ps_chatting" property="psChatting" />
+		<result column="ps_friend_add" property="psFriendAdd" />
+		<result column="ps_Theme" property="psTheme" />
 	</resultMap>
 	<update id='settingSave' parameterType='settingDTO'>
 		update player_setting set
-		bgm_sound=#{bgmSound},my_page=#{myPage},chatting=#{chatting},friend_add=#{friendAdd}
+		bgm_sound=#{bgmSound},my_page=#{myPage},chatting=#{chatting},friend_add=#{friendAdd},ps_theme=#{psTheme}
 		where
 		player_nickname=#{playerNickname}
 	</update>
@@ -21,7 +21,7 @@
 	<update id='settingReset' parameterType='String'>
 		update player_setting
 		set
-		bgm_sound=30,my_page='T',friend_add='T' where
+		bgm_sound=30,my_page='T',friend_add='T',ps_theme='kokomo' where
 		player_nickname=#{value}
 	</update>
 
@@ -34,7 +34,7 @@
 	<insert id="settingInsert" parameterType="String">
 		insert into
 		player_setting
-		(ps_sq,player_nickname,ps_bgm_sound,ps_my_page,ps_chatting,ps_friend_Add)
-		values (ps_sq.nextval,#{value},30,'T','T','T')
+		(ps_sq,player_nickname,ps_bgm_sound,ps_my_page,ps_chatting,ps_friend_Add,ps_theme)
+		values (ps_sq.nextval,#{value},30,'T','T','T','kokomo')
 	</insert>
 </mapper>

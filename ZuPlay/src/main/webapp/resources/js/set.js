@@ -15,7 +15,7 @@ userInfo = {
 var setting = {
 	parts : [ "clothes", "hair", "eyes", "mouse", "earring", "acc" ],
 	page : [],
-	chat : {},
+	chat : [],
 	content : "body",
 };
 

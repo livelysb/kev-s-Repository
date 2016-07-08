@@ -1174,11 +1174,62 @@ $(function(){
 
    
       /*======================Set WebSocket=============================*/
+      var sendMsg = function(){
+         var str = "";
+         for(var i=0;arguments.length;i++){
+           str += arguments[i]+"#/fuckWebSocket/#";
+         }
+         
+         return str;
+      }
+      
       connect(function(){
           $('#logout').click(function() {
               disconnect();
               location.href = "logout";
            });
+          
+          ws.onmessage = function(event){
+              var data = JSON.parse(event.data);
+              console.log(data);
+              
+              switch(data.type){
+                 case "friendSelect" :  break;
+                 case "chat-on" : break;
+                 case "chat-off" : break;
+                 case "chat-msg" : break;
+                 
+                 default : console.log("unknow msg : " + data.type);
+              }
+           }
+           
+           var showChatWindow = function(nick){
+              if(!setting.chat.indexOf(nick) > -1){
+                 setting.chat.push(nick);
+                 var str = "";
+                 str += "<div class='chat-window container-fluid' id='chat-no-"+nick+"'>";
+                 str += "<div>Chat</div><div class='chat-content row-fluid'>"
+                 str += "<div class='col-md-12 bg-white'><div class='chat-message'><ul class='chat-group'>"
+                 str += "</ul></div>"
+                str += "<div class='col-md-12 chat-box bg-white'><div class='input-group'>"
+                str += "<input class='form-control border no-shadow no-rounded' placeholder='Type your message here'>"
+                str += "<span class='input-group-btn'><button class='btn btn-success no-rounded' type='button'>Send</button>"
+                str += "</span></div></div></div></div></div>"
+                   
+               $("#main").append(str);
+                 console.log("appended")
+               $("#chat-no-"+nick).jqxWindow({
+                 width:"430",
+                 height:"700",
+                 resizable:false,
+                 showCollapseButton: true,
+                 theme:"kokomo"
+                });
+              }else{
+                 $("#chat-no-"+nick).jqxWindow("show");
+              }
+           }
+           showChatWindow("kim");
           //추가 된 친구조회
           var friendselectAll = function(){
              ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");

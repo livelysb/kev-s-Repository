@@ -154,8 +154,8 @@ public class FriendController {
 		}
 		if (result) {
 			Gson gson = new Gson();
-			String json = "{\"type\":\"notiFriendAcceptMe\",\"data\":" + gson.toJson(result) + "}";
-			String json2 = "{\"type\":\"notiFriendAcceptYou\",\"data\":" + gson.toJson(result) + "}";
+			String json = "{\"type\":\"notiFriendAcceptMe\",\"data\":\"" +result+ "\"}";
+			String json2 = "{\"type\":\"notiFriendAcceptYou\",\"data\":\"" +playerNickname+ "\"}";
 
 			try {
 				webSession.sendMessage(new TextMessage(json));

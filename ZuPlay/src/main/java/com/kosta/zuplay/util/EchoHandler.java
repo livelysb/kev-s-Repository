@@ -5,7 +5,6 @@ import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,8 +14,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.kosta.zuplay.controller.FriendController;
-import com.kosta.zuplay.model.dto.player.SettingDTO;
-import com.kosta.zuplay.model.service.system.SettingService;
+import com.kosta.zuplay.model.service.player.FriendService;
 import com.kosta.zuplay.util.vo.PlayerVO;
 
 /**
@@ -29,6 +27,8 @@ public class EchoHandler extends TextWebSocketHandler {
 	private ServletContext application;
 	@Autowired
 	private FriendController friendController;
+	@Autowired
+	private FriendService friendServiceImpl;
 
 	@Override
 	protected void handleTextMessage(WebSocketSession webSession, TextMessage message) {
@@ -82,6 +82,12 @@ public class EchoHandler extends TextWebSocketHandler {
 			if (application.getAttribute("#" + appliName.get(i)) != null) {
 				WebSocketSession session2 = pv.getSession();
 				if (session == session2) {
+					List<String> list = friendServiceImpl.friendSelectOnlyNickname(appliName.get(i));
+					String json = "{\"type\":\"notiFriendLogout\",\"data\":\"" + appliName.get(i) + "\"}";
+					for(int j = 0; j<list.size();j++){
+						PlayerVO pv2=(PlayerVO)application.getAttribute("#"+list.get(j));
+						pv2.getSession().sendMessage(new TextMessage(json));
+					}
 					application.removeAttribute("#" + appliName.get(i));
 				}
 			}

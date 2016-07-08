@@ -689,11 +689,11 @@ $(function(){
          /* 친구추가 */
          $(document).on("click",".friend-add-tr",function(){
             var friendId=$(this).children("td").eq(1).text();
-            var myId=$("#friend-add-test").val()
             if(confirm(friendId+"님을 친구로 추가하시겠습니까?")==false || friendId=="") return;
+            ws.send("friendAdd#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendId)
             $(".friend-add-modal").removeClass("in");
-            $(".modal-backdrop").remove();
-            $(".friend-add-modal").hide();
+           $(".modal-backdrop").remove();
+           $(".friend-add-modal").hide();
             
             
          })

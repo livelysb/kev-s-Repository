@@ -18,22 +18,25 @@ public class IndexController {
 	PlayerInfoService playerInfoService;
 	@Autowired
 	SettingService settingServiceImpl;
-	
+
 	@RequestMapping({ "/", "index" })
-	public ModelAndView index(HttpSession session) throws Exception{
+	public ModelAndView index(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView("index");
-		SettingDTO settingDTO=settingServiceImpl.settingSelect((String) session.getAttribute("playerNickname"));
 		try {
-			if(session.getAttribute("playerNickname")!=null)
-				mv.addObject("firstLoginToday", playerInfoService.getRubyPerDay((String)session.getAttribute("playerNickname"))) ;
-				mv.addObject("theme",settingDTO.getPsTheme());
-		} catch(Exception e) {
+			if (session.getAttribute("playerNickname") != null) {
+				SettingDTO settingDTO = settingServiceImpl
+						.settingSelect((String) session.getAttribute("playerNickname"));
+				mv.addObject("firstLoginToday",
+						playerInfoService.getRubyPerDay((String) session.getAttribute("playerNickname")));
+				mv.addObject("theme", settingDTO.getPsTheme());
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMsg", e.toString());
 			System.out.println(e.getMessage());
 			throw new Exception();
 		}
-		
+
 		return mv;
 	}
 

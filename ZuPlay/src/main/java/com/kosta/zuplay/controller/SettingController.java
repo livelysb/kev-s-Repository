@@ -66,7 +66,6 @@ public class SettingController {
 		}
 		Gson gson = new Gson();
 		String json=gson.toJson(dto);
-		System.out.println(json);
 		return json;
 	}
 }

@@ -41,50 +41,49 @@ public class FriendServiceImpl implements FriendService {
 				String ell = el.substring(1);
 				listX.add(ell);
 			}
-			;
 		}
 		for (int i = 0; i < listB.size(); i++) {
 			listA.add(listB.get(i));
 		}
-		for (int i = 0; i < listA.size(); i++) {
-			if (listX.contains(listA.get(i))) {
-
-			} else {
+		int j = listA.size();
+		for (int i = j-1; i >=0 ; i--) {
+			if (!listX.contains(listA.get(i))) {
 				listA.remove(i);
 			}
 		}
+		
 		return listA;
 	}
 
-//	/**
-//	 * 접속중 친구목록 가져오기
-//	 */
-//	@Override
-//	public List<FriendDTO> friendSelectOnline(String playerNickname) {
-//		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
-//		List<FriendDTO> list = new ArrayList<FriendDTO>();
-//		List<FriendDTO> listA = friendDAO.friendSelectA(playerNickname);
-//		List<FriendDTO> listB = friendDAO.friendSelectB(playerNickname);
-//		List<String> listApp = new ArrayList<String>();
-//		Enumeration<String> enumr = application.getAttributeNames();
-//		while (enumr.hasMoreElements()) {
-//			String el = enumr.nextElement();
-//			if (el.charAt(0) == '#') {
-//				String ell = el.substring(1);
-//				listApp.add(ell);
-//			}
-//			;
-//		}
-//		for (int i = 0; i < listB.size(); i++) {
-//			listA.add(listB.get(i));
-//		}
-//		for (int i = 0; i < listA.size(); i++) {
-//			if (listApp.contains(listA.get(i).getPlayerNickname())) {
-//				list.add(listA.get(i));
-//			}
-//		}
-//		return list;
-//	}
+	// /**
+	// * 접속중 친구목록 가져오기
+	// */
+	// @Override
+	// public List<FriendDTO> friendSelectOnline(String playerNickname) {
+	// FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
+	// List<FriendDTO> list = new ArrayList<FriendDTO>();
+	// List<FriendDTO> listA = friendDAO.friendSelectA(playerNickname);
+	// List<FriendDTO> listB = friendDAO.friendSelectB(playerNickname);
+	// List<String> listApp = new ArrayList<String>();
+	// Enumeration<String> enumr = application.getAttributeNames();
+	// while (enumr.hasMoreElements()) {
+	// String el = enumr.nextElement();
+	// if (el.charAt(0) == '#') {
+	// String ell = el.substring(1);
+	// listApp.add(ell);
+	// }
+	// ;
+	// }
+	// for (int i = 0; i < listB.size(); i++) {
+	// listA.add(listB.get(i));
+	// }
+	// for (int i = 0; i < listA.size(); i++) {
+	// if (listApp.contains(listA.get(i).getPlayerNickname())) {
+	// list.add(listA.get(i));
+	// }
+	// }
+	// return list;
+	// }
 
 	/**
 	 * 친구목록 전체 조회
@@ -112,20 +111,19 @@ public class FriendServiceImpl implements FriendService {
 		}
 		for (int i = 0; i < listA.size(); i++) {
 			FriendDTO dto = listA.get(i);
-			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(),dto.getPlayerNickname(),dto.getFriendIsAccepted(),
-					dto.getFriendDate(), false, dto.getList()));
+			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(), dto.getPlayerNickname(),
+					dto.getFriendIsAccepted(), dto.getFriendDate(), false, dto.getList()));
 		}
 		for (int i = 0; i < listB.size(); i++) {
 			FriendDTO dto = listB.get(i);
-			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(),dto.getPlayerNickname(), dto.getFriendIsAccepted(),
-					dto.getFriendDate(), false, dto.getList()));
+			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(), dto.getPlayerNickname(),
+					dto.getFriendIsAccepted(), dto.getFriendDate(), false, dto.getList()));
 		}
-		for(int i=0;i<listVO.size();i++){
-			if(listApp.contains(listVO.get(i).getPlayerNickname())){
+		for (int i = 0; i < listVO.size(); i++) {
+			if (listApp.contains(listVO.get(i).getPlayerNickname())) {
 				listVO.get(i).setOnOrOff(true);
 			}
 		}
-		System.out.println("listVO : " + listVO.get(0));
 		return listVO;
 	}
 
@@ -134,17 +132,14 @@ public class FriendServiceImpl implements FriendService {
 	 */
 	@Override
 	public FriendDTO friendAdd(String playerNickname, String playerNickname2) {
-		System.out.println("friendAdd");
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
 		FriendDTO dto = null;
-		System.out.println(friendCheck(playerNickname, playerNickname2));
 		if (friendCheck(playerNickname, playerNickname2) == false) {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("playerNickname", playerNickname);
 			map.put("playerNickname2", playerNickname2);
 			friendDAO.friendAdd(map);
 			dto = friendDAO.friendCheck(map);
-			System.out.println(dto);
 		}
 		return dto;
 	}

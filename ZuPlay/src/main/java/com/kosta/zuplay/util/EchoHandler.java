@@ -1,10 +1,15 @@
 package com.kosta.zuplay.util;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -59,6 +64,28 @@ public class EchoHandler extends TextWebSocketHandler {
 																									// playerNickname,playerNickname,friendSq
 		}
 
+	}
+
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		Enumeration<String> enumr = application.getAttributeNames();
+		List<String> appliName = new ArrayList<>();
+		while (enumr.hasMoreElements()) {
+			String sharp=enumr.nextElement();
+			if (sharp.charAt(0) == '#') {
+				appliName.add(sharp.substring(1));
+			}
+		}
+		System.out.println(appliName.size());
+		for (int i = 0; i < appliName.size(); i++) {
+			PlayerVO pv = (PlayerVO) application.getAttribute("#" + appliName.get(i));
+			if (application.getAttribute("#" + appliName.get(i)) != null) {
+				WebSocketSession session2 = pv.getSession();
+				if (session == session2) {
+					application.removeAttribute("#" + appliName.get(i));
+				}
+			}
+		}
 	}
 
 }

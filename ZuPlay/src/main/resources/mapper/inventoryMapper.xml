@@ -24,6 +24,14 @@
 		player_nickname=#{playerNickname}) m join item i on
 		m.item_code=i.item_code
 	</select>
+	
+	<select id="playerItemWorn" parameterType="String" resultMap="playerItemMapper">
+		select * from (select * from player_item where
+		player_nickname=#{playerNickname}) m join item i on
+		m.item_code=i.item_code
+		where pi_index &lt; 7
+	</select>
+	
 	<update id="playerItemInsert" parameterType="playerItemDTO">
 		update player_item set
 		pi_index=#{piIndex} where

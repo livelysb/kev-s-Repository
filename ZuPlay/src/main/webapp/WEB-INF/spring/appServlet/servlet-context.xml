@@ -62,8 +62,8 @@
 		<beans:property name="order" value="0"></beans:property>
 	</beans:bean>
 
-	<task:scheduler id="taskScheduler" pool-size="10" />
-	<task:executor id="taskExecutor" pool-size="10" />
+	<task:scheduler id="taskScheduler" pool-size="1" />
+	<task:executor id="taskExecutor" pool-size="1" />
 	<task:annotation-driven executor="taskExecutor"
 		scheduler="taskScheduler" />
 

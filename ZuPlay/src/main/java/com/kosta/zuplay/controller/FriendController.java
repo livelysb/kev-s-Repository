@@ -25,6 +25,7 @@ public class FriendController {
 
 	@Autowired
 	private FriendService friendServiceImpl;
+	
 	@Autowired
 	private ServletContext application;
 

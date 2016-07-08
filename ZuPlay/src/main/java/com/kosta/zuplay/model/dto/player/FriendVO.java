@@ -5,7 +5,7 @@ import java.util.List;
 public class FriendVO {
 	private int friendSq; // 친구코드
 	private String playerNickname; // 닉네임1
-	private String playerNickname2; //본인 닉네임
+	private String playerNickname2; //신청자
 	private String friendIsAccepted; // 친구 수락여부(T=친구/F=친구수락대기중)
 	private String friendDate; // 친구신청일자
 	private boolean onOrOff; //접속여부

@@ -1,7 +1,7 @@
 userInfo = {
 	nickName : "",
 	gender : "",
-	theme : "",
+	theme : "kokomo",
 	money : 0,
 	ruby : 0,
 	grade : "",
@@ -15,6 +15,7 @@ userInfo = {
 var setting = {
 	parts : [ "clothes", "hair", "eyes", "mouse", "earring", "acc" ],
 	page : [],
+	chat : {},
 	content : "body",
 };
 

@@ -8,6 +8,20 @@ html, body{
   position: relative;
 }
 
+a:hover, a:active, a:focus {
+  text-decoration: none;
+  outline: 0;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+small, .small {
+  font-size: 85%;
+}
+
+
 #loading-content{
    position: absolute;
    top: 50%;
@@ -536,4 +550,132 @@ div.vertical-line{
 #news-search-window .news-search-img img{
   width: 100%;
   max-height: 70px;
+}
+
+
+/*채팅*/
+
+.chat-group {
+    list-style: none;
+    margin: 0;
+}
+
+.chat-message{
+    background: #f9f9f9;
+    overflow: auto;
+    height: 525px;
+}
+
+.chat-group li img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50em;
+  -moz-border-radius: 50em;
+  -webkit-border-radius: 50em;
+}
+
+.chat-group img {
+  max-width: 100%;
+}
+
+.chat-body {
+  padding-bottom: 20px;
+}
+
+.chat-group li.left .chat-body {
+  margin-left: 70px;
+  background-color: #fff;
+}
+
+.chat-group li .chat-body {
+  position: relative;
+  font-size: 11px;
+  padding: 10px;
+  border: 1px solid #f1f5fc;
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.chat-group li .chat-body .chat-header {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #f1f5fc;
+}
+
+.chat-group li .chat-body p {
+  margin: 0;
+}
+
+.chat-group li.left .chat-body:before {
+  position: absolute;
+  top: 10px;
+  left: -8px;
+  display: inline-block;
+  background: #fff;
+  width: 16px;
+  height: 16px;
+  border-top: 1px solid #f1f5fc;
+  border-left: 1px solid #f1f5fc;
+  content: '';
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+
+.chat-group li.right .chat-body:before {
+  position: absolute;
+  top: 10px;
+  right: -8px;
+  display: inline-block;
+  background: #fff;
+  width: 16px;
+  height: 16px;
+  border-top: 1px solid #f1f5fc;
+  border-right: 1px solid #f1f5fc;
+  content: '';
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+
+.chat-group li {
+  margin: 15px 0;
+}
+
+.chat-group{
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.chat-group li.right .chat-body {
+  margin-right: 70px;
+  background-color: #fff;
+}
+
+.chat-box {
+  border-top: 1px solid #eee;
+  min-height: 35px;
+  padding-right: 0px;
+  padding-left: 0px;
+  transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  -o-transition: all .5s ease;
+}
+
+.primary-font {
+  color: #3c8dbc;
+}
+
+.chat-window, .col-md-12{
+  padding: 0px 0px 0px 0px;
+}
+
+.chat-content{
+  overflow: hidden;
 }

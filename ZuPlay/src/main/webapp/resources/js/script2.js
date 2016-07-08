@@ -1180,9 +1180,9 @@ $(function(){
                var data = JSON.parse(event.data);
                console.log(data)
                   
-               requestedFriend="";
-               ListFriend="";
-               
+               var requestedFriend="";
+               var ListFriend="";
+               var friendBtnColor="";
                if(data.type=="friendSelect"){
                    
                    $.each(data.data,function(index,item){
@@ -1208,7 +1208,12 @@ $(function(){
                       }else{
                        ListFriend+="<li href='#' class='list-group-item text-left'>";
                        ListFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
-                       ListFriend+="<div class='friend-icon red'> </div>";
+                       if(item.onOrOff=="true"){
+                    	   friendBtnColor="green";
+                       }else{
+                    	   friendBtnColor="red";
+                       }
+                       ListFriend+="<div class='friend-icon "+friendBtnColor+"'> </div>";
                        ListFriend+="<label class='name'>"+friendNickname+"</label>";
                        ListFriend+="<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
                        ListFriend+="<div class='pull-right'>";
@@ -1230,9 +1235,11 @@ $(function(){
             	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
                }else if(data.type=="notiFriendAcceptYou"){
             	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
-            	   $("#friend-request-noti").children().text(data.data+"님께서 친구수락을 하셨습니다.")
+            	   $("#friend-request-noti").children().text(data.data+"님께서 친구수락을 하셨습니다.");
             	   $("#friend-request-noti").jqxNotification("open");
-               }else if(data.type="")
+               }else if(data.type="notiFriendLogin"){
+            	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
+               }
              }
           }   
           friendselectAll();

@@ -151,7 +151,7 @@
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script src="resources/js/set.js"></script>
-<script src="resources/js/script.js"></script>
+<script src="resources/js/script2.js"></script>
       <script type="text/javascript">
         $(function() {
 

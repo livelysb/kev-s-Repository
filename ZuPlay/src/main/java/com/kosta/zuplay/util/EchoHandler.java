@@ -10,6 +10,8 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.kosta.zuplay.controller.FriendController;
+import com.kosta.zuplay.model.dto.player.SettingDTO;
+import com.kosta.zuplay.model.service.system.SettingService;
 import com.kosta.zuplay.util.vo.PlayerVO;
 
 /**
@@ -24,29 +26,29 @@ public class EchoHandler extends TextWebSocketHandler {
 	private FriendController friendController;
 
 	@Override
-	protected void handleTextMessage(WebSocketSession webSession, TextMessage message){
+	protected void handleTextMessage(WebSocketSession webSession, TextMessage message) {
 		String mes = message.getPayload();
 		System.out.println(mes);
 		String[] mesArr = mes.split("#/fuckWebSocket/#");
 		String playerNickname = mesArr[1];
 		if (mesArr[0].equals("open")) {
-			application.setAttribute("#"+playerNickname, new PlayerVO(playerNickname, webSession));
-			try{
-			friendController.friendLogin(playerNickname);
-			}catch(Exception e){
+			application.setAttribute("#" + playerNickname, new PlayerVO(playerNickname, webSession));
+			try {
+				friendController.friendLogin(playerNickname);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (mesArr[0].equals("friendSelect")) {
 			friendController.friendSelect(playerNickname);
 		} else if (mesArr[0].equals("friendAdd")) {
-			try{
-			friendController.friendAdd(playerNickname, mesArr[2]);// param :
-																	// playerNickname,playerNickname2
-			}catch(Exception e){
+			try {
+				friendController.friendAdd(playerNickname, mesArr[2]);// param :
+																		// playerNickname,playerNickname2
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-//		 else if (mesArr[0].equals("friendSelectOnline")) {
-//			friendController.friendSelectOnline(playerNickname);
+			// else if (mesArr[0].equals("friendSelectOnline")) {
+			// friendController.friendSelectOnline(playerNickname);
 		} else if (mesArr[0].equals("friendDel")) {
 			friendController.friendDel(playerNickname, Integer.parseInt(mesArr[2]));// param
 																					// :

@@ -4,19 +4,23 @@ public class SettingDTO {
 	
 	private int psSq;
 	private String playerNickname;
-	private int bgmSound;
-	private String myPage;
-	private String chatting;
-	private String friendAdd;
+	private int psBgmSound;
+	private String psMyPage;
+	private String psChatting;
+	private String psFriendAdd;
+	private String psTheme;
+	
 	public SettingDTO() {}
-	public SettingDTO(int psSq, String playerNickname, int bgmSound, String myPage, String chatting, String friendAdd) {
+	public SettingDTO(int psSq, String playerNickname, int psBgmSound, String psMyPage, String psChatting,
+			String psFriendAdd, String psTheme) {
 		super();
 		this.psSq = psSq;
 		this.playerNickname = playerNickname;
-		this.bgmSound = bgmSound;
-		this.myPage = myPage;
-		this.chatting = chatting;
-		this.friendAdd = friendAdd;
+		this.psBgmSound = psBgmSound;
+		this.psMyPage = psMyPage;
+		this.psChatting = psChatting;
+		this.psFriendAdd = psFriendAdd;
+		this.psTheme = psTheme;
 	}
 	public int getPsSq() {
 		return psSq;
@@ -30,35 +34,41 @@ public class SettingDTO {
 	public void setPlayerNickname(String playerNickname) {
 		this.playerNickname = playerNickname;
 	}
-	public int getBgmSound() {
-		return bgmSound;
+	public int getPsBgmSound() {
+		return psBgmSound;
 	}
-	public void setBgmSound(int bgmSound) {
-		this.bgmSound = bgmSound;
+	public void setPsBgmSound(int psBgmSound) {
+		this.psBgmSound = psBgmSound;
 	}
-	public String getMyPage() {
-		return myPage;
+	public String getPsMyPage() {
+		return psMyPage;
 	}
-	public void setMyPage(String myPage) {
-		this.myPage = myPage;
+	public void setPsMyPage(String psMyPage) {
+		this.psMyPage = psMyPage;
 	}
-	public String getChatting() {
-		return chatting;
+	public String getPsChatting() {
+		return psChatting;
 	}
-	public void setChatting(String chatting) {
-		this.chatting = chatting;
+	public void setPsChatting(String psChatting) {
+		this.psChatting = psChatting;
 	}
-	public String getFriendAdd() {
-		return friendAdd;
+	public String getPsFriendAdd() {
+		return psFriendAdd;
 	}
-	public void setFriendAdd(String friendAdd) {
-		this.friendAdd = friendAdd;
+	public void setPsFriendAdd(String psFriendAdd) {
+		this.psFriendAdd = psFriendAdd;
+	}
+	public String getPsTheme() {
+		return psTheme;
+	}
+	public void setPsTheme(String psTheme) {
+		this.psTheme = psTheme;
 	}
 	@Override
 	public String toString() {
-		return "SettingDTO [psSq=" + psSq + ", playerNickname=" + playerNickname + ", bgmSound=" + bgmSound
-				+ ", myPage=" + myPage + ", chatting=" + chatting + ", friendAdd=" + friendAdd + "]";
+		return "SettingDTO [psSq=" + psSq + ", playerNickname=" + playerNickname + ", psBgmSound=" + psBgmSound
+				+ ", psMyPage=" + psMyPage + ", psChatting=" + psChatting + ", psFriendAdd=" + psFriendAdd
+				+ ", psTheme=" + psTheme + "]";
 	}
-	
 	
 }

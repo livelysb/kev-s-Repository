@@ -631,7 +631,10 @@ $(function(){
       
       
       /* 친구창 */
-      var friendBook = function(){
+      
+      var friendBookinit = function(){
+    	  var friendDelBtn=0;
+    	  
          $("#friend-window").jqxWindow({
              theme:userInfo.theme,
              width:400,
@@ -688,35 +691,59 @@ $(function(){
             var friendId=$(this).children("td").eq(1).text();
             var myId=$("#friend-add-test").val()
             if(confirm(friendId+"님을 친구로 추가하시겠습니까?")==false || friendId=="") return;
-            ws.send("friendAdd#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendId)
+            $(".friend-add-modal").removeClass("in");
+            $(".modal-backdrop").remove();
+            $(".friend-add-modal").hide();
+            
+            
          })
          
          /*친구승락*/
          $(document).on("click",".friend-accept" ,function(){
+        	 var friendNickName = $(this).parent().prevAll(".name").text();
             var friendSq = $(this).parent().prevAll(".requestedFSq").val();
-            var friendNickName = $(this).parent().prevAll(".name").text();
             console.log(friendNickName);
             console.log(friendSq);
             ws.send("friendAccept#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendNickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#");
             
          })
          
-         /*친구거절*/
-         $(document).on("click",".friend-reject",function(){
-            var friendSq = $(this).parent().prevAll(".name").text();
-            ws.send("friendDel#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#")
+         /*친구거절 및 삭제*/
+         $(document).on("click",".friend-reject,.friend-sendBtn .glyphicon-trash",function(){
+        	 var friendSq = $(this).parent().prevAll(".requestedFSq").val();
+        	 if(!friendSq){
+        		 friendSq = $(this).parent().parent().prevAll(".ListFriendFSq").val();
+        	 }
+        	 
+            ws.send("friendDel#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#")
          })
          
          /*친구신청 알림*/
          $("#friend-request-noti").jqxNotification({
-                width: 250, position: "top-right", opacity: 0.9,
-                autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template: "info"
+        	 width: 250, position: "top-right", opacity: 0.9,
+             autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template: "info"
             });
+         
          
          /*TEST*/
          $("#friend-request-btn").on("click",function(){
-        	 $("#friend-request-noti").children().text("님께서 친구신청을 하셨습니다.")
+        	 $("#noti-msg").text("효승 바보");
         	   $("#friend-request-noti").jqxNotification("open");
+         })
+         
+         /*친구삭제 버튼 클릭 시*/
+         $("#friend-del").on("click",function(){
+        	 if(friendDelBtn==0){
+	        	 $(this).text("삭제취소");
+	        	 $("#friend-list-current .glyphicon-envelope").attr("class","glyphicon glyphicon-trash");
+	        	 $(".friend-sendBtn").attr("class","btn btn-danger friend-sendBtn ")
+	        	 friendDelBtn=1
+        	 }else{
+        		 $(this).text("친구삭제");
+        		 $("#friend-list-current .glyphicon-trash").attr("class","glyphicon glyphicon-envelope");
+        		 $(".friend-sendBtn").attr("class","btn btn-info friend-sendBtn ")
+	        	 friendDelBtn=0
+        	 }
          })
       }
       
@@ -785,6 +812,9 @@ $(function(){
           }
           financialSearch(term);
        })
+       
+       /*가나다인척하기*/
+       //financialSearch("가")
       }
       
       /* 경매장 */
@@ -1120,7 +1150,7 @@ $(function(){
       rtaInit();
       stockListInit();
       storeInit();
-      friendBook();
+      friendBookinit();
       financialInit();
       auctionInit();
       myStockInit();
@@ -1152,15 +1182,13 @@ $(function(){
           //추가 된 친구조회
           var friendselectAll = function(){
              ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
-             ws.send("friendSelectOnline#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
-            
              ws.onmessage = function (event) {
                var data = JSON.parse(event.data);
                console.log(data)
                   
-               requestedFriend="";
-               ListFriend="";
-               
+               var requestedFriend="";
+               var ListFriend="";
+               var friendBtnColor="";
                if(data.type=="friendSelect"){
                    
                    $.each(data.data,function(index,item){
@@ -1171,9 +1199,9 @@ $(function(){
                       }
                       
                       if(item.friendIsAccepted=="F"){
-                          if(userInfo.nickName==item.playerNickname2){
-                             requestedFriend+="<li href='#' class='list-group-item text-left'>";
-                               requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
+                          if(userInfo.nickName==item.playerNickname){
+                    	      requestedFriend+="<li href='#' class='list-group-item text-left'>";
+                              requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
                                
                               requestedFriend+="<label class='name'>"+friendNickname+"</label>";
                               requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
@@ -1186,22 +1214,25 @@ $(function(){
                       }else{
                        ListFriend+="<li href='#' class='list-group-item text-left'>";
                        ListFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
-                       ListFriend+="<div class='friend-icon red'> </div>";
+                       if(item.onOrOff==true){
+                    	   friendBtnColor="green";
+                       }else{
+                    	   friendBtnColor="red";
+                       }
+                       ListFriend+="<div class='friend-icon "+friendBtnColor+"'> </div>";
                        ListFriend+="<label class='name'>"+friendNickname+"</label>";
                        ListFriend+="<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
                        ListFriend+="<div class='pull-right'>";
-                       ListFriend+="<button type='button' class='btn btn-default friend-sendBtn '>";
-                       ListFriend+="<i class='glyphicon glyphicon-send'></i></button></div></li>";
+                       ListFriend+="<button type='button' class='btn btn-info friend-sendBtn '>";
+                       ListFriend+="<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
                      }
                   })
                   $("#friend-content .list-group > .title").siblings("li").remove();
                   $("#friend-list-que ul").append(requestedFriend);
                   $("#friend-list-group ul").append(ListFriend);
-               }else if(data.type=="friendSelectOnline"){
-                  
                }else if(data.type=="notiFriendAdd"){
             	   console.log(data.data.playerNickname);
-            	   $("#friend-request-noti").children().text(data.data.playerNickname+"님께서 친구신청을 하셨습니다.")
+            	   $("#noti-msg").text(data.data.playerNickname+"님께서 친구신청을 하셨습니다.")
             	   $("#friend-request-noti").jqxNotification("open");
             	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
                }else if(data.type=="friendDel"){
@@ -1210,8 +1241,13 @@ $(function(){
             	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
                }else if(data.type=="notiFriendAcceptYou"){
             	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
-            	   $("#friend-request-noti").children().text("님께서 친구수락을 하셨습니다.")
+            	   $("#noti-msg").text(data.data+"님께서 친구수락을 하셨습니다.");
             	   $("#friend-request-noti").jqxNotification("open");
+               }else if(data.type="notiFriendLogin"){
+            	   console.log("노티파이!!")
+            	   $("#noti-msg").text(data.data+"님께서 로그인을 하셨습니다.")
+            	   $("#friend-request-noti").jqxNotification("open");
+            	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
                }
              }
           }   

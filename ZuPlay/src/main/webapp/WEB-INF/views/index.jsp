@@ -58,6 +58,7 @@
          <!-- ///////////////////////////////////////////////// -->
          <jsp:include page="auctionWindow.jsp"/>
          <jsp:include page="myStock.jsp"/>
+         <jsp:include page="newsList.jsp"/>
          <!-- ///////////////////////////////////////////////// -->
           </div>
         </div>
@@ -91,6 +92,7 @@
                <button id="mystock-btn">내 주식</button>
                <!-- ///////////////////////////////////////////////// -->
                <!--Notifications-->
+               <button id="news-search-btn">뉴스 검색</button>
                <button id="friend-request-btn">노티파이</button>
                   <div id="friend-request-noti">
                       <div>
@@ -149,7 +151,7 @@
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script src="resources/js/set.js"></script>
-<script src="resources/js/script2.js"></script>
+<script src="resources/js/script.js"></script>
       <script type="text/javascript">
         $(function() {
 

@@ -1058,6 +1058,63 @@ $(function(){
 	     myStockListUpdate();
        }
 
+       /* 뉴스 검색 */
+       var newsSearchInit = function(){
+          $("#news-search-window").jqxWindow({
+                width:"500",
+                height:"700",
+                resizable:true,
+                showCollapseButton: true,
+                autoOpen:false,
+                theme:userInfo.theme
+              });
+          
+          $("#news-search-submit").click(function(){
+             var keyword = $("#news-search-keyword").val();
+             if(keyword == ""){
+                alert("검색어를 입력해주세요.");
+                return;
+             }
+             
+             $.ajax({
+                 url:"searchNews",
+               type:'post',
+                data:{"keyword":keyword},
+                dataType:"json",
+                success:function(result){
+                    var str = "";
+                    if(!result.found){
+                       alert("검색된 결과가 없습니다.");
+                       return;
+                    }
+                   var str = "";
+                   $.each(result.data.docs,function(index, item){
+                      console.log(item);
+                      if(item.image_urls.length>0){
+                         str += "<div class='hr-line-dashed'></div>";
+                         str += "<div class='news-search-img col-md-4'>";
+                         str += "<img src='"+item.image_urls[0]+"'/></div>";
+                         str += "<div class='col-md-8 search-result'>";
+                      }else{
+                         str += "<div class='col-md-12 search-result'>";
+                      }
+                      str+="<h3><a href='#'>"+item.title+"</a></h3>";
+                      str+="<small>"+item.updated_at+"</small><br>"
+                     str+="<a href='#' class='search-link'>"+item.author+" 기자 ("+item.publisher+")</a>";
+                     str+="<p>"+item.content+"</p>";
+                     str+="</div>";
+                   })
+                   console.log(str);
+                   $("#news-search-results").empty().append(str);              
+                   
+                },
+                error:function(err){
+                   console.log("Exception : searchNews(keyword : "+keyword+")");
+                }
+             });
+          })
+          
+       }
        
       invenInit();
       rtaInit();
@@ -1067,6 +1124,7 @@ $(function(){
       financialInit();
       auctionInit();
       myStockInit();
+      newsSearchInit();
       
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
@@ -1077,6 +1135,7 @@ $(function(){
             $("#financial-btn").setBtn($("#financial-window"));
             $("#auction-btn").setBtn($("#auction-window"));
             $("#mystock-btn").setBtn($("#mystock-window"));
+            $("#news-search-btn").setBtn($("#news-search-window"));
             
           $("#myinfo-btn").click(function(){
              showUserInfo(userInfo.nickName);

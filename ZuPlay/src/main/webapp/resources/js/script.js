@@ -1058,6 +1058,63 @@ $(function(){
 	     myStockListUpdate();
        }
 
+       /* 뉴스 검색 */
+       var newsSearchInit = function(){
+          $("#news-search-window").jqxWindow({
+                width:"500",
+                height:"700",
+                resizable:true,
+                showCollapseButton: true,
+                autoOpen:false,
+                theme:userInfo.theme
+              });
+          
+          $("#news-search-submit").click(function(){
+             var keyword = $("#news-search-keyword").val();
+             if(keyword == ""){
+                alert("검색어를 입력해주세요.");
+                return;
+             }
+             
+             $.ajax({
+                 url:"searchNews",
+               type:'post',
+                data:{"keyword":keyword},
+                dataType:"json",
+                success:function(result){
+                    var str = "";
+                    if(!result.found){
+                       alert("검색된 결과가 없습니다.");
+                       return;
+                    }
+                   var str = "";
+                   $.each(result.data.docs,function(index, item){
+                      console.log(item);
+                      if(item.image_urls.length>0){
+                         str += "<div class='hr-line-dashed'></div>";
+                         str += "<div class='news-search-img col-md-4'>";
+                         str += "<img src='"+item.image_urls[0]+"'/></div>";
+                         str += "<div class='col-md-8 search-result'>";
+                      }else{
+                         str += "<div class='col-md-12 search-result'>";
+                      }
+                      str+="<h3><a href='#'>"+item.title+"</a></h3>";
+                      str+="<small>"+item.updated_at+"</small><br>"
+                     str+="<a href='#' class='search-link'>"+item.author+" 기자 ("+item.publisher+")</a>";
+                     str+="<p>"+item.content+"</p>";
+                     str+="</div>";
+                   })
+                   console.log(str);
+                   $("#news-search-results").empty().append(str);              
+                   
+                },
+                error:function(err){
+                   console.log("Exception : searchNews(keyword : "+keyword+")");
+                }
+             });
+          })
+          
+       }
        
       invenInit();
       rtaInit();
@@ -1067,6 +1124,7 @@ $(function(){
       financialInit();
       auctionInit();
       myStockInit();
+      newsSearchInit();
       
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
@@ -1077,6 +1135,7 @@ $(function(){
             $("#financial-btn").setBtn($("#financial-window"));
             $("#auction-btn").setBtn($("#auction-window"));
             $("#mystock-btn").setBtn($("#mystock-window"));
+            $("#news-search-btn").setBtn($("#news-search-window"));
             
           $("#myinfo-btn").click(function(){
              showUserInfo(userInfo.nickName);
@@ -1103,25 +1162,28 @@ $(function(){
                ListFriend="";
                
                if(data.type=="friendSelect"){
-                  
-                  $.each(data.data,function(index,item){
-                     if(userInfo.nickName==item.playerNickname){
-                        var friendNickname=item.playerNickname2
-                     }else{
-                       var friendNickname=item.playerNickname
-                     }
-                     
-                     if(item.friendIsAccepted=="F"){
-                       requestedFriend+="<li href='#' class='list-group-item text-left'>";
-                      requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
+                   
+                   $.each(data.data,function(index,item){
+                      if(userInfo.nickName==item.playerNickname){
+                         var friendNickname=item.playerNickname2
+                      }else{
+                        var friendNickname=item.playerNickname
+                      }
                       
-                     requestedFriend+="<label class='name'>"+friendNickname+"</label>";
-                     requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
-                     requestedFriend+="<div class='pull-right'>";
-                     requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
-                     requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>";
-                     requestedFriend+="</div></li>";
-                     }else{
+                      if(item.friendIsAccepted=="F"){
+                          if(userInfo.nickName==item.playerNickname2){
+                             requestedFriend+="<li href='#' class='list-group-item text-left'>";
+                               requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
+                               
+                              requestedFriend+="<label class='name'>"+friendNickname+"</label>";
+                              requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
+                              requestedFriend+="<div class='pull-right'>";
+                              requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+                              requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>";
+                              requestedFriend+="</div></li>";
+                          }
+                        
+                      }else{
                        ListFriend+="<li href='#' class='list-group-item text-left'>";
                        ListFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
                        ListFriend+="<div class='friend-icon red'> </div>";
@@ -1132,15 +1194,24 @@ $(function(){
                        ListFriend+="<i class='glyphicon glyphicon-send'></i></button></div></li>";
                      }
                   })
+                  $("#friend-content .list-group > .title").siblings("li").remove();
                   $("#friend-list-que ul").append(requestedFriend);
                   $("#friend-list-group ul").append(ListFriend);
                }else if(data.type=="friendSelectOnline"){
                   
-               }else if(data.type=="friendAdd"){
-            	   $("#friend-request-noti").children().text("님께서 친구신청을 하셨습니다.")
+               }else if(data.type=="notiFriendAdd"){
+            	   console.log(data.data.playerNickname);
+            	   $("#friend-request-noti").children().text(data.data.playerNickname+"님께서 친구신청을 하셨습니다.")
             	   $("#friend-request-noti").jqxNotification("open");
+            	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
                }else if(data.type=="friendDel"){
-                  
+            	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
+               }else if(data.type=="notiFriendAcceptMe"){
+            	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
+               }else if(data.type=="notiFriendAcceptYou"){
+            	   ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
+            	   $("#friend-request-noti").children().text("님께서 친구수락을 하셨습니다.")
+            	   $("#friend-request-noti").jqxNotification("open");
                }
              }
           }   

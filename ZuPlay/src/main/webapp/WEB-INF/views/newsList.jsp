@@ -19,10 +19,10 @@
                 </div>
                 
                 <div class="hr-line-dashed"></div>
-				<div class="row" id="news-search-results">
-				
-				</div>
-        	</div>
-    	</div>
-	</div>
+            <div class="row" id="news-search-results">
+            
+            </div>
+           </div>
+       </div>
+   </div>
 </div>

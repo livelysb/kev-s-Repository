@@ -37,14 +37,14 @@
 						<div class="friend-icon green"></div> <label>친구목록</label>
 					</li>
 					<!-- <li href="#" class="list-group-item text-left">
-			            <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
-			            <div class="friend-icon green"> </div>
-			            <label class="name">Park</label>
-			            <div class="pull-right">
-			              <button type="button" class="btn btn-default friend-sendBtn ">
-			                <i class="glyphicon glyphicon-send"></i>
-			              </button>
-			            </div>
+				            <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">
+				            <div class="friend-icon green"> </div>
+				            <label class="name">Park</label>
+				            <div class="pull-right">
+				              <button type="button" class="btn btn-default friend-sendBtn ">
+				                <i class="glyphicon glyphicon-envelope"></i>
+				              </button>
+				            </div>
 			          </li>
           <li href="#" class="list-group-item text-left">
             <img class="img-thumbnail" src="http://bootdey.com/img/Content/User_for_snippets.png">

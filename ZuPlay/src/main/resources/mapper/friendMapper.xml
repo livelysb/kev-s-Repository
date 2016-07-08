@@ -38,7 +38,7 @@
 		join item i on
 		pi.item_code=i.item_code where
 		f.player_nickname=#{playerNickname} and
-		7>pi_index
+		7>pi_index order by pi_index
 	</select>
 	<select id="friendSelectB" parameterType="String" resultMap="friendMap">
 		select * from
@@ -47,7 +47,7 @@
 		item i on
 		pi.item_code=i.item_code where
 		f.player_nickname2=#{playerNickname} and
-		7>pi_index
+		7>pi_index order by pi_index
 	</select>
 	<!-- 친구체크 -->
 	<select id="friendCheck" parameterType="java.util.Map"

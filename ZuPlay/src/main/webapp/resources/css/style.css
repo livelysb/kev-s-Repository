@@ -327,6 +327,20 @@ div.vertical-line{
   margin-top: 7px;
 }
 
+.friend-avatar-div {
+	position: relative;
+	height: 34px;
+	width: 40px;
+	border: black 1px solid;
+}
+
+.friend-avatar-div img {
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+}
+
+
 .btn-circle {
   width: 30px;
   height: 30px;

@@ -17,8 +17,7 @@ public class InventoryServiceImpl implements InventoryService {
 	@Override
 	public List<PlayerItemDTO> playerItemSelectAll(String playerNickname) throws Exception {
 		PlayerItemDAO dao = sqlSession.getMapper(PlayerItemDAO.class);
-		List<PlayerItemDTO> list = dao.playerItemSelectAll(playerNickname);
-		return list;
+		return dao.playerItemSelectAll(playerNickname);
 	}
 
 	@Override
@@ -32,6 +31,13 @@ public class InventoryServiceImpl implements InventoryService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<PlayerItemDTO> playerItemWorn(String playerNickname) throws Exception {
+		PlayerItemDAO dao = sqlSession.getMapper(PlayerItemDAO.class);
+		return dao.playerItemWorn(playerNickname);
+		
 	}
 
 }

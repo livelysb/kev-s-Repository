@@ -9,7 +9,7 @@ public class MasterDTO {
 	private String krxSteelSectidxYn; // KRX철강섹터 지수여부
 	private String krxInsuSectidxYn; // KRX섹터지수 보험여부
 	private double uplmtprc; // 상한가
-	private double prevddAccTrdvol; // 전일누적체결수량
+	private double prevddAccTrdvol; // 전일누적체결수량	               
 	private String krxEnergyChemSectidxYn; // KRX에너지화학섹터 지수여부
 	private String haltYn; // 거래정지여부
 	private String krxTransSectidxYn; // KRX섹터지수 운송여부

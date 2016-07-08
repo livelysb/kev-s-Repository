@@ -3,34 +3,79 @@ package com.kosta.zuplay.util.vo;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class ChatRoomVO {
-	
-	@Autowired
-	private ServletContext application;
-	
+
 	private int roomNo;
-	private List<PlayerVO> playerList = new ArrayList<PlayerVO>();
+	private String roomName;
+	private boolean oneByOne;
+	private String password;
+	private int maxNum;
+	
+	private List<String> playerList = new ArrayList<String>();
 	
 	public ChatRoomVO() {
 	}
 	
-	public ChatRoomVO(int roomNo, String playerNickname) {
+	public ChatRoomVO(int roomNo, String roomName, boolean oneByOne, String password, List<String> playerList, int maxNum) {
+		super();
 		this.roomNo = roomNo;
-		playerList.add((PlayerVO)application.getAttribute(playerNickname));
+		this.roomName = roomName;
+		this.oneByOne = oneByOne;
+		this.password = password;
+		this.playerList = playerList;
+		this.maxNum = maxNum;
 	}
-	
+
 	public int getRoomNo() {
 		return roomNo;
 	}
+
 	public void setRoomNo(int roomNo) {
 		this.roomNo = roomNo;
 	}
 
-	public List<PlayerVO> getPlayerList() {
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
+	public boolean isOneByOne() {
+		return oneByOne;
+	}
+
+	public void setOneByOne(boolean oneByOne) {
+		this.oneByOne = oneByOne;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public List<String> getPlayerList() {
 		return playerList;
 	}
+
+	public void setPlayerList(List<String> playerList) {
+		this.playerList = playerList;
+	}
+
+	public int getMaxNum() {
+		return maxNum;
+	}
+
+	public void setMaxNum(int maxNum) {
+		this.maxNum = maxNum;
+	}
+	
+	
+	
+	
+	
 }

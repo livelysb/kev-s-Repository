@@ -14,4 +14,9 @@ public interface InventoryService {
 	 * 플레이어의 아이템 정보 저장
 	 * */
 	boolean playerItemInsert(List<PlayerItemDTO> list) throws Exception;
+	
+	/**
+	 * 플레이어가 입고있는 옷 정보 가져오기
+	 * */
+	List<PlayerItemDTO> playerItemWorn(String playerNickname) throws Exception;
 }

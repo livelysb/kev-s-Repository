@@ -20,7 +20,7 @@ import com.kosta.zuplay.model.dto.stock.MasterDTO;
 import com.kosta.zuplay.model.dto.stock.PriceDTO;
 
 @Service
-public class StockUpdateServiceImpl implements StockUpdateService{
+public class StockUpdateServiceImpl implements StockUpdateService {
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -28,17 +28,16 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 	@Autowired
 	private StockInfoService stockInfoService;
 
-	
 	@Transactional
 	public void stockPriceUpdate() throws Exception {
 		List<ListsDTO> list = stockInfoService.getLists();
 		for (ListsDTO listsDTO : list) {
 			PriceDTO priceDTO = getPriceFromAPI(listsDTO.getIsuSrtCd());
 			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-			if(priceDTO != null)
+			if (priceDTO != null)
 				stockUpdateDAO.priceUpdate(priceDTO);
 		}
-		System.out.println(new Date().toString() +" : Price is updated");
+		System.out.println(new Date().toString() + " : Price is updated");
 
 	}
 
@@ -54,16 +53,15 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 			Gson gson = new Gson();
 			price = gson.fromJson(br, PriceDTO.class);
 
-		}catch(IOException ioe) {
+		} catch (IOException ioe) {
 			System.out.println("price - 429(불량) 응답으로 인한 한 종목 업데이트 갱신되지 않음");
-			//429에러이니 무시하기^^;
-			//System.out.println(ioe.getMessage());
-		}	
-		catch (Exception e) {
+			// 429에러이니 무시하기^^;
+			// System.out.println(ioe.getMessage());
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(br!=null)
+				if (br != null)
 					br.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -81,9 +79,9 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 				stockUpdateDAO.realtimePriceInsert(priceDTO);
 			}
 		}
-		System.out.println(new Date().toString() +" : RealtimePrice is inserted");
+		System.out.println(new Date().toString() + " : RealtimePrice is inserted");
 	}
-	
+
 	@Transactional
 	public void realtimePriceReset() throws Exception {
 		StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
@@ -94,42 +92,44 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 	@Transactional
 	public void masterUpdate() throws Exception {
 		List<ListsDTO> lists = stockInfoService.getLists();
-		for(ListsDTO listDTO : lists) {
+		for (ListsDTO listDTO : lists) {
 			MasterDTO masterDTO = getMasterFromAPI(listDTO.getIsuSrtCd());
-			StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
-			stockUpdateDAO.masterUpdate(masterDTO);
+			if (masterDTO != null) {
+				StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
+				stockUpdateDAO.masterUpdate(masterDTO);
+			}
 		}
 		System.out.println(new Date().toString() + " : Master is updated");
 	}
-	
+
 	public MasterDTO getMasterFromAPI(String isuSrtCd) throws Exception {
 		URL url = null;
 		BufferedReader br = null;
 		MasterDTO masterDTO = null;
-			try {
-				url = new URL("https://testbed.koscom.co.kr/gateway/v1/market/stocks/master?isuSrtCd="
-						+ isuSrtCd + "&apikey=fa8835c0-1c9c-4268-a5f0-e11448cfb3b2");
-				URLConnection conn = url.openConnection();
-				br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-				Gson gson = new Gson();
-				masterDTO = gson.fromJson(br, MasterDTO.class);
+		try {
+			url = new URL("https://testbed.koscom.co.kr/gateway/v1/market/stocks/master?isuSrtCd=" + isuSrtCd
+					+ "&apikey=fa8835c0-1c9c-4268-a5f0-e11448cfb3b2");
+			URLConnection conn = url.openConnection();
+			br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+			Gson gson = new Gson();
+			masterDTO = gson.fromJson(br, MasterDTO.class);
 
-			} catch(IOException ioe) {
-				System.out.println("master - 429(불량) 응답으로 인한 한 종목 업데이트 갱신되지 않음");
-				//429에러이니 무시하기^^;
-				//System.out.println(ioe.getMessage());
-			}catch (Exception e) {
+		} catch (IOException ioe) {
+			System.out.println("master - 429(불량) 응답으로 인한 한 종목 업데이트 갱신되지 않음");
+			// 429에러이니 무시하기^^;
+			// System.out.println(ioe.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					if(br!=null)
-						br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
-			//return masterMatchKind(masterDTO); - kind 분류시킬때 사용 
-			return masterDTO;
+		}
+		// return masterMatchKind(masterDTO); - kind 분류시킬때 사용
+		return masterDTO;
 	}
 
 	@Transactional
@@ -144,39 +144,39 @@ public class StockUpdateServiceImpl implements StockUpdateService{
 
 	@Override
 	public MasterDTO masterMatchKind(MasterDTO masterDTO) throws Exception {
-		if(masterDTO.getKrxAutosSectidxYn().equals("Y")) {
+		if (masterDTO.getKrxAutosSectidxYn().equals("Y")) {
 			masterDTO.setKind("자동차");
-		} else if(masterDTO.getKrxTransSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxTransSectidxYn().equals("Y")) {
 			masterDTO.setKind("운송");
-		} else if(masterDTO.getKrxSteelSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxSteelSectidxYn().equals("Y")) {
 			masterDTO.setKind("철강");
-		} else if(masterDTO.getKrxBioSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxBioSectidxYn().equals("Y")) {
 			masterDTO.setKind("바이오");
-		} else if(masterDTO.getKrxConsgoodSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxConsgoodSectidxYn().equals("Y")) {
 			masterDTO.setKind("소비재");
-		} else if(masterDTO.getKrxConstrSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxConstrSectidxYn().equals("Y")) {
 			masterDTO.setKind("건설");
-		} else if(masterDTO.getKrxEnergyChemSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxEnergyChemSectidxYn().equals("Y")) {
 			masterDTO.setKind("에너지화학");
-		} else if(masterDTO.getKrxFncSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxFncSectidxYn().equals("Y")) {
 			masterDTO.setKind("금융");
-		} else if(masterDTO.getKrxFncSvcSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxFncSvcSectidxYn().equals("Y")) {
 			masterDTO.setKind("금융서비스");
-		} else if(masterDTO.getKrxInfoCommSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxInfoCommSectidxYn().equals("Y")) {
 			masterDTO.setKind("정보통신");
-		} else if(masterDTO.getKrxInsuSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxInsuSectidxYn().equals("Y")) {
 			masterDTO.setKind("보험");
-		} else if(masterDTO.getKrxLeisureSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxLeisureSectidxYn().equals("Y")) {
 			masterDTO.setKind("레저엔터테인먼트");
-		} else if(masterDTO.getKrxMediaCommSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxMediaCommSectidxYn().equals("Y")) {
 			masterDTO.setKind("미디어통신");
-		} else if(masterDTO.getKrxRetailSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxRetailSectidxYn().equals("Y")) {
 			masterDTO.setKind("소비자유통");
-		} else if(masterDTO.getKrxSecuSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxSecuSectidxYn().equals("Y")) {
 			masterDTO.setKind("증권");
-		} else if(masterDTO.getKrxSemiconSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxSemiconSectidxYn().equals("Y")) {
 			masterDTO.setKind("반도체");
-		} else if(masterDTO.getKrxShipSectidxYn().equals("Y")) {
+		} else if (masterDTO.getKrxShipSectidxYn().equals("Y")) {
 			masterDTO.setKind("선박");
 		} else
 			masterDTO.setKind("기타");

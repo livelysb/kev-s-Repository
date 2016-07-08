@@ -11,6 +11,9 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 <link href="resources/css/jqwidgets/jqx.base.css" rel="stylesheet" />
 <link href="resources/css/jqwidgets/jqx.kokomo.css" rel="stylesheet" />
+<c:if test="${theme ne 'kokomo'}">
+   <link href="resources/css/jqwidgets/jqx.${theme}.css" rel="stylesheet" />
+</c:if>
 <link href="resources/css/jquery-ui/jquery-ui.css" rel="stylesheet" />
 <link href="resources/css/style.css" rel="stylesheet" />
 
@@ -28,8 +31,8 @@
         <div class="side-id">
           <label>${playerNickname}</label>
         </div>
-        <div class="side-avatar" >
-          <img src="" id="side-avatar-player-clothes">
+        <div class="side-avatar" > <!-- relative -->
+          <img src="" id="side-avatar-player-clothes"> <!-- absolute -->
           <img src="" id="side-avatar-player-hair">
           <img src="" id="side-avatar-player-eyes">
           <img src="" id="side-avatar-player-mouse">
@@ -55,11 +58,9 @@
          <jsp:include page="storeWindow.jsp" />
          <jsp:include page="FriendBook.jsp"/>
          <jsp:include page="inventory.jsp" />
-         <!-- ///////////////////////////////////////////////// -->
          <jsp:include page="auctionWindow.jsp"/>
          <jsp:include page="myStock.jsp"/>
          <jsp:include page="newsList.jsp"/>
-         <!-- ///////////////////////////////////////////////// -->
           </div>
         </div>
         <!-- 메인 영역 종료 -->
@@ -86,18 +87,16 @@
                <button id="store-btn">상점</button>
                <button id="friend-btn">친구</button>
                <button id="financial-btn">용어사전</button>
-               <!-- ///////////////////////////////////////////////// -->
                <button id="auction-btn">경매장</button>
                <button id="myinfo-btn">내 정보</button>
                <button id="mystock-btn">내 주식</button>
-               <!-- ///////////////////////////////////////////////// -->
-               <!--Notifications-->
                <button id="news-search-btn">뉴스 검색</button>
+               
+               <!--Notifications-->
                <button id="friend-request-btn">노티파이</button>
                   <div id="friend-request-noti">
-                      <div>
-                          친구요청!!!
-                      </div>
+                      <span id="noti-msg">
+                      </span>	
                      </div> 
 				   
               </div>
@@ -128,16 +127,15 @@
 
    
 </body>
+
+    
 <script type="text/javascript" src="resources/js/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="resources/js/jqwidgets/jqxnotification.js"></script>
+<script type="text/javascript" src="resources/js/jqwidgets/jqxbuttons.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxwindow.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxtooltip.js"></script>
-<script type="text/javascript" src="resources/js/jqwidgets/jqxbuttons.js"></script>
-<!-- ============================================ -->
-<script type="text/javascript" src="resources/js/jqwidgets/jqxnotification.js"></script>
-
-
 <script type="text/javascript" src="resources/js/jqwidgets/jqxcheckbox.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxscrollbar.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxpanel.js"></script>
@@ -151,10 +149,8 @@
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script src="resources/js/set.js"></script>
-<script src="resources/js/script2.js"></script>
-      <script type="text/javascript">
-        $(function() {
-
-        });
-      </script>
+<script type="text/javascript">
+   userInfo.theme = ${theme};
+</script>
+<script src="resources/js/script.js"></script>
 </html>

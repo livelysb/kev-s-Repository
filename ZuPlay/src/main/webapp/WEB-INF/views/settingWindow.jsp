@@ -152,28 +152,28 @@
 }
 </style>
 </head>
-	BGM<br><br>
-	
 	내정보<br>
 	<label class="switch switch-flat">
 		<input class="switch-input" type="checkbox" id="myInfoOp"/>
 		<span class="switch-label" data-on="On" data-off="Off"></span> 
 		<span class="switch-handle"></span> 
 	</label><br>
-	귓속말<br>
+	귓속말
 	<label class="switch switch-flat">
 		<input class="switch-input" type="checkbox" id="whisperOp"/>
 		<span class="switch-label" data-on="On" data-off="Off"></span> 
 		<span class="switch-handle"></span> 
 	</label><br>
-	친구<br>
+	친구
 	<label class="switch switch-flat">
 		<input class="switch-input" type="checkbox" id="friendOp"/>
 		<span class="switch-label" data-on="On" data-off="Off"></span> 
 		<span class="switch-handle"></span> 
 	</label><br>
-	<button type="button" id="saveOp">저장</button>
-	<button type="button" id="initializationOp">초기화</button>
+	테마<br>
+	
+	<button type="button" id="saveOp" class="btn btn-success">저장</button>
+	<button type="button" id="initializationOp" class="btn btn-danger">초기화</button>
 <body>
 </body>
 

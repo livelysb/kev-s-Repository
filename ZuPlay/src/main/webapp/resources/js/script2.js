@@ -1200,7 +1200,9 @@ $(function(){
         	   var requestedFriend="";
 	       	   var ListFriend="";
 	       	   var friendBtnColor="";
-              
+               var friendGender="";
+               var closetUrl = "resources/img/avatar/";
+               
               $.each(data.data,function(index,item){
                  if(userInfo.nickName==item.playerNickname){
                     var friendNickname=item.playerNickname2
@@ -1211,7 +1213,26 @@ $(function(){
                  if(item.friendIsAccepted=="F"){
                      if(userInfo.nickName==item.playerNickname){
                	      requestedFriend+="<li href='#' class='list-group-item text-left'>";
-                         requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
+                         requestedFriend+="<div class='friend-avatar-div' >";
+                         
+                         
+                         $.each(item.playerItemDTO, function(index2,item2){
+                        	if(index2==0){
+                        		item2.itemCode=="m_hair_10"? friendGender="m": friendGender="f";
+                        		return true;
+                        	}
+                    		 if(index2==item2.piIndex){
+                    			 requestedFriend+="<img src='"+item2.itemDTO.itemImg+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
+                    		 }else if(index2<=2){
+                    			 requestedFriend+="<img src='"+closetUrl+setting.parts[index2-1]+"/"+friendGender+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
+                    		 }else if(index2<=4){
+                    			 requestedFriend+="<img src='"+closetUrl+setting.parts[index2-1]+"/"+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
+                    		 }else{
+                    			 requestedFriend+="<img src='"+closetUrl+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
+                    		 }
+                         })
+	                         
+                         requestedFriend+="</div>";
                           
                          requestedFriend+="<label class='name'>"+friendNickname+"</label>";
                          requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
@@ -1222,12 +1243,36 @@ $(function(){
                      }
                    
                  }else{
+                	 
                   ListFriend+="<li href='#' class='list-group-item text-left'>";
-                  ListFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
+                  ListFriend+="<div class='friend-avatar-div' >";
+                  for(var index2=0; index2<=6; index2++){
+	                  	if(index2==0){
+	                  		item.playerItemDTO[index2].itemCode=="m_hair_10"? friendGender="m": friendGender="f";
+	                  		continue;
+	                  	}
+	                  	
+	                  	$.each(item.playerItemDTO,function(index3,item3){
+	                  		 if(item3.piIndex==index2){
+	                  			 ListFriend+="<img src='"+item3.itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[index2-1]+"'>";break;
+	                  		 }else if(index2<=2){
+	                  			 requestedFriend+="<img src='"+closetUrl+setting.parts[index2-1]+"/"+friendGender+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
+	                   		 }else if(index2<=4){
+	                   			 requestedFriend+="<img src='"+closetUrl+setting.parts[index2-1]+"/"+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
+	                   		 }else{
+	                   			 requestedFriend+="<img src='"+closetUrl+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
+	                   		 }
+	                  	})
+	                  	
+	                  	
+                   }
+                 
+                  ListFriend+="</div>";
+                  
                   if(item.onOrOff==true){
-               	   friendBtnColor="green";
+                	  friendBtnColor="green";
                   }else{
-               	   friendBtnColor="red";
+                	  friendBtnColor="red";
                   }
                   ListFriend+="<div class='friend-icon "+friendBtnColor+"'> </div>";
                   ListFriend+="<label class='name'>"+friendNickname+"</label>";
@@ -1235,7 +1280,7 @@ $(function(){
                   ListFriend+="<div class='pull-right'>";
                   ListFriend+="<button type='button' class='btn btn-info friend-sendBtn '>";
                   ListFriend+="<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
-                }
+                 }
              })
              $("#friend-content .list-group > .title").siblings("li").remove();
              $("#friend-list-que ul").append(requestedFriend);
@@ -1313,7 +1358,7 @@ $(function(){
                  $("#chat-no-"+nick).jqxWindow("show");
               }
            }
-           showChatWindow("kim");
+           //showChatWindow("kim");
            
            /*최초 친구리스트*/
            ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");

@@ -14,6 +14,7 @@ userInfo = {
 /* 셋팅 정보 */
 var setting = {
 	parts : [ "clothes", "hair", "eyes", "mouse", "earring", "acc" ],
+	defaultCloset : ["_clothes_00.png", "_hair_00.png", "a_eyes_00.png", "a_mouse_00.png", "empty.png", "empty.png"],
 	page : [],
 	chat : [],
 	content : "body",

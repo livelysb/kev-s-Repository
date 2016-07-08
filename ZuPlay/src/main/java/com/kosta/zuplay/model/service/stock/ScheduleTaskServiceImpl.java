@@ -20,12 +20,12 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	@Autowired
 	private RankService rankService;
 	
-	@Autowired
-	private ChattingService chattingService;
+	//@Autowired
+	//private ChattingService chattingService;
 	
-	@Scheduled(fixedDelay=10000)
+	//@Scheduled(fixedDelay=10000)
 	public void testfunction() {
-		chattingService.chatOnebyOne("이석범짱", "이석범짱", "Hi");
+		//chattingService.chatOnebyOne("이석범짱", "이석범짱", "Hi");
 	}
 	
 	@Scheduled(cron="0 0/5 9-18 * * MON-FRI")
@@ -69,7 +69,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	}
 
 	
-	@Scheduled(cron="0 0 15 * * MON-FRI")
+	@Scheduled(cron="0 30 21 * * MON-FRI")
 	@Override
 	public void actionAtThree(){
 		System.out.println("PM 03:00, 작업을 시작합니다.");

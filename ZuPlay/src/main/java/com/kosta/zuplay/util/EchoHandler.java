@@ -45,8 +45,8 @@ public class EchoHandler extends TextWebSocketHandler {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-		} else if (mesArr[0].equals("friendSelectOnline")) {
-			friendController.friendSelectOnline(playerNickname);
+//		 else if (mesArr[0].equals("friendSelectOnline")) {
+//			friendController.friendSelectOnline(playerNickname);
 		} else if (mesArr[0].equals("friendDel")) {
 			friendController.friendDel(playerNickname, Integer.parseInt(mesArr[2]));// param
 																					// :

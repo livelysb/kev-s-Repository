@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.FriendDAO;
 import com.kosta.zuplay.model.dto.player.FriendDTO;
+import com.kosta.zuplay.model.dto.player.FriendVO;
+import com.kosta.zuplay.model.dto.player.PlayerDTO;
 
 @Service
 public class FriendServiceImpl implements FriendService {
@@ -22,84 +24,109 @@ public class FriendServiceImpl implements FriendService {
 	private ServletContext application;
 	@Autowired
 	private SqlSession sqlSession;
+
 	/**
 	 * 접속중 친구명 가져오기
 	 */
 	@Override
-	public List<String> friendSelectOnlyNickname(String playerNickname){
-		FriendDAO friendDAO=sqlSession.getMapper(FriendDAO.class);
-		List<String> listA=friendDAO.friendSelectOnlyNicknameA(playerNickname);
-		List<String> listB=friendDAO.friendSelectOnlyNicknameB(playerNickname);
-		List<String> listX=new ArrayList<String>();
-		Enumeration<String> enumr=application.getAttributeNames();
-		while (enumr.hasMoreElements()) {
-			String el = enumr.nextElement();
-			if(el.charAt(0)=='#'){
-				String ell=el.substring(1);
-				listX.add(ell);
-			};
-		}
-		for(int i=0;i<listB.size();i++){
-			listA.add(listB.get(i));
-		}
-		for(int i=0;i<listA.size();i++){
-			if (listX.contains(listA.get(i))) {
-				
-			} else{
-				listA.remove(i);
-			}
-		}
-		return listA;
-	}
-	/**
-	 * 접속중 친구목록 가져오기
-	 */
-	@Override
-	public List<FriendDTO> friendSelectOnline(String playerNickname) {
+	public List<String> friendSelectOnlyNickname(String playerNickname) {
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
-		List<FriendDTO> list = new ArrayList<FriendDTO>();
-		List<FriendDTO> listA = friendDAO.friendSelectA(playerNickname);
-		List<FriendDTO> listB = friendDAO.friendSelectB(playerNickname);
-		List<String> listApp = new ArrayList<String>();
+		List<String> listA = friendDAO.friendSelectOnlyNicknameA(playerNickname);
+		List<String> listB = friendDAO.friendSelectOnlyNicknameB(playerNickname);
+		List<String> listX = new ArrayList<String>();
 		Enumeration<String> enumr = application.getAttributeNames();
 		while (enumr.hasMoreElements()) {
 			String el = enumr.nextElement();
-			if(el.charAt(0)=='#'){
-				String ell=el.substring(1);
-				listApp.add(ell);
-			};
+			if (el.charAt(0) == '#') {
+				String ell = el.substring(1);
+				listX.add(ell);
+			}
+			;
 		}
 		for (int i = 0; i < listB.size(); i++) {
 			listA.add(listB.get(i));
 		}
 		for (int i = 0; i < listA.size(); i++) {
-			if (listApp.contains(listA.get(i).getPlayerNickname())) {
-				list.add(listA.get(i));
+			if (listX.contains(listA.get(i))) {
+
+			} else {
+				listA.remove(i);
 			}
 		}
-		return list;
+		return listA;
 	}
+
+//	/**
+//	 * 접속중 친구목록 가져오기
+//	 */
+//	@Override
+//	public List<FriendDTO> friendSelectOnline(String playerNickname) {
+//		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
+//		List<FriendDTO> list = new ArrayList<FriendDTO>();
+//		List<FriendDTO> listA = friendDAO.friendSelectA(playerNickname);
+//		List<FriendDTO> listB = friendDAO.friendSelectB(playerNickname);
+//		List<String> listApp = new ArrayList<String>();
+//		Enumeration<String> enumr = application.getAttributeNames();
+//		while (enumr.hasMoreElements()) {
+//			String el = enumr.nextElement();
+//			if (el.charAt(0) == '#') {
+//				String ell = el.substring(1);
+//				listApp.add(ell);
+//			}
+//			;
+//		}
+//		for (int i = 0; i < listB.size(); i++) {
+//			listA.add(listB.get(i));
+//		}
+//		for (int i = 0; i < listA.size(); i++) {
+//			if (listApp.contains(listA.get(i).getPlayerNickname())) {
+//				list.add(listA.get(i));
+//			}
+//		}
+//		return list;
+//	}
 
 	/**
 	 * 친구목록 전체 조회
 	 */
 	@Override
-	public List<FriendDTO> friendSelect(String playerNickname) {
+	public List<FriendVO> friendSelect(String playerNickname) {
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
 		List<FriendDTO> listA = null;
 		List<FriendDTO> listB = null;
-		System.out.println(playerNickname);
+		List<String> listApp = new ArrayList<String>();
+		List<FriendVO> listVO = new ArrayList<FriendVO>();
+		Enumeration<String> enumr = application.getAttributeNames();
+		while (enumr.hasMoreElements()) {
+			String el = enumr.nextElement();
+			if (el.charAt(0) == '#') {
+				String ell = el.substring(1);
+				listApp.add(ell);
+			}
+		}
 		try {
 			listA = friendDAO.friendSelectA(playerNickname);
 			listB = friendDAO.friendSelectB(playerNickname);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		for (int i = 0; i < listB.size(); i++) {
-			listA.add(listB.get(i));
+		for (int i = 0; i < listA.size(); i++) {
+			FriendDTO dto = listA.get(i);
+			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(), dto.getFriendIsAccepted(),
+					dto.getFriendDate(), false, dto.getList()));
 		}
-		System.out.println("listA : "+ listA);
-		return listA;
+		for (int i = 0; i < listB.size(); i++) {
+			FriendDTO dto = listB.get(i);
+			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname(), dto.getFriendIsAccepted(),
+					dto.getFriendDate(), false, dto.getList()));
+		}
+		for(int i=0;i<listVO.size();i++){
+			if(listApp.contains(listVO.get(i).getPlayerNickname())){
+				listVO.get(i).setOnOrOff(true);
+			}
+		}
+		System.out.println("listVO : " + listVO.get(0));
+		return listVO;
 	}
 
 	/**

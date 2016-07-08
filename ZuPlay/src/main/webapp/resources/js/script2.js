@@ -1187,18 +1187,18 @@ $(function(){
                if(data.type=="friendSelect"){
                    
                    $.each(data.data,function(index,item){
-                     /* if(userInfo.nickName==item.playerNickname){
+                      if(userInfo.nickName==item.playerNickname){
                          var friendNickname=item.playerNickname2
                       }else{
                         var friendNickname=item.playerNickname
-                      }*/
+                      }
                       
                       if(item.friendIsAccepted=="F"){
                           if(userInfo.nickName==item.playerNickname2){
                     	      requestedFriend+="<li href='#' class='list-group-item text-left'>";
                               requestedFriend+="<img class='img-thumbnail' src='http://bootdey.com/img/Content/User_for_snippets.png'>";
                                
-                              requestedFriend+="<label class='name'>"+item.playerNickname+"</label>";
+                              requestedFriend+="<label class='name'>"+friendNickname+"</label>";
                               requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
                               requestedFriend+="<div class='pull-right'>";
                               requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
@@ -1215,7 +1215,7 @@ $(function(){
                     	   friendBtnColor="red";
                        }
                        ListFriend+="<div class='friend-icon "+friendBtnColor+"'> </div>";
-                       ListFriend+="<label class='name'>"+item.playerNickname+"</label>";
+                       ListFriend+="<label class='name'>"+friendNickname+"</label>";
                        ListFriend+="<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
                        ListFriend+="<div class='pull-right'>";
                        ListFriend+="<button type='button' class='btn btn-default friend-sendBtn '>";

@@ -3,20 +3,21 @@ package com.kosta.zuplay.model.service.player;
 import java.util.List;
 
 import com.kosta.zuplay.model.dto.player.FriendDTO;
+import com.kosta.zuplay.model.dto.player.FriendVO;
 
 public interface FriendService {
 	/**
 	 * 접속중 친구명 조회
 	 */
 	List<String> friendSelectOnlyNickname(String playerNickname);
-	/**
-	 * 접속중 친구목록조회
-	 */
-	List<FriendDTO> friendSelectOnline(String playerNickname);
+//	/**
+//	 * 접속중 친구목록조회
+//	 */
+//	List<FriendDTO> friendSelectOnline(String playerNickname);
 	/**
 	 * 친구목록 전체 조회
 	 */
-	List<FriendDTO> friendSelect(String playerNickname);
+	List<FriendVO> friendSelect(String playerNickname);
 	/**
 	 * 친구여부 체크
 	 */

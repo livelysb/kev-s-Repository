@@ -2,6 +2,7 @@ package com.kosta.zuplay.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -14,6 +15,8 @@ import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.player.FriendDTO;
+import com.kosta.zuplay.model.dto.player.FriendVO;
+import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.service.player.FriendService;
 import com.kosta.zuplay.util.vo.PlayerVO;
 
@@ -34,7 +37,7 @@ public class FriendController {
 		}
 		System.out.println(list);
 		WebSocketSession webSocketSession = null;
-		String json = "{\"type\":\"notiFriendLogin\",\"data\":\"" + playerNickname + " 님이 로그인 하셨습니다.\"}";
+		String json = "{\"type\":\"notiFriendLogin\",\"data\":\""+playerNickname+"\"}";
 		TextMessage tx = new TextMessage(json);
 		PlayerVO pv =null;
 		for (int i = 0; i < list.size(); i++) {
@@ -56,7 +59,7 @@ public class FriendController {
 	public void friendSelect(String playerNickname) {
 		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname);
 		WebSocketSession webSession = pv.getSession();
-		List<FriendDTO> list = null;
+		List<FriendVO> list = null;
 		try {
 			list = friendServiceImpl.friendSelect(playerNickname);
 		} catch (Exception e) {
@@ -74,25 +77,25 @@ public class FriendController {
 			e.printStackTrace();
 		}
 	}
-
-	public void friendSelectOnline(String playerNickname) {
-		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname);
-		WebSocketSession webSession = pv.getSession();
-		Gson gson = new Gson();
-		List<FriendDTO> list = null;
-		try {
-			list = friendServiceImpl.friendSelectOnline(playerNickname);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		String json = "{\"type\":\"friendSelectOnline\",\"data\":" + gson.toJson(list) + "}";
-		TextMessage tx = new TextMessage(json);
-		try {
-			webSession.sendMessage(tx);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//
+//	public void friendSelectOnline(String playerNickname) {
+//		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname);
+//		WebSocketSession webSession = pv.getSession();
+//		Gson gson = new Gson();
+//		List<FriendDTO> list = null;
+//		try {
+//			list = friendServiceImpl.friendSelectOnline(playerNickname);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		String json = "{\"type\":\"friendSelectOnline\",\"data\":" + gson.toJson(list) + "}";
+//		TextMessage tx = new TextMessage(json);
+//		try {
+//			webSession.sendMessage(tx);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	public void friendAdd(String playerNickname, String playerNickname2) {
 		PlayerVO pv = null;

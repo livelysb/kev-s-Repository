@@ -30,6 +30,9 @@ public interface ChattingService {
 	 * */
 	void chatRoomOut(String sender, int roomNo);
 	
-	
+	/**
+	 * 모든 채팅방 나가기
+	 */
+	void allChatRoomOut(String sender);
 	
 }

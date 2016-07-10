@@ -34,8 +34,6 @@
 							<input type="hidden" id="auction-hidden">
 					</div>
 
-				
-
 			</div>
 			
 			<div id="myTabContent" class="tab-content">

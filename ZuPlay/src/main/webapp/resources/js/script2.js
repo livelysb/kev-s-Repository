@@ -1254,7 +1254,7 @@ $(function(){
 	                  	
 	                  	$.each(item.playerItemDTO,function(index3,item3){
 	                  		 if(item3.piIndex==index2){
-	                  			 ListFriend+="<img src='"+item3.itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[index2-1]+"'>";break;
+	                  			 ListFriend+="<img src='"+item3.itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[index2-1]+"'>";
 	                  		 }else if(index2<=2){
 	                  			 requestedFriend+="<img src='"+closetUrl+setting.parts[index2-1]+"/"+friendGender+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
 	                   		 }else if(index2<=4){

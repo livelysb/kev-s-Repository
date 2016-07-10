@@ -1146,6 +1146,81 @@ $(function(){
           
        }
        
+      var settingInit = function(){
+    	  var psMyPage="";
+  		var psChatting="";
+  		var psFriendAdd="";
+  		var psTheme="";
+  		
+  		//설정정보 저장
+  		$("#setting-save").on("click", function(){
+  			confirmCheckBox();
+  			$.ajax({
+  				url:"settingSave",
+  				type:"post",
+  				dataType:"text",
+  				data:"psMyPage="+psMyPage+"&psChatting="+psChatting+"&psFriendAdd="+psFriendAdd+"&psTheme="+$("#setting-select").val(),
+  				error:function(err){
+  					console.log("Exception : 설정정보 저장")
+  				}
+  			})
+  		})
+  		
+  		//설정 초기화
+  		$("#setting-initialization").on("click",function(){
+  			$.ajax({
+  				url:"settingReset",
+  				type:"post",
+  				dataType:"text",
+  				success:function(result){
+  					$("#setting-myInfo").prop("checked",true);
+  					$("#setting-whisper").prop("checked",true);
+  					$("#setting-friend").prop("checked",true);
+  					$("#setting-select").val("kokomo");
+  				},
+  				error:function(err){
+  					console.log("Exception : 설정 초기화")
+  				}
+  			})
+  		})
+  		
+  		//셋팅정보 로드
+  		function settingLoad(){
+  			$.ajax({
+  				url:"settingSelect",
+  				type:"post",
+  				dataType:"json",
+  				success:function(result){
+  					result.psMyPage=="T" ? $("#setting-myInfo").prop("checked",true) : $("#setting-myInfo").prop("checked",false);
+  					result.psChatting=="T" ? $("#setting-whisper").prop("checked",true) : $("#setting-whisper").prop("checked",false)
+  					result.psFriendAdd=="T" ? $("#setting-friend").prop("checked",true) : $("#setting-friend").prop("checked",false)
+  					$("#setting-select").val(result.psTheme);
+  				},
+  				error:function(err){
+  					console.log("Exception : settingLoad")
+  				}
+  			})
+  		}
+  		
+  		//체크박스 상태변수
+  		function confirmCheckBox(){
+  			$("#setting-myInfo").is(":checked") ? psMyPage="T" : psMyPage="F"
+  			$("#setting-whisper").is(":checked") ? psChatting="T" : psChatting="F"
+  			$("#setting-friend").is(":checked") ? psFriendAdd="T" : psFriendAdd="F" 
+  		}
+  		
+  		 $("#setting-window").jqxWindow({
+             width:"400",
+             height:"450",
+             resizable:true,
+             showCollapseButton: true,
+             autoOpen:false,
+             theme:userInfo.theme
+           });
+  		
+  		settingLoad()
+      }
+       
       invenInit();
       rtaInit();
       stockListInit();
@@ -1155,7 +1230,7 @@ $(function(){
       auctionInit();
       myStockInit();
       newsSearchInit();
-      
+      settingInit();
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
             $("#rta-btn").setBtn($("#rta-Window"));
@@ -1166,7 +1241,7 @@ $(function(){
             $("#auction-btn").setBtn($("#auction-window"));
             $("#mystock-btn").setBtn($("#mystock-window"));
             $("#news-search-btn").setBtn($("#news-search-window"));
-            
+            $("#setting-btn").setBtn($("#setting-window"))
           $("#myinfo-btn").click(function(){
              showUserInfo(userInfo.nickName);
           });

@@ -48,20 +48,20 @@
 
         <!-- 메인 영역 시작 -->
         <div class="row-fluid main-row" id="main">
-          <div class="col-md-12 main-area">
-         <!-- TEST -->
-         <input type="hidden" value="${playerNickname}" id="friend-add-test">
-         
-         <jsp:include page="realTimeListWindow.jsp"/>
-         <jsp:include page="financialTermWindow.jsp"/>
-         <jsp:include page="stockList.jsp" />
-         <jsp:include page="storeWindow.jsp" />
-         <jsp:include page="FriendBook.jsp"/>
-         <jsp:include page="inventory.jsp" />
-         <jsp:include page="auctionWindow.jsp"/>
-         <jsp:include page="myStock.jsp"/>
-         <jsp:include page="newsList.jsp"/>
-          </div>
+	         <div class="col-md-12 main-area">
+	         
+	         <jsp:include page="realTimeListWindow.jsp"/>
+	         <jsp:include page="financialTermWindow.jsp"/>
+	         <jsp:include page="stockList.jsp" />
+	         <jsp:include page="storeWindow.jsp" />
+	         <jsp:include page="FriendBook.jsp"/>
+	         <jsp:include page="inventory.jsp" />
+	         <jsp:include page="auctionWindow.jsp"/>
+	         <jsp:include page="myStock.jsp"/>
+	         <jsp:include page="newsList.jsp"/>
+	         <jsp:include page="settingWindow.jsp"/>
+	         
+	         </div>
         </div>
         <!-- 메인 영역 종료 -->
 
@@ -91,7 +91,7 @@
                <button id="myinfo-btn">내 정보</button>
                <button id="mystock-btn">내 주식</button>
                <button id="news-search-btn">뉴스 검색</button>
-               
+               <button id="setting-btn">설정</button>
                <!--Notifications-->
                <button id="friend-request-btn">노티파이</button>
                   <div id="friend-request-noti">
@@ -152,5 +152,5 @@
 <script type="text/javascript">
   /*  userInfo.theme = ${theme}; */
 </script>
-<script src="resources/js/script.js"></script>
+<script src="resources/js/script2.js"></script>
 </html>

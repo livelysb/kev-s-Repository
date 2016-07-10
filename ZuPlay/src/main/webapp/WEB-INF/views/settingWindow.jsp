@@ -3,7 +3,7 @@
 
 <div id="setting-window">
 		<div id="setting-header">Setting</div>
-		<div id="setting-content">
+		<div id="setting-content"><br><br>
 	<label>내정보 : </label>
 	<label class="switch switch-flat" >
 		<input class="switch-input" type="checkbox" id="setting-myInfo"/>
@@ -16,7 +16,7 @@
 		<span class="switch-label" data-on="On" data-off="Off"></span> 
 		<span class="switch-handle"></span> 
 	</label><br><br>
-	<label>&nbsp;&nbsp;친구&nbsp;&nbsp; : </label>
+	<label>&nbsp;&nbsp;친구&nbsp;&nbsp;: </label>
 	<label class="switch switch-flat">
 		<input class="switch-input" type="checkbox" id="setting-friend"/>
 		<span class="switch-label" data-on="On" data-off="Off"></span> 
@@ -57,7 +57,7 @@
 			<option value="windowsphone">windowsphone</option>
 			
 		</select><br><br><br>
-	<button type="button" id="setting-save" class="btn btn-success">저장</button>
+	<button type="button" id="setting-save" class="btn btn-success">&nbsp;&nbsp;저장&nbsp;&nbsp;</button>
 	<button type="button" id="setting-initialization" class="btn btn-danger">초기화</button>
 	</div>
 </div>

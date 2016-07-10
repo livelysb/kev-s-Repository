@@ -1159,7 +1159,7 @@ $(function(){
   				url:"settingSave",
   				type:"post",
   				dataType:"text",
-  				data:"psMyPage="+psMyPage+"&psChatting="+psChatting+"&psFriendAdd="+psFriendAdd+"&psTheme="+$("#setting-select").val(),
+  				data:"psMyPage="+psMyPage+"&psChatting="+psChatting+"&psFriendAdd="+psFriendAdd+"&psTheme="+$("#setting-select").val()+"&psBgmSound=0",
   				error:function(err){
   					console.log("Exception : 설정정보 저장")
   				}
@@ -1173,6 +1173,7 @@ $(function(){
   				type:"post",
   				dataType:"text",
   				success:function(result){
+  					console.log(result)
   					$("#setting-myInfo").prop("checked",true);
   					$("#setting-whisper").prop("checked",true);
   					$("#setting-friend").prop("checked",true);
@@ -1210,8 +1211,8 @@ $(function(){
   		}
   		
   		 $("#setting-window").jqxWindow({
-             width:"400",
-             height:"450",
+             width:"360",
+             height:"360",
              resizable:true,
              showCollapseButton: true,
              autoOpen:false,

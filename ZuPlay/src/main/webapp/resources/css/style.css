@@ -241,19 +241,19 @@ div.vertical-line{
 
 /*친구박스*/
 
-.vertical-alignment-helper {
+#friend-content .vertical-alignment-helper {
     display:table;
     height: 100%;
     width: 100%;
     pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
 }
-.vertical-align-center {
+#friend-content .vertical-align-center {
     /* To center vertically */
     display: table-cell;
     vertical-align: middle;
     pointer-events:none;
 }
-.modal-content {
+#friend-content .modal-content {
     /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
     width:inherit;
     height:inherit;
@@ -289,7 +289,7 @@ div.vertical-line{
 
 #friend-list-group{
   height: 73%;
-  overflow: auto;
+ /*  overflow: auto; */
 }
 
 #friend-content{
@@ -299,7 +299,7 @@ div.vertical-line{
 #friend-list-que{
   max-height: 25%;
   height: auto;
-  overflow: auto;
+ /*  overflow: auto; */
 }
 
 #friend-content .list-group .title{
@@ -329,15 +329,15 @@ div.vertical-line{
 
 .friend-avatar-div {
 	position: relative;
-	height: 34px;
-	width: 40px;
+	height: 70px;
+	width: 80px;
 	border: black 1px solid;
 }
 
-.friend-avatar-div img {
+#friend-content .list-group-item img {
   position: absolute;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
 }
 
 

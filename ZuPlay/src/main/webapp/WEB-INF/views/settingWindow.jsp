@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home</title>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/jquery-ui.min.css" rel="stylesheet">
+<link href="resources/css/jquery-ui/jquery-ui.css" rel="stylesheet" />
 <link href="resources/css/style.css" rel="stylesheet">
 <style>
 .switch {
@@ -150,124 +150,158 @@
 	background: #0088cc;
 	box-shadow: none;
 }
+#setting-content{
+	text-align: center; 
+}
+#setting-content .form-control {
+width:auto;
+display:inline-block;
+}
+
+.switch{
+
+display:inline-block;
+
+}
+
 </style>
 </head>
-	내정보<br>
-	<label class="switch switch-flat">
-		<input class="switch-input" type="checkbox" id="myInfoOp"/>
+
+<div id="setting-window">
+		<div id="setting-header">Setting</div>
+		<div id="setting-content">
+	<label>내정보 : </label>
+	<label class="switch switch-flat" >
+		<input class="switch-input" type="checkbox" id="setting-myInfo"/>
 		<span class="switch-label" data-on="On" data-off="Off"></span> 
 		<span class="switch-handle"></span> 
-	</label><br>
-	귓속말
+	</label><br><br>
+	<label>귓속말 : </label>
 	<label class="switch switch-flat">
-		<input class="switch-input" type="checkbox" id="whisperOp"/>
+		<input class="switch-input" type="checkbox" id="setting-whisper"/>
 		<span class="switch-label" data-on="On" data-off="Off"></span> 
 		<span class="switch-handle"></span> 
-	</label><br>
-	친구
+	</label><br><br>
+	<label>&nbsp;&nbsp;친구&nbsp;&nbsp; : </label>
 	<label class="switch switch-flat">
-		<input class="switch-input" type="checkbox" id="friendOp"/>
+		<input class="switch-input" type="checkbox" id="setting-friend"/>
 		<span class="switch-label" data-on="On" data-off="Off"></span> 
 		<span class="switch-handle"></span> 
-	</label><br>
-	테마<br>
-	
-	<button type="button" id="saveOp" class="btn btn-success">저장</button>
-	<button type="button" id="initializationOp" class="btn btn-danger">초기화</button>
+	</label><br><br>
+	<label>테마 : </label>
+		<select class="form-control" id="setting-select" style="width: 150px">
+			<option value="android">android</option>
+			<option value="arctic">arctic</option>
+			<option value="black">black</option>
+			<option value="blackberry">blackberry</option>
+			<option value="bootstrap">bootstrap</option>
+			<option value="classic">classic</option>
+			<option value="dark">dark</option>
+			<option value="darkblue">darkblue</option>
+			<option value="energyblue">energyblue</option>
+			<option value="fresh">fresh</option>
+			<option value="glacier">glacier</option>
+			<option value="highcontrast">highcontrast</option>
+			<option value="kokomo">kokomo</option>
+			<option value="light">light</option>
+			<option value="metro">metro</option>
+			<option value="metrodark">metrodark</option>
+			<option value="mobile">mobile</option>
+			<option value="office">office</option>
+			<option value="orange">orange</option>
+			<option value="shinyblack">shinyblack</option>
+			<option value="summer">summer</option>
+			<option value="ui-darkness">ui-darkness</option>
+			<option value="ui-le-frog">ui-le-frog</option>
+			<option value="ui-lightness">ui-lightness</option>
+			<option value="ui-overcast">ui-overcast</option>
+			<option value="ui-redmond">ui-redmond</option>
+			<option value="ui-smoothness">ui-smoothness</option>
+			<option value="ui-start">ui-start</option>
+			<option value="ui-sunny">ui-sunny</option>
+			<option value="web">web</option>
+			<option value="windowsphone">windowsphone</option>
+			
+		</select><br><br><br>
+	<button type="button" id="setting-save" class="btn btn-success">저장</button>
+	<button type="button" id="setting-initialization" class="btn btn-danger">초기화</button>
+	</div>
+</div>
 <body>
 </body>
 
-<script src="resources/js/jquery-2.2.4.min.js"></script>
+   
+<script type="text/javascript" src="resources/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 <script src="resources/js/naverLogin_implicit-1.0.2.js"></script>
-<script src="resources/js/jquery-ui.min.js"></script>
 <script src="resources/js/jquery.cookie.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		var myPage=false;
-		var chatting=false;
-		var friendAdd=false;
+		var psMyPage="";
+		var psChatting="";
+		var psFriendAdd="";
+		var psTheme="";
 		
-		loadOp()
-		
-		
-		//설정 완료
-		$("#saveOp").on("click", function(){
+		//설정정보 저장
+		$("#setting-save").on("click", function(){
 			confirmCheckBox();
 			$.ajax({
 				url:"settingSave",
 				type:"post",
 				dataType:"text",
-				data:"myPage="+myPage+"&chatting="+chatting+"&friendAdd="+friendAdd,
-				success:function(result){
-					
-				},
+				data:"psMyPage="+psMyPage+"&psChatting="+psChatting+"&psFriendAdd="+psFriendAdd+"&psTheme="+$("#setting-select").val(),
 				error:function(err){
-					alert(err+"에러발생")
+					console.log("Exception : 설정정보 저장")
 				}
 			})
 		})
 		
 		//설정 초기화
-		$("#initializationOp").on("click",function(){
+		$("#setting-initialization").on("click",function(){
 			$.ajax({
 				url:"settingReset",
 				type:"post",
 				dataType:"text",
 				success:function(result){
-					alert(result);
-					//초기화 상태 파악하고 체크해줄 것
+					$("#setting-myInfo").prop("checked",true);
+					$("#setting-whisper").prop("checked",true);
+					$("#setting-friend").prop("checked",true);
+					$("#setting-select").val("kokomo");
 				},
 				error:function(err){
-					alert(err+"에러발생")
+					console.log("Exception : 설정 초기화")
 				}
 			})
 		})
 		
 		//셋팅정보 로드
-		function loadOp(){
+		function settingLoad(){
 			$.ajax({
 				url:"settingSelect",
 				type:"post",
 				dataType:"json",
 				success:function(result){
-					console.log(result.myPage)
-					console.log(result.chatting)
-					console.log(result.friendAdd)
-					
-					if(result.myPage=="T"){
-						$("#myInfoOp").prop("checked",true)
-					}else{
-						$("#myInfoOp").prop("checked",false)
-					}
-					
-					if(result.chatting=="T"){
-						$("#whisperOp").prop("checked",true)
-					}else{
-						$("#whisperOp").prop("checked",false)
-					}
-					
-					if(result.friendAdd=="T"){
-						$("#friendOp").prop("checked",true)
-					}else{
-						$("#friendOp").prop("checked",false)
-					}
-					
+					result.psMyPage=="T" ? $("#setting-myInfo").prop("checked",true) : $("#setting-myInfo").prop("checked",false);
+					result.psChatting=="T" ? $("#setting-whisper").prop("checked",true) : $("#setting-whisper").prop("checked",false)
+					result.psFriendAdd=="T" ? $("#setting-friend").prop("checked",true) : $("#setting-friend").prop("checked",false)
+					$("#setting-select").val(result.psTheme);
 				},
 				error:function(err){
-					alert(err+"에러발생")
+					console.log("Exception : settingLoad")
 				}
 			})
 		}
 		
 		//체크박스 상태변수
 		function confirmCheckBox(){
-			$("#myInfoOp").is(":checked") ? myPage="T" : myPage="F"
-			$("#whisperOp").is(":checked") ? chatting="T" : chatting="F"
-			$("#friendOp").is(":checked") ? friendAdd="T" : friendAdd="F" 
+			$("#setting-myInfo").is(":checked") ? psMyPage="T" : psMyPage="F"
+			$("#setting-whisper").is(":checked") ? psChatting="T" : psChatting="F"
+			$("#setting-friend").is(":checked") ? psFriendAdd="T" : psFriendAdd="F" 
 		}
+		
+		settingLoad()
 	})
 </script>
 </html>

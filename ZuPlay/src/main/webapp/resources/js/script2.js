@@ -718,7 +718,7 @@ $(function(){
             ws.send("friendDel#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#")
          })
          
-         /*친구신청 알림*/
+         /*친구신청 Notify*/
          $("#friend-request-noti").jqxNotification({
         	 width: 250, position: "top-right", opacity: 0.9,
              autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template: "info"
@@ -734,7 +734,7 @@ $(function(){
          /*친구삭제 버튼 클릭 시*/
          $("#friend-del").on("click",function(){
         	 if(friendDelBtn==0){
-	        	 $(this).text("삭제취소");
+	        	 $(this).html("&nbsp&nbsp&nbsp취소&nbsp&nbsp&nbsp");
 	        	 $("#friend-list-current .glyphicon-envelope").attr("class","glyphicon glyphicon-trash");
 	        	 $(".friend-sendBtn").attr("class","btn btn-danger friend-sendBtn ")
 	        	 friendDelBtn=1
@@ -1266,12 +1266,15 @@ $(function(){
            });
           
           
+          /*친구리스트*/
           
-          
-          
-          
-          
-          
+          /**
+           * 아 이틀동안 로직생각해봤는데 이런 쓰레기코드나와서 미안합니다
+           * 사죄하겠습니다.
+           * 이건 진짜 하다하다 답이안나와서 이치안에 포문넣고 그안에 스위치문넣고 그안에 또 삼항연산자 넣었습니다.
+           * 그리고 변수도 많이많이 썻습니다.
+           * 죄송합니다. 
+           * */
           var friendSelectAll = function(data){
         	   var requestedFriend="";
 	       	   var ListFriend="";
@@ -1288,28 +1291,38 @@ $(function(){
                  
                  if(item.friendIsAccepted=="F"){
                      if(userInfo.nickName==item.playerNickname){
-               	      requestedFriend+="<li href='#' class='list-group-item text-left'>";
+               	         requestedFriend+="<li href='#' class='list-group-item text-left'>";
                          requestedFriend+="<div class='friend-avatar-div' >";
                          
                          
-                         $.each(item.playerItemDTO, function(index2,item2){
-                        	if(index2==0){
-                        		item2.itemCode=="m_hair_10"? friendGender="m": friendGender="f";
-                        		return true;
-                        	}
-                    		 if(index2==item2.piIndex){
-                    			 requestedFriend+="<img src='"+item2.itemDTO.itemImg+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
-                    		 }else if(index2<=2){
-                    			 requestedFriend+="<img src='"+closetUrl+setting.parts[index2-1]+"/"+friendGender+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
-                    		 }else if(index2<=4){
-                    			 requestedFriend+="<img src='"+closetUrl+setting.parts[index2-1]+"/"+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
-                    		 }else{
-                    			 requestedFriend+="<img src='"+closetUrl+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
-                    		 }
-                         })
+                         for(var i=0; i<=6; i++){
+   	                	  console.log(typeof(item.playerItemDTO[i]));
+   	                	  switch (i) {
+   								case 0 : item.playerItemDTO[i].itemCode=="m_hair_10"? friendGender="m": friendGender="f"; break;
+   								
+   								case 1 : typeof(item.playerItemDTO[i])==undefined ? 
+   										 requestedFriend+="<img src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"' class='friend-avatar-'"+setting.parts[i-1]+">" :	
+								    	 requestedFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>" ; break;
+   								case 2 : typeof(item.playerItemDTO[i])==undefined ? 
+   										 requestedFriend+="<img src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"' class='friend-avatar-'"+setting.parts[i-1]+">" :
+										 requestedFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>"; break;
+   								case 3 : typeof(item.playerItemDTO[i])==undefined ? 
+   										 requestedFriend+="<img src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"' class='friend-avatar-'"+setting.parts[i-1]+">" :	 
+										 requestedFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>" ; break;
+   								case 4 : typeof(item.playerItemDTO[i])==undefined ? 
+   										 requestedFriend+="<img src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"' class='friend-avatar-'"+setting.parts[i-1]+">" :
+										 requestedFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>" ; break;
+   								case 5 : typeof(item.playerItemDTO[i])==undefined ? 
+   										 requestedFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>" :
+										 requestedFriend+="<img src='"+closetUrl+setting.defaultCloset[i-1]+"' class='friend-avatar-'"+setting.parts[i-1]+">" ; break; 
+   								case 6 : typeof(item.playerItemDTO[i])==undefined ? 
+   										 requestedFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>" :
+										 requestedFriend+="<img src='"+closetUrl+setting.defaultCloset[i-1]+"' class='friend-avatar-'"+setting.parts[i-1]+">"; break;  
+   	                	  }
+   		                  	
+   	                   }
 	                         
                          requestedFriend+="</div>";
-                          
                          requestedFriend+="<label class='name'>"+friendNickname+"</label>";
                          requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>"
                          requestedFriend+="<div class='pull-right'>";
@@ -1322,26 +1335,32 @@ $(function(){
                 	 
                   ListFriend+="<li href='#' class='list-group-item text-left'>";
                   ListFriend+="<div class='friend-avatar-div' >";
-                  for(var index2=0; index2<=6; index2++){
-	                  	if(index2==0){
-	                  		item.playerItemDTO[index2].itemCode=="m_hair_10"? friendGender="m": friendGender="f";
-	                  		continue;
-	                  	}
-	                  	
-	                  	$.each(item.playerItemDTO,function(index3,item3){
-	                  		 if(item3.piIndex==index2){
-	                  			 ListFriend+="<img src='"+item3.itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[index2-1]+"'>";
-	                  		 }else if(index2<=2){
-	                  			 requestedFriend+="<img src='"+closetUrl+setting.parts[index2-1]+"/"+friendGender+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
-	                   		 }else if(index2<=4){
-	                   			 requestedFriend+="<img src='"+closetUrl+setting.parts[index2-1]+"/"+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
-	                   		 }else{
-	                   			 requestedFriend+="<img src='"+closetUrl+setting.defaultCloset[index2-1]+"' class='friend-avatar-'"+setting.parts[index2-1]+">";
-	                   		 }
-	                  	})
-	                  	
-	                  	
-                   }
+	                  for(var i=0; i<=6; i++){
+	                	  switch (i) {
+								case 0 : item.playerItemDTO[i].itemCode=="m_hair_10"? friendGender="m": friendGender="f"; break;
+								
+								case 1 : typeof(item.playerItemDTO[i])==undefined ? 
+										 ListFriend+="<img src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"' class='friend-avatar-"+setting.parts[i-1]+"'>" :	
+										 ListFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>" ; break;
+								case 2 : console.log("<img src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"' class='friend-avatar-"+setting.parts[i-1]+"'>")
+										 typeof(item.playerItemDTO[i])==undefined ? 
+										 ListFriend+="<img src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"' class='friend-avatar-"+setting.parts[i-1]+"'>" :
+										 ListFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>"; break;
+								case 3 : typeof(item.playerItemDTO[i])==undefined ? 
+										 ListFriend+="<img src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"' class='friend-avatar-"+setting.parts[i-1]+"'>" :	 
+										 ListFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>" ; break;
+								case 4 : typeof(item.playerItemDTO[i])==undefined ? 
+										 ListFriend+="<img src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"' class='friend-avatar-"+setting.parts[i-1]+"'>" :
+										 ListFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>" ; break;
+								case 5 : typeof(item.playerItemDTO[i])==undefined ? 
+										 ListFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>" :
+										 ListFriend+="<img src='"+closetUrl+setting.defaultCloset[i-1]+"' class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; 
+								case 6 : typeof(item.playerItemDTO[i])==undefined ? 
+										 ListFriend+="<img src='"+item.playerItemDTO[i].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[i-1]+"'>" :
+										 ListFriend+="<img src='"+closetUrl+setting.defaultCloset[i-1]+"' class='friend-avatar-"+setting.parts[i-1]+"'>"; break;  
+	                	  }
+		                  	
+	                   }
                  
                   ListFriend+="</div>";
                   

@@ -1149,10 +1149,9 @@ $(function(){
        
 
        /* 1:1 채팅 */
+       /** 추가추가**/
        var showChatWindow = function(nick){
-    	   console.log(nick);
-          if(!setting.chat.indexOf(nick) > -1){
-             setting.chat.push(nick);
+          if(!$("#chat-no-"+nick).length){
              var str = "";
              str += "<div class='chat-window container-fluid' id='chat-no-"+nick+"'>";
              str += "<div>Chat</div><div class='chat-content row-fluid'>"
@@ -1172,20 +1171,26 @@ $(function(){
              height:"700",
              resizable:false,
              showCollapseButton: true,
+             closeButtonAction: 'hide',
              theme:userInfo.theme
             });
            
            /* 1:1 채팅 보내기 */
            $(document).on("click","#chat-no-"+nick+" .chat-sendBtn",function(evt){
-              var result = sendMsg("chatOneByOne", userInfo.nickName, nick, $(chatOut).val());
-              console.log(result)
+              sendMsg("chatOneByOne", userInfo.nickName, nick, $(chatOut).val());
               $(chatOut).val("");
            })
            
-           
+           $(chatOut).on("keyup",function(){
+               if(event.keyCode == 13) {
+                   sendMsg("chatOneByOne", userInfo.nickName, nick, $(chatOut).val());
+                   $(chatOut).val("");
+               }
+            })
           }else{
              $("#chat-no-"+nick).jqxWindow("show");
           }
+         
        }
        
       var settingInit = function(){
@@ -1294,7 +1299,9 @@ $(function(){
       /* ======================Set WebSocket============================= */
       var sendMsg = function(){
           var args = Array.prototype.slice.call(arguments, 0);
-          return args.join("#/fuckWebSocket/#");
+          var msg = args.join("#/fuckWebSocket/#");
+          console.log(msg);
+          ws.send(msg);
        }
       
       connect(function(){
@@ -1304,6 +1311,47 @@ $(function(){
               disconnect();
               location.href = "logout";
            });
+          
+          /* 채팅 메세지 */
+          /** 추가추가 */
+          var oneByOne = function(evt){
+        	  var target;
+        	  var str = "";
+        	  var n = $(document).height();
+        	  if(evt.data.sender == userInfo.nickName){
+        		  target = $("#chat-no-"+evt.data.receiver);
+        		  str += "<li class='right clearfix'><span class='chat-img pull-right'>";
+        	  }else{
+        		  target = $("#chat-no-"+evt.data.sender);
+        		  console.log($(target).length);
+        		  if(!$(target).length){
+        			  showChatWindow(evt.data.sender);
+        			  oneByOne(evt);
+        			  return;
+        		  }
+        		  
+        		  str += "<li class='left clearfix'><span class='chat-img pull-left'>";
+        		  
+        		  
+        	  }
+        	  
+        	  var cul = $(target).find(".chat-group");
+        	  
+	              str += "<li class='right clearfix'><span class='chat-img pull-right'>";
+	              str += "<img src='http://bootdey.com/img/Content/user_3.jpg' alt='User Avatar'>";
+	              str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
+	              str += evt.data.sender;
+	              str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
+	              str += evt.data.time;
+	              str += "</small></div><p>";
+	      		  str += evt.data.msg;
+	      		  str+="</p></div></li>";
+	      		
+	      		  var n = $(cul).append(str).css("height");
+	      		  
+	      		$(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
+	      		
+          }
           
           /* 친구리스트 */
           
@@ -1466,8 +1514,7 @@ $(function(){
           
           ws.onmessage = function(event){
               var data = JSON.parse(event.data);
-              console.log(data);
-              
+              console.log(data)
               switch(data.type){
                  case "friendSelect" : friendSelectAll(data);  break;
                  
@@ -1489,7 +1536,7 @@ $(function(){
                  case "notiFriendLogout" :$("#noti-msg").text(data.data+"님께서 로그아웃 하셨습니다.");
 						                  $("#friend-request-noti").jqxNotification("open");
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
-                 case "" : break;
+				/** 추가추가 */ case "oneByOne" : oneByOne(data); break;
                  
                  case "chat-on" : break;
                  case "chat-off" : break;

@@ -72,7 +72,7 @@ public class RankServiceImpl implements RankService{
 
 
 	@Override
-	public List<PlayerDTO> getRank() throws Exception {
+	public List<PlayerDTO> getRank(String kind) throws Exception {
 		List<String> playerList = playerInfoService.getAllPlayerNickName();
 		List<PlayerDTO> playerList2 = new ArrayList<PlayerDTO>();
 		for(String playerNickname : playerList) {
@@ -80,7 +80,25 @@ public class RankServiceImpl implements RankService{
 			player.setPlayerItemDTO(inventoryService.playerItemWorn(playerNickname));
 			playerList2.add(player);
 		}
+		if(kind.equals("d"))
+			Collections.sort(playerList2, new DailyRankCompare());
+		else //kind.equals("s")
+			Collections.sort(playerList2, new SeasonRankCompare());
 		return playerList2;
+	}
+	
+	class DailyRankCompare implements Comparator<PlayerDTO> {
+		@Override
+		public int compare(PlayerDTO p2, PlayerDTO p1) {
+			return p1.getPlayerDailyRank() > p2.getPlayerDailyRank() ? 1 : p1.getPlayerDailyRank() < p2.getPlayerDailyRank() ? -1 : 0;
+		}
+	}
+	
+	class SeasonRankCompare implements Comparator<PlayerDTO> {
+		@Override
+		public int compare(PlayerDTO p2, PlayerDTO p1) {
+			return p1.getPlayerSeasonRank() > p2.getPlayerSeasonRank() ? 1 : p1.getPlayerSeasonRank() < p2.getPlayerSeasonRank() ? -1 : 0;
+		}
 	}
 
 }

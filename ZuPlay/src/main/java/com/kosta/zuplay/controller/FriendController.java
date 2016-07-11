@@ -154,7 +154,6 @@ public class FriendController {
 			e.printStackTrace();
 		}
 		if (result) {
-			Gson gson = new Gson();
 			String json = "{\"type\":\"notiFriendAcceptMe\",\"data\":\"" + result + "\"}";
 			String json2 = "{\"type\":\"notiFriendAcceptYou\",\"data\":\"" + playerNickname + "\"}";
 

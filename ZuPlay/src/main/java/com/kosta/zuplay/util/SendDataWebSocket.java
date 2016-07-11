@@ -25,6 +25,7 @@ public class SendDataWebSocket {
 			if (player != null)
 				receiverList.add(player);
 		}
+		System.out.println(receiverList.size());
 		String json = "{\"type\":\"" + type + "\",\"data\":" + new Gson().toJson(object) + "}";
 		System.out.println(json);
 		for (PlayerVO player : receiverList) {

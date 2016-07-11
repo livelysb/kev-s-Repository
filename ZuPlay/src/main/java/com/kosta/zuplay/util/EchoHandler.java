@@ -100,7 +100,7 @@ public class EchoHandler extends TextWebSocketHandler {
 																										// /
 																										// message
 		} else if (mesArr[0].equals("chatRoomOut")) {
-			chattingServiceImpl.chatRoomOut(playerNickname, Integer.parseInt(mesArr[2])); // param
+			chattingServiceImpl.chatRoomOut(playerNickname, Integer.parseInt(mesArr[2]), false); // param
 																							// :
 																							// sender
 																							// /

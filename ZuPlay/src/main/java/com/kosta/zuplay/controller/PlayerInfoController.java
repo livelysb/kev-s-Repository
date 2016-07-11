@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.kosta.zuplay.model.dao.SettingDAO;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 import com.kosta.zuplay.model.service.item.InventoryService;
@@ -22,31 +24,33 @@ import com.kosta.zuplay.model.service.stock.PlayerStockService;
 @Controller
 public class PlayerInfoController {
 
-	
 	@Autowired
 	private PlayerInfoService playerInfoService;
-	
+
 	@Autowired
 	private InventoryService inventoryService;
-	
+
 	@Autowired
 	private PlayerStockService playerStockService;
-	
+
 	@Autowired
 	private RankService rankService;
-	
+
+	@Autowired
+	private SqlSession sqlSession;
+
 	@Autowired
 	private ServletContext context;
-	
-	@RequestMapping(value={"playerInfoSelectAll"}, produces = "application/json;charset=UTF-8")
+
+	@RequestMapping(value = { "playerInfoSelectAll" }, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String playerInfoSelectAll(HttpSession session, String keyword) throws Exception{
+	public String playerInfoSelectAll(HttpSession session, String keyword) throws Exception {
 		List<PlayerDTO> list;
 		session.getAttribute("playerNickname");
 		try {
 			list = playerInfoService.playerInfoSelectAll(keyword);
-			for(int i = 0 ;i<list.size();i++){
-				if(list.get(i).getPlayerNickname().equals(session.getAttribute("playerNickname"))){
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).getPlayerNickname().equals(session.getAttribute("playerNickname"))) {
 					list.remove(i);
 				}
 			}
@@ -59,8 +63,8 @@ public class PlayerInfoController {
 		String json = gson.toJson(list);
 		return json;
 	}
-	
-	@RequestMapping(value={"updatePI"}, produces = "application/json;charset=UTF-8")
+
+	@RequestMapping(value = { "updatePI" }, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String updatePI(HttpSession session) throws Exception {
 		try {
@@ -74,59 +78,66 @@ public class PlayerInfoController {
 			e.printStackTrace();
 			throw new Exception();
 		}
-		
+
 	}
-	
-	@RequestMapping(value={"userInfo"})
+
+	@RequestMapping(value = { "userInfo" })
 	public ModelAndView userInfo(HttpSession session, String targetPlayer) throws Exception {
+		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
 		ModelAndView mv = new ModelAndView("userInfo");
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		PlayerDTO playerDTO = playerInfoService.getPlayerDetail(playerNickname);
-		if(playerDTO.getPlayerGender().equals("M"))
+		if (playerDTO.getPlayerGender().equals("M"))
 			playerDTO.setPlayerGender("남성");
 		else
 			playerDTO.setPlayerGender("여성");
 		List<PlayerItemDTO> playerItemList = inventoryService.playerItemSelectAll(playerNickname);
 		mv.addObject("playerDTO", playerDTO);
 		mv.addObject("playerItemList", playerItemList);
-		
-		if(playerDTO.getLikerList().contains(playerNickname)) {
+
+		if (playerDTO.getLikerList().contains(playerNickname)) {
 			mv.addObject("isLike", true);
-		}else {
-			mv.addObject("isLike",false);
+		} else {
+			mv.addObject("isLike", false);
 		}
-		
-		mv.addObject("likeNum",playerDTO.getLikerList().size());
-		//mv.addObject("isOn", (context.getAttribute(playerNickname));
-		
+		if (targetPlayer.equals(playerNickname)) {
+			if (settingDAO.settingSelect(targetPlayer).getPsMyPage().equals("F")) {
+				mv.addObject("psMyPage",false);
+			}else{
+				mv.addObject("psMyPage",true);
+			}
+		}
+		mv.addObject("likeNum", playerDTO.getLikerList().size());
+		// mv.addObject("isOn", (context.getAttribute(playerNickname));
+
 		return mv;
 	}
-	
-	@RequestMapping(value={"playerStock"}, produces = "application/json;charset=UTF-8")
+
+	@RequestMapping(value = { "playerStock" }, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String playerStock(HttpSession session) throws Exception{
-		String playerNickname = (String)session.getAttribute("playerNickname");
+	public String playerStock(HttpSession session) throws Exception {
+		String playerNickname = (String) session.getAttribute("playerNickname");
 		try {
 			Gson gson = new Gson();
 			String json = gson.toJson(playerStockService.getPlayerStocksDetail(playerNickname));
-			return json;		
-		} catch(Exception e) {
+			return json;
+		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMsg", e.getMessage());
 			throw new Exception();
 		}
 	}
-	
-	@RequestMapping(value={"getRank"},  produces = "application/json;charset=UTF-8")
+
+	@RequestMapping(value = { "getRank" }, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getRank(HttpSession session, String kind) throws Exception {
 		try {
 			return new Gson().toJson(rankService.getRank(kind));
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMsg", e.getMessage());
 			throw new Exception();
 		}
-		
+
 	}
 }

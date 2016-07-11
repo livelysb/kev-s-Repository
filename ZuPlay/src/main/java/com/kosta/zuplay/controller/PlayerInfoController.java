@@ -110,8 +110,12 @@ public class PlayerInfoController {
 			mv.addObject("psMyPage", true);
 		}
 		mv.addObject("likeNum", playerDTO.getLikerList().size());
-		// mv.addObject("isOn", (context.getAttribute(playerNickname));
-
+		try {
+			context.getAttribute("#"+targetPlayer);
+			mv.addObject("onOrOff", true);
+		} catch (Exception e) {
+			mv.addObject("onOrOff", false);
+		}
 		return mv;
 	}
 

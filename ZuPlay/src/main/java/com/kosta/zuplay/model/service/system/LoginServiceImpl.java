@@ -33,7 +33,9 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean joinMember(PlayerDTO playerDTO) throws Exception{
 		LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
+		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
 		SettingDAO settingDAO=sqlSession.getMapper(SettingDAO.class);
+		playerItemDAO.playerItemInsert(new PlayerItemDTO(0, playerDTO.getPlayerNickname(), "m_hair_10", 0, null));
 		int result=loginDAO.joinMember(playerDTO);
 		settingDAO.settingInsert(playerDTO.getPlayerNickname());
 		if(result==0){

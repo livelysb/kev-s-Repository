@@ -13,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.FriendDAO;
+import com.kosta.zuplay.model.dao.SettingDAO;
 import com.kosta.zuplay.model.dto.player.FriendDTO;
 import com.kosta.zuplay.model.dto.player.FriendVO;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
+import com.kosta.zuplay.model.dto.player.SettingDTO;
 
 @Service
 public class FriendServiceImpl implements FriendService {
@@ -136,13 +138,22 @@ public class FriendServiceImpl implements FriendService {
 	@Override
 	public FriendDTO friendAdd(String playerNickname, String playerNickname2) {
 		FriendDAO friendDAO = sqlSession.getMapper(FriendDAO.class);
+		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
+		SettingDTO settingDTO = null;
+		try {
+			settingDTO = settingDAO.settingSelect(playerNickname2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		FriendDTO dto = null;
-		if (friendCheck(playerNickname, playerNickname2) == false) {
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("playerNickname", playerNickname);
-			map.put("playerNickname2", playerNickname2);
-			friendDAO.friendAdd(map);
-			dto = friendDAO.friendCheck(map);
+		if (settingDTO.getPsFriendAdd().equals('T')) {
+			if (friendCheck(playerNickname, playerNickname2) == false) {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("playerNickname", playerNickname);
+				map.put("playerNickname2", playerNickname2);
+				friendDAO.friendAdd(map);
+				dto = friendDAO.friendCheck(map);
+			}
 		}
 		return dto;
 	}

@@ -8,6 +8,7 @@ import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 public class ChatMsgVO {
 	
 	private String sender;
+	private String receiver;
 	private AtomicInteger roomNo;
 	private String time;
 	private String msg;
@@ -20,10 +21,11 @@ public class ChatMsgVO {
 	}
 
 
-	public ChatMsgVO(String sender, AtomicInteger roomNo, String time, String msg, String gender,
+	public ChatMsgVO(String sender, String receiver, AtomicInteger roomNo, String time, String msg, String gender,
 			List<PlayerItemDTO> playerItem) {
 		super();
 		this.sender = sender;
+		this.receiver = receiver;
 		this.roomNo = roomNo;
 		this.time = time;
 		this.msg = msg;
@@ -39,6 +41,14 @@ public class ChatMsgVO {
 
 	public void setSender(String sender) {
 		this.sender = sender;
+	}
+	
+	public String getReceiver() {
+		return receiver;
+	}
+	
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
 	}
 
 	public AtomicInteger getRoomNo() {

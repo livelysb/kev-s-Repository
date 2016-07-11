@@ -46,7 +46,7 @@ public class ChattingServiceImpl implements ChattingService {
 		receivers.add(receiver);
 		try {
 			sendDataWebSocket.sendData(sender, receivers, "oneByOne",
-					new ChatMsgVO(sender, null, SimpleDateFormat.getInstance().format(new Date()), msg,
+					new ChatMsgVO(sender, receiver, null, SimpleDateFormat.getInstance().format(new Date()), msg,
 							playerInfoService.getPlayer(sender).getPlayerGender(),
 							inventoryService.playerItemWorn(sender)));
 		} catch (Exception e) {
@@ -134,7 +134,7 @@ public class ChattingServiceImpl implements ChattingService {
 		// 채팅 메시지 (data) 전송 (sendData)
 		try {
 			sendDataWebSocket.sendData(sender, receivers, "chatMsg",
-					new ChatMsgVO(sender, null, SimpleDateFormat.getInstance().format(new Date()), msg,
+					new ChatMsgVO(sender, null, new AtomicInteger(roomNo), SimpleDateFormat.getInstance().format(new Date()), msg,
 							playerInfoService.getPlayer(sender).getPlayerGender(),
 							inventoryService.playerItemWorn(sender)));
 		} catch (Exception e) {
@@ -168,6 +168,8 @@ public class ChattingServiceImpl implements ChattingService {
 			int index = playerVO.getChatRoomList().indexOf(new Integer(roomNo));
 			playerVO.getChatRoomList().remove(index);
 		}
+		
+		
 
 	}
 

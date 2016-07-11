@@ -11,9 +11,9 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 <link href="resources/css/jqwidgets/jqx.base.css" rel="stylesheet" />
 <link href="resources/css/jqwidgets/jqx.kokomo.css" rel="stylesheet" />
-<%-- <c:if test="${theme ne 'kokomo'}">
+<c:if test="${theme ne 'kokomo'}">
    <link href="resources/css/jqwidgets/jqx.${theme}.css" rel="stylesheet" />
-</c:if> --%>
+</c:if>
 <link href="resources/css/jquery-ui/jquery-ui.css" rel="stylesheet" />
 <link href="resources/css/style.css" rel="stylesheet" />
 
@@ -150,7 +150,7 @@
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script src="resources/js/set.js"></script>
 <script type="text/javascript">
-  /*  userInfo.theme = ${theme}; */
+    userInfo.theme = ${theme}; 
 </script>
 <script src="resources/js/script.js"></script>
 </html>

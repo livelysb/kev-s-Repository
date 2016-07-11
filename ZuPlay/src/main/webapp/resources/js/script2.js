@@ -821,7 +821,7 @@ $(function(){
       /* 경매장 */
       var auctionInit = function(){
          // 페이지 변수
-         var count=1;
+        var count=1;
         var sellBtn="";
         var colorBtn="";
         var sellFlag=false;
@@ -831,8 +831,9 @@ $(function(){
           
         // 구매탭
         $("#auction-buytab").on("click",function(){
-           $("#auction-search").show();
-             $("#auction-select").show();
+        	$("#auction-search").show();
+        	$("#auction-select").show();
+        	search()
         })
           
           // 판매탭
@@ -1305,154 +1306,97 @@ $(function(){
               location.href = "logout";
            });
           
-          /* 친구리스트 */
           
-          /**
-			 * 아 이틀동안 로직생각해봤는데 이런 쓰레기코드나와서 미안합니다 사죄하겠습니다. 이건 진짜 하다하다 답이안나와서 이치안에
-			 * 포문넣고 그안에 스위치문넣고 그안에 또 삼항연산자 넣었습니다. 그리고 변수도 많이많이 썻습니다. 죄송합니다.
-			 */
+          /* 친구리스트 */
           var friendSelectAll = function(data){
-        	  
 				  var requestedFriend=""; 
 				  var ListFriend=""; 
 				  var friendBtnColor=""; 
-				  var friendGender=""; 
+				  var friendGender="";
 				  var closetUrl = "resources/img/avatar/";
+				  var friendNickname= "";
+				 
+				  var avatarEquiAry = new Array();
+				  
+				  $("#friend-content .list-group > .title").siblings("li").remove(); 
 				  
 				  $.each(data.data,function(index,item){
-				  if(userInfo.nickName==item.playerNickname){ var
-				  friendNickname=item.playerNickname2 }else{ var
-				  friendNickname=item.playerNickname }
-				  
-				  if(item.friendIsAccepted=="F"){
-				  if(userInfo.nickName==item.playerNickname){
-				  requestedFriend+="<li href='#' class='list-group-item text-left'>";
-				  requestedFriend+="<div class='friend-avatar-div' >";
-				  
-				  
-				  /*for(var i=0; i<=6; i++){
-				  console.log(typeof(item.playerItemDTO[i])); switch (i) { case
-				  0 : item.playerItemDTO[i].itemCode=="m_hair_10"?
-				  friendGender="m": friendGender="f"; break;
-				  
-				  case 1 : typeof(item.playerItemDTO[i])==undefined ?
-				  requestedFriend+="<img src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">" :
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-				  2 : typeof(item.playerItemDTO[i])==undefined ?
-				  requestedFriend+="<img
-				  src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">" :
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>"; break; case 3 :
-				  typeof(item.playerItemDTO[i])==undefined ? requestedFriend+="<img
-				  src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">" :
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-				  4 : typeof(item.playerItemDTO[i])==undefined ?
-				  requestedFriend+="<img
-				  src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">" :
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-				  5 : typeof(item.playerItemDTO[i])==undefined ?
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-				  requestedFriend+="<img
-				  src='"+closetUrl+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">" ; break; case
-				  6 : typeof(item.playerItemDTO[i])==undefined ?
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-				  requestedFriend+="<img
-				  src='"+closetUrl+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">"; break; }
-				   }*/
-				  
-				  requestedFriend+="</div>"; 
-				  requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
-				  requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
-				  requestedFriend+="<div class='pull-right'>"; 
-				  requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
-				  requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; requestedFriend+="</div></li>"; }
-				  
-				  }else{
+					  friendGender=item.friendGender.toLowerCase()
 					  
-					  ListFriend+="<li href='#' class='list-group-item text-left'>";
-					  ListFriend+="<div class='friend-avatar-div' >"; /*for(var i=0;
-					  i<=6; i++){ switch (i) { case 0 :
-					  item.playerItemDTO[i].itemCode=="m_hair_10"?
-					  friendGender="m": friendGender="f"; break;
+					  var defaultItemAry=[
+					                      closetUrl+"clothes/"+friendGender+"_clothes_00.png",
+					                      closetUrl+"hair/"+friendGender+"_hair_00.png",
+					                      closetUrl+"eyes/a_eyes_00.png",
+					                      closetUrl+"mouse/a_mouse_00.png",
+					                      closetUrl+"empty.png",
+					                      closetUrl+"empty.png"
+					                      ]
 					  
-					  case 1 : typeof(item.playerItemDTO[i])==undefined ?
-					  ListFriend+="<img
-					  src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-					  2 : console.log("<img
-					  src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>")
-					  typeof(item.playerItemDTO[i])==undefined ? ListFriend+="<img
-					  src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>"; break; case 3 :
-					  typeof(item.playerItemDTO[i])==undefined ? ListFriend+="<img
-					  src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-					  4 : typeof(item.playerItemDTO[i])==undefined ? ListFriend+="<img
-					  src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-					  5 : typeof(item.playerItemDTO[i])==undefined ? ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+closetUrl+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-					  6 : typeof(item.playerItemDTO[i])==undefined ? ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+closetUrl+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>"; break; }
-					   }*/
+					  userInfo.nickName==item.playerNickname ? friendNickname=item.playerNickname2 : 
+						  									   friendNickname=item.playerNickname;
 					  
-					  ListFriend+="</div>";
+					  if(item.friendIsAccepted=="F"){
+						  if(userInfo.nickName==item.playerNickname){
+							  requestedFriend+="<li href='#' class='list-group-item text-left'>";
+							  requestedFriend+="<div class='friend-avatar-div' >";
+							  
+							  for(var i=0; i<=5; i++){
+								  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
+							  }
+							  
+							  for(var j=0; j<item.playerItemDTO.length; j++){
+								  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
+									  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
+							  }
+							  for(var k=0; k<=5; k++ ){
+								  requestedFriend += avatarEquiAry[k];
+							  }
+							  
+							  
+							  requestedFriend+="</div>"; 
+							  requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
+							  requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
+							  requestedFriend+="<div class='pull-right'>"; 
+							  requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+							  requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
+							  requestedFriend+="</div></li>"; 
+						  }
 					  
-					  if(item.onOrOff==true){ 
-						  friendBtnColor="green"; 
 					  }else{
-						  friendBtnColor="red"; 
-					  } 
-					  
-					  ListFriend+="<div class='friend-icon "+friendBtnColor+"'> </div>"; 
-					  ListFriend+="<label class='name'>"+friendNickname+"</label>"; 
-					  ListFriend+="<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>"; 
-					  ListFriend+="<div class='pull-right'>"; 
-					  ListFriend+="<button type='button' class='btn btn-info friend-sendBtn '>"; 
-					  ListFriend+="<i class='glyphicon glyphicon-envelope'></i></button></div></li>"; 
-					  
+						  ListFriend += "<li href='#' class='list-group-item text-left'>";
+						  ListFriend += "<div class='friend-avatar-div'>";
+						  
+						  for(var i=0; i<=5; i++){
+							  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
+						  }
+						  
+						  for(var j=0; j<item.playerItemDTO.length; j++){
+							  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
+								  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
+						  }
+						  for(var k=0; k<=5; k++ ){
+							  ListFriend += avatarEquiAry[k];
+						  }
+						  
+						  ListFriend += "</div>";
+						  
+						  if(item.onOrOff==true){ 
+							  friendBtnColor="green"; 
+						  }else{
+							  friendBtnColor="red"; 
+						  } 
+						  
+						  ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
+				  		  ListFriend += "<label class='name'>"+friendNickname+"</label>";
+      			  		  ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
+						  ListFriend += "<div class='pull-right'>";
+						  ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
+						  ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
+						  
 					  } 
 				  })
-				  $("#friend-content .list-group > .title").siblings("li").remove(); 
-				  $("#friend-list-que ul").append(requestedFriend); $("#friend-list-group ul").append(ListFriend);
+				  $("#friend-list-que ul").append(requestedFriend);
+				  $("#friend-list-group ul").append(ListFriend);
           }
           
           /* 친구창 채팅 버튼*/

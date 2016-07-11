@@ -1276,7 +1276,7 @@ $(function(){
            * 죄송합니다. 
            * */
           var friendSelectAll = function(data){
-        	   var requestedFriend="";
+        	  /* var requestedFriend="";
 	       	   var ListFriend="";
 	       	   var friendBtnColor="";
                var friendGender="";
@@ -1379,7 +1379,7 @@ $(function(){
              })
              $("#friend-content .list-group > .title").siblings("li").remove();
              $("#friend-list-que ul").append(requestedFriend);
-             $("#friend-list-group ul").append(ListFriend);
+             $("#friend-list-group ul").append(ListFriend);*/
           }
           
           

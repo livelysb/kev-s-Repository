@@ -13,7 +13,7 @@
 	</resultMap>
 	<update id='settingSave' parameterType='settingDTO'>
 		update player_setting set
-		bgm_sound=#{bgmSound},my_page=#{myPage},chatting=#{chatting},friend_add=#{friendAdd},ps_theme=#{psTheme}
+		ps_bgm_sound=#{psBgmSound},ps_my_page=#{psMyPage},ps_chatting=#{psChatting},ps_friend_add=#{psFriendAdd},ps_theme=#{psTheme}
 		where
 		player_nickname=#{playerNickname}
 	</update>
@@ -21,7 +21,7 @@
 	<update id='settingReset' parameterType='String'>
 		update player_setting
 		set
-		bgm_sound=30,my_page='T',friend_add='T',ps_theme='kokomo' where
+		ps_bgm_sound=30,ps_my_page='T',ps_chatting='T',ps_friend_add='T',ps_theme='kokomo' where
 		player_nickname=#{value}
 	</update>
 

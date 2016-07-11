@@ -16,6 +16,7 @@ import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 import com.kosta.zuplay.model.service.item.InventoryService;
 import com.kosta.zuplay.model.service.player.PlayerInfoService;
+import com.kosta.zuplay.model.service.player.RankService;
 import com.kosta.zuplay.model.service.stock.PlayerStockService;
 
 @Controller
@@ -30,6 +31,9 @@ public class PlayerInfoController {
 	
 	@Autowired
 	private PlayerStockService playerStockService;
+	
+	@Autowired
+	private RankService rankService;
 	
 	@Autowired
 	private ServletContext context;
@@ -111,5 +115,18 @@ public class PlayerInfoController {
 			session.setAttribute("errorMsg", e.getMessage());
 			throw new Exception();
 		}
+	}
+	
+	@RequestMapping(value={"getRank"},  produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getRank(HttpSession session, String kind) throws Exception {
+		try {
+			return new Gson().toJson(rankService.getRank());
+		} catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMsg", e.getMessage());
+			throw new Exception();
+		}
+		
 	}
 }

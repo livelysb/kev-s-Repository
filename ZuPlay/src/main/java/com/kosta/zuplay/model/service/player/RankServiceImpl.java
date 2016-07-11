@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kosta.zuplay.model.dao.PlayerInfoDAO;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
+import com.kosta.zuplay.model.service.item.InventoryService;
 
 @Service
 public class RankServiceImpl implements RankService{
@@ -23,6 +24,9 @@ public class RankServiceImpl implements RankService{
 	
 	@Autowired
 	private EarningRateService earningRateService;
+
+	@Autowired
+	private InventoryService inventoryService;
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -63,6 +67,20 @@ public class RankServiceImpl implements RankService{
 		public int compare(PlayerDTO p2, PlayerDTO p1) {
 			return p1.getEarningRate() > p2.getEarningRate() ? 1 : p1.getEarningRate() < p2.getEarningRate() ? -1 : 0;
 		}
+	}
+
+
+
+	@Override
+	public List<PlayerDTO> getRank() throws Exception {
+		List<String> playerList = playerInfoService.getAllPlayerNickName();
+		List<PlayerDTO> playerList2 = new ArrayList<PlayerDTO>();
+		for(String playerNickname : playerList) {
+			PlayerDTO player = playerInfoService.getPlayer(playerNickname);
+			player.setPlayerItemDTO(inventoryService.playerItemWorn(playerNickname));
+			playerList2.add(player);
+		}
+		return playerList2;
 	}
 
 }

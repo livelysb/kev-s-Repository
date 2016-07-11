@@ -120,6 +120,10 @@ public class FriendServiceImpl implements FriendService {
 		}
 		for (int i = 0; i < listB.size(); i++) {
 			FriendDTO dto = listB.get(i);
+			if(dto.getList().get(i).getPiIndex()!=i){
+				dto.getList().get(i).setItemCode("xxxxxx");
+				dto.getList().get(i).setPiIndex(i);
+			}
 			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(), dto.getPlayerNickname(),
 					dto.getFriendIsAccepted(), dto.getFriendDate(), false, dto.getList()));
 		}

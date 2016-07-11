@@ -48,20 +48,21 @@
 
         <!-- 메인 영역 시작 -->
         <div class="row-fluid main-row" id="main">
-	         <div class="col-md-12 main-area">
-	         
-	         <jsp:include page="realTimeListWindow.jsp"/>
-	         <jsp:include page="financialTermWindow.jsp"/>
-	         <jsp:include page="stockList.jsp" />
-	         <jsp:include page="storeWindow.jsp" />
-	         <jsp:include page="FriendBook.jsp"/>
-	         <jsp:include page="inventory.jsp" />
-	         <jsp:include page="auctionWindow.jsp"/>
-	         <jsp:include page="myStock.jsp"/>
-	         <jsp:include page="newsList.jsp"/>
-	         <jsp:include page="settingWindow.jsp"/>
-	         <jsp:include page="chatRoom.jsp"/>
-	         </div>
+            <div class="col-md-12 main-area">
+            
+            <jsp:include page="realTimeListWindow.jsp"/>
+            <jsp:include page="financialTermWindow.jsp"/>
+            <jsp:include page="stockList.jsp" />
+            <jsp:include page="storeWindow.jsp" />
+            <jsp:include page="FriendBook.jsp"/>
+            <jsp:include page="inventory.jsp" />
+            <jsp:include page="auctionWindow.jsp"/>
+            <jsp:include page="myStock.jsp"/>
+            <jsp:include page="newsList.jsp"/>
+            <jsp:include page="settingWindow.jsp"/>
+            <jsp:include page="chatRoom.jsp"/>
+            <jsp:include page="rankingWindow.jsp"/>
+            </div>
         </div>
         <!-- 메인 영역 종료 -->
 
@@ -80,7 +81,7 @@
             <!-- 버튼 영역 시작 -->
             <div class="row-fluid buttons-row">
               <div class="col-md-12 buttons-area">
-                   <button id="logout">로그아웃</button>
+               <button id="logout">로그아웃</button>
                <button id="rta-btn">실시간 주가 정보</button>
                <button id="inven-btn">인벤토리</button>
                <button id="stockList-btn">주가 보기</button>
@@ -93,13 +94,14 @@
                <button id="news-search-btn">뉴스 검색</button>
                <button id="setting-btn">설정</button>
                <button id="chatroom-btn">채팅방</button>
+               <button id="ranking-btn">랭킹</button>
                <!--Notifications-->
                <button id="friend-request-btn">노티파이</button>
                   <div id="friend-request-noti">
                       <span id="noti-msg">
-                      </span>	
+                      </span>   
                      </div> 
-				   
+               
               </div>
             </div>
             <!-- 버튼 영역 종료 -->
@@ -153,5 +155,5 @@
 <script type="text/javascript">
     userInfo.theme = "${theme}"; 
 </script>
-<script src="resources/js/script.js"></script>
+<script src="resources/js/script2.js"></script>
 </html>

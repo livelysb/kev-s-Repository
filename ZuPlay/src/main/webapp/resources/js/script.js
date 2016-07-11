@@ -1537,12 +1537,11 @@ $(function(){
         	  //chatroom-list-ul
         	  var str = "";
         	  var data = content.data;
-        	  console.log(data)
         	  for(var i=0; i<data.length;i++){
-        		 str += "<a href='#' class='clearfix'><div class='chatroom-name'><h3><strong>";
+        		 str += "<div class='chatroom-rooms'> <a href='#' class='clearfix'><div class='chatroom-name'><h3><strong>";
         		 str += "<input type='hidden' value='"+data[i].roomNo+"'>";
         		 str += data[i].roomName;
-        		 str += "</strong></h3><small class='text-muted'>";
+        		 str += "</strong></h3></a><small class='text-muted'>";
         		 str += data[i].playerList.length + " / " + data[i].maxNum;
         		 str += "</small>"
 	        	 if(data[i].password == "T"){
@@ -1550,8 +1549,22 @@ $(function(){
 	        	 }
         		 str += "</div>";
         	  }
-        	  console.log(str);
+        	  
+        	  
         	  $("#chatroom-list-ul").append(str);
+        	  var eventTargets = $("#chatroom-list-ul").children(".chatroom-rooms");
+        	  $(eventTargets).click(function(event){
+        		  var roomNo = $(this).find(":hidden").val();
+        		  console.log($(this).find("small.chat-alert"));
+        		  var password = "";
+        		  if($(this).find("small.chat-alert").length.length){
+        			 password = prompt("비밀번호를 입력해주세요", "");
+        		  }
+        		  
+        		  sendMsg("chatRoomJoin",userInfo.nickName,roomNo, password);
+        	  })
+        	  
+        	  //chatRoomJoin
           }
           
           /* 친구창 채팅 버튼*/

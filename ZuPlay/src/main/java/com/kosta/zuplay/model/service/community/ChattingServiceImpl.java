@@ -116,7 +116,9 @@ public class ChattingServiceImpl implements ChattingService {
 					continue;
 				} else {
 					ChatRoomVO chatRoomVO = map.get(roomNo);
-					chatRoomVO.setPassword(null);
+					if(!chatRoomVO.getPassword().equals(null))
+						chatRoomVO.setPassword("T");
+					chatRoomVO.setPassword("");
 					chatRoomList.add(chatRoomVO);
 					if (start == i + 9)
 						break;
@@ -201,6 +203,8 @@ public class ChattingServiceImpl implements ChattingService {
 		// 방 나가기
 		try {
 			crv.getPlayerList().remove(getPlayer(sender));
+			System.out.println(sender + "나갔슴");
+			System.out.println("채팅방 남은 인원수 : " + crv.getPlayerList().size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -216,7 +220,13 @@ public class ChattingServiceImpl implements ChattingService {
 		PlayerVO playerVO = (PlayerVO) context.getAttribute("#" + sender);
 		if (playerVO != null) {
 			int index = playerVO.getChatRoomList().indexOf(new Integer(roomNo));
+			System.out.println(roomNo+"번방 나가기전 방 목록");
+			for(int i : playerVO.getChatRoomList())
+				System.out.print(i+", ");
 			playerVO.getChatRoomList().remove(index);
+			System.out.println(roomNo+"번방 나간 뒤 방 목록");
+			for(int i : playerVO.getChatRoomList())
+				System.out.print(i+", ");
 		}
 
 	}

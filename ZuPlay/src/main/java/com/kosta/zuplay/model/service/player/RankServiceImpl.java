@@ -77,6 +77,11 @@ public class RankServiceImpl implements RankService{
 		List<PlayerDTO> playerList2 = new ArrayList<PlayerDTO>();
 		for(String playerNickname : playerList) {
 			PlayerDTO player = playerInfoService.getPlayer(playerNickname);
+			if(kind.equals("d"))
+				player.setEarningRate(earningRateService.calDailyEarningRate(playerNickname));
+			else
+				player.setEarningRate(earningRateService.calEarningRate(playerNickname));
+			player.setTotalMoney(playerInfoService.getTotalMoney(playerNickname));
 			player.setPlayerItemDTO(inventoryService.playerItemWorn(playerNickname));
 			playerList2.add(player);
 		}

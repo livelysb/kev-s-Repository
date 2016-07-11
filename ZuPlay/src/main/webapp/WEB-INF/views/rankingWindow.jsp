@@ -76,7 +76,7 @@
 									<th>총자산</th>
 								</tr>
 							</thead>
-							<tbody id="ranking-buy-tbody">
+							<tbody id="ranking-season-tbody">
 							</tbody>
 						</table>
 					</div>
@@ -93,7 +93,7 @@
 									<th>총자산</th>
 								</tr>
 							</thead>
-							<tbody id="ranking-sell-tbody">
+							<tbody id="ranking-daily-tbody">
 							</tbody>
 						</table>
 					</div>
@@ -132,29 +132,31 @@
 		 /*랭킹 조회*/
 		 var rankingSelect = function(kind){
 			 var rankType = "";
-			 kind == "s" ? rank = "item.playerSeasonRank" : rank = "item.playerDailyRank" ;
 			 $.ajax({
 				 url:"getRank",
 				 type:"post",
 				 dataType:"json",
 				 data:"kind="+kind,
 				 success:function(data){
-					 console.log(data)
-					 var str="";
-					 /* $.each(data,function(index,item){
-						 str+="<tr><td>"+rankType+"</td>";
-						 str+="<td>"+item.+"</td>";
+				 	var str="";
+					 $.each(data,function(index,item){
+						 if(kind == "s"){
+							 str+="<tr><td>"+item.playerSeasonRank+"</td>";
+						 }else{
+							 str+="<tr><td>"+item.playerDailyRank+"</td>";
+						 }
+						 str+="<td>아바타</td>";
 						 str+="<td>"+item.playerNickname+"</td>";
-						 str+="<td>"+item.+"</td>";
-						 str+="<td>"+item.+"</td>";
-						 str+="<td>"++"</td>";
-						 str+="";
-						 str+="</tr>";
-						 str+="";
-					 }) */
-					 
-					 $("#ranking-sell-tbody").empty();
-					 $("#ranking-sell-tbody").html(str);
+						 str+="<td>"+item.earningRate+"</td>";
+						 str+="<td>"+item.totalMoney+"</td></tr>";
+					 }) 
+					 if(kind=="s"){
+						 $("#ranking-season-tbody").empty();
+						 $("#ranking-season-tbody").html(str);						 
+					 }else{
+						 $("#ranking-daily-tbody").empty();
+						 $("#ranking-daily-tbody").html(str);
+					 }
 				 },
 				 error:function(){
 					 console.log("Exception : 랭크조회");

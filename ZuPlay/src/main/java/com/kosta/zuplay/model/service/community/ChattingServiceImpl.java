@@ -120,7 +120,8 @@ public class ChattingServiceImpl implements ChattingService {
 					System.out.println(chatRoomVO.getPassword());
 					if(!chatRoomVO.getPassword().equals(null))
 						chatRoomVO.setPassword("T");
-					chatRoomVO.setPassword("");
+					else
+						chatRoomVO.setPassword("");
 					chatRoomList.add(chatRoomVO);
 					if (start == i + 9)
 						break;

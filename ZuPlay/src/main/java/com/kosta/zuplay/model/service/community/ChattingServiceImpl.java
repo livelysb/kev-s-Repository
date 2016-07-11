@@ -103,6 +103,7 @@ public class ChattingServiceImpl implements ChattingService {
 
 	@Override
 	public void chatRoomSelect(String sender, int page) {
+		try {
 		System.out.println("came here, chatRoomSelect");
 		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		if(map==null)
@@ -125,6 +126,9 @@ public class ChattingServiceImpl implements ChattingService {
 		System.out.println(myself);
 		System.out.println(chatRoomList);
 		sendDataWebSocket.sendData(sender, myself, "chatList", chatRoomList);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

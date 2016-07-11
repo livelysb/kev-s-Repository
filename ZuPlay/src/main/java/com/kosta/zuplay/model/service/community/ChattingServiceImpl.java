@@ -44,6 +44,7 @@ public class ChattingServiceImpl implements ChattingService {
 	public void chatOnebyOne(String sender, String receiver, String msg) {
 		List<String> receivers = new ArrayList<String>();
 		receivers.add(receiver);
+		receivers.add(sender);
 		try {
 			sendDataWebSocket.sendData(sender, receivers, "oneByOne",
 					new ChatMsgVO(sender, receiver, null, SimpleDateFormat.getInstance().format(new Date()), msg,

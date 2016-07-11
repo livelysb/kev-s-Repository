@@ -1146,13 +1146,13 @@ $(function(){
           
        }
        
-
+/** 수정(3) */
        /* 1:1 채팅 */
        var showChatWindow = function(nick){
           if(!$("#chat-no-"+nick).length){
              var str = "";
              str += "<div class='chat-window container-fluid' id='chat-no-"+nick+"'>";
-             str += "<div>Chat</div><div class='chat-content row-fluid'>"
+             str += "<div>Chat - " +nick+ "</div><div class='chat-content row-fluid'>"
              str += "<div class='col-md-12 bg-white'><div class='chat-message'><ul class='chat-group'>"
              str += "</ul></div>"
             str += "<div class='col-md-12 chat-box bg-white'><div class='input-group'>"
@@ -1175,6 +1175,7 @@ $(function(){
            
            /* 1:1 채팅 보내기 */
            $(document).on("click","#chat-no-"+nick+" .chat-sendBtn",function(evt){
+        	   
               sendMsg("chatOneByOne", userInfo.nickName, nick, $(chatOut).val());
               $(chatOut).val("");
            })
@@ -1273,6 +1274,16 @@ $(function(){
       
       /* 채팅방 윈도우 */
       var initChatRoom = function(){
+    	  
+	  $("#chatroom-create-btn").click(function(){
+		  $("#chatroom-create-modal").modal('show');
+	  });
+	  
+	  $("#chat-create-confirm").click(function(){
+		  sendMsg("chatRoomCreate",userInfo.nickName, $("#chat-create-name").val(), $("#chat-create-pwd").val(), $("#chat-create-max").val());
+		  $("#chatroom-create-modal").modal('toggle');
+	  });
+    	  
       $("#chatroom-window").jqxWindow({
           theme:userInfo.theme,
           width:400,
@@ -1321,6 +1332,7 @@ $(function(){
       var sendMsg = function(){
           var args = Array.prototype.slice.call(arguments, 0);
           var msg = args.join("#/fuckWebSocket/#");
+          console.log("toServer : " + msg);
           ws.send(msg);
        }
       
@@ -1331,6 +1343,54 @@ $(function(){
               disconnect();
               location.href = "logout";
            });
+          
+          
+          /** 추가(3) */
+          /* 채팅방 로드*/
+          var chatRoomSelect = function(page){
+        	  sendMsg("chatRoomSelect", userInfo.nickName,page);
+          }
+          
+          chatRoomSelect(1);
+          
+          
+          /* 채팅 메세지 */
+          var oneByOne = function(evt){
+             var target;
+             var str = "";
+             var n = $(document).height();
+             if(evt.data.sender == userInfo.nickName){
+                target = $("#chat-no-"+evt.data.receiver);
+                str += "<li class='right clearfix'><span class='chat-img pull-right'>";
+             }else{
+                target = $("#chat-no-"+evt.data.sender);
+                console.log($(target).length);
+                if(!$(target).length){
+                   showChatWindow(evt.data.sender);
+                   oneByOne(evt);
+                   return;
+                }
+                
+                str += "<li class='left clearfix'><span class='chat-img pull-left'>";
+                
+             }
+             
+             var cul = $(target).find(".chat-group");
+             
+                 str += "<img src='http://bootdey.com/img/Content/user_3.jpg' alt='User Avatar'>";
+                 str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
+                 str += evt.data.sender;
+                 str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
+                 str += evt.data.time;
+                 str += "</small></div><p>";
+                 str += evt.data.msg;
+                 str+="</p></div></li>";
+               
+                 var n = $(cul).append(str).css("height");
+                 
+                 $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
+               
+          }
           
           
           /* 채팅 메세지 */
@@ -1462,7 +1522,21 @@ $(function(){
 				  $("#friend-list-que ul").append(requestedFriend);
 				  $("#friend-list-group ul").append(ListFriend);
           }
-          	
+          
+          /** 추가(3) 채팅 시작*/
+          /* 채팅 시작 */
+          var chatStart = function(content){
+        	  console.log(content);
+        	  var data = content.data;
+        	  showChatWindow("room"+data.roomNo);
+          }
+          
+          /** 추가(3) 채팅 시작*/
+          /* 채팅 리스트 */
+          var chatList = function(content){
+        	  console.log(content);
+          }
+          
           /* 친구창 채팅 버튼*/
           var friendChatBtn = function(){
              $(document).on("click",".friend-sendBtn.btn-info",function(evt){
@@ -1497,9 +1571,8 @@ $(function(){
                  case "notiFriendLogout" :$("#noti-msg").text(data.data+"님께서 로그아웃 하셨습니다.");
 						                  $("#friend-request-noti").jqxNotification("open");
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
-                 case "" : break;
-                 
-                 case "chat-on" : break;
+                 /** 추가(3) */case "chatStart" : chatStart(data); break;
+                 /** 추가(3) */case "chatList" : chatList(data); break;
                  case "chat-off" : break;
                  case "chat-msg" : break;
                  case "oneByOne" : oneByOne(data); break;

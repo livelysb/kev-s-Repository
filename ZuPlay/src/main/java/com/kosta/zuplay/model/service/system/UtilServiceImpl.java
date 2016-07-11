@@ -33,7 +33,6 @@ public class UtilServiceImpl implements UtilService {
 		} else {
 			for (int i = 0; i < list.size(); i++) {
 
-
 				if (list.get(i) != i + 11) {
 					return i + 11;
 				}
@@ -52,7 +51,11 @@ public class UtilServiceImpl implements UtilService {
 		currentDate += (oCalendar.get(Calendar.MONTH) + 1) > 9
 				? "" + Integer.toString(oCalendar.get(Calendar.MONTH) + 1)
 				: '0' + Integer.toString(oCalendar.get(Calendar.MONTH) + 1);
-		currentDate += '0' + Integer.toString(oCalendar.get(Calendar.DAY_OF_MONTH));
+		if (oCalendar.get(Calendar.DAY_OF_MONTH) < 10) {
+			currentDate += '0' + Integer.toString(oCalendar.get(Calendar.DAY_OF_MONTH));
+		} else {
+			currentDate += Integer.toString(oCalendar.get(Calendar.DAY_OF_MONTH));
+		}
 		return currentDate;
 	}
 

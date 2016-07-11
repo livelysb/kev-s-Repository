@@ -41,7 +41,7 @@ public class RankServiceImpl implements RankService{
 			if(kind.equals("PLAYER_DAILY_RANK"))
 				playerDTO.setEarningRate(earningRateService.calDailyEarningRate(playerNickname));
 			else if(kind.equals("PLAYER_SEASON_RANK"))
-				playerDTO.setEarningRate(earningRateService.calEarningRate(playerNickname));
+				playerDTO.setTotalEarningRate(earningRateService.calEarningRate(playerNickname));
 			playerList2.add(playerDTO);
 		}
 		

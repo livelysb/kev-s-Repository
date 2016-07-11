@@ -89,14 +89,14 @@ public class RankServiceImpl implements RankService{
 	
 	class DailyRankCompare implements Comparator<PlayerDTO> {
 		@Override
-		public int compare(PlayerDTO p2, PlayerDTO p1) {
+		public int compare(PlayerDTO p1, PlayerDTO p2) {
 			return p1.getPlayerDailyRank() > p2.getPlayerDailyRank() ? 1 : p1.getPlayerDailyRank() < p2.getPlayerDailyRank() ? -1 : 0;
 		}
 	}
 	
 	class SeasonRankCompare implements Comparator<PlayerDTO> {
 		@Override
-		public int compare(PlayerDTO p2, PlayerDTO p1) {
+		public int compare(PlayerDTO p1, PlayerDTO p2) {
 			return p1.getPlayerSeasonRank() > p2.getPlayerSeasonRank() ? 1 : p1.getPlayerSeasonRank() < p2.getPlayerSeasonRank() ? -1 : 0;
 		}
 	}

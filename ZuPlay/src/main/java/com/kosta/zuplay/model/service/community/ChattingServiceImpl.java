@@ -103,6 +103,7 @@ public class ChattingServiceImpl implements ChattingService {
 
 	@Override
 	public void chatRoomSelect(String sender, int page) {
+		System.out.println("came here, chatRoomSelect");
 		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		List<ChatRoomVO> chatRoomList = new ArrayList<ChatRoomVO>();
 		int i = (page-1)*10+1;

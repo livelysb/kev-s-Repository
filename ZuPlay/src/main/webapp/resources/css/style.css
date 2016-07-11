@@ -518,6 +518,19 @@ div.vertical-line{
    margin-top: 20px;
 }
 
+.userinfo-avatar-div {
+	position: relative;
+	height: 70px;
+	width: 80px;
+	border: black 1px solid;
+}
+
+.userinfo-avatar-div img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
 /*주식 리스트*/
 
 #page-align{

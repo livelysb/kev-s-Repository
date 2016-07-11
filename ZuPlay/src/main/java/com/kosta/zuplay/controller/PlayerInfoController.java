@@ -1,5 +1,6 @@
 package com.kosta.zuplay.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -92,7 +93,9 @@ public class PlayerInfoController {
 		playerDTO.setEarningRate(earningRateService.calDailyEarningRate(playerNickname));
 		playerDTO.setTotalEarningRate(earningRateService.calEarningRate(playerNickname));
 		playerDTO.setPlayerItemDTO(inventoryService.playerItemWorn(playerNickname));
-		return new Gson().toJson(playerDTO);
+		List<PlayerDTO> playerList = new ArrayList<PlayerDTO>();
+		playerList.add(playerDTO);
+		return new Gson().toJson(playerList);
 	}
 	
 	@RequestMapping(value = { "userInfo" })

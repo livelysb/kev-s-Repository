@@ -51,10 +51,10 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	}
 	
 
-	@Scheduled(cron="0 59 9 * * MON-FRI")
+	@Scheduled(cron="0 13 10 * * MON-FRI")
 	@Override
 	public void actionAtNine(){
-		System.out.println("AM 09:57, 작업을 시작합니다.");
+		System.out.println("AM 09:59, 작업을 시작합니다.");
 		try {
 			stockUpdateService.masterUpdate();
 			stockUpdateService.realtimePriceReset();

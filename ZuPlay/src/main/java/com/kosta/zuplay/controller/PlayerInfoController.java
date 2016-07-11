@@ -84,7 +84,7 @@ public class PlayerInfoController {
 		}
 
 	}
-
+	@ResponseBody
 	@RequestMapping(value = {"userInfo2"}, produces = "application/json;charset=UTF-8")
 	public String userInfo2(HttpSession session, String tragetPlayer) throws Exception {
 		String playerNickname = (String) session.getAttribute("playerNickname");

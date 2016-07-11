@@ -105,6 +105,8 @@ public class EchoHandler extends TextWebSocketHandler {
 																							// sender
 																							// /
 																							// roomNm
+		} else if (mesArr[0].equals("chatRoomSelect")){
+			chattingServiceImpl.chatRoomSelect(playerNickname, Integer.parseInt(mesArr[2]));
 		}
 	}
 

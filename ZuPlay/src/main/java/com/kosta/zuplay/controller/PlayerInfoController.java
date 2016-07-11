@@ -88,11 +88,10 @@ public class PlayerInfoController {
 	@ResponseBody
 	@RequestMapping(value = {"userInfo2"}, produces = "application/json;charset=UTF-8")
 	public String userInfo2(HttpSession session, String tragetPlayer) throws Exception {
-		String playerNickname = (String) session.getAttribute("playerNickname");
-		PlayerDTO playerDTO = playerInfoService.getPlayer(playerNickname);
-		playerDTO.setEarningRate(earningRateService.calDailyEarningRate(playerNickname));
-		playerDTO.setTotalEarningRate(earningRateService.calEarningRate(playerNickname));
-		playerDTO.setPlayerItemDTO(inventoryService.playerItemWorn(playerNickname));
+		PlayerDTO playerDTO = playerInfoService.getPlayer(tragetPlayer);
+		playerDTO.setEarningRate(earningRateService.calDailyEarningRate(tragetPlayer));
+		playerDTO.setTotalEarningRate(earningRateService.calEarningRate(tragetPlayer));
+		playerDTO.setPlayerItemDTO(inventoryService.playerItemWorn(tragetPlayer));
 		List<PlayerDTO> playerList = new ArrayList<PlayerDTO>();
 		playerList.add(playerDTO);
 		return new Gson().toJson(playerList);

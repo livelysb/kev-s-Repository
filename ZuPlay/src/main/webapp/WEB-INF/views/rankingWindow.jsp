@@ -37,16 +37,10 @@
 	width: auto;
 }
 
-#ranking-all-btn,#ranking-week-btn{
-	text-align: center;
-}
-	
 </style>
 
 </head>
 <body>
-
-
 	<div id="ranking-window">
 		<div id="ranking-header">Ranking</div>
 		<div id="ranking-content">
@@ -55,11 +49,13 @@
 				  <div id="ranking-tab-div">
 					<ul id="ranking-myTab" class="nav nav-tabs">
 						<li class="active ">
-						<a data-target="#ranking-all"
-							id="ranking-tab-all" data-toggle="tab">전체랭킹</a>
+						<a data-target="#ranking-season"
+							id="ranking-tab-season" data-toggle="tab">시즌랭킹</a>
 						</li>
-						<li class=""><a data-target="#ranking-week" id="ranking-tab-week"
-							data-toggle="tab">주간랭킹</a>
+						<li class="">
+							<a data-target="#ranking-daily" id="ranking-tab-daily" data-toggle="tab">
+								주간랭킹
+							</a>
 						</li>
 					</ul>
                  </div>
@@ -68,14 +64,13 @@
 			</div>
 			
 			<div id="ranking-myTabContent" class="tab-content">
-				<div class="tab-pane fade active in" id="ranking-all">
+				<div class="tab-pane fade active in" id="ranking-season">
 					<div>
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>순위</th>
-									<th>아이디</th>
-									<th width="10%">아바타</th>
+									<th>아바타</th>
 									<th>닉네임</th>
 									<th>수익률</th>
 									<th>총자산</th>
@@ -84,22 +79,15 @@
 							<tbody id="ranking-buy-tbody">
 							</tbody>
 						</table>
-						<div id="ranking-all-btn">
-							<button type="button" class="btn btn-default"
-								id="ranking-back-btn">이전</button>
-							<button type="button" class="btn btn-default"
-								id="ranking-next-btn">다음</button>
-						</div>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="ranking-week">
+				<div class="tab-pane fade" id="ranking-daily">
 					<div>
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>순위</th>
-									<th>아이디</th>
-									<th width="10%">아바타</th>
+									<th>아바타</th>
 									<th>닉네임</th>
 									<th>수익률</th>
 									<th>총자산</th>
@@ -108,20 +96,12 @@
 							<tbody id="ranking-sell-tbody">
 							</tbody>
 						</table>
-						<div id="ranking-week-btn">
-							<button type="button" class="btn btn-default"
-								id="ranking-back-btn">이전</button>
-							<button type="button" class="btn btn-default"
-								id="ranking-next-btn">다음</button>
-						</div>
 					</div>
 				</div>
 				
 			</div>
 		</div>
 	</div>
-
-
 
 </body>
 
@@ -146,8 +126,53 @@
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script src="resources/js/set.js"></script>
-<script src="resources/js/script2.js"></script>
 <script type="text/javascript">
-	 
+	 $(function(){
+		 
+		 /*랭킹 조회*/
+		 var rankingSelect = function(kind){
+			 var rankType = "";
+			 kind == "s" ? rank = "item.playerSeasonRank" : rank = "item.playerDailyRank" ;
+			 $.ajax({
+				 url:"getRank",
+				 type:"post",
+				 dataType:"json",
+				 data:"kind="+kind,
+				 success:function(data){
+					 console.log(data)
+					 var str="";
+					 /* $.each(data,function(index,item){
+						 str+="<tr><td>"+rankType+"</td>";
+						 str+="<td>"+item.+"</td>";
+						 str+="<td>"+item.playerNickname+"</td>";
+						 str+="<td>"+item.+"</td>";
+						 str+="<td>"+item.+"</td>";
+						 str+="<td>"++"</td>";
+						 str+="";
+						 str+="</tr>";
+						 str+="";
+					 }) */
+					 
+					 $("#ranking-sell-tbody").empty();
+					 $("#ranking-sell-tbody").html(str);
+				 },
+				 error:function(){
+					 console.log("Exception : 랭크조회");
+				 }
+			 })
+		 }
+		 
+		 /*시즌랭킹 탭*/
+		 $("#ranking-tab-season").on("click",function(){
+			 rankingSelect("s");
+		 })
+		 
+		 /*일일랭킹*/
+		 $("#ranking-tab-daily").on("click",function(){
+			 rankingSelect("d");
+		 })
+		 
+		 rankingSelect("s");
+	 })
 </script>
 </html>

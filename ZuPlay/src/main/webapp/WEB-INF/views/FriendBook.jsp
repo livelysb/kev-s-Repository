@@ -26,8 +26,8 @@
 			                <i class="glyphicon glyphicon-remove"></i>
 			              </button>
 			            </div>
-			          </li>
-			           -->
+			          </li> -->
+			          
 				</ul>
 			</div>
 
@@ -36,9 +36,9 @@
 					<li class="list-group-item title">
 						<div class="friend-icon green"></div> <label>친구목록</label>
 					</li>
-					<!-- <li href="#" class="list-group-item text-left">
+						
+					 <!-- <li href="#" class="list-group-item text-left">
 					
-				
 			            <div class="friend-avatar-div" > relative
 				          <img src="" class="friend-avatar-clothes"> absolute
 				          <img src="" class="friend-avatar-hair">

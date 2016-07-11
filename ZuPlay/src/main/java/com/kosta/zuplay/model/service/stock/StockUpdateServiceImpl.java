@@ -97,6 +97,7 @@ public class StockUpdateServiceImpl implements StockUpdateService {
 			if (masterDTO != null) {
 				StockUpdateDAO stockUpdateDAO = sqlSession.getMapper(StockUpdateDAO.class);
 				stockUpdateDAO.masterUpdate(masterDTO);
+				System.out.println(masterDTO.getIsuKorAbbrv());
 			}
 		}
 		System.out.println(new Date().toString() + " : Master is updated");

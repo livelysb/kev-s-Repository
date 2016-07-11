@@ -10,9 +10,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.ServletContext;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kosta.zuplay.model.dao.SettingDAO;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.service.item.InventoryService;
 import com.kosta.zuplay.model.service.player.PlayerInfoService;
@@ -34,7 +36,10 @@ public class ChattingServiceImpl implements ChattingService {
 	PlayerInfoService playerInfoService;
 
 	@Autowired
-	ServletContext context;
+	private ServletContext context;
+
+	@Autowired
+	private SqlSession sqlSession;
 
 	Map<Integer, ChatRoomVO> map = new HashMap<Integer, ChatRoomVO>();
 
@@ -42,14 +47,30 @@ public class ChattingServiceImpl implements ChattingService {
 
 	@Override
 	public void chatOnebyOne(String sender, String receiver, String msg) {
-		List<String> receivers = new ArrayList<String>();
-		receivers.add(receiver);
-		receivers.add(sender);
+		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
 		try {
-			sendDataWebSocket.sendData(sender, receivers, "oneByOne",
-					new ChatMsgVO(sender, receiver, null, SimpleDateFormat.getInstance().format(new Date()), msg,
-							playerInfoService.getPlayer(sender).getPlayerGender(),
-							inventoryService.playerItemWorn(sender)));
+			if (settingDAO.settingSelect(receiver).getPsChatting().equals("T")) {
+				List<String> receivers = new ArrayList<String>();
+				receivers.add(receiver);
+				receivers.add(sender);
+				try {
+					sendDataWebSocket.sendData(sender, receivers, "oneByOne",
+							new ChatMsgVO(sender, receiver, null, SimpleDateFormat.getInstance().format(new Date()),
+									msg, playerInfoService.getPlayer(sender).getPlayerGender(),
+									inventoryService.playerItemWorn(sender)));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				List<String> receivers = new ArrayList<String>();
+				receivers.add(sender);
+				try {
+					sendDataWebSocket.sendData(sender, receivers, "oneByOne",
+							new ChatMsgVO(sender, receiver, null, null, null, null, null));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -134,10 +155,9 @@ public class ChattingServiceImpl implements ChattingService {
 
 		// 채팅 메시지 (data) 전송 (sendData)
 		try {
-			sendDataWebSocket.sendData(sender, receivers, "chatMsg",
-					new ChatMsgVO(sender, null, new AtomicInteger(roomNo), SimpleDateFormat.getInstance().format(new Date()), msg,
-							playerInfoService.getPlayer(sender).getPlayerGender(),
-							inventoryService.playerItemWorn(sender)));
+			sendDataWebSocket.sendData(sender, receivers, "chatMsg", new ChatMsgVO(sender, null,
+					new AtomicInteger(roomNo), SimpleDateFormat.getInstance().format(new Date()), msg,
+					playerInfoService.getPlayer(sender).getPlayerGender(), inventoryService.playerItemWorn(sender)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -169,13 +189,11 @@ public class ChattingServiceImpl implements ChattingService {
 			int index = playerVO.getChatRoomList().indexOf(new Integer(roomNo));
 			playerVO.getChatRoomList().remove(index);
 		}
-		
-		
 
 	}
 
 	// 어플리케이션이 끈기기전에 닉네임 찾아서 방번호 목록 찾아서 모든 방 나가게
-	public void allChatRoomOut(String playerNickname) {	
+	public void allChatRoomOut(String playerNickname) {
 		PlayerVO playerVO = (PlayerVO) context.getAttribute("#" + playerNickname);
 		if (playerVO != null) {
 			for (int roomNo : playerVO.getChatRoomList()) {

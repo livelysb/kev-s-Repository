@@ -15,6 +15,11 @@ public interface ChattingService {
 	void chatRoomCreate(String sender, String roomName, String password,int maxNum);
 	
 	/**
+	 * 채팅방 목록 보기
+	 * */
+	void chatRoomSelect(String sender, int page);
+	
+	/**
 	 * 채팅방 참가
 	 * */
 	void chatRoomJoin(String sender, int roomNo, String password);

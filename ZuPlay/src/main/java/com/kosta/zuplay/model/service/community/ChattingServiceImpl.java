@@ -2,10 +2,11 @@ package com.kosta.zuplay.model.service.community;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.ServletContext;
@@ -41,10 +42,8 @@ public class ChattingServiceImpl implements ChattingService {
 	@Autowired
 	private SqlSession sqlSession;
 
-	Map<Integer, ChatRoomVO> map = new HashMap<Integer, ChatRoomVO>();
-
+	Map<Integer, ChatRoomVO> map = new TreeMap<Integer, ChatRoomVO>();
 	AtomicInteger i = new AtomicInteger(100);
-
 	@Override
 	public void chatOnebyOne(String sender, String receiver, String msg) {
 		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
@@ -89,7 +88,7 @@ public class ChattingServiceImpl implements ChattingService {
 		List<PlayerDTO> playersInfo = new ArrayList<PlayerDTO>();
 		playersInfo.add(getPlayer(sender));
 
-		Map<Integer, ChatRoomVO> map = (Map<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
+		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		int roomNo = i.getAndIncrement();
 		ChatRoomVO crv = new ChatRoomVO(roomNo, roomName, password, playersInfo, maxNum);
 		map.put(roomNo, crv);
@@ -101,10 +100,32 @@ public class ChattingServiceImpl implements ChattingService {
 			playerVO.getChatRoomList().add(crv.getRoomNo());
 		}
 	}
+	
+
+	@Override
+	public void chatRoomSelect(String sender, int page) {
+		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
+		List<ChatRoomVO> chatRoomList = new ArrayList<ChatRoomVO>();
+		int i = (page-1)*10+1;
+		int start = 1;
+		for(Integer roomNo : map.keySet()) {
+			if(start<i) {
+				start++;
+				continue;
+			}else {
+				chatRoomList.add(map.get(roomNo));
+				if(start == i+9)
+					break;
+				start++;
+			}
+		}
+		List<String> myself = new ArrayList<String>();
+		sendDataWebSocket.sendData(sender, myself, "chatList", chatRoomList);
+	}
 
 	@Override
 	public void chatRoomJoin(String sender, int roomNo, String password) {
-		Map<Integer, ChatRoomVO> map = (Map<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
+		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		ChatRoomVO crv = map.get(roomNo);
 
 		// 조건에 맞지 않을 경우 들어오지 못함
@@ -144,7 +165,7 @@ public class ChattingServiceImpl implements ChattingService {
 
 	@Override
 	public void chatRoomChat(String sender, int roomNo, String msg) {
-		Map<Integer, ChatRoomVO> map = (Map<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
+		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		ChatRoomVO crv = map.get(roomNo);
 
 		// sender를 포함한 모든 참석자(receivers)
@@ -166,7 +187,7 @@ public class ChattingServiceImpl implements ChattingService {
 
 	@Override
 	public void chatRoomOut(String sender, int roomNo) {
-		Map<Integer, ChatRoomVO> map = (Map<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
+		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		ChatRoomVO crv = map.get(roomNo);
 
 		// 방 나가기

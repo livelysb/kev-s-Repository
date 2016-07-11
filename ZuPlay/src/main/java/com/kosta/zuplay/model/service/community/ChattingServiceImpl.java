@@ -116,13 +116,14 @@ public class ChattingServiceImpl implements ChattingService {
 					continue;
 				} else {
 					ChatRoomVO chatRoomVO = map.get(roomNo);
+					ChatRoomVO chatRoomVO2 = new ChatRoomVO(chatRoomVO.getRoomNo(), chatRoomVO.getRoomName(), "", chatRoomVO.getPlayerList(), chatRoomVO.getMaxNum());
 					
 					System.out.println(chatRoomVO.getPassword());
-					if(!chatRoomVO.getPassword().equals(null))
-						chatRoomVO.setPassword("T");
+					if(!chatRoomVO.getPassword().equals(""))
+						chatRoomVO2.setPassword("T");
 					else
-						chatRoomVO.setPassword("");
-					chatRoomList.add(chatRoomVO);
+						chatRoomVO2.setPassword("");
+					chatRoomList.add(chatRoomVO2);
 					if (start == i + 9)
 						break;
 					start++;

@@ -4,6 +4,7 @@ $(function(){
          url:"updatePI",
          dataType:"json",
          success:function(data){
+        	 console.log(data);
             userInfo.nickName=data.playerNickname;
             userInfo.gender =data.playerGender;
             userInfo.money =data.playerMoney;
@@ -11,7 +12,6 @@ $(function(){
             userInfo.grade=data.playerGrade;
             userInfo.dailyRank=data.playerDailyRank;
             userInfo.seasonRank=data.playerSeasonRank;
-            userInfo.theme = "kokomo";
             
             if(callBack){
                callBack();
@@ -396,7 +396,7 @@ $(function(){
              return jsonArr;
              
            }
-           
+           console.log("띰 : " + userInfo.theme)
            $("#inven-Window").jqxWindow({
                 minWidth:600,
                 minHeight:420,

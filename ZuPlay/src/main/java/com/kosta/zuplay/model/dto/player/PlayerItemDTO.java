@@ -60,6 +60,12 @@ public class PlayerItemDTO {
 	public void setItemDTO(ItemDTO itemDTO) {
 		this.itemDTO = itemDTO;
 	}
+
+	@Override
+	public String toString() {
+		return "PlayerItemDTO [piSq=" + piSq + ", playerNickname=" + playerNickname + ", itemCode=" + itemCode
+				+ ", piIndex=" + piIndex + ", itemDTO=" + itemDTO + "]";
+	}
 	
 	
 	

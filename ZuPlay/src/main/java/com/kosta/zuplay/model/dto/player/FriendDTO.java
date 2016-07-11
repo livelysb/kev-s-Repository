@@ -10,12 +10,13 @@ public class FriendDTO {
 	private String friendDate; // 친구신청일자
 
 	private List<PlayerItemDTO> playerItemDTO;
+	private PlayerDTO playerDTO;
 
-	public FriendDTO() {
-	}
+	public FriendDTO() {}
+
 
 	public FriendDTO(int friendSq, String playerNickname, String playerNickname2, String friendIsAccepted,
-			String friendDate, List<PlayerItemDTO> playerItemDTO) {
+			String friendDate, List<PlayerItemDTO> playerItemDTO, PlayerDTO playerDTO) {
 		super();
 		this.friendSq = friendSq;
 		this.playerNickname = playerNickname;
@@ -23,7 +24,9 @@ public class FriendDTO {
 		this.friendIsAccepted = friendIsAccepted;
 		this.friendDate = friendDate;
 		this.playerItemDTO = playerItemDTO;
+		this.playerDTO = playerDTO;
 	}
+
 
 	public int getFriendSq() {
 		return friendSq;
@@ -73,11 +76,36 @@ public class FriendDTO {
 		this.playerItemDTO = playerItemDTO;
 	}
 
+	public List<PlayerItemDTO> getPlayerItemDTO() {
+		return playerItemDTO;
+	}
+
+
+	public void setPlayerItemDTO(List<PlayerItemDTO> playerItemDTO) {
+		this.playerItemDTO = playerItemDTO;
+	}
+
+
+	public PlayerDTO getPlayerDTO() {
+		return playerDTO;
+	}
+
+
+	public void setPlayerDTO(PlayerDTO playerDTO) {
+		this.playerDTO = playerDTO;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "FriendDTO [friendSq=" + friendSq + ", playerNickname=" + playerNickname + ", playerNickname2="
-				+ playerNickname2 + ", friendIsAccepted=" + friendIsAccepted + ", friendDate=" + friendDate + ", playerItemDTO="
-				+ playerItemDTO + "]";
+				+ playerNickname2 + ", friendIsAccepted=" + friendIsAccepted + ", friendDate=" + friendDate
+				+ ", playerItemDTO=" + playerItemDTO + ", playerDTO=" + playerDTO + "]";
 	}
+
+
 
 }

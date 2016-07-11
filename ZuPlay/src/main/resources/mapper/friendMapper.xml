@@ -8,6 +8,19 @@
 		<result column="player_nickname2" property="playerNickname2" />
 		<result column="friend_isacepted" property="friendIsAccepted" />
 		<result column="friend_date" property="friendDate" />
+		<association property="playerDTO" javaType="playerDTO">
+			<id column="player_nickname" property="playerNickname" />
+			<result column="player_naver_id" property="playerNaverId" />
+			<result column="player_gender" property="playerGender" />
+			<result column="player_age" property="playerAge" />
+			<result column="player_money" property="playerMoney" />
+			<result column="player_pre_money" property="playerPreMoney" />
+			<result column="player_ruby" property="playerRuby" />
+			<result column="player_last_access" property="playerLastAccess" />
+			<result column="player_grade" property="playerGrade" />
+			<result column="player_daily_rank" property="playerDailyRank" />
+			<result column="player_season_rank" property="playerSeasonRank" />
+		</association>
 		<collection property="playerItemDTO" ofType="playerItemDTO">
 			<id column="pi_sq" property="piSq" />
 			<result column="player_nickname" property="playerNickname" />
@@ -24,11 +37,15 @@
 		</collection>
 	</resultMap>
 	<!-- 친구명 조회 -->
-	<select id="friendSelectOnlyNicknameA" parameterType="String" resultType="String">
-		select player_nickname from friend where player_nickname2=#{value}
+	<select id="friendSelectOnlyNicknameA" parameterType="String"
+		resultType="String">
+		select player_nickname from friend where
+		player_nickname2=#{value}
 	</select>
-	<select id="friendSelectOnlyNicknameB" parameterType="String" resultType="String">
-		select player_nickname2 from friend where player_nickname=#{value}
+	<select id="friendSelectOnlyNicknameB" parameterType="String"
+		resultType="String">
+		select player_nickname2 from friend where
+		player_nickname=#{value}
 	</select>
 	<!--친구조회 -->
 	<select id="friendSelectA" parameterType="String" resultMap="friendMap">
@@ -36,8 +53,11 @@
 		friend f join player_item pi on
 		f.player_nickname2=pi.player_nickname
 		join item i on
-		pi.item_code=i.item_code where
-		f.player_nickname=#{playerNickname} and
+		pi.item_code=i.item_code
+		join player p on
+		f.player_nickname2=p.player_nickname where
+		f.player_nickname=#{value}
+		and
 		7>pi_index order by pi_index
 	</select>
 	<select id="friendSelectB" parameterType="String" resultMap="friendMap">
@@ -45,7 +65,8 @@
 		friend f join player_item pi on
 		f.player_nickname=pi.player_nickname join
 		item i on
-		pi.item_code=i.item_code where
+		pi.item_code=i.item_code join player p on
+		f.player_nickname=p.player_nickname where
 		f.player_nickname2=#{playerNickname} and
 		7>pi_index order by pi_index
 	</select>

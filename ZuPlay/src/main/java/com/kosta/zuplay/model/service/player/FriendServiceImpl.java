@@ -46,12 +46,12 @@ public class FriendServiceImpl implements FriendService {
 			listA.add(listB.get(i));
 		}
 		int j = listA.size();
-		for (int i = j-1; i >=0 ; i--) {
+		for (int i = j - 1; i >= 0; i--) {
 			if (!listX.contains(listA.get(i))) {
 				listA.remove(i);
 			}
 		}
-		
+
 		return listA;
 	}
 
@@ -111,27 +111,22 @@ public class FriendServiceImpl implements FriendService {
 		}
 		for (int i = 0; i < listA.size(); i++) {
 			FriendDTO dto = listA.get(i);
-			if(dto.getList().get(i).getPiIndex()!=i){
-				dto.getList().get(i).setItemCode("xxxxxx");
-				dto.getList().get(i).setPiIndex(i);
-			}
 			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(), dto.getPlayerNickname(),
-					dto.getFriendIsAccepted(), dto.getFriendDate(), false, dto.getList()));
+					dto.getFriendIsAccepted(), dto.getFriendDate(), dto.getPlayerDTO().getPlayerGender(), false,
+					dto.getList()));
 		}
 		for (int i = 0; i < listB.size(); i++) {
 			FriendDTO dto = listB.get(i);
-			if(dto.getList().get(i).getPiIndex()!=i){
-				dto.getList().get(i).setItemCode("xxxxxx");
-				dto.getList().get(i).setPiIndex(i);
-			}
 			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(), dto.getPlayerNickname(),
-					dto.getFriendIsAccepted(), dto.getFriendDate(), false, dto.getList()));
+					dto.getFriendIsAccepted(), dto.getFriendDate(), dto.getPlayerDTO().getPlayerGender(), false,
+					dto.getList()));
 		}
 		for (int i = 0; i < listVO.size(); i++) {
 			if (listApp.contains(listVO.get(i).getPlayerNickname())) {
 				listVO.get(i).setOnOrOff(true);
 			}
 		}
+		System.out.println(listApp);
 		return listVO;
 	}
 

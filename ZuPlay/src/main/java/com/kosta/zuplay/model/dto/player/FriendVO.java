@@ -8,6 +8,7 @@ public class FriendVO {
 	private String playerNickname2; //신청자
 	private String friendIsAccepted; // 친구 수락여부(T=친구/F=친구수락대기중)
 	private String friendDate; // 친구신청일자
+	private String friendGender; //친구 성별
 	private boolean onOrOff; //접속여부
 	private List<PlayerItemDTO> playerItemDTO;
 
@@ -15,17 +16,20 @@ public class FriendVO {
 	public FriendVO() {}
 	
 
+
 	public FriendVO(int friendSq, String playerNickname, String playerNickname2, String friendIsAccepted,
-			String friendDate, boolean onOrOff, List<PlayerItemDTO> playerItemDTO) {
+			String friendDate, String friendGender, boolean onOrOff, List<PlayerItemDTO> playerItemDTO) {
 		super();
 		this.friendSq = friendSq;
 		this.playerNickname = playerNickname;
 		this.playerNickname2 = playerNickname2;
 		this.friendIsAccepted = friendIsAccepted;
 		this.friendDate = friendDate;
+		this.friendGender = friendGender;
 		this.onOrOff = onOrOff;
 		this.playerItemDTO = playerItemDTO;
 	}
+
 
 
 	public String getPlayerNickname2() {
@@ -77,13 +81,28 @@ public class FriendVO {
 		this.playerItemDTO = playerItemDTO;
 	}
 
+	public String getFriendGender() {
+		return friendGender;
+	}
 
+	public void setFriendGender(String friendGender) {
+		this.friendGender = friendGender;
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "FriendVO [friendSq=" + friendSq + ", playerNickname=" + playerNickname + ", playerNickname2="
 				+ playerNickname2 + ", friendIsAccepted=" + friendIsAccepted + ", friendDate=" + friendDate
-				+ ", onOrOff=" + onOrOff + ", playerItemDTO=" + playerItemDTO + "]";
+				+ ", friendGender=" + friendGender + ", onOrOff=" + onOrOff + ", playerItemDTO=" + playerItemDTO + "]";
 	}
+
+
+
 
 	
 

@@ -25,7 +25,7 @@ public class FriendController {
 
 	@Autowired
 	private FriendService friendServiceImpl;
-	
+
 	@Autowired
 	private ServletContext application;
 
@@ -109,15 +109,17 @@ public class FriendController {
 		}
 		FriendDTO dto = null;
 		dto = friendServiceImpl.friendAdd(playerNickname, playerNickname2);
-		Gson gson = new Gson();
-		String json = gson.toJson(dto);
-		json = "{\"type\":\"notiFriendAdd\",\"data\":" + json + "}";
-		TextMessage tx = new TextMessage(json);
-		if (application.getAttribute("#" + playerNickname2) != null) {
-			try {
-				webSession.sendMessage(tx);
-			} catch (IOException e) {
-				e.printStackTrace();
+		if (dto != null) {
+			Gson gson = new Gson();
+			String json = gson.toJson(dto);
+			json = "{\"type\":\"notiFriendAdd\",\"data\":" + json + "}";
+			TextMessage tx = new TextMessage(json);
+			if (application.getAttribute("#" + playerNickname2) != null) {
+				try {
+					webSession.sendMessage(tx);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

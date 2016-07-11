@@ -17,6 +17,7 @@ import com.kosta.zuplay.model.dao.SettingDAO;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 import com.kosta.zuplay.model.service.item.InventoryService;
+import com.kosta.zuplay.model.service.player.EarningRateService;
 import com.kosta.zuplay.model.service.player.PlayerInfoService;
 import com.kosta.zuplay.model.service.player.RankService;
 import com.kosta.zuplay.model.service.stock.PlayerStockService;
@@ -35,6 +36,9 @@ public class PlayerInfoController {
 
 	@Autowired
 	private RankService rankService;
+	
+	@Autowired
+	private EarningRateService earningRateService;
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -81,6 +85,16 @@ public class PlayerInfoController {
 
 	}
 
+	@RequestMapping(value = {"userInfo2"}, produces = "application/json;charset=UTF-8")
+	public String userInfo2(HttpSession session, String tragetPlayer) throws Exception {
+		String playerNickname = (String) session.getAttribute("playerNickname");
+		PlayerDTO playerDTO = playerInfoService.getPlayer(playerNickname);
+		playerDTO.setEarningRate(earningRateService.calDailyEarningRate(playerNickname));
+		playerDTO.setTotalEarningRate(earningRateService.calEarningRate(playerNickname));
+		playerDTO.setPlayerItemDTO(inventoryService.playerItemWorn(playerNickname));
+		return new Gson().toJson(playerDTO);
+	}
+	
 	@RequestMapping(value = { "userInfo" })
 	public ModelAndView userInfo(HttpSession session, String targetPlayer) throws Exception {
 		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);

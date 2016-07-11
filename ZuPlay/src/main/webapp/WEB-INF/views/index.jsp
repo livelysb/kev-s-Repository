@@ -60,7 +60,7 @@
 	         <jsp:include page="myStock.jsp"/>
 	         <jsp:include page="newsList.jsp"/>
 	         <jsp:include page="settingWindow.jsp"/>
-	         
+	         <jsp:include page="chatRoom.jsp"/>
 	         </div>
         </div>
         <!-- 메인 영역 종료 -->
@@ -92,6 +92,7 @@
                <button id="mystock-btn">내 주식</button>
                <button id="news-search-btn">뉴스 검색</button>
                <button id="setting-btn">설정</button>
+               <button id="chatroom-btn">채팅방</button>
                <!--Notifications-->
                <button id="friend-request-btn">노티파이</button>
                   <div id="friend-request-noti">

@@ -843,3 +843,69 @@ display:inline-block;
 #setting-content .switch{
 display:inline-block;
 }
+#chatroom-ul {
+  list-style: none;
+  margin-left: -35px;
+}
+
+#chatroom-window .nav-tabs >li {
+  width: 50%;
+  text-align: center;
+}
+
+#chatroom-mychat {
+  list-style: none;
+  margin-left: -40px;
+}
+
+#chatroom-mychat li {
+  border-bottom: 1px solid #eee;
+}
+
+#chatroom-mychat li a img {
+  float: left;
+  width: 45px;
+  height: 45px;
+  margin-right: 0px;
+}
+
+ #chatroom-mychat li a {
+  position: relative;
+  display: block;
+  padding: 10px;
+  transition: all .2s ease;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+}
+
+#chatroom-mychat li.active a {
+  background-color: #f1f5fc;
+}
+
+#chatroom-mychat li a .chatroom-name,
+#chatroom-mychat li a .chatroom-name:hover {
+  color: #777;
+}
+
+#chatroom-mychat li a .last-message {
+  width: 65%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+#chatroom-mychat li a .time {
+  position: absolute;
+  top: 10px;
+  right: 8px;
+}
+
+#chatroom-mychat li a .chat-alert {
+  position: absolute;
+  right: 8px;
+  top: 27px;
+  font-size: 10px;
+  padding: 3px 5px;
+}

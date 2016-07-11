@@ -122,6 +122,8 @@ public class ChattingServiceImpl implements ChattingService {
 			}
 		}
 		List<String> myself = new ArrayList<String>();
+		System.out.println(myself);
+		System.out.println(chatRoomList);
 		sendDataWebSocket.sendData(sender, myself, "chatList", chatRoomList);
 	}
 

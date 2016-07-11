@@ -146,7 +146,7 @@ public class FriendServiceImpl implements FriendService {
 			e.printStackTrace();
 		}
 		FriendDTO dto = null;
-		if (settingDTO.getPsFriendAdd().equals('T')) {
+		if (settingDTO.getPsFriendAdd().equals("T")) {
 			if (friendCheck(playerNickname, playerNickname2) == false) {
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("playerNickname", playerNickname);

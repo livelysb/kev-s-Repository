@@ -118,7 +118,6 @@ public class ChattingServiceImpl implements ChattingService {
 					ChatRoomVO chatRoomVO = map.get(roomNo);
 					ChatRoomVO chatRoomVO2 = new ChatRoomVO(chatRoomVO.getRoomNo(), chatRoomVO.getRoomName(), "", chatRoomVO.getPlayerList(), chatRoomVO.getMaxNum());
 					
-					System.out.println(chatRoomVO.getPassword());
 					if(!chatRoomVO.getPassword().equals(""))
 						chatRoomVO2.setPassword("T");
 					else

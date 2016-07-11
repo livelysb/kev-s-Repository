@@ -1534,7 +1534,24 @@ $(function(){
           /** 추가(3) 채팅 시작*/
           /* 채팅 리스트 */
           var chatList = function(content){
-        	  console.log(content);
+        	  //chatroom-list-ul
+        	  var str = "";
+        	  var data = content.data;
+        	  console.log(data)
+        	  for(var i=0; i<data.length;i++){
+        		 str += "<a href='#' class='clearfix'><div class='chatroom-name'><h3><strong>";
+        		 str += "<input type='hidden' value='"+data[i].roomNo+"'>";
+        		 str += data[i].roomName;
+        		 str += "</strong></h3><small class='text-muted'>";
+        		 str += data[i].playerList.length + " / " + data[i].maxNum;
+        		 str += "</small>"
+	        	 if(data[i].password == "T"){
+	        		str += "<small class='chat-alert label label-danger'>password</small>"
+	        	 }
+        		 str += "</div>";
+        	  }
+        	  console.log(str);
+        	  $("#chatroom-list-ul").append(str);
           }
           
           /* 친구창 채팅 버튼*/

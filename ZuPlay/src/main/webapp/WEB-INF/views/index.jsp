@@ -150,7 +150,7 @@
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script src="resources/js/set.js"></script>
 <script type="text/javascript">
-    userInfo.theme = ${theme}; 
+    userInfo.theme = "${theme}"; 
 </script>
 <script src="resources/js/script.js"></script>
 </html>

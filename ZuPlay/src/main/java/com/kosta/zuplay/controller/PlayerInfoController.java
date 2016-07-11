@@ -101,7 +101,7 @@ public class PlayerInfoController {
 			mv.addObject("isLike", false);
 		}
 		if (!targetPlayer.equals(playerNickname)) {
-			if (settingDAO.settingSelect(targetPlayer).getPsMyPage().equals("F")) {
+			if (settingDAO.settingSelect(targetPlayer).getPsMyPage().equals("F")){
 				mv.addObject("psMyPage",false);
 			}else{
 				mv.addObject("psMyPage",true);
@@ -110,12 +110,12 @@ public class PlayerInfoController {
 			mv.addObject("psMyPage", true);
 		}
 		mv.addObject("likeNum", playerDTO.getLikerList().size());
-		try {
-			context.getAttribute("#"+targetPlayer);
+		
+		if(context.getAttribute("#"+targetPlayer)!=null)
 			mv.addObject("onOrOff", true);
-		} catch (Exception e) {
+		else
 			mv.addObject("onOrOff", false);
-		}
+		
 		return mv;
 	}
 

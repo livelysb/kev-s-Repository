@@ -2,11 +2,9 @@ package com.kosta.zuplay.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import org.springframework.web.socket.WebSocketSession;
 import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.player.FriendDTO;
 import com.kosta.zuplay.model.dto.player.FriendVO;
-import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.service.player.FriendService;
 import com.kosta.zuplay.util.vo.PlayerVO;
 

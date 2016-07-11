@@ -105,6 +105,8 @@ public class ChattingServiceImpl implements ChattingService {
 	public void chatRoomSelect(String sender, int page) {
 		System.out.println("came here, chatRoomSelect");
 		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
+		if(map==null)
+			return;
 		List<ChatRoomVO> chatRoomList = new ArrayList<ChatRoomVO>();
 		int i = (page-1)*10+1;
 		int start = 1;

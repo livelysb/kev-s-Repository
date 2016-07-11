@@ -42,7 +42,7 @@ public class ChattingServiceImpl implements ChattingService {
 	@Autowired
 	private SqlSession sqlSession;
 
-	Map<Integer, ChatRoomVO> map = new TreeMap<Integer, ChatRoomVO>();
+	
 	AtomicInteger i = new AtomicInteger(100);
 	@Override
 	public void chatOnebyOne(String sender, String receiver, String msg) {
@@ -74,11 +74,10 @@ public class ChattingServiceImpl implements ChattingService {
 			e.printStackTrace();
 		}
 	}
-
 	@Override
 	public void chatRoomCreate(String sender, String roomName, String password, int maxNum) {
-		if (context.getAttribute("chatRoom") == null)
-			context.setAttribute("chatRoom", map);
+		if (context.getAttribute("chatRoom") == null) 
+			context.setAttribute("chatRoom", new TreeMap<Integer, ChatRoomVO>());
 
 		// 나에게 보내기
 		List<String> myself = new ArrayList<String>();

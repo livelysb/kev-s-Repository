@@ -69,7 +69,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	}
 
 	
-	@Scheduled(cron="0 30 21 * * MON-FRI")
+	@Scheduled(cron="0 59 14 * * MON-FRI")
 	@Override
 	public void actionAtThree(){
 		System.out.println("PM 03:00, 작업을 시작합니다.");

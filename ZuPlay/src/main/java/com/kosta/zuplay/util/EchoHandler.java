@@ -65,7 +65,7 @@ public class EchoHandler extends TextWebSocketHandler {
 			friendController.friendAccept(playerNickname, mesArr[2], Integer.parseInt(mesArr[3]));// param
 																									// :
 																									// playerNickname,playerNickname,friendSq
-		} else if (mesArr[0].equals("chatOnebyOne")) {
+		} else if (mesArr[0].equals("chatOneByOne")) {
 			chattingServiceImpl.chatOnebyOne(playerNickname, mesArr[2], mesArr[3]); // param
 																					// :
 																					// sender

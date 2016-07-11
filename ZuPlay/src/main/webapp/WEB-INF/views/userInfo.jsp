@@ -8,7 +8,10 @@
       <div class="panel-body">
          <div class="row">
             <div class="col-md-4 userinfo-row" align="center">
-               <img alt="User Pic" src="resources/user.png" class="img-responsive">
+               <!-- <img alt="User Pic" src="resources/user.png" class="img-responsive"> -->
+               <div class='userinfo-avatar-div'>
+               	
+               </div>
                <label class="userinfo-favorite">
                   <c:choose>
                      <c:when test="${isLike}">

@@ -47,6 +47,31 @@ $(function(){
         width : $("#avatar-clothes").css("width"),
         height : $("#avatar-clothes").css("height")
      });
+      
+      /*아바타 옷입히기.*/
+      var avatarEqui = function(className,avatarGender,item){
+		  var avatarEquiAry = new Array();
+		  var closetUrl = "resources/img/avatar/";
+		  var defaultItemAry=[
+		                      closetUrl+"clothes/"+avatarGender.toLowerCase()+"_clothes_00.png",
+		                      closetUrl+"hair/"+avatarGender.toLowerCase()+"_hair_00.png",
+		                      closetUrl+"eyes/a_eyes_00.png",
+		                      closetUrl+"mouse/a_mouse_00.png",
+		                      closetUrl+"empty.png",
+		                      closetUrl+"empty.png"
+		  ]
+		  
+		  
+    	  for(var i=0; i<=5; i++){
+			  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='"+className+"-avatar-"+setting.parts[i]+"'>";
+		  }
+		  
+		  for(var j=0; j<item.playerItemDTO.length; j++){
+			  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
+				  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='"+className+"-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
+		  }
+		  return avatarEquiAry;
+      }
 
    
     /* 실시간 주가 정보 */
@@ -102,7 +127,6 @@ $(function(){
             isHover = false;
          }
        )
-        
       }
       /* 주식 구매 */
 	   var buyStock = function(companyId, qty){
@@ -745,6 +769,102 @@ $(function(){
 	        	 friendDelBtn=0
         	 }
          })
+         
+         /* 친구리스트 */
+         friendSelectAll = function(data){
+				  var requestedFriend=""; 
+				  var ListFriend=""; 
+				  var friendBtnColor=""; 
+				  var friendGender="";
+				  var friendNickname= "";
+				 /* var closetUrl = "resources/img/avatar/";*/
+				 
+				  var avatarEquiAry;
+				  
+				  $("#friend-content .list-group > .title").siblings("li").remove(); 
+				  
+				  $.each(data.data,function(index,item){
+					  friendGender=item.friendGender
+					  
+					  /*var defaultItemAry=[
+					                      closetUrl+"clothes/"+friendGender+"_clothes_00.png",
+					                      closetUrl+"hair/"+friendGender+"_hair_00.png",
+					                      closetUrl+"eyes/a_eyes_00.png",
+					                      closetUrl+"mouse/a_mouse_00.png",
+					                      closetUrl+"empty.png",
+					                      closetUrl+"empty.png"
+					  ]*/
+					  
+					  userInfo.nickName==item.playerNickname ? friendNickname=item.playerNickname2 : 
+						  									   friendNickname=item.playerNickname;
+					  
+					  if(item.friendIsAccepted=="F"){
+						  if(userInfo.nickName==item.playerNickname){
+							  requestedFriend+="<li href='#' class='list-group-item text-left'>";
+							  requestedFriend+="<div class='friend-avatar-div' >";
+							  avatarEquiAry = avatarEqui("friend",friendGender,item)
+							  /*for(var i=0; i<=5; i++){
+								  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
+							  }
+							  
+							  for(var j=0; j<item.playerItemDTO.length; j++){
+								  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
+									  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
+							  }*/
+							  
+							  
+							  for(var k=0; k<=5; k++ ){
+								  requestedFriend += avatarEquiAry[k];
+							  }
+							  
+							  
+							  requestedFriend+="</div>"; 
+							  requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
+							  requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
+							  requestedFriend+="<div class='pull-right'>"; 
+							  requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+							  requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
+							  requestedFriend+="</div></li>"; 
+						  }
+					  
+					  }else{
+						  ListFriend += "<li href='#' class='list-group-item text-left'>";
+						  ListFriend += "<div class='friend-avatar-div'>";
+						  
+						  /*for(var i=0; i<=5; i++){
+							  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
+						  }
+						  
+						  for(var j=0; j<item.playerItemDTO.length; j++){
+							  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
+								  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
+						  }*/
+						  avatarEquiAry = avatarEqui("friend",friendGender,item)
+						  for(var k=0; k<=5; k++ ){
+							  ListFriend += avatarEquiAry[k];
+						  }
+						  
+						  ListFriend += "</div>";
+						  
+						  if(item.onOrOff==true){ 
+							  friendBtnColor="green"; 
+						  }else{
+							  friendBtnColor="red"; 
+						  } 
+						  
+						  ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
+				  		  ListFriend += "<label class='name'>"+friendNickname+"</label>";
+     			  		  ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
+						  ListFriend += "<div class='pull-right'>";
+						  ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
+						  ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
+						  
+					  } 
+				  })
+				  $("#friend-list-que ul").append(requestedFriend);
+				  $("#friend-list-group ul").append(ListFriend);
+         }
+         
       }
       
       /* 경제용어사전 */
@@ -1029,6 +1149,34 @@ $(function(){
       
       /* 유저 정보 보기 */
       var showUserInfo = function(nickName){
+    	  
+    	  /*유저 아바타*/
+          var myInfoAvatar = function(){
+        	  $.ajax({
+					 url:"userInfo2",
+					 type:"post",
+					 data:"tragetPlayer="+userInfo.nickName,  /////////////////내정보만구현되어있음!!
+					 dataType:"json",
+					 success:function(data){
+						 console.log("데이터!!")
+						 console.log(data);
+						 str="";
+						 $.each(data,function(index,item){
+							 var avatarEquiAry = avatarEqui("userinfo",item.playerGender,item);
+							 for(var i=0; i<=5; i++ ){
+								  str += avatarEquiAry[i];
+							 }
+							 $(".userinfo-avatar-div").empty();
+							 $(".userinfo-avatar-div").html(str);	
+						 })
+						 
+					 },
+					 error:function(err){
+						 console.log("Exception : myInfoAvatar ");
+					 }
+				 })
+          }
+    	  
           $.ajax({
              url:"userInfo",
              data:{targetPlayer:nickName},
@@ -1044,12 +1192,14 @@ $(function(){
                      closeButtonAction: 'close',
                      theme:userInfo.theme
                 });
-                
+                myInfoAvatar();
              },
              error:function(err){
                 console.log("Exception : showUserInfo");
              }
           })
+          
+          
        };
       
        var myStockListUpdate = function(){
@@ -1286,6 +1436,101 @@ $(function(){
         });
       } 
       
+      /*랭킹*/
+      var initRanking = function(){
+    	  /*랭킹 조회*/
+ 		 var rankingSelect = function(kind){
+ 			 $.ajax({
+ 				 url:"getRank",
+ 				 type:"post",
+ 				 dataType:"json",
+ 				 data:"kind="+kind,
+ 				 success:function(data){
+ 					 console.log(data)
+ 					 rankingdraw(kind,data);
+ 			   	 	
+ 				 },
+ 				 error:function(){
+ 					 console.log("Exception : 랭크조회");
+ 				 }
+ 			 })
+ 		 }
+ 		 
+ 		 /* 시즌랭킹 탭 */
+ 		 $("#ranking-tab-season").on("click",function(){
+ 			 rankingSelect("s");
+ 		 })
+ 		 
+ 		 /* 일일랭킹 탭*/
+ 		 $("#ranking-tab-daily").on("click",function(){
+ 			 rankingSelect("d");
+ 		 })
+ 		 
+ 		 /*랭킹검색*/ //ResponseBody아님!!
+ 		 $("#ranking-search").on("keyup",function(){
+ 			 
+ 			 if(event.keyCode == 13) {
+ 			    var kind ="";
+ 			 	$("#ranking-myTabContent .active").attr("id")=="ranking-season" ? kind="s" : kind="d";
+ 		 		$.ajax({
+ 					 url:"userInfo2",
+ 					 type:"post",
+ 					 data:"tragetPlayer="+$(this).val(),
+ 					 dataType:"json",
+ 					 success:function(data){
+ 						 console.log(data);
+ 						 rankingdraw(kind, data);
+ 					 },
+ 					 error:function(err){
+ 						 console.log("Exception : 랭킹검색 ");
+ 					 }
+ 				 })
+ 		 	 }
+ 		 })
+ 		 
+ 		 /*랭킹 그리기*/
+ 		 var rankingdraw = function(kind, data){
+ 			 var str="";
+ 			 $.each(data,function(index,item){
+ 				 
+ 				 kind=="s" ? str+="<tr><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";
+ 				 str+="<td><div class='ranking-avatar-div'>";
+ 				 
+ 				 var avatarEquiAry = avatarEqui("ranking",item.playerGender,item);
+ 				 
+ 				 for(var i=0; i<=5; i++ ){
+ 					  str += avatarEquiAry[i];
+ 				  }
+ 				 str+="</div>";
+ 				 str+="</td>";
+ 				 str+="<td>"+item.playerNickname+"</td>";
+ 				 kind=="s" ? str+="<td>"+item.totalEarningRate+"</td>" : str+="<td>"+item.earningRate+"%</td>";
+ 				 str+="<td>"+item.totalMoney+"</td></tr>";
+ 			 }) 
+ 			 if(kind=="s"){
+ 				 $("#ranking-season-tbody").empty();
+ 				 $("#ranking-season-tbody").html(str);						 
+ 			 }else{
+ 				 $("#ranking-daily-tbody").empty();
+ 				 $("#ranking-daily-tbody").html(str);
+ 			 }
+ 		 }
+ 		 
+ 		$("#ranking-window").jqxWindow({
+ 	          theme:userInfo.theme,
+ 	          height:440,
+ 	          width:550,
+ 	          maxWidth:800,
+ 	          minWidth:400,
+ 	          minHeight:400,
+ 	          resizable:true,
+ 	          autoOpen:false,
+ 	          showCollapseButton: true
+ 	        });
+ 		 
+ 		 rankingSelect("s");
+      }
+      
       invenInit();
       rtaInit();
       stockListInit();
@@ -1297,7 +1542,7 @@ $(function(){
       newsSearchInit();
       settingInit();
       initChatRoom();
-      
+      initRanking();
       
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
@@ -1309,8 +1554,9 @@ $(function(){
             $("#auction-btn").setBtn($("#auction-window"));
             $("#mystock-btn").setBtn($("#mystock-window"));
             $("#news-search-btn").setBtn($("#news-search-window"));
-            $("#setting-btn").setBtn($("#setting-window"))
+            $("#setting-btn").setBtn($("#setting-window"));
             $("#chatroom-btn").setBtn($("#chatroom-window"));
+            $("#ranking-btn").setBtn($("#ranking-window"));
             $("#myinfo-btn").click(function(){
             showUserInfo(userInfo.nickName);
           });
@@ -1371,97 +1617,6 @@ $(function(){
                
           }
           
-          /* 친구리스트 */
-          var friendSelectAll = function(data){
-				  var requestedFriend=""; 
-				  var ListFriend=""; 
-				  var friendBtnColor=""; 
-				  var friendGender="";
-				  var closetUrl = "resources/img/avatar/";
-				  var friendNickname= "";
-				 
-				  var avatarEquiAry = new Array();
-				  
-				  $("#friend-content .list-group > .title").siblings("li").remove(); 
-				  
-				  $.each(data.data,function(index,item){
-					  friendGender=item.friendGender.toLowerCase()
-					  
-					  var defaultItemAry=[
-					                      closetUrl+"clothes/"+friendGender+"_clothes_00.png",
-					                      closetUrl+"hair/"+friendGender+"_hair_00.png",
-					                      closetUrl+"eyes/a_eyes_00.png",
-					                      closetUrl+"mouse/a_mouse_00.png",
-					                      closetUrl+"empty.png",
-					                      closetUrl+"empty.png"
-					  ]
-					  
-					  userInfo.nickName==item.playerNickname ? friendNickname=item.playerNickname2 : 
-						  									   friendNickname=item.playerNickname;
-					  
-					  if(item.friendIsAccepted=="F"){
-						  if(userInfo.nickName==item.playerNickname){
-							  requestedFriend+="<li href='#' class='list-group-item text-left'>";
-							  requestedFriend+="<div class='friend-avatar-div' >";
-							  
-							  for(var i=0; i<=5; i++){
-								  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
-							  }
-							  
-							  for(var j=0; j<item.playerItemDTO.length; j++){
-								  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
-									  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
-							  }
-							  for(var k=0; k<=5; k++ ){
-								  requestedFriend += avatarEquiAry[k];
-							  }
-							  
-							  
-							  requestedFriend+="</div>"; 
-							  requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
-							  requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
-							  requestedFriend+="<div class='pull-right'>"; 
-							  requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
-							  requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
-							  requestedFriend+="</div></li>"; 
-						  }
-					  
-					  }else{
-						  ListFriend += "<li href='#' class='list-group-item text-left'>";
-						  ListFriend += "<div class='friend-avatar-div'>";
-						  
-						  for(var i=0; i<=5; i++){
-							  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
-						  }
-						  
-						  for(var j=0; j<item.playerItemDTO.length; j++){
-							  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
-								  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
-						  }
-						  for(var k=0; k<=5; k++ ){
-							  ListFriend += avatarEquiAry[k];
-						  }
-						  
-						  ListFriend += "</div>";
-						  
-						  if(item.onOrOff==true){ 
-							  friendBtnColor="green"; 
-						  }else{
-							  friendBtnColor="red"; 
-						  } 
-						  
-						  ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
-				  		  ListFriend += "<label class='name'>"+friendNickname+"</label>";
-      			  		  ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
-						  ListFriend += "<div class='pull-right'>";
-						  ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
-						  ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
-						  
-					  } 
-				  })
-				  $("#friend-list-que ul").append(requestedFriend);
-				  $("#friend-list-group ul").append(ListFriend);
-          }
           	
           /* 친구창 채팅 버튼*/
           var friendChatBtn = function(){

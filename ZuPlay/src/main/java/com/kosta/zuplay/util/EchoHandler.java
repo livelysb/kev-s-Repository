@@ -35,78 +35,86 @@ public class EchoHandler extends TextWebSocketHandler {
 
 	@Override
 	protected void handleTextMessage(WebSocketSession webSession, TextMessage message) {
-		String mes = message.getPayload();
-		System.out.println(mes);
-		String[] mesArr = mes.split("#/fuckWebSocket/#");
-		String playerNickname = mesArr[1];
-		if (mesArr[0].equals("open")) {
-			application.setAttribute("#" + playerNickname, new PlayerVO(playerNickname, webSession));
-			try {
-				friendController.friendLogin(playerNickname);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (mesArr[0].equals("friendSelect")) {
-			friendController.friendSelect(playerNickname);
-		} else if (mesArr[0].equals("friendAdd")) {
-			try {
-				friendController.friendAdd(playerNickname, mesArr[2]);// param :
-																		// playerNickname,playerNickname2
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			// else if (mesArr[0].equals("friendSelectOnline")) {
-			// friendController.friendSelectOnline(playerNickname);
-		} else if (mesArr[0].equals("friendDel")) {
-			friendController.friendDel(playerNickname, Integer.parseInt(mesArr[2]));// param
-																					// :
-																					// playerNickname,friendSq
-		} else if (mesArr[0].equals("friendAccept")) {
-			friendController.friendAccept(playerNickname, mesArr[2], Integer.parseInt(mesArr[3]));// param
-																									// :
-																									// playerNickname,playerNickname,friendSq
-		} else if (mesArr[0].equals("chatOneByOne")) {
-			chattingServiceImpl.chatOnebyOne(playerNickname, mesArr[2], mesArr[3]); // param
-																					// :
-																					// sender
-																					// /
-																					// receiver
-																					// /
-																					// message
-		} else if (mesArr[0].equals("chatRoomCreate")) {
-			chattingServiceImpl.chatRoomCreate(playerNickname, mesArr[2], mesArr[3], Integer.parseInt(mesArr[4])); // param
-			// :
-			// sender
-			// /
-			// roomname
-			// /
-			// password
-			// /
-			// maxNum
-		} else if (mesArr[0].equals("chatRoomJoin")) {
-			chattingServiceImpl.chatRoomJoin(playerNickname, Integer.parseInt(mesArr[2]), mesArr[3]); // param
-			// :
-			// sender
-			// /
-			// roomNum
-			// /
-			// password
-		} else if (mesArr[0].equals("chatRoomChat")) {
-			chattingServiceImpl.chatRoomChat(playerNickname, Integer.parseInt(mesArr[2]), mesArr[3]); // param
+		try {
+			String mes = message.getPayload();
+			System.out.println(mes);
+			String[] mesArr = mes.split("#/fuckWebSocket/#");
+			String playerNickname = mesArr[1];
+			if (mesArr[0].equals("open")) {
+				application.setAttribute("#" + playerNickname, new PlayerVO(playerNickname, webSession));
+				try {
+					friendController.friendLogin(playerNickname);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (mesArr[0].equals("friendSelect")) {
+				friendController.friendSelect(playerNickname);
+			} else if (mesArr[0].equals("friendAdd")) {
+				try {
+					friendController.friendAdd(playerNickname, mesArr[2]);// param
+																			// :
+																			// playerNickname,playerNickname2
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				// else if (mesArr[0].equals("friendSelectOnline")) {
+				// friendController.friendSelectOnline(playerNickname);
+			} else if (mesArr[0].equals("friendDel")) {
+				friendController.friendDel(playerNickname, Integer.parseInt(mesArr[2]));// param
+																						// :
+																						// playerNickname,friendSq
+			} else if (mesArr[0].equals("friendAccept")) {
+				friendController.friendAccept(playerNickname, mesArr[2], Integer.parseInt(mesArr[3]));// param
 																										// :
-																										// sender
-																										// /
-																										// roomNum
-																										// /
-																										// message
-		} else if (mesArr[0].equals("chatRoomOut")) {
-			chattingServiceImpl.chatRoomOut(playerNickname, Integer.parseInt(mesArr[2]), false); // param
-																							// :
-																							// sender
-																							// /
-																							// roomNm
-		} else if (mesArr[0].equals("chatRoomSelect")){
-			chattingServiceImpl.chatRoomSelect(playerNickname, Integer.parseInt(mesArr[2]));
+																										// playerNickname,playerNickname,friendSq
+			} else if (mesArr[0].equals("chatOneByOne")) {
+				chattingServiceImpl.chatOnebyOne(playerNickname, mesArr[2], mesArr[3]); // param
+																						// :
+																						// sender
+																						// /
+																						// receiver
+																						// /
+																						// message
+			} else if (mesArr[0].equals("chatRoomCreate")) {
+				chattingServiceImpl.chatRoomCreate(playerNickname, mesArr[2], mesArr[3], Integer.parseInt(mesArr[4])); // param
+				// :
+				// sender
+				// /
+				// roomname
+				// /
+				// password
+				// /
+				// maxNum
+			} else if (mesArr[0].equals("chatRoomJoin")) {
+				if(mesArr.length==4)
+					chattingServiceImpl.chatRoomJoin(playerNickname, Integer.parseInt(mesArr[2]), mesArr[3]); // param
+				else
+					chattingServiceImpl.chatRoomJoin(playerNickname, Integer.parseInt(mesArr[2]), "");
+				// :
+				// sender
+				// /
+				// roomNum
+				// /
+				// password
+			} else if (mesArr[0].equals("chatRoomChat")) {
+				chattingServiceImpl.chatRoomChat(playerNickname, Integer.parseInt(mesArr[2]), mesArr[3]); // param
+																											// :
+																											// sender
+																											// /
+																											// roomNum
+																											// /
+																											// message
+			} else if (mesArr[0].equals("chatRoomOut")) {
+				chattingServiceImpl.chatRoomOut(playerNickname, Integer.parseInt(mesArr[2]), false); // param
+				// :
+				// sender
+				// /
+				// roomNm
+			} else if (mesArr[0].equals("chatRoomSelect")) {
+				chattingServiceImpl.chatRoomSelect(playerNickname, Integer.parseInt(mesArr[2]));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -19,7 +19,7 @@ public interface RankService {
 	/**
 	 * 랭크 조회하기
 	 * */
-	List<PlayerDTO> getRank() throws Exception;
+	List<PlayerDTO> getRank(String kind) throws Exception;
 	
 
 	

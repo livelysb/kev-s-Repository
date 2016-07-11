@@ -121,7 +121,7 @@ public class PlayerInfoController {
 	@ResponseBody
 	public String getRank(HttpSession session, String kind) throws Exception {
 		try {
-			return new Gson().toJson(rankService.getRank());
+			return new Gson().toJson(rankService.getRank(kind));
 		} catch(Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMsg", e.getMessage());

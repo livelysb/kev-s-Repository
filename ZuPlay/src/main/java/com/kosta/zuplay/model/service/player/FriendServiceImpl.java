@@ -110,21 +110,24 @@ public class FriendServiceImpl implements FriendService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		List<PlayerItemDTO> listDDDDD=new ArrayList<>();
 		for (int i = 0; i < listA.size(); i++) {
 			FriendDTO dto = listA.get(i);
 			List<PlayerItemDTO> listPi = dto.getList();
-			if (i < 10) {
+			if (i < 7) {
 				if (listPi.get(i).getPiIndex() == i) {
 					listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(), dto.getPlayerNickname(),
 							dto.getFriendIsAccepted(), dto.getFriendDate(), false, dto.getList()));
 				} else {
-					listVO.add(null);
+					listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(), dto.getPlayerNickname(),
+							dto.getFriendIsAccepted(), dto.getFriendDate(), false, listDDDDD));
 				}
 			} else {
 				listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(), dto.getPlayerNickname(),
 						dto.getFriendIsAccepted(), dto.getFriendDate(), false, dto.getList()));
 			}
 		}
+		System.out.println(listVO);
 		for (int i = 0; i < listB.size(); i++) {
 			FriendDTO dto = listB.get(i);
 			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(), dto.getPlayerNickname(),

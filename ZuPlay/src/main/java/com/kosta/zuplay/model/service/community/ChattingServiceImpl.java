@@ -116,9 +116,10 @@ public class ChattingServiceImpl implements ChattingService {
 					continue;
 				} else {
 					ChatRoomVO chatRoomVO = map.get(roomNo);
-					ChatRoomVO chatRoomVO2 = new ChatRoomVO(chatRoomVO.getRoomNo(), chatRoomVO.getRoomName(), "", chatRoomVO.getPlayerList(), chatRoomVO.getMaxNum());
-					
-					if(!chatRoomVO.getPassword().equals(""))
+					ChatRoomVO chatRoomVO2 = new ChatRoomVO(chatRoomVO.getRoomNo(), chatRoomVO.getRoomName(), "",
+							chatRoomVO.getPlayerList(), chatRoomVO.getMaxNum());
+
+					if (!chatRoomVO.getPassword().equals(""))
 						chatRoomVO2.setPassword("T");
 					else
 						chatRoomVO2.setPassword("");
@@ -138,6 +139,7 @@ public class ChattingServiceImpl implements ChattingService {
 
 	@Override
 	public void chatRoomJoin(String sender, int roomNo, String password) {
+		try {
 		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		ChatRoomVO crv = map.get(roomNo);
 
@@ -174,6 +176,9 @@ public class ChattingServiceImpl implements ChattingService {
 		if (playerVO != null) {
 			playerVO.getChatRoomList().add(crv.getRoomNo());
 		}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -199,15 +204,20 @@ public class ChattingServiceImpl implements ChattingService {
 	}
 
 	@Override
-	public void chatRoomOut(String sender, int roomNo) {
+	public void chatRoomOut(String sender, int roomNo, boolean allOut) {
 		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		ChatRoomVO crv = map.get(roomNo);
 
 		// 방 나가기
 		try {
-			crv.getPlayerList().remove(getPlayer(sender));
-			System.out.println(sender + "나갔슴");
-			System.out.println("채팅방 남은 인원수 : " + crv.getPlayerList().size());
+			PlayerDTO playerDTO = null;
+			for (PlayerDTO playerDTO2 : crv.getPlayerList()) {
+				if (playerDTO2.getPlayerNickname().equals(sender)) {
+					playerDTO = playerDTO2;
+					break;
+				}
+			}
+			crv.getPlayerList().remove(playerDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -217,19 +227,24 @@ public class ChattingServiceImpl implements ChattingService {
 		for (PlayerDTO playerDTO : crv.getPlayerList()) {
 			receivers.add(playerDTO.getPlayerNickname());
 		}
-		sendDataWebSocket.sendData(sender, receivers, "chatOut", getPlayer(sender));
+		if (crv.getPlayerList().size() != 0)
+			sendDataWebSocket.sendData(sender, receivers, "chatOut", getPlayer(sender));
 
-		// 플레이어의 VO에 접속 중인 채팅방 끊기
-		PlayerVO playerVO = (PlayerVO) context.getAttribute("#" + sender);
-		if (playerVO != null) {
-			int index = playerVO.getChatRoomList().indexOf(new Integer(roomNo));
-			System.out.println(roomNo+"번방 나가기전 방 목록");
-			for(int i : playerVO.getChatRoomList())
-				System.out.print(i+", ");
-			playerVO.getChatRoomList().remove(index);
-			System.out.println(roomNo+"번방 나간 뒤 방 목록");
-			for(int i : playerVO.getChatRoomList())
-				System.out.print(i+", ");
+		if (!allOut) {
+			// 플레이어의 VO에 접속 중인 채팅방 끊기
+			PlayerVO playerVO = (PlayerVO) context.getAttribute("#" + sender);
+			if (playerVO != null) {
+				int index = playerVO.getChatRoomList().indexOf(new Integer(roomNo));
+				System.out.println(roomNo + "번방 나가기전 방 목록");
+				for (int i : playerVO.getChatRoomList())
+					System.out.print(i + ", ");
+				System.out.println();
+				playerVO.getChatRoomList().remove(index);
+				System.out.println(roomNo + "번방 나간 뒤 방 목록");
+				for(int i : playerVO.getChatRoomList())
+					System.out.print(i+", ");
+				System.out.println();
+			}
 		}
 
 	}
@@ -239,8 +254,9 @@ public class ChattingServiceImpl implements ChattingService {
 		PlayerVO playerVO = (PlayerVO) context.getAttribute("#" + playerNickname);
 		if (playerVO != null) {
 			for (int roomNo : playerVO.getChatRoomList()) {
-				chatRoomOut(playerNickname, roomNo);
+				chatRoomOut(playerNickname, roomNo, true);
 			}
+			playerVO.setChatRoomList(null);
 		}
 	}
 

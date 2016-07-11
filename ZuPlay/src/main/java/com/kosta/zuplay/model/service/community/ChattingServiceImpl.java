@@ -42,8 +42,8 @@ public class ChattingServiceImpl implements ChattingService {
 	@Autowired
 	private SqlSession sqlSession;
 
-	
 	AtomicInteger i = new AtomicInteger(100);
+
 	@Override
 	public void chatOnebyOne(String sender, String receiver, String msg) {
 		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
@@ -74,9 +74,10 @@ public class ChattingServiceImpl implements ChattingService {
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public void chatRoomCreate(String sender, String roomName, String password, int maxNum) {
-		if (context.getAttribute("chatRoom") == null) 
+		if (context.getAttribute("chatRoom") == null)
 			context.setAttribute("chatRoom", new TreeMap<Integer, ChatRoomVO>());
 
 		// 나에게 보내기
@@ -99,35 +100,33 @@ public class ChattingServiceImpl implements ChattingService {
 			playerVO.getChatRoomList().add(crv.getRoomNo());
 		}
 	}
-	
 
 	@Override
 	public void chatRoomSelect(String sender, int page) {
 		try {
-		System.out.println("came here, chatRoomSelect");
-		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
-		if(map==null)
-			return;
-		List<ChatRoomVO> chatRoomList = new ArrayList<ChatRoomVO>();
-		int i = (page-1)*10+1;
-		int start = 1;
-		for(Integer roomNo : map.keySet()) {
-			if(start<i) {
-				start++;
-				continue;
-			}else {
-				chatRoomList.add(map.get(roomNo));
-				if(start == i+9)
-					break;
-				start++;
+			Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
+			if (map == null)
+				return;
+			List<ChatRoomVO> chatRoomList = new ArrayList<ChatRoomVO>();
+			int i = (page - 1) * 10 + 1;
+			int start = 1;
+			for (Integer roomNo : map.keySet()) {
+				if (start < i) {
+					start++;
+					continue;
+				} else {
+					ChatRoomVO chatRoomVO = map.get(roomNo);
+					chatRoomVO.setPassword(null);
+					chatRoomList.add(chatRoomVO);
+					if (start == i + 9)
+						break;
+					start++;
+				}
 			}
-		}
-		List<String> myself = new ArrayList<String>();
-		myself.add(sender);
-		System.out.println(myself);
-		System.out.println(chatRoomList);
-		sendDataWebSocket.sendData(sender, myself, "chatList", chatRoomList);
-		} catch(Exception e) {
+			List<String> myself = new ArrayList<String>();
+			myself.add(sender);
+			sendDataWebSocket.sendData(sender, myself, "chatList", chatRoomList);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

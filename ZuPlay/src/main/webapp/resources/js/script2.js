@@ -1205,6 +1205,9 @@ $(function(){
   				type:"post",
   				dataType:"text",
   				data:"psMyPage="+psMyPage+"&psChatting="+psChatting+"&psFriendAdd="+psFriendAdd+"&psTheme="+$("#setting-select").val()+"&psBgmSound=0",
+  				success:function(){
+  					location.reload(true)
+  				},
   				error:function(err){
   					console.log("Exception : 설정정보 저장")
   				}
@@ -1223,6 +1226,7 @@ $(function(){
   					$("#setting-whisper").prop("checked",true);
   					$("#setting-friend").prop("checked",true);
   					$("#setting-select").val("kokomo");
+  					location.reload(true)
   				},
   				error:function(err){
   					console.log("Exception : 설정 초기화")

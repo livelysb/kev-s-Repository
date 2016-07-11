@@ -4,6 +4,7 @@ $(function(){
          url:"updatePI",
          dataType:"json",
          success:function(data){
+        	 console.log(data);
             userInfo.nickName=data.playerNickname;
             userInfo.gender =data.playerGender;
             userInfo.money =data.playerMoney;
@@ -11,7 +12,6 @@ $(function(){
             userInfo.grade=data.playerGrade;
             userInfo.dailyRank=data.playerDailyRank;
             userInfo.seasonRank=data.playerSeasonRank;
-            userInfo.theme = "kokomo";
             
             if(callBack){
                callBack();
@@ -396,7 +396,6 @@ $(function(){
              return jsonArr;
              
            }
-           
            $("#inven-Window").jqxWindow({
                 minWidth:600,
                 minHeight:420,
@@ -821,7 +820,7 @@ $(function(){
       /* 경매장 */
       var auctionInit = function(){
          // 페이지 변수
-         var count=1;
+        var count=1;
         var sellBtn="";
         var colorBtn="";
         var sellFlag=false;
@@ -831,8 +830,9 @@ $(function(){
           
         // 구매탭
         $("#auction-buytab").on("click",function(){
-           $("#auction-search").show();
-             $("#auction-select").show();
+        	$("#auction-search").show();
+        	$("#auction-select").show();
+        	search()
         })
           
           // 판매탭
@@ -1059,7 +1059,6 @@ $(function(){
     		   dataType:"json",
     		   success:function(data){
     			   str="";
-    			   console.log(data);
     			   $("#mystockListTBody").empty();
     			   $.each(data, function(index, item){
     				   str+="<tr><td>"+item.isuKorAbbrv+"</td>";
@@ -1149,7 +1148,6 @@ $(function(){
        
 
        /* 1:1 채팅 */
-       /** 추가추가**/
        var showChatWindow = function(nick){
           if(!$("#chat-no-"+nick).length){
              var str = "";
@@ -1207,6 +1205,9 @@ $(function(){
   				type:"post",
   				dataType:"text",
   				data:"psMyPage="+psMyPage+"&psChatting="+psChatting+"&psFriendAdd="+psFriendAdd+"&psTheme="+$("#setting-select").val()+"&psBgmSound=0",
+  				success:function(){
+  					location.reload(true)
+  				},
   				error:function(err){
   					console.log("Exception : 설정정보 저장")
   				}
@@ -1225,6 +1226,7 @@ $(function(){
   					$("#setting-whisper").prop("checked",true);
   					$("#setting-friend").prop("checked",true);
   					$("#setting-select").val("kokomo");
+  					location.reload(true)
   				},
   				error:function(err){
   					console.log("Exception : 설정 초기화")
@@ -1268,7 +1270,22 @@ $(function(){
   		
   		settingLoad()
       }
-       
+      
+      /* 채팅방 윈도우 */
+      var initChatRoom = function(){
+      $("#chatroom-window").jqxWindow({
+          theme:userInfo.theme,
+          width:400,
+          maxWidth:800,
+          minWidth:400,
+          minHeight:400,
+          autoOpen:false,
+          height:600,
+          maxHeight:900,
+          showCollapseButton: true
+        });
+      } 
+      
       invenInit();
       rtaInit();
       stockListInit();
@@ -1279,6 +1296,9 @@ $(function(){
       myStockInit();
       newsSearchInit();
       settingInit();
+      initChatRoom();
+      
+      
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
             $("#rta-btn").setBtn($("#rta-Window"));
@@ -1290,6 +1310,7 @@ $(function(){
             $("#mystock-btn").setBtn($("#mystock-window"));
             $("#news-search-btn").setBtn($("#news-search-window"));
             $("#setting-btn").setBtn($("#setting-window"))
+            $("#chatroom-btn").setBtn($("#chatroom-window"));
             $("#myinfo-btn").click(function(){
             showUserInfo(userInfo.nickName);
           });
@@ -1300,7 +1321,6 @@ $(function(){
       var sendMsg = function(){
           var args = Array.prototype.slice.call(arguments, 0);
           var msg = args.join("#/fuckWebSocket/#");
-          console.log(msg);
           ws.send(msg);
        }
       
@@ -1312,197 +1332,137 @@ $(function(){
               location.href = "logout";
            });
           
+          
           /* 채팅 메세지 */
-          /** 추가추가 */
           var oneByOne = function(evt){
-        	  var target;
-        	  var str = "";
-        	  var n = $(document).height();
-        	  if(evt.data.sender == userInfo.nickName){
-        		  target = $("#chat-no-"+evt.data.receiver);
-        		  str += "<li class='right clearfix'><span class='chat-img pull-right'>";
-        	  }else{
-        		  target = $("#chat-no-"+evt.data.sender);
-        		  console.log($(target).length);
-        		  if(!$(target).length){
-        			  showChatWindow(evt.data.sender);
-        			  oneByOne(evt);
-        			  return;
-        		  }
-        		  
-        		  str += "<li class='left clearfix'><span class='chat-img pull-left'>";
-        		  
-        		  
-        	  }
-        	  
-        	  var cul = $(target).find(".chat-group");
-        	  
-	              str += "<li class='right clearfix'><span class='chat-img pull-right'>";
-	              str += "<img src='http://bootdey.com/img/Content/user_3.jpg' alt='User Avatar'>";
-	              str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
-	              str += evt.data.sender;
-	              str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
-	              str += evt.data.time;
-	              str += "</small></div><p>";
-	      		  str += evt.data.msg;
-	      		  str+="</p></div></li>";
-	      		
-	      		  var n = $(cul).append(str).css("height");
-	      		  
-	      		$(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
-	      		
+             var target;
+             var str = "";
+             var n = $(document).height();
+             if(evt.data.sender == userInfo.nickName){
+                target = $("#chat-no-"+evt.data.receiver);
+                str += "<li class='right clearfix'><span class='chat-img pull-right'>";
+             }else{
+                target = $("#chat-no-"+evt.data.sender);
+                console.log($(target).length);
+                if(!$(target).length){
+                   showChatWindow(evt.data.sender);
+                   oneByOne(evt);
+                   return;
+                }
+                
+                str += "<li class='left clearfix'><span class='chat-img pull-left'>";
+                
+             }
+             
+             var cul = $(target).find(".chat-group");
+             
+                 str += "<img src='http://bootdey.com/img/Content/user_3.jpg' alt='User Avatar'>";
+                 str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
+                 str += evt.data.sender;
+                 str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
+                 str += evt.data.time;
+                 str += "</small></div><p>";
+                 str += evt.data.msg;
+                 str+="</p></div></li>";
+               
+                 var n = $(cul).append(str).css("height");
+                 
+                 $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
+               
           }
           
           /* 친구리스트 */
-          
-          /**
-			 * 아 이틀동안 로직생각해봤는데 이런 쓰레기코드나와서 미안합니다 사죄하겠습니다. 이건 진짜 하다하다 답이안나와서 이치안에
-			 * 포문넣고 그안에 스위치문넣고 그안에 또 삼항연산자 넣었습니다. 그리고 변수도 많이많이 썻습니다. 죄송합니다.
-			 */
           var friendSelectAll = function(data){
-        	  
 				  var requestedFriend=""; 
 				  var ListFriend=""; 
 				  var friendBtnColor=""; 
-				  var friendGender=""; 
+				  var friendGender="";
 				  var closetUrl = "resources/img/avatar/";
+				  var friendNickname= "";
+				 
+				  var avatarEquiAry = new Array();
+				  
+				  $("#friend-content .list-group > .title").siblings("li").remove(); 
 				  
 				  $.each(data.data,function(index,item){
-				  if(userInfo.nickName==item.playerNickname){ var
-				  friendNickname=item.playerNickname2 }else{ var
-				  friendNickname=item.playerNickname }
-				  
-				  if(item.friendIsAccepted=="F"){
-				  if(userInfo.nickName==item.playerNickname){
-				  requestedFriend+="<li href='#' class='list-group-item text-left'>";
-				  requestedFriend+="<div class='friend-avatar-div' >";
-				  
-				  
-				  /*for(var i=0; i<=6; i++){
-				  console.log(typeof(item.playerItemDTO[i])); switch (i) { case
-				  0 : item.playerItemDTO[i].itemCode=="m_hair_10"?
-				  friendGender="m": friendGender="f"; break;
-				  
-				  case 1 : typeof(item.playerItemDTO[i])==undefined ?
-				  requestedFriend+="<img src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">" :
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-				  2 : typeof(item.playerItemDTO[i])==undefined ?
-				  requestedFriend+="<img
-				  src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">" :
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>"; break; case 3 :
-				  typeof(item.playerItemDTO[i])==undefined ? requestedFriend+="<img
-				  src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">" :
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-				  4 : typeof(item.playerItemDTO[i])==undefined ?
-				  requestedFriend+="<img
-				  src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">" :
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-				  5 : typeof(item.playerItemDTO[i])==undefined ?
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-				  requestedFriend+="<img
-				  src='"+closetUrl+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">" ; break; case
-				  6 : typeof(item.playerItemDTO[i])==undefined ?
-				  requestedFriend+="<img
-				  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-				  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-				  requestedFriend+="<img
-				  src='"+closetUrl+setting.defaultCloset[i-1]+"'
-				  class='friend-avatar-'"+setting.parts[i-1]+">"; break; }
-				   }*/
-				  
-				  requestedFriend+="</div>"; 
-				  requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
-				  requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
-				  requestedFriend+="<div class='pull-right'>"; 
-				  requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
-				  requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; requestedFriend+="</div></li>"; }
-				  
-				  }else{
+					  friendGender=item.friendGender.toLowerCase()
 					  
-					  ListFriend+="<li href='#' class='list-group-item text-left'>";
-					  ListFriend+="<div class='friend-avatar-div' >"; /*for(var i=0;
-					  i<=6; i++){ switch (i) { case 0 :
-					  item.playerItemDTO[i].itemCode=="m_hair_10"?
-					  friendGender="m": friendGender="f"; break;
+					  var defaultItemAry=[
+					                      closetUrl+"clothes/"+friendGender+"_clothes_00.png",
+					                      closetUrl+"hair/"+friendGender+"_hair_00.png",
+					                      closetUrl+"eyes/a_eyes_00.png",
+					                      closetUrl+"mouse/a_mouse_00.png",
+					                      closetUrl+"empty.png",
+					                      closetUrl+"empty.png"
+					  ]
 					  
-					  case 1 : typeof(item.playerItemDTO[i])==undefined ?
-					  ListFriend+="<img
-					  src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-					  2 : console.log("<img
-					  src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>")
-					  typeof(item.playerItemDTO[i])==undefined ? ListFriend+="<img
-					  src='"+closetUrl+setting.parts[i-1]+"/"+friendGender+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>"; break; case 3 :
-					  typeof(item.playerItemDTO[i])==undefined ? ListFriend+="<img
-					  src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-					  4 : typeof(item.playerItemDTO[i])==undefined ? ListFriend+="<img
-					  src='"+closetUrl+setting.parts[i-1]+"/"+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-					  5 : typeof(item.playerItemDTO[i])==undefined ? ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+closetUrl+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" ; break; case
-					  6 : typeof(item.playerItemDTO[i])==undefined ? ListFriend+="<img
-					  src='"+item.playerItemDTO[i].itemDTO.itemImg+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>" :
-					  ListFriend+="<img
-					  src='"+closetUrl+setting.defaultCloset[i-1]+"'
-					  class='friend-avatar-"+setting.parts[i-1]+"'>"; break; }
-					   }*/
+					  userInfo.nickName==item.playerNickname ? friendNickname=item.playerNickname2 : 
+						  									   friendNickname=item.playerNickname;
 					  
-					  ListFriend+="</div>";
+					  if(item.friendIsAccepted=="F"){
+						  if(userInfo.nickName==item.playerNickname){
+							  requestedFriend+="<li href='#' class='list-group-item text-left'>";
+							  requestedFriend+="<div class='friend-avatar-div' >";
+							  
+							  for(var i=0; i<=5; i++){
+								  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
+							  }
+							  
+							  for(var j=0; j<item.playerItemDTO.length; j++){
+								  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
+									  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
+							  }
+							  for(var k=0; k<=5; k++ ){
+								  requestedFriend += avatarEquiAry[k];
+							  }
+							  
+							  
+							  requestedFriend+="</div>"; 
+							  requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
+							  requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
+							  requestedFriend+="<div class='pull-right'>"; 
+							  requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+							  requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
+							  requestedFriend+="</div></li>"; 
+						  }
 					  
-					  if(item.onOrOff==true){ 
-						  friendBtnColor="green"; 
 					  }else{
-						  friendBtnColor="red"; 
-					  } 
-					  
-					  ListFriend+="<div class='friend-icon "+friendBtnColor+"'> </div>"; 
-					  ListFriend+="<label class='name'>"+friendNickname+"</label>"; 
-					  ListFriend+="<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>"; 
-					  ListFriend+="<div class='pull-right'>"; 
-					  ListFriend+="<button type='button' class='btn btn-info friend-sendBtn '>"; 
-					  ListFriend+="<i class='glyphicon glyphicon-envelope'></i></button></div></li>"; 
-					  
+						  ListFriend += "<li href='#' class='list-group-item text-left'>";
+						  ListFriend += "<div class='friend-avatar-div'>";
+						  
+						  for(var i=0; i<=5; i++){
+							  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
+						  }
+						  
+						  for(var j=0; j<item.playerItemDTO.length; j++){
+							  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
+								  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
+						  }
+						  for(var k=0; k<=5; k++ ){
+							  ListFriend += avatarEquiAry[k];
+						  }
+						  
+						  ListFriend += "</div>";
+						  
+						  if(item.onOrOff==true){ 
+							  friendBtnColor="green"; 
+						  }else{
+							  friendBtnColor="red"; 
+						  } 
+						  
+						  ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
+				  		  ListFriend += "<label class='name'>"+friendNickname+"</label>";
+      			  		  ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
+						  ListFriend += "<div class='pull-right'>";
+						  ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
+						  ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
+						  
 					  } 
 				  })
-				  $("#friend-content .list-group > .title").siblings("li").remove(); 
-				  $("#friend-list-que ul").append(requestedFriend); $("#friend-list-group ul").append(ListFriend);
+				  $("#friend-list-que ul").append(requestedFriend);
+				  $("#friend-list-group ul").append(ListFriend);
           }
-          
+          	
           /* 친구창 채팅 버튼*/
           var friendChatBtn = function(){
              $(document).on("click",".friend-sendBtn.btn-info",function(evt){
@@ -1514,7 +1474,8 @@ $(function(){
           
           ws.onmessage = function(event){
               var data = JSON.parse(event.data);
-              console.log(data)
+              console.log(data);
+              
               switch(data.type){
                  case "friendSelect" : friendSelectAll(data);  break;
                  
@@ -1536,11 +1497,12 @@ $(function(){
                  case "notiFriendLogout" :$("#noti-msg").text(data.data+"님께서 로그아웃 하셨습니다.");
 						                  $("#friend-request-noti").jqxNotification("open");
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
-				/** 추가추가 */ case "oneByOne" : oneByOne(data); break;
+                 case "" : break;
                  
                  case "chat-on" : break;
                  case "chat-off" : break;
                  case "chat-msg" : break;
+                 case "oneByOne" : oneByOne(data); break;
                  
                  default : console.log("unknow msg : " + data.type);
               }

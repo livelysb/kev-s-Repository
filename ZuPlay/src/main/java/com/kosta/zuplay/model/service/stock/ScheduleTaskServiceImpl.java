@@ -28,7 +28,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 		//chattingService.chatOnebyOne("이석범짱", "이석범짱", "Hi");
 	}
 	
-	@Scheduled(cron="0 0/5 9-18 * * MON-FRI")
+	@Scheduled(cron="0 0/5 9-17 * * MON-FRI")
 	@Override
 	public void actionPer10Min() {
 		System.out.println("매 5분마다 작업을 시작합니다.");
@@ -39,7 +39,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 		}
 	}
 	
-	@Scheduled(cron="0 0/10 9-18 * * MON-FRI")
+	@Scheduled(cron="0 0/10 9-17 * * MON-FRI")
 	@Override
 	public void actionPer20Min(){
 		System.out.println("매 10분마다 작업을 시작합니다.");
@@ -51,7 +51,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	}
 	
 
-	@Scheduled(cron="0 13 10 * * MON-FRI")
+	@Scheduled(cron="0 59 9 * * MON-FRI")
 	@Override
 	public void actionAtNine(){
 		System.out.println("AM 09:59, 작업을 시작합니다.");

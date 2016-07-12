@@ -1178,7 +1178,7 @@ $(function(){
           
           
           /*친구정보보기*/
-          $(document).on("click","#friend-content .name, #ranking-content tr td:nth-child(2)  ",function(){
+          $(document).on("click","#friend-content .name, #ranking-content tr td:nth-child(3)  ",function(){
         	  console.log($(this).text());
         	  showUserInfo($(this).text());
           }).on("hover"," #friend-content .name",function(){

@@ -1131,7 +1131,7 @@ $(function(){
              $.ajax({
                 url:"userInfo2",
                 type:"post",
-                data:"tragetPlayer="+nickName,  /////////////////내정보만구현되어있음!!
+                data:"tragetPlayer="+nickName, 
                 dataType:"json",
                 success:function(data){
                    console.log("데이터!!")
@@ -1153,12 +1153,12 @@ $(function(){
              })
           }
           showUserInfo = function(nickName){
-	          $.ajax({
+        	  $.ajax({
 	             url:"userInfo",
 	             data:{targetPlayer:nickName},
 	             dataType:"html",
 	             success:function(data){
-	
+            	 console.log(data)
 	              $(".main-area").append(data);
 	                $("#userinfo-player-"+nickName).jqxWindow({
 	                     width:"450",
@@ -1179,6 +1179,7 @@ $(function(){
           
           /*친구정보보기*/
           $(document).on("click","#friend-content .name",function(){
+        	  console.log($(this).text());
         	  showUserInfo($(this).text());
           }).on("hover"," #friend-content .name",function(){
         	  $(this).css('cursor','pointer');

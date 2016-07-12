@@ -1629,7 +1629,7 @@ $(function(){
                  avatarEquiAry = avatarEqui("chat",evt.data.gender,evt.data.playerItem)
                  
 				 for(var i=0; i<=5; i++ ){
-					 ListFriend += avatarEquiAry[i];
+					 str += avatarEquiAry[i];
 				 }
 				  
                  

@@ -1423,6 +1423,16 @@ $(function(){
       
       /* 채팅방 윈도우 */
       var initChatRoom = function(){
+         
+     $("#chatroom-create-btn").click(function(){
+        $("#chatroom-create-modal").modal('show');
+     });
+     
+     $("#chat-create-confirm").click(function(){
+        sendMsg("chatRoomCreate",userInfo.nickName, $("#chat-create-name").val(), $("#chat-create-pwd").val(), $("#chat-create-max").val());
+        $("#chatroom-create-modal").modal('toggle');
+     });
+         
       $("#chatroom-window").jqxWindow({
           theme:userInfo.theme,
           width:400,
@@ -1529,6 +1539,8 @@ $(function(){
  	        });
  		 
  		 rankingSelect("s");
+ 		 
+ 		 
       }
       
       invenInit();
@@ -1547,7 +1559,7 @@ $(function(){
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
             $("#rta-btn").setBtn($("#rta-Window"));
-            $("#stockList-btn").setBtn($("#stock-window"));
+            $("#stockList-btn").setBtn($("#stock-wiow"));
             $("#store-btn").setBtn($("#store-window"));
             $("#friend-btn").setBtn($("#friend-window"));
             $("#financial-btn").setBtn($("#financial-window"));
@@ -1577,6 +1589,13 @@ $(function(){
               disconnect();
               location.href = "logout";
            });
+          /* 채팅방 로드*/
+          var chatRoomSelect = function(page){
+             sendMsg("chatRoomSelect", userInfo.nickName,page);
+          }
+          
+          chatRoomSelect(1);
+          
           
           
           /* 채팅 메세지 */
@@ -1616,7 +1635,6 @@ $(function(){
                  $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
                
           }
-          
           	
           /* 친구창 채팅 버튼*/
           var friendChatBtn = function(){
@@ -1626,6 +1644,52 @@ $(function(){
              });
           }
           friendChatBtn();
+          
+          /** 추가(3) 채팅 시작*/
+          /* 채팅 시작 */
+          var chatStart = function(content){
+             console.log(content);
+             var data = content.data;
+             showChatWindow("room"+data.roomNo);
+          }
+          
+          /** 추가(3) 채팅 시작*/
+          /* 채팅 리스트 */
+          var chatList = function(content){
+             //chatroom-list-ul
+             var str = "";
+             var data = content.data;
+             for(var i=0; i<data.length;i++){
+               str += "<div class='chatroom-rooms'> <a href='#' class='clearfix'><div class='chatroom-name'><h3><strong>";
+               str += "<input type='hidden' value='"+data[i].roomNo+"'>";
+               str += data[i].roomName;
+               str += "</strong></h3></a><small class='text-muted'>";
+               str += data[i].playerList.length + " / " + data[i].maxNum;
+               str += "</small>"
+               if(data[i].password == "T"){
+                 str += "<small class='chat-alert label label-danger'>password</small>"
+               }
+               str += "</div>";
+             }
+             
+             
+             $("#chatroom-list-ul").append(str);
+             var eventTargets = $("#chatroom-list-ul").children(".chatroom-rooms");
+             $(eventTargets).click(function(event){
+                var roomNo = $(this).find(":hidden").val();
+                console.log($(this).find("small.chat-alert"));
+                if($(this).find("small.chat-alert").length){
+                  var password = prompt("비밀번호를 입력해주세요", "");
+                  sendMsg("chatRoomJoin",userInfo.nickName,roomNo, password);
+                  return;
+                }
+               
+                sendMsg("chatRoomJoin",userInfo.nickName,roomNo);
+             })
+             
+             //chatRoomJoin
+          }
+          
           
           ws.onmessage = function(event){
               var data = JSON.parse(event.data);
@@ -1652,12 +1716,12 @@ $(function(){
                  case "notiFriendLogout" :$("#noti-msg").text(data.data+"님께서 로그아웃 하셨습니다.");
 						                  $("#friend-request-noti").jqxNotification("open");
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
-                 case "" : break;
-                 
                  case "chat-on" : break;
                  case "chat-off" : break;
                  case "chat-msg" : break;
                  case "oneByOne" : oneByOne(data); break;
+                 case "chatStart" : chatStart(data); break;
+                 case "chatList" : chatList(data); break;
                  
                  default : console.log("unknow msg : " + data.type);
               }

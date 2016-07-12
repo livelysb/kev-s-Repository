@@ -60,9 +60,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 		try {
 			stockUpdateService.masterUpdate();
 			stockUpdateService.realtimePriceReset();
-			
 			earningRateService.updateEarningRate();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

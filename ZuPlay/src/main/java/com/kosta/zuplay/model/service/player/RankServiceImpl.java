@@ -49,6 +49,8 @@ public class RankServiceImpl implements RankService{
 		int i = 0;
 		for(PlayerDTO playerDTO : playerList2) {
 			i++;
+			System.out.println(playerDTO.getPlayerNickname() + ", " + i + "등, 일일수익률 : " + playerDTO.getEarningRate());
+			System.out.println(playerDTO.getPlayerNickname() + ", " + i + "등, 종합수익률 : " + playerDTO.getTotalEarningRate());
 			PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("playerNickname", playerDTO.getPlayerNickname());
@@ -80,7 +82,7 @@ public class RankServiceImpl implements RankService{
 			if(kind.equals("d"))
 				player.setEarningRate(earningRateService.calDailyEarningRate(playerNickname));
 			else
-				player.setEarningRate(earningRateService.calEarningRate(playerNickname));
+				player.setTotalEarningRate(earningRateService.calEarningRate(playerNickname));
 			player.setTotalMoney(playerInfoService.getTotalMoney(playerNickname));
 			player.setPlayerItemDTO(inventoryService.playerItemWorn(playerNickname));
 			playerList2.add(player);

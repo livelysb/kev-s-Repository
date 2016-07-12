@@ -144,8 +144,10 @@ public class ChattingServiceImpl implements ChattingService {
 			ChatRoomVO crv = map.get(roomNo);
 
 			// 조건에 맞지 않을 경우 들어오지 못함
-			if (crv.getMaxNum() <= crv.getPlayerList().size() || !crv.getPassword().equals(password))
+			if (crv.getMaxNum() <= crv.getPlayerList().size() || !crv.getPassword().equals(password)) {
+				System.out.println("여기 오나?");
 				return;
+			}
 
 			/**
 			 * 1. 방에 멤버에게 참석자의 정보를 전송

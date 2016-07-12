@@ -6,7 +6,7 @@ import java.util.List;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 
 public class ChatRoomVO {
-
+	private String sender;
 	private int roomNo;
 	private String roomName;
 	private String password;
@@ -17,13 +17,22 @@ public class ChatRoomVO {
 	public ChatRoomVO() {
 	}
 	
-	public ChatRoomVO(int roomNo, String roomName, String password, List<PlayerDTO> playerList, int maxNum) {
+	public ChatRoomVO(String sender, int roomNo, String roomName, String password, List<PlayerDTO> playerList, int maxNum) {
 		super();
+		this.sender = sender;
 		this.roomNo = roomNo;
 		this.roomName = roomName;
 		this.password = password;
 		this.playerList = playerList;
 		this.maxNum = maxNum;
+	}
+
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
 	}
 
 	public int getRoomNo() {

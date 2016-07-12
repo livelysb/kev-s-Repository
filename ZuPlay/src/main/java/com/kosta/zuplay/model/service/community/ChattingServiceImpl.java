@@ -90,7 +90,7 @@ public class ChattingServiceImpl implements ChattingService {
 
 		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		int roomNo = i.getAndIncrement();
-		ChatRoomVO crv = new ChatRoomVO(roomNo, roomName, password, playersInfo, maxNum);
+		ChatRoomVO crv = new ChatRoomVO(sender, roomNo, roomName, password, playersInfo, maxNum);
 		map.put(roomNo, crv);
 		sendDataWebSocket.sendData(sender, myself, "chatStart", crv);
 
@@ -116,7 +116,7 @@ public class ChattingServiceImpl implements ChattingService {
 					continue;
 				} else {
 					ChatRoomVO chatRoomVO = map.get(roomNo);
-					ChatRoomVO chatRoomVO2 = new ChatRoomVO(chatRoomVO.getRoomNo(), chatRoomVO.getRoomName(), "",
+					ChatRoomVO chatRoomVO2 = new ChatRoomVO(sender, chatRoomVO.getRoomNo(), chatRoomVO.getRoomName(), "",
 							chatRoomVO.getPlayerList(), chatRoomVO.getMaxNum());
 
 					if (!chatRoomVO.getPassword().equals(""))
@@ -156,10 +156,11 @@ public class ChattingServiceImpl implements ChattingService {
 			for (PlayerDTO playerDTO : crv.getPlayerList()) {
 				receivers.add(playerDTO.getPlayerNickname());
 			}
-			// 나의정보 (data)
-			PlayerDTO player = getPlayer(sender);
+			// 방의 참에 참석, 나의정보 (변경된 채팅방 정보)
+			crv.getPlayerList().add(getPlayer(sender));
+			crv.setSender(sender);
 			// 전송
-			sendDataWebSocket.sendData(sender, receivers, "chatIn", new ChatMsgVO(sender, null, new AtomicInteger(roomNo), null, null, null, null));
+			sendDataWebSocket.sendData(sender, receivers, "chatIn", crv);
 
 			/**
 			 * 2. 나에게 방의 정보보내기
@@ -167,8 +168,7 @@ public class ChattingServiceImpl implements ChattingService {
 			// 나에게 보내기(receivers)
 			List<String> myself = new ArrayList<String>();
 			myself.add(sender);
-			// 방에 참석, 방정보 및 방 사람들의 정보(crv>(data)
-			crv.getPlayerList().add(player);
+
 			// 전송
 			sendDataWebSocket.sendData(sender, myself, "chatStart", crv);
 
@@ -233,9 +233,10 @@ public class ChattingServiceImpl implements ChattingService {
 			for (PlayerDTO playerDTO : crv.getPlayerList()) {
 				receivers.add(playerDTO.getPlayerNickname());
 				System.out.println("플레이어 닉네임 : " + playerDTO.getPlayerNickname());
-			}
+			}		
+			crv.setSender(sender);
 			if (crv.getPlayerList().size() != 0)
-				sendDataWebSocket.sendData(sender, receivers, "chatOut", new ChatMsgVO(sender, null, new AtomicInteger(roomNo), null, null, null, null));
+				sendDataWebSocket.sendData(sender, receivers, "chatOut", crv);
 		}
 		
 

@@ -8,6 +8,7 @@ public interface ScheduleTaskService {
 	/**
 	 * 작동빈도 : 작업이 끝난 시점으로 1분 뒤 재시작한다.
 	 * 수행사항 : price 값 받아와서 PRICE, REALTIME_PRICE 테이블을 update, insert를 진행한다.
+	 *            모든 플레이어의 랭크를 갱신한다.
 	 * */
 	public void actionPer10Min() throws Exception;
 	
@@ -20,8 +21,7 @@ public interface ScheduleTaskService {
 	 * 수행사항
 	 * 1. 마스터정보를 업데이트한다.
 	 * 2. 어제의 실시간 체결가를 초기화한다.
-	 * 3. 모든 플레이어의 랭크를 갱신한다.
-	 * 4. 모든 플레이어의 일일 수익률을 삽입시키고, 전일 가격을 업데이트시킨다.
+	 * 4. 모든 플레이어의 일일 수익률을 갱신시키고, 전일 가격을 업데이트시킨다.
 	 * 5. 금일 접속자에게 한번에 한하여 루비를 준다.
 	 * */
 	public void actionAtNine() throws Exception;

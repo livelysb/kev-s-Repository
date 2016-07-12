@@ -69,4 +69,8 @@ public interface ItemAuctionDAO {
 	 * 종료물품 삭제
 	 */
 	int auctionDeleteFin(int imSq) throws Exception;
+	/**
+	 * 나의 종료된 아이템 조회하기
+	 */
+	List<ItemMarketDTO> itemAuctionEndSearch(String playerNickname) throws Exception;
 }

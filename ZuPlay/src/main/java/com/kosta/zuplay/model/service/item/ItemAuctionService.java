@@ -44,4 +44,9 @@ public interface ItemAuctionService {
 	 * 경매종료 물품 종료 
 	 */
 	public void itemAuctionUpdate() throws Exception;
+	
+	/**
+	 * 경매장 판매완료 물건 조회
+	 */
+	public boolean itemAuctionEndSearch(String playerNickname) throws Exception;
 }

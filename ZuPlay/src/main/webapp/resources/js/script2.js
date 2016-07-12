@@ -171,7 +171,7 @@ $(function(){
 			  };
       /* 기업 정보 조회 */
       var companyInfo = function(companyId){
-             var price = $(companyId + " .company-title-stock").text();
+             var price = $(companyId + " .	-title-stock").text();
              var isuCd = $(companyId + " .company-isuCd").val();
              var qty = $(companyId + " .company-qty").val();
              var ticks = parseInt(userInfo.money/price);
@@ -777,7 +777,6 @@ $(function(){
 				  var friendBtnColor=""; 
 				  var friendGender="";
 				  var friendNickname= "";
-				 /* var closetUrl = "resources/img/avatar/";*/
 				 
 				  var avatarEquiAry;
 				  
@@ -836,6 +835,7 @@ $(function(){
 		                    
 		                 } 
 		              })
+		              console.log(requestedFriend)
 		              $("#friend-list-que ul").append(requestedFriend);
 		              $("#friend-list-group ul").append(ListFriend);
 		         }

@@ -63,7 +63,7 @@
 
 <script type="text/javascript">
 
-	var naverLogin = new naver_id_login("MEu9lHVoIBXQU0fULcr6","http://127.0.0.1:8000/zuplay/LoginInfo");
+	var naverLogin = new naver_id_login("MEu9lHVoIBXQU0fULcr6","http://192.168.0.57/zuplay/LoginInfo");
 
 	//get_naver_userprofile 동작후 callback 될 function
 	function testcallback() {
@@ -128,7 +128,7 @@
     	 //모달이 포커스를 잃을 시 로그인화면으로 이동
     	 $('#nickModal').on('hidden.bs.modal', function() {
     		 alert("별명을 입력하지않으면 게임을 할 수 없습니다.")
-    		 location.href="http://127.0.0.1:8000/zuplay/Login";
+    		 location.href="http://192.168.0.57/zuplay/Login";
     	 })
    }) 
 	</script>

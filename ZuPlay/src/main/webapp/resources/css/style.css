@@ -565,6 +565,10 @@ div.vertical-line{
   height: 100%;
 }
 
+#friend-content .name:hover{
+	cursor:pointer;
+}
+
 /*주식 리스트*/
 
 #page-align{
@@ -1021,4 +1025,8 @@ display:inline-block;
 }
 #ranking-content td{
 	vertical-align: middle;
+}
+
+#ranking-content .ranking-playernickname:hover{
+	cursor:pointer;
 }

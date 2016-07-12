@@ -1731,6 +1731,7 @@ $(function(){
                  });
                 
                 var onlineLabel = $(chatContent).find(".chat-current-online");
+                var title = $(chatContent).find(".chat-room-header");
                 
                 if(content.data.playerList.length>content.data.maxNum){
                 	$(onlineLabel).removeClass("label-success").addClass("label-danger");
@@ -1739,7 +1740,7 @@ $(function(){
                 
                 
                 /* 채팅방 채팅 보내기 */
-                $(document).on("click","#chat-roomNo-"+roomNo+" .chat-sendBtn",function(evt){
+                $(document).on("click","#chat-roomNo-"+roomNo+" .chat-sendBtn",function(event){
              	   if($(chatOut).val() == ""){
              		   return;
              	   }
@@ -1757,6 +1758,19 @@ $(function(){
                     }
                  });
                }
+               
+               var users = "";
+               for(var i=0; i<content.data.playerList.length; i++){
+            	   users += content.data.playerList[i].playerNickname;
+               }
+               $(title).jqxTooltip({ 
+            	   content: users, 
+            	   position: 'bottom', 
+            	   autoHide: false, 
+            	   trigger: "none", 
+            	   closeOnClick: false 
+            	 });
+               
           }
 
           /* 채팅 리스트 */

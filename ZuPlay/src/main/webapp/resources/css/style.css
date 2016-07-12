@@ -529,6 +529,8 @@ div.vertical-line{
 
 .dropdown-user:hover {
    cursor: pointer;
+   	color:#4682b4;
+	font-weight: bold;
 }
 
 .table-user-information>tbody>tr {
@@ -1000,7 +1002,7 @@ display:inline-block;
 
 .chat-room-header:HOVER {
 	cursor: pointer;
-	color:#4682b4;
+	color:blue;
 	font-weight: bold;
 }
 /*랭킹*/

@@ -48,8 +48,8 @@ $(function(){
         height : $("#avatar-clothes").css("height")
      });
       
-      /*아바타 옷입히기.*/
-      var avatarEqui = function(className,avatarGender,item){
+      /*아바타 옷입히기*/
+      var avatarEqui = function(className,avatarGender,playerItem){
 		  var avatarEquiAry = new Array();
 		  var closetUrl = "resources/img/avatar/";
 		  var defaultItemAry=[
@@ -66,13 +66,13 @@ $(function(){
 			  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='"+className+"-avatar-"+setting.parts[i]+"'>";
 		  }
 		  
-		  for(var j=0; j<item.playerItemDTO.length; j++){
-			  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
-				  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='"+className+"-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
+		  for(var j=0; j<playerItem.length; j++){
+			  avatarEquiAry[(playerItem[j].piIndex)-1] = 
+				  "<img src='"+playerItem[j].itemDTO.itemImg+"' class='"+className+"-avatar-"+setting.parts[(playerItem[j].piIndex)-1]+"'>";
 		  }
 		  return avatarEquiAry;
       }
-
+      
    
     /* 실시간 주가 정보 */
     var rtaInit = function(){
@@ -802,7 +802,7 @@ $(function(){
 						  if(userInfo.nickName==item.playerNickname){
 							  requestedFriend+="<li href='#' class='list-group-item text-left'>";
 							  requestedFriend+="<div class='friend-avatar-div' >";
-							  avatarEquiAry = avatarEqui("friend",friendGender,item)
+							  avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
 							  /*for(var i=0; i<=5; i++){
 								  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
 							  }
@@ -839,7 +839,7 @@ $(function(){
 							  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
 								  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
 						  }*/
-						  avatarEquiAry = avatarEqui("friend",friendGender,item)
+						  avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
 						  for(var k=0; k<=5; k++ ){
 							  ListFriend += avatarEquiAry[k];
 						  }
@@ -1162,7 +1162,7 @@ $(function(){
 						 console.log(data);
 						 str="";
 						 $.each(data,function(index,item){
-							 var avatarEquiAry = avatarEqui("userinfo",item.playerGender,item);
+							 var avatarEquiAry = avatarEqui("userinfo",item.playerGender,item.playerItemDTO);
 							 for(var i=0; i<=5; i++ ){
 								  str += avatarEquiAry[i];
 							 }
@@ -1509,7 +1509,7 @@ $(function(){
  				 kind=="s" ? str+="<tr><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";
  				 str+="<td><div class='ranking-avatar-div'>";
  				 
- 				 var avatarEquiAry = avatarEqui("ranking",item.playerGender,item);
+ 				 var avatarEquiAry = avatarEqui("ranking",item.playerGender,item.playerItemDTO);
  				 
  				 for(var i=0; i<=5; i++ ){
  					  str += avatarEquiAry[i];
@@ -1517,7 +1517,7 @@ $(function(){
  				 str+="</div>";
  				 str+="</td>";
  				 str+="<td>"+item.playerNickname+"</td>";
- 				 kind=="s" ? str+="<td>"+item.totalEarningRate+"</td>" : str+="<td>"+item.earningRate+"%</td>";
+ 				 kind=="s" ? str+="<td>"+item.totalEarningRate+"%</td>" : str+="<td>"+item.earningRate+"%</td>";
  				 str+="<td>"+item.totalMoney+"</td></tr>";
  			 }) 
  			 if(kind=="s"){
@@ -1624,7 +1624,18 @@ $(function(){
              
              var cul = $(target).find(".chat-group");
              
-                 str += "<img src='http://bootdey.com/img/Content/user_3.jpg' alt='User Avatar'>";
+                 str += "<div class='chat-avatar-div'>";
+                 
+                 avatarEquiAry = avatarEqui("chat",evt.data.gender,evt.data.playerItem)
+                 
+				 for(var i=0; i<=5; i++ ){
+					 ListFriend += avatarEquiAry[i];
+				 }
+				  
+                 
+                 str += "</div>";
+                 
+                 
                  str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
                  str += evt.data.sender;
                  str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";

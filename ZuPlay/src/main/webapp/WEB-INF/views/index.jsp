@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home</title>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+<link href="resources/css/font-awesome.min.css" rel="stylesheet" />
 <link href="resources/css/jqwidgets/jqx.base.css" rel="stylesheet" />
 <link href="resources/css/jqwidgets/jqx.kokomo.css" rel="stylesheet" />
 <c:if test="${theme ne 'kokomo'}">

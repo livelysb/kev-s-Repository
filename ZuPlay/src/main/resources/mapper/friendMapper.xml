@@ -40,7 +40,7 @@
 	<select id="friendSelectOnlyNicknameA" parameterType="String"
 		resultType="String">
 		select player_nickname from friend where
-		player_nickname2=#{value}
+		player_nickname2=#{value} and friend_isacepted='T'
 	</select>
 	<select id="friendSelectOnlyNicknameB" parameterType="String"
 		resultType="String">

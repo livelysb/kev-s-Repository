@@ -117,8 +117,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 			PlayerVO pv = (PlayerVO) application.getAttribute("#"+sellerNickname);
 			if (pv != null) {
 				WebSocketSession webSession = pv.getSession();
-				String json = "{\"type\":\"notiAuctionEndBySeller\",\"data\":\"" + jsss + "\"}";
-				System.out.println("json : " + json);
+				String json = "{\"type\":\"notiAuctionEndBySeller\",\"data\":" + jsss + "}";
 				webSession.sendMessage(new TextMessage(json));
 			}
 		} catch (Exception e) {

@@ -48,29 +48,29 @@ $(function(){
         height : $("#avatar-clothes").css("height")
      });
       
-      /*아바타 옷입히기.*/
-      var avatarEqui = function(className,avatarGender,item){
-		  var avatarEquiAry = new Array();
-		  var closetUrl = "resources/img/avatar/";
-		  var defaultItemAry=[
-		                      closetUrl+"clothes/"+avatarGender.toLowerCase()+"_clothes_00.png",
-		                      closetUrl+"hair/"+avatarGender.toLowerCase()+"_hair_00.png",
-		                      closetUrl+"eyes/a_eyes_00.png",
-		                      closetUrl+"mouse/a_mouse_00.png",
-		                      closetUrl+"empty.png",
-		                      closetUrl+"empty.png"
-		  ]
-		  
-		  
-    	  for(var i=0; i<=5; i++){
-			  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='"+className+"-avatar-"+setting.parts[i]+"'>";
-		  }
-		  
-		  for(var j=0; j<item.playerItemDTO.length; j++){
-			  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
-				  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='"+className+"-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
-		  }
-		  return avatarEquiAry;
+      /*아바타 옷입히기*/
+      var avatarEqui = function(className,avatarGender,playerItem){
+        var avatarEquiAry = new Array();
+        var closetUrl = "resources/img/avatar/";
+        var defaultItemAry=[
+                            closetUrl+"clothes/"+avatarGender.toLowerCase()+"_clothes_00.png",
+                            closetUrl+"hair/"+avatarGender.toLowerCase()+"_hair_00.png",
+                            closetUrl+"eyes/a_eyes_00.png",
+                            closetUrl+"mouse/a_mouse_00.png",
+                            closetUrl+"empty.png",
+                            closetUrl+"empty.png"
+        ]
+        
+        
+         for(var i=0; i<=5; i++){
+           avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='"+className+"-avatar-"+setting.parts[i]+"'>";
+        }
+        
+        for(var j=0; j<playerItem.length; j++){
+           avatarEquiAry[(playerItem[j].piIndex)-1] = 
+              "<img src='"+playerItem[j].itemDTO.itemImg+"' class='"+className+"-avatar-"+setting.parts[(playerItem[j].piIndex)-1]+"'>";
+        }
+        return avatarEquiAry;
       }
 
    
@@ -799,73 +799,73 @@ $(function(){
 						  									   friendNickname=item.playerNickname;
 					  
 					  if(item.friendIsAccepted=="F"){
-						  if(userInfo.nickName==item.playerNickname){
-							  requestedFriend+="<li href='#' class='list-group-item text-left'>";
-							  requestedFriend+="<div class='friend-avatar-div' >";
-							  avatarEquiAry = avatarEqui("friend",friendGender,item)
-							  /*for(var i=0; i<=5; i++){
-								  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
-							  }
-							  
-							  for(var j=0; j<item.playerItemDTO.length; j++){
-								  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
-									  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
-							  }*/
-							  
-							  
-							  for(var k=0; k<=5; k++ ){
-								  requestedFriend += avatarEquiAry[k];
-							  }
-							  
-							  
-							  requestedFriend+="</div>"; 
-							  requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
-							  requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
-							  requestedFriend+="<div class='pull-right'>"; 
-							  requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
-							  requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
-							  requestedFriend+="</div></li>"; 
-						  }
-					  
-					  }else{
-						  ListFriend += "<li href='#' class='list-group-item text-left'>";
-						  ListFriend += "<div class='friend-avatar-div'>";
-						  
-						  /*for(var i=0; i<=5; i++){
-							  avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
-						  }
-						  
-						  for(var j=0; j<item.playerItemDTO.length; j++){
-							  avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
-								  "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
-						  }*/
-						  avatarEquiAry = avatarEqui("friend",friendGender,item)
-						  for(var k=0; k<=5; k++ ){
-							  ListFriend += avatarEquiAry[k];
-						  }
-						  
-						  ListFriend += "</div>";
-						  
-						  if(item.onOrOff==true){ 
-							  friendBtnColor="green"; 
-						  }else{
-							  friendBtnColor="red"; 
-						  } 
-						  
-						  ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
-				  		  ListFriend += "<label class='name'>"+friendNickname+"</label>";
-     			  		  ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
-						  ListFriend += "<div class='pull-right'>";
-						  ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
-						  ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
-						  
-					  } 
-				  })
-				  $("#friend-list-que ul").append(requestedFriend);
-				  $("#friend-list-group ul").append(ListFriend);
-         }
-         
-      }
+		                    if(userInfo.nickName==item.playerNickname){
+		                       requestedFriend+="<li href='#' class='list-group-item text-left'>";
+		                       requestedFriend+="<div class='friend-avatar-div' >";
+		                       avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
+		                       /*for(var i=0; i<=5; i++){
+		                          avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
+		                       }
+		                       
+		                       for(var j=0; j<item.playerItemDTO.length; j++){
+		                          avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
+		                             "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
+		                       }*/
+		                       
+		                       
+		                       for(var k=0; k<=5; k++ ){
+		                          requestedFriend += avatarEquiAry[k];
+		                       }
+		                       
+		                       
+		                       requestedFriend+="</div>"; 
+		                       requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
+		                       requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
+		                       requestedFriend+="<div class='pull-right'>"; 
+		                       requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+		                       requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
+		                       requestedFriend+="</div></li>"; 
+		                    }
+		                 
+		                 }else{
+		                    ListFriend += "<li href='#' class='list-group-item text-left'>";
+		                    ListFriend += "<div class='friend-avatar-div'>";
+		                    
+		                    /*for(var i=0; i<=5; i++){
+		                       avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
+		                    }
+		                    
+		                    for(var j=0; j<item.playerItemDTO.length; j++){
+		                       avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
+		                          "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
+		                    }*/
+		                    avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
+		                    for(var k=0; k<=5; k++ ){
+		                       ListFriend += avatarEquiAry[k];
+		                    }
+		                    
+		                    ListFriend += "</div>";
+		                    
+		                    if(item.onOrOff==true){ 
+		                       friendBtnColor="green"; 
+		                    }else{
+		                       friendBtnColor="red"; 
+		                    } 
+		                    
+		                    ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
+		                      ListFriend += "<label class='name'>"+friendNickname+"</label>";
+		                        ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
+		                    ListFriend += "<div class='pull-right'>";
+		                    ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
+		                    ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
+		                    
+		                 } 
+		              })
+		              $("#friend-list-que ul").append(requestedFriend);
+		              $("#friend-list-group ul").append(ListFriend);
+		         }
+		         
+		      }
       
       /* 경제용어사전 */
       var financialInit = function(){
@@ -1152,29 +1152,29 @@ $(function(){
     	  
     	  /*유저 아바타*/
           var myInfoAvatar = function(){
-        	  $.ajax({
-					 url:"userInfo2",
-					 type:"post",
-					 data:"tragetPlayer="+userInfo.nickName,  /////////////////내정보만구현되어있음!!
-					 dataType:"json",
-					 success:function(data){
-						 console.log("데이터!!")
-						 console.log(data);
-						 str="";
-						 $.each(data,function(index,item){
-							 var avatarEquiAry = avatarEqui("userinfo",item.playerGender,item);
-							 for(var i=0; i<=5; i++ ){
-								  str += avatarEquiAry[i];
-							 }
-							 $(".userinfo-avatar-div").empty();
-							 $(".userinfo-avatar-div").html(str);	
-						 })
-						 
-					 },
-					 error:function(err){
-						 console.log("Exception : myInfoAvatar ");
-					 }
-				 })
+             $.ajax({
+                url:"userInfo2",
+                type:"post",
+                data:"tragetPlayer="+userInfo.nickName,  /////////////////내정보만구현되어있음!!
+                dataType:"json",
+                success:function(data){
+                   console.log("데이터!!")
+                   console.log(data);
+                   str="";
+                   $.each(data,function(index,item){
+                      var avatarEquiAry = avatarEqui("userinfo",item.playerGender,item.playerItemDTO);
+                      for(var i=0; i<=5; i++ ){
+                          str += avatarEquiAry[i];
+                      }
+                      $(".userinfo-avatar-div").empty();
+                      $(".userinfo-avatar-div").html(str);   
+                   })
+                   
+                },
+                error:function(err){
+                   console.log("Exception : myInfoAvatar ");
+                }
+             })
           }
     	  
           $.ajax({
@@ -1353,7 +1353,7 @@ $(function(){
              str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";
              str += "<div>Chat</div><div class='chat-content row-fluid'>"
              str += "<div class='col-md-12 bg-white'><div class='chat-message'><ul class='chat-group'></ul></div>"
-             str += "<div class='col-md-1'><a href='#' class='btn btn-danger'><i class='fa fa-plus fa-1x'></i><br/></a></div>" 
+             str += "<div class='col-md-1'><a href='#' class='chat-info-btn btn btn-danger'><i class='fa fa-plus fa-1x'></i><br/></a></div>" 
              str += "<div class='col-md-11 chat-box bg-white'><div class='input-group'>"
              str += "<input class='form-control border no-shadow no-rounded chat-output' placeholder='Type your message here'>"
              str += "<span class='input-group-btn chat-sendBtn'><button class='btn btn-success no-rounded' type='button'>Send</button>"
@@ -1551,33 +1551,36 @@ $(function(){
  		 	 }
  		 })
  		 
- 		 /*랭킹 그리기*/
- 		 var rankingdraw = function(kind, data){
- 			 var str="";
- 			 $.each(data,function(index,item){
- 				 
- 				 kind=="s" ? str+="<tr><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";
- 				 str+="<td><div class='ranking-avatar-div'>";
- 				 
- 				 var avatarEquiAry = avatarEqui("ranking",item.playerGender,item);
- 				 
- 				 for(var i=0; i<=5; i++ ){
- 					  str += avatarEquiAry[i];
- 				  }
- 				 str+="</div>";
- 				 str+="</td>";
- 				 str+="<td>"+item.playerNickname+"</td>";
- 				 kind=="s" ? str+="<td>"+item.totalEarningRate+"</td>" : str+="<td>"+item.earningRate+"%</td>";
- 				 str+="<td>"+item.totalMoney+"</td></tr>";
- 			 }) 
- 			 if(kind=="s"){
- 				 $("#ranking-season-tbody").empty();
- 				 $("#ranking-season-tbody").html(str);						 
- 			 }else{
- 				 $("#ranking-daily-tbody").empty();
- 				 $("#ranking-daily-tbody").html(str);
- 			 }
- 		 }
+ 		/*랭킹 그리기*/
+         var rankingdraw = function(kind, data){
+            var str="";
+            $.each(data,function(index,item){
+               if(item.playerSeasonRank==0 || item.playerDailyRank==0){
+                 return true
+               }
+               
+               kind=="s" ? str+="<tr><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";
+               str+="<td><div class='ranking-avatar-div'>";
+               
+               var avatarEquiAry = avatarEqui("ranking",item.playerGender,item.playerItemDTO);
+               
+               for(var i=0; i<=5; i++ ){
+                   str += avatarEquiAry[i];
+                }
+               str+="</div>";
+               str+="</td>";
+               str+="<td>"+item.playerNickname+"</td>";
+               kind=="s" ? str+="<td>"+item.totalEarningRate+"%</td>" : str+="<td>"+item.earningRate+"%</td>";
+               str+="<td>"+item.totalMoney+"</td></tr>";
+            }) 
+            if(kind=="s"){
+               $("#ranking-season-tbody").empty();
+               $("#ranking-season-tbody").html(str);                   
+            }else{
+               $("#ranking-daily-tbody").empty();
+               $("#ranking-daily-tbody").html(str);
+            }
+         }
  		 
  		$("#ranking-window").jqxWindow({
  	          theme:userInfo.theme,
@@ -1675,20 +1678,31 @@ $(function(){
              
              var cul = $(target).find(".chat-group");
              
-                 str += "<img src='http://bootdey.com/img/Content/user_3.jpg' alt='User Avatar'>";
-                 str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
-                 str += evt.data.sender;
-                 str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
-                 str += evt.data.time;
-                 str += "</small></div><p>";
-                 str += evt.data.msg;
-                 str+="</p></div></li>";
-               
-                 var n = $(cul).append(str).css("height");
-                 
-                 $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
-               
-          }
+             str += "<div class='chat-avatar-div'>";
+             
+             avatarEquiAry = avatarEqui("chat",evt.data.gender,evt.data.playerItem)
+             
+	         for(var i=0; i<=5; i++ ){
+	            str += avatarEquiAry[i];
+	         }
+	          
+	             
+	             str += "</div>";
+	             
+	             
+	             str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
+	             str += evt.data.sender;
+	             str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
+	             str += evt.data.time;
+	             str += "</small></div><p>";
+	             str += evt.data.msg;
+	             str+="</p></div></li>";
+	           
+	             var n = $(cul).append(str).css("height");
+	             
+	             $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
+	           
+	      }
           
           /* 채팅방 메세지*/
           var chatMsg = function(evt){
@@ -1704,14 +1718,25 @@ $(function(){
              
              var cul = $(target).find(".chat-group");
              
-                 str += "<img src='http://bootdey.com/img/Content/user_3.jpg' alt='User Avatar'>";
-                 str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
-                 str += evt.data.sender;
-                 str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
-                 str += evt.data.time;
-                 str += "</small></div><p>";
-                 str += evt.data.msg;
-                 str+="</p></div></li>";
+             str += "<div class='chat-avatar-div'>";
+             
+             avatarEquiAry = avatarEqui("chat",evt.data.gender,evt.data.playerItem)
+             
+	         for(var i=0; i<=5; i++ ){
+	            str += avatarEquiAry[i];
+	         }
+	          
+	             
+	             str += "</div>";
+	             
+	             
+	             str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
+	             str += evt.data.sender;
+	             str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
+	             str += evt.data.time;
+	             str += "</small></div><p>";
+	             str += evt.data.msg;
+	             str+="</p></div></li>";
                
                  var n = $(cul).append(str).css("height");
                  

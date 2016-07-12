@@ -103,16 +103,16 @@ public class PlayerInfoController {
 		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
 		ModelAndView mv = new ModelAndView("userInfo");
 		String playerNickname = (String) session.getAttribute("playerNickname");
-		PlayerDTO playerDTO = playerInfoService.getPlayerDetail(playerNickname);
+		PlayerDTO playerDTO = playerInfoService.getPlayerDetail(targetPlayer);
 		if (playerDTO.getPlayerGender().equals("M"))
 			playerDTO.setPlayerGender("남성");
 		else
 			playerDTO.setPlayerGender("여성");
-		List<PlayerItemDTO> playerItemList = inventoryService.playerItemSelectAll(playerNickname);
+		List<PlayerItemDTO> playerItemList = inventoryService.playerItemSelectAll(targetPlayer);
 		mv.addObject("playerDTO", playerDTO);
 		mv.addObject("playerItemList", playerItemList);
 
-		if (playerDTO.getLikerList().contains(playerNickname)) {
+		if (playerDTO.getLikerList().contains(targetPlayer)) {
 			mv.addObject("isLike", true);
 		} else {
 			mv.addObject("isLike", false);

@@ -108,4 +108,7 @@
 		select * from item_market where player_nickname=#{value} and im_auction_end!='T'
 	</select>
 	
+	<select id="itemAuctionEndSearchBySeller" parameterType="int" resultMap="itemMarketMapper">
+		select * from item_market where im_sq=#{value}
+	</select>
 </mapper>

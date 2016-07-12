@@ -116,6 +116,17 @@ div.vertical-line{
   padding:2px;
 }
 
+.vertical-middle{
+    display: table;
+    table-layout: fixed;
+}
+
+.vertical-center > *{
+	display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+}
+
 /* 실시간 정보 */
 #rta-data{padding: 0 0 0 0}
 #rta-th-name{width:130px;}
@@ -744,10 +755,6 @@ div.vertical-line{
   height: 100% ;
 }
 
-.chat-room-info{
-	text-align: center;
-}
-
 
 /*설정*/
 .switch {
@@ -978,6 +985,7 @@ display:inline-block;
   border-bottom: 2px #F2F2FF solid;
   text-align: center;
   overflow: hidden;
+  line-height: 100%;
 }
 
 .chat-room-header{

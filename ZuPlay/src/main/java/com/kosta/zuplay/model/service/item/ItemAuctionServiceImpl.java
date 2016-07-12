@@ -111,11 +111,13 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 		}
 		try {
 			ItemMarketDTO itemMarketDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
+			int imPrice=itemMarketDTO.getImPurchasePrice();
 			String sellerNickname = itemMarketDTO.getPlayerNickname();
+			String jsss="{\"sellerNickname\":"+sellerNickname+",\"imPrice\":\"" + imPrice + "\"}";
 			PlayerVO pv = (PlayerVO) application.getAttribute("#"+sellerNickname);
 			if (pv != null) {
 				WebSocketSession webSession = pv.getSession();
-				String json = "{\"type\":\"notiAuctionEndBySeller\",\"data\":\"" + itemMarketDTO + "\"}";
+				String json = "{\"type\":\"notiAuctionEndBySeller\",\"data\":\"" + jsss + "\"}";
 				webSession.sendMessage(new TextMessage(json));
 			}
 		} catch (Exception e) {

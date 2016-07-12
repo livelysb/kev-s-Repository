@@ -1353,8 +1353,8 @@ $(function(){
              str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";
              str += "<div>Chat</div><div class='chat-content row-fluid'>"
              str += "<div class='col-md-12 bg-white'><div class='chat-message'><ul class='chat-group'>"
-             str += "</ul></div><div class='col-md-11>";
-             str += '<a href="#" class="btn btn-sq-xs btn-danger"><i class="fa fa-plus fa-1x"></i><br/></a>';
+             str += "</ul></div><div class='col-md-1>";
+             str += '<a href="#" class="btn btn-sq-xs btn-danger"><i class="fa fa-plus fa-1x"></i><br/></a></div>';
              str += "<div class='col-md-11 chat-box bg-white'><div class='input-group'>";
              str += "<input class='form-control border no-shadow no-rounded chat-output' placeholder='Type your message here'>"
              str += "<span class='input-group-btn chat-sendBtn'><button class='btn btn-success no-rounded' type='button'>Send</button>"

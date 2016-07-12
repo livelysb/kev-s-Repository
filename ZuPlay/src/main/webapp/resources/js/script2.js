@@ -464,6 +464,7 @@ $(function(){
                      $("#stockListTBody").html(str);
                      
                      $(document).on("click", "#stock-window tr, #rta-Window tr",function(e){
+                    	 console.log("클릭이벤트!!");
                        var cd = $(this).find(":hidden").val();
                        showCompanyInfo(cd);
                      })

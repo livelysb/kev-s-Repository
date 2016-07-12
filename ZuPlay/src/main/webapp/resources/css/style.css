@@ -567,6 +567,8 @@ div.vertical-line{
 
 #friend-content .name:hover{
 	cursor:pointer;
+	color:#4682b4;
+	font-weight: bold;
 }
 
 /*주식 리스트*/
@@ -998,6 +1000,8 @@ display:inline-block;
 
 .chat-room-header:HOVER {
 	cursor: pointer;
+	color:#4682b4;
+	font-weight: bold;
 }
 /*랭킹*/
 

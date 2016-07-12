@@ -1707,7 +1707,7 @@ $(function(){
                   str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";
                   str += "<div>Chat</div><div class='chat-content row-fluid'>";
                   str += "<div class='col-md-12 chat-room-info'><span class='label label-default pull-left'>No."+roomNo+"</span>";
-                  str += "<label class='chat-room-header'>"+content.data.roomName+"</label>";
+                  str += "<label class='chat-room-header'>"+content.data.roomName+"</label><div class='chat-room-popover'>hello</div>";
                   str += "<span class='label label-success pull-right chat-current-online'></span>";
             	  if(content.data.password){
             		  str += "<span class='label label-danger pull-right'><i class='fa fa-key' aria-hidden='true'></i></span>";
@@ -1732,6 +1732,7 @@ $(function(){
                 
                 var onlineLabel = $(chatContent).find(".chat-current-online");
                 var title = $(chatContent).find(".chat-room-header");
+                var popover = $(chatContent).find(".chat-room-popover");
                 
                 if(content.data.playerList.length>content.data.maxNum){
                 	$(onlineLabel).removeClass("label-success").addClass("label-danger");
@@ -1759,17 +1760,15 @@ $(function(){
                  });
                }
                
-               var users = "";
-               for(var i=0; i<content.data.playerList.length; i++){
-            	   users += content.data.playerList[i].playerNickname;
-               }
-               $(title).jqxTooltip({ 
-            	   content: users, 
-            	   position: 'bottom', 
-            	   autoHide: false, 
-            	   trigger: "none", 
-            	   closeOnClick: false 
-            	 });
+               $(popover).jqxPopover({ 
+            	   offset: { left: 0, top: 240 }, 
+            	   isModal: true, 
+            	   arrowOffsetValue: -240, 
+            	   position: "right", 
+            	   title: "Employees", 
+            	   showCloseButton: true, 
+            	   selector: $(title)
+            	});
                
           }
 

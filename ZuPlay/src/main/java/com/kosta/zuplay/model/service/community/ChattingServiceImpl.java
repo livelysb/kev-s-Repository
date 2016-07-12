@@ -227,10 +227,12 @@ public class ChattingServiceImpl implements ChattingService {
 		System.out.println("방의 잔여 인원수 : " + crv.getPlayerList().size() + "명");
 		if(crv.getPlayerList().size() == 0) {
 			map.remove(roomNo);
+		} else {
 			// receiver
 			List<String> receivers = new ArrayList<String>();
 			for (PlayerDTO playerDTO : crv.getPlayerList()) {
 				receivers.add(playerDTO.getPlayerNickname());
+				System.out.println("플레이어 닉네임 : " + playerDTO.getPlayerNickname());
 			}
 			if (crv.getPlayerList().size() != 0)
 				sendDataWebSocket.sendData(sender, receivers, "chatOut", new ChatMsgVO(sender, null, new AtomicInteger(roomNo), null, null, null, null));

@@ -789,16 +789,13 @@ $(function(){
 						  									   friendNickname=item.playerNickname;
 					  
 					  if(item.friendIsAccepted=="F"){
-		                    if(userInfo.nickName==item.playerNickname){
 		                       requestedFriend+="<li href='#' class='list-group-item text-left'>";
 		                       requestedFriend+="<div class='friend-avatar-div' >";
 		                       avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
 		                       
-		                       
 		                       for(var k=0; k<=5; k++ ){
 		                          requestedFriend += avatarEquiAry[k];
 		                       }
-		                       
 		                       
 		                       requestedFriend+="</div>"; 
 		                       requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
@@ -807,7 +804,6 @@ $(function(){
 		                       requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
 		                       requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
 		                       requestedFriend+="</div></li>"; 
-		                    }
 		                 
 		                 }else{
 		                    ListFriend += "<li href='#' class='list-group-item text-left'>";

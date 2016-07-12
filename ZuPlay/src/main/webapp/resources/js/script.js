@@ -1345,54 +1345,6 @@ $(function(){
              $("#chat-no-"+nick).jqxWindow("show");
           }
        }
-
-       /* 채팅방 Show */
-       var showChatRoomWindow = function(roomNo){
-          if(!$("#chat-roomNo-"+roomNo).length){
-             var str = "";
-             str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";
-             str += "<div>Chat</div><div class='chat-content row-fluid'>"
-             str += "<div class='col-md-12 bg-white'><div class='chat-message'><ul class='chat-group'></ul></div>"
-             str += "<div class='col-md-1'><a href='#' class='chat-info-btn btn btn-danger'><i class='fa fa-plus fa-1x'></i><br/></a></div>" 
-             str += "<div class='col-md-11 chat-box bg-white'><div class='input-group'>"
-             str += "<input class='form-control border no-shadow no-rounded chat-output' placeholder='Type your message here'>"
-             str += "<span class='input-group-btn chat-sendBtn'><button class='btn btn-success no-rounded' type='button'>Send</button>"
-             str += "</span></div></div></div></div></div>"
-               
-           $("#main").append(str);
-             var chatContent = $("#chat-roomNo-"+roomNo);
-             var chatOut = $("#chat-roomNo-"+roomNo + " .chat-output");
-             
-           $("#chat-roomNo-"+roomNo).jqxWindow({
-             width:"430",
-             height:"700",
-             resizable:false,
-             showCollapseButton: true,
-             closeButtonAction: 'hide',
-             theme:userInfo.theme
-            });
-           
-           /* 채팅방 채팅 보내기 */
-           $(document).on("click","#chat-roomNo-"+roomNo+" .chat-sendBtn",function(evt){
-        	   if($(chatOut).val() == ""){
-        		   return;
-        	   }
-              sendMsg("chatRoomChat", userInfo.nickName, roomNo, $(chatOut).val());
-              $(chatOut).val("");
-           });
-           
-           $(chatOut).on("keyup",function(){
-        	   if($(chatOut).val() == ""){
-        		   return;
-        	   }
-               if(event.keyCode == 13) {
-	               sendMsg("chatRoomChat", userInfo.nickName, roomNo, $(chatOut).val());
-	               $(chatOut).val("");
-               }
-            });
-          }
-       }
-
        
       var settingInit = function(){
     	  var psMyPage="";
@@ -1757,7 +1709,70 @@ $(function(){
           /* 채팅 시작 */
           var chatStart = function(content){
              var data = content.data;
-             showChatRoomWindow(data.roomNo);
+             var roomNo = content.data.roomNo;
+
+             /*       <div class="col-md-12 chat-room-info">
+                    <span class="label label-default pull-left">No.335</span>
+                    <label>들어오세요!</label>
+                    <span class="label label-success pull-right chat-current-online">3 / 5</span>
+                    <span class="label label-danger pull-right"><i class="fa fa-key" aria-hidden="true"></i></span>
+                  </div>*/
+
+               if(!$("#chat-roomNo-"+roomNo).length){
+                  var str = "";
+                  str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";
+                  str += "<div>Chat</div><div class='chat-content row-fluid'>";
+                  str += "<div class='col-md-12 bg-white'><span class='label label-default pull-left'>No."+roomNo+"</span>";
+                  str += "<label>"+content.data.roomName+"</label>";
+                  str += "<span class='label label-success pull-right chat-current-online'></span>";
+            	  if(content.data.password){
+            		  str += "<span class='label label-danger pull-right'><i class='fa fa-key' aria-hidden='true'></i></span>";
+            	  }
+                  str += "</div><div class='chat-message'><ul class='chat-group'></ul></div><div class='col-md-12 chat-box bg-white'><div class='input-group'>";
+                  str += "<input class='form-control border no-shadow no-rounded chat-output' placeholder='Type your message here'>";
+                  str += "<span class='input-group-btn chat-sendBtn'><button class='btn btn-success no-rounded' type='button'>Send</button>";
+                  str += "</span></div></div></div></div></div>"
+                    
+                $("#main").append(str);
+                  var chatContent = $("#chat-roomNo-"+roomNo);
+                  var chatOut = $("#chat-roomNo-"+roomNo + " .chat-output");
+                  
+                $(chatContent).jqxWindow({
+                  width:"430",
+                  height:"700",
+                  resizable:false,
+                  showCollapseButton: true,
+                  closeButtonAction: 'hide',
+                  theme:userInfo.theme
+                 });
+                
+                var onlineLabel = $(chatContent).find(".chat-current-online");
+                
+                if(content.data.playerList.length>content.data.maxNum){
+                	$(onlineLabel).removeClass("label-success").addClass("label-danger");
+                }
+                $(onlineLabel).text(content.data.playerList.length + " / " + content.data.maxNum);
+                
+                
+                /* 채팅방 채팅 보내기 */
+                $(document).on("click","#chat-roomNo-"+roomNo+" .chat-sendBtn",function(evt){
+             	   if($(chatOut).val() == ""){
+             		   return;
+             	   }
+                   sendMsg("chatRoomChat", userInfo.nickName, roomNo, $(chatOut).val());
+                   $(chatOut).val("");
+                });
+                
+                $(chatOut).on("keyup",function(){
+             	   if($(chatOut).val() == ""){
+             		   return;
+             	   }
+                    if(event.keyCode == 13) {
+     	               sendMsg("chatRoomChat", userInfo.nickName, roomNo, $(chatOut).val());
+     	               $(chatOut).val("");
+                    }
+                 });
+               }
           }
 
           /* 채팅 리스트 */

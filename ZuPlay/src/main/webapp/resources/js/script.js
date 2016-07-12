@@ -1366,15 +1366,15 @@ $(function(){
              theme:userInfo.theme
             });
            
-           /* 채팅룸 채팅 보내기 */
+           /* 채팅방 채팅 보내기 */
            $(document).on("click","#chat-roomNo-"+roomNo+" .chat-sendBtn",function(evt){
-              sendMsg("chatRoomChat", userInfo.nickName, nick, $(chatOut).val());
+              sendMsg("chatRoomChat", userInfo.nickName, roomNo, $(chatOut).val());
               $(chatOut).val("");
            });
            
            $(chatOut).on("keyup",function(){
                if(event.keyCode == 13) {
-	               sendMsg("chatRoomChat", userInfo.nickName, nick, $(chatOut).val());
+	               sendMsg("chatRoomChat", userInfo.nickName, roomNo, $(chatOut).val());
 	               $(chatOut).val("");
                }
             });
@@ -1600,7 +1600,7 @@ $(function(){
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
             $("#rta-btn").setBtn($("#rta-Window"));
-            $("#stockList-btn").setBtn($("#stock-wiow"));
+            $("#stockList-btn").setBtn($("#stock-window"));
             $("#store-btn").setBtn($("#store-window"));
             $("#friend-btn").setBtn($("#friend-window"));
             $("#financial-btn").setBtn($("#financial-window"));

@@ -150,6 +150,7 @@
 <script type="text/javascript" src="resources/js/jqwidgets/jqxsortable.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxslider.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxnumberinput.js"></script>
+<script type="text/javascript" src="resources/js/jqwidgets/jqxpopover.js"></script>
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script src="resources/js/set.js"></script>

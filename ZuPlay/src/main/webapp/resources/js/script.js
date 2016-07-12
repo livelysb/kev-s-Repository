@@ -1715,7 +1715,7 @@ $(function(){
                   var str = "";
                   str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";
                   str += "<div>Chat</div><div class='chat-content row-fluid'>";
-                  str += "<div class='col-md-12 bg-white chat-room-info'><span class='label label-default pull-left'>No."+roomNo+"</span>";
+                  str += "<div class='col-md-12 bg-moccasin chat-room-info'><span class='label label-default pull-left'>No."+roomNo+"</span>";
                   str += "<label>"+content.data.roomName+"</label>";
                   str += "<span class='label label-success pull-right chat-current-online'></span>";
             	  if(content.data.password){

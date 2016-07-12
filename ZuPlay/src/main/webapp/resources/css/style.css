@@ -744,6 +744,10 @@ div.vertical-line{
   height: 100% ;
 }
 
+.chat-room-info{
+	text-align: center;
+}
+
 
 /*설정*/
 .switch {

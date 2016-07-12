@@ -1127,7 +1127,7 @@ $(function(){
       
     	  
     	  /*유저 아바타*/
-          var myInfoAvatar = function(nickName){
+          var myInfoAvatar = function(nickName,window){
              $.ajax({
                 url:"userInfo2",
                 type:"post",
@@ -1142,8 +1142,8 @@ $(function(){
                       for(var i=0; i<=5; i++ ){
                           str += avatarEquiAry[i];
                       }
-                      $(".userinfo-avatar-div").empty();
-                      $(".userinfo-avatar-div").html(str);   
+                      $(window + " .userinfo-avatar-div").empty();
+                      $(window + " .userinfo-avatar-div").html(str);   
                    })
                    
                 },
@@ -1168,7 +1168,7 @@ $(function(){
 	                     closeButtonAction: 'close',
 	                     theme:userInfo.theme
 	                });
-	                myInfoAvatar(nickName);
+	                myInfoAvatar(nickName,"#userinfo-player-"+nickName);
 	             },
 	             error:function(err){
 	                console.log("Exception : showUserInfo");

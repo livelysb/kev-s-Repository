@@ -1603,8 +1603,6 @@ $(function(){
              sendMsg("chatRoomSelect", userInfo.nickName,page);
           }
           
-          chatRoomSelect(1);
-          
           
           
           /* 채팅 메세지 */
@@ -1701,13 +1699,19 @@ $(function(){
           var chatStart = function(content){
              var data = content.data;
              var roomNo = content.data.roomNo;
-               if(!$("#chat-roomNo-"+roomNo).length){
+             
+             
+             
+               if($("#chat-roomNo-"+roomNo).length){
+            	return;   
+               }
+               setting.chat[roomNo] = data;
                   var str = "";
                   str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";
-                  str += "<div>Chat</div><div class='chat-content row-fluid'>";
+                  str += "<div>Chat - "+ roomNo +"</div><div class='chat-content row-fluid'>";
                   str += "<div class='col-md-12 chat-room-info'><span class='label label-default pull-left'>No."+roomNo+"</span>";
                   str += "<label class='chat-room-header'>"+content.data.roomName+"</label>";
-                  str += "<div class='chat-room-popover' hidden><div class='chat-room-popover-contents'></div>";
+                  str += "<div id='chat-room-popover-"+roomNo+"'><div class='chat-room-popover-contents'></div>";
                   str += "<div class='col-xs-12' style='padding:0; margin-bottom:2px'><button class='btn btn-sm btn-danger btn-block'>나가기</button></div></div>"
                   str += "<span class='label label-success pull-right chat-current-online'></span>";
             	  if(content.data.password){
@@ -1721,8 +1725,8 @@ $(function(){
                 $("#main").append(str);
                   var chatContent = $("#chat-roomNo-"+roomNo);
                   var chatOut = $("#chat-roomNo-"+roomNo + " .chat-output");
-                  var popover = $(chatContent).find(".chat-room-popover");
-                  
+                  var popover = $("#chat-room-popover-"+roomNo);
+                  var closeBtn = $(chatContent).find("button.btn-danger.btn-block");
                 $(chatContent).jqxWindow({
                   width:"430",
                   height:"700",
@@ -1734,7 +1738,7 @@ $(function(){
                 
                 var onlineLabel = $(chatContent).find(".chat-current-online");
                 
-                if(content.data.playerList.length>content.data.maxNum){
+                if(content.data.playerList.length>=content.data.maxNum){
                 	$(onlineLabel).removeClass("label-success").addClass("label-danger");
                 }
                 $(onlineLabel).text(content.data.playerList.length + " / " + content.data.maxNum);
@@ -1758,16 +1762,25 @@ $(function(){
      	               $(chatOut).val("");
                     }
                  });
-               }
-               var popoverContents = $(popover).find(".chat-room-popover-contents");
-               $(popoverContents).html(getChatCurrentUsers(content.data.playerList));
-               //접속 인원 보기
-               $(popover).jqxPopover({
-            	   title: "접속 인원", 
-            	   showCloseButton: true, 
-            	   selector: $(chatContent).find(".chat-room-header"),
-            	   theme : userInfo.theme
-               });
+                
+                $(closeBtn).click(function(evt){
+                	console.log($(this));
+                	delete setting.chat[roomNo];
+                	sendMsg("chatRoomOut", userInfo.nickName, roomNo);
+                	$("#chat-room-popover-"+roomNo).remove();
+                	$(chatContent).remove();
+                	
+                });
+                var popoverContents = $(popover).find(".chat-room-popover-contents");
+                $(popoverContents).html(getChatCurrentUsers(content.data.playerList));
+                //접속 인원 보기
+                $(popover).jqxPopover({
+             	   title: "접속 인원", 
+             	   showCloseButton: true, 
+             	   selector: $(chatContent).find(".chat-room-header"),
+             	   theme : userInfo.theme
+                });
+               
           }
           
           /* 방 유저 업데이트 */
@@ -1805,11 +1818,13 @@ $(function(){
              }
              
              
-             $("#chatroom-list-ul").append(str);
-             var eventTargets = $("#chatroom-list-ul").children(".chatroom-rooms");
+             $("#chatroom-list-ul").html(str);
+             var eventTargets = $("#chatroom-list-ul .chatroom-rooms");
+             console.log(eventTargets);
              $(eventTargets).click(function(event){
                 var roomNo = $(this).find(":hidden").val();
-                console.log($(this).find("small.chat-alert"));
+                console.log("===================================================");
+                console.log(roomNo);
                 if($(this).find("small.chat-alert").length){
                   var password = prompt("비밀번호를 입력해주세요", "");
                   sendMsg("chatRoomJoin",userInfo.nickName,roomNo, password);
@@ -1821,7 +1836,75 @@ $(function(){
           }
           
           /* Chat In */
+          var chatIn = function(content){
+        	  var roomNo = content.data.roomNo;
+              setting.chat[roomNo].playerList = content.data.playerList;
+
+             var target;
+             var str = "";
+             var n = $(document).height();
+             target = $("#chat-roomNo-"+roomNo);
+             
+             str += "<li class='well-sm text-center'><div class='chat-body clearfix'><h4 class='text-success'>";
+             str += content.data.sender + "님이 입장하셨습니다."
+             str += "</h3></div></li>";
+             
+             var cul = $(target).find(".chat-group");
+             var n = $(cul).append(str).css("height");
+             $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
+             
+             refreshRoomInfo(roomNo);
+          }
           
+          /* Chat Out */
+          var chatOut = function(content){
+        	 var roomNo = content.data.roomNo;
+        	 setting.chat[roomNo].playerList = content.data.playerList;
+             var target;
+             var target;
+             var str = "";
+             var n = $(document).height();
+             target = $("#chat-roomNo-"+roomNo);
+             
+             str += "<li class='well-sm text-center'><div class='chat-body clearfix'><h4 class='text-danger'>";
+             str += content.data.sender + "님이 퇴장하셨습니다."
+             str += "</h3></div></li>";
+             
+             var cul = $(target).find(".chat-group");
+             var n = $(cul).append(str).css("height");
+             $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
+             
+             refreshRoomInfo(roomNo);
+          }
+          
+          /* 방 정보 갱신 */
+          var refreshRoomInfo = function(roomNo){
+        	  var chatPage = setting.chat[roomNo];
+        	  
+              var chatContent = $("#chat-roomNo-"+roomNo);
+              var popover = $(chatContent).find(".chat-room-popover");
+              var onlineLabel = $(chatContent).find(".chat-current-online");
+              
+              if(chatPage.playerList.length>=chatPage.maxNum){
+              	$(onlineLabel).removeClass("label-success").addClass("label-danger");
+              }else{
+            	  $(onlineLabel).removeClass("label-danger").addClass("label-success");
+              }
+              $(onlineLabel).text(chatPage.playerList.length + " / " + chatPage.maxNum);
+
+              var popoverContents = $("#chat-room-popover-"+roomNo+" .chat-room-popover-contents");
+              $(popoverContents).html(getChatCurrentUsers(chatPage.playerList));
+              
+              $(popover).jqxPopover({
+           	   title: "접속 인원", 
+           	   showCloseButton: true, 
+           	   selector: $(chatContent).find(".chat-room-header"),
+           	   theme : userInfo.theme
+              });
+              
+          }
+          
+          /* 내 채팅 갱신*/
           
           ws.onmessage = function(event){
               var data = JSON.parse(event.data);
@@ -1850,6 +1933,7 @@ $(function(){
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
                  case "chatMsg" : chatMsg(data); break;
                  case "chatIn" : chatIn(data); break;
+                 case "chatOut" : chatOut(data); break;
                  case "oneByOne" : oneByOne(data); break;
                  case "chatStart" : chatStart(data); break;
                  case "chatList" : chatList(data); break;

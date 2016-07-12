@@ -30,25 +30,31 @@
 		resultMap="itemMarketMapper">
 		select * from (select row_number() over(order by
 		IM_PURCHASE_PRICE desc) rnum,
-		im_sq, player_nickname, item_code, im_purchase_price, im_bid_time,
+		im_sq, player_nickname, item_code,
+		im_purchase_price, im_bid_time,
 		Im_auction_end
 		from item_market where
 		im_auction_end='T') m join item i on
 		m.item_code=i.item_code
-		where item_name like '%${keyword}%' and rnum
+		where
+		item_name like '%${keyword}%' and rnum
 		between #{startNo} and #{endNo}
+		and i.item_gender=lower(#{gender})
 	</select>
 	<select id="auctionSearch" parameterType="java.util.Map"
 		resultMap="itemMarketMapper">
 		select * from (select row_number() over(order by
 		IM_PURCHASE_PRICE desc) rnum,
-		im_sq, player_nickname, item_code, im_purchase_price, im_bid_time,
+		im_sq, player_nickname, item_code,
+		im_purchase_price, im_bid_time,
 		Im_auction_end
 		from item_market where
 		im_auction_end='T') m join item i on
 		m.item_code=i.item_code
-		where item_name like '%${keyword}%' and
-		item_class=#{itemClass} and rnum between #{startNo} and #{endNo}
+		where
+		item_name like '%${keyword}%' and
+		item_class=#{itemClass} and rnum
+		between #{startNo} and #{endNo} and i.item_gender=lower(#{gender})
 	</select>
 	<select id="bringItemInfoByImSq" parameterType="int"
 		resultMap="itemMarketMapper">
@@ -60,23 +66,25 @@
 		update item_market
 		set IM_AUCTION_END='F' where im_sq=#{value}
 	</update>
-	
+
 	<insert id="auctionInsertItemMarket" parameterType="java.util.Map">
 		insert into
 		item_market values
 		(im_sq.nextval,#{playerNickname},#{itemCode},#{imPurchasePrice},sysdate,'T')
 	</insert>
-	
+
 	<update id="auctionCancel" parameterType="int">
 		update item_market set
 		im_auction_end='X' where im_sq=#{value}
 	</update>
 	<select id="auctionBring" parameterType="int" resultType="String">
-		select IM_AUCTION_END from item_market where im_sq=#{value}
+		select
+		IM_AUCTION_END from item_market where im_sq=#{value}
 	</select>
 	<select id="auctionMyPage" parameterType="String" resultMap="itemMarketMapper">
 		select * from (select * from item_market order
-		by im_bid_time) m join item i on
+		by im_bid_time) m join
+		item i on
 		m.item_code=i.item_code
 		where
 		player_nickname=#{playerNickname}
@@ -93,6 +101,7 @@
 		select im_purchase_price from item_market where im_sq=#{value}
 	</select>
 	<delete id="auctionDeleteFin" parameterType="int">
-		delete item_market where im_sq=#{value}
+		delete item_market
+		where im_sq=#{value}
 	</delete>
 </mapper>

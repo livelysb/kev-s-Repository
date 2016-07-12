@@ -55,7 +55,8 @@
 		join item i on
 		pi.item_code=i.item_code
 		join player p on
-		f.player_nickname2=p.player_nickname where
+		f.player_nickname2=p.player_nickname 
+		where
 		f.player_nickname=#{value}
 		and
 		7>pi_index order by pi_index

@@ -34,7 +34,7 @@ public class ItemAuctionController {
 		
 		List<ItemMarketDTO> list = null;
 		try {
-			list = itemAuctionServiceImpl.auctionSearch(keyword, itemClass, page);
+			list = itemAuctionServiceImpl.auctionSearch((String)session.getAttribute("playerNickname"),keyword, itemClass, page);
 		} catch (Exception e) {
 			session.setAttribute("errorMsg", e.toString());
 			e.printStackTrace();

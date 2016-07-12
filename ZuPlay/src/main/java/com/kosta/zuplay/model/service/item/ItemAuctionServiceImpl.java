@@ -38,14 +38,17 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	 *            : eight units in one page
 	 */
 	@Override
-	public List<ItemMarketDTO> auctionSearch(String keyword, String itemClass, int page) throws Exception {
+	public List<ItemMarketDTO> auctionSearch(String playerNickname,String keyword, String itemClass, int page) throws Exception {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
+		PlayerInfoDAO playerInfoDAO=sqlSession.getMapper(PlayerInfoDAO.class);
 		List<ItemMarketDTO> list=null;
 		Map<String, String> map = new HashMap<String, String>();
+		String gender=playerInfoDAO.getPlayer(playerNickname).getPlayerGender();
 		map.put("keyword", keyword);
 		map.put("itemClass", itemClass);
 		map.put("startNo", 1 + ((page - 1) * 10) + "");
 		map.put("endNo", page * 10 + "");
+		map.put("gender", gender);
 		if(itemClass.equals("all")){
 			list = itemAuctionDAO.auctionSearchAll(map);
 		}else{

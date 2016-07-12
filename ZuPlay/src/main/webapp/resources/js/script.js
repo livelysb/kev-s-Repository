@@ -1354,7 +1354,8 @@ $(function(){
              str += "<div>Chat</div><div class='chat-content row-fluid'>"
              str += "<div class='col-md-12 bg-white'><div class='chat-message'><ul class='chat-group'>"
              str += "</ul></div>"
-            str += "<div class='col-md-12 chat-box bg-white'><div class='input-group'>"
+             str += "<div class='col-md-12 chat-box bg-white'><div class='input-group'>";
+             str += '<a href="#" class="btn btn-sq-xs btn-danger"><i class="fa fa-user fa-1x"></i><br/></a>';
             str += "<input class='form-control border no-shadow no-rounded chat-output' placeholder='Type your message here'>"
             str += "<span class='input-group-btn chat-sendBtn'><button class='btn btn-success no-rounded' type='button'>Send</button>"
             str += "</span></div></div></div></div></div>"

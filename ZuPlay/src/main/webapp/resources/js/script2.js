@@ -786,15 +786,6 @@ $(function(){
 				  $.each(data.data,function(index,item){
 					  friendGender=item.friendGender
 					  
-					  /*var defaultItemAry=[
-					                      closetUrl+"clothes/"+friendGender+"_clothes_00.png",
-					                      closetUrl+"hair/"+friendGender+"_hair_00.png",
-					                      closetUrl+"eyes/a_eyes_00.png",
-					                      closetUrl+"mouse/a_mouse_00.png",
-					                      closetUrl+"empty.png",
-					                      closetUrl+"empty.png"
-					  ]*/
-					  
 					  userInfo.nickName==item.playerNickname ? friendNickname=item.playerNickname2 : 
 						  									   friendNickname=item.playerNickname;
 					  
@@ -803,14 +794,6 @@ $(function(){
 		                       requestedFriend+="<li href='#' class='list-group-item text-left'>";
 		                       requestedFriend+="<div class='friend-avatar-div' >";
 		                       avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
-		                       /*for(var i=0; i<=5; i++){
-		                          avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
-		                       }
-		                       
-		                       for(var j=0; j<item.playerItemDTO.length; j++){
-		                          avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
-		                             "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
-		                       }*/
 		                       
 		                       
 		                       for(var k=0; k<=5; k++ ){
@@ -831,14 +814,6 @@ $(function(){
 		                    ListFriend += "<li href='#' class='list-group-item text-left'>";
 		                    ListFriend += "<div class='friend-avatar-div'>";
 		                    
-		                    /*for(var i=0; i<=5; i++){
-		                       avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
-		                    }
-		                    
-		                    for(var j=0; j<item.playerItemDTO.length; j++){
-		                       avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
-		                          "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
-		                    }*/
 		                    avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
 		                    for(var k=0; k<=5; k++ ){
 		                       ListFriend += avatarEquiAry[k];
@@ -853,8 +828,8 @@ $(function(){
 		                    } 
 		                    
 		                    ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
-		                      ListFriend += "<label class='name'>"+friendNickname+"</label>";
-		                        ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
+	                        ListFriend += "<label class='name'>"+friendNickname+"</label>";
+	                        ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
 		                    ListFriend += "<div class='pull-right'>";
 		                    ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
 		                    ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
@@ -1148,14 +1123,15 @@ $(function(){
       }
       
       /* 유저 정보 보기 */
-      var showUserInfo = function(nickName){
+      var userInfoInit = function(){
+      
     	  
     	  /*유저 아바타*/
-          var myInfoAvatar = function(){
+          var myInfoAvatar = function(nickName){
              $.ajax({
                 url:"userInfo2",
                 type:"post",
-                data:"tragetPlayer="+userInfo.nickName,  /////////////////내정보만구현되어있음!!
+                data:"tragetPlayer="+nickName,  /////////////////내정보만구현되어있음!!
                 dataType:"json",
                 success:function(data){
                    console.log("데이터!!")
@@ -1176,31 +1152,31 @@ $(function(){
                 }
              })
           }
-    	  
-          $.ajax({
-             url:"userInfo",
-             data:{targetPlayer:nickName},
-             dataType:"html",
-             success:function(data){
-
-              $(".main-area").append(data);
-                $("#userinfo-player-"+nickName).jqxWindow({
-                     width:"450",
-                     height:"400",
-                     showCollapseButton: true,
-                     autoOpen:true,
-                     closeButtonAction: 'close',
-                     theme:userInfo.theme
-                });
-                myInfoAvatar();
-             },
-             error:function(err){
-                console.log("Exception : showUserInfo");
-             }
-          })
+          var showUserInfo = function(nickName){
+	          $.ajax({
+	             url:"userInfo",
+	             data:{targetPlayer:nickName},
+	             dataType:"html",
+	             success:function(data){
+	
+	              $(".main-area").append(data);
+	                $("#userinfo-player-"+nickName).jqxWindow({
+	                     width:"450",
+	                     height:"400",
+	                     showCollapseButton: true,
+	                     autoOpen:true,
+	                     closeButtonAction: 'close',
+	                     theme:userInfo.theme
+	                });
+	                myInfoAvatar(nickName);
+	             },
+	             error:function(err){
+	                console.log("Exception : showUserInfo");
+	             }
+	          })
+          }
           
-          
-       };
+      };
       
        var myStockListUpdate = function(){
     	   $.ajax({
@@ -1611,7 +1587,7 @@ $(function(){
       settingInit();
       initChatRoom();
       initRanking();
-      
+      userInfoInit()
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
             $("#rta-btn").setBtn($("#rta-Window"));

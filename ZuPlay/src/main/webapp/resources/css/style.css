@@ -980,6 +980,9 @@ display:inline-block;
   overflow: hidden;
 }
 
+.chat-room-header{
+	color:#4682b4;
+}
 /*랭킹*/
 
 .ranking-avatar-div{

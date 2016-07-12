@@ -1799,6 +1799,11 @@ $(function(){
                  case "notiFriendLogout" :$("#noti-msg").text(data.data+"님께서 로그아웃 하셨습니다.");
 						                  $("#friend-request-noti").jqxNotification("open");
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
+				 
+                 case "notiIsAuctionFinish" : $("#noti-msg").html("낙찰 된 물품이 있습니다.<br>확인해주십시오");
+                 							  $("#friend-request-noti").jqxNotification("open");break;
+                 case "notiAuctionEndBySeller" : $("#noti-msg").html(data.data.ItemMarketDTO.itemDTO.itemName+"이 "+data.data.ItemMarketDTO.imPurchasePrice+"에 팔렸습니다.<br>낙찰금액을 수령해 주십시오.");
+							          	  		 $("#friend-request-noti").jqxNotification("open");break;
                  case "chatMsg" : chatMsg(data); break;
                  case "chatIn" : chatIn(data); break;
                  case "oneByOne" : oneByOne(data); break;

@@ -1620,6 +1620,7 @@ $(function(){
       var sendMsg = function(){
           var args = Array.prototype.slice.call(arguments, 0);
           var msg = args.join("#/fuckWebSocket/#");
+          console.log(msg);
           ws.send(msg);
        }
       

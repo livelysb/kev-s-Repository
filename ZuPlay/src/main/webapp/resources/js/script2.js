@@ -438,6 +438,7 @@ $(function(){
                   dataType:"json",
                   data:"page="+page+"&keyword="+keyword,
                   success:function(data){
+                	  console.log(data);
                      str="";
                            
                      $.each(data, function(index,item){
@@ -449,6 +450,7 @@ $(function(){
                            }
                         }else{
                            str+="<tr class='stock-evt'><td class='stock-select'>"+item.isuKorAbbrv+"</a></td>"
+                           str+="<td>"+item.kind+"</td>"
                            str+="<td>"+item.priceDTO.trdPrc +"</td>";
                            str+="<td>"+item.priceDTO.cmpprevddPrc +"</td>";
                            str+="<td>"+item.priceDTO.fluctuationRate +"</td>";
@@ -478,13 +480,13 @@ $(function(){
 
             /* 마지막 페이지 */
             function pagenation(pageNo){ 
-                 $('#page-selection').bootpag({
+                 $('#stock-content #page-selection').bootpag({
                      total: pageNo, maxVisible: 10
                  })
              }
             
             /* 페이지 클릭 */
-            $('#page-selection').on("page", function(event, num){
+            $('#stock-content #page-selection').on("page", function(event, num){
                
                if($("#stock-search-keyword").val()==""){
                   $("#stock-search-keyword").val("undefined");
@@ -530,7 +532,7 @@ $(function(){
             
             var stockListSearch = function(){
                if($("#stock-search").val()=="") return;
-                $("#page-selection ul li").eq(1).trigger("click");
+                $("#stock-content #page-selection ul li").eq(1).trigger("click");
                 $("#stock-search-keyword").val($("#stock-search").val());
                 stockPageSelect(1,$("#stock-search").val());
             }
@@ -1800,9 +1802,11 @@ $(function(){
 						                  $("#friend-request-noti").jqxNotification("open");
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
 				 
-                 case "notiIsAuctionFinish" : $("#noti-msg").html("낙찰 된 물품이 있습니다.<br>확인해주십시오");
-                 							  $("#friend-request-noti").jqxNotification("open");break;
-                 case "notiAuctionEndBySeller" : $("#noti-msg").html(data.data.ItemMarketDTO.itemDTO.itemName+"이 "+data.data.ItemMarketDTO.imPurchasePrice+"에 팔렸습니다.<br>낙찰금액을 수령해 주십시오.");
+                 case "notiIsAuctionFinish" : if(data.data=="true"){
+                	 								$("#noti-msg").html("낙찰 된 물품이 있습니다.<br>확인해주십시오");
+                	 								$("#friend-request-noti").jqxNotification("open");
+                 							  };break;
+                 case "notiAuctionEndBySeller" : $("#noti-msg").html(data.data.itemName+"이 "+data.data.imPrice+"루비에 팔렸습니다.<br>낙찰금액을 수령해 주십시오.");
 							          	  		 $("#friend-request-noti").jqxNotification("open");break;
                  case "chatMsg" : chatMsg(data); break;
                  case "chatIn" : chatIn(data); break;

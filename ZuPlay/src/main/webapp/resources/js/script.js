@@ -1712,7 +1712,7 @@ $(function(){
             	  if(content.data.password){
             		  str += "<span class='label label-danger pull-right'><i class='fa fa-key' aria-hidden='true'></i></span>";
             	  }
-                  str += "</div><div class='chat-message'><ul class='chat-group'></ul></div><div class='col-md-12 chat-box bg-white'><div class='input-group'>";
+                  str += "</div><div class='chat-message col-md-12'><ul class='chat-group'></ul></div><div class='col-md-12 chat-box bg-white'><div class='input-group'>";
                   str += "<input class='form-control border no-shadow no-rounded chat-output' placeholder='Type your message here'>";
                   str += "<span class='input-group-btn chat-sendBtn'><button class='btn btn-success no-rounded' type='button'>Send</button>";
                   str += "</span></div></div></div></div></div>"

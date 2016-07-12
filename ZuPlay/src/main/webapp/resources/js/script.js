@@ -1327,19 +1327,60 @@ $(function(){
            $(document).on("click","#chat-no-"+nick+" .chat-sendBtn",function(evt){
               sendMsg("chatOneByOne", userInfo.nickName, nick, $(chatOut).val());
               $(chatOut).val("");
-           })
+           });
            
            $(chatOut).on("keyup",function(){
                if(event.keyCode == 13) {
                    sendMsg("chatOneByOne", userInfo.nickName, nick, $(chatOut).val());
                    $(chatOut).val("");
                }
-            })
+            });
           }else{
              $("#chat-no-"+nick).jqxWindow("show");
           }
-         
        }
+       
+       /* 채팅방 Show */
+       var showChatRoomWindow = function(roomNo){
+          if(!$("#chat-roomNo-"+roomNo).length){
+             var str = "";
+             str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";
+             str += "<div>Chat</div><div class='chat-content row-fluid'>"
+             str += "<div class='col-md-12 bg-white'><div class='chat-message'><ul class='chat-group'>"
+             str += "</ul></div>"
+            str += "<div class='col-md-12 chat-box bg-white'><div class='input-group'>"
+            str += "<input class='form-control border no-shadow no-rounded chat-output' placeholder='Type your message here'>"
+            str += "<span class='input-group-btn chat-sendBtn'><button class='btn btn-success no-rounded' type='button'>Send</button>"
+            str += "</span></div></div></div></div></div>"
+               
+           $("#main").append(str);
+             var chatContent = $("#chat-roomNo-"+roomNo);
+             var chatOut = $("#chat-roomNo-"+roomNo + " .chat-output");
+             
+           $("#chat-roomNo-"+roomNo).jqxWindow({
+             width:"430",
+             height:"700",
+             resizable:false,
+             showCollapseButton: true,
+             closeButtonAction: 'hide',
+             theme:userInfo.theme
+            });
+           
+           /* 채팅룸 채팅 보내기 */
+           $(document).on("click","#chat-roomNo-"+roomNo+" .chat-sendBtn",function(evt){
+              sendMsg("chatRoomChat", userInfo.nickName, nick, $(chatOut).val());
+              $(chatOut).val("");
+           });
+           
+           $(chatOut).on("keyup",function(){
+               if(event.keyCode == 13) {
+	               sendMsg("chatRoomChat", userInfo.nickName, nick, $(chatOut).val());
+	               $(chatOut).val("");
+               }
+            });
+          }
+       }
+
        
       var settingInit = function(){
     	  var psMyPage="";
@@ -1644,19 +1685,14 @@ $(function(){
              });
           }
           friendChatBtn();
-          
-          /** 추가(3) 채팅 시작*/
           /* 채팅 시작 */
           var chatStart = function(content){
-             console.log(content);
              var data = content.data;
-             showChatWindow("room"+data.roomNo);
+             showChatRoomWindow(data.roomNo);
           }
-          
-          /** 추가(3) 채팅 시작*/
+
           /* 채팅 리스트 */
           var chatList = function(content){
-             //chatroom-list-ul
              var str = "";
              var data = content.data;
              for(var i=0; i<data.length;i++){
@@ -1686,10 +1722,12 @@ $(function(){
                
                 sendMsg("chatRoomJoin",userInfo.nickName,roomNo);
              })
-             
-             //chatRoomJoin
           }
           
+          /* 채팅 메세지 수신*/
+          var chatMsg = function(data){
+        	  
+          }
           
           ws.onmessage = function(event){
               var data = JSON.parse(event.data);
@@ -1716,9 +1754,8 @@ $(function(){
                  case "notiFriendLogout" :$("#noti-msg").text(data.data+"님께서 로그아웃 하셨습니다.");
 						                  $("#friend-request-noti").jqxNotification("open");
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
-                 case "chat-on" : break;
-                 case "chat-off" : break;
-                 case "chat-msg" : break;
+                 case "chatMsg" : chatMsg(data); break;
+                 case "chatIn" : break;
                  case "oneByOne" : oneByOne(data); break;
                  case "chatStart" : chatStart(data); break;
                  case "chatList" : chatList(data); break;

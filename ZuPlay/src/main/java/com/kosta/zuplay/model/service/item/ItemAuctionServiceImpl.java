@@ -43,7 +43,13 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 		PlayerInfoDAO playerInfoDAO=sqlSession.getMapper(PlayerInfoDAO.class);
 		List<ItemMarketDTO> list=null;
 		Map<String, String> map = new HashMap<String, String>();
-		String gender=playerInfoDAO.getPlayer(playerNickname).getPlayerGender();
+		String pGender=playerInfoDAO.getPlayer(playerNickname).getPlayerGender();
+		String gender = null;
+		if(pGender=="M"){
+			gender="f";
+		}else{
+			gender="m";
+		}
 		map.put("keyword", keyword);
 		map.put("itemClass", itemClass);
 		map.put("startNo", 1 + ((page - 1) * 10) + "");

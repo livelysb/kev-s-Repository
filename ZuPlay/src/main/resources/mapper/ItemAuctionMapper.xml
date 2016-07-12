@@ -39,7 +39,7 @@
 		where
 		item_name like '%${keyword}%' and rnum
 		between #{startNo} and #{endNo}
-		and i.item_gender=lower(#{gender})
+		and i.item_gender!=lower(#{gender})
 	</select>
 	<select id="auctionSearch" parameterType="java.util.Map"
 		resultMap="itemMarketMapper">
@@ -54,7 +54,7 @@
 		where
 		item_name like '%${keyword}%' and
 		item_class=#{itemClass} and rnum
-		between #{startNo} and #{endNo} and i.item_gender=lower(#{gender})
+		between #{startNo} and #{endNo} and i.item_gender!=lower(#{gender})
 	</select>
 	<select id="bringItemInfoByImSq" parameterType="int"
 		resultMap="itemMarketMapper">

@@ -1178,11 +1178,9 @@ $(function(){
           
           
           /*친구정보보기*/
-          $(document).on("click","#friend-content .name, #ranking-content tr:nth-child(3)  ",function(){
+          $(document).on("click","#friend-content .name, #ranking-content .ranking-playernickname",function(){
         	  console.log($(this).text());
         	  showUserInfo($(this).text());
-          }).on("hover"," #friend-content .name",function(){
-        	  $(this).css('cursor','pointer');
           })
       };
       
@@ -1553,7 +1551,7 @@ $(function(){
                 }
                str+="</div>";
                str+="</td>";
-               str+="<td>"+item.playerNickname+"</td>";
+               str+="<td class='ranking-playernickname'>"+item.playerNickname+"</td>";
                kind=="s" ? str+="<td>"+item.totalEarningRate+"%</td>" : str+="<td>"+item.earningRate+"%</td>";
                str+="<td>"+item.totalMoney+"</td></tr>";
             }) 

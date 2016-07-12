@@ -777,7 +777,7 @@ $(function(){
 				  var friendBtnColor=""; 
 				  var friendGender="";
 				  var friendNickname= "";
-				 /* var closetUrl = "resources/img/avatar/";*/
+				 /* var closetUrl = "resources/img/avatar/";*/ 
 				 
 				  var avatarEquiAry;
 				  
@@ -1502,6 +1502,9 @@ $(function(){
  		 var rankingdraw = function(kind, data){
  			 var str="";
  			 $.each(data,function(index,item){
+ 				 if(item.playerSeasonRank==0 || item.playerDailyRank==0){
+ 					return true
+ 				 }
  				 
  				 kind=="s" ? str+="<tr><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";
  				 str+="<td><div class='ranking-avatar-div'>";

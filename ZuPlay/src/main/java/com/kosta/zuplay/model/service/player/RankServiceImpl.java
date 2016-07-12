@@ -44,8 +44,10 @@ public class RankServiceImpl implements RankService{
 				playerDTO.setTotalEarningRate(earningRateService.calEarningRate(playerNickname));
 			playerList2.add(playerDTO);
 		}
-		
-		Collections.sort(playerList2, new EarningRateCompare());
+		if(kind.equals("PLAYER_DAILY_RANK"))
+			Collections.sort(playerList2, new EarningRateCompare());
+		else
+			Collections.sort(playerList2, new TotalEarningRateCompare());
 		int i = 0;
 		for(PlayerDTO playerDTO : playerList2) {
 			i++;
@@ -68,6 +70,13 @@ public class RankServiceImpl implements RankService{
 		@Override
 		public int compare(PlayerDTO p2, PlayerDTO p1) {
 			return p1.getEarningRate() > p2.getEarningRate() ? 1 : p1.getEarningRate() < p2.getEarningRate() ? -1 : 0;
+		}
+	}
+	
+	class TotalEarningRateCompare implements Comparator<PlayerDTO> {
+		@Override
+		public int compare(PlayerDTO p2, PlayerDTO p1) {
+			return p1.getTotalEarningRate() > p2.getTotalEarningRate() ? 1 : p1.getTotalEarningRate() < p2.getTotalEarningRate() ? -1 : 0;
 		}
 	}
 

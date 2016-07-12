@@ -250,8 +250,13 @@ $(function(){
                  success:function(data){
                    $("#inven-content td").empty();   
                    $.each(data,function(index,item){
+                	   if(item.piIndex==0){
+                		   return true;
+                	   }
                       var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item);
                       $("#inven-player-"+item.piIndex).html(items);
+                      $("#inven-player-"+item.piIndex).jqxTooltip({ content: item.itemDTO.itemName+"("+item.itemDTO.itemGrade+")", position: 'bottom', autoHide: true, 
+                          name: 'movieTooltip', theme : userInfo.theme });
                    });
                    updateAvatar()
                  },
@@ -438,7 +443,6 @@ $(function(){
                   dataType:"json",
                   data:"page="+page+"&keyword="+keyword,
                   success:function(data){
-                	  console.log(data);
                      str="";
                            
                      $.each(data, function(index,item){
@@ -593,7 +597,7 @@ $(function(){
                       $(".store-itemBox").empty();
                       $.each(data, function(index, item){
                          $("#store-item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:100%;' id='"+item.itemCode+"'/>");  
-                         $("#store-item"+itemClass+""+index+" img").jqxTooltip({ content: item.itemName+"("+item.itemGrade+")"+"<br>₩"+item.itemPrice+"<br>", position: 'bottom', autoHide: true, 
+                         $("#store-item"+itemClass+""+index).jqxTooltip({ content: item.itemName+"("+item.itemGrade+")"+"<br>₩"+item.itemPrice+"<br>", position: 'bottom', autoHide: true, 
                             name: 'movieTooltip', theme : userInfo.theme });
                       })
                    }
@@ -745,6 +749,9 @@ $(function(){
         	 }
         	 
             ws.send("friendDel#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#")
+            friendDelBtn=0
+            $("#friend-del").text("친구삭제");
+            
          })
          
          /* 친구신청 Notify */

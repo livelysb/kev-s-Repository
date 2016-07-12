@@ -15,6 +15,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.kosta.zuplay.controller.FriendController;
 import com.kosta.zuplay.model.service.community.ChattingService;
+import com.kosta.zuplay.model.service.community.ChattingServiceImpl;
 import com.kosta.zuplay.model.service.player.FriendService;
 import com.kosta.zuplay.util.vo.PlayerVO;
 
@@ -42,6 +43,7 @@ public class EchoHandler extends TextWebSocketHandler {
 			String playerNickname = mesArr[1];
 			if (mesArr[0].equals("open")) {
 				application.setAttribute("#" + playerNickname, new PlayerVO(playerNickname, webSession));
+				chattingServiceImpl.chatRoomSelect();
 				try {
 					friendController.friendLogin(playerNickname,webSession);
 				} catch (Exception e) {
@@ -110,8 +112,6 @@ public class EchoHandler extends TextWebSocketHandler {
 				// sender
 				// /
 				// roomNm
-			} else if (mesArr[0].equals("chatRoomSelect")) {
-				chattingServiceImpl.chatRoomSelect(playerNickname, Integer.parseInt(mesArr[2]));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

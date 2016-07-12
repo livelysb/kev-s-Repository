@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -53,7 +54,7 @@ public class ChattingServiceImpl implements ChattingService {
 				receivers.add(receiver);
 				receivers.add(sender);
 				try {
-					sendDataWebSocket.sendData(sender, receivers, "oneByOne",
+					sendDataWebSocket.sendData(receivers, "oneByOne",
 							new ChatMsgVO(sender, receiver, null, SimpleDateFormat.getInstance().format(new Date()),
 									msg, playerInfoService.getPlayer(sender).getPlayerGender(),
 									inventoryService.playerItemWorn(sender)));
@@ -64,7 +65,7 @@ public class ChattingServiceImpl implements ChattingService {
 				List<String> receivers = new ArrayList<String>();
 				receivers.add(sender);
 				try {
-					sendDataWebSocket.sendData(sender, receivers, "oneByOne",
+					sendDataWebSocket.sendData(receivers, "oneByOne",
 							new ChatMsgVO(sender, receiver, null, null, null, null, null));
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -92,7 +93,8 @@ public class ChattingServiceImpl implements ChattingService {
 		int roomNo = i.getAndIncrement();
 		ChatRoomVO crv = new ChatRoomVO(sender, roomNo, roomName, password, playersInfo, maxNum);
 		map.put(roomNo, crv);
-		sendDataWebSocket.sendData(sender, myself, "chatStart", crv);
+		sendDataWebSocket.sendData(myself, "chatStart", crv);
+		chatRoomSelect();
 
 		// 플레이어의 VO에 접속중인 채팅방 연결.
 		PlayerVO playerVO = (PlayerVO) context.getAttribute("#" + sender);
@@ -102,37 +104,38 @@ public class ChattingServiceImpl implements ChattingService {
 	}
 
 	@Override
-	public void chatRoomSelect(String sender, int page) {
+	public void chatRoomSelect() {
 		try {
 			Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 			if (map == null)
 				return;
 			List<ChatRoomVO> chatRoomList = new ArrayList<ChatRoomVO>();
-			int i = (page - 1) * 10 + 1;
-			int start = 1;
 			for (Integer roomNo : map.keySet()) {
-				if (start < i) {
-					start++;
-					continue;
-				} else {
-					ChatRoomVO chatRoomVO = map.get(roomNo);
-					ChatRoomVO chatRoomVO2 = new ChatRoomVO(sender, chatRoomVO.getRoomNo(), chatRoomVO.getRoomName(), "",
-							chatRoomVO.getPlayerList(), chatRoomVO.getMaxNum());
 
-					if (!chatRoomVO.getPassword().equals(""))
-						chatRoomVO2.setPassword("T");
-					else
-						chatRoomVO2.setPassword("");
-					chatRoomList.add(chatRoomVO2);
-					if (start == i + 9)
-						break;
-					start++;
+				ChatRoomVO chatRoomVO = map.get(roomNo);
+				ChatRoomVO chatRoomVO2 = new ChatRoomVO(null, chatRoomVO.getRoomNo(), chatRoomVO.getRoomName(), "",
+						chatRoomVO.getPlayerList(), chatRoomVO.getMaxNum());
+
+				if (!chatRoomVO.getPassword().equals(""))
+					chatRoomVO2.setPassword("T");
+				else
+					chatRoomVO2.setPassword("");
+				
+				chatRoomList.add(chatRoomVO2);
+			}
+			List<String> allPlayer = new ArrayList<String>();
+			Enumeration<String> enumr = context.getAttributeNames();
+			while (enumr.hasMoreElements()) {
+				String el = enumr.nextElement();
+				if (el.charAt(0) == '#') {
+					String ell = el.substring(1);
+					allPlayer.add(ell);
 				}
 			}
-			List<String> myself = new ArrayList<String>();
-			myself.add(sender);
-			sendDataWebSocket.sendData(sender, myself, "chatList", chatRoomList);
-		} catch (Exception e) {
+			sendDataWebSocket.sendData(allPlayer, "chatList", chatRoomList);
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -160,7 +163,7 @@ public class ChattingServiceImpl implements ChattingService {
 			crv.getPlayerList().add(getPlayer(sender));
 			crv.setSender(sender);
 			// 전송
-			sendDataWebSocket.sendData(sender, receivers, "chatIn", crv);
+			sendDataWebSocket.sendData(receivers, "chatIn", crv);
 
 			/**
 			 * 2. 나에게 방의 정보보내기
@@ -170,16 +173,18 @@ public class ChattingServiceImpl implements ChattingService {
 			myself.add(sender);
 
 			// 전송
-			sendDataWebSocket.sendData(sender, myself, "chatStart", crv);
+			sendDataWebSocket.sendData(myself, "chatStart", crv);
 
 			// 플레이어의 VO에 접속중인 채팅방 연결.
 			PlayerVO playerVO = (PlayerVO) context.getAttribute("#" + sender);
 			if (playerVO != null) {
 				playerVO.getChatRoomList().add(crv.getRoomNo());
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		chatRoomSelect();
 	}
 
 	@Override
@@ -195,12 +200,13 @@ public class ChattingServiceImpl implements ChattingService {
 
 		// 채팅 메시지 (data) 전송 (sendData)
 		try {
-			sendDataWebSocket.sendData(sender, receivers, "chatMsg", new ChatMsgVO(sender, null,
+			sendDataWebSocket.sendData(receivers, "chatMsg", new ChatMsgVO(sender, null,
 					new AtomicInteger(roomNo), SimpleDateFormat.getInstance().format(new Date()), msg,
 					playerInfoService.getPlayer(sender).getPlayerGender(), inventoryService.playerItemWorn(sender)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		chatRoomSelect();
 
 	}
 
@@ -209,7 +215,7 @@ public class ChattingServiceImpl implements ChattingService {
 		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		ChatRoomVO crv = map.get(roomNo);
 
-		System.out.println(roomNo+"번방의 현재 인원수 : " + crv.getPlayerList().size() + "명" );
+		System.out.println(roomNo + "번방의 현재 인원수 : " + crv.getPlayerList().size() + "명");
 		// 방 나가기
 		try {
 			PlayerDTO playerDTO = null;
@@ -223,9 +229,9 @@ public class ChattingServiceImpl implements ChattingService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("방의 잔여 인원수 : " + crv.getPlayerList().size() + "명");
-		if(crv.getPlayerList().size() == 0) {
+		if (crv.getPlayerList().size() == 0) {
 			map.remove(roomNo);
 		} else {
 			// receiver
@@ -233,12 +239,10 @@ public class ChattingServiceImpl implements ChattingService {
 			for (PlayerDTO playerDTO : crv.getPlayerList()) {
 				receivers.add(playerDTO.getPlayerNickname());
 				System.out.println("플레이어 닉네임 : " + playerDTO.getPlayerNickname());
-			}		
+			}
 			crv.setSender(sender);
-			if (crv.getPlayerList().size() != 0)
-				sendDataWebSocket.sendData(sender, receivers, "chatOut", crv);
+			sendDataWebSocket.sendData(receivers, "chatOut", crv);
 		}
-		
 
 		if (!allOut) {
 			// 플레이어의 VO에 접속 중인 채팅방 끊기
@@ -256,6 +260,7 @@ public class ChattingServiceImpl implements ChattingService {
 				System.out.println();
 			}
 		}
+		chatRoomSelect();
 
 	}
 
@@ -280,5 +285,4 @@ public class ChattingServiceImpl implements ChattingService {
 		}
 		return null;
 	}
-
 }

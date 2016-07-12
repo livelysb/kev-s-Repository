@@ -16,7 +16,6 @@ import com.kosta.zuplay.model.dao.FriendDAO;
 import com.kosta.zuplay.model.dao.SettingDAO;
 import com.kosta.zuplay.model.dto.player.FriendDTO;
 import com.kosta.zuplay.model.dto.player.FriendVO;
-import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.dto.player.SettingDTO;
 
 @Service

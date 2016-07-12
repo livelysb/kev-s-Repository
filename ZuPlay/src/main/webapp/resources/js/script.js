@@ -1706,6 +1706,8 @@ $(function(){
                  $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
                
           }
+          
+          
           	
           /* 친구창 채팅 버튼*/
           var friendChatBtn = function(){
@@ -1781,7 +1783,7 @@ $(function(){
 						                  $("#friend-request-noti").jqxNotification("open");
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
                  case "chatMsg" : chatMsg(data); break;
-                 case "chatIn" : break;
+                 case "chatIn" : chatIn(data); break;
                  case "oneByOne" : oneByOne(data); break;
                  case "chatStart" : chatStart(data); break;
                  case "chatList" : chatList(data); break;

@@ -1180,8 +1180,9 @@ $(function(){
           /*친구정보보기*/
           $(document).on("click","#friend-content .name",function(){
         	  showUserInfo($(this).text());
+          }).on("hover"," #friend-content .name",function(){
+        	  $(this).css('cursor','pointer');
           })
-          
       };
       
        var myStockListUpdate = function(){

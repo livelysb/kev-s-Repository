@@ -10,11 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home</title>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/jquery-ui.min.css" rel="stylesheet">
-<link href="resources/css/zuplay.css" rel="stylesheet">
-
-<style type="text/css">
-</style>
 
 </head>
 
@@ -55,11 +50,8 @@
 	
 <script src="resources/js/jquery-2.2.4.min.js"></script>
 <script src="resources/js/naverLogin_implicit-1.0.2.js"></script>
-
-<script src="resources/js/jquery-ui.min.js"></script>
 <script src="resources/js/jquery.cookie.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/zuplay.js"></script>
 
 <script type="text/javascript">
 
@@ -100,6 +92,9 @@
     	 }
 		//닉네임 중복체크
     	 $("#playerNickname").on("keyup",function (){
+    		 if(event.keyCode == 13) {
+    			 return;
+    		 }
 			if($(this).val()==""){
 				$("#divIdCheck").text("");
 			}else{

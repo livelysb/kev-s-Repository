@@ -995,6 +995,10 @@ display:inline-block;
 .chat-room-header{
 	color:#4682b4;
 }
+
+.chat-room-header:HOVER {
+	cursor: pointer;
+}
 /*랭킹*/
 
 .ranking-avatar-div{

@@ -16,7 +16,7 @@
    <link href="resources/css/jqwidgets/jqx.${theme}.css" rel="stylesheet" />
 </c:if>
 <link href="resources/css/jquery-ui/jquery-ui.css" rel="stylesheet" />
-<link href="resources/css/style.css" rel="stylesheet" />
+<link href="http://192.168.0.43:8000/zuplay/resources/css/style.css" rel="stylesheet" />
 
 </head>
 <body class='default'>
@@ -152,9 +152,9 @@
 <script type="text/javascript" src="resources/js/jqwidgets/jqxnumberinput.js"></script>
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
-<script src="resources/js/set.js"></script>
+<script src="http://192.168.0.43:8000/zuplay/resources/js/set.js"></script>
 <script type="text/javascript">
     userInfo.theme = "${theme}"; 
 </script>
-<script src="resources/js/script2.js"></script>
+<script src="http://192.168.0.43:8000/zuplay/resources/js/script.js"></script>
 </html>

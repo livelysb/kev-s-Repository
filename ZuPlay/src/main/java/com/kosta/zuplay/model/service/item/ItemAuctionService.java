@@ -11,7 +11,7 @@ public interface ItemAuctionService {
 	 * @param itemClass : If you want to search for some parts
 	 * @param page : eight units in one page
 	 */
-	List<ItemMarketDTO> auctionSearch(String keyword,String itemClass,int page) throws Exception;
+	List<ItemMarketDTO> auctionSearch(String playerNickname,String keyword,String itemClass,int page) throws Exception;
 	
 	/**
 	 * buy item in item auction

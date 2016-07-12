@@ -1678,31 +1678,31 @@ $(function(){
              
              var cul = $(target).find(".chat-group");
              
-             str += "<div class='chat-avatar-div'>";
-             
-             avatarEquiAry = avatarEqui("chat",evt.data.gender,evt.data.playerItem)
-             
-	         for(var i=0; i<=5; i++ ){
-	            str += avatarEquiAry[i];
-	         }
-	          
-	             
-	             str += "</div>";
-	             
-	             
-	             str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
-	             str += evt.data.sender;
-	             str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
-	             str += evt.data.time;
-	             str += "</small></div><p>";
-	             str += evt.data.msg;
-	             str+="</p></div></li>";
-	           
-	             var n = $(cul).append(str).css("height");
-	             
-	             $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
-	           
-	      }
+                 str += "<div class='chat-avatar-div'>";
+                 
+                 avatarEquiAry = avatarEqui("chat",evt.data.gender,evt.data.playerItem)
+                 
+             for(var i=0; i<=5; i++ ){
+                str += avatarEquiAry[i];
+             }
+              
+                 
+                 str += "</div>";
+                 
+                 
+                 str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
+                 str += evt.data.sender;
+                 str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
+                 str += evt.data.time;
+                 str += "</small></div><p>";
+                 str += evt.data.msg;
+                 str+="</p></div></li>";
+               
+                 var n = $(cul).append(str).css("height");
+                 
+                 $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
+               
+          }
           
           /* 채팅방 메세지*/
           var chatMsg = function(evt){

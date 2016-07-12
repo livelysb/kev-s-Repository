@@ -45,7 +45,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 		Map<String, String> map = new HashMap<String, String>();
 		String pGender=playerInfoDAO.getPlayer(playerNickname).getPlayerGender();
 		String gender = null;
-		if(pGender=="M"){
+		if(pGender.equals("M")){
 			gender="f";
 		}else{
 			gender="m";

@@ -159,7 +159,7 @@ public class ChattingServiceImpl implements ChattingService {
 			// 나의정보 (data)
 			PlayerDTO player = getPlayer(sender);
 			// 전송
-			sendDataWebSocket.sendData(sender, receivers, "chatIn", player);
+			sendDataWebSocket.sendData(sender, receivers, "chatIn", new ChatMsgVO(sender, null, new AtomicInteger(roomNo), null, null, null, null));
 
 			/**
 			 * 2. 나에게 방의 정보보내기
@@ -233,7 +233,7 @@ public class ChattingServiceImpl implements ChattingService {
 				receivers.add(playerDTO.getPlayerNickname());
 			}
 			if (crv.getPlayerList().size() != 0)
-				sendDataWebSocket.sendData(sender, receivers, "chatOut", getPlayer(sender));
+				sendDataWebSocket.sendData(sender, receivers, "chatOut", new ChatMsgVO(sender, null, new AtomicInteger(roomNo), null, null, null, null));
 		}
 		
 

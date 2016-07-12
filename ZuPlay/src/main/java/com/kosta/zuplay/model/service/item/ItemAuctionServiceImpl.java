@@ -112,8 +112,9 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 		try {
 			ItemMarketDTO itemMarketDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
 			int imPrice=itemMarketDTO.getImPurchasePrice();
+			String itemName=itemMarketDTO.getItemDTO().getItemName();
 			String sellerNickname = itemMarketDTO.getPlayerNickname();
-			String jsss="{\"sellerNickname\":\""+sellerNickname+"\",\"imPrice\":\"" + imPrice + "\"}";
+			String jsss="{\"itemName\":\""+itemName+"\",\"imPrice\":\"" + imPrice + "\"}";
 			PlayerVO pv = (PlayerVO) application.getAttribute("#"+sellerNickname);
 			if (pv != null) {
 				WebSocketSession webSession = pv.getSession();

@@ -76,7 +76,7 @@ $(function(){
    
     /* 실시간 주가 정보 */
     var rtaInit = function(){
-     
+     alert("수정!!");
      $("#rta-Window").jqxWindow({
            width:"400",
            height:"450",
@@ -464,7 +464,7 @@ $(function(){
                      $("#stockListTBody").html(str);
                      
                      $(document).on("click", "#stock-window tr, #rta-Window tr",function(e){
-                    	 console.log("클릭이벤트!!");
+                    	 console.log("클릭");
                        var cd = $(this).find(":hidden").val();
                        showCompanyInfo(cd);
                      })
@@ -833,7 +833,6 @@ $(function(){
 		                    
 		                 } 
 		              })
-		              console.log(requestedFriend)
 		              $("#friend-list-que ul").append(requestedFriend);
 		              $("#friend-list-group ul").append(ListFriend);
 		         }

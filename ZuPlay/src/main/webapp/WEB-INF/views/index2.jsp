@@ -156,5 +156,5 @@
 <script type="text/javascript">
     userInfo.theme = "${theme}"; 
 </script>
-<script src="http://192.168.0.43:8000/zuplay/resources/js/script.js"></script>
+<script src="http://192.168.0.43:8000/zuplay/resources/js/script2.js"></script>
 </html>

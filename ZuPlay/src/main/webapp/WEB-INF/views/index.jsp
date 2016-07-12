@@ -155,5 +155,5 @@
 <script type="text/javascript">
     userInfo.theme = "${theme}"; 
 </script>
-<script src="resources/js/script2.js"></script>
+<script src="resources/js/script.js"></script>
 </html>

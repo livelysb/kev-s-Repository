@@ -1701,13 +1701,13 @@ $(function(){
           var chatStart = function(content){
              var data = content.data;
              var roomNo = content.data.roomNo;
-
                if(!$("#chat-roomNo-"+roomNo).length){
                   var str = "";
                   str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";
                   str += "<div>Chat</div><div class='chat-content row-fluid'>";
                   str += "<div class='col-md-12 chat-room-info'><span class='label label-default pull-left'>No."+roomNo+"</span>";
-                  str += "<label class='chat-room-header'>"+content.data.roomName+"</label><div class='chat-room-popover'>hello</div>";
+                  str += "<label class='chat-room-header'>"+content.data.roomName+"</label>";
+                  str += "<div class='chat-room-popover' hidden>hello</div>";
                   str += "<span class='label label-success pull-right chat-current-online'></span>";
             	  if(content.data.password){
             		  str += "<span class='label label-danger pull-right'><i class='fa fa-key' aria-hidden='true'></i></span>";
@@ -1720,6 +1720,7 @@ $(function(){
                 $("#main").append(str);
                   var chatContent = $("#chat-roomNo-"+roomNo);
                   var chatOut = $("#chat-roomNo-"+roomNo + " .chat-output");
+                  var popover = $(chatContent).find(".chat-room-popover");
                   
                 $(chatContent).jqxWindow({
                   width:"430",
@@ -1731,8 +1732,6 @@ $(function(){
                  });
                 
                 var onlineLabel = $(chatContent).find(".chat-current-online");
-                var title = $(chatContent).find(".chat-room-header");
-                var popover = $(chatContent).find(".chat-room-popover");
                 
                 if(content.data.playerList.length>content.data.maxNum){
                 	$(onlineLabel).removeClass("label-success").addClass("label-danger");
@@ -1759,31 +1758,30 @@ $(function(){
                     }
                  });
                }
-               
                $(popover).html(getChatCurrentUsers(content.data.playerList));
-               
-/*               $(popover).jqxPopover({ 
-            	   offset: { left: 0, top: 240 }, 
-            	   isModal: true, 
-            	   arrowOffsetValue: -240, 
-            	   position: "bottom", 
+               //접속 인원 보기
+               $(popover).jqxPopover({
             	   title: "접속 인원", 
             	   showCloseButton: true, 
-            	   selector: $(title)
-            	});*/
-               
+            	   selector: $(chatContent).find(".chat-room-header")
+            	  });
           }
           
           /* 방 유저 업데이트 */
           var getChatCurrentUsers = function(players){
-        	  var str = "<table><tbody>";
+        	  var str = "<div class='chat-room-online-users'><table class='table table-condensed table-hover'><tbody>";
+        	  
+        	  
         	  for(var i=0; i<players.length; i++){
         		  str += "<tr>";
-        		  str += "<th>" + players[i].playerNickname + "</th>";
+        		  str += "<td><div class='chat-avatar-div'>" + avatarEqui("chat",players[i].playerGender,players[i].playerItemDTO).join("") + "</div></td>";
+        		  str += "<td>" + players[i].playerNickname + "</td>";
         		  str += "</tr>"
         	  }
         	  
-        	  str += "</tbody></table>"
+        	  str += "</tbody></table></div>";
+        	  
+        	  return str;
           }
 
           /* 채팅 리스트 */

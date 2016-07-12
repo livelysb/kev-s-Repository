@@ -21,6 +21,11 @@ small, .small {
   font-size: 85%;
 }
 
+.jqx-popover-title{
+	padding-right: 3px;
+	padding-left: 3px;
+	text-align: center;
+}
 
 #loading-content{
    position: absolute;

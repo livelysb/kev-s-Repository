@@ -14,6 +14,7 @@ import org.springframework.web.socket.WebSocketSession;
 import com.google.gson.Gson;
 import com.kosta.zuplay.model.dto.player.FriendDTO;
 import com.kosta.zuplay.model.dto.player.FriendVO;
+import com.kosta.zuplay.model.service.item.ItemAuctionService;
 import com.kosta.zuplay.model.service.player.FriendService;
 import com.kosta.zuplay.util.vo.PlayerVO;
 
@@ -25,18 +26,29 @@ public class FriendController {
 
 	@Autowired
 	private ServletContext application;
+	
+	@Autowired
+	private ItemAuctionService itemAuctionServiceImpl;
 
-	public void friendLogin(String playerNickname) {
+	public void friendLogin(String playerNickname,WebSocketSession webSession) {
 		List<String> list = new ArrayList<>();
 		WebSocketSession webSocketSession = null;
-
+		boolean isAuctionFinish = true;
 		try {
+			isAuctionFinish=itemAuctionServiceImpl.itemAuctionEndSearch(playerNickname);
 			list = friendServiceImpl.friendSelectOnlyNickname(playerNickname);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		String jsonAuction = "{\"type\":\"notiIsAuctionFinish\",\"data\":\""+isAuctionFinish+"\"}";
 		String json = "{\"type\":\"notiFriendLogin\",\"data\":\"" + playerNickname + "\"}";
+		TextMessage txAuction = new TextMessage(jsonAuction);
 		TextMessage tx = new TextMessage(json);
+		try {
+			webSession.sendMessage(txAuction);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		PlayerVO pv = null;
 		for (int i = 0; i < list.size(); i++) {
 			String playerNickname1 = list.get(i);

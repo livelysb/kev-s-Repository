@@ -14,7 +14,6 @@ import com.kosta.zuplay.model.dao.ItemAuctionDAO;
 import com.kosta.zuplay.model.dao.ItemStoreDAO;
 import com.kosta.zuplay.model.dao.PlayerInfoDAO;
 import com.kosta.zuplay.model.dao.PlayerItemDAO;
-import com.kosta.zuplay.model.dto.item.ItemDTO;
 import com.kosta.zuplay.model.dto.item.ItemMarketDTO;
 import com.kosta.zuplay.model.dto.player.PlayerItemDTO;
 import com.kosta.zuplay.model.service.system.UtilService;
@@ -70,7 +69,6 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	@Override
 	@Transactional
 	public int auctionBuy(String playerNickname, int imSq) throws Exception {
-		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
@@ -159,7 +157,6 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	@Transactional
 	public boolean auctionBring(String playerNickname, int imSq) throws Exception  {
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
-		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		String imAuctionEnd = itemAuctionDAO.auctionBring(imSq);
@@ -216,6 +213,17 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 
 			}
 		}
+	}
+
+	@Override
+	public boolean itemAuctionEndSearch(String playerNickname) throws Exception {
+		ItemAuctionDAO itemAuctionDAO=sqlSession.getMapper(ItemAuctionDAO.class);
+		List<ItemMarketDTO> list = itemAuctionDAO.itemAuctionEndSearch(playerNickname);
+		boolean result = true ; 
+		if(list.size()==0){
+			result = false;
+		}
+		return result;
 	}
 
 }

@@ -43,7 +43,7 @@ public class EchoHandler extends TextWebSocketHandler {
 			if (mesArr[0].equals("open")) {
 				application.setAttribute("#" + playerNickname, new PlayerVO(playerNickname, webSession));
 				try {
-					friendController.friendLogin(playerNickname);
+					friendController.friendLogin(playerNickname,webSession);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

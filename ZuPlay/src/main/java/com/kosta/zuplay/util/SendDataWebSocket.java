@@ -18,7 +18,7 @@ public class SendDataWebSocket {
 	@Autowired
 	private ServletContext context;
 	
-	public void sendData(String sender, List<String> receivers, String type, Object object) {
+	public void sendData(List<String> receivers, String type, Object object) {
 		List<PlayerVO> receiverList = new ArrayList<PlayerVO>();
 		for (String receiver : receivers) {
 			PlayerVO player = (PlayerVO) context.getAttribute("#" + receiver);

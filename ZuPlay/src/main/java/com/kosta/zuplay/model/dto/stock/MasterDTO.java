@@ -39,6 +39,7 @@ public class MasterDTO {
 	private double earningRate; //종목별 수익률
 	private boolean like; //좋아요
 	private int plQuantity;//수량
+	private int earningMoney; //종목별 총 수익/손실금
 	
 	private List<RealTimePriceDTO> rtpList; // 실시간 주식정보 (일간용) 1:다 조인
 	private List<DailyPriceDTO> dpList; //일별 주식 정보 (월간용) 1:다 조인
@@ -394,6 +395,15 @@ public class MasterDTO {
 	public void setPriceDTO(PriceDTO priceDTO) {
 		this.priceDTO = priceDTO;
 	}
+
+	public int getEarningMoney() {
+		return earningMoney;
+	}
+
+	public void setEarningMoney(int earningMoney) {
+		this.earningMoney = earningMoney;
+	}
+	
 	
 
 }

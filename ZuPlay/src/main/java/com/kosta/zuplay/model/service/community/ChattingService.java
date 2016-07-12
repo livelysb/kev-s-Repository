@@ -17,7 +17,7 @@ public interface ChattingService {
 	/**
 	 * 채팅방 목록 보기
 	 * */
-	void chatRoomSelect(String sender, int page);
+	void chatRoomSelect();
 	
 	/**
 	 * 채팅방 참가

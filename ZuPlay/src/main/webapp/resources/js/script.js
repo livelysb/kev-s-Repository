@@ -1325,11 +1325,17 @@ $(function(){
            
            /* 1:1 채팅 보내기 */
            $(document).on("click","#chat-no-"+nick+" .chat-sendBtn",function(evt){
+        	   if($(chatOut).val() == ""){
+        		   return;
+        	   }
               sendMsg("chatOneByOne", userInfo.nickName, nick, $(chatOut).val());
               $(chatOut).val("");
            });
            
            $(chatOut).on("keyup",function(){
+        	   if($(chatOut).val() == ""){
+        		   return;
+        	   }
                if(event.keyCode == 13) {
                    sendMsg("chatOneByOne", userInfo.nickName, nick, $(chatOut).val());
                    $(chatOut).val("");
@@ -1368,11 +1374,17 @@ $(function(){
            
            /* 채팅방 채팅 보내기 */
            $(document).on("click","#chat-roomNo-"+roomNo+" .chat-sendBtn",function(evt){
+        	   if($(chatOut).val() == ""){
+        		   return;
+        	   }
               sendMsg("chatRoomChat", userInfo.nickName, roomNo, $(chatOut).val());
               $(chatOut).val("");
            });
            
            $(chatOut).on("keyup",function(){
+        	   if($(chatOut).val() == ""){
+        		   return;
+        	   }
                if(event.keyCode == 13) {
 	               sendMsg("chatRoomChat", userInfo.nickName, roomNo, $(chatOut).val());
 	               $(chatOut).val("");

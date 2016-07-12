@@ -624,7 +624,7 @@ div.vertical-line{
 .chat-message{
     background: #f9f9f9;
     overflow: auto;
-    height: 525px;
+    height: 500px;
 }
 
 .chat-group li img {

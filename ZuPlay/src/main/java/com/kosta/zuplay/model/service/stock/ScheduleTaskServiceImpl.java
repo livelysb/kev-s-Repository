@@ -33,6 +33,8 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	public void actionPer10Min() {
 		System.out.println("매 5분마다 작업을 시작합니다.");
 		try {
+			rankService.calRank("PLAYER_DAILY_RANK");
+			rankService.calRank("PLAYER_SEASON_RANK");
 			stockUpdateService.stockPriceUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,8 +60,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 		try {
 			stockUpdateService.masterUpdate();
 			stockUpdateService.realtimePriceReset();
-			rankService.calRank("PLAYER_DAILY_RANK");
-			rankService.calRank("PLAYER_SEASON_RANK");
+			
 			earningRateService.updateEarningRate();
 			
 		} catch (Exception e) {

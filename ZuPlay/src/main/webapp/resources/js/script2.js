@@ -1152,7 +1152,7 @@ $(function(){
                 }
              })
           }
-          var showUserInfo = function(nickName){
+          showUserInfo = function(nickName){
 	          $.ajax({
 	             url:"userInfo",
 	             data:{targetPlayer:nickName},

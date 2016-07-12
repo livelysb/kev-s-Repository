@@ -128,6 +128,9 @@ public class EchoHandler extends TextWebSocketHandler {
 				appliName.add(sharp.substring(1));
 			}
 		}
+		for(String name : appliName) {
+			System.out.println(name);
+		}
 		System.out.println(appliName.size());
 		for (int i = 0; i < appliName.size(); i++) {
 			PlayerVO pv = (PlayerVO) application.getAttribute("#" + appliName.get(i));

@@ -1637,11 +1637,7 @@ $(function(){
              for(var i=0; i<=5; i++ ){
                 str += avatarEquiAry[i];
              }
-              
-                 
                  str += "</div>";
-                 
-                 
                  str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
                  str += evt.data.sender;
                  str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
@@ -1677,11 +1673,7 @@ $(function(){
 	         for(var i=0; i<=5; i++ ){
 	            str += avatarEquiAry[i];
 	         }
-	          
-	             
 	             str += "</div>";
-	             
-	             
 	             str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
 	             str += evt.data.sender;
 	             str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
@@ -1689,9 +1681,8 @@ $(function(){
 	             str += "</small></div><p>";
 	             str += evt.data.msg;
 	             str+="</p></div></li>";
-               
+	             
                  var n = $(cul).append(str).css("height");
-                 
                  $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
                
           }
@@ -1715,8 +1706,8 @@ $(function(){
                   var str = "";
                   str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";
                   str += "<div>Chat</div><div class='chat-content row-fluid'>";
-                  str += "<div class='col-md-12 bg-moccasin chat-room-info'><span class='label label-default pull-left'>No."+roomNo+"</span>";
-                  str += "<label>"+content.data.roomName+"</label>";
+                  str += "<div class='col-md-12 vertical-middle chat-room-info'><span class='label label-default pull-left'>No."+roomNo+"</span>";
+                  str += "<label class='chat-room-header'>"+content.data.roomName+"</label>";
                   str += "<span class='label label-success pull-right chat-current-online'></span>";
             	  if(content.data.password){
             		  str += "<span class='label label-danger pull-right'><i class='fa fa-key' aria-hidden='true'></i></span>";

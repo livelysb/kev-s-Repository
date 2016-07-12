@@ -20,7 +20,7 @@
   <script type="text/javascript">
     var textarea = document.getElementById("messageWindow");
    // var webSocket = new WebSocket('ws://localhost:8000/controller/server');
-   var webSocket = new WebSocket('ws://localhost:8000/zuplay/echo');
+   var webSocket = new WebSocket('ws://192.168.0.57/zuplay/echo');
     var inputMessage = document.getElementById('inputMessage');
     webSocket.onerror = function(event) {
       onError(event)

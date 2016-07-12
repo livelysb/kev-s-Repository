@@ -1760,16 +1760,30 @@ $(function(){
                  });
                }
                
+               $(popover).html(getChatCurrentUsers(content.data.playerList));
+               
                $(popover).jqxPopover({ 
             	   offset: { left: 0, top: 240 }, 
             	   isModal: true, 
             	   arrowOffsetValue: -240, 
-            	   position: "right", 
-            	   title: "Employees", 
+            	   position: "bottom", 
+            	   title: "접속 인원", 
             	   showCloseButton: true, 
             	   selector: $(title)
             	});
                
+          }
+          
+          /* 방 유저 업데이트 */
+          var getChatCurrentUsers = function(players){
+        	  var str = "<table><tbody>";
+        	  for(var i=0; i<players.length; i++){
+        		  str += "<tr>";
+        		  str += "<th>" + players[i].playerNickname + "</th>";
+        		  str += "</tr>"
+        	  }
+        	  
+        	  str += "</tbody></table>"
           }
 
           /* 채팅 리스트 */

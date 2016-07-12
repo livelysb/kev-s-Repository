@@ -1677,6 +1677,35 @@ $(function(){
                  $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
                
           }
+          
+          /* 채팅방 메세지*/
+          var chatMsg = function(evt){
+             var target;
+             var str = "";
+             var n = $(document).height();
+             target = $("#chat-roomNo-"+evt.data.roomNo);
+             if(evt.data.sender == userInfo.nickName){
+                str += "<li class='right clearfix'><span class='chat-img pull-right'>";
+             }else{
+                str += "<li class='left clearfix'><span class='chat-img pull-left'>";
+             }
+             
+             var cul = $(target).find(".chat-group");
+             
+                 str += "<img src='http://bootdey.com/img/Content/user_3.jpg' alt='User Avatar'>";
+                 str += "</span><div class='chat-body clearfix'><div class='header'><strong class='primary-font'>";
+                 str += evt.data.sender;
+                 str += "</strong><small class='pull-right text-muted'><i class='fa fa-clock-o'></i>";
+                 str += evt.data.time;
+                 str += "</small></div><p>";
+                 str += evt.data.msg;
+                 str+="</p></div></li>";
+               
+                 var n = $(cul).append(str).css("height");
+                 
+                 $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
+               
+          }
           	
           /* 친구창 채팅 버튼*/
           var friendChatBtn = function(){
@@ -1725,10 +1754,6 @@ $(function(){
              })
           }
           
-          /* 채팅 메세지 수신*/
-          var chatMsg = function(data){
-        	  
-          }
           
           ws.onmessage = function(event){
               var data = JSON.parse(event.data);

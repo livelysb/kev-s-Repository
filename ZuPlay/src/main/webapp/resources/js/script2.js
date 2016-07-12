@@ -76,7 +76,6 @@ $(function(){
    
     /* 실시간 주가 정보 */
     var rtaInit = function(){
-     alert("수정!!");
      $("#rta-Window").jqxWindow({
            width:"400",
            height:"450",
@@ -102,7 +101,7 @@ $(function(){
                      var tbd = $("#rta-tbody").empty();
                      $(data).each(function(index, item) {
                        if(index!=0){
-                          $(tbd).append("<tr> <td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"%</td><td>"+item.priceDTO.accTrdvol+"</td></tr>")
+                          $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"%</td><td>"+item.priceDTO.accTrdvol+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
                        }
                      });
                     if(data.length < 11) stockPage=1;
@@ -463,12 +462,14 @@ $(function(){
                      
                      $("#stockListTBody").html(str);
                      
-                     $(document).on("click", "#stock-window tr, #rta-Window tr",function(e){
-                    	 console.log("클릭");
+                     $(document).on("click", "#stock-window tr, #rta-Window tr, #mystock-window tr",function(e){
                        var cd = $(this).find(":hidden").val();
+                       console.log(cd)
                        showCompanyInfo(cd);
                      })
                   },
+                  
+                  
                   error:function(err){
                      console.log("Exception : stockListInit");
                   }
@@ -1195,7 +1196,7 @@ $(function(){
     				   str+="<td>"+item.plQuantity+"</td>";
     				   str+="<td>"+item.priceDTO.trdPrc+"</td>";
     				   str+="<td>"+item.priceDTO.trdPrc * item.plQuantity+"</td>";
-    				   str+="<td>"+item.earningRate+"%"+"</td></tr>";
+    				   str+="<td>"+item.earningRate+"%"+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
     			   });
     			   $("#mystockListTBody").html(str);
     		   },

@@ -1762,7 +1762,7 @@ $(function(){
                
                $(popover).html(getChatCurrentUsers(content.data.playerList));
                
-               $(popover).jqxPopover({ 
+/*               $(popover).jqxPopover({ 
             	   offset: { left: 0, top: 240 }, 
             	   isModal: true, 
             	   arrowOffsetValue: -240, 
@@ -1770,7 +1770,7 @@ $(function(){
             	   title: "접속 인원", 
             	   showCloseButton: true, 
             	   selector: $(title)
-            	});
+            	});*/
                
           }
           

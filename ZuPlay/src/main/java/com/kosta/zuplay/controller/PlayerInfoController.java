@@ -92,6 +92,7 @@ public class PlayerInfoController {
 		playerDTO.setEarningRate(earningRateService.calDailyEarningRate(tragetPlayer));
 		playerDTO.setTotalEarningRate(earningRateService.calEarningRate(tragetPlayer));
 		playerDTO.setPlayerItemDTO(inventoryService.playerItemWorn(tragetPlayer));
+		playerDTO.setTotalMoney(playerInfoService.getTotalMoney(tragetPlayer));
 		List<PlayerDTO> playerList = new ArrayList<PlayerDTO>();
 		playerList.add(playerDTO);
 		return new Gson().toJson(playerList);

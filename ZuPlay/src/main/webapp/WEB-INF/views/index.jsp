@@ -16,8 +16,7 @@
    <link href="resources/css/jqwidgets/jqx.${theme}.css" rel="stylesheet" />
 </c:if>
 <link href="resources/css/jquery-ui/jquery-ui.css" rel="stylesheet" />
-<link href="resources/css/style.css" rel="stylesheet" />
-
+<link href="http://192.168.0.88:8000/zuplay/resources/css/style.css" rel="stylesheet" />
 </head>
 <body class='default'>
 <img src="resources/img/loading.gif" id="loading-content">
@@ -153,9 +152,9 @@
 <script type="text/javascript" src="resources/js/jqwidgets/jqxpopover.js"></script>
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
-<script src="resources/js/set.js"></script>
+<script src="http://192.168.0.88:8000/zuplay/resources/js/set.js"></script>
 <script type="text/javascript">
     userInfo.theme = "${theme}"; 
 </script>
-<script src="resources/js/script.js"></script>
+<script src="http://192.168.0.88:8000/zuplay/resources/js/script.js"></script>
 </html>

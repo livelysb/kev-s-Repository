@@ -1176,6 +1176,12 @@ $(function(){
 	          })
           }
           
+          
+          /*친구정보보기*/
+          $(document).on("click","#friend-content .name",function(){
+        	  showUserInfo($(this).text());
+          })
+          
       };
       
        var myStockListUpdate = function(){

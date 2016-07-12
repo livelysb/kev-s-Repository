@@ -145,7 +145,6 @@ public class ChattingServiceImpl implements ChattingService {
 
 			// 조건에 맞지 않을 경우 들어오지 못함
 			if (crv.getMaxNum() <= crv.getPlayerList().size() || !crv.getPassword().equals(password)) {
-				System.out.println("여기 오나?");
 				return;
 			}
 

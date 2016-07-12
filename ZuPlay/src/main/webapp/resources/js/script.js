@@ -1711,13 +1711,6 @@ $(function(){
              var data = content.data;
              var roomNo = content.data.roomNo;
 
-             /*       <div class="col-md-12 chat-room-info">
-                    <span class="label label-default pull-left">No.335</span>
-                    <label>들어오세요!</label>
-                    <span class="label label-success pull-right chat-current-online">3 / 5</span>
-                    <span class="label label-danger pull-right"><i class="fa fa-key" aria-hidden="true"></i></span>
-                  </div>*/
-
                if(!$("#chat-roomNo-"+roomNo).length){
                   var str = "";
                   str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";

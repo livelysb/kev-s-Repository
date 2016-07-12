@@ -1707,7 +1707,8 @@ $(function(){
                   str += "<div>Chat</div><div class='chat-content row-fluid'>";
                   str += "<div class='col-md-12 chat-room-info'><span class='label label-default pull-left'>No."+roomNo+"</span>";
                   str += "<label class='chat-room-header'>"+content.data.roomName+"</label>";
-                  str += "<div class='chat-room-popover' hidden>hello</div>";
+                  str += "<div class='chat-room-popover' hidden><div class='chat-room-popover-contents'></div>";
+                  str += "<div class='col-xs-12' style='padding:0; margin-bottom:2px'><button class='btn btn-sm btn-danger btn-block'>나가기</button></div></div>"
                   str += "<span class='label label-success pull-right chat-current-online'></span>";
             	  if(content.data.password){
             		  str += "<span class='label label-danger pull-right'><i class='fa fa-key' aria-hidden='true'></i></span>";
@@ -1758,18 +1759,20 @@ $(function(){
                     }
                  });
                }
-               $(popover).html(getChatCurrentUsers(content.data.playerList));
+               var popoverContents = $(popover).find(".chat-room-popover-contents");
+               $(popoverContents).html(getChatCurrentUsers(content.data.playerList));
                //접속 인원 보기
                $(popover).jqxPopover({
             	   title: "접속 인원", 
             	   showCloseButton: true, 
-            	   selector: $(chatContent).find(".chat-room-header")
-            	  });
+            	   selector: $(chatContent).find(".chat-room-header"),
+            	   theme : userInfo.theme
+               });
           }
           
           /* 방 유저 업데이트 */
           var getChatCurrentUsers = function(players){
-        	  var str = "<div class='chat-room-online-users'><table class='table table-condensed table-hover'><tbody>";
+        	  var str = "<div class='chat-room-online-users'><table class='table table-condensed table-bordered'><tbody>";
         	  
         	  
         	  for(var i=0; i<players.length; i++){
@@ -1816,6 +1819,8 @@ $(function(){
                 sendMsg("chatRoomJoin",userInfo.nickName,roomNo);
              })
           }
+          
+          /* Chat In */
           
           
           ws.onmessage = function(event){

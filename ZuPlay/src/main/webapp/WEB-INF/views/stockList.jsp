@@ -15,6 +15,7 @@
          <thead>
             <tr>
                <th>종목명</th>
+               <th>분야</th>
                <th>현재가</th>
                <th>전일비</th>
                <th>등락률</th>

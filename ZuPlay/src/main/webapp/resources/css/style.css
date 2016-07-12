@@ -730,6 +730,22 @@ div.vertical-line{
   overflow: hidden;
 }
 
+.chat-avatar-div {
+	position: relative;
+	height: 80px;
+	width: 70px;
+	border: #DDDDDD 1px solid;
+	border-radius:100%;
+}
+
+.chat-avatar-div img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+
+
 /*설정*/
 .switch {
 	position: relative;

@@ -974,6 +974,11 @@ display:inline-block;
 	padding: 0;
 }
 
+.chat-room-info{
+  border-bottom: 2px #F2F2FF solid;
+  text-align: center;
+  overflow: hidden;
+}
 
 /*랭킹*/
 

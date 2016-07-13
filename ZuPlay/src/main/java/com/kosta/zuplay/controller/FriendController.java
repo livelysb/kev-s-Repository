@@ -26,21 +26,21 @@ public class FriendController {
 
 	@Autowired
 	private ServletContext application;
-	
+
 	@Autowired
 	private ItemAuctionService itemAuctionServiceImpl;
 
-	public void friendLogin(String playerNickname,WebSocketSession webSession) {
+	public void friendLogin(String playerNickname, WebSocketSession webSession) {
 		List<String> list = new ArrayList<>();
 		WebSocketSession webSocketSession = null;
 		boolean isAuctionFinish = true;
 		try {
-			isAuctionFinish=itemAuctionServiceImpl.itemAuctionEndSearch(playerNickname);
+			isAuctionFinish = itemAuctionServiceImpl.itemAuctionEndSearch(playerNickname);
 			list = friendServiceImpl.friendSelectOnlyNickname(playerNickname);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String jsonAuction = "{\"type\":\"notiIsAuctionFinish\",\"data\":\""+isAuctionFinish+"\"}";
+		String jsonAuction = "{\"type\":\"notiIsAuctionFinish\",\"data\":\"" + isAuctionFinish + "\"}";
 		String json = "{\"type\":\"notiFriendLogin\",\"data\":\"" + playerNickname + "\"}";
 		TextMessage txAuction = new TextMessage(jsonAuction);
 		TextMessage tx = new TextMessage(json);
@@ -52,39 +52,38 @@ public class FriendController {
 		PlayerVO pv = null;
 		for (int i = 0; i < list.size(); i++) {
 			String playerNickname1 = list.get(i);
-			try {
-				pv = (PlayerVO) application.getAttribute("#" + playerNickname1);
+			pv = (PlayerVO) application.getAttribute("#" + playerNickname1);
+			if (pv != null) {
 				webSocketSession = pv.getSession();
-			} catch (Exception e) {
-				e.printStackTrace();
+				try {
+					webSocketSession.sendMessage(tx);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-			try {
-				webSocketSession.sendMessage(tx);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
 		}
 
 	}
 
 	public void friendSelect(String playerNickname) {
 		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname);
-		WebSocketSession webSession = pv.getSession();
-		List<FriendVO> list = null;
-		try {
-			list = friendServiceImpl.friendSelect(playerNickname);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Gson gson = new Gson();
-		String json = gson.toJson(list);
-		json = "{\"type\":\"friendSelect\",\"data\": " + json + "}";
-		TextMessage tx = new TextMessage(json);
-		try {
-			webSession.sendMessage(tx);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (pv != null) {
+			WebSocketSession webSession = pv.getSession();
+			List<FriendVO> list = null;
+			try {
+				list = friendServiceImpl.friendSelect(playerNickname);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Gson gson = new Gson();
+			String json = gson.toJson(list);
+			json = "{\"type\":\"friendSelect\",\"data\": " + json + "}";
+			TextMessage tx = new TextMessage(json);
+			try {
+				webSession.sendMessage(tx);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	//
@@ -109,12 +108,10 @@ public class FriendController {
 	// }
 
 	public void friendAdd(String playerNickname, String playerNickname2) {
-		PlayerVO pv = null;
+		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname2);
 		WebSocketSession webSession = null;
-		if (application.getAttribute("#" + playerNickname2) != null) {
-			pv = (PlayerVO) application.getAttribute("#" + playerNickname2);
+		if (pv != null) {
 			webSession = pv.getSession();
-
 		}
 		FriendDTO dto = null;
 		dto = friendServiceImpl.friendAdd(playerNickname, playerNickname2);
@@ -135,28 +132,32 @@ public class FriendController {
 
 	public void friendDel(String playerNickname, int friendSq) {
 		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname);
-		WebSocketSession webSession = pv.getSession();
-		boolean result = false;
-		result = friendServiceImpl.friendDel(friendSq);
-		Gson gson = new Gson();
-		String json = "{\"type\":\"friendDel\",\"data\":" + gson.toJson(result) + "}";
-		TextMessage tx = new TextMessage(json);
-		try {
-			webSession.sendMessage(tx);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (pv != null) {
+			WebSocketSession webSession = pv.getSession();
+			boolean result = false;
+			result = friendServiceImpl.friendDel(friendSq);
+			Gson gson = new Gson();
+			String json = "{\"type\":\"friendDel\",\"data\":" + gson.toJson(result) + "}";
+			TextMessage tx = new TextMessage(json);
+			try {
+				webSession.sendMessage(tx);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void friendAccept(String playerNickname, String playerNickname2, int friendSq) {
 		PlayerVO pv = (PlayerVO) application.getAttribute("#" + playerNickname);
-		PlayerVO pv2 = null;
+		PlayerVO pv2 = (PlayerVO) application.getAttribute("#" + playerNickname2);
 		WebSocketSession webSession2 = null;
-		if (application.getAttribute("#" + playerNickname2) != null) {
-			pv2 = (PlayerVO) application.getAttribute("#" + playerNickname2);
+		if (pv2 != null) {
 			webSession2 = pv2.getSession();
 		}
-		WebSocketSession webSession = pv.getSession();
+		WebSocketSession webSession = null;
+		if (pv != null) {
+			webSession = pv.getSession();
+		}
 
 		boolean result = true;
 		try {
@@ -170,8 +171,10 @@ public class FriendController {
 			String json2 = "{\"type\":\"notiFriendAcceptYou\",\"data\":\"" + playerNickname + "\"}";
 
 			try {
-				webSession.sendMessage(new TextMessage(json));
-				if (application.getAttribute("#" + playerNickname2) != null) {
+				if (pv != null) {
+					webSession.sendMessage(new TextMessage(json));
+				}
+				if (pv2 != null) {
 					webSession2.sendMessage(new TextMessage(json2));
 				}
 			} catch (IOException e) {

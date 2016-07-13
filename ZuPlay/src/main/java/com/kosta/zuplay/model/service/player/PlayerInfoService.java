@@ -8,7 +8,7 @@ public interface PlayerInfoService {
 	/**
 	 * 플레이어 리스트 가져오기
 	 */
-	public List<PlayerDTO> playerInfoSelectAll(String keyword) throws Exception;
+	public List<PlayerDTO> playerInfoSelectAll(String playerNickname,String keyword) throws Exception;
 	/**
 	 * 플레이어 정보 가져오기
 	 * */

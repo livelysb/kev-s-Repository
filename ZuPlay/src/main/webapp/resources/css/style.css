@@ -772,6 +772,10 @@ div.vertical-line{
   height: 100% ;
 }
 
+.chat-one{
+	height: 525px !important;
+}
+
 
 /*설정*/
 .switch {
@@ -970,14 +974,14 @@ display:inline-block;
   color: #777;
 }
 
-#chatroom-mychat li a .last-message {
+#chatroom-mychat li a .chat-last-message {
   width: 65%;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-#chatroom-mychat li a .time {
+#chatroom-mychat li a .chat-time {
   position: absolute;
   top: 10px;
   right: 8px;
@@ -1010,9 +1014,9 @@ display:inline-block;
 }
 
 .chat-room-header:HOVER {
-	cursor: pointer;
 	color:blue;
 	font-weight: bold;
+	
 }
 
 .chat-room-popover-contents .table {

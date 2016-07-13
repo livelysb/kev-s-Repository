@@ -21,6 +21,7 @@ $(function(){
          error:function(){
             console.log("Exception : updatePI");
             alert("유저 정보 로드를 실패했습니다. 잠시 후 다시 시도해주세요.");
+            location.href="/";
          }
       })
    }
@@ -130,13 +131,11 @@ $(function(){
       }
       /* 주식 구매 */
 	   var buyStock = function(companyId, qty){
-		   console.log(companyId + " " + qty)
 		      $.ajax({
 		    	  url:"buyStock",
 		    	  dataType:"text",
 		    	  data:{isuCd:companyId, plQuantity:qty},
 		    	  success:function(data){
-		    		  console.log(data);
 		    		  if(data == "true"){
 		    			  alert("구매 성공하였습니다.");
 		    		  }else{
@@ -151,7 +150,6 @@ $(function(){
 		  };
 		  /* 주식 판매 */
 		   var sellStock = function(companyId, qty){
-			   console.log(companyId + " " + qty)
 			      $.ajax({
 			    	  url:"sellStock",
 			    	  dataType:"text",
@@ -736,8 +734,6 @@ $(function(){
          $(document).on("click",".friend-accept" ,function(){
         	 var friendNickName = $(this).parent().prevAll(".name").text();
             var friendSq = $(this).parent().prevAll(".requestedFSq").val();
-            console.log(friendNickName);
-            console.log(friendSq);
             ws.send("friendAccept#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendNickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#");
             
          })
@@ -787,7 +783,6 @@ $(function(){
               var requestedFriend=""; 
               var ListFriend=""; 
               var friendBtnColor=""; 
-              var friendGender="";
               var friendNickname= "";
              
               var avatarEquiAry;
@@ -795,59 +790,74 @@ $(function(){
               $("#friend-content .list-group > .title").siblings("li").remove(); 
               
               $.each(data.data,function(index,item){
-                 friendGender=item.friendGender
                  
                  userInfo.nickName==item.playerNickname ? friendNickname=item.playerNickname2 : 
                                                   friendNickname=item.playerNickname;
                  
                  if(item.friendIsAccepted=="F"){
-                             requestedFriend+="<li href='#' class='list-group-item text-left'>";
-                             requestedFriend+="<div class='friend-avatar-div' >";
-                             avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
-                             
-                             for(var k=0; k<=5; k++ ){
-                                requestedFriend += avatarEquiAry[k];
-                             }
-                             
-                             requestedFriend+="</div>"; 
-                             requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
-                             requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
-                             requestedFriend+="<div class='pull-right'>"; 
-                             requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
-                             requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
-                             requestedFriend+="</div></li>"; 
-                       
-                       }else{
-                          ListFriend += "<li href='#' class='list-group-item text-left'>";
-                          ListFriend += "<div class='friend-avatar-div'>";
-                          
-                          avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
-                          for(var k=0; k<=5; k++ ){
-                             ListFriend += avatarEquiAry[k];
-                          }
-                          
-                          ListFriend += "</div>";
-                          
-                          if(item.onOrOff==true){ 
-                             friendBtnColor="green"; 
-                          }else{
-                             friendBtnColor="red"; 
-                          } 
-                          
-                          ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
-                           ListFriend += "<label class='name'>"+friendNickname+"</label>";
-                           ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
-                          ListFriend += "<div class='pull-right'>";
-                          ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
-                          ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
-                          
-                       } 
-                    })
-                    $("#friend-list-que ul").append(requestedFriend);
-                    $("#friend-list-group ul").append(ListFriend);
-               }
-               
-            }
+                    if(item.type=="A" && item.playerNickname==userInfo.nickName){
+                         requestedFriend+="<li href='#' class='list-group-item text-left'>";
+                         requestedFriend+="<div class='friend-avatar-div' >";
+                         avatarEquiAry = avatarEqui("friend",item.friendGender,item.playerItemDTO)
+                         
+                         for(var k=0; k<=5; k++ ){
+                            requestedFriend += avatarEquiAry[k];
+                         }
+                         
+                         requestedFriend+="</div>"; 
+                         requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
+                         requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
+                         requestedFriend+="<div class='pull-right'>"; 
+                         requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+                         requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
+                         requestedFriend+="</div></li>"; 
+                    }else if(item.type=="B" && item.playerNickname2==userInfo.nickName){
+                       requestedFriend+="<li href='#' class='list-group-item text-left'>";
+                         requestedFriend+="<div class='friend-avatar-div' >";
+                         avatarEquiAry = avatarEqui("friend",item.friendGender,item.playerItemDTO)
+                         
+                         for(var k=0; k<=5; k++ ){
+                            requestedFriend += avatarEquiAry[k];
+                         }
+                         
+                         requestedFriend+="</div>"; 
+                         requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
+                         requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
+                         requestedFriend+="<div class='pull-right'>"; 
+                         requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+                         requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
+                         requestedFriend+="</div></li>"; 
+                    }
+               }else{
+                  ListFriend += "<li href='#' class='list-group-item text-left'>";
+                  ListFriend += "<div class='friend-avatar-div'>";
+                  
+                  avatarEquiAry = avatarEqui("friend",item.friendGender,item.playerItemDTO)
+                  for(var k=0; k<=5; k++ ){
+                     ListFriend += avatarEquiAry[k];
+                  }
+                  
+                  ListFriend += "</div>";
+                  
+                  if(item.onOrOff==true){ 
+                     friendBtnColor="green"; 
+                  }else{
+                     friendBtnColor="red"; 
+                  } 
+                  
+                  ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
+                  ListFriend += "<label class='name'>"+friendNickname+"</label>";
+                  ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
+                  ListFriend += "<div class='pull-right'>";
+                  ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
+                  ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
+                  
+               } 
+            });
+            $("#friend-list-que ul").append(requestedFriend);
+            $("#friend-list-group ul").append(ListFriend);
+           }
+        }
       
       /* 경제용어사전 */
       var financialInit = function(){
@@ -1253,7 +1263,6 @@ $(function(){
                     }
                    var str = "";
                    $.each(result.data.docs,function(index, item){
-                      console.log(item);
                       if(item.image_urls.length>0){
                          str += "<div class='hr-line-dashed'></div>";
                          str += "<div class='news-search-img col-md-4'>";
@@ -1268,7 +1277,6 @@ $(function(){
                      str+="<p>"+item.content+"</p>";
                      str+="</div>";
                    })
-                   console.log(str);
                    $("#news-search-results").empty().append(str);              
                    
                 },
@@ -1283,16 +1291,22 @@ $(function(){
 
        /* 1:1 채팅 */
        var showChatWindow = function(nick){
-          if(!$("#chat-no-"+nick).length){
+          if(!$("#chat-no-"+nick).length || !setting.chat[nick]){
+        	 setting.chat[nick] = {
+        			 roomNo : nick,
+        			 count : 0,
+        			 isOBO : true
+        	 };
+        	  
              var str = "";
              str += "<div class='chat-window container-fluid' id='chat-no-"+nick+"'>";
              str += "<div>Chat</div><div class='chat-content row-fluid'>"
-             str += "<div class='col-md-12 bg-white'><div class='chat-message'><ul class='chat-group'>"
+             str += "<div class='col-md-12 bg-white'><div class='chat-message chat-one'><ul class='chat-group'>"
              str += "</ul></div>"
-            str += "<div class='col-md-12 chat-box bg-white'><div class='input-group'>"
-            str += "<input class='form-control border no-shadow no-rounded chat-output' placeholder='Type your message here'>"
-            str += "<span class='input-group-btn chat-sendBtn'><button class='btn btn-success no-rounded' type='button'>Send</button>"
-            str += "</span></div></div></div></div></div>"
+             str += "<div class='col-md-12 chat-box bg-white'><div class='input-group'>"
+             str += "<input class='form-control border no-shadow no-rounded chat-output' placeholder='Type your message here'>"
+             str += "<span class='input-group-btn chat-sendBtn'><button class='btn btn-success no-rounded' type='button'>Send</button>"
+             str += "</span></div></div></div></div></div>"
                
            $("#main").append(str);
              var chatContent = $("#chat-no-"+nick);
@@ -1306,7 +1320,7 @@ $(function(){
              closeButtonAction: 'hide',
              theme:userInfo.theme
             });
-           
+           updateMyChat();
            /* 1:1 채팅 보내기 */
            $(document).on("click","#chat-no-"+nick+" .chat-sendBtn",function(evt){
         	   if($(chatOut).val() == ""){
@@ -1324,6 +1338,7 @@ $(function(){
                    sendMsg("chatOneByOne", userInfo.nickName, nick, $(chatOut).val());
                    $(chatOut).val("");
                }
+               
             });
           }else{
              $("#chat-no-"+nick).jqxWindow("show");
@@ -1360,7 +1375,6 @@ $(function(){
   				type:"post",
   				dataType:"text",
   				success:function(result){
-  					console.log(result)
   					$("#setting-myInfo").prop("checked",true);
   					$("#setting-whisper").prop("checked",true);
   					$("#setting-friend").prop("checked",true);
@@ -1445,7 +1459,6 @@ $(function(){
  				 dataType:"json",
  				 data:"kind="+kind,
  				 success:function(data){
- 					 console.log(data)
  					 rankingdraw(kind,data);
  			   	 	
  				 },
@@ -1477,7 +1490,6 @@ $(function(){
  					 data:"tragetPlayer="+$(this).val(),
  					 dataType:"json",
  					 success:function(data){
- 						 console.log(data);
  						 rankingdraw(kind, data);
  					 },
  					 error:function(err){
@@ -1532,8 +1544,173 @@ $(function(){
  		 
  		 rankingSelect("s");
  		 
- 		 
       }
+      
+      
+      /* 방 유저 업데이트 */
+      var getChatCurrentUsers = function(players){
+    	  var str = "<div class='chat-room-online-users'><table class='table table-condensed table-bordered'><tbody>";
+    	  
+    	  
+    	  for(var i=0; i<players.length; i++){
+    		  str += "<tr>";
+    		  str += "<td><div class='chat-avatar-div'>" + avatarEqui("chat",players[i].playerGender,players[i].playerItemDTO).join("") + "</div></td>";
+    		  str += "<td>" + players[i].playerNickname + "</td>";
+    		  str += "</tr>"
+    	  }
+    	  
+    	  str += "</tbody></table></div>";
+    	  
+    	  return str;
+      }
+
+      /* 채팅 리스트 */
+      var chatList = function(content){
+         var str = "";
+         var data = content.data;
+         for(var i=0; i<data.length;i++){
+           str += "<div class='chatroom-rooms'> <a href='#' class='clearfix'><div class='chatroom-name'><h3><strong>";
+           str += "<input type='hidden' value='"+data[i].roomNo+"'>";
+           str += data[i].roomName;
+           str += "</strong></h3></a><small class='text-muted'>";
+           str += data[i].playerList.length + " / " + data[i].maxNum;
+           str += "</small>"
+           if(data[i].password == "T"){
+             str += "<small class='chat-alert label label-danger chat-label-pwd'>password</small>"
+           }
+           str += "</div>";
+         }
+         
+         
+         $("#chatroom-list-ul").html(str);
+         var eventTargets = $("#chatroom-list-ul a");
+         
+         $(eventTargets).click(function(event){
+            var roomNo = $(this).find(":hidden").val();
+            if(setting.chat[roomNo]){
+            	return;
+            }
+            
+            if(data[i].password == "T"){
+              var password = prompt("비밀번호를 입력해주세요", "");
+              sendMsg("chatRoomJoin",userInfo.nickName,roomNo, password);
+              return;
+            }
+           
+            sendMsg("chatRoomJoin",userInfo.nickName,roomNo);
+         })
+      }
+      
+      /* Chat In */
+      var chatIn = function(content){
+    	  var roomNo = content.data.roomNo;
+          setting.chat[roomNo].playerList = content.data.playerList;
+
+         var target;
+         var str = "";
+         var n = $(document).height();
+         target = $("#chat-roomNo-"+roomNo);
+         
+         str += "<li class='well-sm text-center'><div class='chat-body clearfix'><h4 class='text-success'>";
+         str += content.data.sender + "님이 입장하셨습니다."
+         str += "</h3></div></li>";
+         
+         var cul = $(target).find(".chat-group");
+         var n = $(cul).append(str).css("height");
+         $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
+         
+         refreshRoomInfo(roomNo);
+      }
+      
+      /* Chat Out */
+      var chatOut = function(content){
+    	 var roomNo = content.data.roomNo;
+    	 setting.chat[roomNo].playerList = content.data.playerList;
+         var target;
+         var target;
+         var str = "";
+         var n = $(document).height();
+         target = $("#chat-roomNo-"+roomNo);
+         
+         str += "<li class='well-sm text-center'><div class='chat-body clearfix'><h4 class='text-danger'>";
+         str += content.data.sender + "님이 퇴장하셨습니다."
+         str += "</h3></div></li>";
+         
+         var cul = $(target).find(".chat-group");
+         var n = $(cul).append(str).css("height");
+         $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
+         
+         refreshRoomInfo(roomNo);
+      }
+      
+      /* 방 정보 갱신 */
+      var refreshRoomInfo = function(roomNo){
+    	  var chatPage = setting.chat[roomNo];
+    	  
+          var chatContent = $("#chat-roomNo-"+roomNo);
+          var popover = $(chatContent).find(".chat-room-popover");
+          var onlineLabel = $(chatContent).find(".chat-current-online");
+          
+          if(chatPage.playerList.length>=chatPage.maxNum){
+          	$(onlineLabel).removeClass("label-success").addClass("label-danger");
+          }else{
+        	  $(onlineLabel).removeClass("label-danger").addClass("label-success");
+          }
+          $(onlineLabel).text(chatPage.playerList.length + " / " + chatPage.maxNum);
+
+          var popoverContents = $("#chat-room-popover-"+roomNo+" .chat-room-popover-contents");
+          $(popoverContents).html(getChatCurrentUsers(chatPage.playerList));
+          
+          $(popover).jqxPopover({
+       	   title: "접속 인원", 
+       	   showCloseButton: true, 
+       	   selector: $(chatContent).find(".chat-room-header"),
+       	   theme : userInfo.theme
+          });
+          
+      }
+      
+      /* 내 채팅 업데이트*/
+      var updateMyChat = function(){
+    	  var str = "";
+    	  for(var key in setting.chat){
+    		  str += "<li class='chatroom-mychat-li'><input type='hidden' value='"+setting.chat[key].roomNo+"'><a href='#' class='clearfix'>";
+    		  str += "<img src='http://bootdey.com/img/Content/user_1.jpg' alt='' class='img-circle'>";
+    		  str += "<div class='chatroom-name'><strong>";
+    		  str += setting.chat[key].isOBO ? setting.chat[key].roomNo : setting.chat[key].roomName;
+    		  str += "</strong></div><div class='chat-last-message text-muted'></div>";
+    		  str += "<small class='chat-time text-muted'></small><small class='chat-alert chat-count label label-danger'></small>";
+    		  str += "</a></li>";
+    		  
+    		  updateMyChatOne(key);
+    	  }
+
+    	  $("#chatroom-mychat-ul").html(str);
+      }
+      
+      /* 내 채팅 개별 업데이트 */
+      var updateMyChatOne = function(roomNo){
+    	  var myChat = $("#chatroom-mychat-ul li input[value="+roomNo+"]").parent();
+    	  $(myChat).find(".chat-last-message").text(setting.chat[roomNo].lastMsg);
+    	  $(myChat).find(".chat-time").text(setting.chat[roomNo].lastTime);
+    	  $(myChat).find(".chat-count").text(setting.chat[roomNo].count);
+      }
+      
+      /* 내 채팅 클릭 이벤트 */
+      $(document).on("click","#chatroom-mychat-ul li", function(event){
+    	  var roomNo = $(this).find(":hidden").val();
+    	  
+    	  if(setting.chat[roomNo].isOBO){
+    		  var targetWindow = $("#chat-no-"+roomNo);
+    	  }else{
+	    	  var targetWindow = $("#chat-roomNo-"+roomNo);
+	      }
+    	  $(targetWindow).jqxWindow("open");
+    	  $(targetWindow).jqxWindow("focus");
+    	  $(targetWindow).jqxWindow("expand");
+    	  $(targetWindow).jqxWindow('bringToFront');
+      });
+      
       
       invenInit();
       rtaInit();
@@ -1572,7 +1749,7 @@ $(function(){
       var sendMsg = function(){
           var args = Array.prototype.slice.call(arguments, 0);
           var msg = args.join("#/fuckWebSocket/#");
-          console.log(msg);
+          console.log("Send to server : " + msg);
           ws.send(msg);
        }
       
@@ -1593,16 +1770,18 @@ $(function(){
           /* 채팅 메세지 */
           var oneByOne = function(evt){
              var target;
+             var roomNo;
              var str = "";
              var n = $(document).height();
              if(evt.data.sender == userInfo.nickName){
                 target = $("#chat-no-"+evt.data.receiver);
+                roomNo = evt.data.receiver;
                 str += "<li class='right clearfix'><span class='chat-img pull-right'>";
              }else{
                 target = $("#chat-no-"+evt.data.sender);
-                console.log($(target).length);
                 if(!$(target).length){
                    showChatWindow(evt.data.sender);
+                   roomNo = evt.data.sender;
                    oneByOne(evt);
                    return;
                 }
@@ -1632,7 +1811,11 @@ $(function(){
                  var n = $(cul).append(str).css("height");
                  
                  $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
-               
+                 
+                 setting.chat[roomNo].lastMsg = evt.data.msg;
+                 setting.chat[roomNo].lastTime = evt.data.time;
+                 
+                 updateMyChatOne(roomNo);
           }
           
           /* 채팅방 메세지*/
@@ -1668,6 +1851,11 @@ $(function(){
                  var n = $(cul).append(str).css("height");
                  $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
                
+                 var roomObj = setting.chat[evt.data.roomNo];
+                 roomObj.lastMsg = evt.data.msg
+                 roomObj.lastTime = evt.data.time;
+                 updateMyChatOne(evt.data.roomNo);
+                 
           }
           
           
@@ -1682,12 +1870,10 @@ $(function(){
           var chatStart = function(content){
              var data = content.data;
              var roomNo = content.data.roomNo;
-             
-             
-             
-               if($("#chat-roomNo-"+roomNo).length){
+             if($("#chat-roomNo-"+roomNo).length || setting.chat[roomNo]){
             	return;   
                }
+               
                setting.chat[roomNo] = data;
                   var str = "";
                   str += "<div class='chat-window container-fluid' id='chat-roomNo-"+roomNo+"'>";
@@ -1747,7 +1933,6 @@ $(function(){
                  });
                 
                 $(closeBtn).click(function(evt){
-                	console.log($(this));
                 	delete setting.chat[roomNo];
                 	sendMsg("chatRoomOut", userInfo.nickName, roomNo);
                 	$("#chat-room-popover-"+roomNo).remove();
@@ -1763,136 +1948,13 @@ $(function(){
              	   selector: $(chatContent).find(".chat-room-header"),
              	   theme : userInfo.theme
                 });
+                
+                updateMyChat();
                
           }
-          
-          /* 방 유저 업데이트 */
-          var getChatCurrentUsers = function(players){
-        	  var str = "<div class='chat-room-online-users'><table class='table table-condensed table-bordered'><tbody>";
-        	  
-        	  
-        	  for(var i=0; i<players.length; i++){
-        		  str += "<tr>";
-        		  str += "<td><div class='chat-avatar-div'>" + avatarEqui("chat",players[i].playerGender,players[i].playerItemDTO).join("") + "</div></td>";
-        		  str += "<td>" + players[i].playerNickname + "</td>";
-        		  str += "</tr>"
-        	  }
-        	  
-        	  str += "</tbody></table></div>";
-        	  
-        	  return str;
-          }
 
-          /* 채팅 리스트 */
-          var chatList = function(content){
-             var str = "";
-             var data = content.data;
-             for(var i=0; i<data.length;i++){
-               str += "<div class='chatroom-rooms'> <a href='#' class='clearfix'><div class='chatroom-name'><h3><strong>";
-               str += "<input type='hidden' value='"+data[i].roomNo+"'>";
-               str += data[i].roomName;
-               str += "</strong></h3></a><small class='text-muted'>";
-               str += data[i].playerList.length + " / " + data[i].maxNum;
-               str += "</small>"
-               if(data[i].password == "T"){
-                 str += "<small class='chat-alert label label-danger'>password</small>"
-               }
-               str += "</div>";
-             }
-             
-             
-             $("#chatroom-list-ul").html(str);
-             var eventTargets = $("#chatroom-list-ul a");
-             console.log(eventTargets);
-             
-             $(eventTargets).click(function(event){
-                var roomNo = $(this).find(":hidden").val();
-                console.log("===================================================");
-                console.log(roomNo);
-                if($(this).find("small.chat-alert").length){
-                  var password = prompt("비밀번호를 입력해주세요", "");
-                  sendMsg("chatRoomJoin",userInfo.nickName,roomNo, password);
-                  return;
-                }
-               
-                sendMsg("chatRoomJoin",userInfo.nickName,roomNo);
-             })
-          }
-          
-          /* Chat In */
-          var chatIn = function(content){
-        	  var roomNo = content.data.roomNo;
-              setting.chat[roomNo].playerList = content.data.playerList;
-
-             var target;
-             var str = "";
-             var n = $(document).height();
-             target = $("#chat-roomNo-"+roomNo);
-             
-             str += "<li class='well-sm text-center'><div class='chat-body clearfix'><h4 class='text-success'>";
-             str += content.data.sender + "님이 입장하셨습니다."
-             str += "</h3></div></li>";
-             
-             var cul = $(target).find(".chat-group");
-             var n = $(cul).append(str).css("height");
-             $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
-             
-             refreshRoomInfo(roomNo);
-          }
-          
-          /* Chat Out */
-          var chatOut = function(content){
-        	 var roomNo = content.data.roomNo;
-        	 setting.chat[roomNo].playerList = content.data.playerList;
-             var target;
-             var target;
-             var str = "";
-             var n = $(document).height();
-             target = $("#chat-roomNo-"+roomNo);
-             
-             str += "<li class='well-sm text-center'><div class='chat-body clearfix'><h4 class='text-danger'>";
-             str += content.data.sender + "님이 퇴장하셨습니다."
-             str += "</h3></div></li>";
-             
-             var cul = $(target).find(".chat-group");
-             var n = $(cul).append(str).css("height");
-             $(target).find(".chat-message").animate({ scrollTop: n }, 50).jqxWindow("show");
-             
-             refreshRoomInfo(roomNo);
-          }
-          
-          /* 방 정보 갱신 */
-          var refreshRoomInfo = function(roomNo){
-        	  var chatPage = setting.chat[roomNo];
-        	  
-              var chatContent = $("#chat-roomNo-"+roomNo);
-              var popover = $(chatContent).find(".chat-room-popover");
-              var onlineLabel = $(chatContent).find(".chat-current-online");
-              
-              if(chatPage.playerList.length>=chatPage.maxNum){
-              	$(onlineLabel).removeClass("label-success").addClass("label-danger");
-              }else{
-            	  $(onlineLabel).removeClass("label-danger").addClass("label-success");
-              }
-              $(onlineLabel).text(chatPage.playerList.length + " / " + chatPage.maxNum);
-
-              var popoverContents = $("#chat-room-popover-"+roomNo+" .chat-room-popover-contents");
-              $(popoverContents).html(getChatCurrentUsers(chatPage.playerList));
-              
-              $(popover).jqxPopover({
-           	   title: "접속 인원", 
-           	   showCloseButton: true, 
-           	   selector: $(chatContent).find(".chat-room-header"),
-           	   theme : userInfo.theme
-              });
-              
-          }
-          
-          /* 내 채팅 갱신*/
-          
           ws.onmessage = function(event){
               var data = JSON.parse(event.data);
-              console.log(data);
               
               switch(data.type){
                  case "friendSelect" : friendSelectAll(data);  break;

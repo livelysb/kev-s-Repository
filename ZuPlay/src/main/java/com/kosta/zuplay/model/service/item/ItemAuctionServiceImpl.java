@@ -89,7 +89,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 			System.out.println("[ LOG ] : " + playerNickname + " 님의 인벤토리 빈 인덱스 = " + piIndex);
 			if (piIndex != 0) {
 				payRubyMap.put("playerNickname", playerNickname);
-				payRubyMap.put("updateRuby", ruby - price + "");
+				payRubyMap.put("updateRuby", (ruby - price) + "");
 				int payRubyResult = playerInfoDAO.updateRuby(payRubyMap);
 
 				if (payRubyResult != 0) {
@@ -191,7 +191,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 			itemAuctionDAO.auctionDeleteFin(imSq);
 
 			map.put("playerNickname", playerNickname);
-			map.put("updateRuby", ruby + price + "");
+			map.put("updateRuby", ruby + (price*0.9) + "");
 			int result = playerInfoDAO.updateRuby(map);
 			System.out.println(map);
 			if (result == 0) {

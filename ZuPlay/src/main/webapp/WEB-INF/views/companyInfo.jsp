@@ -27,9 +27,9 @@
 		
 		<div class="tab-content">
 		  <div id="company-chart-today" class="tab-pane fade in active">
-		   <%-- <c:forEach items="${masterDTO.rtpList}" var="rtp" varStatus="stu">
+		   <c:forEach items="${masterDTO.rtpList}" var="rtp" varStatus="stu">
 		   		${rtp.rpTrdTm} : ${rtp.rpTrdPrc}
-		   </c:forEach> --%>
+		   </c:forEach>
 		</div>
 	  	
 		  <div id="company-chart-week" class="tab-pane fade">
@@ -96,7 +96,7 @@
   </div>
   
 <script type="text/javascript">
-	$("#company-${masterDTO.isuCd}").ready(function(){
+	/* $("#company-${masterDTO.isuCd}").ready(function(){
 		
 			console.log("${masterDTO.rtpList}")
 			//console.log("${masterDTO.rtpList.rpTrdTm}")
@@ -157,5 +157,5 @@
 	                data: [ ["2016.07.01" , 1] , ["2016.08.01" , 2] , ["2016.09.01" , 3] , ["2016.10.01", 4] , ["2016.11.01", 5] ]
 	            }]
 	        });
-	    });
+	    }); */
 </script>

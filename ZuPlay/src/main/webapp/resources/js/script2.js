@@ -30,6 +30,9 @@ $(function(){
    $.fn.setBtn = function(window){
       $(this).on("click",function(){
          $(window).jqxWindow("show");
+         $(window).jqxWindow('bringToFront');
+         $(window).jqxWindow('expand');
+         $(window).jqxWindow('focus');
       })
       return this;
    };
@@ -129,7 +132,6 @@ $(function(){
          }
        )
       }
-    
     var myStockListUpdate = function(){
         $.ajax({
            url:"playerStock",
@@ -153,6 +155,21 @@ $(function(){
            }
         });
      }
+    
+     var myStockInit = function(){
+	     $("#mystock-window").jqxWindow({
+	           width:"400",
+	           height:"450",
+	           resizable:true,
+	           showCollapseButton: true,
+	           autoOpen:false,
+	           theme:userInfo.theme
+	         });
+	     myStockListUpdate();
+     }
+    
+    
+    
       /* 주식 구매 */
 	   var buyStock = function(companyId, qty){
 		      $.ajax({
@@ -163,7 +180,6 @@ $(function(){
 		    		  if(data == "true"){
 		    			  myStockListUpdate();
 		    			  alert("구매 성공하였습니다.");
-		    			 
 		    		  }else{
 		    			  alert("구매 실패하였습니다.");
 		    		  }
@@ -1223,41 +1239,7 @@ $(function(){
          showUserInfo($(this).text());
       })
       
-      /*var myStockListUpdate = function(){
-          $.ajax({
-             url:"playerStock",
-             type:"post",
-             dataType:"json",
-             success:function(data){
-                str="";
-                $("#mystockListTBody").empty();
-                $.each(data, function(index, item){
-                   str+="<tr><td>"+item.isuKorAbbrv+"</td>";
-                   str+="<td>"+item.kind+"</td>";
-                   str+="<td>"+item.plQuantity+"</td>";
-                   str+="<td>"+item.priceDTO.trdPrc+"</td>";
-                   str+="<td>"+item.priceDTO.trdPrc * item.plQuantity+"</td>";
-                   str+="<td>"+item.earningRate+"%"+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
-                });
-                $("#mystockListTBody").html(str);
-             },
-             error:function(err){
-                console.log("Exception : myStockListUpdate");
-             }
-          });
-       }*/
       
-       var myStockInit = function(){
-	     $("#mystock-window").jqxWindow({
-	           width:"400",
-	           height:"450",
-	           resizable:true,
-	           showCollapseButton: true,
-	           autoOpen:false,
-	           theme:userInfo.theme
-	         });
-	     myStockListUpdate();
-       }
 
        /* 뉴스 검색 */
        var newsSearchInit = function(){
@@ -1609,8 +1591,8 @@ $(function(){
          }
          
          
-         $("#chatroom-list-ul").html(str);
-         var eventTargets = $("#chatroom-list-ul a");
+         $("#chatroom-list-ul").empty().html(str);
+         var eventTargets = $("#chatroom-list-ul .chatroom-rooms");
          
          $(eventTargets).click(function(event){
             var roomNo = $(this).find(":hidden").val();
@@ -1618,13 +1600,13 @@ $(function(){
             	return;
             }
             
-            if(data[i].password == "T"){
+            if($(this).find(".chat-label-pwd").length){
               var password = prompt("비밀번호를 입력해주세요", "");
               sendMsg("chatRoomJoin",userInfo.nickName,roomNo, password);
               return;
+            }else{
+            	sendMsg("chatRoomJoin",userInfo.nickName,roomNo);
             }
-           
-            sendMsg("chatRoomJoin",userInfo.nickName,roomNo);
          })
       }
       
@@ -1708,11 +1690,13 @@ $(function(){
     		  str += "</strong></div><div class='chat-last-message text-muted'></div>";
     		  str += "<small class='chat-time text-muted'></small><small class='chat-alert chat-count label label-danger'></small>";
     		  str += "</a></li>";
-    		  
-    		  updateMyChatOne(key);
     	  }
 
     	  $("#chatroom-mychat-ul").html(str);
+    	  
+    	  for(var key in setting.chat){
+    		  updateMyChatOne(key);
+    	  }
       }
       
       /* 내 채팅 개별 업데이트 */
@@ -1964,6 +1948,7 @@ $(function(){
                 	sendMsg("chatRoomOut", userInfo.nickName, roomNo);
                 	$("#chat-room-popover-"+roomNo).remove();
                 	$(chatContent).remove();
+                	updateMyChat();
                 	
                 });
                 var popoverContents = $(popover).find(".chat-room-popover-contents");

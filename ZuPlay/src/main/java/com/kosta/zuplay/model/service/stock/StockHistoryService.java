@@ -2,7 +2,7 @@ package com.kosta.zuplay.model.service.stock;
 
 import java.util.List;
 
-import com.kosta.zuplay.model.dto.stock.EarningRateHistory;
+import com.kosta.zuplay.model.dto.stock.EarningRateHistoryDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
 
 public interface StockHistoryService {
@@ -17,7 +17,7 @@ public interface StockHistoryService {
 	/**
 	 * 1. 일일수익률 가져오기
 	 * */
-	List<EarningRateHistory> getEarningRateList(String playerNickname) throws Exception;
+	List<EarningRateHistoryDTO> getEarningRateList(String playerNickname) throws Exception;
 	
 	
 	/**

@@ -26,7 +26,7 @@
 		select * from stock_deal_history where player_nickname = #{String}
 	</select>
 
-	<select id="getEarningRateHistory" parameterType="String" resultMap="earningRateHistory">
+	<select id="getEarningRateHistory" parameterType="String" resultType="earningRateHistoryDTO">
 		select * from EARNING_RATE_HISTORY where player_nickname = #{String}
 	</select>
 </mapper>

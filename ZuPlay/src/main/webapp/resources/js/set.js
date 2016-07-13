@@ -16,6 +16,7 @@ var setting = {
 	parts : [ "clothes", "hair", "eyes", "mouse", "earring", "acc" ],
 	page : [],
 	chat : {},
+	oneByOne : {},
 	content : "body",
 };
 

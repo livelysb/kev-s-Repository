@@ -114,13 +114,13 @@ public class FriendServiceImpl implements FriendService {
 			FriendDTO dto = listA.get(i);
 			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname2(), dto.getPlayerNickname(),
 					dto.getFriendIsAccepted(), dto.getFriendDate(), dto.getPlayerDTO().getPlayerGender(), false,
-					dto.getList()));
+					"A",dto.getList()));
 		}
 		for (int i = 0; i < listB.size(); i++) {
 			FriendDTO dto = listB.get(i);
 			listVO.add(new FriendVO(dto.getFriendSq(), dto.getPlayerNickname(), dto.getPlayerNickname2(),
 					dto.getFriendIsAccepted(), dto.getFriendDate(), dto.getPlayerDTO().getPlayerGender(), false,
-					dto.getList()));
+					"B",dto.getList()));
 		}
 		for (int i = 0; i < listVO.size(); i++) {
 			if (listApp.contains(listVO.get(i).getPlayerNickname())) {

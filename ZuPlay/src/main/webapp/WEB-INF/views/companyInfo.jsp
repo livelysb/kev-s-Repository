@@ -98,64 +98,64 @@
 <script type="text/javascript">
 	$("#company-${masterDTO.isuCd}").ready(function(){
 		str="( [ [2016.07.01 , 1] , [2016.08.01 , 2] , [2016.09.01 , 3] , [2016.10.01, 4] , [2016.11.01, 5] ] )";
-		jsonStr = JSON.parse(str);
-		console.log("${masterDTO.rtpList}");
-		alert("시행")
-		console.log(jsonStr);
-        $('#company-chart-today').highcharts({
-            chart: {
-                zoomType: 'x'
-            },
-            title: {
-                text: '${masterDTO.isuKorAbbrv} Today Chart'
-            },
-            subtitle: {
-                text: document.ontouchstart === undefined ?
-                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
-            },
-            xAxis: {
-                type: 'datetime'
-            },
-            yAxis: {
-                title: {
-                    text: '주가'
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            plotOptions: {
-                area: {
-                    fillColor: {
-                        linearGradient: {
-                            x1: 0,
-                            y1: 0,
-                            x2: 0,
-                            y2: 1
-                        },
-                        stops: [
-                            [0, Highcharts.getOptions().colors[0]],
-                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                        ]
-                    },
-                    marker: {
-                        radius: 2
-                    },
-                    lineWidth: 1,
-                    states: {
-                        hover: {
-                            lineWidth: 1
-                        }
-                    },
-                    threshold: null
-                }
-            },
+		
+		$.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
+			console.log(data);
+	        $('#company-chart-today').highcharts({
+	            chart: {
+	                zoomType: 'x'
+	            },
+	            title: {
+	                text: 'USD to EUR exchange rate over time'
+	            },
+	            subtitle: {
+	                text: document.ontouchstart === undefined ?
+	                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+	            },
+	            xAxis: {
+	                type: 'datetime'
+	            },
+	            yAxis: {
+	                title: {
+	                    text: 'Exchange rate'
+	                }
+	            },
+	            legend: {
+	                enabled: false
+	            },
+	            plotOptions: {
+	                area: {
+	                    fillColor: {
+	                        linearGradient: {
+	                            x1: 0,
+	                            y1: 0,
+	                            x2: 0,
+	                            y2: 1
+	                        },
+	                        stops: [
+	                            [0, Highcharts.getOptions().colors[0]],
+	                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+	                        ]
+	                    },
+	                    marker: {
+	                        radius: 2
+	                    },
+	                    lineWidth: 1,
+	                    states: {
+	                        hover: {
+	                            lineWidth: 1
+	                        }
+	                    },
+	                    threshold: null
+	                }
+	            },
 
-            series: [{
-                type: 'area',
-                name: 'USD to EUR',
-                data: jsonStr
-            }]
-        });
+	            series: [{
+	                type: 'area',
+	                name: 'USD to EUR',
+	                data: data
+	            }]
+	        });
+	    });
 	});
 </script>

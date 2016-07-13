@@ -37,7 +37,7 @@ public class PlayerInfoController {
 
 	@Autowired
 	private RankService rankService;
-	
+
 	@Autowired
 	private EarningRateService earningRateService;
 
@@ -53,7 +53,7 @@ public class PlayerInfoController {
 		List<PlayerDTO> list;
 		session.getAttribute("playerNickname");
 		try {
-			list = playerInfoService.playerInfoSelectAll(keyword);
+			list = playerInfoService.playerInfoSelectAll((String) session.getAttribute("playerNickname"), keyword);
 			for (int i = 0; i < list.size(); i++) {
 				if (list.get(i).getPlayerNickname().equals(session.getAttribute("playerNickname"))) {
 					list.remove(i);
@@ -85,8 +85,9 @@ public class PlayerInfoController {
 		}
 
 	}
+
 	@ResponseBody
-	@RequestMapping(value = {"userInfo2"}, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = { "userInfo2" }, produces = "application/json;charset=UTF-8")
 	public String userInfo2(HttpSession session, String tragetPlayer) throws Exception {
 		PlayerDTO playerDTO = playerInfoService.getPlayer(tragetPlayer);
 		playerDTO.setEarningRate(earningRateService.calDailyEarningRate(tragetPlayer));
@@ -97,7 +98,7 @@ public class PlayerInfoController {
 		playerList.add(playerDTO);
 		return new Gson().toJson(playerList);
 	}
-	
+
 	@RequestMapping(value = { "userInfo" })
 	public ModelAndView userInfo(HttpSession session, String targetPlayer) throws Exception {
 		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
@@ -118,21 +119,21 @@ public class PlayerInfoController {
 			mv.addObject("isLike", false);
 		}
 		if (!targetPlayer.equals(playerNickname)) {
-			if (settingDAO.settingSelect(targetPlayer).getPsMyPage().equals("F")){
-				mv.addObject("psMyPage",false);
-			}else{
-				mv.addObject("psMyPage",true);
+			if (settingDAO.settingSelect(targetPlayer).getPsMyPage().equals("F")) {
+				mv.addObject("psMyPage", false);
+			} else {
+				mv.addObject("psMyPage", true);
 			}
-		}else{
+		} else {
 			mv.addObject("psMyPage", true);
 		}
 		mv.addObject("likeNum", playerDTO.getLikerList().size());
-		
-		if(context.getAttribute("#"+targetPlayer)!=null)
+
+		if (context.getAttribute("#" + targetPlayer) != null)
 			mv.addObject("onOrOff", true);
 		else
 			mv.addObject("onOrOff", false);
-		
+
 		return mv;
 	}
 

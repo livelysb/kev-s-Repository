@@ -97,7 +97,8 @@
   
 <script type="text/javascript">
 	$("#company-${masterDTO.isuCd}").ready(function(){
-		console.log("${masterDTO.rtpList}")
+		console.log("${masterDTO.rtpList}");
+		alert("시행")
         $('#company-chart-today').highcharts({
             chart: {
                 zoomType: 'x'

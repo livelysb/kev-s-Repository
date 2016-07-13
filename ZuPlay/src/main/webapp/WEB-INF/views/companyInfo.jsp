@@ -101,6 +101,8 @@
 		
 		$.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
 			console.log(data);
+			console.log("${masterDTO.rtpList}")
+			
 	        $('#company-chart-today').highcharts({
 	            chart: {
 	                zoomType: 'x'

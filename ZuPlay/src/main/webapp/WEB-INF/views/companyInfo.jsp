@@ -15,7 +15,6 @@
         </div>
       </div>
 
-
       <div class="row-fluid">
          <div class="col-xs-6 company-chart-warpper">
          <div class="company-chart">
@@ -116,7 +115,7 @@
 	                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
 	            },
 	            xAxis: {
-	            	categories : 	                
+	            	//categories : 	                
 	            },
 	            yAxis: {
 	                title: {

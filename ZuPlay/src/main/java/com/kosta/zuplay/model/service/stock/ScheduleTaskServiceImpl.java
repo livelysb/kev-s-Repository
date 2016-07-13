@@ -64,7 +64,6 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	

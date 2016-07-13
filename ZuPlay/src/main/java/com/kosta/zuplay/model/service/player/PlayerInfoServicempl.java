@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.FriendDAO;
 import com.kosta.zuplay.model.dao.PlayerInfoDAO;
-import com.kosta.zuplay.model.dao.SettingDAO;
 import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
 import com.kosta.zuplay.model.service.item.InventoryService;
@@ -149,8 +148,8 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		for(int i = list.size()-1 ; i>=0;i--){
-			if(friendList.contains(list.get(i).getPlayerNickname())){
+		for (int i = list.size() - 1; i >= 0; i--) {
+			if (friendList.contains(list.get(i).getPlayerNickname())) {
 				list.remove(i);
 			}
 		}

@@ -57,6 +57,8 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		List<MasterDTO> best = new ArrayList<MasterDTO>();
 		
 		for(int i=0; i<3; i++) {
+			if(masterList.size()<=i)
+				break;
 			if(masterList.get(i).getEarningRate()>=0)
 				best.add(masterList.get(i));
 		}
@@ -77,6 +79,8 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		List<MasterDTO> worst = new ArrayList<MasterDTO>();
 		
 		for(int i=0; i<3; i++) {
+			if(masterList.size()<=i)
+				break;
 			if(masterList.get(i).getEarningRate()>=0)
 				worst.add(masterList.get(i));
 		}

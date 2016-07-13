@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-  <div id="company-${masterDTO.isuCd}" class="company-window">
+ <div id="company-${masterDTO.isuCd}" class="company-window">
     <div class="company-header">기업정보 - ${masterDTO.isuCd}</div>
 	<input type="hidden" value="${masterDTO.isuCd}" class="company-isuCd">
 	<input type="hidden" value="${plQuantity}" class="company-qty">

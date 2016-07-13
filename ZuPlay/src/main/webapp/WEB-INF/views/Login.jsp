@@ -10,8 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home</title>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/jquery-ui.min.css" rel="stylesheet">
-<link href="resources/css/zuplay.css" rel="stylesheet">
 <style type="text/css">
    #naver_id_login{
       left:42.5%;
@@ -52,7 +50,6 @@ body {
 
 <script src="resources/js/jquery-2.2.4.min.js"></script>
 <script src="resources/js/naverLogin_implicit-1.0.2.js"></script>
-<script src="resources/js/jquery-ui.min.js"></script>
 <script src="resources/js/jquery.cookie.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
 

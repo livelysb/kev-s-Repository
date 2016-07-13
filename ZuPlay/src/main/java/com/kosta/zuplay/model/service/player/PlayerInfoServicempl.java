@@ -149,8 +149,8 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		for(int i = list.size() ; i>=0;i--){
-			if(friendList.contains(list.get(i))){
+		for(int i = list.size()-1 ; i>=0;i--){
+			if(friendList.contains(list.get(i).getPlayerNickname())){
 				list.remove(i);
 			}
 		}

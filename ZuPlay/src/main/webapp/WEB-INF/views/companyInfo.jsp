@@ -97,7 +97,7 @@
   
 <script type="text/javascript">
 	$("#company-${masterDTO.isuCd}").ready(function(){
-
+		console.log("${masterDTO.rtpList}")
         $('#company-chart-today').highcharts({
             chart: {
                 zoomType: 'x'

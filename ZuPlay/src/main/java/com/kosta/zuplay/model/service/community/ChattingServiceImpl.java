@@ -11,6 +11,7 @@ import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class ChattingServiceImpl implements ChattingService {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Autowired
+  private HttpSession session;
 
 	AtomicInteger i = new AtomicInteger(100);
 

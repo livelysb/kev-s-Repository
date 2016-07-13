@@ -17,22 +17,22 @@ public interface StockHistoryService {
 	/**
 	 * 1. 일일수익률 가져오기
 	 * */
-	List<EarningRateHistory> getEarningRateList(String playerNickname);
+	List<EarningRateHistory> getEarningRateList(String playerNickname) throws Exception;
 	
 	
 	/**
 	 * 2.1. 수익률 Best 3 주식 뽑아오기
 	 * */
-	List<MasterDTO> getBest3(String playerNickname);
+	List<MasterDTO> getBest3(String playerNickname) throws Exception;
 	
 	/**
 	 * 2.2. 수익률 Worst 3 주식 뽑아오기
 	 * */
-	List<MasterDTO> getWorst3(String playerNickname);
+	List<MasterDTO> getWorst3(String playerNickname) throws Exception;
 	
 	/**
 	 * 3. 구매내역 가져오기
 	 * */
-	List<MasterDTO> getStockDealHistory(String playerNickname, String orderBy, boolean asc);
+	List<MasterDTO> getStockDealHistory(String playerNickname, String orderBy, boolean asc) throws Exception;
 	
 }

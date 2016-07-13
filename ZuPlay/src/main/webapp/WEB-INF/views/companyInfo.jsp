@@ -103,7 +103,7 @@
                 zoomType: 'x'
             },
             title: {
-                text: 'USD to EUR exchange rate over time'
+                text: '${masterDTO.isuKorAbbrv} Today Chart'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -114,7 +114,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Exchange rate'
+                    text: '주가'
                 }
             },
             legend: {

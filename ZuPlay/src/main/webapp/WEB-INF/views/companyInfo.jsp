@@ -101,6 +101,7 @@
 		jsonStr = JSON.parse(str);
 		console.log("${masterDTO.rtpList}");
 		alert("시행")
+		console.log(jsonStr);
         $('#company-chart-today').highcharts({
             chart: {
                 zoomType: 'x'
@@ -153,7 +154,7 @@
             series: [{
                 type: 'area',
                 name: 'USD to EUR',
-                data: "${masterDTO.rtpList}"
+                data: jsonStr
             }]
         });
 	});

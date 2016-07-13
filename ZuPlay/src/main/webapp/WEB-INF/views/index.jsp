@@ -153,6 +153,7 @@
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script src="http://192.168.0.88:8000/zuplay/resources/js/set.js"></script>
+<script type="text/javascript" src="resources/js/highcharts.js"></script>
 <script type="text/javascript">
     userInfo.theme = "${theme}"; 
 </script>

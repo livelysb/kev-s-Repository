@@ -24,6 +24,11 @@ public interface EarningRateService {
 	public double calItemEarningRate(String playerNickname, String isuCd) throws Exception;
 	
 	/**
+	 * 플레이어의 종목별 총 수익률 계산하기
+	 * */
+	public int calItemEarningMoney(String playerNickname, String isuCd) throws Exception;
+	
+	/**
 	 * 전일 자산 업데이트
 	 * */
 	boolean updatePreMoney(String playerNickname) throws Exception;

@@ -436,11 +436,15 @@ $(function(){
                   data:"piSq="+piSq+"&imPurchasePrice="+imPurchasePrice,
                   dataType:"",
                   success:function(result){ 
-                     $(".inven-auction-modal").modal("hide");
-                     playerItemSelectAll();
-                     $("#inven-auction-imPurchasePrice").val("");
-                     search(1)
-                     $("#auction-selltab").trigger("click");
+                	  if(result=="true"){
+	                     $(".inven-auction-modal").modal("hide");
+	                     playerItemSelectAll();
+	                     $("#inven-auction-imPurchasePrice").val("");
+	                     search(1)
+	                     $("#auction-selltab").trigger("click");
+                	  }else{
+                		  alert("잘못 된 입력 값 입니다.");
+                	  }
                   }, 
                   error:function(err){
                      console.log("Exception : auctionSell");

@@ -39,6 +39,9 @@ public class IndexController {
 
 		return mv;
 	}
+	
+	@RequestMapping("intro")
+	public void intro(){}
 
 	@RequestMapping("{url}")
 	public void call(HttpSession session) {

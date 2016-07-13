@@ -255,7 +255,7 @@ $(function(){
                 	   }
                       var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item);
                       $("#inven-player-"+item.piIndex).html(items);
-                      $("#inven-player-"+item.piIndex).jqxTooltip({ content: item.itemDTO.itemName+"("+item.itemDTO.itemGrade+")", position: 'bottom', autoHide: true, 
+                      $("#inven-player-"+item.piIndex+" img").jqxTooltip({ content: item.itemDTO.itemName+"("+item.itemDTO.itemGrade+")", position: 'bottom', autoHide: true, 
                           name: 'movieTooltip', theme : userInfo.theme });
                    });
                    updateAvatar()

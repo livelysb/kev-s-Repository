@@ -30,6 +30,9 @@ $(function(){
    $.fn.setBtn = function(window){
       $(this).on("click",function(){
          $(window).jqxWindow("show");
+         $(window).jqxWindow('bringToFront');
+         $(window).jqxWindow('expand');
+         $(window).jqxWindow('focus');
       })
       return this;
    };
@@ -1587,11 +1590,12 @@ $(function(){
          
          $(eventTargets).click(function(event){
             var roomNo = $(this).find(":hidden").val();
+            var parent = $(this).find(":hidden").parent();
             if(setting.chat[roomNo]){
             	return;
             }
             
-            if(data[i].password == "T"){
+            if($(parent).find(".chat-label-pwd")){
               var password = prompt("비밀번호를 입력해주세요", "");
               sendMsg("chatRoomJoin",userInfo.nickName,roomNo, password);
               return;
@@ -1681,11 +1685,13 @@ $(function(){
     		  str += "</strong></div><div class='chat-last-message text-muted'></div>";
     		  str += "<small class='chat-time text-muted'></small><small class='chat-alert chat-count label label-danger'></small>";
     		  str += "</a></li>";
-    		  
-    		  updateMyChatOne(key);
     	  }
 
     	  $("#chatroom-mychat-ul").html(str);
+    	  
+    	  for(var key in setting.chat){
+    		  updateMyChatOne(key);
+    	  }
       }
       
       /* 내 채팅 개별 업데이트 */
@@ -1937,6 +1943,7 @@ $(function(){
                 	sendMsg("chatRoomOut", userInfo.nickName, roomNo);
                 	$("#chat-room-popover-"+roomNo).remove();
                 	$(chatContent).remove();
+                	updateMyChat();
                 	
                 });
                 var popoverContents = $(popover).find(".chat-room-popover-contents");

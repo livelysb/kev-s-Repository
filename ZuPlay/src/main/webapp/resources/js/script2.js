@@ -129,6 +129,30 @@ $(function(){
          }
        )
       }
+    
+    var myStockListUpdate = function(){
+        $.ajax({
+           url:"playerStock",
+           type:"post",
+           dataType:"json",
+           success:function(data){
+              str="";
+              $("#mystockListTBody").empty();
+              $.each(data, function(index, item){
+                 str+="<tr><td>"+item.isuKorAbbrv+"</td>";
+                 str+="<td>"+item.kind+"</td>";
+                 str+="<td>"+item.plQuantity+"</td>";
+                 str+="<td>"+item.priceDTO.trdPrc+"</td>";
+                 str+="<td>"+item.priceDTO.trdPrc * item.plQuantity+"</td>";
+                 str+="<td>"+item.earningRate+"%"+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
+              });
+              $("#mystockListTBody").html(str);
+           },
+           error:function(err){
+              console.log("Exception : myStockListUpdate");
+           }
+        });
+     }
       /* 주식 구매 */
 	   var buyStock = function(companyId, qty){
 		      $.ajax({
@@ -137,7 +161,9 @@ $(function(){
 		    	  data:{isuCd:companyId, plQuantity:qty},
 		    	  success:function(data){
 		    		  if(data == "true"){
+		    			  myStockListUpdate();
 		    			  alert("구매 성공하였습니다.");
+		    			 
 		    		  }else{
 		    			  alert("구매 실패하였습니다.");
 		    		  }
@@ -156,6 +182,7 @@ $(function(){
 			    	  data:{isuCd:companyId, plQuantity:qty},
 			    	  success:function(data){
 			    		  if(data == "true"){
+			    			  myStockListUpdate();
 			    			  alert("판매 하였습니다.");
 			    		  }else{
 			    			  alert("판매 실패하였습니다.");
@@ -1196,7 +1223,7 @@ $(function(){
          showUserInfo($(this).text());
       })
       
-      var myStockListUpdate = function(){
+      /*var myStockListUpdate = function(){
           $.ajax({
              url:"playerStock",
              type:"post",
@@ -1218,7 +1245,7 @@ $(function(){
                 console.log("Exception : myStockListUpdate");
              }
           });
-       }
+       }*/
       
        var myStockInit = function(){
 	     $("#mystock-window").jqxWindow({

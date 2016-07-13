@@ -132,6 +132,26 @@ public class EarningRateServiceImpl implements EarningRateService {
 		int rate = (int)((sell - buy) / (double)(buy) * 100000000);
 		return rate/1000000.0;
 	}
+	
+	/**
+	 * 플레이어의 종목별 총 수익금 구하기
+	 * */
+	public int calItemEarningMoney(String playerNickname, String isuCd) throws Exception {
+		int buy = 0;
+		int sell = 0;
+		List<StockDealHistoryDTO> stockDealHistoryList = dealHistoryService.getStockHistory(playerNickname);
+		for(StockDealHistoryDTO stockDealHistory : stockDealHistoryList) {
+			if(!stockDealHistory.getIsuCd().equals(isuCd))
+				continue;
+			
+			if(stockDealHistory.getSdhBuySell().equals("b"))
+				buy += stockDealHistory.getSdhDealPrice();
+			else 
+				sell += stockDealHistory.getSdhDealPrice();
+		}
+		sell += playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity() * stockInfoService.getPrice(isuCd).getTrdPrc();
+		return (sell - buy);
+	}
 
 	/**
 	 * 플레이어의 분야별 수익률 계산하기

@@ -20,6 +20,12 @@ public interface DealHistoryDAO {
 	public List<StockDealHistoryDTO> getStockHistory(String playerNickname) throws Exception;
 	
 	/**
+	 * 플레이어의 구매 / 판매 기록 가져와 보여주기(정렬 및 페이징)
+	 * */
+	public List<StockDealHistoryDTO> getStockHistoryOp(Map<String,String> map) throws Exception;
+	
+	
+	/**
 	 * 플레이어의 일일 수익률 히스토리 가져오기
 	 * */
 	public List<EarningRateHistoryDTO> getEarningRateHistory(String playerNickname) throws Exception;

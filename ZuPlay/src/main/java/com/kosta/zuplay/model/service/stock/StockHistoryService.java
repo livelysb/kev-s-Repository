@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kosta.zuplay.model.dto.stock.EarningRateHistoryDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
+import com.kosta.zuplay.model.dto.stock.StockDealHistoryDTO;
 
 public interface StockHistoryService {
 
@@ -33,6 +34,6 @@ public interface StockHistoryService {
 	/**
 	 * 3. 구매내역 가져오기
 	 * */
-	List<MasterDTO> getStockDealHistory(String playerNickname, String orderBy, boolean asc) throws Exception;
+	List<StockDealHistoryDTO> getStockDealHistory(String playerNickname, String orderBy, boolean asc, int page) throws Exception;
 	
 }

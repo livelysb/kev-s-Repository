@@ -13,6 +13,14 @@
 		<result column="SDH_BUY_SELL" property="sdhBuySell" />
 	</resultMap>
 
+	<resultMap type="earningRateHistoryDTO" id="earningRateHistory">
+		<id column="ERH_SQ" property="pehSq" />
+		<result column="PLAYER_NICKNAME" property="playerNickname" />
+		<result column="ERH_PE" property="pehPe" />
+		<result column="ERH_DATE" property="pehDate" />
+
+	</resultMap>
+
 	<insert id="stockHistoryInsert" parameterType="java.util.Map">
 		insert into
 		STOCK_DEAL_HISTORY
@@ -26,7 +34,22 @@
 		select * from stock_deal_history where player_nickname = #{String}
 	</select>
 
-	<select id="getEarningRateHistory" parameterType="String" resultType="earningRateHistoryDTO">
-		select * from EARNING_RATE_HISTORY where player_nickname = #{String}
+	<select id="getStockHistoryOp" parameterType="java.util.Map"
+		resultMap="stockDealHistory">
+		select * from (
+		select row_number() over(order by
+		<if test="orderBy!=null and asc!=null"> ${orderBy} ${asc},</if>
+		sdh_deal_time desc) rnum, m.isucd, sdh_deal_price, sdh_deal_time,
+		sdh_quantity, sdh_buy_sell, isukorabbrv, kind from (
+		select * from stock_deal_history where player_nickname=#{playerNickname}) s
+		join (select isucd, ISUKORABBRV, kind from master) m
+		on s.isucd=m.isucd)
+		where rnum>=#{startNum} and rnum&lt;#{lastNum}
+	</select>
+
+	<select id="getEarningRateHistory" parameterType="String"
+		resultMap="earningRateHistory">
+		select * from EARNING_RATE_HISTORY where player_nickname =
+		#{String}
 	</select>
 </mapper>

@@ -15,6 +15,7 @@
         </div>
       </div>
 
+
       <div class="row-fluid">
          <div class="col-xs-6 company-chart-warpper">
          <div class="company-chart">
@@ -99,9 +100,8 @@
 		str="( [ [2016.07.01 , 1] , [2016.08.01 , 2] , [2016.09.01 , 3] , [2016.10.01, 4] , [2016.11.01, 5] ] )";
 		
 		$.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
-			console.log(data);
 			console.log("${masterDTO.rtpList}")
-			console.log("${masterDTO}")
+			console.log("${masterDTO.rtpList.rpTrdTm}")
 			
 	        $('#company-chart-today').highcharts({
 	            chart: {
@@ -115,7 +115,8 @@
 	                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
 	            },
 	            xAxis: {
-	            	//categories : 	                
+	                type: 'datetime',
+	                
 	            },
 	            yAxis: {
 	                title: {
@@ -132,7 +133,7 @@
 	                            x1: 0,
 	                            y1: 0,
 	                            x2: 0,
-	                            y2: 1
+	                            y2: 5
 	                        },
 	                        stops: [
 	                            [0, Highcharts.getOptions().colors[0]],
@@ -155,7 +156,7 @@
 	            series: [{
 	                type: 'area',
 	                name: 'USD to EUR',
-	                data: data
+	                data: [ ["2016.07.01" , 1] , ["2016.08.01" , 2] , ["2016.09.01" , 3] , ["2016.10.01", 4] , ["2016.11.01", 5] ]
 	            }]
 	        });
 	    });

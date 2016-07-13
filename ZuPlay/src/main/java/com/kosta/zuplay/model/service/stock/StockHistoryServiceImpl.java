@@ -17,13 +17,9 @@ import com.kosta.zuplay.model.dto.stock.EarningRateHistoryDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
 import com.kosta.zuplay.model.dto.stock.StockDealHistoryDTO;
 import com.kosta.zuplay.model.service.player.EarningRateService;
-import com.kosta.zuplay.model.service.player.PlayerInfoService;
 
 @Service
 public class StockHistoryServiceImpl implements StockHistoryService {
-
-	@Autowired
-	private PlayerInfoService playerInfoService;
 
 	@Autowired
 	private PlayerStockService playerStockService;
@@ -46,6 +42,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 	@Override
 	public List<MasterDTO> getBest3(String playerNickname) throws Exception {
 		List<MasterDTO> masterList = getEarningList(playerNickname);
+		System.out.println("마스터 사이즈 : " + masterList.size());
 		Collections.sort(masterList, new EarningCompareAsc());
 		
 		for(MasterDTO master : masterList){
@@ -56,11 +53,11 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		}
 		List<MasterDTO> best = new ArrayList<MasterDTO>();
 		
-		for(int i=0; i<3; i++) {
-			if(masterList.size()<=i)
+		for(MasterDTO master : masterList) {
+			if(master.getEarningRate()>=0)
+				best.add(master);
+			else
 				break;
-			if(masterList.get(i).getEarningRate()>=0)
-				best.add(masterList.get(i));
 		}
 		return best;
 	}
@@ -78,11 +75,11 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		}
 		List<MasterDTO> worst = new ArrayList<MasterDTO>();
 		
-		for(int i=0; i<3; i++) {
-			if(masterList.size()<=i)
+		for(MasterDTO master : masterList) {
+			if(master.getEarningRate()<=0)
+				worst.add(master);
+			else
 				break;
-			if(masterList.get(i).getEarningRate()>=0)
-				worst.add(masterList.get(i));
 		}
 		return worst;
 	}
@@ -118,13 +115,13 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 	
 	class EarningCompareAsc implements Comparator<MasterDTO> {
 		@Override
-		public int compare(MasterDTO m1, MasterDTO m2) {
+		public int compare(MasterDTO m2, MasterDTO m1) {
 			return m1.getEarningRate() > m2.getEarningRate() ? 1 : m1.getEarningRate() < m2.getEarningRate() ? -1 : 0;
 		}
 	}
 	class EarningCompareDesc implements Comparator<MasterDTO> {
 		@Override
-		public int compare(MasterDTO m2, MasterDTO m1) {
+		public int compare(MasterDTO m1, MasterDTO m2) {
 			return m1.getEarningRate() > m2.getEarningRate() ? 1 : m1.getEarningRate() < m2.getEarningRate() ? -1 : 0;
 		}
 	}

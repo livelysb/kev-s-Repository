@@ -40,6 +40,7 @@ public class MasterDTO {
 	private boolean like; //좋아요
 	private int plQuantity;//수량
 	private int earningMoney; //종목별 총 수익/손실금
+	private int percent; //그래프 그릴 때 퍼센트
 	
 	private List<RealTimePriceDTO> rtpList; // 실시간 주식정보 (일간용) 1:다 조인
 	private List<DailyPriceDTO> dpList; //일별 주식 정보 (월간용) 1:다 조인
@@ -402,6 +403,14 @@ public class MasterDTO {
 
 	public void setEarningMoney(int earningMoney) {
 		this.earningMoney = earningMoney;
+	}
+
+	public int getPercent() {
+		return percent;
+	}
+
+	public void setPercent(int percent) {
+		this.percent = percent;
 	}
 	
 	

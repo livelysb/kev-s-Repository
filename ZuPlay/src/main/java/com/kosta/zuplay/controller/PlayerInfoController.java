@@ -180,4 +180,16 @@ public class PlayerInfoController {
 			throw new Exception();
 		}
 	}
+	
+	@RequestMapping(value={"getWorst"}, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getWorst(HttpSession session, String targetPlayer) throws Exception {
+		try {
+			return new Gson().toJson(stockHistoryService.getWorst3(targetPlayer));
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMsg", e.getMessage());
+			throw new Exception();
+		}
+	}
 }

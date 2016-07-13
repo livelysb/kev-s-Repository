@@ -4,18 +4,17 @@
    <div>Chat</div>
    <div id="chatroom-content">
       <ul class="nav nav-tabs" id="chatlist-tab">
-         <li class="active"><a data-target="#chatroom-mychat"
-            data-toggle="tab">내 채팅</a></li>
+         <li class="active"><a data-target="#chatroom-mychat" data-toggle="tab">내 채팅</a></li>
          <li><a data-target="#chatroom-list" data-toggle="tab">채팅방</a></li>
-      </ul>
+      </ul>`
       <div class="tab-content">
          <div class="tab-pane active" id="chatroom-mychat">
-            <ul id="#chatroom-mychat">
+            <ul id="chatroom-mychat-ul">
                
             </ul>
          </div>
          <div class="tab-pane" id="chatroom-list">
-            <button id="chatroom-create-btn">채팅방 생성</button>
+            <button id="chatroom-create-btn btn btn-success">채팅방 생성</button>
             <ul id="chatroom-list-ul">
             </ul>
             <div id="chatroom-create-modal" class="modal fade">

@@ -99,9 +99,8 @@
 	$("#company-${masterDTO.isuCd}").ready(function(){
 		str="( [ [2016.07.01 , 1] , [2016.08.01 , 2] , [2016.09.01 , 3] , [2016.10.01, 4] , [2016.11.01, 5] ] )";
 		
-		$.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
 			console.log("${masterDTO.rtpList}")
-			console.log("${masterDTO.rtpList.rpTrdTm}")
+			//console.log("${masterDTO.rtpList.rpTrdTm}")
 			
 	        $('#company-chart-today').highcharts({
 	            chart: {
@@ -160,5 +159,4 @@
 	            }]
 	        });
 	    });
-	});
 </script>

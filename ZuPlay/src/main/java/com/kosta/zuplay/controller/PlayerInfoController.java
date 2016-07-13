@@ -22,6 +22,7 @@ import com.kosta.zuplay.model.service.player.EarningRateService;
 import com.kosta.zuplay.model.service.player.PlayerInfoService;
 import com.kosta.zuplay.model.service.player.RankService;
 import com.kosta.zuplay.model.service.stock.PlayerStockService;
+import com.kosta.zuplay.model.service.stock.StockHistoryService;
 
 @Controller
 public class PlayerInfoController {
@@ -40,6 +41,9 @@ public class PlayerInfoController {
 
 	@Autowired
 	private EarningRateService earningRateService;
+	
+	@Autowired
+	private StockHistoryService stockHistoryService;
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -163,5 +167,17 @@ public class PlayerInfoController {
 			throw new Exception();
 		}
 
+	}
+	
+	@RequestMapping(value={"getBest"}, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getBest(HttpSession session, String targetPlayer) throws Exception {
+		try {
+			return new Gson().toJson(stockHistoryService.getBest3(targetPlayer));
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMsg", e.getMessage());
+			throw new Exception();
+		}
 	}
 }

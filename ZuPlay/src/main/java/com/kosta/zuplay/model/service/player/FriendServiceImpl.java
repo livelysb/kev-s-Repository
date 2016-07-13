@@ -127,7 +127,6 @@ public class FriendServiceImpl implements FriendService {
 				listVO.get(i).setOnOrOff(true);
 			}
 		}
-		System.out.println("listVO : "+ listVO);
 		return listVO;
 	}
 

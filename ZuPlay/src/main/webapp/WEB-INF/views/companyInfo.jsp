@@ -94,3 +94,7 @@
       </c:if>
     </div>
   </div>
+  
+<script type="text/javascript">
+	alert("박효승바봉");
+</script>

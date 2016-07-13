@@ -97,6 +97,8 @@
   
 <script type="text/javascript">
 	$("#company-${masterDTO.isuCd}").ready(function(){
+		str="( [ [2016.07.01 , 1] , [2016.08.01 , 2] , [2016.09.01 , 3] , [2016.10.01, 4] , [2016.11.01, 5] ] )";
+		jsonStr = JSON.parse(str);
 		console.log("${masterDTO.rtpList}");
 		alert("시행")
         $('#company-chart-today').highcharts({

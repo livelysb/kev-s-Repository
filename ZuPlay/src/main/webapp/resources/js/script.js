@@ -89,31 +89,31 @@ $(function(){
 
         var stockPage = 1;
         var getRealTimeStock = function(){
-           
-           if(!isHover){
-              $.ajax({
-                  url:'realTimeStock',
-                  type:'post',
-                  dataType:'json',
-                  contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-                  data: {"page":stockPage,"keyword":"undefined"},
-                  success:function(data){
-                     stockPage++;
-                     var tbd = $("#rta-tbody").empty();
-                     $(data).each(function(index, item) {
-                       if(index!=0){
-                          $(tbd).append("<tr> <td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"%</td><td>"+item.priceDTO.accTrdvol+"</td></tr>")
-                       }
-                     });
-                    if(data.length < 11) stockPage=1;
-                  },
-                  error:function(e){
-                    console.log("Exception : getRealTimeStock");
-                    stockPage = 1;
-                  }
-               });
-           }
-        };
+            
+            if(!isHover){
+               $.ajax({
+                   url:'realTimeStock',
+                   type:'post',
+                   dataType:'json',
+                   contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                   data: {"page":stockPage,"keyword":"undefined"},
+                   success:function(data){
+                      stockPage++;
+                      var tbd = $("#rta-tbody").empty();
+                      $(data).each(function(index, item) {
+                        if(index!=0){
+                           $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"%</td><td>"+item.priceDTO.accTrdvol+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
+                        }
+                      });
+                     if(data.length < 11) stockPage=1;
+                   },
+                   error:function(e){
+                     console.log("Exception : getRealTimeStock");
+                     stockPage = 1;
+                   }
+                });
+            }
+         };
         
         // 실시간 마우스 호버 이벤트
         var rtaRefresh=setInterval(getRealTimeStock, 3000);
@@ -242,25 +242,30 @@ $(function(){
 
       var invenInit = function(){
           
-          // 내아이템 목록 조회
-           playerItemSelectAll = function(){
-              $.ajax({
-                 url:"playerItemSelectAll",
-                 type:"post",
-                 dataType:"json",
-                 success:function(data){
-                   $("#inven-content td").empty();   
-                   $.each(data,function(index,item){
-                      var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item);
-                      $("#inven-player-"+item.piIndex).html(items);
-                   });
-                   updateAvatar()
-                 },
-                 error:function(err){
-                    console.log("Exception : invenInit");
-                 }
-              })
-           }
+    	  // 내아이템 목록 조회
+          playerItemSelectAll = function(){
+             $.ajax({
+                url:"playerItemSelectAll",
+                type:"post",
+                dataType:"json",
+                success:function(data){
+                  $("#inven-content td").empty();   
+                  $.each(data,function(index,item){
+                     if(item.piIndex==0){
+                        return true;
+                     }
+                     var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item);
+                     $("#inven-player-"+item.piIndex).html(items);
+                     $("#inven-player-"+item.piIndex+" img").jqxTooltip({ content: item.itemDTO.itemName+"("+item.itemDTO.itemGrade+")", position: 'bottom', autoHide: true, 
+                         name: 'movieTooltip', theme : userInfo.theme });
+                  });
+                  updateAvatar()
+                },
+                error:function(err){
+                   console.log("Exception : invenInit");
+                }
+             })
+          }
            
            var playerItemUpdate = function(){
                var jsonList = passingJson();
@@ -450,6 +455,7 @@ $(function(){
                            }
                         }else{
                            str+="<tr class='stock-evt'><td class='stock-select'>"+item.isuKorAbbrv+"</a></td>"
+                           str+="<td>"+item.kind+"</td>"
                            str+="<td>"+item.priceDTO.trdPrc +"</td>";
                            str+="<td>"+item.priceDTO.cmpprevddPrc +"</td>";
                            str+="<td>"+item.priceDTO.fluctuationRate +"</td>";
@@ -462,11 +468,14 @@ $(function(){
                      })
                      
                      $("#stockListTBody").html(str);
-                     $(document).on("click", "#stock-window tr",function(e){
-                       var cd = $(this).find(":hidden").val();
-                       showCompanyInfo(cd);
-                     })
-                  },
+                     
+                     $(document).on("click", "#stock-window tr, #rta-Window tr, #mystock-window tr",function(e){
+                         var cd = $(this).find(":hidden").val();
+                         showCompanyInfo(cd);
+                       })
+                    },
+                  
+                  
                   error:function(err){
                      console.log("Exception : stockListInit");
                   }
@@ -558,7 +567,7 @@ $(function(){
                 storeSelect(1)
            });
           
-           // Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
+        // Body,Head등을 구분해서 파라미터로 넣어주면 거기에 해당되는 것을 뿌려줌
            function storeSelect(page){
               var itemClass = $("#store-content .active").attr("id");
               $.ajax({
@@ -598,6 +607,7 @@ $(function(){
                 }
               })
           }
+           
            
            storeSelect(count);
            // 이전버튼
@@ -734,12 +744,14 @@ $(function(){
          
          /* 친구거절 및 삭제 */
          $(document).on("click",".friend-reject,.friend-sendBtn .glyphicon-trash",function(){
-        	 var friendSq = $(this).parent().prevAll(".requestedFSq").val();
-        	 if(!friendSq){
-        		 friendSq = $(this).parent().parent().prevAll(".ListFriendFSq").val();
-        	 }
-        	 
+            var friendSq = $(this).parent().prevAll(".requestedFSq").val();
+            if(!friendSq){
+               friendSq = $(this).parent().parent().prevAll(".ListFriendFSq").val();
+            }
+            
             ws.send("friendDel#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"+friendSq+"#/fuckWebSocket/#")
+            friendDelBtn=0
+            $("#friend-del").text("친구삭제");
          })
          
          /* 친구신청 Notify */
@@ -772,100 +784,70 @@ $(function(){
          
          /* 친구리스트 */
          friendSelectAll = function(data){
-				  var requestedFriend=""; 
-				  var ListFriend=""; 
-				  var friendBtnColor=""; 
-				  var friendGender="";
-				  var friendNickname= "";
-				 /* var closetUrl = "resources/img/avatar/";*/
-				 
-				  var avatarEquiAry;
-				  
-				  $("#friend-content .list-group > .title").siblings("li").remove(); 
-				  
-				  $.each(data.data,function(index,item){
-					  friendGender=item.friendGender
-					  
-					  /*var defaultItemAry=[
-					                      closetUrl+"clothes/"+friendGender+"_clothes_00.png",
-					                      closetUrl+"hair/"+friendGender+"_hair_00.png",
-					                      closetUrl+"eyes/a_eyes_00.png",
-					                      closetUrl+"mouse/a_mouse_00.png",
-					                      closetUrl+"empty.png",
-					                      closetUrl+"empty.png"
-					  ]*/
-					  
-					  userInfo.nickName==item.playerNickname ? friendNickname=item.playerNickname2 : 
-						  									   friendNickname=item.playerNickname;
-					  
-					  if(item.friendIsAccepted=="F"){
-		                    if(userInfo.nickName==item.playerNickname){
-		                       requestedFriend+="<li href='#' class='list-group-item text-left'>";
-		                       requestedFriend+="<div class='friend-avatar-div' >";
-		                       avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
-		                       /*for(var i=0; i<=5; i++){
-		                          avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
-		                       }
-		                       
-		                       for(var j=0; j<item.playerItemDTO.length; j++){
-		                          avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
-		                             "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
-		                       }*/
-		                       
-		                       
-		                       for(var k=0; k<=5; k++ ){
-		                          requestedFriend += avatarEquiAry[k];
-		                       }
-		                       
-		                       
-		                       requestedFriend+="</div>"; 
-		                       requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
-		                       requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
-		                       requestedFriend+="<div class='pull-right'>"; 
-		                       requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
-		                       requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
-		                       requestedFriend+="</div></li>"; 
-		                    }
-		                 
-		                 }else{
-		                    ListFriend += "<li href='#' class='list-group-item text-left'>";
-		                    ListFriend += "<div class='friend-avatar-div'>";
-		                    
-		                    /*for(var i=0; i<=5; i++){
-		                       avatarEquiAry[i] = "<img src='"+defaultItemAry[i]+"' class='friend-avatar-"+setting.parts[i]+"'>";
-		                    }
-		                    
-		                    for(var j=0; j<item.playerItemDTO.length; j++){
-		                       avatarEquiAry[(item.playerItemDTO[j].piIndex)-1] = 
-		                          "<img src='"+item.playerItemDTO[j].itemDTO.itemImg+"' class='friend-avatar-"+setting.parts[(item.playerItemDTO[j].piIndex)-1]+"'>";
-		                    }*/
-		                    avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
-		                    for(var k=0; k<=5; k++ ){
-		                       ListFriend += avatarEquiAry[k];
-		                    }
-		                    
-		                    ListFriend += "</div>";
-		                    
-		                    if(item.onOrOff==true){ 
-		                       friendBtnColor="green"; 
-		                    }else{
-		                       friendBtnColor="red"; 
-		                    } 
-		                    
-		                    ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
-		                      ListFriend += "<label class='name'>"+friendNickname+"</label>";
-		                        ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
-		                    ListFriend += "<div class='pull-right'>";
-		                    ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
-		                    ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
-		                    
-		                 } 
-		              })
-		              $("#friend-list-que ul").append(requestedFriend);
-		              $("#friend-list-group ul").append(ListFriend);
-		         }
-		         
-		      }
+              var requestedFriend=""; 
+              var ListFriend=""; 
+              var friendBtnColor=""; 
+              var friendGender="";
+              var friendNickname= "";
+             
+              var avatarEquiAry;
+              
+              $("#friend-content .list-group > .title").siblings("li").remove(); 
+              
+              $.each(data.data,function(index,item){
+                 friendGender=item.friendGender
+                 
+                 userInfo.nickName==item.playerNickname ? friendNickname=item.playerNickname2 : 
+                                                  friendNickname=item.playerNickname;
+                 
+                 if(item.friendIsAccepted=="F"){
+                             requestedFriend+="<li href='#' class='list-group-item text-left'>";
+                             requestedFriend+="<div class='friend-avatar-div' >";
+                             avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
+                             
+                             for(var k=0; k<=5; k++ ){
+                                requestedFriend += avatarEquiAry[k];
+                             }
+                             
+                             requestedFriend+="</div>"; 
+                             requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
+                             requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
+                             requestedFriend+="<div class='pull-right'>"; 
+                             requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+                             requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
+                             requestedFriend+="</div></li>"; 
+                       
+                       }else{
+                          ListFriend += "<li href='#' class='list-group-item text-left'>";
+                          ListFriend += "<div class='friend-avatar-div'>";
+                          
+                          avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
+                          for(var k=0; k<=5; k++ ){
+                             ListFriend += avatarEquiAry[k];
+                          }
+                          
+                          ListFriend += "</div>";
+                          
+                          if(item.onOrOff==true){ 
+                             friendBtnColor="green"; 
+                          }else{
+                             friendBtnColor="red"; 
+                          } 
+                          
+                          ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
+                           ListFriend += "<label class='name'>"+friendNickname+"</label>";
+                           ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
+                          ListFriend += "<div class='pull-right'>";
+                          ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
+                          ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
+                          
+                       } 
+                    })
+                    $("#friend-list-que ul").append(requestedFriend);
+                    $("#friend-list-group ul").append(ListFriend);
+               }
+               
+            }
       
       /* 경제용어사전 */
       var financialInit = function(){
@@ -1148,26 +1130,25 @@ $(function(){
       }
       
       /* 유저 정보 보기 */
-      var showUserInfo = function(nickName){
-    	  
-    	  /*유저 아바타*/
-          var myInfoAvatar = function(){
+      var userInfoInit = function(){
+      
+         
+         /*유저 아바타*/
+          var myInfoAvatar = function(nickName,window){
              $.ajax({
                 url:"userInfo2",
                 type:"post",
-                data:"tragetPlayer="+userInfo.nickName,  /////////////////내정보만구현되어있음!!
+                data:"tragetPlayer="+nickName, 
                 dataType:"json",
                 success:function(data){
-                   console.log("데이터!!")
-                   console.log(data);
                    str="";
                    $.each(data,function(index,item){
                       var avatarEquiAry = avatarEqui("userinfo",item.playerGender,item.playerItemDTO);
                       for(var i=0; i<=5; i++ ){
                           str += avatarEquiAry[i];
                       }
-                      $(".userinfo-avatar-div").empty();
-                      $(".userinfo-avatar-div").html(str);   
+                      $(window + " .userinfo-avatar-div").empty();
+                      $(window + " .userinfo-avatar-div").html(str);   
                    })
                    
                 },
@@ -1176,56 +1157,59 @@ $(function(){
                 }
              })
           }
-    	  
+          showUserInfo = function(nickName){
+             $.ajax({
+                url:"userInfo",
+                data:{targetPlayer:nickName},
+                dataType:"html",
+                success:function(data){
+                 $(".main-area").append(data);
+                   $("#userinfo-player-"+nickName).jqxWindow({
+                        width:"450",
+                        height:"400",
+                        showCollapseButton: true,
+                        autoOpen:true,
+                        closeButtonAction: 'close',
+                        theme:userInfo.theme
+                   });
+                   myInfoAvatar(nickName,"#userinfo-player-"+nickName);
+                },
+                error:function(err){
+                   console.log("Exception : showUserInfo");
+                }
+             })
+          }
+      };
+      
+      /*친구정보보기*/
+      $(document).on("click","#friend-content .name, #ranking-content .ranking-playernickname",function(){
+         showUserInfo($(this).text());
+      })
+      
+      var myStockListUpdate = function(){
           $.ajax({
-             url:"userInfo",
-             data:{targetPlayer:nickName},
-             dataType:"html",
+             url:"playerStock",
+             type:"post",
+             dataType:"json",
              success:function(data){
-
-              $(".main-area").append(data);
-                $("#userinfo-player-"+nickName).jqxWindow({
-                     width:"450",
-                     height:"400",
-                     showCollapseButton: true,
-                     autoOpen:true,
-                     closeButtonAction: 'close',
-                     theme:userInfo.theme
+                str="";
+                $("#mystockListTBody").empty();
+                $.each(data, function(index, item){
+                   str+="<tr><td>"+item.isuKorAbbrv+"</td>";
+                   str+="<td>"+item.kind+"</td>";
+                   str+="<td>"+item.plQuantity+"</td>";
+                   str+="<td>"+item.priceDTO.trdPrc+"</td>";
+                   str+="<td>"+item.priceDTO.trdPrc * item.plQuantity+"</td>";
+                   str+="<td>"+item.earningRate+"%"+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
                 });
-                myInfoAvatar();
+                $("#mystockListTBody").html(str);
              },
              error:function(err){
-                console.log("Exception : showUserInfo");
+                console.log("Exception : myStockListUpdate");
              }
-          })
-          
-          
-       };
-      
-       var myStockListUpdate = function(){
-    	   $.ajax({
-    		   url:"playerStock",
-    		   type:"post",
-    		   dataType:"json",
-    		   success:function(data){
-    			   str="";
-    			   $("#mystockListTBody").empty();
-    			   $.each(data, function(index, item){
-    				   str+="<tr><td>"+item.isuKorAbbrv+"</td>";
-    				   str+="<td>"+item.kind+"</td>";
-    				   str+="<td>"+item.plQuantity+"</td>";
-    				   str+="<td>"+item.priceDTO.trdPrc+"</td>";
-    				   str+="<td>"+item.priceDTO.trdPrc * item.plQuantity+"</td>";
-    				   str+="<td>"+item.earningRate+"%"+"</td></tr>";
-    			   });
-    			   $("#mystockListTBody").html(str);
-    		   },
-    		   error:function(err){
-    			   console.log("Exception : myStockListUpdate");
-    		   }
-    	   });
+          });
        }
-       
+      
        var myStockInit = function(){
 	     $("#mystock-window").jqxWindow({
 	           width:"400",
@@ -1521,7 +1505,7 @@ $(function(){
                 }
                str+="</div>";
                str+="</td>";
-               str+="<td>"+item.playerNickname+"</td>";
+               str+="<td class='ranking-playernickname'>"+item.playerNickname+"</td>";
                kind=="s" ? str+="<td>"+item.totalEarningRate+"%</td>" : str+="<td>"+item.earningRate+"%</td>";
                str+="<td>"+item.totalMoney+"</td></tr>";
             }) 
@@ -1563,6 +1547,7 @@ $(function(){
       settingInit();
       initChatRoom();
       initRanking();
+      userInfoInit();
       
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
@@ -1688,13 +1673,11 @@ $(function(){
           
           	
           /* 친구창 채팅 버튼*/
-          var friendChatBtn = function(){
-             $(document).on("click",".friend-sendBtn.btn-info",function(evt){
-                var name = $(this).parent().siblings(".name").text();
-                showChatWindow(name);
-             });
-          }
-          friendChatBtn();
+         $(document).on("click",".friend-sendBtn.btn-info",function(evt){
+            var name = $(this).parent().siblings(".name").text();
+            showChatWindow(name);
+         });
+             
           /* 채팅 시작 */
           var chatStart = function(content){
              var data = content.data;
@@ -1819,8 +1802,9 @@ $(function(){
              
              
              $("#chatroom-list-ul").html(str);
-             var eventTargets = $("#chatroom-list-ul .chatroom-rooms");
+             var eventTargets = $("#chatroom-list-ul a");
              console.log(eventTargets);
+             
              $(eventTargets).click(function(event){
                 var roomNo = $(this).find(":hidden").val();
                 console.log("===================================================");
@@ -1931,6 +1915,16 @@ $(function(){
                  case "notiFriendLogout" :$("#noti-msg").text(data.data+"님께서 로그아웃 하셨습니다.");
 						                  $("#friend-request-noti").jqxNotification("open");
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
+                 case "notiIsAuctionFinish" : 
+                	 				if(data.data=="true"){
+							           $("#noti-msg").html("낙찰 된 물품이 있습니다.<br>확인해주십시오");
+							           $("#friend-request-noti").jqxNotification("open");
+							        }; break;
+                 case "notiAuctionEndBySeller" : $("#noti-msg").html(data.data.itemName+"이 "+data.data.imPrice+"루비에 팔렸습니다.<br>낙찰금액을 수령해 주십시오.");
+                    							 $("#friend-request-noti").jqxNotification("open");break;			          	  
+							          	  
+							          	  
+							          	  
                  case "chatMsg" : chatMsg(data); break;
                  case "chatIn" : chatIn(data); break;
                  case "chatOut" : chatOut(data); break;

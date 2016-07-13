@@ -91,13 +91,18 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 				payRubyMap.put("playerNickname", playerNickname);
 				payRubyMap.put("updateRuby", ruby - price + "");
 				int payRubyResult = playerInfoDAO.updateRuby(payRubyMap);
+
 				if (payRubyResult != 0) {
 					ItemMarketDTO itemMarketDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
-					int insertResult = playerItemDAO.auctionInsertPlayerItem(new PlayerItemDTO(0, playerNickname,
-							itemMarketDTO.getItemCode(), piIndex, itemMarketDTO.getItemDTO()));
-					if (insertResult != 0) {
-						itemAuctionDAO.auctionBuyFinish(imSq);
-					} else {
+					if (itemMarketDTO.getImAuctionEnd().equals("T")) {
+						int insertResult = playerItemDAO.auctionInsertPlayerItem(new PlayerItemDTO(0, playerNickname,
+								itemMarketDTO.getItemCode(), piIndex, itemMarketDTO.getItemDTO()));
+						if (insertResult != 0) {
+							itemAuctionDAO.auctionBuyFinish(imSq);
+						} else {
+							return 4;
+						}
+					}else{
 						return 4;
 					}
 				} else {
@@ -111,11 +116,11 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 		}
 		try {
 			ItemMarketDTO itemMarketDTO = itemAuctionDAO.bringItemInfoByImSq(imSq);
-			int imPrice=itemMarketDTO.getImPurchasePrice();
-			String itemName=itemMarketDTO.getItemDTO().getItemName();
+			int imPrice = itemMarketDTO.getImPurchasePrice();
+			String itemName = itemMarketDTO.getItemDTO().getItemName();
 			String sellerNickname = itemMarketDTO.getPlayerNickname();
-			String jsss="{\"itemName\":\""+itemName+"\",\"imPrice\":\"" + imPrice + "\"}";
-			PlayerVO pv = (PlayerVO) application.getAttribute("#"+sellerNickname);
+			String jsss = "{\"itemName\":\"" + itemName + "\",\"imPrice\":\"" + imPrice + "\"}";
+			PlayerVO pv = (PlayerVO) application.getAttribute("#" + sellerNickname);
 			if (pv != null) {
 				WebSocketSession webSession = pv.getSession();
 				String json = "{\"type\":\"notiAuctionEndBySeller\",\"data\":" + jsss + "}";

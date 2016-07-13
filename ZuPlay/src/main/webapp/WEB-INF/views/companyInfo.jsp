@@ -96,5 +96,7 @@
   </div>
   
 <script type="text/javascript">
-	alert("박효승바봉");
+	$("#company-${masterDTO.isuCd}").ready(function(){
+		alert("박효승바봉");
+	});
 </script>

@@ -102,6 +102,7 @@
 		$.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
 			console.log(data);
 			console.log("${masterDTO.rtpList}")
+			console.log("${masterDTO}")
 			
 	        $('#company-chart-today').highcharts({
 	            chart: {
@@ -115,7 +116,7 @@
 	                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
 	            },
 	            xAxis: {
-	            	//categories	                
+	            	categories : 	                
 	            },
 	            yAxis: {
 	                title: {

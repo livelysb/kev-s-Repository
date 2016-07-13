@@ -787,7 +787,6 @@ $(function(){
               var requestedFriend=""; 
               var ListFriend=""; 
               var friendBtnColor=""; 
-              var friendGender="";
               var friendNickname= "";
              
               var avatarEquiAry;
@@ -795,59 +794,75 @@ $(function(){
               $("#friend-content .list-group > .title").siblings("li").remove(); 
               
               $.each(data.data,function(index,item){
-                 friendGender=item.friendGender
                  
                  userInfo.nickName==item.playerNickname ? friendNickname=item.playerNickname2 : 
                                                   friendNickname=item.playerNickname;
                  
                  if(item.friendIsAccepted=="F"){
-                             requestedFriend+="<li href='#' class='list-group-item text-left'>";
-                             requestedFriend+="<div class='friend-avatar-div' >";
-                             avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
-                             
-                             for(var k=0; k<=5; k++ ){
-                                requestedFriend += avatarEquiAry[k];
-                             }
-                             
-                             requestedFriend+="</div>"; 
-                             requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
-                             requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
-                             requestedFriend+="<div class='pull-right'>"; 
-                             requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
-                             requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
-                             requestedFriend+="</div></li>"; 
-                       
-                       }else{
-                          ListFriend += "<li href='#' class='list-group-item text-left'>";
-                          ListFriend += "<div class='friend-avatar-div'>";
-                          
-                          avatarEquiAry = avatarEqui("friend",friendGender,item.playerItemDTO)
-                          for(var k=0; k<=5; k++ ){
-                             ListFriend += avatarEquiAry[k];
-                          }
-                          
-                          ListFriend += "</div>";
-                          
-                          if(item.onOrOff==true){ 
-                             friendBtnColor="green"; 
-                          }else{
-                             friendBtnColor="red"; 
-                          } 
-                          
-                          ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
-                           ListFriend += "<label class='name'>"+friendNickname+"</label>";
-                           ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
-                          ListFriend += "<div class='pull-right'>";
-                          ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
-                          ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
-                          
-                       } 
-                    })
-                    $("#friend-list-que ul").append(requestedFriend);
-                    $("#friend-list-group ul").append(ListFriend);
-               }
-               
-            }
+                	 if(item.type=="A" && item.playerNickname==userInfo.nickName){
+                         requestedFriend+="<li href='#' class='list-group-item text-left'>";
+                         requestedFriend+="<div class='friend-avatar-div' >";
+                         avatarEquiAry = avatarEqui("friend",item.friendGender,item.playerItemDTO)
+                         
+                         for(var k=0; k<=5; k++ ){
+                            requestedFriend += avatarEquiAry[k];
+                         }
+                         
+                         requestedFriend+="</div>"; 
+                         requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
+                         requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
+                         requestedFriend+="<div class='pull-right'>"; 
+                         requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+                         requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
+                         requestedFriend+="</div></li>"; 
+                	 }else if(item.type=="B" && item.playerNickname2==userInfo.nickName){
+                		 requestedFriend+="<li href='#' class='list-group-item text-left'>";
+                         requestedFriend+="<div class='friend-avatar-div' >";
+                         avatarEquiAry = avatarEqui("friend",item.friendGender,item.playerItemDTO)
+                         
+                         for(var k=0; k<=5; k++ ){
+                            requestedFriend += avatarEquiAry[k];
+                         }
+                         
+                         requestedFriend+="</div>"; 
+                         requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
+                         requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
+                         requestedFriend+="<div class='pull-right'>"; 
+                         requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
+                         requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
+                         requestedFriend+="</div></li>"; 
+                	 }
+               }else{
+                  ListFriend += "<li href='#' class='list-group-item text-left'>";
+                  ListFriend += "<div class='friend-avatar-div'>";
+                  
+                  avatarEquiAry = avatarEqui("friend",item.friendGender,item.playerItemDTO)
+                  for(var k=0; k<=5; k++ ){
+                     ListFriend += avatarEquiAry[k];
+                  }
+                  
+                  ListFriend += "</div>";
+                  
+                  if(item.onOrOff==true){ 
+                     friendBtnColor="green"; 
+                  }else{
+                     friendBtnColor="red"; 
+                  } 
+                  
+                  ListFriend += "<div class='friend-icon "+friendBtnColor+"'> </div>";
+                  ListFriend += "<label class='name'>"+friendNickname+"</label>";
+                  ListFriend += "<input type='hidden' class='ListFriendFSq' value='"+item.friendSq+"'>";
+                  ListFriend += "<div class='pull-right'>";
+                  ListFriend += "<button type='button' class='btn btn-info friend-sendBtn '>";
+                  ListFriend += "<i class='glyphicon glyphicon-envelope'></i></button></div></li>";
+                  
+               } 
+            });
+            $("#friend-list-que ul").append(requestedFriend);
+            $("#friend-list-group ul").append(ListFriend);
+           }
+           
+        }
       
       /* 경제용어사전 */
       var financialInit = function(){

@@ -49,7 +49,7 @@
 				url:"getHistoryCount",
 				type:"post",
 				dataType:"json",
-				data:"targetPlayer=김민수",
+				data:"targetPlayer=이석범짱",
 				success:function(page){
 					if(page%10==0){
 						historyPage(page/10)
@@ -70,7 +70,7 @@
 				url:"getStockDealHistory", 
 				type:"post",
 				dataType:"json",
-				data:{"targetPlayer":"김민수","orderBy":orderBy,"asc":asc,"page":page},
+				data:{"targetPlayer":"이석범짱","orderBy":orderBy,"asc":asc,"page":page},
 				success:function(data){
 					console.log(data);
 					var str="";
@@ -109,7 +109,7 @@
 				url:"getBest",
 				type:"post",
 				dataType:"json",
-				data:"targetPlayer=김민수",
+				data:"targetPlayer=이석범짱",
 				success:function(data){
 					pieChartJson = new Array();
 					$.each(data,function(index,item){
@@ -131,7 +131,7 @@
 				url:"getWorst",
 				type:"post",
 				dataType:"json",
-				data:"targetPlayer=김민수", //해당유저에맞게 수정요망
+				data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
 				success:function(data){
 					pieChartJson = new Array();
 					$.each(data,function(index,item){
@@ -155,7 +155,7 @@
 				url:"getEarningRateList",
 				type:"post",
 				dataType:"json",
-				data:"targetPlayer=김민수", //해당유저에맞게 수정요망
+				data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
 				success:function(data){
 					console.log(data)
 					lineChartdraw(data);

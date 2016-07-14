@@ -29,9 +29,6 @@ public class ItemAuctionController {
 	@RequestMapping(value = "auctionSearch", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String auctionSearch(HttpSession session, String keyword, String itemClass, int page) throws Exception {
-		System.out.println(keyword);
-		System.out.println(itemClass);
-		System.out.println(page);
 
 		List<ItemMarketDTO> list = null;
 		try {
@@ -44,7 +41,6 @@ public class ItemAuctionController {
 		}
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
-		System.out.println(json);
 		return json;
 	}
 
@@ -118,7 +114,6 @@ public class ItemAuctionController {
 	@RequestMapping(value = "auctionBring", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public boolean auctionBring(HttpSession session, int imSq) throws Exception {
-		System.out.println("imSq : " + imSq);
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		try {
 			return itemAuctionServiceImpl.auctionBring(playerNickname, imSq);

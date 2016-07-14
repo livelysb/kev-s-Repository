@@ -82,11 +82,9 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		Map<String, String> payRubyMap = new HashMap<String, String>();
 		int ruby = playerInfoDAO.getRuby(playerNickname); // 보유루비 확인
-		System.out.println("[ LOG ] : " + playerNickname + " 님의 루비 = " + ruby);
 		int price = itemAuctionDAO.auctionHowPrice(imSq);
 		if (ruby >= price) {
 			int piIndex = utilServiceImpl.indexSearch(playerNickname);
-			System.out.println("[ LOG ] : " + playerNickname + " 님의 인벤토리 빈 인덱스 = " + piIndex);
 			if (piIndex != 0) {
 				payRubyMap.put("playerNickname", playerNickname);
 				payRubyMap.put("updateRuby", (ruby - price) + "");
@@ -150,11 +148,9 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 		if (insertResult != 0) {
 			int deleteResult = playerItemDAO.itemDelete(piSq);
 			if (deleteResult == 0) {
-				System.out.println("[ LOG ] : player_item 레코드 삭제 실패하였습니다.");
 				return false;
 			}
 		} else {
-			System.out.println("[ LOG ] : 경매장에 아이템 등록을 실패하였습니다.");
 			return false;
 		}
 		return true;
@@ -193,7 +189,6 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 			map.put("playerNickname", playerNickname);
 			map.put("updateRuby", ruby + (price*0.9) + "");
 			int result = playerInfoDAO.updateRuby(map);
-			System.out.println(map);
 			if (result == 0) {
 				return false;
 			}

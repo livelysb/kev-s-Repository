@@ -3,12 +3,12 @@ package com.kosta.zuplay.model.dto.stock;
 public class EarningRateHistoryDTO {
 	private int pehSq;				//수익률코드
 	private String playerNickname;	//닉네임
-	private int pehPe;				//수익률
+	private double pehPe;				//수익률
 	private String pehDate;			//일자
 	
 	public EarningRateHistoryDTO() {}
 
-	public EarningRateHistoryDTO(int pehSq, String playerNickname, int pehPe, String pehDate) {
+	public EarningRateHistoryDTO(int pehSq, String playerNickname, double pehPe, String pehDate) {
 		super();
 		this.pehSq = pehSq;
 		this.playerNickname = playerNickname;
@@ -32,11 +32,11 @@ public class EarningRateHistoryDTO {
 		this.playerNickname = playerNickname;
 	}
 
-	public int getPehPe() {
+	public double getPehPe() {
 		return pehPe;
 	}
 
-	public void setPehPe(int pehPe) {
+	public void setPehPe(double pehPe) {
 		this.pehPe = pehPe;
 	}
 

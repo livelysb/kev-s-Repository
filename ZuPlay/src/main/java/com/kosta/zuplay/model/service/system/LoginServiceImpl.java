@@ -32,6 +32,12 @@ public class LoginServiceImpl implements LoginService {
 
    @Override
    public boolean joinMember(PlayerDTO playerDTO) throws Exception{
+	  String nickname=playerDTO.getPlayerNickname();
+	  for(int i = 0;i<nickname.length();i++){
+		  if(nickname.charAt(i)=='<'){
+			  return false;
+		  }
+	  }
       LoginDAO loginDAO=sqlSession.getMapper(LoginDAO.class);
       PlayerItemDAO playerItemDAO=sqlSession.getMapper(PlayerItemDAO.class);
       SettingDAO settingDAO=sqlSession.getMapper(SettingDAO.class);

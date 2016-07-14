@@ -82,10 +82,6 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		DealHistoryDAO dealHistoryDAO = sqlSession.getMapper(DealHistoryDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
 
-		System.out.println("playerNickname : " + playerNickname);
-		System.out.println("orderBy : " + orderBy);
-		System.out.println("asc : " + asc);
-		System.out.println("page : " + page);
 		map.put("playerNickname", playerNickname);
 		map.put("orderBy", orderBy);
 		if (asc == true)

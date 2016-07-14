@@ -91,8 +91,6 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 			masterDTO2.setEarningMoney(earningRateService.calItemEarningMoney(playerNickname, playerLists.getIsuCd()));
 			masterList.add(masterDTO2);
 		}
-		
-		
 		return masterList;
 	}
 	

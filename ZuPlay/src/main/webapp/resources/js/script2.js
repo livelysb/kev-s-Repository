@@ -607,7 +607,7 @@ $(function(){
            var status = "next";
 
           
-           $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+           $('#store-content a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 storeSelect(1)
            });
           
@@ -1593,7 +1593,6 @@ $(function(){
                dataType:"json",
                data:{"targetPlayer":"이석범짱","orderBy":orderBy,"asc":asc,"page":page},
                success:function(data){
-                  console.log(data);
                   var str="";
                   $.each(data,function(index,item){
                      if(item.sdhBuySell=="b"){
@@ -1625,7 +1624,6 @@ $(function(){
          
          /*탭 클릭 이벤트*/
          $("#history-content .nav-tabs  a").on("click",function(){
-            console.log($(this).text())
             if($(this).text()=="Best"){
                $("#history-worst-piechart").empty();
                historyBest();
@@ -1638,7 +1636,6 @@ $(function(){
          /*히스토리 Order By */
          var orderFlag=3;
          $("#history-foot thead th").on("click",function(){
-            console.log(($(this).index()));
             var thIndex=($(this).index());
             switch ($(this).index()) {
                case 0: orderFnc("SDH_BUY_SELL",thIndex); break;
@@ -1762,7 +1759,8 @@ $(function(){
                      plotBorderWidth: null,
                      plotShadow: false,
                      type: 'pie',
-                     height:350
+                     height:350,
+                     width:480
                  },
                  title: {
                      text: chartTitle
@@ -1797,7 +1795,8 @@ $(function(){
          var lineChartdraw = function(pieChartJson){
             $('#history-line-chart').highcharts({
                   chart: {
-                      zoomType: 'x'
+                      zoomType: 'x',
+                      width:350
                   },
                   title: {
                       text: 'Daily Earning Rate'
@@ -1854,8 +1853,10 @@ $(function(){
               });
          }
          $("#history-window").jqxWindow({
-             minWidth:700,
-             minHeight:500,
+             width:1000,
+             maxWidth:1200,
+             height:800,
+             maxHeight:1200,
              resizable:true,
              showCollapseButton: true,
              autoOpen:false,

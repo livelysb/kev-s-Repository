@@ -44,8 +44,8 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		List<MasterDTO> masterList = getEarningList(playerNickname);
 		Collections.sort(masterList, new EarningCompareAsc());
 		List<MasterDTO> best = new ArrayList<MasterDTO>();
-		for(MasterDTO master : masterList) {
-			if(master.getEarningRate()>=0)
+		for (MasterDTO master : masterList) {
+			if (master.getEarningRate() >= 0)
 				best.add(master);
 			else
 				break;
@@ -58,8 +58,8 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		List<MasterDTO> masterList = getEarningList(playerNickname);
 		Collections.sort(masterList, new EarningCompareDesc());
 		List<MasterDTO> worst = new ArrayList<MasterDTO>();
-		for(MasterDTO master : masterList) {
-			if(master.getEarningRate()<=0)
+		for (MasterDTO master : masterList) {
+			if (master.getEarningRate() <= 0)
 				worst.add(master);
 			else
 				break;
@@ -68,9 +68,10 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 	}
 
 	@Override
-	public List<StockDealHistoryDTO> getStockDealHistory(String playerNickname, String orderBy, boolean asc, int page) throws Exception {
+	public List<StockDealHistoryDTO> getStockDealHistory(String playerNickname, String orderBy, boolean asc, int page)
+			throws Exception {
 		DealHistoryDAO dealHistoryDAO = sqlSession.getMapper(DealHistoryDAO.class);
-		Map<String, String>map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<String, String>();
 		System.out.println("playerNickname : " + playerNickname);
 		System.out.println("orderBy : " + orderBy);
 		System.out.println("asc : " + asc);
@@ -80,10 +81,19 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		map.put("asc", String.valueOf(asc));
 		map.put("startNum", 1 + ((page - 1) * 10) + "");
 		map.put("lastNum", page * 10 + "");
-		return dealHistoryDAO.getStockHistoryOp(map);
+		List<StockDealHistoryDTO> list = dealHistoryDAO.getStockHistoryOp(map);
+		double feePercent = 0;
+		for(StockDealHistoryDTO history : list) {
+			if(history.getSdhBuySell().equals("b"))
+				feePercent = 0.015;
+			else
+				feePercent = -0.315;
+			history.getMasterDTO().getPriceDTO().setTrdPrc((int)(history.getSdhDealPrice() / (history.getSdhQuantity() * (1 + feePercent))));
+		}
+		return list;
 	}
-	
-	public List<MasterDTO> getEarningList(String playerNickname) throws Exception{
+
+	public List<MasterDTO> getEarningList(String playerNickname) throws Exception {
 		List<MasterDTO> masterList = new ArrayList<MasterDTO>();
 		List<PlayerListsDTO> playerStockList = playerStockService.getPlayerStocks(playerNickname);
 		for (PlayerListsDTO playerLists : playerStockList) {
@@ -97,13 +107,14 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		}
 		return masterList;
 	}
-	
+
 	class EarningCompareAsc implements Comparator<MasterDTO> {
 		@Override
 		public int compare(MasterDTO m2, MasterDTO m1) {
 			return m1.getEarningRate() > m2.getEarningRate() ? 1 : m1.getEarningRate() < m2.getEarningRate() ? -1 : 0;
 		}
 	}
+
 	class EarningCompareDesc implements Comparator<MasterDTO> {
 		@Override
 		public int compare(MasterDTO m1, MasterDTO m2) {

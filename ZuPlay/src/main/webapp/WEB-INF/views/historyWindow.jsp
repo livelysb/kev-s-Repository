@@ -324,7 +324,8 @@
 		            },
 		            tooltip: {
 			        	 formatter: function() {
-			                return new Date(this.x).toUTCString().format('YYYY/MM/DD')+"<br>"+this.series.name + ' : <b>' + this.y + '%</b>';
+			        		 var result = new Date(this.x).toUTCString().split("00:")[0];
+			                return result+"<br>"+this.series.name + ' : <b>' + this.y + '%</b>';
 			            } 
 			        },
 		            plotOptions: {

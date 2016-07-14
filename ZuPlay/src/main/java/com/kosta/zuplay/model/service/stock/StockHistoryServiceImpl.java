@@ -55,7 +55,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		Collections.sort(masterList, new EarningCompareAsc());
 		List<MasterDTO> best = new ArrayList<MasterDTO>();
 		for (MasterDTO master : masterList) {
-			if (master.getEarningRate() >= 0)
+			if (master.getEarningRate() > 0)
 				best.add(master);
 			else
 				break;
@@ -69,7 +69,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		Collections.sort(masterList, new EarningCompareDesc());
 		List<MasterDTO> worst = new ArrayList<MasterDTO>();
 		for (MasterDTO master : masterList) {
-			if (master.getEarningRate() <= 0)
+			if (master.getEarningRate() < 0)
 				worst.add(master);
 			else
 				break;

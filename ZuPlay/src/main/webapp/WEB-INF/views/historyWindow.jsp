@@ -10,7 +10,7 @@
 <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/highcharts.js"></script>
-
+<script src="resources/js/set.js"></script>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 
 <style type="text/css">
@@ -27,27 +27,30 @@
             total: 10, maxVisible: 10
         });
 		
-		$.ajax({
-			url:"getWorst",
-			type:"post",
-			dataType:"json",
-			data:"targetPlayer=김소연",
-			success:function(data){
-				console.log(data);
-				pieChartJson = new Array();
-				$.each(data,function(index,item){
-					var pieChart = new Object();
-					pieChart.name=item.isuKorAbbrv;
-					pieChart.y=(-item.earningMoney);
-					pieChartJson.push(pieChart);
-				}) 
-				pieChart();
-			},
-			error:function(err){
-				console.log("Exception : pieChart")
-			}
-		})
-
+		var history = function(){
+			console.log(userInfo.nickName);
+			$.ajax({
+				url:"getWorst",
+				type:"post",
+				dataType:"json",
+				data:"targetPlayer=이석범짱"
+				,
+				success:function(data){
+					console.log(data);
+					pieChartJson = new Array();
+					$.each(data,function(index,item){
+						var pieChart = new Object();
+						pieChart.name=item.isuKorAbbrv;
+						pieChart.y=(-item.earningMoney);
+						pieChartJson.push(pieChart);
+					}) 
+					pieChart();
+				},
+				error:function(err){
+					console.log("Exception : pieChart")
+				}
+			})
+		}
 		
 		
 		 
@@ -68,7 +71,6 @@
 		        	formatter: function() {
 		                return 'The value for <b>' + this.name + '</b> is <b>' + this.y + '</b>, in series '+ this.series.name;
 		            }
-
 		        },
 		        plotOptions: {
 		            pie: {
@@ -90,6 +92,8 @@
 	        	}] 
 	  	  });
 		}
+		
+		history();
 	}) 
 </script>
 

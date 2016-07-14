@@ -8,6 +8,10 @@ html, body{
   position: relative;
 }
 
+body{
+	background-image: url("../img/back.png");
+}
+
 a:hover, a:active, a:focus {
   text-decoration: none;
   outline: 0;
@@ -41,38 +45,6 @@ small, .small {
    margin-left: -240px; /* 이미지 너비/2  */
 }
 
-.main-container{
-  width: 100%;
-  height: 100%;
-  padding: 0 0 0 0;
-  visibility: hidden;
-}
-
-.main-container > .row-fluid{
-  height: 100%;
-}
-
-.main-section, .side-section, .main-area, .chat-area, .toolbar-area, .buttons-area,
-.status-row, .status-area{
-  height: 100%;
-  padding: 0 0 0 0;
-}
-
-.main-row{
-  height: 85%;
-}
-
-.footer-section{
-  height: 15%;
-}
-
-.buttons-row{
-  height: 80%;
-}
-
-.status-row{
-  height: 20%;
-}
 
 .side-id{
   font-weight: bold;
@@ -81,6 +53,7 @@ small, .small {
 
 .side-section{
   position: relative;
+  width:10%;
 }
 
 .side-avatar {
@@ -92,6 +65,10 @@ small, .small {
   position: absolute;
   width: 100%;
   min-height: 100%;
+}
+
+.button-margin-right{
+	margin-right: 50px;
 }
 
 div.vertical-line{

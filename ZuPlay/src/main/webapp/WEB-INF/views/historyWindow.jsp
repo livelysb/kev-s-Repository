@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-
+<!-- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -373,7 +373,7 @@
 </script>
 
 </head>
-<body>
+<body> -->
 	<div id="history-window">
 		<div id="history-header">Stock History</div>
 		<div id="history-content">
@@ -416,8 +416,7 @@
 		            <div id="page-selection"></div>
 		        </div>
 			</div>
-			
 		</div>
 	</div>
-</body>
-</html>
+<!-- </body>
+</html> -->

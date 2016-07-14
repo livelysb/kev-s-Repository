@@ -1768,7 +1768,6 @@ $(function(){
                      text: chartTitle
                  },
                  tooltip: {
-                      /* pointFormat: '{series.name}: <b>{this.y}원</b>' */
                      formatter: function() {
                          return this.series.name + ' : <b>₩' + this.y.format() + '</b>';
                      } 
@@ -1802,10 +1801,6 @@ $(function(){
                   },
                   title: {
                       text: 'Daily Earning Rate'
-                  },
-                  subtitle: {
-                 /*      text: document.ontouchstart === undefined ?
-                              'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' */
                   },
                   xAxis: {
                       type: 'datetime'
@@ -1859,9 +1854,9 @@ $(function(){
               });
          }
          $("#history-window").jqxWindow({
-             minWidth:600,
-             minHeight:420,
-             resizable:false,
+             minWidth:700,
+             minHeight:500,
+             resizable:true,
              showCollapseButton: true,
              autoOpen:false,
              theme : userInfo.theme

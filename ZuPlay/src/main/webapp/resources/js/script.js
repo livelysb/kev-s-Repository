@@ -1216,7 +1216,7 @@ $(function(){
                 data:{targetPlayer:nickName},
                 dataType:"html",
                 success:function(data){
-                 $(".main-area").append(data);
+                 $("#main").append(data);
                    $("#userinfo-player-"+nickName).jqxWindow({
                         width:"450",
                         height:"400",
@@ -2014,7 +2014,7 @@ $(function(){
            ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
            
       });
-      $(".main-container").css("visibility","visible");
+      $("#main").css("visibility","visible");
       $("#loading-content").remove();
    };
    updatePI(initContent);

@@ -515,11 +515,7 @@ $(function(){
                      })
                      
                      $("#stockListTBody").html(str);
-                     
-                     $(document).on("click", "#stock-window tr, #rta-Window tr, #mystock-window tr",function(e){
-                         var cd = $(this).find(":hidden").val();
-                         showCompanyInfo(cd);
-                       })
+                    
                     },
                   
                   
@@ -528,6 +524,10 @@ $(function(){
                   }
                })
             }
+         	$(document).on("click", "#stock-window tr, #rta-Window tr, #mystock-window tr",function(e){
+             var cd = $(this).find(":hidden").val();
+             showCompanyInfo(cd);
+           })
 
             /* 마지막 페이지 */
             function pagenation(pageNo){ 

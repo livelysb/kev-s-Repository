@@ -96,6 +96,6 @@
   </div>
 <script type="text/javascript">
 	 $("#company-${masterDTO.isuCd}").ready(function(){
-			  
+		console.log("${masterDTO.isuCd}");
 	 });
 </script>

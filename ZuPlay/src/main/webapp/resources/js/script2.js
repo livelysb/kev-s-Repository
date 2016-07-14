@@ -710,7 +710,6 @@ $(function(){
          });
       }
       
-      
       /* 친구창 */
       
       var friendBookinit = function(){

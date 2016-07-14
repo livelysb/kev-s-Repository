@@ -31,6 +31,13 @@
     text-align:center;
 }
 
+#history-foot thead tr th:nth-child(2){
+	width:20%;
+}
+#history-foot thead tr th:nth-child(3){
+	width:15%;
+}
+
 	
 </style>
 

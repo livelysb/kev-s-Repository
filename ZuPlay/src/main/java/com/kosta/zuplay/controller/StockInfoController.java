@@ -56,6 +56,7 @@ public class StockInfoController {
 	
 	@RequestMapping(value = "companyInfo", produces = "application/json;charset=UTF-8")
 	public ModelAndView getStock(HttpSession session, String isuCd) throws Exception{
+		System.out.println(isuCd);
 		MasterDTO masterDTO = null;
 		String playerNickname = (String)session.getAttribute("playerNickname");
 		int plQuantity = 0;

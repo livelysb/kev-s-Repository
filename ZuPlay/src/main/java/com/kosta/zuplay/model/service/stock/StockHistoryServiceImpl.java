@@ -37,7 +37,11 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 	@Override
 	public List<EarningRateHistoryDTO> getEarningRateList(String playerNickname) throws Exception {
 		DealHistoryDAO dealHistoryDAO = sqlSession.getMapper(DealHistoryDAO.class);
-		return dealHistoryDAO.getEarningRateHistory(playerNickname);
+		List<EarningRateHistoryDTO> list = dealHistoryDAO.getEarningRateHistory(playerNickname);
+		for(EarningRateHistoryDTO erh:list) {
+			erh.setPehDate(erh.getPehDate().split(" ")[0]);
+		}
+		return list;
 	}
 
 	@Override

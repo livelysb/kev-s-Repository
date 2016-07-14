@@ -31,6 +31,10 @@
     text-align:center;
 }
 
+#history-foot thead tr th:nth-child(1){
+	width:8%;
+}
+
 #history-foot thead tr th:nth-child(2){
 	width:20%;
 }
@@ -123,7 +127,7 @@
 			})
 			
 			/*히스토리 Order By */
-			var orderFlag=5;
+			var orderFlag=3;
 			$("#history-foot thead th").on("click",function(){
 				console.log(($(this).index()));
 				var thIndex=($(this).index());

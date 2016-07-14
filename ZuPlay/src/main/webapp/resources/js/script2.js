@@ -1796,7 +1796,8 @@ $(function(){
             $('#history-line-chart').highcharts({
                   chart: {
                       zoomType: 'x',
-                      width:350
+                      width:350,
+                      width:480
                   },
                   title: {
                       text: 'Daily Earning Rate'

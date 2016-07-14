@@ -15,6 +15,7 @@ import com.kosta.zuplay.model.dao.stock.DealHistoryDAO;
 import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
 import com.kosta.zuplay.model.dto.stock.EarningRateHistoryDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
+import com.kosta.zuplay.model.dto.stock.PriceDTO;
 import com.kosta.zuplay.model.dto.stock.StockDealHistoryDTO;
 import com.kosta.zuplay.model.service.player.EarningRateService;
 
@@ -88,6 +89,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 				feePercent = 0.015;
 			else
 				feePercent = -0.315;
+			history.getMasterDTO().setPriceDTO(new PriceDTO());
 			history.getMasterDTO().getPriceDTO().setTrdPrc((int)(history.getSdhDealPrice() / (history.getSdhQuantity() * (1 + feePercent))));
 		}
 		return list;

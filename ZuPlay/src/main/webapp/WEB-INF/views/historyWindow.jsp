@@ -85,7 +85,7 @@
 						str+="<td>"+item.masterDTO.kind+"</td>";
 						str+="<td>"+item.sdhDealTime+"</td>";
 						str+="<td>"+item.sdhQuantity+"</td>";
-						str+="<td>체결가</td>";
+						str+="<td>"+item.masterDTO.priceDTO.trdPrc+"</td>";
 						str+="<td>"+item.sdhDealPrice+"</td></tr>";
 					});
 					$("#history-stock-list").empty();
@@ -118,7 +118,7 @@
 						pieChartObj.y=(item.earningMoney);
 						pieChartJson.push(pieChartObj);
 					}) 
-					pieChartdraw("#history-best-piechart",pieChartJson);
+					pieChartdraw("#history-best-piechart",pieChartJson,"Profit");
 				},
 				error:function(err){
 					console.log("Exception : historyBest")
@@ -140,7 +140,7 @@
 						pieChartObj.y=(-item.earningMoney);
 						pieChartJson.push(pieChartObj);
 					}) 
-					pieChartdraw("#history-worst-piechart",pieChartJson);
+					pieChartdraw("#history-worst-piechart",pieChartJson,"Lost");
 				},
 				error:function(err){
 					console.log("Exception : historyWorst")
@@ -167,7 +167,7 @@
 		
 		
 		 
-		var pieChartdraw = function(historySelector,pieChartJson) {
+		var pieChartdraw = function(historySelector,pieChartJson,chartTitle) {
 			$(historySelector).highcharts({
 				
 		        chart: {
@@ -177,7 +177,7 @@
 		            type: 'pie'
 		        },
 		        title: {
-		            //text: 'Browser market shares January, 2015 to May, 2015'
+		            text: chartTitle
 		        },
 		        tooltip: {
 		         /*    pointFormat: '{series.name}: <b>{this.y}원</b>'  */

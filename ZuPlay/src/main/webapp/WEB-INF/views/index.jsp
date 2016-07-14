@@ -23,41 +23,46 @@
 </head>
 <body class='default' id="main">
 	<img src="resources/img/loading.gif" id="loading-content">
-	<div class="side-section">
-		<div class="side-id">
-			<label>${playerNickname}</label>
-		</div>
-		<div class="side-avatar" > <!-- relative -->
-			<img src="" id="side-avatar-player-clothes"> <!-- absolute -->
-			<img src="" id="side-avatar-player-hair">
-			<img src="" id="side-avatar-player-eyes">
-			<img src="" id="side-avatar-player-mouse">
-			<img src="" id="side-avatar-player-earring">
-			<img src="" id="side-avatar-player-acc">
-		</div>
-	</div>
-      
-    <!-- includes JSP -->
-    <jsp:include page="realTimeListWindow.jsp"/>
-    <jsp:include page="financialTermWindow.jsp"/>
-    <jsp:include page="stockList.jsp" />
-    <jsp:include page="storeWindow.jsp" />
-    <jsp:include page="FriendBook.jsp"/>
-    <jsp:include page="inventory.jsp" />
-    <jsp:include page="auctionWindow.jsp"/>
-    <jsp:include page="myStock.jsp"/>
-    <jsp:include page="newsList.jsp"/>
-    <jsp:include page="settingWindow.jsp"/>
-    <jsp:include page="chatRoom.jsp"/>
-    <jsp:include page="rankingWindow.jsp"/>
-    <!-- includes END -->
-    
-	<div id="friend-request-noti">
-		<span id="noti-msg">
-		</span>
-	</div>
 	
-	<div id="menu-bar"></div>
+	<div id="loader">
+	
+		<div class="side-section">
+			<div class="side-id">
+				<label>${playerNickname}</label>
+			</div>
+			<div class="side-avatar" > <!-- relative -->
+				<img src="" id="side-avatar-player-clothes"> <!-- absolute -->
+				<img src="" id="side-avatar-player-hair">
+				<img src="" id="side-avatar-player-eyes">
+				<img src="" id="side-avatar-player-mouse">
+				<img src="" id="side-avatar-player-earring">
+				<img src="" id="side-avatar-player-acc">
+			</div>
+		</div>
+	      
+	    <!-- includes JSP -->
+	    <jsp:include page="realTimeListWindow.jsp"/>
+	    <jsp:include page="financialTermWindow.jsp"/>
+	    <jsp:include page="stockList.jsp" />
+	    <jsp:include page="storeWindow.jsp" />
+	    <jsp:include page="FriendBook.jsp"/>
+	    <jsp:include page="inventory.jsp" />
+	    <jsp:include page="auctionWindow.jsp"/>
+	    <jsp:include page="myStock.jsp"/>
+	    <jsp:include page="newsList.jsp"/>
+	    <jsp:include page="settingWindow.jsp"/>
+	    <jsp:include page="chatRoom.jsp"/>
+	    <jsp:include page="rankingWindow.jsp"/>
+	    <!-- includes END -->
+	    
+		<div id="friend-request-noti">
+			<span id="noti-msg">
+			</span>
+		</div>
+		
+		<div id="menu-bar" class="center-block"></div>
+	
+	</div>
 </body>
 
     

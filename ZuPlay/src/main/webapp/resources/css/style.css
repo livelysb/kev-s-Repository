@@ -16,6 +16,16 @@ body{
 	visibility: hidden;
 }
 
+#logo{
+	position: absolute;
+    top: 0; bottom:0; left: 0; right:0;
+    margin: auto;
+}
+
+#menu-bar{
+	width:100%;
+}
+
 a:hover, a:active, a:focus {
   text-decoration: none;
   outline: 0;
@@ -49,6 +59,9 @@ small, .small {
    margin-left: -240px; /* 이미지 너비/2  */
 }
 
+#dock-menu-wrapper{
+	width:100% !important;
+}
 
 .side-id{
   font-weight: bold;

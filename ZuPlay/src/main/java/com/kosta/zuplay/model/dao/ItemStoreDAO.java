@@ -22,5 +22,8 @@ public interface ItemStoreDAO {
 	 * 랜덤박스 리스트 가져오기
 	 */
 	List<ItemDTO> itemStoreRandomBoxList(Map<String, String> map) throws Exception;
-
+	/**
+	 * 아이템 정보 가져오기
+	 */
+	ItemDTO itemInfo(String itemCode) throws Exception;
 }

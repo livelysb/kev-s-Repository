@@ -53,6 +53,7 @@
 	    <jsp:include page="settingWindow.jsp"/>
 	    <jsp:include page="chatRoom.jsp"/>
 	    <jsp:include page="rankingWindow.jsp"/>
+	    <jsp:include page="historyWindow.jsp"/>
 	    <!-- includes END -->
 	    
 		<div id="friend-request-noti">

@@ -968,7 +968,7 @@ $(function(){
        })
        
        /* 가나다인척하기 */
-       financialSearch("가")
+       //financialSearch("가")
       }
       
       /* 경매장 */
@@ -1554,6 +1554,325 @@ $(function(){
  		 
       }
       
+      /*히스토리 */
+      var historyInit = function(){
+         
+         /*히스토리 페이지네이션*/
+         var historyPage = function(page){
+            $("#history-content #page-selection").bootpag({
+                  total: page, maxVisible: 10
+              });
+         }
+         
+         /*히스토리 총페이지*/
+         var historyStockListCount = function(page){
+            $.ajax({
+               url:"getHistoryCount",
+               type:"post",
+               dataType:"json",
+               data:"targetPlayer=이석범짱",
+               success:function(page){
+                  if(page%10==0){
+                     historyPage(page/10)
+                  }else{
+                     historyPage(page/10+1)   
+                  }
+               },
+               error:function(err){
+                  console.log("Exception : historyStockList")
+               }
+            })
+         }
+         
+         /*히스토리 내역*/
+         var historyStockList = function(page,orderBy,asc){
+   
+            $.ajax({
+               url:"getStockDealHistory", 
+               type:"post",
+               dataType:"json",
+               data:{"targetPlayer":"이석범짱","orderBy":orderBy,"asc":asc,"page":page},
+               success:function(data){
+                  console.log(data);
+                  var str="";
+                  $.each(data,function(index,item){
+                     if(item.sdhBuySell=="b"){
+                        str+="<tr><td>매수</td>";
+                     }else{
+                        str+="<tr><td>매도</td>";
+                     }
+                     
+                     str+="<td>"+item.masterDTO.isuKorAbbrv+"</td>";
+                     str+="<td>"+item.masterDTO.kind+"</td>";
+                     str+="<td>"+item.sdhDealTime+"</td>";
+                     str+="<td>"+item.sdhQuantity+"</td>";
+                     str+="<td>"+((item.masterDTO.priceDTO.trdPrc).format())+"</td>";
+                     str+="<td>"+((item.sdhDealPrice).format())+"</td></tr>";
+                  });
+                  $("#history-stock-list").empty();
+                  $("#history-stock-list").html(str);
+               },
+               error:function(err){
+                  console.log("Exception : historyStockList")
+               }
+            })
+         }
+         
+         /*페이지클릭 이벤트*/
+         $('#history-content #page-selection').on("page", function(event, num){
+            historyStockList(num);
+           });
+         
+         /*탭 클릭 이벤트*/
+         $("#history-content .nav-tabs  a").on("click",function(){
+            console.log($(this).text())
+            if($(this).text()=="Best"){
+               $("#history-worst-piechart").empty();
+               historyBest();
+            }else{
+               $("#history-best-piechart").empty();
+               historyWorst();
+            }
+         })
+         
+         /*히스토리 Order By */
+         var orderFlag=3;
+         $("#history-foot thead th").on("click",function(){
+            console.log(($(this).index()));
+            var thIndex=($(this).index());
+            switch ($(this).index()) {
+               case 0: orderFnc("SDH_BUY_SELL",thIndex); break;
+               case 1: orderFnc("isuKorAbbrv",thIndex); break;         
+               case 2:   orderFnc("kind",thIndex); break;
+               case 3:   orderFnc("SDH_DEAL_TIME",thIndex); break;
+               default: return;
+            }
+         })
+         
+         var orderFnc = function(orderBy,index){
+            if(orderFlag!=index){
+               historyStockList(1,orderBy,false);
+               orderFlag=index;
+            }else{
+               historyStockList(1,orderBy,true);
+               orderFlag=5;
+            }
+         }
+         
+         
+         /*Best 파이차트*/
+         var historyBest = function(){
+            $.ajax({
+               url:"getBest",
+               type:"post",
+               dataType:"json",
+               data:"targetPlayer=이석범짱",
+               success:function(data){
+                  pieChartJson = new Array();
+                  var etcMoney=0;
+                  $.each(data,function(index,item){
+                     var pieChartObj = new Object();
+                     if(index<=9){
+                        pieChartObj.name=item.isuKorAbbrv;
+                        pieChartObj.y=(item.earningMoney);
+                        pieChartJson.push(pieChartObj);
+                     }else{
+                        etcMoney+=item.earningMoney;
+                        if(index+1 == data.length) {
+                           pieChartObj.name="etc";
+                           pieChartObj.y=etcMoney;
+                           pieChartJson.push(pieChartObj);
+                        }
+                     }
+                  }) 
+                  pieChartdraw("#history-best-piechart",pieChartJson,"Profit");
+               },
+               error:function(err){
+                  console.log("Exception : historyBest")
+               }
+            })
+         }
+         /*Worst 파이차트*/
+         var historyWorst = function(){
+            $.ajax({
+               url:"getWorst",
+               type:"post",
+               dataType:"json",
+               data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
+               success:function(data){
+                  pieChartJson = new Array();
+                  var etcMoney=0;
+                  $.each(data,function(index,item){
+                     var pieChartObj = new Object();
+                     if(index<=9){
+                        pieChartObj.name=item.isuKorAbbrv;
+                        pieChartObj.y=(-item.earningMoney);
+                        pieChartJson.push(pieChartObj);
+                     }else{
+                        etcMoney+=item.earningMoney;
+                        if(index+1 == data.length) {
+                           pieChartObj.name="etc";
+                           pieChartObj.y=(-etcMoney);
+                           pieChartJson.push(pieChartObj);
+                        }
+                     }
+                  }) 
+                  pieChartdraw("#history-worst-piechart",pieChartJson,"Lost");
+                  
+               },
+               error:function(err){
+                  console.log("Exception : historyWorst")
+               }
+            })
+         }
+         
+         
+         /*수익률차트*/
+            var earningChart = function(){
+               $.ajax({
+                  url:"getEarningRateList",
+                  type:"post",
+                  dataType:"json",
+                  data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
+                  success:function(data){
+                     pieChartJson = new Array();
+                     $.each(data,function(index,item){
+                        var pieChartObj = new Object();
+                        pieChartObj.x=item.pehDate2 ;
+                        pieChartObj.y=parseFloat((item.pehPe).toFixed(2));
+                        pieChartObj.name=item.pehDate2;
+                        pieChartJson.push(pieChartObj);
+                     })    
+                     
+                     lineChartdraw(pieChartJson);
+                  },
+                  error:function(){
+                     console.log("Exception : earningChart")
+                  }
+               })
+            }
+         
+         
+          /*파이차트 그리기*/
+         var pieChartdraw = function(historySelector,pieChartJson,chartTitle) {
+            $(historySelector).highcharts({
+               
+                 chart: {
+                     plotBackgroundColor: null,
+                     plotBorderWidth: null,
+                     plotShadow: false,
+                     type: 'pie',
+                     height:350
+                 },
+                 title: {
+                     text: chartTitle
+                 },
+                 tooltip: {
+                      /* pointFormat: '{series.name}: <b>{this.y}원</b>' */
+                     formatter: function() {
+                         return this.series.name + ' : <b>₩' + this.y.format() + '</b>';
+                     } 
+                 },
+                 plotOptions: {
+                     pie: {
+                         allowPointSelect: true,
+                         cursor: 'pointer',
+                         dataLabels: {
+                             enabled: true,
+                             format: '<b>{point.name}</b>:  {point.percentage:.1f} %',
+                             style: {
+                                 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                             }
+                         }
+                     }
+                 },
+                 series: [{
+                           name: "profit",
+                           colorByPoint: true,
+                           data: pieChartJson
+                 }],
+             });
+         }
+         
+          /*라인차트 그리기*/
+         var lineChartdraw = function(pieChartJson){
+            $('#history-line-chart').highcharts({
+                  chart: {
+                      zoomType: 'x'
+                  },
+                  title: {
+                      text: 'Daily Earning Rate'
+                  },
+                  subtitle: {
+                 /*      text: document.ontouchstart === undefined ?
+                              'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' */
+                  },
+                  xAxis: {
+                      type: 'datetime'
+                  },
+                  yAxis: {
+                      title: {
+                          text: 'Earning Rate'
+                      }
+                  },
+                  legend: {
+                      enabled: false
+                  },
+                  tooltip: {
+                     formatter: function() {
+                        var result = new Date(this.x).toUTCString().split("00:")[0];
+                         return result+"<br>"+this.series.name + ' : <b>' + this.y + '%</b>';
+                     } 
+                 },
+                  plotOptions: {
+                      area: {
+                          fillColor: {
+                              linearGradient: {
+                                  x1: 0,
+                                  y1: 0,
+                                  x2: 0,
+                                  y2: 1
+                              },
+                              stops: [
+                                  [0, Highcharts.getOptions().colors[0]],
+                                  [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                              ]
+                          },
+                          marker: {
+                              radius: 2
+                          },
+                          lineWidth: 1,
+                          states: {
+                              hover: {
+                                  lineWidth: 1
+                              }
+                          },
+                          threshold: null
+                      }
+                  },
+   
+                  series: [{
+                      type: 'area',
+                      name: 'Earning rate',
+                      data: pieChartJson
+                  }]
+              });
+         }
+         $("#history-window").jqxWindow({
+             minWidth:600,
+             minHeight:420,
+             resizable:false,
+             showCollapseButton: true,
+             autoOpen:false,
+             theme : userInfo.theme
+           });
+         
+         earningChart();
+         historyBest();
+         historyStockListCount()
+         historyStockList()
+      }
+      
       
       /* 방 유저 업데이트 */
       var getChatCurrentUsers = function(players){
@@ -1735,6 +2054,7 @@ $(function(){
       initChatRoom();
       initRanking();
       userInfoInit();
+      historyInit();
       
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));
@@ -1749,6 +2069,7 @@ $(function(){
             $("#setting-btn").setBtn($("#setting-window"));
             $("#chatroom-btn").setBtn($("#chatroom-window"));
             $("#ranking-btn").setBtn($("#ranking-window"));
+            $("#history-btn").setBtn($("#history-window"));
             $("#myinfo-btn").click(function(){
             showUserInfo(userInfo.nickName);
           });
@@ -1996,8 +2317,6 @@ $(function(){
 							        }; break;
                  case "notiAuctionEndBySeller" : $("#noti-msg").html(data.data.itemName+"이 "+data.data.imPrice+"루비에 팔렸습니다.<br>낙찰금액을 수령해 주십시오.");
                     							 $("#friend-request-noti").jqxNotification("open");break;			          	  
-							          	  
-							          	  
 							          	  
                  case "chatMsg" : chatMsg(data); break;
                  case "chatIn" : chatIn(data); break;

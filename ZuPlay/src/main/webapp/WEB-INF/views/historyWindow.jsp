@@ -17,7 +17,7 @@
 #history-right {height:400px; width:50%; float:right;}
 #history-foot {height:400px; width:100%; clear: both;}
 #history-content #page-align {text-align: center;}
-#history-foot thead th:hover{
+#history-foot thead th:nth-last-child(n+4):hover{
 	cursor:pointer;
 }
 #history-content .nav-tabs > li {
@@ -36,287 +36,288 @@
 
 <script type="text/javascript">
 	$(function(){
-		
-		/*히스토리 페이지네이션*/
-		var historyPage = function(page){
-			$("#history-content #page-selection").bootpag({
-	            total: page, maxVisible: 10
-	        });
-		}
-		
-		/*히스토리 총페이지*/
-		var historyStockListCount = function(page){
-			$.ajax({
-				url:"getHistoryCount",
-				type:"post",
-				dataType:"json",
-				data:"targetPlayer=이석범짱",
-				success:function(page){
-					if(page%10==0){
-						historyPage(page/10)
-					}else{
-						historyPage(page/10+1)	
-					}
-				},
-				error:function(err){
-					console.log("Exception : historyStockList")
-				}
-			})
-		}
-		
-		/*히스토리 내역*/
-		var historyStockList = function(page,orderBy,asc){
-
-			$.ajax({
-				url:"getStockDealHistory", 
-				type:"post",
-				dataType:"json",
-				data:{"targetPlayer":"이석범짱","orderBy":orderBy,"asc":asc,"page":page},
-				success:function(data){
-					console.log(data);
-					var str="";
-					$.each(data,function(index,item){
-						if(item.sdhBuySell=="b"){
-							str+="<tr><td>매수</td>";
+		var historyInit = function(){		
+			/*히스토리 페이지네이션*/
+			var historyPage = function(page){
+				$("#history-content #page-selection").bootpag({
+		            total: page, maxVisible: 10
+		        });
+			}
+			
+			/*히스토리 총페이지*/
+			var historyStockListCount = function(page){
+				$.ajax({
+					url:"getHistoryCount",
+					type:"post",
+					dataType:"json",
+					data:"targetPlayer=이석범짱",
+					success:function(page){
+						if(page%10==0){
+							historyPage(page/10)
 						}else{
-							str+="<tr><td>매도</td>";
+							historyPage(page/10+1)	
 						}
-						
-						str+="<td>"+item.masterDTO.isuKorAbbrv+"</td>";
-						str+="<td>"+item.masterDTO.kind+"</td>";
-						str+="<td>"+item.sdhDealTime+"</td>";
-						str+="<td>"+item.sdhQuantity+"</td>";
-						str+="<td>"+item.masterDTO.priceDTO.trdPrc+"</td>";
-						str+="<td>"+item.sdhDealPrice+"</td></tr>";
-					});
-					$("#history-stock-list").empty();
-					$("#history-stock-list").html(str);
-				},
-				error:function(err){
-					console.log("Exception : historyStockList")
-				}
-			})
-		}
-		
-		/*페이지클릭 이벤트*/
-		$('#history-content #page-selection').on("page", function(event, num){
-			historyStockList(num);
-        });
-		
-		/*탭 클릭 이벤트*/
-		$("#history-content .nav-tabs  a").on("click",function(){
-			console.log($(this).text())
-			if($(this).text()=="Best"){
-				$("#history-worst-piechart").empty();
-				historyBest();
-			}else{
-				$("#history-best-piechart").empty();
-				historyWorst();
+					},
+					error:function(err){
+						console.log("Exception : historyStockList")
+					}
+				})
 			}
-		})
-		
-		/*히스토리 Order By */
-		var orderFlag=5;
-		$("#history-foot thead th").on("click",function(){
-			console.log(($(this).index()));
-			var thIndex=($(this).index());
-			switch ($(this).index()) {
-				case 0: orderFnc("SDH_BUY_SELL",thIndex); break;
-				case 1: orderFnc("isuKorAbbrv",thIndex); break;			
-				case 2:	orderFnc("kind",thIndex); break;
-				case 3:	orderFnc("SDH_DEAL_TIME",thIndex); break;
-				default: return;
+			
+			/*히스토리 내역*/
+			var historyStockList = function(page,orderBy,asc){
+	
+				$.ajax({
+					url:"getStockDealHistory", 
+					type:"post",
+					dataType:"json",
+					data:{"targetPlayer":"이석범짱","orderBy":orderBy,"asc":asc,"page":page},
+					success:function(data){
+						console.log(data);
+						var str="";
+						$.each(data,function(index,item){
+							if(item.sdhBuySell=="b"){
+								str+="<tr><td>매수</td>";
+							}else{
+								str+="<tr><td>매도</td>";
+							}
+							
+							str+="<td>"+item.masterDTO.isuKorAbbrv+"</td>";
+							str+="<td>"+item.masterDTO.kind+"</td>";
+							str+="<td>"+item.sdhDealTime+"</td>";
+							str+="<td>"+item.sdhQuantity+"</td>";
+							str+="<td>"+item.masterDTO.priceDTO.trdPrc+"</td>";
+							str+="<td>"+item.sdhDealPrice+"</td></tr>";
+						});
+						$("#history-stock-list").empty();
+						$("#history-stock-list").html(str);
+					},
+					error:function(err){
+						console.log("Exception : historyStockList")
+					}
+				})
 			}
-		})
-		
-		var orderFnc = function(orderBy,index){
-			if(orderFlag!=index){
-				historyStockList(1,orderBy,false);
-				orderFlag=index;
-			}else{
-				historyStockList(1,orderBy,true);
-				orderFlag=5;
-			}
-		}
-		
-		
-		/*Best 파이차트*/
-		var historyBest = function(){
-			$.ajax({
-				url:"getBest",
-				type:"post",
-				dataType:"json",
-				data:"targetPlayer=이석범짱",
-				success:function(data){
-					pieChartJson = new Array();
-					$.each(data,function(index,item){
-						var pieChartObj = new Object();
-						pieChartObj.name=item.isuKorAbbrv;
-						pieChartObj.y=(item.earningMoney);
-						pieChartJson.push(pieChartObj);
-					}) 
-					pieChartdraw("#history-best-piechart",pieChartJson,"Profit");
-				},
-				error:function(err){
-					console.log("Exception : historyBest")
-				}
-			})
-		}
-		/*Worst 파이차트*/
-		var historyWorst = function(){
-			$.ajax({
-				url:"getWorst",
-				type:"post",
-				dataType:"json",
-				data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
-				success:function(data){
-					pieChartJson = new Array();
-					$.each(data,function(index,item){
-						var pieChartObj = new Object();
-						pieChartObj.name=item.isuKorAbbrv;
-						pieChartObj.y=(-item.earningMoney);
-						pieChartJson.push(pieChartObj);
-					}) 
-					pieChartdraw("#history-worst-piechart",pieChartJson,"Lost");
-				},
-				error:function(err){
-					console.log("Exception : historyWorst")
-				}
-			})
-		}
-		
-		
-		/*수익률차트*/
-	      var earningChart = function(){
-	         $.ajax({
-	            url:"getEarningRateList",
-	            type:"post",
-	            dataType:"json",
-	            data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
-	            success:function(data){
-	               pieChartJson = new Array();
-	               $.each(data,function(index,item){
-	                  var pieChartObj = new Object();
-	                  pieChartObj.x=item.pehDate2 ;
-	                  pieChartObj.y=item.pehPe;
-	                  pieChartObj.name=item.pehDate2 ;
-	                  pieChartJson.push(pieChartObj);
-	               })    
-	               
-	               lineChartdraw(pieChartJson);
-	            },
-	            error:function(){
-	               console.log("Exception : earningChart")
-	            }
-	         })
-	      }
-		
-		
-		 /*파이차트 그리기*/
-		var pieChartdraw = function(historySelector,pieChartJson,chartTitle) {
-			$(historySelector).highcharts({
-				
-		        chart: {
-		            plotBackgroundColor: null,
-		            plotBorderWidth: null,
-		            plotShadow: false,
-		            type: 'pie',
-		            height:350
-		        },
-		        title: {
-		            text: chartTitle
-		        },
-		        tooltip: {
-		             /* pointFormat: '{series.name}: <b>{this.y}원</b>' */
-		        	 formatter: function() {
-		                return 'The value for <b>' + this.series.name + '</b> is <b>' + this.y + '</b>';
-		            } 
-		        },
-		        plotOptions: {
-		            pie: {
-		                allowPointSelect: true,
-		                cursor: 'pointer',
-		                dataLabels: {
-		                    enabled: true,
-		                    format: '<b>{point.name}</b>:  {point.percentage:.1f} %',
-		                    style: {
-		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-		                    }
-		                }
-		            }
-		        },
-		        series: [{
-				            name: "profit",
-				            colorByPoint: true,
-				            data: pieChartJson
-	        	}],
-	  	  });
-		}
-		
-		 /*라인차트 그리기*/
-		var lineChartdraw = function(pieChartJson){
-			$('#history-line-chart').highcharts({
-	            chart: {
-	                zoomType: 'x'
-	            },
-	            title: {
-	                text: 'Daily Earning Rate'
-	            },
-	            subtitle: {
-	           /*      text: document.ontouchstart === undefined ?
-	                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' */
-	            },
-	            xAxis: {
-	                type: 'datetime'
-	            },
-	            yAxis: {
-	                title: {
-	                    text: 'Earning Rate'
-	                }
-	            },
-	            legend: {
-	                enabled: false
-	            },
-	            plotOptions: {
-	                area: {
-	                    fillColor: {
-	                        linearGradient: {
-	                            x1: 0,
-	                            y1: 0,
-	                            x2: 0,
-	                            y2: 1
-	                        },
-	                        stops: [
-	                            [0, Highcharts.getOptions().colors[0]],
-	                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-	                        ]
-	                    },
-	                    marker: {
-	                        radius: 2
-	                    },
-	                    lineWidth: 1,
-	                    states: {
-	                        hover: {
-	                            lineWidth: 1
-	                        }
-	                    },
-	                    threshold: null
-	                }
-	            },
-
-	            series: [{
-	                type: 'area',
-	                name: 'Earning rate',
-	                data: pieChartJson
-	            }]
+			
+			/*페이지클릭 이벤트*/
+			$('#history-content #page-selection').on("page", function(event, num){
+				historyStockList(num);
 	        });
+			
+			/*탭 클릭 이벤트*/
+			$("#history-content .nav-tabs  a").on("click",function(){
+				console.log($(this).text())
+				if($(this).text()=="Best"){
+					$("#history-worst-piechart").empty();
+					historyBest();
+				}else{
+					$("#history-best-piechart").empty();
+					historyWorst();
+				}
+			})
+			
+			/*히스토리 Order By */
+			var orderFlag=5;
+			$("#history-foot thead th").on("click",function(){
+				console.log(($(this).index()));
+				var thIndex=($(this).index());
+				switch ($(this).index()) {
+					case 0: orderFnc("SDH_BUY_SELL",thIndex); break;
+					case 1: orderFnc("isuKorAbbrv",thIndex); break;			
+					case 2:	orderFnc("kind",thIndex); break;
+					case 3:	orderFnc("SDH_DEAL_TIME",thIndex); break;
+					default: return;
+				}
+			})
+			
+			var orderFnc = function(orderBy,index){
+				if(orderFlag!=index){
+					historyStockList(1,orderBy,false);
+					orderFlag=index;
+				}else{
+					historyStockList(1,orderBy,true);
+					orderFlag=5;
+				}
+			}
+			
+			
+			/*Best 파이차트*/
+			var historyBest = function(){
+				$.ajax({
+					url:"getBest",
+					type:"post",
+					dataType:"json",
+					data:"targetPlayer=이석범짱",
+					success:function(data){
+						pieChartJson = new Array();
+						$.each(data,function(index,item){
+							var pieChartObj = new Object();
+							pieChartObj.name=item.isuKorAbbrv;
+							pieChartObj.y=(item.earningMoney);
+							pieChartJson.push(pieChartObj);
+						}) 
+						pieChartdraw("#history-best-piechart",pieChartJson,"Profit");
+					},
+					error:function(err){
+						console.log("Exception : historyBest")
+					}
+				})
+			}
+			/*Worst 파이차트*/
+			var historyWorst = function(){
+				$.ajax({
+					url:"getWorst",
+					type:"post",
+					dataType:"json",
+					data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
+					success:function(data){
+						pieChartJson = new Array();
+						$.each(data,function(index,item){
+							var pieChartObj = new Object();
+							pieChartObj.name=item.isuKorAbbrv;
+							pieChartObj.y=(-item.earningMoney);
+							pieChartJson.push(pieChartObj);
+						}) 
+						pieChartdraw("#history-worst-piechart",pieChartJson,"Lost");
+					},
+					error:function(err){
+						console.log("Exception : historyWorst")
+					}
+				})
+			}
+			
+			
+			/*수익률차트*/
+		      var earningChart = function(){
+		         $.ajax({
+		            url:"getEarningRateList",
+		            type:"post",
+		            dataType:"json",
+		            data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
+		            success:function(data){
+		               pieChartJson = new Array();
+		               $.each(data,function(index,item){
+		                  var pieChartObj = new Object();
+		                  pieChartObj.x=item.pehDate2 ;
+		                  pieChartObj.y=item.pehPe;
+		                  pieChartObj.name=item.pehDate2 ;
+		                  pieChartJson.push(pieChartObj);
+		               })    
+		               
+		               lineChartdraw(pieChartJson);
+		            },
+		            error:function(){
+		               console.log("Exception : earningChart")
+		            }
+		         })
+		      }
+			
+			
+			 /*파이차트 그리기*/
+			var pieChartdraw = function(historySelector,pieChartJson,chartTitle) {
+				$(historySelector).highcharts({
+					
+			        chart: {
+			            plotBackgroundColor: null,
+			            plotBorderWidth: null,
+			            plotShadow: false,
+			            type: 'pie',
+			            height:350
+			        },
+			        title: {
+			            text: chartTitle
+			        },
+			        tooltip: {
+			             /* pointFormat: '{series.name}: <b>{this.y}원</b>' */
+			        	 formatter: function() {
+			                return 'The value for <b>' + this.series.name + '</b> is <b>' + this.y + '</b>';
+			            } 
+			        },
+			        plotOptions: {
+			            pie: {
+			                allowPointSelect: true,
+			                cursor: 'pointer',
+			                dataLabels: {
+			                    enabled: true,
+			                    format: '<b>{point.name}</b>:  {point.percentage:.1f} %',
+			                    style: {
+			                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+			                    }
+			                }
+			            }
+			        },
+			        series: [{
+					            name: "profit",
+					            colorByPoint: true,
+					            data: pieChartJson
+		        	}],
+		  	  });
+			}
+			
+			 /*라인차트 그리기*/
+			var lineChartdraw = function(pieChartJson){
+				$('#history-line-chart').highcharts({
+		            chart: {
+		                zoomType: 'x'
+		            },
+		            title: {
+		                text: 'Daily Earning Rate'
+		            },
+		            subtitle: {
+		           /*      text: document.ontouchstart === undefined ?
+		                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' */
+		            },
+		            xAxis: {
+		                type: 'datetime'
+		            },
+		            yAxis: {
+		                title: {
+		                    text: 'Earning Rate'
+		                }
+		            },
+		            legend: {
+		                enabled: false
+		            },
+		            plotOptions: {
+		                area: {
+		                    fillColor: {
+		                        linearGradient: {
+		                            x1: 0,
+		                            y1: 0,
+		                            x2: 0,
+		                            y2: 1
+		                        },
+		                        stops: [
+		                            [0, Highcharts.getOptions().colors[0]],
+		                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+		                        ]
+		                    },
+		                    marker: {
+		                        radius: 2
+		                    },
+		                    lineWidth: 1,
+		                    states: {
+		                        hover: {
+		                            lineWidth: 1
+		                        }
+		                    },
+		                    threshold: null
+		                }
+		            },
+	
+		            series: [{
+		                type: 'area',
+		                name: 'Earning rate',
+		                data: pieChartJson
+		            }]
+		        });
+			}
+	
+			earningChart();
+			historyBest();
+			historyStockListCount()
+			historyStockList()
 		}
-
-		earningChart();
-		historyBest();
-		historyStockListCount()
-		historyStockList()
-		
+		historyInit();
 	}) 
 </script>
 

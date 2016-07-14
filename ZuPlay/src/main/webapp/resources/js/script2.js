@@ -638,11 +638,12 @@ $(function(){
                       return;
                    }else{
                       count=page;
-                      
+                      var priceInfo="";
                       $(".store-itemBox").empty();
                       $.each(data, function(index, item){
                          $("#store-item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:100%;' id='"+item.itemCode+"'/>");  
-                         $("#store-item"+itemClass+""+index+" img").jqxTooltip({ content: item.itemName+"("+item.itemGrade+")"+"<br>₩"+item.itemPrice+"<br>", position: 'bottom', autoHide: true, 
+                         item.itemPrice!=0 ? priceInfo="₩"+item.itemPrice : priceInfo="구매할 수 없는 아이템 입니다.";
+                         $("#store-item"+itemClass+""+index+" img").jqxTooltip({ content: "<b>"+item.itemName+"</b>("+item.itemGrade+")"+"<br>"+priceInfo+"<br>", position: 'bottom', autoHide: true, 
                             name: 'movieTooltip', theme : userInfo.theme });
                       })
                    }
@@ -685,9 +686,10 @@ $(function(){
                       case "1" : alert("구매되었습니다."); break;
                       case "2" : alert("인벤토리가 부족합니다."); break;
                       case "3" : alert("루비가 부족합니다."); break;
+                      case "4" : alert("랜덤박스로만 구매할 수 있습니다."); break;
+                      default : alert(result+"을(를) 획득하였습니다."); break;
                    }
                    playerItemSelectAll();
-                   
                 },
                 error:function(err){
                    console.log("Exception : 아이템 구매");

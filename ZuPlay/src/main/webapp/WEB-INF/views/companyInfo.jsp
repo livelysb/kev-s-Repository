@@ -86,3 +86,89 @@
       </c:if>
     </div>
   </div>
+  <script type="text/javascript">
+	 $("#company-${masterDTO.isuCd}").ready(function(){
+		 
+		 var chartData =  function(data){
+			 console.log("시작");
+ 				console.log(data)
+                ChartJson = new Array();
+                $.each(data,function(index,item){	
+                	console.log(item);
+                   var ChartObj = new Object();
+                   ChartObj.x=item.rpTrdTm2 ;
+                   ChartObj.y=item.rpTrdPrc;
+                   ChartObj.name=item.rpTrdTm2;
+                   console.log(ChartObj.x+","+ChartObj.y);
+                   ChartJson.push(ChartObj);
+                })    
+                
+                companylineChart(ChartJson);
+                
+		 }
+		 
+		 /*라인차트 그리기*/
+         var companylineChart = function(ChartJson){
+            $('#history-line-chart').highcharts({
+                  chart: {
+                      zoomType: 'x',
+                      width:300,
+                      width:300
+                  },
+                  title: {
+                      //text: 'Daily Earning Rate'
+                  },
+                  xAxis: {
+                      type: 'datetime'
+                  },
+                  yAxis: {
+                      title: {
+                          text: 'Profit'
+                      }
+                  },
+                  legend: {
+                      enabled: false
+                  },
+                  tooltip: {
+                     formatter: function() {
+                        var result = new Date(this.x).toUTCString().split("00:")[0];
+                         return result+"<br>"+this.series.name + ' : <b>' + this.y + '</b>';
+                     } 
+                 },
+                  plotOptions: {
+                      area: {
+                          fillColor: {
+                              linearGradient: {
+                                  x1: 0,
+                                  y1: 0,
+                                  x2: 0,
+                                  y2: 1
+                              },
+                              stops: [
+                                  [0, Highcharts.getOptions().colors[0]],
+                                  [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                              ]
+                          },
+                          marker: {
+                              radius: 2
+                          },
+                          lineWidth: 1,
+                          states: {
+                              hover: {
+                                  lineWidth: 1
+                              }
+                          },
+                          threshold: null
+                      }
+                  },
+   
+                  series: [{
+                      type: 'area',
+                      name: 'Profit',
+                      data: ChartJson
+                  }]
+              });
+         }
+         chartData("${masterDTO.rtpList}");
+	 });
+</script>

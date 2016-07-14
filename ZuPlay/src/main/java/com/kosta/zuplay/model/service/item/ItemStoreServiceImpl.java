@@ -134,7 +134,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		int ruby = playerInfoDAO.getRuby(playerNickname);
 		int price = itemStoreDAO.getPrice(itemCode);
 		map.put("playerNickname", playerNickname);
-		map.put("updateRuby", ruby - price + "");
+		map.put("updateRuby", ruby +1000 + "");
 		playerInfoDAO.updateRuby(map);
 		int result = playerItemDAO.itemDelete(piSq);
 		if (result == 0) {

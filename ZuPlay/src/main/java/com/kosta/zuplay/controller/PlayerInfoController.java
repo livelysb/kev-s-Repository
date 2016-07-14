@@ -21,6 +21,7 @@ import com.kosta.zuplay.model.service.item.InventoryService;
 import com.kosta.zuplay.model.service.player.EarningRateService;
 import com.kosta.zuplay.model.service.player.PlayerInfoService;
 import com.kosta.zuplay.model.service.player.RankService;
+import com.kosta.zuplay.model.service.stock.DealHistoryService;
 import com.kosta.zuplay.model.service.stock.PlayerStockService;
 import com.kosta.zuplay.model.service.stock.StockHistoryService;
 
@@ -44,6 +45,9 @@ public class PlayerInfoController {
 	
 	@Autowired
 	private StockHistoryService stockHistoryService;
+	
+	@Autowired
+	private DealHistoryService dealHistoryService;
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -186,6 +190,18 @@ public class PlayerInfoController {
 	public String getWorst(HttpSession session, String targetPlayer) throws Exception {
 		try {
 			return new Gson().toJson(stockHistoryService.getWorst3(targetPlayer));
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMsg", e.getMessage());
+			throw new Exception();
+		}
+	}
+	
+	@RequestMapping(value={"getHistoryCount"}, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getHistoryCount(HttpSession session, String targetPlayer) throws Exception {
+		try {	
+			return new Gson().toJson(dealHistoryService.getStockHistory(targetPlayer).size());
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMsg", e.getMessage());

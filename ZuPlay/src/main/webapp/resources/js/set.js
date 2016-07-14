@@ -21,7 +21,7 @@ var setting = {
 
 /* 웹소켓 */
 function connect(callBack) {
-	ws = new WebSocket('ws://127.0.0.1:8000/zuplay/echo/test');
+	ws = new WebSocket('ws://192.168.0.57/zuplay/echo/test');
 	ws.onopen = function() {
 		console.log('websocket opened');
 		var open = "open#/fuckWebSocket/#" + userInfo.nickName

@@ -160,11 +160,21 @@
 					data:"targetPlayer=이석범짱",
 					success:function(data){
 						pieChartJson = new Array();
+						var etcMoney=0;
 						$.each(data,function(index,item){
 							var pieChartObj = new Object();
-							pieChartObj.name=item.isuKorAbbrv;
-							pieChartObj.y=(item.earningMoney);
-							pieChartJson.push(pieChartObj);
+							if(index<=9){
+								pieChartObj.name=item.isuKorAbbrv;
+								pieChartObj.y=(item.earningMoney);
+								pieChartJson.push(pieChartObj);
+							}else{
+								etcMoney+=item.earningMoney;
+								if(index+1 == data.length) {
+									pieChartObj.name=etc;
+									pieChartObj.y=etcMoney;
+									pieChartJson.push(pieChartObj);
+								}
+							}
 						}) 
 						pieChartdraw("#history-best-piechart",pieChartJson,"Profit");
 					},
@@ -182,13 +192,24 @@
 					data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
 					success:function(data){
 						pieChartJson = new Array();
+						var etcMoney=0;
 						$.each(data,function(index,item){
 							var pieChartObj = new Object();
-							pieChartObj.name=item.isuKorAbbrv;
-							pieChartObj.y=(-item.earningMoney);
-							pieChartJson.push(pieChartObj);
+							if(index<=9){
+								pieChartObj.name=item.isuKorAbbrv;
+								pieChartObj.y=(-item.earningMoney);
+								pieChartJson.push(pieChartObj);
+							}else{
+								etcMoney+=item.earningMoney;
+								if(index+1 == data.length) {
+									pieChartObj.name=etc;
+									pieChartObj.y=etcMoney;
+									pieChartJson.push(pieChartObj);
+								}
+							}
 						}) 
 						pieChartdraw("#history-worst-piechart",pieChartJson,"Lost");
+						
 					},
 					error:function(err){
 						console.log("Exception : historyWorst")

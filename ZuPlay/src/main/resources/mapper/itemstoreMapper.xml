@@ -25,7 +25,9 @@
 		where upper(item_gender)!=#{playerGender} and item_class=#{itemClass} and item_grade!='default') where
 		rnum between #{startNo} and #{endNo}
 	</select>
-	
+	<select id="itemStoreRandomBoxList" parameterType="java.util.Map" resultMap="itemMapper">
+		select * from item where upper(item_gender)!=#{playerGender} and item_grade=#{randomResult} 
+	</select>
 	<select id="getPrice" parameterType="String" resultType="int">
 		select item_price from item where item_code=#{itemCode}
 	</select>

@@ -261,7 +261,7 @@
 			        tooltip: {
 			             /* pointFormat: '{series.name}: <b>{this.y}원</b>' */
 			        	 formatter: function() {
-			                return 'The value for <b>' + this.series.name + '</b> is <b>' + this.y + '</b>';
+			                return this.series.name + ' : <b>' + this.y + '</b>';
 			            } 
 			        },
 			        plotOptions: {

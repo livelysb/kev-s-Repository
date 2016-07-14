@@ -105,8 +105,8 @@
 							}else{
 								str+="<tr><td>매도</td>";
 							}
-							var trdPrc=(item.masterDTO.priceDTO.trdPrc).format;
-							var sdhDealPrice=(item.sdhDealPrice).format;
+							var trdPrc=(parseInt(item.masterDTO.priceDTO.trdPrc)).format;
+							var sdhDealPrice=(parseInt(item.sdhDealPrice)).format;
 							console.log(trdPrc);
 							console.log(sdhDealPrice);
 							str+="<td>"+item.masterDTO.isuKorAbbrv+"</td>";

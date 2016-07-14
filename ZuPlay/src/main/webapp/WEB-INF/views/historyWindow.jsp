@@ -160,8 +160,8 @@
 					pieChartJson = new Array();
 					$.each(data,function(index,item){
 						var pieChartObj = new Object();
-						pieChartObj.name=item.pehDate ;
-						pieChartObj.y=(item.pehPe);
+						pieChartObj.name=(Date.UTC(item.pehDate)) ;
+						pieChartObj.y=item.pehPe;
 						pieChartJson.push(pieChartObj);
 					}) 	
 					

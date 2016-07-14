@@ -72,7 +72,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 				payRubyMap.put("updateRuby", ruby - price + "");
 				playerInfoDAO.updateRuby(payRubyMap);
 				itemDTO=itemStoreDAO.itemInfo(itemDTO.getItemCode());
-				if (itemDTO.getItemClass().equals("randomBox")) {
+				if (itemDTO.getItemClass().equals("random")) {
 					int ranNum = (int) (Math.random() * 10 + 1);
 					Map<String, String> randomBoxMap = new HashMap<>();
 					String gender = playerInfoDAO.getPlayer(playerNickname).getPlayerGender();

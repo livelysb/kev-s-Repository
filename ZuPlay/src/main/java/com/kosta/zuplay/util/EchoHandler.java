@@ -38,7 +38,6 @@ public class EchoHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession webSession, TextMessage message) {
 		try {
 			String mes = message.getPayload();
-			System.out.println(mes);
 			String[] mesArr = mes.split("#/fuckWebSocket/#");
 			String playerNickname = mesArr[1];
 			if (mesArr[0].equals("open")) {
@@ -128,10 +127,6 @@ public class EchoHandler extends TextWebSocketHandler {
 				appliName.add(sharp.substring(1));
 			}
 		}
-		for(String name : appliName) {
-			System.out.println(name);
-		}
-		System.out.println(appliName.size());
 		for (int i = 0; i < appliName.size(); i++) {
 			PlayerVO pv = (PlayerVO) application.getAttribute("#" + appliName.get(i));
 			if (application.getAttribute("#" + appliName.get(i)) != null) {

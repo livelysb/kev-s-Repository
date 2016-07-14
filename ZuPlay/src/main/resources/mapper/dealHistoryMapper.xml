@@ -11,6 +11,10 @@
 		<result column="SDH_DEAL_TIME" property="sdhDealTime" />
 		<result column="SDH_QUANTITY" property="sdhQuantity" />
 		<result column="SDH_BUY_SELL" property="sdhBuySell" />
+		<association property="masterDTO" javaType="masterDTO">
+			<result column="isuKorAbbrv" property="isuKorAbbrv" />
+			<result column="kind" property="kind" />
+		</association>
 	</resultMap>
 
 	<resultMap type="earningRateHistoryDTO" id="earningRateHistory">
@@ -41,8 +45,10 @@
 		<if test="orderBy!=null and asc!=null"> ${orderBy} ${asc},</if>
 		sdh_deal_time desc) rnum, m.isucd, sdh_deal_price, sdh_deal_time,
 		sdh_quantity, sdh_buy_sell, isukorabbrv, kind from (
-		select * from stock_deal_history where player_nickname=#{playerNickname}) s
-		join (select isucd, ISUKORABBRV, kind from master) m
+		select * from
+		stock_deal_history where player_nickname=#{playerNickname}) s
+		join
+		(select isucd, ISUKORABBRV, kind from master) m
 		on s.isucd=m.isucd)
 		where rnum>=#{startNum} and rnum&lt;#{lastNum}
 	</select>

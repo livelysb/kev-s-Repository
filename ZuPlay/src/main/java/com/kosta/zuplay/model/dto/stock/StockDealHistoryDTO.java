@@ -9,6 +9,8 @@ public class StockDealHistoryDTO {
 	private int sdhQuantity;		//수량
 	private String sdhBuySell;		//Buy or Sell
 	
+	private MasterDTO masterDTO; // isuKorAbbrv, kind 제공을 위함
+	
 	public StockDealHistoryDTO() {}
 
 	public StockDealHistoryDTO(int sdhSq, String isuCd, String playerNickname, int sdhDealPrice, String sdhDealTime,
@@ -77,6 +79,15 @@ public class StockDealHistoryDTO {
 
 	public void setSdhBuySell(String sdhBuySell) {
 		this.sdhBuySell = sdhBuySell;
+	}
+
+	
+	public MasterDTO getMasterDTO() {
+		return masterDTO;
+	}
+
+	public void setMasterDTO(MasterDTO masterDTO) {
+		this.masterDTO = masterDTO;
 	}
 
 	@Override

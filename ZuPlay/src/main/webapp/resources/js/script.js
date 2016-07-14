@@ -2014,7 +2014,8 @@ $(function(){
            ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
            
       });
-      $("#main").css("visibility","visible");
+      
+      $("#loader").css("visibility","visible");
       $("#loading-content").remove();
    };
    updatePI(initContent);

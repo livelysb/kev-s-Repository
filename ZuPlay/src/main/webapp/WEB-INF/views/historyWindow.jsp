@@ -309,6 +309,12 @@
 		            legend: {
 		                enabled: false
 		            },
+		            tooltip: {
+			             /* pointFormat: '{series.name}: <b>{this.y}원</b>' */
+			        	 formatter: function() {
+			                return this.x+"<br>"+this.series.name + ' : <b>' + this.y + '%</b>';
+			            } 
+			        },
 		            plotOptions: {
 		                area: {
 		                    fillColor: {

@@ -157,8 +157,15 @@
 				dataType:"json",
 				data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
 				success:function(data){
-					console.log(data)
-					lineChartdraw(data);
+					pieChartJson = new Array();
+					$.each(data,function(index,item){
+						var pieChartObj = new Object();
+						pieChartObj.name=item.pehDate ;
+						pieChartObj.y=(item.pehPe);
+						pieChartJson.push(pieChartObj);
+					}) 	
+					
+					lineChartdraw(pieChartJson);
 				},
 				error:function(){
 					console.log("Exception : earningChart")
@@ -167,7 +174,7 @@
 		}
 		
 		
-		 
+		 /*파이차트 그리기*/
 		var pieChartdraw = function(historySelector,pieChartJson,chartTitle) {
 			$(historySelector).highcharts({
 				
@@ -207,7 +214,8 @@
 	  	  });
 		}
 		
-		var lineChartdraw = function(data){
+		 /*라인차트 그리기*/
+		var lineChartdraw = function(pieChartJson){
 			$('#history-line-chart').highcharts({
 	            chart: {
 	                zoomType: 'x'
@@ -260,7 +268,7 @@
 	            series: [{
 	                type: 'area',
 	                name: 'USD to EUR',
-	                data: data
+	                data: pieChartJson
 	            }]
 	        });
 		}

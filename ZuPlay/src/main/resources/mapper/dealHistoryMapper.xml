@@ -50,7 +50,7 @@
 		join
 		(select isucd, ISUKORABBRV, kind from master) m
 		on s.isucd=m.isucd)
-		where rnum>=#{startNum} and rnum&lt;#{lastNum}
+		where rnum>=#{startNum} and rnum&lt;=#{lastNum}
 	</select>
 
 	<select id="getEarningRateHistory" parameterType="String"

@@ -126,7 +126,7 @@
 						<div class="portfolio-box-caption">
 							<div class="portfolio-box-caption-content">
 								<div class="project-category text-faded">Leader</div>
-								<div class="project-name">Lee Suk-bum</div>
+								<div class="project-name">Lee Seok-bum</div>
 							</div>
 						</div>
 					</a>
@@ -176,7 +176,7 @@
 						<div class="portfolio-box-caption">
 							<div class="portfolio-box-caption-content">
 								<div class="project-category text-faded">UI Manager</div>
-								<div class="project-name">Park Hyo-seoung</div>
+								<div class="project-name">Park Hyo-seung</div>
 							</div>
 						</div>
 					</a>
@@ -212,7 +212,7 @@
 				<div class="col-lg-4 text-center">
 					<i class="fa fa-envelope-o fa-3x sr-contact"></i>
 					<p>
-						<a href="mailto:your-email@your-domain.com">Zuplay.naver.com</a>
+						<a href="mailto:your-email@your-domain.com">zuplay.naver.com</a>
 					</p>
 				</div>
 			</div>

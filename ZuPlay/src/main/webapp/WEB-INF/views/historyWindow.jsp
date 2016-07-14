@@ -170,7 +170,7 @@
 							}else{
 								etcMoney+=item.earningMoney;
 								if(index+1 == data.length) {
-									pieChartObj.name=etc;
+									pieChartObj.name="etc";
 									pieChartObj.y=etcMoney;
 									pieChartJson.push(pieChartObj);
 								}

@@ -90,6 +90,7 @@
 	 $("#company-${masterDTO.isuCd}").ready(function(){
 		 
 		 var chartData =  function(data){
+			 console.log("시작");
  				console.log(data)
                 ChartJson = new Array();
                 $.each(data,function(index,item){	

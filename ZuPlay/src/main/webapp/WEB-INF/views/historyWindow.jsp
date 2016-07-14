@@ -131,7 +131,7 @@
 				url:"getWorst",
 				type:"post",
 				dataType:"json",
-				data:"targetPlayer=김민수",
+				data:"targetPlayer=김민수", //해당유저에맞게 수정요망
 				success:function(data){
 					pieChartJson = new Array();
 					$.each(data,function(index,item){
@@ -148,16 +148,17 @@
 			})
 		}
 		
-		/*수익률차트*/
 		
+		/*수익률차트*/
 		var earningChart = function(){
 			$.ajax({
-				url:"",
+				url:"getEarningRateList",
 				type:"post",
 				dataType:"json",
-				data:"",
+				data:"targetPlayer=김민수", //해당유저에맞게 수정요망
 				success:function(data){
 					console.log(data)
+					lineChartdraw(data);
 				},
 				error:function(){
 					console.log("Exception : earningChart")
@@ -180,10 +181,10 @@
 		            text: chartTitle
 		        },
 		        tooltip: {
-		         /*    pointFormat: '{series.name}: <b>{this.y}원</b>'  */
-		        	formatter: function() {
-		                return 'The value for <b>' + this.name + '</b> is <b>' + this.y + '</b>, in series '+ this.series.name;
-		            }
+		             /* pointFormat: '{series.name}: <b>{this.y}원</b>' */
+		        	 formatter: function() {
+		                return 'The value for <b>' + this.series.name + '</b> is <b>' + this.y + '</b>';
+		            } 
 		        },
 		        plotOptions: {
 		            pie: {
@@ -199,16 +200,77 @@
 		            }
 		        },
 		        series: [{
-				            name: "profits",
+				            name: "profit",
 				            colorByPoint: true,
 				            data: pieChartJson
 	        	}] 
 	  	  });
 		}
-		historyStockListCount()
-		historyStockList()
+		
+		var lineChartdraw = function(data){
+			$('#history-line-chart').highcharts({
+	            chart: {
+	                zoomType: 'x'
+	            },
+	            title: {
+	                text: 'Today Earning Rate'
+	            },
+	            subtitle: {
+	           /*      text: document.ontouchstart === undefined ?
+	                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' */
+	            },
+	            xAxis: {
+	                type: 'datetime'
+	            },
+	            yAxis: {
+	                title: {
+	                    text: 'Earning Rate'
+	                }
+	            },
+	            legend: {
+	                enabled: false
+	            },
+	            plotOptions: {
+	                area: {
+	                    fillColor: {
+	                        linearGradient: {
+	                            x1: 0,
+	                            y1: 0,
+	                            x2: 0,
+	                            y2: 1
+	                        },
+	                        stops: [
+	                            [0, Highcharts.getOptions().colors[0]],
+	                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+	                        ]
+	                    },
+	                    marker: {
+	                        radius: 2
+	                    },
+	                    lineWidth: 1,
+	                    states: {
+	                        hover: {
+	                            lineWidth: 1
+	                        }
+	                    },
+	                    threshold: null
+	                }
+	            },
+
+	            series: [{
+	                type: 'area',
+	                name: 'USD to EUR',
+	                data: data
+	            }]
+	        });
+		}
+
+		earningChart();
 		historyWorst();
 		historyBest();
+		historyStockListCount()
+		historyStockList()
+		
 	}) 
 </script>
 
@@ -217,7 +279,9 @@
 	<div id="history-window">
 		<div id="history-header">Stock History</div>
 		<div id="history-content">
-			<div id="div1">chart</div>
+			<div id="div1">
+				<div id="history-line-chart"></div>
+			</div>
 			<div id="div2">
 				<ul class="nav nav-tabs">
 				  <li class="active"><a data-toggle="tab" href="#history-best-div">Best</a></li>

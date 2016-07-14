@@ -208,4 +208,18 @@ public class PlayerInfoController {
 			throw new Exception();
 		}
 	}
+	
+	@RequestMapping(value={"getStockDealHistory"}, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getStockDealHistory(HttpSession session, String targetPlayer, String orderBy, boolean asc, int page) throws Exception {
+		try {	
+			return new Gson().toJson(stockHistoryService.getStockDealHistory(targetPlayer, orderBy, asc, page));
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMsg", e.getMessage());
+			throw new Exception();
+		}
+	}
+	
+	
 }

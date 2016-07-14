@@ -427,54 +427,58 @@ $(function(){
         }
         
 
-           // 경매판매
-            var auctionSell = function(piSq,imPurchasePrice){
-               
-               $.ajax({
-                  url:"auctionSell",
-                  type:"post",
-                  data:"piSq="+piSq+"&imPurchasePrice="+imPurchasePrice,
-                  dataType:"",
-                  success:function(result){ 
-                     $(".inven-auction-modal").modal("hide");
-                     playerItemSelectAll();
-                     $("#inven-auction-imPurchasePrice").val("");
-                     search(1)
-                     $("#auction-selltab").trigger("click");
-                  }, 
-                  error:function(err){
-                     console.log("Exception : auctionSell");
-                  }
-               })
+     // 경매판매
+        var auctionSell = function(piSq,imPurchasePrice){
+           
+           $.ajax({
+              url:"auctionSell",
+              type:"post",
+              data:"piSq="+piSq+"&imPurchasePrice="+imPurchasePrice,
+              dataType:"",
+              success:function(result){ 
+                 if(result=="true"){
+                    $(".inven-auction-modal").modal("hide");
+                    playerItemSelectAll();
+                    $("#inven-auction-imPurchasePrice").val("");
+                    search(1)
+                    $("#auction-selltab").trigger("click");
+                 }else{
+                    alert("잘못 된 입력 값 입니다.");
+                 }
+              }, 
+              error:function(err){
+                 console.log("Exception : auctionSell");
+              }
+           })
+        }
+    
+       // 인덱스 값 파싱
+       function passingJson(){
+         var jsonArr = new Array();
+         
+         for(var i=1;i<=30;i++){
+            if(i>=7 && i<=10) {continue;}
+            var invenPlayerItem = $("#inven-player-"+i).children().data("item");
+   
+            if(typeof(invenPlayerItem)!="undefined"){
+              var jsonObj = new Object();
+               jsonObj.piSq=$("#inven-player-"+i).children().data("item").piSq;
+               jsonObj.piIndex=i;
+               jsonArr.push(jsonObj);
             }
-        
-           // 인덱스 값 파싱
-           function passingJson(){
-             var jsonArr = new Array();
-             
-             for(var i=1;i<=30;i++){
-                if(i>=7 && i<=10) {continue;}
-                var invenPlayerItem = $("#inven-player-"+i).children().data("item");
-       
-                if(typeof(invenPlayerItem)!="undefined"){
-                  var jsonObj = new Object();
-                   jsonObj.piSq=$("#inven-player-"+i).children().data("item").piSq;
-                   jsonObj.piIndex=i;
-                   jsonArr.push(jsonObj);
-                }
-             }
-             return jsonArr;
-             
-           }
-           $("#inven-Window").jqxWindow({
-                minWidth:600,
-                minHeight:420,
-                resizable:false,
-                showCollapseButton: true,
-                autoOpen:false,
-                theme : userInfo.theme
-              });
+         }
+         return jsonArr;
+         
        }
+       $("#inven-Window").jqxWindow({
+            minWidth:600,
+            minHeight:420,
+            resizable:false,
+            showCollapseButton: true,
+            autoOpen:false,
+            theme : userInfo.theme
+          });
+   }
       
       /* 주식 */
       var stockListInit = function(){
@@ -525,13 +529,13 @@ $(function(){
 
             /* 마지막 페이지 */
             function pagenation(pageNo){ 
-                 $('#page-selection').bootpag({
+                 $('#stock-content #page-selection').bootpag({
                      total: pageNo, maxVisible: 10
                  })
              }
             
             /* 페이지 클릭 */
-            $('#page-selection').on("page", function(event, num){
+            $('#stock-content #page-selection').on("page", function(event, num){
                
                if($("#stock-search-keyword").val()==""){
                   $("#stock-search-keyword").val("undefined");
@@ -577,7 +581,7 @@ $(function(){
             
             var stockListSearch = function(){
                if($("#stock-search").val()=="") return;
-                $("#page-selection ul li").eq(1).trigger("click");
+                $("#stock-content #page-selection ul li").eq(1).trigger("click");
                 $("#stock-search-keyword").val($("#stock-search").val());
                 stockPageSelect(1,$("#stock-search").val());
             }

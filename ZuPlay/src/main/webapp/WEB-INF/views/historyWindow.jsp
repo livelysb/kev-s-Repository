@@ -14,10 +14,22 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 
 <style type="text/css">
-#div1 {border:black 1px solid; height:300px; width:50%; float:left;}
-#div2 {border:red 1px solid; height:300px; width:50%; float:right;}
-#div3 {border:blue 1px solid; height:300px; width:100%; clear: both;}
-#page-align {text-align: center;}
+#div1 {border:black 1px solid; height:400px; width:50%; float:left;}
+#div2 {border:red 1px solid; height:400px; width:50%; float:right;}
+#div3 {border:blue 1px solid; height:400px; width:100%; clear: both;}
+#history-content #page-align {text-align: center;}
+
+#history-content .nav-tabs > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+#history-content .nav-tabs {
+    text-align:center;
+}
+
 	
 </style>
 
@@ -52,24 +64,45 @@
 		}
 		
 		/*히스토리 내역*/
-		var historyStockList = function(orderBy,asc,page){
+		var historyStockList = function(page,orderBy,asc){
 
 			$.ajax({
 				url:"getStockDealHistory", 
 				type:"post",
-				dataType:"text",
+				dataType:"json",
 				data:{"targetPlayer":"김민수","orderBy":orderBy,"asc":asc,"page":page},
 				success:function(data){
-					alert(1)
 					console.log(data);
+					var str="";
+					$.each(data,function(index,item){
+						if(item.sdhBuySell=="b"){
+							str+="<tr><td>구매</td>";
+						}else{
+							str+="<tr><td>판매</td>";
+						}
+						
+						str+="<td>"+item.masterDTO.isuKorAbbrv+"</td>";
+						str+="<td>"+item.masterDTO.kind+"</td>";
+						str+="<td>"+item.sdhDealTime+"</td>";
+						str+="<td>"+item.sdhQuantity+"</td>";
+						str+="<td>체결가</td>";
+						str+="<td>"+item.sdhDealPrice+"</td></tr>";
+					});
+					$("#history-stock-list").empty();
+					$("#history-stock-list").html(str);
 				},
 				error:function(err){
-					alert(2)
-					console.log(err);
 					console.log("Exception : historyStockList")
 				}
 			})
 		}
+		
+		/*페이지클릭 이벤트*/
+		$('#history-content #page-selection').on("page", function(event, num){
+			historyStockList(num);
+        });
+		
+		
 		/*Best 파이차트*/
 		var historyBest = function(){
 			$.ajax({
@@ -212,7 +245,7 @@
 							<th>거래가</th>
 						</tr>
 					</thead>
-					<tbody id="">
+					<tbody id="history-stock-list">
 
 					</tbody>
 				</table>

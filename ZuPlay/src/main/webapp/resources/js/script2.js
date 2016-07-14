@@ -529,13 +529,13 @@ $(function(){
 
             /* 마지막 페이지 */
             function pagenation(pageNo){ 
-                 $('#page-selection').bootpag({
+                 $('#stock-content #page-selection').bootpag({
                      total: pageNo, maxVisible: 10
                  })
              }
             
             /* 페이지 클릭 */
-            $('#page-selection').on("page", function(event, num){
+            $('#stock-content #page-selection').on("page", function(event, num){
                
                if($("#stock-search-keyword").val()==""){
                   $("#stock-search-keyword").val("undefined");
@@ -581,7 +581,7 @@ $(function(){
             
             var stockListSearch = function(){
                if($("#stock-search").val()=="") return;
-                $("#page-selection ul li").eq(1).trigger("click");
+                $("#stock-content #page-selection ul li").eq(1).trigger("click");
                 $("#stock-search-keyword").val($("#stock-search").val());
                 stockPageSelect(1,$("#stock-search").val());
             }

@@ -179,7 +179,6 @@ public class PlayerInfoController {
 	public String getEarningRateList(HttpSession session, String targetPlayer) throws Exception {
 		try {
 			String json = new Gson().toJson(stockHistoryService.getEarningRateList(targetPlayer));
-			System.out.println(json);
 			return json;
 		} catch (Exception e) {
 			e.printStackTrace();

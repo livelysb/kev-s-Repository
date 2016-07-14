@@ -169,6 +169,6 @@
               });
          }
 		 
-         chartData("${masterDTO.rtpList}");
+         chartData("${masterDTO.rtpList.RealTimePriceDTO }");
 	 });
 </script>

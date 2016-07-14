@@ -21,26 +21,18 @@
          <div class="company-chart">
 		<ul class="nav nav-tabs">
 		  <li class="active"><a data-toggle="tab" href="#company-chart-today">오늘</a></li>
-		  <li><a data-toggle="tab" href="#company-chart-week">1주</a></li>
 		  <li><a data-toggle="tab" href="#company-chart-month">한달</a></li>
 		</ul>
 		
 		<div class="tab-content">
 		  <div id="company-chart-today" class="tab-pane fade in active">
 		   <c:forEach items="${masterDTO.rtpList}" var="rtp" varStatus="stu">
-		   		${rtp.rpTrdTm} : ${rtp.rpTrdPrc}
+		   		${rtp.rpTrdTm2} : ${rtp.rpTrdPrc}
 		   </c:forEach>
 		</div>
-	  	
-		  <div id="company-chart-week" class="tab-pane fade">
-		   <c:forEach items="${masterDTO.dpList}" var="dp" varStatus="stu">
-		   		${dp.dpDate} : ${dp.dpClsprc}
-		   </c:forEach>
-		  </div>
-		  
 		  <div id="company-chart-month" class="tab-pane fade">
 		   <c:forEach items="${masterDTO.dpList}" var="dp" varStatus="stu">
-		   		${dp.dpDate} : ${dp.dpClsprc}
+		   		${dp.dpDate2} : ${dp.dpClsprc}
 		   </c:forEach>
 		  </div>
 		</div>

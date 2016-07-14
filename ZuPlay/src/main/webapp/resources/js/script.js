@@ -104,7 +104,9 @@ $(function(){
                    success:function(data){
                       stockPage++;
                       var tbd = $("#rta-tbody").empty();
+                      
                       $(data).each(function(index, item) {
+                    
                         if(index!=0){
                            $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"%</td><td>"+item.priceDTO.accTrdvol+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
                         }

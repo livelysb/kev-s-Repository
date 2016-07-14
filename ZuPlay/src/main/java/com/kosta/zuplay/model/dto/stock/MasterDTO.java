@@ -2,6 +2,7 @@ package com.kosta.zuplay.model.dto.stock;
 
 import java.util.List;
 
+
 public class MasterDTO {
 	private String krxBioSectidxYn; // KRX바이오섹터 지수여부
 	private String mktcapScaleCd; // 시가총액규모코드

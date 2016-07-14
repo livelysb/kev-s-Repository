@@ -19,7 +19,7 @@
    <link href="resources/css/jqwidgets/jqx.${theme}.css" rel="stylesheet" />
 </c:if>
 <link href="resources/css/jquery-ui/jquery-ui.css" rel="stylesheet" />
-<link href="resources/css/style.css" rel="stylesheet" />
+<link href="http://192.168.0.88:8000/zuplay/resources/css/style.css" rel="stylesheet" />
 </head>
 <body class='default' id="main">
 	<img src="resources/img/loading.gif" id="loading-content">

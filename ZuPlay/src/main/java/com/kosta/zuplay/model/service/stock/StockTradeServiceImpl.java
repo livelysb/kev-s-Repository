@@ -31,7 +31,7 @@ public class StockTradeServiceImpl implements StockTradeService {
 		// 0.315%
 		// ->
 		// 0.000315
-		if (plQuantity >= quantity) {
+		if (plQuantity >= quantity && quantity>=0) {
 			if (playerStockService.setPlayerStock(playerNickname, isuCd, plQuantity - quantity))// 수량 빼기
 				if (playerInfoService.setPlayerMoney(playerNickname, playerMoney + price))// 돈 추가하기 ( 수수료 계산 )
 					if (dealHistoryService.stockHistoryInsert(playerNickname, isuCd, quantity, price, "s"))
@@ -51,7 +51,7 @@ public class StockTradeServiceImpl implements StockTradeService {
 		PlayerListsDTO playerListsDTO = playerStockService.getPlayerStock(playerNickname, isuCd);// 현재보유량
 		if (playerListsDTO != null)
 			quantity = playerListsDTO.getPlQuantity();
-		if (playerMoney >= totalPrice)
+		if (playerMoney >= totalPrice  && plQuantity>=0)
 			if (playerInfoService.setPlayerMoney(playerNickname, playerMoney - (totalPrice))) // 돈빼기 (수수료 0.015% 포함 -> 0.00015)
 				if (playerStockService.setPlayerStock(playerNickname, isuCd, quantity + plQuantity)) // 주식수량
 					if (dealHistoryService.stockHistoryInsert(playerNickname, isuCd, plQuantity, totalPrice, "b")) // 늘려주기

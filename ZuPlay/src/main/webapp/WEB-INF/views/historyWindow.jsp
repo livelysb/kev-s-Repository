@@ -10,6 +10,7 @@
 <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/highcharts.js"></script>
+<script src="http://192.168.0.88:8000/zuplay/resources/js/set.js"></script>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 
 <style type="text/css">
@@ -230,7 +231,7 @@
 		               $.each(data,function(index,item){
 		                  var pieChartObj = new Object();
 		                  pieChartObj.x=item.pehDate2 ;
-		                  pieChartObj.y=(item.pehPe).toFixed(2);
+		                  pieChartObj.y=parseInt((item.pehPe).toFixed(2));
 		                  pieChartObj.name=item.pehDate2;
 		                  pieChartJson.push(pieChartObj);
 		               })    
@@ -261,7 +262,7 @@
 			        tooltip: {
 			             /* pointFormat: '{series.name}: <b>{this.y}원</b>' */
 			        	 formatter: function() {
-			                return this.series.name + ' : <b>₩' + this.y + '</b>';
+			                return this.series.name + ' : <b>₩' + this.y.format() + '</b>';
 			            } 
 			        },
 			        plotOptions: {

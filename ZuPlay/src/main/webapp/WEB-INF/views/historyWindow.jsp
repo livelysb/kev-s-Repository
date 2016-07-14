@@ -121,10 +121,10 @@
 			console.log(($(this).index()));
 			var thIndex=($(this).index());
 			switch ($(this).index()) {
-				case 0: orderFnc("sdhBuySell",thIndex); break;
+				case 0: orderFnc("SDH_BUY_SELL",thIndex); break;
 				case 1: orderFnc("isuKorAbbrv",thIndex); break;			
 				case 2:	orderFnc("kind",thIndex); break;
-				case 3:	orderFnc("sdhDealTime",thIndex); break;
+				case 3:	orderFnc("SDH_DEAL_TIME",thIndex); break;
 				default: return;
 			}
 		})

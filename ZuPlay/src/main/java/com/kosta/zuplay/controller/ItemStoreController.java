@@ -55,6 +55,7 @@ public class ItemStoreController {
 			e.printStackTrace();
 			throw new Exception();
 		} // 1=정상 / 2=인벤토리부족 / 3=루비부족
+		System.out.println(result);
 		return result;
 	}
 

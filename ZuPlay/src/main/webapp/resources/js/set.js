@@ -96,6 +96,10 @@ $('#menu-bar').dockmenu({
 		'class' : 'button-margin-right',
 		'imgURL' : 'resources/img/icons/medal.png'
 	}, {
+		'title' : '내 정보',
+		'id' : "myinfo-btn",
+		'imgURL' : 'resources/img/icons/id-card.png'
+	}, {
 		'title' : '설정',
 		'id' : "setting-btn",
 		'imgURL' : 'resources/img/icons/cogwheel.png'

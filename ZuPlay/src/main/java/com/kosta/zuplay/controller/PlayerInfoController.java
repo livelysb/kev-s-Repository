@@ -178,7 +178,9 @@ public class PlayerInfoController {
 	@ResponseBody
 	public String getEarningRateList(HttpSession session, String targetPlayer) throws Exception {
 		try {
-			return new Gson().toJson(stockHistoryService.getEarningRateList(targetPlayer));
+			String json = new Gson().toJson(stockHistoryService.getEarningRateList(targetPlayer));
+			System.out.println(json);
+			return json;
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMsg", e.getMessage());
@@ -214,7 +216,6 @@ public class PlayerInfoController {
 	@RequestMapping(value={"getHistoryCount"}, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getHistoryCount(HttpSession session, String targetPlayer) throws Exception {
-		System.out.println(1111111111);
 		try {	
 			return new Gson().toJson(dealHistoryService.getStockHistory(targetPlayer).size());
 		} catch (Exception e) {

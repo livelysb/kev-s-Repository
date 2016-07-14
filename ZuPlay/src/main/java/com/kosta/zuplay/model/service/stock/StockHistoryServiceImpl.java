@@ -3,6 +3,7 @@ package com.kosta.zuplay.model.service.stock;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +39,11 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 	public List<EarningRateHistoryDTO> getEarningRateList(String playerNickname) throws Exception {
 		DealHistoryDAO dealHistoryDAO = sqlSession.getMapper(DealHistoryDAO.class);
 		List<EarningRateHistoryDTO> list = dealHistoryDAO.getEarningRateHistory(playerNickname);
-		for(EarningRateHistoryDTO erh:list) {
+		for (EarningRateHistoryDTO erh : list) {
 			erh.setPehDate(erh.getPehDate().split(" ")[0]);
+			erh.setPehDate2(new Date(Integer.parseInt(erh.getPehDate().split("-")[0]) - 1900,
+					Integer.parseInt(erh.getPehDate().split("-")[1]) - 1,
+					Integer.parseInt(erh.getPehDate().split("-")[2]) + 1).getTime());
 		}
 		return list;
 	}
@@ -77,24 +81,29 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 			throws Exception {
 		DealHistoryDAO dealHistoryDAO = sqlSession.getMapper(DealHistoryDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
+
 		System.out.println("playerNickname : " + playerNickname);
 		System.out.println("orderBy : " + orderBy);
 		System.out.println("asc : " + asc);
 		System.out.println("page : " + page);
 		map.put("playerNickname", playerNickname);
 		map.put("orderBy", orderBy);
-		map.put("asc", String.valueOf(asc));
+		if (asc == true)
+			map.put("asc", "asc");
+		else
+			map.put("asc", "desc");
 		map.put("startNum", 1 + ((page - 1) * 10) + "");
 		map.put("lastNum", page * 10 + "");
 		List<StockDealHistoryDTO> list = dealHistoryDAO.getStockHistoryOp(map);
 		double feePercent = 0;
-		for(StockDealHistoryDTO history : list) {
-			if(history.getSdhBuySell().equals("b"))
+		for (StockDealHistoryDTO history : list) {
+			if (history.getSdhBuySell().equals("b"))
 				feePercent = 0.015;
 			else
 				feePercent = -0.315;
 			history.getMasterDTO().setPriceDTO(new PriceDTO());
-			history.getMasterDTO().getPriceDTO().setTrdPrc((int)(history.getSdhDealPrice() / (history.getSdhQuantity() * (1 + feePercent))));
+			history.getMasterDTO().getPriceDTO()
+					.setTrdPrc((int) (history.getSdhDealPrice() / (history.getSdhQuantity() * (1 + feePercent))));
 		}
 		return list;
 	}

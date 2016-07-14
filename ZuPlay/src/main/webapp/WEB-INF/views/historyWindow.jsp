@@ -10,7 +10,6 @@
 <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
 <script type="text/javascript" src="resources/js/highcharts.js"></script>
-<script src="http://192.168.0.88:8000/zuplay/resources/js/set.js"></script>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 
 <style type="text/css">
@@ -48,6 +47,19 @@
 
 <script type="text/javascript">
 	$(function(){
+		
+		Number.prototype.format = function(){
+		    if(this==0) return 0;
+		 
+		    var reg = /(^[+-]?\d+)(\d{3})/;
+		    var n = (this + '');
+		 
+		    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+		 
+		    return n;
+		};
+		 
+		
 		var historyInit = function(){		
 			/*히스토리 페이지네이션*/
 			var historyPage = function(page){
@@ -231,7 +243,7 @@
 		               $.each(data,function(index,item){
 		                  var pieChartObj = new Object();
 		                  pieChartObj.x=item.pehDate2 ;
-		                  pieChartObj.y=parsefloat((item.pehPe).toFixed(2));
+		                  pieChartObj.y=parseFloat((item.pehPe).toFixed(2));
 		                  pieChartObj.name=item.pehDate2;
 		                  pieChartJson.push(pieChartObj);
 		               })    

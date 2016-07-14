@@ -31,5 +31,7 @@
 	<select id="getPrice" parameterType="String" resultType="int">
 		select item_price from item where item_code=#{itemCode}
 	</select>
-	
+	<select id="itemInfo" parameterType="String" resultMap="itemMapper">
+		select * from item where item_code=#{value}
+	</select>
 </mapper>

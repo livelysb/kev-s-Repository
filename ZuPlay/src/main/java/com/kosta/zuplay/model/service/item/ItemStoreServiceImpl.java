@@ -53,7 +53,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 	}
 
 	/**
-	 * 아이템 구매 리턴: 1=정상 / 2=인벤토리 풀 / 3=루비부족
+	 * 아이템 구매 리턴: 1=정상 / 2=인벤토리 풀 / 3=루비부족 / 4=구매할 수 없는 품목
 	 */
 	@Override
 	@Transactional
@@ -71,6 +71,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 				payRubyMap.put("playerNickname", playerNickname);
 				payRubyMap.put("updateRuby", ruby - price + "");
 				playerInfoDAO.updateRuby(payRubyMap);
+				itemDTO=itemStoreDAO.itemInfo(itemDTO.getItemCode());
 				if (itemDTO.getItemClass().equals("randomBox")) {
 					int ranNum = (int) (Math.random() * 10 + 1);
 					Map<String, String> randomBoxMap = new HashMap<>();
@@ -102,9 +103,13 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 					itemBuyMap.put("itemCode", randomList.get(randomNum).getItemCode());
 					itemBuyMap.put("piIndex", piIndex + "");
 				} else {
-					itemBuyMap.put("playerNickname", playerNickname);
-					itemBuyMap.put("itemCode", itemDTO.getItemCode());
-					itemBuyMap.put("piIndex", piIndex + "");
+					if (itemDTO.getItemGrade().equals("common")) {
+						itemBuyMap.put("playerNickname", playerNickname);
+						itemBuyMap.put("itemCode", itemDTO.getItemCode());
+						itemBuyMap.put("piIndex", piIndex + "");
+					}else{
+						return 4;
+					}
 				}
 				playerItemDAO.itemStoreBuy(itemBuyMap);
 			} else {

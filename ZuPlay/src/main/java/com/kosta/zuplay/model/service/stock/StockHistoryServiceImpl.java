@@ -42,17 +42,8 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 	@Override
 	public List<MasterDTO> getBest3(String playerNickname) throws Exception {
 		List<MasterDTO> masterList = getEarningList(playerNickname);
-		System.out.println("마스터 사이즈 : " + masterList.size());
 		Collections.sort(masterList, new EarningCompareAsc());
-		
-		for(MasterDTO master : masterList){
-			System.out.println(master.getIsuKorAbbrv());
-			System.out.println(master.getEarningRate());
-			System.out.println(master.getEarningMoney());
-			System.out.println();
-		}
 		List<MasterDTO> best = new ArrayList<MasterDTO>();
-		
 		for(MasterDTO master : masterList) {
 			if(master.getEarningRate()>=0)
 				best.add(master);
@@ -66,15 +57,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 	public List<MasterDTO> getWorst3(String playerNickname) throws Exception {
 		List<MasterDTO> masterList = getEarningList(playerNickname);
 		Collections.sort(masterList, new EarningCompareDesc());
-		
-		for(MasterDTO master : masterList){
-			System.out.println(master.getIsuKorAbbrv());
-			System.out.println(master.getEarningRate());
-			System.out.println(master.getEarningMoney());
-			System.out.println();
-		}
 		List<MasterDTO> worst = new ArrayList<MasterDTO>();
-		
 		for(MasterDTO master : masterList) {
 			if(master.getEarningRate()<=0)
 				worst.add(master);

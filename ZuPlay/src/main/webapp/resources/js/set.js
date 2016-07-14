@@ -52,7 +52,7 @@ $('#menu-bar').dockmenu({
 	buttons : [ {
 		'title' : '실시간 주가 정보',
 		'id' : "rta-btn",
-		'imgURL' : 'resources/img/icons/statistics.png'
+		'imgURL' : 'resources/img/icons/diagram.png'
 	}, {
 		'title' : '주가 보기',
 		'id' : "stockList-btn",

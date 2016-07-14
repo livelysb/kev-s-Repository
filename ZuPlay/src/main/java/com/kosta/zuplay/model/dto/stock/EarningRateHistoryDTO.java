@@ -5,6 +5,7 @@ public class EarningRateHistoryDTO {
 	private String playerNickname;	//닉네임
 	private double pehPe;				//수익률
 	private String pehDate;			//일자
+	private long pehDate2;
 	
 	public EarningRateHistoryDTO() {}
 
@@ -46,6 +47,15 @@ public class EarningRateHistoryDTO {
 
 	public void setPehDate(String pehDate) {
 		this.pehDate = pehDate;
+	}
+	
+
+	public long getPehDate2() {
+		return pehDate2;
+	}
+
+	public void setPehDate2(long pehDate2) {
+		this.pehDate2 = pehDate2;
 	}
 
 	@Override

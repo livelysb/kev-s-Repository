@@ -1,5 +1,6 @@
 package com.kosta.zuplay.model.service.stock;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,9 +12,11 @@ import org.springframework.stereotype.Service;
 import com.kosta.zuplay.model.dao.stock.PlayerStockDAO;
 import com.kosta.zuplay.model.dao.stock.StockInfoDAO;
 import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
+import com.kosta.zuplay.model.dto.stock.DailyPriceDTO;
 import com.kosta.zuplay.model.dto.stock.ListsDTO;
 import com.kosta.zuplay.model.dto.stock.MasterDTO;
 import com.kosta.zuplay.model.dto.stock.PriceDTO;
+import com.kosta.zuplay.model.dto.stock.RealTimePriceDTO;
 
 @Service
 public class StockInfoServiceImpl implements StockInfoService {
@@ -78,6 +81,13 @@ public class StockInfoServiceImpl implements StockInfoService {
 		MasterDTO masterDTO = stockInfoDAO.getStock(isuCd);
 		masterDTO.setDpList(stockInfoDAO.getDPList(isuCd));
 		masterDTO.setRtpList(stockInfoDAO.getRTPList(isuCd));
+		for(RealTimePriceDTO rtp : masterDTO.getRtpList()) {
+			rtp.setRpTrdTm2(new Date(new Date().getYear(), new Date().getMonth(), new Date().getDate(), Integer.parseInt(rtp.getRpTrdTm().split(":")[0]), Integer.parseInt(rtp.getRpTrdTm().split(":")[1]), Integer.parseInt(rtp.getRpTrdTm().split(":")[2])).getTime());
+		}
+		for(DailyPriceDTO dp : masterDTO.getDpList()) {
+			String s[] = dp.getDpDate().split(" ");
+			dp.setDpDate2(new Date(Integer.parseInt(s[0].split("-")[0])-1900, Integer.parseInt(s[0].split("-")[1])-1, Integer.parseInt(s[0].split("-")[2])+1, Integer.parseInt(s[1].split(":")[0]), Integer.parseInt(s[1].split(":")[1]), Integer.parseInt(s[1].split(":")[2])).getTime());
+		}
 
 		// 좋아하는 기업인지
 		PlayerStockDAO playerStockDAO = sqlSession.getMapper(PlayerStockDAO.class);
@@ -100,7 +110,6 @@ public class StockInfoServiceImpl implements StockInfoService {
 			masterDTO.setPlQuantity(0);
 		else
 			masterDTO.setPlQuantity(playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity());
-
 		return masterDTO;
 
 	}

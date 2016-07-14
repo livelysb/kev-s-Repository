@@ -1114,3 +1114,33 @@ div.vertical-line {
 #ranking-content .ranking-playernickname:hover {
 	cursor: pointer;
 }
+
+/*히스토리*/
+#history-left {height:400px; width:50%; float:left;}
+#history-right {height:400px; width:50%; float:right;}
+#history-foot {height:400px; width:100%; clear: both;}
+#history-content #page-align {text-align: center;}
+#history-foot thead th:nth-last-child(n+4):hover{
+   cursor:pointer;
+}
+#history-content .nav-tabs > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+#history-content .nav-tabs {
+    text-align:center;
+}
+
+#history-foot thead tr th:nth-child(1){
+   width:8%;
+}
+
+#history-foot thead tr th:nth-child(2){
+   width:20%;
+}
+#history-foot thead tr th:nth-child(3){
+   width:15%;
+}

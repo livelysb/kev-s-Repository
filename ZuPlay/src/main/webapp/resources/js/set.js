@@ -118,7 +118,7 @@ $('#menu-bar').dockmenu({
 		'imgURL' : 'resources/img/icons/medal.png'
 	},{
 		'title' : '분석',
-		'id' : "myinfo-btn",
+		'id' : "history-btn",
 		'imgURL' : 'resources/img/icons/contract.png'
 	},{
 		'title' : '내 정보',

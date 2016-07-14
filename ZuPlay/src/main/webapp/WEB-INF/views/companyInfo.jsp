@@ -86,7 +86,7 @@
       </c:if>
     </div>
   </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	 $("#company-${masterDTO.isuCd}").ready(function(){
 		 
 		 var chartData =  function(data){
@@ -172,4 +172,4 @@
 		 alert("${masterDTO.rtpList.rpTrdPrc}")
          chartData("${masterDTO.rtpList.rpTrdPrc}");
 	 });
-</script>
+</script> -->

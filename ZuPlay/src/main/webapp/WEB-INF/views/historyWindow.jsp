@@ -33,8 +33,7 @@
 				url:"getWorst",
 				type:"post",
 				dataType:"json",
-				data:"targetPlayer=이석범짱"
-				,
+				data:"targetPlayer=김민수",
 				success:function(data){
 					console.log(data);
 					pieChartJson = new Array();

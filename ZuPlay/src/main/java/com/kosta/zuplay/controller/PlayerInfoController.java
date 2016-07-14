@@ -174,6 +174,18 @@ public class PlayerInfoController {
 
 	}
 	
+	@RequestMapping(value={"getEarningRateList"}, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getEarningRateList(HttpSession session, String targetPlayer) throws Exception {
+		try {
+			return new Gson().toJson(stockHistoryService.getEarningRateList(targetPlayer));
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMsg", e.getMessage());
+			throw new Exception();
+		}
+	}
+	
 	@RequestMapping(value={"getBest"}, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getBest(HttpSession session, String targetPlayer) throws Exception {
@@ -185,6 +197,7 @@ public class PlayerInfoController {
 			throw new Exception();
 		}
 	}
+	
 	
 	@RequestMapping(value={"getWorst"}, produces = "application/json;charset=UTF-8")
 	@ResponseBody

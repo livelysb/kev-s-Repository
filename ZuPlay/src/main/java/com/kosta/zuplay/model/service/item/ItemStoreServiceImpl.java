@@ -30,11 +30,11 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		LoginDAO loginDAO = sqlSession.getMapper(LoginDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
-		String gender=null;
-		if(loginDAO.getGender(playerNickname).equals("M")){
-			gender="F";
-		}else{
-			gender="M";
+		String gender = null;
+		if (loginDAO.getGender(playerNickname).equals("M")) {
+			gender = "F";
+		} else {
+			gender = "M";
 		}
 		map.put("playerGender", gender);
 		map.put("itemClass", itemClass);
@@ -42,13 +42,13 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		map.put("endNo", page * 8 + "");
 		System.out.println(map);
 		List<ItemDTO> list = new ArrayList<ItemDTO>();
-			if(itemClass.equals("all")){
-				list.clear();
-				list=itemStoreDAO.itemStoreSelectAll(map);
-			}else{
-				list=itemStoreDAO.itemStoreSelect(map);
-			}
-		System.out.println("[ LOG ] list = " + list+" / list.size() = "+list.size());
+		if (itemClass.equals("all")) {
+			list.clear();
+			list = itemStoreDAO.itemStoreSelectAll(map);
+		} else {
+			list = itemStoreDAO.itemStoreSelect(map);
+		}
+		System.out.println("[ LOG ] list = " + list + " / list.size() = " + list.size());
 		return list;
 	}
 
@@ -64,31 +64,53 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		Map<String, String> payRubyMap = new HashMap<String, String>();
 		Map<String, String> itemBuyMap = new HashMap<String, String>();
 		int ruby = playerInfoDAO.getRuby(playerNickname);
-		System.out.println("[ LOG ] : " + playerNickname + " 님의 루비 = " + ruby);
 		int price = itemStoreDAO.getPrice(itemDTO.getItemCode());
-		System.out.println("[ LOG ] : " + itemDTO.getItemCode() + " 아이템의 가격 = " + price);
 		if (ruby >= price) {
 			int piIndex = utilServiceImpl.indexSearch(playerNickname);
-			System.out.println("[ LOG ] : " + playerNickname + " 님의 인벤토리 빈 인덱스 = " + piIndex);
 			if (piIndex != 0) {
 				payRubyMap.put("playerNickname", playerNickname);
-				payRubyMap.put("updateRuby", ruby-price + "");
-				System.out.println();
-				int payRubyResult = playerInfoDAO.updateRuby(payRubyMap);
-				System.out.println(payRubyResult + " 개 행 수정(1개 = 정상실행)");
-				itemBuyMap.put("playerNickname", playerNickname);
-				itemBuyMap.put("itemCode", itemDTO.getItemCode());
-				itemBuyMap.put("piIndex", piIndex + "");
-				int itembuyResult = playerItemDAO.itemStoreBuy(itemBuyMap);
-				System.out.println(itembuyResult + " 개 행 수정(1개 = 정상실행)");
+				payRubyMap.put("updateRuby", ruby - price + "");
+				playerInfoDAO.updateRuby(payRubyMap);
+				if (itemDTO.getItemClass().equals("randomBox")) {
+					int ranNum = (int) (Math.random() * 10 + 1);
+					Map<String, String> randomBoxMap = new HashMap<>();
+					String gender = playerInfoDAO.getPlayer(playerNickname).getPlayerGender();
+					if (gender.equals("M")) {
+						randomBoxMap.put("playerGender", "F");
+						if (ranNum <= 1) {
+							randomBoxMap.put("randomResult", "uniq");
+						} else if (ranNum <= 4) {
+							randomBoxMap.put("randomResult", "rare");
+						} else {
+							randomBoxMap.put("randomResult", "common");
+						}
+					} else {
+						randomBoxMap.put("playerGender", "M");
+						if (ranNum <= 1) {
+							randomBoxMap.put("randomResult", "uniq");
+						} else if (ranNum <= 4) {
+							randomBoxMap.put("randomResult", "rare");
+						} else {
+							randomBoxMap.put("randomResult", "common");
+						}
+					}
+					List<ItemDTO> randomList = itemStoreDAO.itemStoreRandomBoxList(randomBoxMap);
+					int randomSize = randomList.size();
+					int randomNum = (int) (Math.random() * (randomSize - 1) + 1);
+
+					itemBuyMap.put("playerNickname", playerNickname);
+					itemBuyMap.put("itemCode", randomList.get(randomNum).getItemCode());
+					itemBuyMap.put("piIndex", piIndex + "");
+				} else {
+					itemBuyMap.put("playerNickname", playerNickname);
+					itemBuyMap.put("itemCode", itemDTO.getItemCode());
+					itemBuyMap.put("piIndex", piIndex + "");
+				}
+				playerItemDAO.itemStoreBuy(itemBuyMap);
 			} else {
-				System.out.println("[ LOG ] : 인벤토리 가득 참");
-				// 인벤토리 가득참
 				return 2;
 			}
 		} else {
-			System.out.println("[ LOG ] : 루비부족");
-			// 루비부족
 			return 3;
 		}
 		return 1;
@@ -101,10 +123,10 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		Map<String, String> map = new HashMap<String, String>();
-		int ruby=playerInfoDAO.getRuby(playerNickname);
+		int ruby = playerInfoDAO.getRuby(playerNickname);
 		int price = itemStoreDAO.getPrice(itemCode);
 		map.put("playerNickname", playerNickname);
-		map.put("updateRuby", ruby-price + "");
+		map.put("updateRuby", ruby - price + "");
 		playerInfoDAO.updateRuby(map);
 		int result = playerItemDAO.itemDelete(piSq);
 		if (result == 0) {

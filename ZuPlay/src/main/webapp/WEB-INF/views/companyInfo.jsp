@@ -168,7 +168,7 @@
                   }]
               });
          }
-		 
-         chartData("${masterDTO.rtpList.rpTrdPrc }");
+		 alert("${masterDTO.rtpList.rpTrdPrc}")
+         chartData("${masterDTO.rtpList.rpTrdPrc}");
 	 });
 </script>

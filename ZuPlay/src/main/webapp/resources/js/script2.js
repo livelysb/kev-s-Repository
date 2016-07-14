@@ -120,7 +120,7 @@ $(function(){
          };
         
         // 실시간 마우스 호버 이벤트
-        var rtaRefresh=setInterval(getRealTimeStock, 3000);
+        var rtaRefresh=setInterval(getRealTimeStock, 5000);
         var isHover = false;
         
        $("#rta-content").hover(
@@ -427,58 +427,58 @@ $(function(){
         }
         
 
-           // 경매판매
-            var auctionSell = function(piSq,imPurchasePrice){
-               
-               $.ajax({
-                  url:"auctionSell",
-                  type:"post",
-                  data:"piSq="+piSq+"&imPurchasePrice="+imPurchasePrice,
-                  dataType:"",
-                  success:function(result){ 
-                	  if(result=="true"){
-	                     $(".inven-auction-modal").modal("hide");
-	                     playerItemSelectAll();
-	                     $("#inven-auction-imPurchasePrice").val("");
-	                     search(1)
-	                     $("#auction-selltab").trigger("click");
-                	  }else{
-                		  alert("잘못 된 입력 값 입니다.");
-                	  }
-                  }, 
-                  error:function(err){
-                     console.log("Exception : auctionSell");
-                  }
-               })
+     // 경매판매
+        var auctionSell = function(piSq,imPurchasePrice){
+           
+           $.ajax({
+              url:"auctionSell",
+              type:"post",
+              data:"piSq="+piSq+"&imPurchasePrice="+imPurchasePrice,
+              dataType:"",
+              success:function(result){ 
+                 if(result=="true"){
+                    $(".inven-auction-modal").modal("hide");
+                    playerItemSelectAll();
+                    $("#inven-auction-imPurchasePrice").val("");
+                    search(1)
+                    $("#auction-selltab").trigger("click");
+                 }else{
+                    alert("잘못 된 입력 값 입니다.");
+                 }
+              }, 
+              error:function(err){
+                 console.log("Exception : auctionSell");
+              }
+           })
+        }
+    
+       // 인덱스 값 파싱
+       function passingJson(){
+         var jsonArr = new Array();
+         
+         for(var i=1;i<=30;i++){
+            if(i>=7 && i<=10) {continue;}
+            var invenPlayerItem = $("#inven-player-"+i).children().data("item");
+   
+            if(typeof(invenPlayerItem)!="undefined"){
+              var jsonObj = new Object();
+               jsonObj.piSq=$("#inven-player-"+i).children().data("item").piSq;
+               jsonObj.piIndex=i;
+               jsonArr.push(jsonObj);
             }
-        
-           // 인덱스 값 파싱
-           function passingJson(){
-             var jsonArr = new Array();
-             
-             for(var i=1;i<=30;i++){
-                if(i>=7 && i<=10) {continue;}
-                var invenPlayerItem = $("#inven-player-"+i).children().data("item");
-       
-                if(typeof(invenPlayerItem)!="undefined"){
-                  var jsonObj = new Object();
-                   jsonObj.piSq=$("#inven-player-"+i).children().data("item").piSq;
-                   jsonObj.piIndex=i;
-                   jsonArr.push(jsonObj);
-                }
-             }
-             return jsonArr;
-             
-           }
-           $("#inven-Window").jqxWindow({
-                minWidth:600,
-                minHeight:420,
-                resizable:false,
-                showCollapseButton: true,
-                autoOpen:false,
-                theme : userInfo.theme
-              });
+         }
+         return jsonArr;
+         
        }
+       $("#inven-Window").jqxWindow({
+            minWidth:600,
+            minHeight:420,
+            resizable:false,
+            showCollapseButton: true,
+            autoOpen:false,
+            theme : userInfo.theme
+          });
+   }
       
       /* 주식 */
       var stockListInit = function(){
@@ -804,12 +804,6 @@ $(function(){
             });
          
          
-         /* TEST */
-         $("#friend-request-btn").on("click",function(){
-        	 $("#noti-msg").text("효승 바보");
-        	   $("#friend-request-noti").jqxNotification("open");
-         })
-         
          /* 친구삭제 버튼 클릭 시 */
          $("#friend-del").on("click",function(){
         	 if(friendDelBtn==0){
@@ -973,7 +967,7 @@ $(function(){
        })
        
        /* 가나다인척하기 */
-       // financialSearch("가")
+       financialSearch("가")
       }
       
       /* 경매장 */
@@ -1220,7 +1214,7 @@ $(function(){
                 data:{targetPlayer:nickName},
                 dataType:"html",
                 success:function(data){
-                 $(".main-area").append(data);
+                 $("#main").append(data);
                    $("#userinfo-player-"+nickName).jqxWindow({
                         width:"450",
                         height:"400",
@@ -1787,6 +1781,7 @@ $(function(){
              var target;
              var roomNo;
              var str = "";
+            
              var n = $(document).height();
              if(evt.data.sender == userInfo.nickName){
                 target = $("#chat-no-"+evt.data.receiver);
@@ -2018,7 +2013,8 @@ $(function(){
            ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
            
       });
-      $(".main-container").css("visibility","visible");
+      
+      $("#loader").css("visibility","visible");
       $("#loading-content").remove();
    };
    updatePI(initContent);

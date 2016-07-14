@@ -45,9 +45,9 @@ public class ItemStoreController {
 	 */
 	@RequestMapping(value = "itemStoreBuy", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public int itemStoreBuy(HttpSession session, ItemDTO itemDTO, int quantity) throws Exception {
+	public String itemStoreBuy(HttpSession session, ItemDTO itemDTO, int quantity) throws Exception {
 		String playerNickname = (String) session.getAttribute("playerNickname");
-		int result;
+		String result;
 		try {
 			result = itemStoreServiceImpl.itemStoreBuy(playerNickname, itemDTO, quantity);
 		} catch (Exception e) {

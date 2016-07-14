@@ -968,7 +968,7 @@ $(function(){
        })
        
        /* 가나다인척하기 */
-       financialSearch("가")
+       //financialSearch("가")
       }
       
       /* 경매장 */

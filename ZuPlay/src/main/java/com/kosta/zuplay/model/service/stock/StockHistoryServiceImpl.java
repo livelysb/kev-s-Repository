@@ -92,8 +92,8 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 			map.put("asc", "asc");
 		else
 			map.put("asc", "desc");
-		map.put("startNum", 1 + ((page - 1) * 10) + "");
-		map.put("lastNum", page * 10 + "");
+		map.put("startNum", 1 + ((page - 1) * 5) + "");
+		map.put("lastNum", page * 5 + "");
 		List<StockDealHistoryDTO> list = dealHistoryDAO.getStockHistoryOp(map);
 		double feePercent = 0;
 		for (StockDealHistoryDTO history : list) {

@@ -40,7 +40,6 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		map.put("itemClass", itemClass);
 		map.put("startNo", 1 + ((page - 1) * 8) + "");
 		map.put("endNo", page * 8 + "");
-		System.out.println(map);
 		List<ItemDTO> list = new ArrayList<ItemDTO>();
 		if (itemClass.equals("all")) {
 			list.clear();

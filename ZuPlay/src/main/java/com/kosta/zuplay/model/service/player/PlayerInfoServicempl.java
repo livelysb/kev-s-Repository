@@ -153,7 +153,6 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 				list.remove(i);
 			}
 		}
-		System.out.println(list);
 		return list;
 	}
 

@@ -24,8 +24,6 @@ public class ItemStoreController {
 	@RequestMapping(value = "itemStoreSelect", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String itemStoreSelect(HttpSession session, String itemClass, int page) throws Exception {
-		System.out.println(itemClass);
-		System.out.println(page);
 		String playerNickname = (String) session.getAttribute("playerNickname");
 		List<ItemDTO> list;
 		try {
@@ -55,7 +53,6 @@ public class ItemStoreController {
 			e.printStackTrace();
 			throw new Exception();
 		} // 1=정상 / 2=인벤토리부족 / 3=루비부족
-		System.out.println(result);
 		return result;
 	}
 

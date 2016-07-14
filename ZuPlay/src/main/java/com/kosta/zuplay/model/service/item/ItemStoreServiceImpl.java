@@ -53,11 +53,11 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 	}
 
 	/**
-	 * 아이템 구매 리턴: 1=정상 / 2=인벤토리 풀 / 3=루비부족 / 4=구매할 수 없는 품목
+	 * 아이템 구매 리턴: 1=정상 / 2=인벤토리 풀 / 3=루비부족 / 4=구매할 수 없는 품목 / 기타: 아이템명
 	 */
 	@Override
 	@Transactional
-	public int itemStoreBuy(String playerNickname, ItemDTO itemDTO, int quantity) throws Exception {
+	public String itemStoreBuy(String playerNickname, ItemDTO itemDTO, int quantity) throws Exception {
 		ItemStoreDAO itemStoreDAO = sqlSession.getMapper(ItemStoreDAO.class);
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
@@ -102,23 +102,26 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 					itemBuyMap.put("playerNickname", playerNickname);
 					itemBuyMap.put("itemCode", randomList.get(randomNum).getItemCode());
 					itemBuyMap.put("piIndex", piIndex + "");
+					playerItemDAO.itemStoreBuy(itemBuyMap);
+					return "[ "+randomList.get(randomNum).getItemName()+" ]";
 				} else {
 					if (itemDTO.getItemGrade().equals("common")) {
 						itemBuyMap.put("playerNickname", playerNickname);
 						itemBuyMap.put("itemCode", itemDTO.getItemCode());
 						itemBuyMap.put("piIndex", piIndex + "");
+						playerItemDAO.itemStoreBuy(itemBuyMap);
+
 					}else{
-						return 4;
+						return "4";
 					}
 				}
-				playerItemDAO.itemStoreBuy(itemBuyMap);
 			} else {
-				return 2;
+				return "2";
 			}
 		} else {
-			return 3;
+			return "3";
 		}
-		return 1;
+		return "1";
 	}
 
 	@Override

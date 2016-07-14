@@ -88,7 +88,7 @@
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script type="text/javascript" src="resources/js/highcharts.js"></script>
 <script type="text/javascript" src="resources/js/dockmenu.min.js"></script>
-<script src="192.168.0.88:8000/zuplay/resources/js/set.js"></script>
+<script src="http://192.168.0.88:8000/zuplay/resources/js/set.js"></script>
 <script type="text/javascript">
     userInfo.theme = "${theme}"; 
     
@@ -96,5 +96,5 @@
     	$("#rta-btn li").append("<div>");
     })
 </script>
-<script src="192.168.0.88:8000/zuplay/resources/js/script.js"></script>
+<script src="http://192.168.0.88:8000/zuplay/resources/js/script.js"></script>
 </html>

@@ -105,13 +105,16 @@
 							}else{
 								str+="<tr><td>매도</td>";
 							}
-							
+							var trdPrc=(item.masterDTO.priceDTO.trdPrc).format;
+							var sdhDealPrice=(item.sdhDealPrice).format;
+							console.log(trdPrc);
+							console.log(sdhDealPrice);
 							str+="<td>"+item.masterDTO.isuKorAbbrv+"</td>";
 							str+="<td>"+item.masterDTO.kind+"</td>";
 							str+="<td>"+item.sdhDealTime+"</td>";
 							str+="<td>"+item.sdhQuantity+"</td>";
-							str+="<td>"+((item.masterDTO.priceDTO.trdPrc).format)+"</td>";
-							str+="<td>"+((item.sdhDealPrice).format)+"</td></tr>";
+							str+="<td>"+trdPrc+"</td>";
+							str+="<td>"+sdhDealPrice+"</td></tr>";
 						});
 						$("#history-stock-list").empty();
 						$("#history-stock-list").html(str);

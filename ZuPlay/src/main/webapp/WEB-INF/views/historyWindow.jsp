@@ -14,47 +14,128 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 
 <style type="text/css">
-#div1 {border:black 1px solid; height:220px; width:50%; float:left;}
-#div2 {border:red 1px solid; height:220px; width:50%; float:right;}
-#div3 {border:blue 1px solid; height:220px; width:100%; clear: both;}
+#div1 {border:black 1px solid; height:300px; width:50%; float:left;}
+#div2 {border:red 1px solid; height:300px; width:50%; float:right;}
+#div3 {border:blue 1px solid; height:300px; width:100%; clear: both;}
 #page-align {text-align: center;}
 	
 </style>
 
 <script type="text/javascript">
 	$(function(){
-		$("#history-content #page-selection").bootpag({
-            total: 10, maxVisible: 10
-        });
 		
-		var history = function(){
-			console.log(userInfo.nickName);
+		/*히스토리 페이지네이션*/
+		var historyPage = function(page){
+			$("#history-content #page-selection").bootpag({
+	            total: page, maxVisible: 10
+	        });
+		}
+		
+		/*히스토리 총페이지*/
+		var historyStockListCount = function(page){
+			$.ajax({
+				url:"getHistoryCount",
+				type:"post",
+				dataType:"json",
+				data:"targetPlayer=김민수",
+				success:function(page){
+					if(page%10==0){
+						historyPage(page/10)
+					}else{
+						historyPage(page/10+1)	
+					}
+				},
+				error:function(err){
+					console.log("Exception : historyStockList")
+				}
+			})
+		}
+		
+		/*히스토리 내역*/
+		var historyStockList = function(orderBy,asc,page){
+
+			$.ajax({
+				url:"getStockDealHistory", 
+				type:"post",
+				dataType:"text",
+				data:{"targetPlayer":"김민수","orderBy":orderBy,"asc":asc,"page":page},
+				success:function(data){
+					alert(1)
+					console.log(data);
+				},
+				error:function(err){
+					alert(2)
+					console.log(err);
+					console.log("Exception : historyStockList")
+				}
+			})
+		}
+		/*Best 파이차트*/
+		var historyBest = function(){
+			$.ajax({
+				url:"getBest",
+				type:"post",
+				dataType:"json",
+				data:"targetPlayer=김민수",
+				success:function(data){
+					pieChartJson = new Array();
+					$.each(data,function(index,item){
+						var pieChartObj = new Object();
+						pieChartObj.name=item.isuKorAbbrv;
+						pieChartObj.y=(item.earningMoney);
+						pieChartJson.push(pieChartObj);
+					}) 
+					pieChartdraw("#history-best-piechart",pieChartJson);
+				},
+				error:function(err){
+					console.log("Exception : historyBest")
+				}
+			})
+		}
+		/*Worst 파이차트*/
+		var historyWorst = function(){
 			$.ajax({
 				url:"getWorst",
 				type:"post",
 				dataType:"json",
 				data:"targetPlayer=김민수",
 				success:function(data){
-					console.log(data);
 					pieChartJson = new Array();
 					$.each(data,function(index,item){
-						var pieChart = new Object();
-						pieChart.name=item.isuKorAbbrv;
-						pieChart.y=(-item.earningMoney);
-						pieChartJson.push(pieChart);
+						var pieChartObj = new Object();
+						pieChartObj.name=item.isuKorAbbrv;
+						pieChartObj.y=(-item.earningMoney);
+						pieChartJson.push(pieChartObj);
 					}) 
-					pieChart();
+					pieChartdraw("#history-worst-piechart",pieChartJson);
 				},
 				error:function(err){
-					console.log("Exception : pieChart")
+					console.log("Exception : historyWorst")
+				}
+			})
+		}
+		
+		/*수익률차트*/
+		
+		var earningChart = function(){
+			$.ajax({
+				url:"",
+				type:"post",
+				dataType:"json",
+				data:"",
+				success:function(data){
+					console.log(data)
+				},
+				error:function(){
+					console.log("Exception : earningChart")
 				}
 			})
 		}
 		
 		
 		 
-		var pieChart = function() {
-			$('#history-piechart').highcharts({
+		var pieChartdraw = function(historySelector,pieChartJson) {
+			$(historySelector).highcharts({
 				
 		        chart: {
 		            plotBackgroundColor: null,
@@ -91,8 +172,10 @@
 	        	}] 
 	  	  });
 		}
-		
-		history();
+		historyStockListCount()
+		historyStockList()
+		historyWorst();
+		historyBest();
 	}) 
 </script>
 
@@ -103,7 +186,18 @@
 		<div id="history-content">
 			<div id="div1">chart</div>
 			<div id="div2">
-				<div id="history-piechart"></div>
+				<ul class="nav nav-tabs">
+				  <li class="active"><a data-toggle="tab" href="#history-best-div">Best</a></li>
+				  <li><a data-toggle="tab" href="#history-worst-div">Worst</a></li>
+				</ul>
+				<div class="tab-content">
+				  <div id="history-best-div" class="tab-pane fade in active">	
+				  	  <div id="history-best-piechart"></div>
+				  </div>
+				  <div id="history-worst-div" class="tab-pane fade in active">	
+		  	  		  <div id="history-worst-piechart"></div>
+				  </div>
+			  	</div>
 			</div>
 			<div id="div3">
 				<table class="table table-bordered table-hover">

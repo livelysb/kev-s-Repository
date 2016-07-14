@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -200,6 +201,7 @@ public class PlayerInfoController {
 	@RequestMapping(value={"getHistoryCount"}, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getHistoryCount(HttpSession session, String targetPlayer) throws Exception {
+		System.out.println(1111111111);
 		try {	
 			return new Gson().toJson(dealHistoryService.getStockHistory(targetPlayer).size());
 		} catch (Exception e) {
@@ -211,7 +213,7 @@ public class PlayerInfoController {
 	
 	@RequestMapping(value={"getStockDealHistory"}, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String getStockDealHistory(HttpSession session, String targetPlayer, String orderBy, boolean asc, int page) throws Exception {
+	public String getStockDealHistory(HttpSession session, String targetPlayer, String orderBy, boolean asc, @RequestParam(defaultValue="1") int page) throws Exception {
 		try {	
 			return new Gson().toJson(stockHistoryService.getStockDealHistory(targetPlayer, orderBy, asc, page));
 		} catch (Exception e) {
@@ -220,6 +222,4 @@ public class PlayerInfoController {
 			throw new Exception();
 		}
 	}
-	
-	
 }

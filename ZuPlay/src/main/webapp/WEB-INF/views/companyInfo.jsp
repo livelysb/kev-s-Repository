@@ -94,3 +94,8 @@
       </c:if>
     </div>
   </div>
+<script type="text/javascript">
+	 $("#company-${masterDTO.isuCd}").ready(function(){
+			  
+	 });
+</script>

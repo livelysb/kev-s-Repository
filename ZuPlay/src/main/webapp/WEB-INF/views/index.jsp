@@ -25,7 +25,7 @@
 	<img src="resources/img/loading.gif" id="loading-content">
 	
 	<div id="loader">
-	
+	<img src="resources/img/logo_kr.png" id="logo">
 		<div class="side-section">
 			<div class="side-id">
 				<label>${playerNickname}</label>

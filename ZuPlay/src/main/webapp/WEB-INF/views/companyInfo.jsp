@@ -90,9 +90,10 @@
 	 $("#company-${masterDTO.isuCd}").ready(function(){
 		 
 		 var chartData =  function(data){
- 				console.log(JSON.parse(data))
+ 				console.log(data)
                 ChartJson = new Array();
-                $.each(JSON.parse(data),function(index,item){	
+                $.each(data,function(index,item){	
+                	console.log(item);
                    var ChartObj = new Object();
                    ChartObj.x=item.rpTrdTm2 ;
                    ChartObj.y=item.rpTrdPrc;

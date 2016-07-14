@@ -18,4 +18,9 @@ public interface ItemStoreDAO {
 	 * 아이템 가격 가져오기
 	 */
 	int getPrice(String itemCode) throws Exception;
+	/**
+	 * 랜덤박스 리스트 가져오기
+	 */
+	List<ItemDTO> itemStoreRandomBoxList(Map<String, String> map) throws Exception;
+
 }

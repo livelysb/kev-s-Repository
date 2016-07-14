@@ -230,8 +230,8 @@
 		               $.each(data,function(index,item){
 		                  var pieChartObj = new Object();
 		                  pieChartObj.x=item.pehDate2 ;
-		                  pieChartObj.y=item.pehPe;
-		                  pieChartObj.name=item.pehDate2 ;
+		                  pieChartObj.y=(item.pehPe).toFixed(2);
+		                  pieChartObj.name=item.pehDate2;
 		                  pieChartJson.push(pieChartObj);
 		               })    
 		               
@@ -261,7 +261,7 @@
 			        tooltip: {
 			             /* pointFormat: '{series.name}: <b>{this.y}원</b>' */
 			        	 formatter: function() {
-			                return this.series.name + ' : <b>' + this.y + '</b>';
+			                return this.series.name + ' : <b>₩' + this.y + '</b>';
 			            } 
 			        },
 			        plotOptions: {
@@ -310,7 +310,6 @@
 		                enabled: false
 		            },
 		            tooltip: {
-			             /* pointFormat: '{series.name}: <b>{this.y}원</b>' */
 			        	 formatter: function() {
 			                return this.x+"<br>"+this.series.name + ' : <b>' + this.y + '%</b>';
 			            } 

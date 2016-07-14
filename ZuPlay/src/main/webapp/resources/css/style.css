@@ -12,6 +12,10 @@ body{
 	background-image: url("../img/back.png");
 }
 
+#loader{
+	visibility: hidden;
+}
+
 a:hover, a:active, a:focus {
   text-decoration: none;
   outline: 0;

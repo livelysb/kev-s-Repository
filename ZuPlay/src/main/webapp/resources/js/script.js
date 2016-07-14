@@ -120,7 +120,7 @@ $(function(){
          };
         
         // 실시간 마우스 호버 이벤트
-        var rtaRefresh=setInterval(getRealTimeStock, 3000);
+        var rtaRefresh=setInterval(getRealTimeStock, 5000);
         var isHover = false;
         
        $("#rta-content").hover(
@@ -800,12 +800,6 @@ $(function(){
             });
          
          
-         /* TEST */
-         $("#friend-request-btn").on("click",function(){
-        	 $("#noti-msg").text("효승 바보");
-        	   $("#friend-request-noti").jqxNotification("open");
-         })
-         
          /* 친구삭제 버튼 클릭 시 */
          $("#friend-del").on("click",function(){
         	 if(friendDelBtn==0){
@@ -969,7 +963,7 @@ $(function(){
        })
        
        /* 가나다인척하기 */
-       // financialSearch("가")
+       financialSearch("가")
       }
       
       /* 경매장 */
@@ -1783,6 +1777,7 @@ $(function(){
              var target;
              var roomNo;
              var str = "";
+            
              var n = $(document).height();
              if(evt.data.sender == userInfo.nickName){
                 target = $("#chat-no-"+evt.data.receiver);

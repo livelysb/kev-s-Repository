@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Creative - Start Bootstrap Theme</title>
+<title>play STOCK - Zuplay</title>
 
 <c:url value="/resources" var="url" />
 
@@ -75,6 +75,9 @@
 
 	<header>
 		<div class="header-content">
+			<video autoplay loop poster="video-bg.jpg" id="bgvid">
+				<source src="${url}/img/main_1.mp4" type="video/mp4">
+			</video>
 			<div class="header-content-inner">
 				<h1 id="homeHeading">주식을 플레이하라 !</h1>
 				<hr>
@@ -83,11 +86,9 @@
 				</p>
 				<p></p>
 				<div id="naver_id_login"></div>
-
 			</div>
 		</div>
 	</header>
-
 	<section class="bg-primary" id="about">
 		<div class="container">
 			<div class="row">

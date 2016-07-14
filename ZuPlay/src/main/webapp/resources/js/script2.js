@@ -47,10 +47,7 @@ $(function(){
       })
       
    
-    $(".side-avatar").css({
-        width : $("#avatar-clothes").css("width"),
-        height : $("#avatar-clothes").css("height")
-     });
+
       
       /*아바타 옷입히기*/
       var avatarEqui = function(className,avatarGender,playerItem){
@@ -104,7 +101,9 @@ $(function(){
                    success:function(data){
                       stockPage++;
                       var tbd = $("#rta-tbody").empty();
+                      
                       $(data).each(function(index, item) {
+                    
                         if(index!=0){
                            $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"%</td><td>"+item.priceDTO.accTrdvol+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
                         }
@@ -513,11 +512,7 @@ $(function(){
                      })
                      
                      $("#stockListTBody").html(str);
-                     
-                     $(document).on("click", "#stock-window tr, #rta-Window tr, #mystock-window tr",function(e){
-                         var cd = $(this).find(":hidden").val();
-                         showCompanyInfo(cd);
-                       })
+                    
                     },
                   
                   
@@ -526,6 +521,10 @@ $(function(){
                   }
                })
             }
+         	$(document).on("click", "#stock-window tr, #rta-Window tr, #mystock-window tr",function(e){
+             var cd = $(this).find(":hidden").val();
+             showCompanyInfo(cd);
+           })
 
             /* 마지막 페이지 */
             function pagenation(pageNo){ 
@@ -709,6 +708,7 @@ $(function(){
              $(this).tab('show');
          });
       }
+      
       
       /* 친구창 */
       
@@ -2014,9 +2014,15 @@ $(function(){
            ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
            
       });
+      $(".side-avatar").css({
+          width : $("#side-avatar-player-clothes").css("width"),
+          height : $("#side-avatar-player-clothes").css("height")
+       });
       
       $("#loader").css("visibility","visible");
       $("#loading-content").remove();
+      
+      
    };
    updatePI(initContent);
 });

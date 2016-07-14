@@ -83,13 +83,13 @@ $('#menu-bar').dockmenu({
 		'id' : "auction-btn",
 		'imgURL' : 'resources/img/icons/badge.png'
 	}, {
-		'title' : '채팅방',
-		'id' : "chatroom-btn",
-		'imgURL' : 'resources/img/icons/chat.png'
-	}, {
 		'title' : '친구',
 		'id' : "friend-btn",
 		'imgURL' : 'resources/img/icons/users.png'
+	}, {
+		'title' : '채팅방',
+		'id' : "chatroom-btn",
+		'imgURL' : 'resources/img/icons/chat.png'
 	}, {
 		'title' : '랭킹',
 		'id' : "ranking-btn",

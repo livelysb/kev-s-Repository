@@ -221,67 +221,79 @@ $(function(){
 			  };*/
       /* 기업 정보 조회 */
       var companyInfo = function(companyId){
-             var price = $(companyId + " .company-title-stock").text();
-             var isuCd = $(companyId + " .company-isuCd").val();
-             var qty = $(companyId + " .company-qty").val();
+    	     var company = $(companyId);
+             var price = $(company).find(".company-title-stock").text();
+             var isuCd = $(company).find(".company-isuCd").val();
+             var qty = $(company).find(".company-qty").val();
              var ticks = parseInt(userInfo.money/price);
+             
+             var buySlider = $(company).find(".company-buy-slider");
+             var buyNum = $(company).find(".company-buy-input");
+             
+             var sellSlider = $(company).find(".company-sell-slider");
+             var sellNum = $(company).find(".company-sell-input");
              
              $(companyId).jqxWindow({
                    theme:userInfo.theme,
-                   minWidth:700,
+                   minWidth:800,
                    width:"auto",
-                   height:380,
+                   minHeight:500,
                    showCollapseButton: true,
                    resizable : false
                  });
-              
-              var buySlider = $(companyId + " .company-buy-slider");
-              var sellSlider = $(companyId + " .company-sell-slider");
+             
+             $(buySlider).jqxSlider({
+                 width: "100%",
+                 tooltip: true,
+                 mode: 'fixed',
+                 min : 1,
+                 max : ticks,
+                 ticksFrequency: ticks/10,
+                 theme : userInfo.theme,
+                 step: 1
+             });
+             
+             $(buyNum).jqxNumberInput({
+                 width: '100%',
+                 height: '25px',
+                 inputMode: 'simple',
+                 decimal: 1,
+                 spinButtons: true,
+                 spinButtonsStep: 1,
+                 min : 1,
+                 max : ticks,
+                 textAlign: "center",
+                 decimalDigits: 0,
+                 theme : userInfo.theme
+               });
               
               if(qty>0){
-	              $(sellSlider).jqxSlider({
-	                  width: "100%",
-	                  tooltip: true,
-	                  mode: 'fixed',
-	                  min : 1,
-	                  max : qty,
-	                  ticksFrequency: qty/10,
-	                  theme : userInfo.theme,
-	              });
-	              
-	              $(document).on("change",$(sellSlider),function(event){
-	                  $(companyId + " .company-sell-value").text(price * event.args.value);
-	                  
-	               });
-	              
-	              $(companyId + " .company-sell-btn").on("click",function(evt){
-	            	  sellStock(isuCd,$(sellSlider).val());
-	              })
+                  $(sellSlider).jqxSlider({
+                      width: "100%",
+                      tooltip: true,
+                      mode: 'fixed',
+                      min : 1,
+                      max : qty,
+                      ticksFrequency: qty/10,
+                      theme : userInfo.theme,
+                      step: 1
+                  });
+                  
+                  $(sellNum).jqxNumberInput({
+                      width: '100%',
+                      height: '25px',
+                      inputMode: 'simple',
+                      decimal: 1,
+                      spinButtons: true,
+                      spinButtonsStep: 1,
+                      min : 1,
+                      max : qty,
+                      textAlign: "center",
+                      decimalDigits: 0,
+                      theme : userInfo.theme
+                    });
+
               }
-
-              $(buySlider).jqxSlider({
-                  width:"100%",
-                  showTickLabels: true,
-                  tooltip: true,
-                  mode: "fixed",
-                  min: 0,
-                  ticksFrequency: ticks/10,
-                  step: 1,
-                  theme : userInfo.theme,
-                  tooltipPosition: "far",
-                  max: ticks,
-                  value: 0
-              });
-              
-              $(document).on("click", companyId + " .company-buy-btn", function(event){
-            	  buyStock(isuCd,$(buySlider).val());
-              })
-              
-              $(document).on("change",$(buySlider),function(event){
-                 $(companyId + " .company-buy-value").text(price * event.args.value);
-          
-              });
-
       }
 
       

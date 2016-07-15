@@ -72,6 +72,7 @@ public class StockInfoController {
 		mv.addObject("masterDTO", masterDTO);
 		mv.addObject("plQuantity", plQuantity);
 		mv.addObject("rtpList", new Gson().toJson(masterDTO.getRtpList()));
+		mv.addObject("dpList", new Gson().toJson(masterDTO.getDpList()));
 		return mv;
 	}
 }

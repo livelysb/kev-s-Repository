@@ -4,7 +4,7 @@ $(function(){
          url:"updatePI",
          dataType:"json",
          success:function(data){
-        	 console.log(data);
+        	console.log(data);
             userInfo.nickName=data.playerNickname;
             userInfo.gender =data.playerGender;
             userInfo.money =data.playerMoney;
@@ -16,6 +16,8 @@ $(function(){
             if(callBack){
                callBack();
             }
+            
+            updateLabel();
 
          },
          error:function(){
@@ -25,6 +27,7 @@ $(function(){
          }
       })
    }
+  
    
    /* 버튼클릭했을 때 이벤트 설정 */
    $.fn.setBtn = function(window){
@@ -37,6 +40,12 @@ $(function(){
       return this;
    };
    
+   /* 내 정보 갱신 (Money, Ruby) */
+   var updateLabel = function(){
+	   $(".side-money label").text(userInfo.money.format());
+	   $(".side-ruby label").text(userInfo.ruby.format());
+   }
+   
    
    var initContent = function(){
       console.log("start init content");
@@ -47,7 +56,7 @@ $(function(){
       })
       
    
-
+      updateLabel();
       
       /*아바타 옷입히기*/
       var avatarEqui = function(className,avatarGender,playerItem){
@@ -75,105 +84,106 @@ $(function(){
       }
 
    
-    /* 실시간 주가 정보 */
-    var rtaInit = function(){
-     
-     $("#rta-Window").jqxWindow({
-           width:"400",
-           height:"450",
-           resizable:true,
-           showCollapseButton: true,
-           autoOpen:false,
-           theme:userInfo.theme
-         });
-         
+      /* 실시간 주가 정보 */
+      var rtaInit = function(){
+       
+       $("#rta-Window").jqxWindow({
+             width:"400",
+             height:"450",
+             resizable:true,
+             showCollapseButton: true,
+             autoOpen:false,
+             theme:userInfo.theme
+           });
+           
 
-        var stockPage = 1;
-        var getRealTimeStock = function(){
-            
-            if(!isHover){
-               $.ajax({
-                   url:'realTimeStock',
-                   type:'post',
-                   dataType:'json',
-                   contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-                   data: {"page":stockPage,"keyword":"undefined"},
-                   success:function(data){
-                      stockPage++;
-                      var tbd = $("#rta-tbody").empty();
+          var stockPage = 1;
+          var getRealTimeStock = function(){
+              
+              if(!isHover){
+                 $.ajax({
+                     url:'realTimeStock',
+                     type:'post',
+                     dataType:'json',
+                     contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                     data: {"page":stockPage,"keyword":"undefined"},
+                     success:function(data){
+                        stockPage++;
+                        var tbd = $("#rta-tbody").empty();
+                        
+                        $(data).each(function(index, item) {
                       
-                      $(data).each(function(index, item) {
-                    
-                        if(index!=0){
-                           $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+(item.priceDTO.trdPrc).format()+"</td> <td>"+(item.priceDTO.cmpprevddPrc).format()+"</td> <td>"+item.priceDTO.fluctuationRate+"</td><td>"+(item.priceDTO.accTrdvol).format()+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
-                        }
-                      });
-                     if(data.length < 11) stockPage=1;
-                   },
-                   error:function(e){
-                     console.log("Exception : getRealTimeStock");
-                     stockPage = 1;
-                   }
-                });
-            }
-         };
-        
-        // 실시간 마우스 호버 이벤트
-        var rtaRefresh=setInterval(getRealTimeStock, 5000);
-        var isHover = false;
-        
-       $("#rta-content").hover(
-         function(){
-            isHover = true;
-         },
-         function(){
-            isHover = false;
-         }
-       )
-      }
-    var myStockListUpdate = function(){
-        $.ajax({
-           url:"playerStock",
-           type:"post",
-           dataType:"json",
-           success:function(data){
-              str="";
-              $("#mystockListTBody").empty();
-              $.each(data, function(index, item){
-                 str+="<tr><td>"+item.isuKorAbbrv+"</td>";
-                 str+="<td>"+item.kind+"</td>";
-                 str+="<td>"+(item.plQuantity).format()+"</td>";
-                 str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
-                 str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
-                 str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
-                 str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
-              });
-              $("#mystockListTBody").html(str);
+                          if(index!=0){
+                             $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+(item.priceDTO.trdPrc).format()+"</td> <td>"+(item.priceDTO.cmpprevddPrc).format()+"</td> <td>"+item.priceDTO.fluctuationRate+"</td><td>"+(item.priceDTO.accTrdvol).format()+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
+                          }
+                        });
+                       if(data.length < 11) stockPage=1;
+                     },
+                     error:function(e){
+                       console.log("Exception : getRealTimeStock");
+                       stockPage = 1;
+                     }
+                  });
+              }
+           };
+          
+          // 실시간 마우스 호버 이벤트
+          var rtaRefresh=setInterval(getRealTimeStock, 5000);
+          var isHover = false;
+          
+         $("#rta-content").hover(
+           function(){
+              isHover = true;
            },
-           error:function(err){
-              console.log("Exception : myStockListUpdate");
+           function(){
+              isHover = false;
            }
-        });
-     }
-    
-     var myStockInit = function(){
-	     $("#mystock-window").jqxWindow({
-	           width:"400",
-	           height:"450",
-	           resizable:true,
-	           showCollapseButton: true,
-	           autoOpen:false,
-	           theme:userInfo.theme
-	         });
-	     myStockListUpdate();
-     }
-    
-    
-    
-      /* 주식 구매 */
-	   var buyStock = function(companyId, qty){
+         )
+        }
+      var myStockListUpdate = function(){
+          $.ajax({
+             url:"playerStock",
+             type:"post",
+             dataType:"json",
+             success:function(data){
+                str="";
+                $("#mystockListTBody").empty();
+                $.each(data, function(index, item){
+                   str+="<tr><td>"+item.isuKorAbbrv+"</td>";
+                   str+="<td>"+item.kind+"</td>";
+                   str+="<td>"+(item.plQuantity).format()+"</td>";
+                   str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
+                   str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
+                   str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
+                   str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
+                });
+                $("#mystockListTBody").html(str);
+             },
+             error:function(err){
+                console.log("Exception : myStockListUpdate");
+             }
+          });
+       }
+      
+       var myStockInit = function(){
+          $("#mystock-window").jqxWindow({
+                width:"400",
+                height:"450",
+                resizable:true,
+                showCollapseButton: true,
+                autoOpen:false,
+                theme:userInfo.theme
+              });
+          myStockListUpdate();
+       }
+      
+      
+      
+        /* 주식 구매 */
+     /* buyStock , sellStock*/
+	   var tradingStock = function(companyId, qty, url){
 		      $.ajax({
-		    	  url:"buyStock",
+		    	  url:url.toString(),
 		    	  dataType:"text",
 		    	  data:{isuCd:companyId, plQuantity:qty},
 		    	  success:function(data){
@@ -186,11 +196,11 @@ $(function(){
 		    		  updatePI();
 		    	  },
 		    	  error:function(){
-		    		  console.log("Exception : buyStock");
+		    		  console.log("Exception : tradingStock");
 		    	  }
 		      });
-		  };
-		  /* 주식 판매 */
+		  };/*
+		   주식 판매 
 		   var sellStock = function(companyId, qty){
 			      $.ajax({
 			    	  url:"sellStock",
@@ -209,74 +219,86 @@ $(function(){
 			    		  console.log("Exception : sellStock");
 			    	  }
 			      });
-			  };
+			  };*/
       /* 기업 정보 조회 */
       var companyInfo = function(companyId){
-             var price = $(companyId + " .company-title-stock").text();
-             var isuCd = $(companyId + " .company-isuCd").val();
-             var qty = $(companyId + " .company-qty").val();
+    	     var company = $(companyId);
+             var price = $(company).find(".company-title-stock").text();
+             var isuCd = $(company).find(".company-isuCd").val();
+             var qty = parseInt($(company).find(".company-qty").val()/1);
              var ticks = parseInt(userInfo.money/price);
              
-             $(companyId).jqxWindow({
-                   theme:userInfo.theme,
-                   minWidth:700,
-                   width:"auto",
-                   height:500,
-                   showCollapseButton: true,
-                   resizable : true
-                 });
-              
-              var buySlider = $(companyId + " .company-buy-slider");
-              var sellSlider = $(companyId + " .company-sell-slider");
+             var buySlider = $(company).find(".company-buy-slider");
+             var buyNum = $(company).find(".company-buy-input");
+             
+             var sellSlider = $(company).find(".company-sell-slider");
+             var sellNum = $(company).find(".company-sell-input");
+             console.log(qty);
+             
+             if(ticks>0){
+	             $(companyId).jqxWindow({
+	                   theme:userInfo.theme,
+	                   minWidth:700,
+	                   width:"auto",
+	                   height:500,
+	                   showCollapseButton: true,
+	                   resizable : true
+	                 });
+	             
+	             $(buySlider).jqxSlider({
+	                 width: "100%",
+	                 tooltip: true,
+	                 mode: 'fixed',
+	                 min : 1,
+	                 max : ticks,
+	                 ticksFrequency: ticks/10,
+	                 theme : userInfo.theme,
+	                 step: 1
+	             });
+             }else{
+            	 $(company).find(".company-buy").remove();
+             }
+             $(buyNum).jqxNumberInput({
+                 width: '100%',
+                 height: '25px',
+                 inputMode: 'simple',
+                 decimal: 1,
+                 spinButtons: true,
+                 spinButtonsStep: 1,
+                 min : 1,
+                 max : ticks,
+                 textAlign: "center",
+                 decimalDigits: 0,
+                 theme : userInfo.theme
+               });
               
               if(qty>0){
-	              $(sellSlider).jqxSlider({
-	                  width:"100%",
-	                  showTickLabels: true,
-	                  tooltip: true,
-	                  mode: "fixed",
-	                  min: 0,
-	                  max: qty,
-	                  ticksFrequency: qty/10,
-	                  value: 0,
-	                  step: 1,
-	                  theme : userInfo.theme,
-	                  tooltipPosition: "far"
-	              });
-	              
-	              $(document).on("change",$(sellSlider),function(event){
-	                  $(companyId + " .company-sell-value").text(price * event.args.value);
-	                  
-	               });
-	              
-	              $(companyId + " .company-sell-btn").on("click",function(evt){
-	            	  sellStock(isuCd,$(sellSlider).val());
-	              })
+                  $(sellNum).jqxNumberInput({
+                      width: '100%',
+                      height: '25px',
+                      inputMode: 'simple',
+                      decimal: 1,
+                      spinButtons: true,
+                      spinButtonsStep: 1,
+                      min : 1,
+                      max : qty,
+                      textAlign: "center",
+                      decimalDigits: 0,
+                      theme : userInfo.theme
+                    });
+                  $(sellSlider).jqxSlider({
+                      width: "100%",
+                      tooltip: true,
+                      mode: 'fixed',
+                      min : 1,
+                      ticksFrequency: qty/10,
+                      max : qty,
+                      theme : userInfo.theme,
+                      step: 1
+                  });
+              }else{
+             	 $(company).find(".company-buy").remove();
               }
-
-              $(buySlider).jqxSlider({
-                  width:"100%",
-                  showTickLabels: true,
-                  tooltip: true,
-                  mode: "fixed",
-                  min: 0,
-                  ticksFrequency: ticks/10,
-                  step: 1,
-                  theme : userInfo.theme,
-                  tooltipPosition: "far",
-                  max: ticks,
-                  value: 0
-              });
-              
-              $(document).on("click", companyId + " .company-buy-btn", function(event){
-            	  buyStock(isuCd,$(buySlider).val());
-              })
-              
-              $(document).on("change",$(buySlider),function(event){
-                 $(companyId + " .company-buy-value").text(price * event.args.value);
-          
-              });
-
       }
 
       
@@ -402,7 +424,6 @@ $(function(){
               }
               return false;
            });
-
         
         // 모달에서 판매등록
         $("#inven-auction-sell-btn").on("click",function(){
@@ -426,7 +447,7 @@ $(function(){
         }
         
 
-        // 경매판매
+     // 경매판매
         var auctionSell = function(piSq,imPurchasePrice){
            
            $.ajax({
@@ -435,7 +456,7 @@ $(function(){
               data:"piSq="+piSq+"&imPurchasePrice="+imPurchasePrice,
               dataType:"",
               success:function(result){ 
-            	  console.log(result);
+                 console.log(result);
                  if(result==true){
                     $(".inven-auction-modal").modal("hide");
                     playerItemSelectAll();
@@ -522,7 +543,7 @@ $(function(){
                   }
                })
             }
-         	$(document).on("click", "#stock-window tr, #rta-Window tr, #mystock-window tr",function(e){
+            $(document).on("click", "#stock-window tr, #rta-Window tr, #mystock-window tr",function(e){
              var cd = $(this).find(":hidden").val();
              showCompanyInfo(cd);
            })
@@ -697,8 +718,8 @@ $(function(){
               })
           })
           $("#store-window").jqxWindow({
-              width:720,
-              height:420,
+              width:640,
+              height:390,
               resizable:false,
               showCollapseButton: true,
               autoOpen:false,
@@ -727,16 +748,15 @@ $(function(){
              maxHeight:900,
              showCollapseButton: true
            });
-         
          /*친구추가 검색*/
          var friendSearch = function(){
-        	 $.ajax({
+            $.ajax({
                  url:"playerInfoSelectAll",
                  type:"post",
                  data:"keyword="+$("#friend-add-text").val(),
                  dataType:"json",
                  success:function(data){
-                	 console.log(data);
+                    console.log(data);
                     str="";
                     $.each(data,function(index,item){
                        str+="<tr class='friend-add-tr'>";
@@ -748,8 +768,8 @@ $(function(){
                            str += avatarEquiAry[i];
                         }
                        str+="</div>";
-                       str+="</td>";	   
-                    	   
+                       str+="</td>";      
+                          
                        str+="<td>"+item.playerNickname+"</td></tr>";
                        
                        
@@ -814,7 +834,7 @@ $(function(){
          
          /* 친구신청 Notify */
          $("#friend-request-noti").jqxNotification({
-        	 position: "top-right", opacity: 0.9,
+            position: "top-right", opacity: 0.9,
              autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template: "info"
             });
          
@@ -836,7 +856,7 @@ $(function(){
          
          /* 친구리스트 */
          friendSelectAll = function(data){
-        	 console.log(data.data)
+            console.log(data.data)
               var requestedFriend=""; 
               var ListFriend=""; 
               var friendBtnColor=""; 
@@ -1107,44 +1127,44 @@ $(function(){
            search(count+1)
         })
          
-        // 페이지에따른 검색
-       search = function (page){
-             $.ajax({
-                url:"auctionSearch",
-                type:"post",
-                dataType:"json",
-                data:"keyword=" + $("#auction-search").val()+"&itemClass="+$("#auction-select").val()+"&page="+page,
-                success:function(data){
-                   
-                   if(data.length==0){
-                      if(sellFlag=true){
-                         $("#auction-buy-tbody").empty();
-                      }
-                      return;
-                   } 
-                   count=page;
-                   $("#auction-buy-tbody").empty();
-                   var str="";
-                   $.each(data, function(index,item){
-                      if(item.imAuctionEnd="T"){
-                         str+="<tr><td><img src='"+item.itemDTO.itemImg+"' class='auction-itemImg'></td>";
-                         str+="<td>"+item.itemDTO.itemName+"</td>";
-                         str+="<td>"+item.imPurchasePrice+"</td>";
-                         str+="<td>"+item.imBidTime+"</td>";
-                         str+="<td>"+item.playerNickname+"</td>";
-                         str+="<td><input type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnBuy' value='구매'></td>"
-                      }
-                   })
-                   $("#auction-buy-tbody").html(str);
-                },
-                error:function(err){
-                   console.log("Exception : search");
-                }
-                
-             })
-          }
-        
-        // 판매탭 접속
+     // 페이지에따른 검색
+        search = function (page){
+              $.ajax({
+                 url:"auctionSearch",
+                 type:"post",
+                 dataType:"json",
+                 data:"keyword=" + $("#auction-search").val()+"&itemClass="+$("#auction-select").val()+"&page="+page,
+                 success:function(data){
+                    
+                    if(data.length==0){
+                       if(sellFlag=true){
+                          $("#auction-buy-tbody").empty();
+                       }
+                       return;
+                    } 
+                    count=page;
+                    $("#auction-buy-tbody").empty();
+                    var str="";
+                    $.each(data, function(index,item){
+                       if(item.imAuctionEnd="T"){
+                          str+="<tr><td><img src='"+item.itemDTO.itemImg+"' class='auction-itemImg'></td>";
+                          str+="<td>"+item.itemDTO.itemName+"</td>";
+                          str+="<td>"+item.imPurchasePrice+"</td>";
+                          str+="<td>"+item.imBidTime+"</td>";
+                          str+="<td>"+item.playerNickname+"</td>";
+                          str+="<td><input type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnBuy' value='구매'></td>"
+                       }
+                    })
+                    $("#auction-buy-tbody").html(str);
+                 },
+                 error:function(err){
+                    console.log("Exception : search");
+                 }
+                 
+              })
+           }
+         
+         // 판매탭 접속
         function auctionSellList(){
            $.ajax({
                 url: "auctionMyPage" ,
@@ -1534,21 +1554,21 @@ $(function(){
                
                
                if(kind=="s"){
-            	   switch (item.playerSeasonRank) {
-						case 1: str+="<td><img src='resources/img/grade/gold.png' style='width:60px;height:60px;'></td>";	break;
-						case 2:	str+="<td><img src='resources/img/grade/silver.png' style='width:50px;height:50px;'></td>"; break;
-						case 3:	str+="<td><img src='resources/img/grade/bronze.png' style='width:40px;height:40px;'></td>"; break;
-		
-						default: str+="<td>"+item.playerSeasonRank+"</td>"; break;
-					}
+                  switch (item.playerSeasonRank) {
+                  case 1: str+="<td><img src='resources/img/grade/gold.png' style='width:60px;height:60px;'></td>";   break;
+                  case 2:   str+="<td><img src='resources/img/grade/silver.png' style='width:50px;height:50px;'></td>"; break;
+                  case 3:   str+="<td><img src='resources/img/grade/bronze.png' style='width:40px;height:40px;'></td>"; break;
+      
+                  default: str+="<td>"+item.playerSeasonRank+"</td>"; break;
+               }
                }else{
-            	   switch (item.playerDailyRank) {
-	            	    case 1: str+="<td><img src='resources/img/grade/gold.png' style='width:60px;height:60px;'></td>";	break;
-						case 2:	str+="<td><img src='resources/img/grade/silver.png' style='width:50px;height:50px;'></td>"; break;
-						case 3:	str+="<td><img src='resources/img/grade/bronze.png' style='width:40px;height:40px;'></td>"; break;
-		 
-						default: str+="<td>"+item.playerDailyRank+"</td>"; break;
-            	   }
+                  switch (item.playerDailyRank) {
+                      case 1: str+="<td><img src='resources/img/grade/gold.png' style='width:60px;height:60px;'></td>";   break;
+                  case 2:   str+="<td><img src='resources/img/grade/silver.png' style='width:50px;height:50px;'></td>"; break;
+                  case 3:   str+="<td><img src='resources/img/grade/bronze.png' style='width:40px;height:40px;'></td>"; break;
+       
+                  default: str+="<td>"+item.playerDailyRank+"</td>"; break;
+                  }
                }
                
                //kind=="s" ? str+="<tr><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";
@@ -1573,21 +1593,21 @@ $(function(){
                $("#ranking-daily-tbody").html(str);
             }
          }
- 		 
- 		$("#ranking-window").jqxWindow({
- 	          theme:userInfo.theme,
- 	          height:440,
- 	          width:550,
- 	          maxWidth:800,
- 	          minWidth:400,
- 	          minHeight:400,
- 	          resizable:true,
- 	          autoOpen:false,
- 	          showCollapseButton: true
- 	        });
- 		 
- 		 rankingSelect("s");
- 		 
+        
+       $("#ranking-window").jqxWindow({
+              theme:userInfo.theme,
+              height:440,
+              width:550,
+              maxWidth:800,
+              minWidth:400,
+              minHeight:400,
+              resizable:true,
+              autoOpen:false,
+              showCollapseButton: true
+            });
+        
+        rankingSelect("s");
+        
       }
       
       /*히스토리 */
@@ -1663,7 +1683,7 @@ $(function(){
          
          /*탭 클릭 이벤트*/
          $("#history-content .nav-tabs  a").on("click",function(){
-        	 console.log()
+            console.log()
             if($(this).text()=="Profit"){
                $("#history-worst-piechart").empty();
                historyBest();

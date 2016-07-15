@@ -1,5 +1,6 @@
 package com.kosta.zuplay.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -71,6 +72,8 @@ public class StockInfoController {
 		ModelAndView mv = new ModelAndView("companyInfo");
 		mv.addObject("masterDTO", masterDTO);
 		mv.addObject("plQuantity", plQuantity);
+		Collections.reverse(masterDTO.getRtpList());
+		Collections.reverse(masterDTO.getDpList());
 		mv.addObject("rtpList", new Gson().toJson(masterDTO.getRtpList()));
 		mv.addObject("dpList", new Gson().toJson(masterDTO.getDpList()));
 		return mv;

@@ -153,9 +153,7 @@ public class ChattingServiceImpl implements ChattingService {
 				}
 			}
 			sendDataWebSocket.sendData(allPlayer, "chatList", chatRoomList);
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

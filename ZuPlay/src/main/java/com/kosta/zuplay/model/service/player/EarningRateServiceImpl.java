@@ -52,15 +52,14 @@ public class EarningRateServiceImpl implements EarningRateService {
 				if (updatePreMoney(playerNickname)) {
 					// earingRate를 이용한 루비 추가
 					int ruby = playerInfoService.getRuby(playerNickname);
-					int plusRuby = (int) (earningRate * 1000000);
+					int plusRuby = (int) (earningRate * 100000);
 					if (plusRuby <= 0) {
 						plusRuby = 0;
 					}
 
 					ruby += plusRuby;
 					if (playerInfoService.updateRuby(playerNickname, ruby)) {
-						System.out
-								.println(playerNickname + "님의 수익률 : " + earningRate + ", 수익률로 인한 루비 지급 : " + plusRuby);
+						System.out.println(playerNickname + "님의 수익률 : " + earningRate + ", 수익률로 인한 루비 지급 : " + plusRuby);
 						result++;
 					}
 				}

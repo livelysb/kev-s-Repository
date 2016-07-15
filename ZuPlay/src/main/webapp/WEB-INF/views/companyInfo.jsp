@@ -80,13 +80,13 @@
 			</div>
 			<div class="row-fluid">
 				<div class="col-xs-4"><div class="company-buy-input company-val'"></div></div>
-				<div class="col-xs-5"><h4 class="company-buy-value company-val'"></h4>0</div>
+				<div class="col-xs-5"><h4 class="company-buy-value'"></h4>0</div>
 				<div class="col-xs-3"><button class="company-buy-btn btn btn-block btn-success">매수</button></div>
 			</div>
 		</div>
 		<div class="company-sell">
 			<div class="row-fluid">
-				<div class="col-xs-12"><div class='company-sell-slider company-val'></div></div>
+				<div class="col-xs-12"><div class='company-sell-slider'></div></div>
 			</div>
 			<div class="row-fluid">
 				<div class="col-xs-4"><div class="company-sell-input company-val'"></div></div>

@@ -803,7 +803,7 @@ $(function(){
          
          /* 친구신청 Notify */
          $("#friend-request-noti").jqxNotification({
-        	 width: 250, position: "top-right", opacity: 0.9,
+        	 position: "top-right", opacity: 0.9,
              autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template: "info"
             });
          
@@ -1519,7 +1519,28 @@ $(function(){
                  return true
                }
                
-               kind=="s" ? str+="<tr><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";
+               item.playerNickname==userInfo.nickName ? str+="<tr style='background-color:'>" : str+="<tr>";
+               
+               
+               if(kind=="s"){
+            	   switch (item.playerSeasonRank) {
+						case 1: str+="<td>금</td>";	break;
+						case 2:	str+="<td>은</td>"; break;
+						case 3:	str+="<td>동</td>"; break;
+		
+						default: str+="<td>"+item.playerSeasonRank+"</td>"; break;
+					}
+               }else{
+            	   switch (item.playerSeasonRank) {
+					case 1: str+="<td>금</td>";	break;
+					case 2:	str+="<td>은</td>"; break;
+					case 3:	str+="<td>동</td>"; break;
+	
+					default: str+="<td>"+item.playerDailyRank+"</td>"; break;
+				}
+               }
+               
+               //kind=="s" ? str+="<tr><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";
                str+="<td><div class='ranking-avatar-div'>";
                
                var avatarEquiAry = avatarEqui("ranking",item.playerGender,item.playerItemDTO);
@@ -1531,7 +1552,7 @@ $(function(){
                str+="</td>";
                str+="<td class='ranking-playernickname'>"+item.playerNickname+"</td>";
                kind=="s" ? str+="<td>"+item.totalEarningRate+"%</td>" : str+="<td>"+item.earningRate+"%</td>";
-               str+="<td>"+item.totalMoney+"</td></tr>";
+               str+="<td>"+(item.totalMoney).format()+"</td></tr>";
             }) 
             if(kind=="s"){
                $("#ranking-season-tbody").empty();

@@ -42,16 +42,16 @@
          <div id="store-tab-randombox" class="tab-pane fade">
             <div class="container-fluid store-container">
                <div class="row">
-                  <div class="store-itemBox col-xs-3" id="store-itemrandombox0"></div>
-                  <div class="store-itemBox col-xs-3" id="store-itemrandombox1"></div>
-                  <div class="store-itemBox col-xs-3" id="store-itemrandombox2"></div>
-                  <div class="store-itemBox col-xs-3" id="store-itemrandombox3"></div>
+                  <div class="store-itemBox col-xs-3" id="store-itemrandom0"></div>
+                  <div class="store-itemBox col-xs-3" id="store-itemrandom1"></div>
+                  <div class="store-itemBox col-xs-3" id="store-itemrandom2"></div>
+                  <div class="store-itemBox col-xs-3" id="store-itemrandom3"></div>
                </div>
                <div class="row">
-                  <div class="store-itemBox col-xs-3" id="store-itemrandombox4"></div>
-                  <div class="store-itemBox col-xs-3" id="store-itemrandombox5"></div>
-                  <div class="store-itemBox col-xs-3" id="store-itemrandombox6"></div>
-                  <div class="store-itemBox col-xs-3" id="store-itemrandombox7"></div>
+                  <div class="store-itemBox col-xs-3" id="store-itemrandom4"></div>
+                  <div class="store-itemBox col-xs-3" id="store-itemrandom5"></div>
+                  <div class="store-itemBox col-xs-3" id="store-itemrandom6"></div>
+                  <div class="store-itemBox col-xs-3" id="store-itemrandom7"></div>
                </div>
             </div>
 

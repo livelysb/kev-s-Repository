@@ -66,7 +66,6 @@
 			<span id="noti-msg">
 			</span>
 		</div>
-		
 		<div id="menu-bar" class="center-block"></div>
 	
 	</div>

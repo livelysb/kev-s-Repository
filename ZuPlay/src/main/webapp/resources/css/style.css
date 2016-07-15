@@ -68,25 +68,39 @@ small, .small {
 	z-index: 99999999 !important;
 }
 
+.side-section{
+	display: inline-block;
+	width : 228px;
+	height: auto;
+	border: 2px black solid;
+	background-color : white;
+	overflow: hidden;
+	box-sizing: content-box;
+}
+
+.side-section div{
+	width : 100%;
+	padding-bottom: 2px;
+	border-bottom: 2px black solid;
+}
+
+
 .side-id {
 	font-weight: bold;
 	text-align: center;
 }
 
 .side-avatar {
-	width: 10%;
+	width: 228px;
+	height: 300px;
 	position: relative;
-	border-image-slice: 42 42 42 42;
-	border-image-width: 42px 42px 42px 42px;
-	border-image-outset: 0px 0px 0px 0px;
-	border-image-repeat: round round;
-	border-image-source: url("../img/avatar_border.svg");
 }
 
 .side-avatar img {
 	position: absolute;
-	width: 100%;
-	min-height: 100%;
+	width: 228px;
+	height: 300px;;
+	margin-bottom: 2px;
 }
 
 .button-margin-right {

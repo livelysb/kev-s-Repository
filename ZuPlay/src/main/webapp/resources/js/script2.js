@@ -383,13 +383,14 @@ $(function(){
               var storeIsOpen = $("#store-window").jqxWindow("isOpen");
               var auctionIsOpen = $("#auction-window").jqxWindow("isOpen");
               var dataItem=$(this).children().data("item");
-              
+              console.log("데이터");
+              console.log(dataItem);
               if(storeIsOpen==true && auctionIsOpen==true) {
               
               }else if(storeIsOpen==true){
                  // 상점에 아이템 판매
                  if(dataItem){
-                    if(confirm("판매하시겠습니까?")){
+                    if(confirm(dataItem.itemDTO.itemName+"의 판매가격은 1000원입니다.\n판매하시겠습니까?")){
                        storeSell($(this).children().data("item"));
                     };
                  }
@@ -641,7 +642,7 @@ $(function(){
                       $(".store-itemBox").empty();
                       $.each(data, function(index, item){
                          $("#store-item"+itemClass+""+index).html("<img src='" + item.itemImg +"' style='width:100%; height:100%;' id='"+item.itemCode+"'/>");  
-                         item.itemPrice!=0 ? priceInfo="₩"+item.itemPrice : priceInfo="구매할 수 없는 아이템 입니다.";
+                         item.itemPrice!=0 ? priceInfo="₩"+item.itemPrice.format() : priceInfo="구매할 수 없는 아이템 입니다.";
                          $("#store-item"+itemClass+""+index+" img").jqxTooltip({ content: "<b>"+item.itemName+"</b>("+item.itemGrade+")"+"<br>"+priceInfo+"<br>", position: 'bottom', autoHide: true, 
                             name: 'movieTooltip', theme : userInfo.theme });
                       })
@@ -696,8 +697,8 @@ $(function(){
               })
           })
           $("#store-window").jqxWindow({
-              width:640,
-              height:390,
+              width:740,
+              height:420,
               resizable:false,
               showCollapseButton: true,
               autoOpen:false,

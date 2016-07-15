@@ -31,7 +31,7 @@
 		select * from (select row_number() over(order by
 		IM_PURCHASE_PRICE desc) rnum,
 		im_sq, player_nickname, item_code,
-		im_purchase_price, im_bid_time,
+		im_purchase_price, to_char(im_bid_time+7,'yyyy/mm/dd'),
 		Im_auction_end
 		from item_market where
 		im_auction_end='T') m join item i on
@@ -46,7 +46,7 @@
 		select * from (select row_number() over(order by
 		IM_PURCHASE_PRICE desc) rnum,
 		im_sq, player_nickname, item_code,
-		im_purchase_price, im_bid_time,
+		im_purchase_price, to_char(im_bid_time+7,'yyyy/mm/dd'),
 		Im_auction_end
 		from item_market where
 		im_auction_end='T') m join item i on

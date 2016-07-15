@@ -24,7 +24,6 @@ public class UtilServiceImpl implements UtilService {
 	public int indexSearch(String playerNickname) throws Exception {
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
 		List<Integer> list = playerItemDAO.getItemIndex(playerNickname);
-		System.out.println(list);
 		if (list.size() >= 20) {
 			return 0;
 		}

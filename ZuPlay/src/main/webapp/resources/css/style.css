@@ -86,16 +86,22 @@ small, .small {
 
 .side-id {
 	font-weight: bold;
+	font-size: 20px;
 	text-align: center;
+	vertical-align: middle;
 }
 
 .side-ruby{
 	border-bottom: 0px !important;
 }
 
-.side-id, ,.side-avatar{
+.side-id, ,.side-info{
 	display: table-cell;
 	vertical-align: middle;
+}
+
+.side-info label{
+	font-size: 20px;
 }
 
 .side-avatar {

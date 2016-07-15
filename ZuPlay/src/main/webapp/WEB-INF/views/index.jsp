@@ -38,6 +38,12 @@
 				<img src="" id="side-avatar-player-earring">
 				<img src="" id="side-avatar-player-acc">
 			</div>
+			<div class="side-money">
+				<label>df</label>
+			</div>
+			<div class="side-ruby">
+				<label>df</label>
+			</div>
 		</div>
 	      
 	    <!-- includes JSP -->

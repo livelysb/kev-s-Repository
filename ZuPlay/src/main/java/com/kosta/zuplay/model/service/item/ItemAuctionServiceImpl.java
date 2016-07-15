@@ -203,7 +203,6 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 				return false;
 			}
 		}
-		System.out.println("성공");
 		return true;
 	}
 

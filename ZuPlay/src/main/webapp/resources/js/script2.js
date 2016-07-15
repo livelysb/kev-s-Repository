@@ -1708,7 +1708,7 @@ $(function(){
                   var etcMoney=0;
                   $.each(data,function(index,item){
                      var pieChartObj = new Object();
-                     if(index<=9){
+                     if(index<=6){
                         pieChartObj.name=item.isuKorAbbrv;
                         pieChartObj.y=(item.earningMoney);
                         pieChartJson.push(pieChartObj);
@@ -1740,7 +1740,7 @@ $(function(){
                   var etcMoney=0;
                   $.each(data,function(index,item){
                      var pieChartObj = new Object();
-                     if(index<=9){
+                     if(index<=6){
                         pieChartObj.name=item.isuKorAbbrv;
                         pieChartObj.y=(-item.earningMoney);
                         pieChartJson.push(pieChartObj);

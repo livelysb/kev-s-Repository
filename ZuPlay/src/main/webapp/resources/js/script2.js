@@ -2315,6 +2315,8 @@ $(function(){
                  case "notiAuctionEndBySeller" : $("#noti-msg").html(data.data.itemName+"이 "+data.data.imPrice+"루비에 팔렸습니다.<br>낙찰금액을 수령해 주십시오.");
                     							 $("#friend-request-noti").jqxNotification("open");break;			          	  
 							          	  
+							          	  
+							          	  
                  case "chatMsg" : chatMsg(data); break;
                  case "chatIn" : chatIn(data); break;
                  case "chatOut" : chatOut(data); break;

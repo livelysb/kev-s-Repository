@@ -14,8 +14,6 @@
 					class="company-title-stock">${masterDTO.priceDTO.trdPrc}</span>
 			</div>
 		</div>
-
-
 		<div class="row-fluid">
 			<div class="col-xs-6 company-chart-warpper">
 				<div class="company-chart">
@@ -109,8 +107,10 @@
 					function() {
 
 						var chartData = function(data) {
+							console.log(data);
 							console.log("시작");
 							ChartJson = new Array();
+							
 							$.each(data, function(index, item) {
 								var ChartObj = new Object();
 								ChartObj.x = item.rpTrdTm2;

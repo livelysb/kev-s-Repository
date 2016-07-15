@@ -140,13 +140,19 @@ $(function(){
            }
          )
         }
-      var myStockListUpdate = function(){
+      var myStockListUpdate = function(targetPlayer){
+    	  if(targetPlayer != userInfo.nickName){
+    		  userStockListUpdate(targetPlayer);
+    		  return;
+    	  }
           $.ajax({
              url:"playerStock",
              type:"post",
+             data:"targetPlayer="+userInfo.nickName,
              dataType:"json",
              success:function(data){
-                str="";
+            	 console.log(data);
+                var str="";
                 $("#mystockListTBody").empty();
                 $.each(data, function(index, item){
                    str+="<tr><td>"+item.isuKorAbbrv+"</td>";
@@ -164,6 +170,48 @@ $(function(){
              }
           });
        }
+      /*유저 주식 확인*/
+      var userStockListUpdate = function(targetPlayer){
+          $.ajax({
+             url:"playerStock",
+             type:"post",
+             data:"targetPlayer="+targetPlayer,
+             dataType:"json",
+             success:function(data){
+            	console.log(data);
+            	var table = "<div class='stock-user-window'><div>유저주식 - "+targetPlayer+"</div><div class='stock-user-content'>";
+            	table += "<table class='table table-bordered table-hover'><thead><tr>";
+            	table += "<th>종목명</th><th>분야</th><th>수량</th><th>체결가</th><th>총가치</th><th>등락률</th><th>수익률</th></tr>"
+            	table += "</thead><tbody></tbody></table></div></div>";
+                var str="";
+
+                $.each(data, function(index, item){
+                   str+="<tr><td>"+item.isuKorAbbrv+"</td>";
+                   str+="<td>"+item.kind+"</td>";
+                   str+="<td>"+(item.plQuantity).format()+"</td>";
+                   str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
+                   str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
+                   str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
+                   str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
+                });
+                
+                console.log(str);
+
+                $(table).jqxWindow({
+                    width:"400",
+                    height:"450",
+                    resizable:true,
+                    showCollapseButton: true,
+                    autoOpen:true,
+                    closeButtonAction: "close",
+                    theme:userInfo.theme
+                }).find('tbody').html(str);
+             },
+             error:function(err){
+                console.log("Exception : userStockListUpdate");
+             }
+          });
+       }
       
        var myStockInit = function(){
           $("#mystock-window").jqxWindow({
@@ -174,7 +222,7 @@ $(function(){
                 autoOpen:false,
                 theme:userInfo.theme
               });
-          myStockListUpdate();
+          myStockListUpdate(userInfo.nickName);
        }
       
       
@@ -188,7 +236,7 @@ $(function(){
 		    	  data:{isuCd:companyId, plQuantity:qty},
 		    	  success:function(data){
 		    		  if(data == "true"){
-		    			  myStockListUpdate();
+		    			  myStockListUpdate(userInfo.nickName);
 		    			  alert("구매 성공하였습니다.");
 		    		  }else{
 		    			  alert("구매 실패하였습니다.");
@@ -1275,11 +1323,16 @@ $(function(){
       
       /*친구주식현황보기*/
       $(document).on("click", ".userinfo-stocklist-btn",function(){
-    	  var friendNick = $(this).parents(".userinfo-window").children("label").children("span").text();
-    	  console.log("친구이름 ");
-    	  console.log($(this).parents(".userinfo-window").attr("id").split("-")[2]);
-    	  console.log(friendNick);
-    	  showUserInfo(friendNick);
+    	  var friendNick = $(this).parents(".userinfo-window").attr("id").split("-")[2];
+    	  myStockListUpdate(friendNick);
+
+      })
+      
+      /*친구주식분석보기*/
+      $(document).on("click", ".userinfo-stocklist-btn",function(){
+    	  var friendNick = $(this).parents(".userinfo-stockHistory-btn").attr("id").split("-")[2];
+    	  myStockListUpdate(friendNick);
+    	  $("#mystock-window").jqxWindow("show");
       })
       
 

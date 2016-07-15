@@ -132,11 +132,11 @@
 											{
 												chart : {
 													zoomType : 'x',
-													width : 300,
-													width : 200
+													height : 200,
+													width : 300
 												},
 												title : {
-												//text: 'Daily Earning Rate'
+													text: ' '
 												},
 												xAxis : {
 													type : 'datetime'

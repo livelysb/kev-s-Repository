@@ -697,7 +697,7 @@ $(function(){
               })
           })
           $("#store-window").jqxWindow({
-              width:740,
+              width:720,
               height:420,
               resizable:false,
               showCollapseButton: true,

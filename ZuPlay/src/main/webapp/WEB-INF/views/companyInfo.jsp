@@ -202,18 +202,19 @@
 						}
 						
 						/*탭 클릭 이벤트*/
-				         $("#history-content .nav-tabs  a").on("click",function(){
-				            if($(this).text()=="Best"){
-				               $("#history-worst-piechart").empty();
-				               historyBest();
+				         $("#company-${masterDTO.isuCd} .nav-tabs  a").on("click",function(){
+				        	 console.log("탭클릭")
+				            if($(this).text()=="오늘"){
+				            	console.log("오늘")
+				               $("#company-${masterDTO.isuCd} #company-chart-today").empty();
+				               chartData(JSON.parse('${rtpList}')); 
 				            }else{
-				               $("#history-best-piechart").empty();
-				               historyWorst();
+				            	console.log("한달")
+				               $("#company-${masterDTO.isuCd} #company-chart-month").empty();
+				               chartData(JSON.parse('${dpList}')); 
 				            }
 				         })
-				         console.log("시자악!")
 						console.log("company-${masterDTO.isuCd}");
 						chartData(JSON.parse('${rtpList}')); 
-						//chartData(Json.parse('${dpList}'));
 					});
 </script>

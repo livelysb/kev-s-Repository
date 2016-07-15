@@ -137,7 +137,6 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	@Override
 	@Transactional
 	public boolean auctionSell(String playerNickname, int piSq, int imPurchasePrice) throws Exception {
-		System.out.println("piSq : " +piSq);
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
 		PlayerItemDTO playerItemDTO = playerItemDAO.bringItemInfoByPiSq(piSq);
@@ -181,7 +180,6 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 		PlayerInfoDAO playerInfoDAO = sqlSession.getMapper(PlayerInfoDAO.class);
 		String imAuctionEnd = itemAuctionDAO.auctionBring(imSq);
 		if (imAuctionEnd.equals("F")) {
-			System.out.println(imAuctionEnd);
 			Map<String, String> map = new HashMap<String, String>();
 			int ruby = playerInfoDAO.getRuby(playerNickname);
 			int price = itemAuctionDAO.auctionHowPrice(imSq);
@@ -204,7 +202,6 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 				return false;
 			}
 		}
-		System.out.println("성공");
 		return true;
 	}
 

@@ -206,7 +206,7 @@
 						}
 						
 						/*탭 클릭 이벤트*/
-				         $("#company-${masterDTO.isuCd} .nav-tabs  a").on("click",function(){
+				        /*  $("#company-${masterDTO.isuCd} .nav-tabs  a").on("click",function(){
 				        	 console.log("탭클릭")
 				            if($(this).text()=="오늘"){
 				            	console.log("오늘")
@@ -215,9 +215,10 @@
 				            }else{
 				            	console.log("한달")
 				               $("#company-${masterDTO.isuCd} #company-chart-month").empty();
-				               chartData(JSON.parse('${dpList}'),"dp"); 
+				               
 				            }
-				         })
+				         }) */
 						chartData(JSON.parse('${rtpList}'),"rtp"); 
+				         chartData(JSON.parse('${dpList}'),"dp"); 
 					});
 </script>

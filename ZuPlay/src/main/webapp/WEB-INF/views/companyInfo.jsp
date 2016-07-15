@@ -79,8 +79,8 @@
 				<div class="col-xs-12"><div class='company-buy-slider company-val'></div></div>
 			</div>
 			<div class="row-fluid">
-				<div class="col-xs-4"><div class="company-buy-input company-val'"></div></div>
-				<div class="col-xs-5"><h4 class="company-buy-value'"></h4>0</div>
+				<div class="col-xs-4"><div class="company-buy-input company-val"></div></div>
+				<div class="col-xs-5"><h4 class="company-buy-value"></h4>0</div>
 				<div class="col-xs-3"><button class="company-buy-btn btn btn-block btn-success">매수</button></div>
 			</div>
 		</div>
@@ -89,8 +89,8 @@
 				<div class="col-xs-12"><div class='company-sell-slider'></div></div>
 			</div>
 			<div class="row-fluid">
-				<div class="col-xs-4"><div class="company-sell-input company-val'"></div></div>
-				<div class="col-xs-5"><h4 class="company-sell-value company-val'">0</h4></div>
+				<div class="col-xs-4"><div class="company-sell-input company-val"></div></div>
+				<div class="col-xs-5"><h4 class="company-sell-value company-val">0</h4></div>
 				<div class="col-xs-3"><button class="company-sell-btn btn btn-danger btn-block">매도</button></div>
 			</div>
 		</div>

@@ -151,16 +151,8 @@
 												},
 												tooltip : {
 													formatter : function() {
-														var result = new Date(
-																this.x)
-																.toUTCString()
-																.split("00:")[0];
-														return result
-																+ "<br>"
-																+ this.series.name
-																+ ' : <b>'
-																+ this.y
-																+ '</b>';
+														var result = new Date(this.x).toUTCString().split("GMT")[0];
+														return result+ "<br>"+ this.series.name+ ' : <b>'+ this.y+ '</b>';
 													}
 												},
 												plotOptions : {

@@ -112,9 +112,12 @@ small, .small {
 .side-section lable{
 	margin-bottom: 0px;
 }
+
+.side-info{
+	text-align: center;
+}
 .side-info label{
 	font-size: 20px;
-	width: 58px;
 	text-align: center;
 }
 .side-section div{
@@ -153,7 +156,6 @@ small, .small {
  	margin-left: 5px;
  	margin-right: 20px;
 }
-
 .button-margin-right {
 	margin-right: 50px;
 }

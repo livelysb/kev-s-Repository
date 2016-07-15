@@ -106,17 +106,23 @@
 			.ready(
 					function() {
 
-						var chartData = function(data,time,price) {
+						var chartData = function(data,kind) {
 							console.log(data);
 							console.log("시작");
 							ChartJson = new Array();
 							
 							$.each(data, function(index, item) {
 								var ChartObj = new Object();
-								ChartObj.x = item.time+32400000;
-								ChartObj.y = item.price;
-								ChartObj.name = item.time;
-								ChartJson.push(ChartObj);
+								if(kind=="rtp"){
+									ChartObj.x = item.rpTrdTm2+32400000;
+									ChartObj.y = item.rpTrdPrc;
+									ChartObj.name = item.rpTrdTm2;
+								}else{
+									ChartObj.x = item.dpDate2+32400000;
+									ChartObj.y = item.dpClsprc;
+									ChartObj.name = item.dpDate2;
+								}
+									ChartJson.push(ChartObj);
 							})
 
 							companylineChart(ChartJson);
@@ -205,14 +211,14 @@
 				            if($(this).text()=="오늘"){
 				            	console.log("오늘")
 				               $("#company-${masterDTO.isuCd} #company-chart-today").empty();
-				               chartData(JSON.parse('${rtpList}'),rpTrdTm2,rpTrdPrc); 
+				               chartData(JSON.parse('${rtpList}'),rtp); 
 				            }else{
 				            	console.log("한달")
 				               $("#company-${masterDTO.isuCd} #company-chart-month").empty();
-				               chartData(JSON.parse('${dpList}'),dpDate2,dpClsprc); 
+				               chartData(JSON.parse('${dpList}'),dp); 
 				            }
 				         })
 						console.log("company-${masterDTO.isuCd}");
-						chartData(JSON.parse('${rtpList}'),rpTrdTm2,rpTrdPrc); 
+						chartData(JSON.parse('${rtpList}'),rtp); 
 					});
 </script>

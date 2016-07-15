@@ -56,6 +56,8 @@ public class LoginController {
 	@RequestMapping(value = "joinMember")
 	public String joinMember(String playerNickname, String playerNaverId, String playerGender, String playerAge,
 			HttpSession session) throws Exception{
+
+		
 		try {
 			loginServiceImpl.joinMember(new PlayerDTO(playerNickname, playerNaverId, playerGender, playerAge, 100000000,
 					100000000, 1000, "B", 0, 0));
@@ -79,6 +81,11 @@ public class LoginController {
 	@ResponseBody
 	public boolean checkRepetition(String playerNickname, HttpSession session) throws Exception{
 		boolean checkRepetiton = false;
+		for(int i = 0 ; i<playerNickname.length();i++){
+			if(playerNickname.charAt(i)==' '){
+				return false;
+			}
+		}
 		try {
 			checkRepetiton = loginServiceImpl.checkRepetition(playerNickname);
 		} catch(Exception e) {

@@ -12,6 +12,7 @@
                <th>수량</th>
                <th>체결가</th>
                <th>총가치</th>
+               <th>등락률</th>
                <th>수익률</th>
             </tr>
          </thead>

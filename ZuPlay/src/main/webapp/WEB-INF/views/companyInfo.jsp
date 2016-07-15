@@ -75,27 +75,24 @@
 		</div>
 		<hr>
 		
-		<div class="row-fluid">
+		<div class="row-fluid company-buy">
 			<div class="col-xs-12"><div class='company-buy-slider'></div></div>
 		</div>
 			<div class="row-fluid">
 			<div class="col-xs-4"><div class="company-buy-input"></div></div>
-			<div class="col-xs-4"><label class="company-buy-value"></label></div>
-			<div class="col-xs-4"><button class="company-buy-btn btn btn-block btn-primary">매수</button></div>
+			<div class="col-xs-4"><h4 class="company-buy-value"></h4></div>
+			<div class="col-xs-4"><button class="company-buy-btn btn btn-block btn-success">매수</button></div>
 		</div>
 		
 
 		<c:if test="${plQuantity gt 0}">
 			<div class="row-fluid company-sell">
-				<div class="col-xs-8">
-					<div class="company-sell-slider"></div>
-				</div>
-				<div class="col-xs-2">
-					<h5 class="company-sell-value">0</h5>
-				</div>
-				<div class="col-xs-2">
-					<button class="company-sell-btn btn btn-danger">판매</button>
-				</div>
+				<div class="col-xs-12"><div class='company-sell-slider'></div></div>
+			</div>
+			<div class="row-fluid">
+				<div class="col-xs-4"><div class="company-sell-input"></div></div>
+				<div class="col-xs-4"><h4 class="company-sell-value"></h4></div>
+				<div class="col-xs-4"><button class="company-sell-btn btn btn-danger btn-block">매수</button></div>
 			</div>
 		</c:if>
 	</div>

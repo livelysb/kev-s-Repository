@@ -211,14 +211,14 @@
 				            if($(this).text()=="오늘"){
 				            	console.log("오늘")
 				               $("#company-${masterDTO.isuCd} #company-chart-today").empty();
-				               chartData(JSON.parse('${rtpList}'),rtp); 
+				               chartData(JSON.parse('${rtpList}'),"rtp"); 
 				            }else{
 				            	console.log("한달")
 				               $("#company-${masterDTO.isuCd} #company-chart-month").empty();
-				               chartData(JSON.parse('${dpList}'),dp); 
+				               chartData(JSON.parse('${dpList}'),"dp"); 
 				            }
 				         })
 						console.log("company-${masterDTO.isuCd}");
-						chartData(JSON.parse('${rtpList}'),rtp); 
+						chartData(JSON.parse('${rtpList}'),"rtp"); 
 					});
 </script>

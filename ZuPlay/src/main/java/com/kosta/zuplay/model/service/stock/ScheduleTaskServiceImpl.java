@@ -53,14 +53,15 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 	}
 	
 
-	@Scheduled(cron="0 20 9 * * MON-FRI")
+	@Scheduled(cron="0 15 9 * * MON-FRI")
 	@Override
 	public void actionAtNine(){
-		System.out.println("AM 09:20, 작업을 시작합니다.");
+		System.out.println("AM 09:15, 작업을 시작합니다.");
 		try {
-			stockUpdateService.masterUpdate();
+			//stockUpdateService.masterUpdate();
 			stockUpdateService.realtimePriceReset();
 			earningRateService.updateEarningRate();
+			System.out.println("9시 15분에 시작한 작업 정상종료");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,6 +74,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 		System.out.println("PM 03:00, 작업을 시작합니다.");
 		try {
 			stockUpdateService.dailyPriceInsert();
+			System.out.println("3시에 시작한 작업 정상종료");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

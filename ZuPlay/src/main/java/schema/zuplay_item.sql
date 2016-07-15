@@ -87,3 +87,23 @@ insert into item(ITEM_CODE, ITEM_NAME, ITEM_PRICE, ITEM_CLASS, ITEM_GRADE, ITEM_
 insert into item(ITEM_CODE, ITEM_NAME, ITEM_PRICE, ITEM_CLASS, ITEM_GRADE, ITEM_IMG, ITEM_GENDER) values ('a_acc_04','포터안경','5000','acc','common','resources/img/avatar/acc/a_acc_04.png','a');
 insert into item(ITEM_CODE, ITEM_NAME, ITEM_PRICE, ITEM_CLASS, ITEM_GRADE, ITEM_IMG, ITEM_GENDER) values ('a_acc_05','토끼귀','3000','acc','common','resources/img/avatar/acc/a_acc_05.png','a');
 insert into item(ITEM_CODE, ITEM_NAME, ITEM_PRICE, ITEM_CLASS, ITEM_GRADE, ITEM_IMG, ITEM_GENDER) values ('a_acc_06','귀염꽃','4000','acc','common','resources/img/avatar/acc/a_acc_06.png','a');
+
+
+update item set item_grade='rare' where item_name='기도머리';
+update item set item_grade='rare' where item_name='경원머리';
+update item set item_grade='rare' where item_name='회사정장';
+update item set item_grade='rare' where item_name='카사노바셔츠';
+update item set item_grade='rare' where item_name='떡볶이코트';
+update item set item_grade='rare' where item_name='기본정장';
+update item set item_grade='rare' where item_name='청멜빵';
+update item set item_grade='rare' where item_name='회색V넥';
+update item set item_grade='rare' where item_name='회사원룩';
+update item set item_grade='rare' where item_class='eyes';
+update item set item_grade='rare' where item_class='mouse';
+update item set item_grade='rare' where item_class='earring';
+update item set item_grade='uniq' where item_class='acc';
+update item set item_grade='common' where item_name='웃는눈';
+update item set item_grade='common' where item_name='졸린눈';
+update item set item_grade='common' where item_name='유령신부';
+update item set item_grade='common' where item_name='웃는입';
+update item set item_grade='common' where item_name='스마일입';

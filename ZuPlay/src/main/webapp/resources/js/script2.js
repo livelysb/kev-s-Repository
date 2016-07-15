@@ -384,8 +384,6 @@ $(function(){
               var storeIsOpen = $("#store-window").jqxWindow("isOpen");
               var auctionIsOpen = $("#auction-window").jqxWindow("isOpen");
               var dataItem=$(this).children().data("item");
-              console.log("데이터");
-              console.log(dataItem);
               if(storeIsOpen==true && auctionIsOpen==true) {
               
               }else if(storeIsOpen==true){
@@ -428,7 +426,7 @@ $(function(){
         }
         
 
-     // 경매판매
+        // 경매판매
         var auctionSell = function(piSq,imPurchasePrice){
            
            $.ajax({
@@ -1594,6 +1592,9 @@ $(function(){
       
       /*히스토리 */
       var historyInit = function(targetPlayer){
+         var nowPage=0;
+         var nowOrderby="";
+         var nowAsc=false;
          
          /*히스토리 페이지네이션*/
          var historyPage = function(page){
@@ -1642,7 +1643,7 @@ $(function(){
                      str+="<td>"+item.masterDTO.isuKorAbbrv+"</td>";
                      str+="<td>"+item.masterDTO.kind+"</td>";
                      str+="<td>"+item.sdhDealTime+"</td>";
-                     str+="<td>"+item.sdhQuantity+"</td>";
+                     str+="<td>"+(item.sdhQuantity).format()+"</td>";
                      str+="<td>"+((item.masterDTO.priceDTO.trdPrc).format())+"</td>";
                      str+="<td>"+((item.sdhDealPrice).format())+"</td></tr>";
                   });

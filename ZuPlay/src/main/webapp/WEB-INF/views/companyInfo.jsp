@@ -25,14 +25,14 @@
 
 					<div class="tab-content">
 						<div id="company-chart-today" class="tab-pane fade in active">
-							<c:forEach items="${masterDTO.rtpList}" var="rtp" varStatus="stu">
-		   		${rtp.rpTrdTm2} : ${rtp.rpTrdPrc}
-		   </c:forEach>
+							<%-- <c:forEach items="${masterDTO.rtpList}" var="rtp" varStatus="stu">
+						   		${rtp.rpTrdTm2} : ${rtp.rpTrdPrc}
+						   </c:forEach> --%>
 						</div>
 						<div id="company-chart-month" class="tab-pane fade">
-							<c:forEach items="${masterDTO.dpList}" var="dp" varStatus="stu">
-		   		${dp.dpDate2} : ${dp.dpClsprc}
-		   </c:forEach>
+							<%-- <c:forEach items="${masterDTO.dpList}" var="dp" varStatus="stu">
+						   		${dp.dpDate2} : ${dp.dpClsprc}
+						   </c:forEach> --%>
 						</div>
 					</div>
 				</div>
@@ -207,6 +207,6 @@
 												} ]
 											});
 						}
-						chartData("${rtpList}");
+						chartData(JSON.parse("${rtpList}"));
 					});
 </script>

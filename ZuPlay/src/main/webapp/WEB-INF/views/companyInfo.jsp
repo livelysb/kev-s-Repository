@@ -215,10 +215,9 @@
 				            }else{
 				            	console.log("한달")
 				               $("#company-${masterDTO.isuCd} #company-chart-month").empty();
-				               
+				            	chartData(JSON.parse('${dpList}'),"dp")
 				            }
 				         }) 
 						chartData(JSON.parse('${rtpList}'),"rtp"); 
-/* 				        chartData(JSON.parse('${dpList}'),"dp"); 
- */					});
+ 					});
 </script>

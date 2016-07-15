@@ -12,6 +12,10 @@ body {
 	background-image: url("../img/back.png");
 }
 
+table{
+	text-align: center;
+}
+
 #loader {
 	visibility: hidden;
 }

@@ -131,6 +131,7 @@ small, .small {
 	font-size: 20px;
 	text-align: center;
 	vertical-align: middle;
+	background-color: lightgray !important;
 }
 
 .side-ruby{
@@ -153,7 +154,7 @@ small, .small {
 .side-info img{
  	width : 50px;
  	height : 30px;
- 	margin-left: 5px;
+ 	margin-left: 10px;
  	margin-right: 20px;
 }
 .button-margin-right {

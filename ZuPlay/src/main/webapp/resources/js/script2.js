@@ -1273,6 +1273,12 @@ $(function(){
          showUserInfo($(this).text());
       })
       
+      /*친구주식현황보기*/
+      $(document).on("click", ".userinfo-stocklist-btn",function(){
+    	  var friendNick = $(this).parent(".userinfo-window").children(".userinfo-favorite").children("span");
+    	  console.log("친구이름 : " + friendNick);
+    	  showUserInfo(friendNick);
+      })
       
 
        /* 뉴스 검색 */

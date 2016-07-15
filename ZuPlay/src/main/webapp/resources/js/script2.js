@@ -105,7 +105,7 @@ $(function(){
                       $(data).each(function(index, item) {
                     
                         if(index!=0){
-                           $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+item.priceDTO.trdPrc+"</td> <td>"+item.priceDTO.cmpprevddPrc+"</td> <td>"+item.priceDTO.fluctuationRate+"%</td><td>"+item.priceDTO.accTrdvol+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
+                           $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+(item.priceDTO.trdPrc).format()+"</td> <td>"+(item.priceDTO.cmpprevddPrc).format()+"</td> <td>"+item.priceDTO.fluctuationRate+"</td><td>"+(item.priceDTO.accTrdvol).format()+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
                         }
                       });
                      if(data.length < 11) stockPage=1;
@@ -142,9 +142,9 @@ $(function(){
               $.each(data, function(index, item){
                  str+="<tr><td>"+item.isuKorAbbrv+"</td>";
                  str+="<td>"+item.kind+"</td>";
-                 str+="<td>"+item.plQuantity+"</td>";
-                 str+="<td>"+item.priceDTO.trdPrc+"</td>";
-                 str+="<td>"+item.priceDTO.trdPrc * item.plQuantity+"</td>";
+                 str+="<td>"+(item.plQuantity).format()+"</td>";
+                 str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
+                 str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
                  str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
                  str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
               });
@@ -503,13 +503,13 @@ $(function(){
                         }else{
                            str+="<tr class='stock-evt'><td class='stock-select'>"+item.isuKorAbbrv+"</a></td>"
                            str+="<td>"+item.kind+"</td>"
-                           str+="<td>"+item.priceDTO.trdPrc +"</td>";
-                           str+="<td>"+item.priceDTO.cmpprevddPrc +"</td>";
+                           str+="<td>"+(item.priceDTO.trdPrc).format() +"</td>";
+                           str+="<td>"+(item.priceDTO.cmpprevddPrc).format() +"</td>";
                            str+="<td>"+item.priceDTO.fluctuationRate +"</td>";
-                           str+="<td>"+item.priceDTO.accTrdvol +"</td>";
-                           str+="<td>"+item.priceDTO.opnprc +"</td>";
-                           str+="<td>"+item.priceDTO.hgprc +"</td>";
-                           str+="<td>"+item.priceDTO.lwprc +"</td>";
+                           str+="<td>"+(item.priceDTO.accTrdvol).format() +"</td>";
+                           str+="<td>"+(item.priceDTO.opnprc).format() +"</td>";
+                           str+="<td>"+(item.priceDTO.hgprc).format() +"</td>";
+                           str+="<td>"+(item.priceDTO.lwprc).format() +"</td>";
                            str+="<input type='hidden' value='"+item.isuCd+"'/></tr>"
                         }
                      })

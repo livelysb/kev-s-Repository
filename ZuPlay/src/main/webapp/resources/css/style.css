@@ -16,6 +16,10 @@ table{
 	text-align: center;
 }
 
+table th{
+	text-align: center;
+}
+
 #loader {
 	visibility: hidden;
 }
@@ -261,7 +265,8 @@ div.vertical-line {
 #inven-player-avatar img {
 	position: absolute;
 	height: 100%;
-	width: 100%
+	width: 100%;
+	left:0;
 }
 
 /* 기업 정보 */

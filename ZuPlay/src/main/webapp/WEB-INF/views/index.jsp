@@ -40,11 +40,9 @@
 			</div>
 			<div class="side-money side-info">
 				<img src="resources/img/money.png"><label>loading</label>
-				<label class="pull-right">원</label>
 			</div>
 			<div class="side-ruby side-info">
 				<img src="resources/img/ruby-small.png"><label>loading</label>
-				<label class="pull-right">루비</label>
 			</div>
 		</div>
 	      

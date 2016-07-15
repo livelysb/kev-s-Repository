@@ -68,20 +68,57 @@ small, .small {
 	z-index: 99999999 !important;
 }
 
+.price-up:before{
+  content: "\f0d8";
+  margin-right: 2px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  font-weight: bold;
+  color: red;
+}
+
+.price-up{
+  color: red;
+}
+
+.price-down:before{
+  content: "\f0d7";
+  margin-right: 2px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  font-weight: bold;
+  color: blue;
+}
+
+.price-down{
+  color:blue;
+}
+
 .side-section{
-	display: table;
 	width : 228px;
 	height: auto;
-	border: 2px black solid;
+	border: 4px black solid;
 	background-color : white;
 	overflow: hidden;
 	box-sizing: content-box;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 
+.side-section lable{
+	margin-bottom: 0px;
+}
+.side-info label{
+	font-size: 20px;
+}
 .side-section div{
 	width : 100%;
 	padding-bottom: 2px;
-	border-bottom: 2px black solid;
+	border-bottom: 4px black solid;
 }
 
 .side-id {
@@ -95,15 +132,6 @@ small, .small {
 	border-bottom: 0px !important;
 }
 
-.side-id, ,.side-info{
-	display: table-cell;
-	vertical-align: middle;
-}
-
-.side-info label{
-	font-size: 20px;
-}
-
 .side-avatar {
 	width: 228px;
 	height: 300px;
@@ -114,7 +142,7 @@ small, .small {
 	position: absolute;
 	width: 228px;
 	height: 300px;
-	padding-bottom: 3px;
+	padding-bottom: 5px;
 }
 
 .side-info img{

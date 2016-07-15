@@ -117,6 +117,7 @@
 								ChartObj.y = item.rpTrdPrc;
 								ChartObj.name = item.rpTrdTm2;
 								console.log(ChartObj.x + "," + ChartObj.y);
+								console.log(item.rpTrdTm)
 								ChartJson.push(ChartObj);
 							})
 

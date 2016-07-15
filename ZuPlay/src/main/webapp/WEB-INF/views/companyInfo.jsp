@@ -200,6 +200,19 @@
 												} ]
 											});
 						}
+						
+						/*탭 클릭 이벤트*/
+				         $("#history-content .nav-tabs  a").on("click",function(){
+				            if($(this).text()=="Best"){
+				               $("#history-worst-piechart").empty();
+				               historyBest();
+				            }else{
+				               $("#history-best-piechart").empty();
+				               historyWorst();
+				            }
+				         })
+				         console.log("시자악!")
+						console.log("company-${masterDTO.isuCd}");
 						chartData(JSON.parse('${rtpList}')); 
 						//chartData(Json.parse('${dpList}'));
 					});

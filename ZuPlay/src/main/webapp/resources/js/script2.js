@@ -1275,8 +1275,10 @@ $(function(){
       
       /*친구주식현황보기*/
       $(document).on("click", ".userinfo-stocklist-btn",function(){
-    	  var friendNick = $(this).parent(".userinfo-window").children(".userinfo-favorite").children("span");
-    	  console.log("친구이름 : " + friendNick);
+    	  var friendNick = $(this).parents(".userinfo-window").children("label").children("span").text();
+    	  console.log("친구이름 ");
+    	  console.log($(this).parents(".userinfo-window").attr("id").split("-")[2]);
+    	  console.log(friendNick);
     	  showUserInfo(friendNick);
       })
       

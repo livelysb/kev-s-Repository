@@ -95,12 +95,12 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 		double feePercent = 0;
 		for (StockDealHistoryDTO history : list) {
 			if (history.getSdhBuySell().equals("b"))
-				feePercent = 0.015;
+				feePercent = 0.00015;
 			else
-				feePercent = -0.315;
+				feePercent = -0.00315;
 			history.getMasterDTO().setPriceDTO(new PriceDTO());
 			history.getMasterDTO().getPriceDTO()
-					.setTrdPrc((int) (history.getSdhDealPrice() / (history.getSdhQuantity() * (1 + feePercent))));
+					.setTrdPrc((int) (history.getSdhDealPrice() / (history.getSdhQuantity() * (1 + feePercent)))+1);
 		}
 		return list;
 	}

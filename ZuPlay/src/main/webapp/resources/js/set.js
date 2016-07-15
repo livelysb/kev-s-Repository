@@ -13,23 +13,26 @@ userInfo = {
 }
 
 //숫자 타입에서 쓸 수 있도록 format() 함수 추가
-Number.prototype.format = function(){
-    if(this==0) return 0;
- 
-    var reg = /(^[+-]?\d+)(\d{3})/;
-    var n = (this + '');
- 
-    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
- 
-    return n;
+Number.prototype.format = function() {
+	if (this == 0)
+		return 0;
+
+	var reg = /(^[+-]?\d+)(\d{3})/;
+	var n = (this + '');
+
+	while (reg.test(n))
+		n = n.replace(reg, '$1' + ',' + '$2');
+
+	return n;
 };
- 
+
 // 문자열 타입에서 쓸 수 있도록 format() 함수 추가
-String.prototype.format = function(){
-    var num = parseFloat(this);
-    if( isNaN(num) ) return "0";
- 
-    return num.format();
+String.prototype.format = function() {
+	var num = parseFloat(this);
+	if (isNaN(num))
+		return "0";
+
+	return num.format();
 };
 
 /* 셋팅 정보 */
@@ -83,6 +86,10 @@ $('#menu-bar').dockmenu({
 		'id' : "mystock-btn",
 		'imgURL' : 'resources/img/icons/mystock.png'
 	}, {
+		'title' : '분석',
+		'id' : "history-btn",
+		'imgURL' : 'resources/img/icons/contract.png'
+	}, {
 		'title' : '뉴스',
 		'id' : "news-search-btn",
 		'imgURL' : 'resources/img/icons/news.png'
@@ -116,11 +123,7 @@ $('#menu-bar').dockmenu({
 		'id' : "ranking-btn",
 		'class' : 'button-margin-right',
 		'imgURL' : 'resources/img/icons/medal.png'
-	},{
-		'title' : '분석',
-		'id' : "history-btn",
-		'imgURL' : 'resources/img/icons/contract.png'
-	},{
+	}, {
 		'title' : '내 정보',
 		'id' : "myinfo-btn",
 		'imgURL' : 'resources/img/icons/id-card.png'

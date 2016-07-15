@@ -224,7 +224,7 @@ $(function(){
     	     var company = $(companyId);
              var price = $(company).find(".company-title-stock").text();
              var isuCd = $(company).find(".company-isuCd").val();
-             var qty = $(company).find(".company-qty").val();
+             var qty = parseInt($(company).find(".company-qty").val()/1);
              var ticks = parseInt(userInfo.money/price);
              
              var buySlider = $(company).find(".company-buy-slider");
@@ -232,27 +232,31 @@ $(function(){
              
              var sellSlider = $(company).find(".company-sell-slider");
              var sellNum = $(company).find(".company-sell-input");
+             console.log(qty);
              
-             $(companyId).jqxWindow({
-                   theme:userInfo.theme,
-                   minWidth:800,
-                   width:"auto",
-                   minHeight:500,
-                   showCollapseButton: true,
-                   resizable : false
-                 });
-             
-             $(buySlider).jqxSlider({
-                 width: "100%",
-                 tooltip: true,
-                 mode: 'fixed',
-                 min : 1,
-                 max : ticks,
-                 ticksFrequency: ticks/10,
-                 theme : userInfo.theme,
-                 step: 1
-             });
-             
+             if(ticks>0){
+	             $(companyId).jqxWindow({
+	                   theme:userInfo.theme,
+	                   minWidth:800,
+	                   width:"auto",
+	                   minHeight:500,
+	                   showCollapseButton: true,
+	                   resizable : false
+	                 });
+	             
+	             $(buySlider).jqxSlider({
+	                 width: "100%",
+	                 tooltip: true,
+	                 mode: 'fixed',
+	                 min : 1,
+	                 max : ticks,
+	                 ticksFrequency: ticks/10,
+	                 theme : userInfo.theme,
+	                 step: 1
+	             });
+             }else{
+            	 $(company).find(".company-buy").remove();
+             }
              $(buyNum).jqxNumberInput({
                  width: '100%',
                  height: '25px',
@@ -268,17 +272,6 @@ $(function(){
                });
               
               if(qty>0){
-                  $(sellSlider).jqxSlider({
-                      width: "100%",
-                      tooltip: true,
-                      mode: 'fixed',
-                      min : 1,
-                      max : qty,
-                      ticksFrequency: qty/10,
-                      theme : userInfo.theme,
-                      step: 1
-                  });
-                  
                   $(sellNum).jqxNumberInput({
                       width: '100%',
                       height: '25px',
@@ -292,7 +285,18 @@ $(function(){
                       decimalDigits: 0,
                       theme : userInfo.theme
                     });
-
+                  $(sellSlider).jqxSlider({
+                      width: "100%",
+                      tooltip: true,
+                      mode: 'fixed',
+                      min : 1,
+                      ticksFrequency: qty/10,
+                      max : qty,
+                      theme : userInfo.theme,
+                      step: 1
+                  });
+              }else{
+             	 $(company).find(".company-buy").remove();
               }
       }
 

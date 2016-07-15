@@ -42,8 +42,8 @@ $(function(){
    
    /* 내 정보 갱신 (Money, Ruby) */
    var updateLabel = function(){
-	   $(".side-money label").text("₩ " + userInfo.money.format());
-	   $(".side-ruby label").text("₩ " + userInfo.ruby.format());
+	   $(".side-money label").text(userInfo.money.format());
+	   $(".side-ruby label").text(userInfo.ruby.format());
    }
    
    

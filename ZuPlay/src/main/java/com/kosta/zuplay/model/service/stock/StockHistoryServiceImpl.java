@@ -43,7 +43,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 			erh.setPehDate(erh.getPehDate().split(" ")[0]);
 			erh.setPehDate2(new Date(Integer.parseInt(erh.getPehDate().split("-")[0]) - 1900,
 					Integer.parseInt(erh.getPehDate().split("-")[1]),
-					Integer.parseInt(erh.getPehDate().split("-")[2]) + 1,
+					Integer.parseInt(erh.getPehDate().split("-")[2]),
 					-15,0,0).getTime());
 		}
 		return list;

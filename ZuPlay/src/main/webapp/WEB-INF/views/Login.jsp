@@ -121,7 +121,7 @@
 				<div class="col-lg-4 col-sm-6">
 					<a href="${url}/img/portfolio/fullsize/1.jpg" class="portfolio-box"
 						style="text-align: center"> <img
-						src="${url}/img/portfolio/thumbnails/1.jpg" class="img-responsive"
+						src="${url}/img/portfolio/thumbnails/1.jpg"  width="100%"  height="350px"  class="img-responsive"
 						alt="">
 						<div class="portfolio-box-caption">
 							<div class="portfolio-box-caption-content">
@@ -134,7 +134,7 @@
 				<div class="col-lg-4 col-sm-6">
 					<a href="${url}/img/portfolio/fullsize/2.jpg" class="portfolio-box"
 						style="text-align: center"> <img
-						src="${url}/img/portfolio/thumbnails/2.jpg" class="img-responsive"
+						src="${url}/img/portfolio/fullsize/2.jpg"  width="100%"  height="350px" class="img-responsive"
 						alt="">
 						<div class="portfolio-box-caption">
 							<div class="portfolio-box-caption-content">
@@ -146,8 +146,8 @@
 					</a>
 				</div>
 				<div class="col-lg-4 col-sm-6">
-					<a href="${url}/img/portfolio/fullsize/3.jpg" class="portfolio-box">
-						<img src="${url}/img/portfolio/thumbnails/3.jpg"
+					<a href="${url}/img/portfolio/fullsize/3.png" class="portfolio-box">
+						<img src="${url}/img/portfolio/thumbnails/3.png"  width="100%"  height="350px" 
 						class="img-responsive" alt="">
 						<div class="portfolio-box-caption">
 							<div class="portfolio-box-caption-content">
@@ -159,7 +159,7 @@
 				</div>
 				<div class="col-lg-4 col-sm-6">
 					<a href="${url}/img/portfolio/fullsize/4.jpg" class="portfolio-box">
-						<img src="${url}/img/portfolio/thumbnails/4.jpg"
+						<img src="${url}/img/portfolio/thumbnails/4.jpg"  width="100%"  height="350px" 
 						class="img-responsive" alt="">
 						<div class="portfolio-box-caption">
 							<div class="portfolio-box-caption-content">
@@ -171,7 +171,7 @@
 				</div>
 				<div class="col-lg-4 col-sm-6">
 					<a href="${url}/img/portfolio/fullsize/5.jpg" class="portfolio-box">
-						<img src="${url}/img/portfolio/thumbnails/5.jpg"
+						<img src="${url}/img/portfolio/thumbnails/5.jpg"  width="100%"  height="350px" 
 						class="img-responsive" alt="">
 						<div class="portfolio-box-caption">
 							<div class="portfolio-box-caption-content">
@@ -183,7 +183,7 @@
 				</div>
 				<div class="col-lg-4 col-sm-6">
 					<a href="${url}/img/portfolio/fullsize/6.jpg" class="portfolio-box">
-						<img src="${url}/img/portfolio/thumbnails/6.jpg"
+						<img src="${url}/img/portfolio/thumbnails/6.jpg"  width="100%"  height="350px" 
 						class="img-responsive" alt="">
 						<div class="portfolio-box-caption">
 							<div class="portfolio-box-caption-content">

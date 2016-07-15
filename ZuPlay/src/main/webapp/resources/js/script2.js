@@ -729,6 +729,8 @@ $(function(){
              maxHeight:900,
              showCollapseButton: true
            });
+         
+         /*친구추가 검색*/
          var friendSearch = function(){
         	 $.ajax({
                  url:"playerInfoSelectAll",
@@ -736,12 +738,23 @@ $(function(){
                  data:"keyword="+$("#friend-add-text").val(),
                  dataType:"json",
                  success:function(data){
+                	 console.log(data);
                     str="";
                     $.each(data,function(index,item){
+                       str+="<tr class='friend-add-tr'>";
+                       str+="<td><div class='friend-seach-avatar-div'>";
                        
-                       str+="<tr class='friend-add-tr'><td>아바타</td>";
-                       str+="<td>"+item.playerNickname+"</td>"
-                       str+="<td>"+item.playerGrade+"</td></tr>"
+                       var avatarEquiAry = avatarEqui("friend-seach",item.playerGender,item.playerItemDTO);
+                       
+                       for(var i=0; i<=5; i++ ){
+                           str += avatarEquiAry[i];
+                        }
+                       str+="</div>";
+                       str+="</td>";	   
+                    	   
+                       str+="<td>"+item.playerNickname+"</td></tr>";
+                       
+                       
                     })
                     $("#friend-list-table").empty();
                     $("#friend-list-table").html(str);
@@ -1525,17 +1538,17 @@ $(function(){
                if(kind=="s"){
             	   switch (item.playerSeasonRank) {
 						case 1: str+="<td><img src='resources/img/grade/gold.png' style='width:60px;height:60px;'></td>";	break;
-						case 2:	str+="<td><img src='resources/img/grade/silver.png' style='width:40px;height:40px;'></td>"; break;
+						case 2:	str+="<td><img src='resources/img/grade/silver.png' style='width:50px;height:50px;'></td>"; break;
 						case 3:	str+="<td><img src='resources/img/grade/bronze.png' style='width:40px;height:40px;'></td>"; break;
 		
 						default: str+="<td>"+item.playerSeasonRank+"</td>"; break;
 					}
                }else{
             	   switch (item.playerDailyRank) {
-	            	    case 1: str+="<td><img src='resources/grade/gold.png'></td>";	break;
-						case 2:	str+="<td><img src='resources/grade/silver.png'></td>"; break;
-						case 3:	str+="<td><img src='resources/grade/bronze.png'></td>"; break;
-		
+	            	    case 1: str+="<td><img src='resources/img/grade/gold.png' style='width:60px;height:60px;'></td>";	break;
+						case 2:	str+="<td><img src='resources/img/grade/silver.png' style='width:50px;height:50px;'></td>"; break;
+						case 3:	str+="<td><img src='resources/img/grade/bronze.png' style='width:40px;height:40px;'></td>"; break;
+		 
 						default: str+="<td>"+item.playerDailyRank+"</td>"; break;
             	   }
                }
@@ -1551,7 +1564,7 @@ $(function(){
                str+="</div>";
                str+="</td>";
                str+="<td class='ranking-playernickname'>"+item.playerNickname+"</td>";
-               kind=="s" ? str+="<td>"+item.totalEarningRate+"%</td>" : str+="<td>"+item.earningRate+"%</td>";
+               kind=="s" ? str+="<td>"+(item.totalEarningRate).toFixed(2)+"</td>" : str+="<td>"+item.earningRate+"%</td>";
                str+="<td>"+(item.totalMoney).format()+"</td></tr>";
             }) 
             if(kind=="s"){

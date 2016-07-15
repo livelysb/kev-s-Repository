@@ -436,7 +436,8 @@ $(function(){
               data:"piSq="+piSq+"&imPurchasePrice="+imPurchasePrice,
               dataType:"",
               success:function(result){ 
-                 if(result=="true"){
+            	  console.log(result);
+                 if(result==true){
                     $(".inven-auction-modal").modal("hide");
                     playerItemSelectAll();
                     $("#inven-auction-imPurchasePrice").val("");

@@ -207,6 +207,6 @@
 												} ]
 											});
 						}
-						chartData(JSON.parse(${rtpList}));
+						chartData(JSON.parse('${rtpList}')); 
 					});
 </script>

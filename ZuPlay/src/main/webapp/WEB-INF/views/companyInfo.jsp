@@ -152,7 +152,7 @@
 												tooltip : {
 													formatter : function() {
 														var result = new Date(this.x).toUTCString().split("GMT")[0];
-														return result+ "<br>"+ this.series.name+ ' : <b>'+ this.y+ '</b>';
+														return result+ "<br>"+ this.series.name+ ' : <b>'+ (this.y).format()+ '원</b>';
 													}
 												},
 												plotOptions : {
@@ -195,7 +195,7 @@
 
 												series : [ {
 													type : 'area',
-													name : 'Profit',
+													name : '체결가',
 													data : ChartJson
 												} ]
 											});

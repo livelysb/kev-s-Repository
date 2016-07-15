@@ -148,10 +148,10 @@ public class PlayerInfoController {
 
 	@RequestMapping(value = { "playerStock" }, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String playerStock(HttpSession session, String tragetPlayer) throws Exception {
+	public String playerStock(HttpSession session, String targetPlayer) throws Exception {
 		try {
 			Gson gson = new Gson();
-			String json = gson.toJson(playerStockService.getPlayerStocksDetail(tragetPlayer));
+			String json = gson.toJson(playerStockService.getPlayerStocksDetail(targetPlayer));
 			return json;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -382,8 +382,8 @@
 			</div>
 			<div id="history-right">
 				<ul class="nav nav-tabs">
-				  <li class="active"><a data-toggle="tab" href="#history-best-div">Best</a></li>
-				  <li><a data-toggle="tab" href="#history-worst-div">Worst</a></li>
+				  <li class="active"><a data-toggle="tab" href="#history-best-div">Profit</a></li>
+				  <li><a data-toggle="tab" href="#history-worst-div">Lost</a></li>
 				</ul>
 				<div class="tab-content">
 				  <div id="history-best-div" class="tab-pane active">	

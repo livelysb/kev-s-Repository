@@ -71,6 +71,7 @@ public class StockInfoController {
 		ModelAndView mv = new ModelAndView("companyInfo");
 		mv.addObject("masterDTO", masterDTO);
 		mv.addObject("plQuantity", plQuantity);
+		mv.addObject("rtpList", new Gson().toJson(masterDTO.getRtpList()));
 		return mv;
 	}
 }

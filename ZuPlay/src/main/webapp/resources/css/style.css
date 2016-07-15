@@ -69,7 +69,7 @@ small, .small {
 }
 
 .side-section{
-	display: inline-block;
+	display: table;
 	width : 228px;
 	height: auto;
 	border: 2px black solid;
@@ -84,10 +84,18 @@ small, .small {
 	border-bottom: 2px black solid;
 }
 
-
 .side-id {
 	font-weight: bold;
 	text-align: center;
+}
+
+.side-ruby{
+	border-bottom: 0px !important;
+}
+
+.side-id, ,.side-avatar{
+	display: table-cell;
+	vertical-align: middle;
 }
 
 .side-avatar {
@@ -99,8 +107,15 @@ small, .small {
 .side-avatar img {
 	position: absolute;
 	width: 228px;
-	height: 300px;;
-	margin-bottom: 2px;
+	height: 300px;
+	padding-bottom: 3px;
+}
+
+.side-info img{
+ 	width : 50px;
+ 	height : 30px;
+ 	margin-left: 5px;
+ 	margin-right: 20px;
 }
 
 .button-margin-right {

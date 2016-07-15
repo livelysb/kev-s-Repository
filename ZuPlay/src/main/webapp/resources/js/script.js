@@ -4,7 +4,7 @@ $(function(){
          url:"updatePI",
          dataType:"json",
          success:function(data){
-        	 console.log(data);
+        	console.log(data);
             userInfo.nickName=data.playerNickname;
             userInfo.gender =data.playerGender;
             userInfo.money =data.playerMoney;
@@ -16,6 +16,8 @@ $(function(){
             if(callBack){
                callBack();
             }
+            
+            updateLabel();
 
          },
          error:function(){
@@ -25,6 +27,7 @@ $(function(){
          }
       })
    }
+  
    
    /* 버튼클릭했을 때 이벤트 설정 */
    $.fn.setBtn = function(window){
@@ -37,6 +40,12 @@ $(function(){
       return this;
    };
    
+   /* 내 정보 갱신 (Money, Ruby) */
+   var updateLabel = function(){
+	   $(".side-money label").text("₩ " + userInfo.money.format());
+	   $(".side-ruby label").text("₩ " + userInfo.ruby.format());
+   }
+   
    
    var initContent = function(){
       console.log("start init content");
@@ -47,7 +56,7 @@ $(function(){
       })
       
    
-
+      updateLabel();
       
       /*아바타 옷입히기*/
       var avatarEqui = function(className,avatarGender,playerItem){

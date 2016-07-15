@@ -85,7 +85,7 @@
 			</div>
 		</div>
 		<div class="company-sell">
-			<div class="row-fluid company-sell">
+			<div class="row-fluid">
 				<div class="col-xs-12"><div class='company-sell-slider'></div></div>
 			</div>
 			<div class="row-fluid">

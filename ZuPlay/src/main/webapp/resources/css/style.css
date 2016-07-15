@@ -114,6 +114,8 @@ small, .small {
 }
 .side-info label{
 	font-size: 20px;
+	width: 58px;
+	text-align: center;
 }
 .side-section div{
 	width : 100%;

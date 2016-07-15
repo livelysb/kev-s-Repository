@@ -69,28 +69,70 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 				payRubyMap.put("playerNickname", playerNickname);
 				payRubyMap.put("updateRuby", ruby - price + "");
 				playerInfoDAO.updateRuby(payRubyMap);
-				itemDTO=itemStoreDAO.itemInfo(itemDTO.getItemCode());
+				itemDTO = itemStoreDAO.itemInfo(itemDTO.getItemCode());
 				if (itemDTO.getItemClass().equals("random")) {
 					int ranNum = (int) (Math.random() * 10 + 1);
 					Map<String, String> randomBoxMap = new HashMap<>();
 					String gender = playerInfoDAO.getPlayer(playerNickname).getPlayerGender();
-					if (gender.equals("M")) {
-						randomBoxMap.put("playerGender", "F");
-						if (ranNum <= 1) {
-							randomBoxMap.put("randomResult", "uniq");
-						} else if (ranNum <= 4) {
-							randomBoxMap.put("randomResult", "rare");
+					if (itemDTO.getItemName().equals("하급랜덤박스")) {
+						if (gender.equals("M")) {
+							randomBoxMap.put("playerGender", "F");
+							if (ranNum <= 0.5) {
+								randomBoxMap.put("randomResult", "uniq");
+							} else if (ranNum <= 2) {
+								randomBoxMap.put("randomResult", "rare");
+							} else {
+								randomBoxMap.put("randomResult", "common");
+							}
 						} else {
-							randomBoxMap.put("randomResult", "common");
+							randomBoxMap.put("playerGender", "M");
+							if (ranNum <= 0.5) {
+								randomBoxMap.put("randomResult", "uniq");
+							} else if (ranNum <= 2) {
+								randomBoxMap.put("randomResult", "rare");
+							} else {
+								randomBoxMap.put("randomResult", "common");
+							}
 						}
-					} else {
-						randomBoxMap.put("playerGender", "M");
-						if (ranNum <= 1) {
-							randomBoxMap.put("randomResult", "uniq");
-						} else if (ranNum <= 4) {
-							randomBoxMap.put("randomResult", "rare");
+					}else if(itemDTO.getItemName().equals("중급랜덤박스")) {
+						if (gender.equals("M")) {
+							randomBoxMap.put("playerGender", "F");
+							if (ranNum <= 1) {
+								randomBoxMap.put("randomResult", "uniq");
+							} else if (ranNum <= 4) {
+								randomBoxMap.put("randomResult", "rare");
+							} else {
+								randomBoxMap.put("randomResult", "common");
+							}
 						} else {
-							randomBoxMap.put("randomResult", "common");
+							randomBoxMap.put("playerGender", "M");
+							if (ranNum <= 1) {
+								randomBoxMap.put("randomResult", "uniq");
+							} else if (ranNum <= 4) {
+								randomBoxMap.put("randomResult", "rare");
+							} else {
+								randomBoxMap.put("randomResult", "common");
+							}
+						}
+					}else{
+						if (gender.equals("M")) {
+							randomBoxMap.put("playerGender", "F");
+							if (ranNum <= 1.5) {
+								randomBoxMap.put("randomResult", "uniq");
+							} else if (ranNum <= 5) {
+								randomBoxMap.put("randomResult", "rare");
+							} else {
+								randomBoxMap.put("randomResult", "common");
+							}
+						} else {
+							randomBoxMap.put("playerGender", "M");
+							if (ranNum <= 1.5) {
+								randomBoxMap.put("randomResult", "uniq");
+							} else if (ranNum <= 5) {
+								randomBoxMap.put("randomResult", "rare");
+							} else {
+								randomBoxMap.put("randomResult", "common");
+							}
 						}
 					}
 					List<ItemDTO> randomList = itemStoreDAO.itemStoreRandomBoxList(randomBoxMap);
@@ -101,7 +143,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 					itemBuyMap.put("itemCode", randomList.get(randomNum).getItemCode());
 					itemBuyMap.put("piIndex", piIndex + "");
 					playerItemDAO.itemStoreBuy(itemBuyMap);
-					return "[ "+randomList.get(randomNum).getItemName()+" ]";
+					return randomList.get(randomNum).getItemGrade()+" - [ " + randomList.get(randomNum).getItemName() + " ]";
 				} else {
 					if (itemDTO.getItemGrade().equals("common")) {
 						itemBuyMap.put("playerNickname", playerNickname);
@@ -109,7 +151,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 						itemBuyMap.put("piIndex", piIndex + "");
 						playerItemDAO.itemStoreBuy(itemBuyMap);
 
-					}else{
+					} else {
 						return "4";
 					}
 				}
@@ -132,7 +174,7 @@ public class ItemStoreServiceImpl implements ItemStoreService {
 		int ruby = playerInfoDAO.getRuby(playerNickname);
 		int price = itemStoreDAO.getPrice(itemCode);
 		map.put("playerNickname", playerNickname);
-		map.put("updateRuby", ruby +1000 + "");
+		map.put("updateRuby", ruby + 1000 + "");
 		playerInfoDAO.updateRuby(map);
 		int result = playerItemDAO.itemDelete(piSq);
 		if (result == 0) {

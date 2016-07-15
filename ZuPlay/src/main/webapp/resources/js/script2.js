@@ -1555,7 +1555,7 @@ $(function(){
       }
       
       /*히스토리 */
-      var historyInit = function(){
+      var historyInit = function(targetPlayer){
          
          /*히스토리 페이지네이션*/
          var historyPage = function(page){
@@ -1570,12 +1570,12 @@ $(function(){
                url:"getHistoryCount",
                type:"post",
                dataType:"json",
-               data:"targetPlayer=이석범짱",
+               data:"targetPlayer="+targetPlayer,
                success:function(page){
-                  if(page%10==0){
-                     historyPage(page/10)
+                  if(page%5==0){
+                     historyPage(page/5)
                   }else{
-                     historyPage(page/10+1)   
+                     historyPage(page/5+1)   
                   }
                },
                error:function(err){
@@ -1591,7 +1591,7 @@ $(function(){
                url:"getStockDealHistory", 
                type:"post",
                dataType:"json",
-               data:{"targetPlayer":"이석범짱","orderBy":orderBy,"asc":asc,"page":page},
+               data:{"targetPlayer":targetPlayer,"orderBy":orderBy,"asc":asc,"page":page},
                success:function(data){
                   var str="";
                   $.each(data,function(index,item){
@@ -1640,8 +1640,8 @@ $(function(){
             switch ($(this).index()) {
                case 0: orderFnc("SDH_BUY_SELL",thIndex); break;
                case 1: orderFnc("isuKorAbbrv",thIndex); break;         
-               case 2:   orderFnc("kind",thIndex); break;
-               case 3:   orderFnc("SDH_DEAL_TIME",thIndex); break;
+               case 2: orderFnc("kind",thIndex); break;
+               case 3: orderFnc("SDH_DEAL_TIME",thIndex); break;
                default: return;
             }
          })
@@ -1663,7 +1663,7 @@ $(function(){
                url:"getBest",
                type:"post",
                dataType:"json",
-               data:"targetPlayer=이석범짱",
+               data:"targetPlayer="+targetPlayer,
                success:function(data){
                   pieChartJson = new Array();
                   var etcMoney=0;
@@ -1676,7 +1676,7 @@ $(function(){
                      }else{
                         etcMoney+=item.earningMoney;
                         if(index+1 == data.length) {
-                           pieChartObj.name="etc";
+                           pieChartObj.name="기타";
                            pieChartObj.y=etcMoney;
                            pieChartJson.push(pieChartObj);
                         }
@@ -1695,7 +1695,7 @@ $(function(){
                url:"getWorst",
                type:"post",
                dataType:"json",
-               data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
+               data:"targetPlayer="+targetPlayer, //해당유저에맞게 수정요망
                success:function(data){
                   pieChartJson = new Array();
                   var etcMoney=0;
@@ -1730,7 +1730,7 @@ $(function(){
                   url:"getEarningRateList",
                   type:"post",
                   dataType:"json",
-                  data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
+                  data:"targetPlayer="+targetPlayer, //해당유저에맞게 수정요망
                   success:function(data){
                      pieChartJson = new Array();
                      $.each(data,function(index,item){
@@ -1866,8 +1866,8 @@ $(function(){
          
          earningChart();
          historyBest();
-         historyStockListCount()
-         historyStockList()
+         historyStockListCount();
+         historyStockList();
       }
       
       
@@ -2051,7 +2051,7 @@ $(function(){
       initChatRoom();
       initRanking();
       userInfoInit();
-      historyInit();
+      historyInit(userInfo.nickName);
       
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));

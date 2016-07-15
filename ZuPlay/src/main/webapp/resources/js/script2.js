@@ -1519,25 +1519,25 @@ $(function(){
                  return true
                }
                
-               item.playerNickname==userInfo.nickName ? str+="<tr style='background-color:'>" : str+="<tr>";
+               item.playerNickname==userInfo.nickName ? str+="<tr style='background-color:rgba(255,255,0,0.3);'>" : str+="<tr>";
                
                
                if(kind=="s"){
             	   switch (item.playerSeasonRank) {
-						case 1: str+="<td>금</td>";	break;
-						case 2:	str+="<td>은</td>"; break;
-						case 3:	str+="<td>동</td>"; break;
+						case 1: str+="<td><img src='resources/img/grade/gold.png' style='width:60px;height:60px;'></td>";	break;
+						case 2:	str+="<td><img src='resources/img/grade/silver.png' style='width:40px;height:40px;'></td>"; break;
+						case 3:	str+="<td><img src='resources/img/grade/bronze.png' style='width:40px;height:40px;'></td>"; break;
 		
 						default: str+="<td>"+item.playerSeasonRank+"</td>"; break;
 					}
                }else{
-            	   switch (item.playerSeasonRank) {
-					case 1: str+="<td>금</td>";	break;
-					case 2:	str+="<td>은</td>"; break;
-					case 3:	str+="<td>동</td>"; break;
-	
-					default: str+="<td>"+item.playerDailyRank+"</td>"; break;
-				}
+            	   switch (item.playerDailyRank) {
+	            	    case 1: str+="<td><img src='resources/grade/gold.png'></td>";	break;
+						case 2:	str+="<td><img src='resources/grade/silver.png'></td>"; break;
+						case 3:	str+="<td><img src='resources/grade/bronze.png'></td>"; break;
+		
+						default: str+="<td>"+item.playerDailyRank+"</td>"; break;
+            	   }
                }
                
                //kind=="s" ? str+="<tr><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";

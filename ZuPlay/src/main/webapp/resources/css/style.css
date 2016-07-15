@@ -555,6 +555,32 @@ div.vertical-line {
 	font-size: x-large;
 }
 
+.friend-seach-avatar-div {
+	position: relative;
+	height: 50px;
+	width: 42px;
+	text-align: left;
+}
+
+.friend-seach-avatar-div img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.friend-add-tr:hover{
+	cursor: pointer;
+}
+
+.friend-add-tr td:nth-child(1){
+	width:60px;
+}
+.friend-add-tr td:nth-child(2){
+	vertical-align: middle;
+}
+
+
+
 /*경제용어사전*/
 
 /*----- Accordion -----*/
@@ -1177,6 +1203,7 @@ div.vertical-line {
 	position: absolute;
 	width: 100%;
 	height: 100%;
+	left: 0;
 }
 
 #ranking-tab-div {

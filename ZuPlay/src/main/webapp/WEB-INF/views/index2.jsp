@@ -38,6 +38,12 @@
 				<img src="" id="side-avatar-player-earring">
 				<img src="" id="side-avatar-player-acc">
 			</div>
+			<div class="side-money side-info">
+				<img src="resources/img/money.png" class='pull-left'><label>loading</label>
+			</div>
+			<div class="side-ruby side-info">
+				<img src="resources/img/ruby-small.png" class='pull-left'><label>loading</label>
+			</div>
 		</div>
 	      
 	    <!-- includes JSP -->
@@ -66,7 +72,6 @@
 	</div>
 </body>
 
-    
 <script type="text/javascript" src="resources/js/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jqwidgets/jqxcore.js"></script>

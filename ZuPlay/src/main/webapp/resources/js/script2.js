@@ -145,6 +145,7 @@ $(function(){
                  str+="<td>"+item.plQuantity+"</td>";
                  str+="<td>"+item.priceDTO.trdPrc+"</td>";
                  str+="<td>"+item.priceDTO.trdPrc * item.plQuantity+"</td>";
+                 str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
                  str+="<td>"+item.earningRate+"%"+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
               });
               $("#mystockListTBody").html(str);
@@ -1626,7 +1627,8 @@ $(function(){
          
          /*탭 클릭 이벤트*/
          $("#history-content .nav-tabs  a").on("click",function(){
-            if($(this).text()=="Best"){
+        	 console.log()
+            if($(this).text()=="Profit"){
                $("#history-worst-piechart").empty();
                historyBest();
             }else{

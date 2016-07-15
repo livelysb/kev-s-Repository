@@ -390,6 +390,10 @@ div.vertical-line {
 }
 
 /*친구박스*/
+#friend-list-request:nth-child(n+2){
+	/* height: 200px; */
+}
+
 #friend-content .vertical-alignment-helper {
 	display: table;
 	height: 100%;
@@ -425,6 +429,7 @@ div.vertical-line {
 
 #friend-content .list-group {
 	margin-bottom: 3;
+	clear: both; 
 }
 
 #friend-content .name {
@@ -481,15 +486,20 @@ div.vertical-line {
 
 .friend-avatar-div {
 	position: relative;
-	height: 70px;
-	width: 80px;
-	border: black 1px solid;
+	height: 63px;
+	width: 50px;
+	border: #DDDDDD 1px solid;
+	/*  float:left;  */
 }
 
 #friend-content .list-group-item img {
 	position: absolute;
 	width: 100%;
 	height: 100%;
+}
+#friend-content list-group-item{
+	/* clear:both;
+	height:90px; */
 }
 
 .btn-circle {

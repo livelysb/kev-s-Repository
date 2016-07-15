@@ -109,7 +109,7 @@
 						var chartData = function(data,kind) {
 							console.log(data);
 							console.log("시작");
-							ChartJson = new Array();
+							chartJson = new Array();
 							
 							$.each(data, function(index, item) {
 								var ChartObj = new Object();
@@ -122,17 +122,17 @@
 									ChartObj.y = item.dpClsprc;
 									ChartObj.name = item.dpDate2;
 								}
-									ChartJson.push(ChartObj);
+									chartJson.push(ChartObj);
 							})
 
-							companylineChart(ChartJson);
+							kind=="rtp" ? companylineChart(chartJson,"#company-${masterDTO.isuCd} #company-chart-today") : 
+										  companylineChart(chartJson,"#company-${masterDTO.isuCd} #company-chart-month");
 
 						}
 
 						/*라인차트 그리기*/
-						var companylineChart = function(ChartJson) {
-							$('#company-chart-today')
-									.highcharts(
+						var companylineChart = function(chartJson,chartId) {
+							$(chartId).highcharts(
 											{
 												chart : {
 													zoomType : 'x',
@@ -200,7 +200,7 @@
 												series : [ {
 													type : 'area',
 													name : '체결가',
-													data : ChartJson
+													data : chartJson
 												} ]
 											});
 						}
@@ -218,7 +218,6 @@
 				               chartData(JSON.parse('${dpList}'),"dp"); 
 				            }
 				         })
-						console.log("company-${masterDTO.isuCd}");
 						chartData(JSON.parse('${rtpList}'),"rtp"); 
 					});
 </script>

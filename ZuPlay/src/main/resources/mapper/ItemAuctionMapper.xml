@@ -46,7 +46,7 @@
 		select * from (select row_number() over(order by
 		IM_PURCHASE_PRICE desc) rnum,
 		im_sq, player_nickname, item_code,
-		im_purchase_price, to_char(im_bid_time+7,'yyyy/mm/dd'),
+		im_purchase_price, to_char(im_bid_time+7,'yyyy/mm/dd') im_bid_time,
 		Im_auction_end
 		from item_market where
 		im_auction_end='T') m join item i on
@@ -82,7 +82,9 @@
 		IM_AUCTION_END from item_market where im_sq=#{value}
 	</select>
 	<select id="auctionMyPage" parameterType="String" resultMap="itemMarketMapper">
-		select * from (select * from item_market order
+		select * from (select im_sq, player_nickname, item_code,
+		im_purchase_price, to_char(im_bid_time+7,'yyyy/mm/dd') im_bid_time,
+		Im_auction_end from item_market order
 		by im_bid_time) m join
 		item i on
 		m.item_code=i.item_code

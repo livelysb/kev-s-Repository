@@ -73,7 +73,6 @@ public class StockInfoController {
 		mv.addObject("masterDTO", masterDTO);
 		mv.addObject("plQuantity", plQuantity);
 		Collections.reverse(masterDTO.getRtpList());
-		Collections.reverse(masterDTO.getDpList());
 		mv.addObject("rtpList", new Gson().toJson(masterDTO.getRtpList()));
 		mv.addObject("dpList", new Gson().toJson(masterDTO.getDpList()));
 		return mv;

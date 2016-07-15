@@ -74,17 +74,16 @@
 			</div>
 		</div>
 		<hr>
-		<div class="row-fluid company-buy">
-			<div class="col-xs-8">
-				<div class="company-buy-slider"></div>
-			</div>
-			<div class="col-xs-2">
-				<h5 class="company-buy-value">0</h5>
-			</div>
-			<div class="col-xs-2">
-				<button class="company-buy-btn btn btn-primary">구매</button>
-			</div>
+		
+		<div class="row-fluid">
+			<div class="col-xs-12"><div class='company-buy-slider'></div></div>
 		</div>
+			<div class="row-fluid">
+			<div class="col-xs-4"><div class="company-buy-input"></div></div>
+			<div class="col-xs-4"><label class="company-buy-value"></label></div>
+			<div class="col-xs-4"><button class="company-buy-btn btn btn-block btn-primary">매수</button></div>
+		</div>
+		
 
 		<c:if test="${plQuantity gt 0}">
 			<div class="row-fluid company-sell">

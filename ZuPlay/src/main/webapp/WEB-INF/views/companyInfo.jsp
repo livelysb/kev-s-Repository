@@ -108,7 +108,6 @@
 
 						var chartData = function(data,kind) {
 							console.log(data);
-							console.log("시작");
 							chartJson = new Array();
 							
 							$.each(data, function(index, item) {
@@ -132,6 +131,7 @@
 
 						/*라인차트 그리기*/
 						var companylineChart = function(chartJson,chartId) {
+							console.log(chartJson);
 							$(chartId).highcharts(
 											{
 												chart : {
@@ -219,6 +219,6 @@
 				            }
 				         }) */
 						chartData(JSON.parse('${rtpList}'),"rtp"); 
-				         chartData(JSON.parse('${dpList}'),"dp"); 
+				        chartData(JSON.parse('${dpList}'),"dp"); 
 					});
 </script>

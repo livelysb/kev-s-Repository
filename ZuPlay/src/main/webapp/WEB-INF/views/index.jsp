@@ -39,10 +39,10 @@
 				<img src="" id="side-avatar-player-acc">
 			</div>
 			<div class="side-money">
-				<img src="resoruces/img/moeny.png"><label>df</label>
+				<img src="resources/img/moeny.png"><label>df</label>
 			</div>
 			<div class="side-ruby">
-				<img src="resoruces/img/ruby-small.png"><label>df</label>
+				<img src="resources/img/ruby-small.png"><label>df</label>
 			</div>
 		</div>
 	      

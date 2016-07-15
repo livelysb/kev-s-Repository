@@ -179,9 +179,10 @@ $(function(){
     
     
       /* 주식 구매 */
-	   var buyStock = function(companyId, qty){
+     /* buyStock , sellStock*/
+	   var tradingStock = function(companyId, qty, url){
 		      $.ajax({
-		    	  url:"buyStock",
+		    	  url:url.toString(),
 		    	  dataType:"text",
 		    	  data:{isuCd:companyId, plQuantity:qty},
 		    	  success:function(data){
@@ -194,11 +195,11 @@ $(function(){
 		    		  updatePI();
 		    	  },
 		    	  error:function(){
-		    		  console.log("Exception : buyStock");
+		    		  console.log("Exception : tradingStock");
 		    	  }
 		      });
-		  };
-		  /* 주식 판매 */
+		  };/*
+		   주식 판매 
 		   var sellStock = function(companyId, qty){
 			      $.ajax({
 			    	  url:"sellStock",
@@ -217,7 +218,7 @@ $(function(){
 			    		  console.log("Exception : sellStock");
 			    	  }
 			      });
-			  };
+			  };*/
       /* 기업 정보 조회 */
       var companyInfo = function(companyId){
              var price = $(companyId + " .company-title-stock").text();
@@ -1523,11 +1524,8 @@ $(function(){
                if(item.playerSeasonRank==0 || item.playerDailyRank==0){
                  return true
                }
-               if(item.playerNickname==userInfo.nickName){
-                   kind=="s" ? str+="<tr class='ranking-playernickname' background='yellow'><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";
-
-               }
-               kind=="s" ? str+="<tr class='ranking-playernickname'><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";
+               
+               kind=="s" ? str+="<tr><td>"+item.playerSeasonRank+"</td>" : str+="<tr><td>"+item.playerDailyRank+"</td>";
                str+="<td><div class='ranking-avatar-div'>";
                
                var avatarEquiAry = avatarEqui("ranking",item.playerGender,item.playerItemDTO);
@@ -1537,7 +1535,7 @@ $(function(){
                 }
                str+="</div>";
                str+="</td>";
-               str+="<td>"+item.playerNickname+"</td>";
+               str+="<td class='ranking-playernickname'>"+item.playerNickname+"</td>";
                kind=="s" ? str+="<td>"+item.totalEarningRate+"%</td>" : str+="<td>"+item.earningRate+"%</td>";
                str+="<td>"+item.totalMoney+"</td></tr>";
             }) 

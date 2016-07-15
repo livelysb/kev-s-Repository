@@ -75,9 +75,6 @@
 
 	<header>
 		<div class="header-content">
-			<video autoplay loop poster="video-bg.jpg" id="bgvid">
-				<source src="${url}/img/main_1.mp4" type="video/mp4">
-			</video>
 			<div class="header-content-inner">
 				<h1 id="homeHeading">주식을 플레이하라 !</h1>
 				<hr>

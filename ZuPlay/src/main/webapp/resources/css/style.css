@@ -547,6 +547,10 @@ div.vertical-line {
 	background-color: orange;
 }
 
+#noti-msg{
+	font-size: x-large;
+}
+
 /*경제용어사전*/
 
 /*----- Accordion -----*/

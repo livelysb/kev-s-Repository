@@ -106,18 +106,16 @@
 			.ready(
 					function() {
 
-						var chartData = function(data) {
+						var chartData = function(data,time,price) {
 							console.log(data);
 							console.log("시작");
 							ChartJson = new Array();
 							
 							$.each(data, function(index, item) {
 								var ChartObj = new Object();
-								ChartObj.x = item.rpTrdTm2+32400000;
-								ChartObj.y = item.rpTrdPrc;
-								ChartObj.name = item.rpTrdTm2;
-								console.log(ChartObj.x + "," + ChartObj.y);
-								console.log(item.rpTrdTm)
+								ChartObj.x = item.time+32400000;
+								ChartObj.y = item.price;
+								ChartObj.name = item.time;
 								ChartJson.push(ChartObj);
 							})
 
@@ -207,14 +205,14 @@
 				            if($(this).text()=="오늘"){
 				            	console.log("오늘")
 				               $("#company-${masterDTO.isuCd} #company-chart-today").empty();
-				               chartData(JSON.parse('${rtpList}')); 
+				               chartData(JSON.parse('${rtpList}'),rpTrdTm2,rpTrdPrc); 
 				            }else{
 				            	console.log("한달")
 				               $("#company-${masterDTO.isuCd} #company-chart-month").empty();
-				               chartData(JSON.parse('${dpList}')); 
+				               chartData(JSON.parse('${dpList}'),dpDate2,dpClsprc); 
 				            }
 				         })
 						console.log("company-${masterDTO.isuCd}");
-						chartData(JSON.parse('${rtpList}')); 
+						chartData(JSON.parse('${rtpList}'),rpTrdTm2,rpTrdPrc); 
 					});
 </script>

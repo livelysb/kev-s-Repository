@@ -137,6 +137,7 @@ public class ItemAuctionServiceImpl implements ItemAuctionService {
 	@Override
 	@Transactional
 	public boolean auctionSell(String playerNickname, int piSq, int imPurchasePrice) throws Exception {
+		System.out.println("piSq : " +piSq);
 		ItemAuctionDAO itemAuctionDAO = sqlSession.getMapper(ItemAuctionDAO.class);
 		PlayerItemDAO playerItemDAO = sqlSession.getMapper(PlayerItemDAO.class);
 		PlayerItemDTO playerItemDTO = playerItemDAO.bringItemInfoByPiSq(piSq);

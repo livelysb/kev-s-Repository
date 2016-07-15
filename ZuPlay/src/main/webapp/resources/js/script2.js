@@ -146,7 +146,7 @@ $(function(){
                  str+="<td>"+item.priceDTO.trdPrc+"</td>";
                  str+="<td>"+item.priceDTO.trdPrc * item.plQuantity+"</td>";
                  str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
-                 str+="<td>"+item.earningRate+"%"+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
+                 str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
               });
               $("#mystockListTBody").html(str);
            },
@@ -825,6 +825,7 @@ $(function(){
          
          /* 친구리스트 */
          friendSelectAll = function(data){
+        	 console.log(data.data)
               var requestedFriend=""; 
               var ListFriend=""; 
               var friendBtnColor=""; 
@@ -848,14 +849,14 @@ $(function(){
                          for(var k=0; k<=5; k++ ){
                             requestedFriend += avatarEquiAry[k];
                          }
-                         
                          requestedFriend+="</div>"; 
                          requestedFriend+="<label class='name'>"+friendNickname+"</label>"; 
                          requestedFriend+="<input type='hidden' class='requestedFSq' value='"+item.friendSq+"'>" 
                          requestedFriend+="<div class='pull-right'>"; 
                          requestedFriend+="<button type='button' class='btn btn-success friend-accept btn-circle'><i class='glyphicon glyphicon-ok'></i></button>";
                          requestedFriend+="<button type='button' class='btn btn-danger friend-reject btn-circle'><i class='glyphicon glyphicon-remove'></i></button>"; 
-                         requestedFriend+="</div></li>"; 
+                         requestedFriend+="</div>"; 
+                         requestedFriend+="</li>";
                     }else if(item.type=="B" && item.playerNickname2==userInfo.nickName){
                        requestedFriend+="<li href='#' class='list-group-item text-left'>";
                          requestedFriend+="<div class='friend-avatar-div' >";

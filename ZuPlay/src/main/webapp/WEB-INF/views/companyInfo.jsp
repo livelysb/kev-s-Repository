@@ -207,6 +207,6 @@
 												} ]
 											});
 						}
-						chartData("${masterDTO.rtpList}");
+						chartData("${rtpList}");
 					});
 </script>

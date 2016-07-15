@@ -240,17 +240,13 @@ $(function(){
               
               if(qty>0){
 	              $(sellSlider).jqxSlider({
-	                  width:"100%",
-	                  showTickLabels: true,
+	                  width: "100%",
 	                  tooltip: true,
-	                  mode: "fixed",
-	                  min: 0,
-	                  max: qty,
+	                  mode: 'fixed',
+	                  min : 1,
+	                  max : qty,
 	                  ticksFrequency: qty/10,
-	                  value: 0,
-	                  step: 1,
 	                  theme : userInfo.theme,
-	                  tooltipPosition: "far"
 	              });
 	              
 	              $(document).on("change",$(sellSlider),function(event){

@@ -113,7 +113,7 @@
 							
 							$.each(data, function(index, item) {
 								var ChartObj = new Object();
-								ChartObj.x = item.rpTrdTm2;
+								ChartObj.x = item.rpTrdTm2+32400000;
 								ChartObj.y = item.rpTrdPrc;
 								ChartObj.name = item.rpTrdTm2;
 								console.log(ChartObj.x + "," + ChartObj.y);

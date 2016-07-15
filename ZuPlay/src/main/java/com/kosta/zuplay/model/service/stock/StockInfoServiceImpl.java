@@ -86,7 +86,7 @@ public class StockInfoServiceImpl implements StockInfoService {
 		}
 		for(DailyPriceDTO dp : masterDTO.getDpList()) {
 			String s[] = dp.getDpDate().split(" ");
-			dp.setDpDate2(new Date(Integer.parseInt(s[0].split("-")[0])-1900, Integer.parseInt(s[0].split("-")[1])-1, Integer.parseInt(s[0].split("-")[2])+1, Integer.parseInt(s[1].split(":")[0]), Integer.parseInt(s[1].split(":")[1]), Integer.parseInt(s[1].split(":")[2])).getTime());
+			dp.setDpDate2(new Date(Integer.parseInt(s[0].split("-")[0])-1900, Integer.parseInt(s[0].split("-")[1])-1, Integer.parseInt(s[0].split("-")[2]), Integer.parseInt(s[1].split(":")[0]), Integer.parseInt(s[1].split(":")[1]), Integer.parseInt(s[1].split(":")[2])).getTime());
 		}
 
 		// 좋아하는 기업인지

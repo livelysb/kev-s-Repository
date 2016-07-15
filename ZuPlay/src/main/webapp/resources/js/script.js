@@ -607,7 +607,7 @@ $(function(){
            var status = "next";
 
           
-           $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+           $('#store-content a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 storeSelect(1)
            });
           
@@ -1555,7 +1555,7 @@ $(function(){
       }
       
       /*히스토리 */
-      var historyInit = function(){
+      var historyInit = function(targetPlayer){
          
          /*히스토리 페이지네이션*/
          var historyPage = function(page){
@@ -1570,12 +1570,12 @@ $(function(){
                url:"getHistoryCount",
                type:"post",
                dataType:"json",
-               data:"targetPlayer=이석범짱",
+               data:"targetPlayer="+targetPlayer,
                success:function(page){
-                  if(page%10==0){
-                     historyPage(page/10)
+                  if(page%5==0){
+                     historyPage(page/5)
                   }else{
-                     historyPage(page/10+1)   
+                     historyPage(page/5+1)   
                   }
                },
                error:function(err){
@@ -1591,9 +1591,8 @@ $(function(){
                url:"getStockDealHistory", 
                type:"post",
                dataType:"json",
-               data:{"targetPlayer":"이석범짱","orderBy":orderBy,"asc":asc,"page":page},
+               data:{"targetPlayer":targetPlayer,"orderBy":orderBy,"asc":asc,"page":page},
                success:function(data){
-                  console.log(data);
                   var str="";
                   $.each(data,function(index,item){
                      if(item.sdhBuySell=="b"){
@@ -1625,7 +1624,6 @@ $(function(){
          
          /*탭 클릭 이벤트*/
          $("#history-content .nav-tabs  a").on("click",function(){
-            console.log($(this).text())
             if($(this).text()=="Best"){
                $("#history-worst-piechart").empty();
                historyBest();
@@ -1638,13 +1636,12 @@ $(function(){
          /*히스토리 Order By */
          var orderFlag=3;
          $("#history-foot thead th").on("click",function(){
-            console.log(($(this).index()));
             var thIndex=($(this).index());
             switch ($(this).index()) {
                case 0: orderFnc("SDH_BUY_SELL",thIndex); break;
                case 1: orderFnc("isuKorAbbrv",thIndex); break;         
-               case 2:   orderFnc("kind",thIndex); break;
-               case 3:   orderFnc("SDH_DEAL_TIME",thIndex); break;
+               case 2: orderFnc("kind",thIndex); break;
+               case 3: orderFnc("SDH_DEAL_TIME",thIndex); break;
                default: return;
             }
          })
@@ -1666,7 +1663,7 @@ $(function(){
                url:"getBest",
                type:"post",
                dataType:"json",
-               data:"targetPlayer=이석범짱",
+               data:"targetPlayer="+targetPlayer,
                success:function(data){
                   pieChartJson = new Array();
                   var etcMoney=0;
@@ -1679,7 +1676,7 @@ $(function(){
                      }else{
                         etcMoney+=item.earningMoney;
                         if(index+1 == data.length) {
-                           pieChartObj.name="etc";
+                           pieChartObj.name="기타";
                            pieChartObj.y=etcMoney;
                            pieChartJson.push(pieChartObj);
                         }
@@ -1698,7 +1695,7 @@ $(function(){
                url:"getWorst",
                type:"post",
                dataType:"json",
-               data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
+               data:"targetPlayer="+targetPlayer, //해당유저에맞게 수정요망
                success:function(data){
                   pieChartJson = new Array();
                   var etcMoney=0;
@@ -1733,7 +1730,7 @@ $(function(){
                   url:"getEarningRateList",
                   type:"post",
                   dataType:"json",
-                  data:"targetPlayer=이석범짱", //해당유저에맞게 수정요망
+                  data:"targetPlayer="+targetPlayer, //해당유저에맞게 수정요망
                   success:function(data){
                      pieChartJson = new Array();
                      $.each(data,function(index,item){
@@ -1762,13 +1759,13 @@ $(function(){
                      plotBorderWidth: null,
                      plotShadow: false,
                      type: 'pie',
-                     height:350
+                     height:350,
+                     width:480
                  },
                  title: {
                      text: chartTitle
                  },
                  tooltip: {
-                      /* pointFormat: '{series.name}: <b>{this.y}원</b>' */
                      formatter: function() {
                          return this.series.name + ' : <b>₩' + this.y.format() + '</b>';
                      } 
@@ -1798,14 +1795,12 @@ $(function(){
          var lineChartdraw = function(pieChartJson){
             $('#history-line-chart').highcharts({
                   chart: {
-                      zoomType: 'x'
+                      zoomType: 'x',
+                      width:350,
+                      width:480
                   },
                   title: {
                       text: 'Daily Earning Rate'
-                  },
-                  subtitle: {
-                 /*      text: document.ontouchstart === undefined ?
-                              'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in' */
                   },
                   xAxis: {
                       type: 'datetime'
@@ -1858,10 +1853,21 @@ $(function(){
                   }]
               });
          }
+         $("#history-window").jqxWindow({
+             width:1000,
+             maxWidth:1200,
+             height:800,
+             maxHeight:1200,
+             resizable:true,
+             showCollapseButton: true,
+             autoOpen:false,
+             theme : userInfo.theme
+           });
+         
          earningChart();
          historyBest();
-         historyStockListCount()
-         historyStockList()
+         historyStockListCount();
+         historyStockList();
       }
       
       
@@ -2045,7 +2051,7 @@ $(function(){
       initChatRoom();
       initRanking();
       userInfoInit();
-      historyInit();
+      historyInit(userInfo.nickName);
       
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));

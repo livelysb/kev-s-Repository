@@ -126,7 +126,7 @@
 
 						/*라인차트 그리기*/
 						var companylineChart = function(ChartJson) {
-							$('#history-line-chart')
+							$('#company-chart-today')
 									.highcharts(
 											{
 												chart : {
@@ -208,5 +208,6 @@
 											});
 						}
 						chartData(JSON.parse('${rtpList}')); 
+						//chartData(Json.parse('${dpList}'));
 					});
 </script>

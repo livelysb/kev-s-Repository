@@ -1786,7 +1786,7 @@ $(function(){
                      }
                  },
                  series: [{
-                           name: "profit",
+                           name: chartTitle,
                            colorByPoint: true,
                            data: pieChartJson
                  }],

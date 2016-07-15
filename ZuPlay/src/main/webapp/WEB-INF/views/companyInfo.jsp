@@ -133,7 +133,7 @@
 												chart : {
 													zoomType : 'x',
 													width : 300,
-													width : 300
+													width : 200
 												},
 												title : {
 												//text: 'Daily Earning Rate'

@@ -222,7 +222,7 @@ $(function(){
                    width:"auto",
                    height:500,
                    showCollapseButton: true,
-                   resizable : false
+                   resizable : true
                  });
               
               var buySlider = $(companyId + " .company-buy-slider");

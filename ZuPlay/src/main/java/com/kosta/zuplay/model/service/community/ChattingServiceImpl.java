@@ -52,6 +52,14 @@ public class ChattingServiceImpl implements ChattingService {
 	@Override
 	public void chatOnebyOne(String sender, String receiver, String msg) {
 		SettingDAO settingDAO = sqlSession.getMapper(SettingDAO.class);
+		String msgRe="";
+		for(int i = 0 ; i<msg.length();i++){
+			if(msg.charAt(i)=='<'){
+				msgRe+="&lt;";
+			}else{
+				msgRe+=msg.charAt(i);
+			}
+		}
 		try {
 			if (settingDAO.settingSelect(receiver).getPsChatting().equals("T")) {
 				List<String> receivers = new ArrayList<String>();
@@ -60,7 +68,7 @@ public class ChattingServiceImpl implements ChattingService {
 				try {
 					sendDataWebSocket.sendData(receivers, "oneByOne",
 							new ChatMsgVO(sender, receiver, null, SimpleDateFormat.getInstance().format(new Date()),
-									msg, playerInfoService.getPlayer(sender).getPlayerGender(),
+									msgRe, playerInfoService.getPlayer(sender).getPlayerGender(),
 									inventoryService.playerItemWorn(sender)));
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -82,6 +90,14 @@ public class ChattingServiceImpl implements ChattingService {
 
 	@Override
 	public void chatRoomCreate(String sender, String roomName, String password, int maxNum) {
+		String roomNameRe="";
+		for(int i = 0 ; i<roomName.length();i++){
+			if(roomName.charAt(i)=='<'){
+				roomNameRe+="&lt;";
+			}else{
+				roomNameRe+=roomName.charAt(i);
+			}
+		}
 		if (context.getAttribute("chatRoom") == null)
 			context.setAttribute("chatRoom", new TreeMap<Integer, ChatRoomVO>());
 
@@ -95,7 +111,7 @@ public class ChattingServiceImpl implements ChattingService {
 
 		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		int roomNo = i.getAndIncrement();
-		ChatRoomVO crv = new ChatRoomVO(sender, roomNo, roomName, password, playersInfo, maxNum);
+		ChatRoomVO crv = new ChatRoomVO(sender, roomNo, roomNameRe, password, playersInfo, maxNum);
 		map.put(roomNo, crv);
 		sendDataWebSocket.sendData(myself, "chatStart", crv);
 		chatRoomSelect();
@@ -193,6 +209,14 @@ public class ChattingServiceImpl implements ChattingService {
 
 	@Override
 	public void chatRoomChat(String sender, int roomNo, String msg) {
+		String msgRe="";
+		for(int i = 0 ; i<msg.length();i++){
+			if(msg.charAt(i)=='<'){
+				msgRe+="&lt;";
+			}else{
+				msgRe+=msg.charAt(i);
+			}
+		}
 		Map<Integer, ChatRoomVO> map = (TreeMap<Integer, ChatRoomVO>) context.getAttribute("chatRoom");
 		ChatRoomVO crv = map.get(roomNo);
 
@@ -205,7 +229,7 @@ public class ChattingServiceImpl implements ChattingService {
 		// 채팅 메시지 (data) 전송 (sendData)
 		try {
 			sendDataWebSocket.sendData(receivers, "chatMsg", new ChatMsgVO(sender, null,
-					new AtomicInteger(roomNo), SimpleDateFormat.getInstance().format(new Date()), msg,
+					new AtomicInteger(roomNo), SimpleDateFormat.getInstance().format(new Date()), msgRe,
 					playerInfoService.getPlayer(sender).getPlayerGender(), inventoryService.playerItemWorn(sender)));
 		} catch (Exception e) {
 			e.printStackTrace();

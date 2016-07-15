@@ -8,7 +8,7 @@
 
       <ul class="nav nav-tabs" id="store-nav-tabs">
          <li class="active" id="all"><a data-toggle="tab" href="#store-tab-all"> All</a></li>
-         <li id="randombox"><a data-toggle="tab" href="#store-tab-randombox">RandomBox</a></li>
+         <li id="randombox"><a data-toggle="tab" href="#store-tab-randombox">Box</a></li>
          <li id="hair"><a data-toggle="tab" href="#store-tab-hair">Hair</a></li>
          <li id="clothes"><a data-toggle="tab" href="#store-tab-clothes">Clothes</a></li>
          <li id="eyes"><a data-toggle="tab" href="#store-tab-eyes">Eyes</a></li>

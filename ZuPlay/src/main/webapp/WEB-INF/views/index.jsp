@@ -39,10 +39,10 @@
 				<img src="" id="side-avatar-player-acc">
 			</div>
 			<div class="side-money side-info">
-				<img src="resources/img/money.png"><label>loading</label>
+				<img src="resources/img/money.png" class='pull-left'><label>loading</label>
 			</div>
 			<div class="side-ruby side-info">
-				<img src="resources/img/ruby-small.png"><label>loading</label>
+				<img src="resources/img/ruby-small.png" class='pull-left'><label>loading</label>
 			</div>
 		</div>
 	      

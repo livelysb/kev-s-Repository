@@ -220,7 +220,7 @@ $(function(){
                    theme:userInfo.theme,
                    minWidth:700,
                    width:"auto",
-                   height:380,
+                   height:500,
                    showCollapseButton: true,
                    resizable : false
                  });

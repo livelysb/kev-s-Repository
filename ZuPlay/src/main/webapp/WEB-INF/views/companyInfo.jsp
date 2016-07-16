@@ -108,7 +108,7 @@
                      <th>하한가</th>
                      <td><fmt:formatNumber value="${masterDTO.lwlmtprc}" /></td>
                      <th>상한가</th>
-                     <td><fmt:formatNumber value="${masterDTO.listShrs * masterDTO.priceDTO.uplmtprc}" /></td>
+                     <td><fmt:formatNumber value="${masterDTO.uplmtprc}" /></td>
                   </tr>
                </tbody>
             </table>

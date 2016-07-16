@@ -351,8 +351,16 @@ div.vertical-line {
 	margin-bottom: -1px;
 }
 
-.company-buy h5, .company-sell h5 {
+.company-buy h4, .company-sell h4 {
 	text-align: center;
+	margin: 0 0 0 0
+}
+.company-title-stock{
+	margin-left: 10px;
+}
+
+.company-buy>.row-fluid>div, .company-sell>.row-fluid>div{
+	margin-top: 5px;
 }
 
 /* 아이템 상점 */

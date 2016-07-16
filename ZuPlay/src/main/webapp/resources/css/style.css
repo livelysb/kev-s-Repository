@@ -1252,13 +1252,36 @@ div.vertical-line {
 }
 
 /*히스토리*/
-#history-left {height:400px; width:50%; float:left;}
-#history-right {height:400px; width:50%; float:right;}
-#history-foot {height:400px; width:100%; clear: both;}
-#history-content #page-align {text-align: center;}
-#history-foot thead th:nth-last-child(n+4):hover{
-   cursor:pointer;
+#history-left {
+	height: 400px;
+	width: 50%;
+	float: left;
 }
+
+#history-right {
+	height: 400px;
+	width: 50%;
+	float: right;
+}
+
+#history-foot {
+	height: 400px;
+	width: 100%;
+	clear: both;
+}
+
+history-content{
+	overflow:hidden;
+}
+
+#history-content #page-align {
+	text-align: center;
+}
+
+#history-foot thead th:nth-last-child(n+4):hover {
+	cursor: pointer;
+}
+
 #history-content .nav-tabs > li {
     float:none;
     display:inline-block;

@@ -40,6 +40,25 @@ $(function(){
       return this;
    };
    
+   $.fn.upDown = function(){
+	   var checkVal = $(this).text();
+	   console.log("value : " + checkVal);
+	   if(!checkVal || checkVal == "0" || checkVal == 0){
+		   return;
+	   }
+	   
+	   var checker = checkVal.substr(0,1);
+	   console.log("value : " + checker);
+	   if(checker == "-"){
+		   $(this).addClass("price-down");
+		   $(this).text(checkVal.substr(1).format());
+	   }else{
+		   $(this).addClass("price-up");
+	   }
+	   
+	   return this;
+   }
+   
    /* 내 정보 갱신 (Money, Ruby) */
    var updateLabel = function(){
 	   $(".side-money label").text(userInfo.money.format());
@@ -626,7 +645,7 @@ $(function(){
                      })
                      
                      $("#stockListTBody").html(str);
-                    
+                    $("#stockListTBody td").upDown();
                     },
                   
                   
@@ -1723,17 +1742,7 @@ $(function(){
             $("#friend-request-noti").jqxNotification("open");
          }
       }
-      
-      /*등락에따른 체크*/
-      var updownClass = function(value){
-    	  if(value==0){
-    		  
-    	  }else if(value>0){
-    		  
-    	  }else{
-    		  
-    	  }
-      }
+
       
       /*히스토리 */
       var historyInit = function(targetPlayer){

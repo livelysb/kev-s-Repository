@@ -112,6 +112,10 @@ small, .small {
 	color:blue;
 }
 
+.no-border-top{
+	border-top: none;
+}
+
 .side-section{
 	width : 228px;
 	height: auto;

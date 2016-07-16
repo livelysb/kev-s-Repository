@@ -17,10 +17,13 @@ public class StockTradeController {
 	
 	@RequestMapping(value="buyStock", produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public boolean butStock(HttpSession session, String isuCd, int plQuantity) throws Exception{		
+	public String butStock(HttpSession session, String isuCd, int plQuantity) throws Exception{		
 		String playerNickname = (String)session.getAttribute("playerNickname");
 		try {
-			return stockTradeService.buyStock(playerNickname, isuCd, plQuantity);
+			if(stockTradeService.buyStock(playerNickname, isuCd, plQuantity))
+				return plQuantity + " 주가 성공적으로 구매되었습니다.";
+			else
+				return "정상적으로 구매 처리되지 않았습니다. 다시 시도해 주세요.";
 		} catch(Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMsg", e.toString());
@@ -30,10 +33,13 @@ public class StockTradeController {
 	
 	@RequestMapping(value="sellStock", produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public boolean sellStock(HttpSession session, String isuCd, int plQuantity) throws Exception {
+	public String sellStock(HttpSession session, String isuCd, int plQuantity) throws Exception {
 		String playerNickname = (String)session.getAttribute("playerNickname");
 		try {
-			return stockTradeService.sellStock(playerNickname, isuCd, plQuantity);
+			if(stockTradeService.sellStock(playerNickname, isuCd, plQuantity))
+				return plQuantity + " 주를 성공적으로 판매하였습니다.";
+			else 
+				return "정상적으로 판매 처리되지 않았습니다. 다시 시도해 주세요.";
 		}catch(Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMsg", e.toString());

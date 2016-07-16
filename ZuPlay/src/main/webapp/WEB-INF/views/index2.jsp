@@ -100,6 +100,12 @@
     
     $(function(){
     	$("#rta-btn li").append("<div>");
+    	console.log("최초접속 : ${firstLoginToday}");
+    	
+    	if("${firstLoginToday}"==true){
+    		$("#noti-msg").html(userInfo.nickName+"님 오늘 최초접속!!<br>2만루비를 드립니다.");
+    	}
+  	    $("#friend-request-noti").jqxNotification("open");
     })
 </script>
 <script src="http://192.168.0.43:8000/zuplay/resources/js/script2.js"></script>

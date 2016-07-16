@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 
-<div id='history-window'>
 	<div id='history-header'>Stock History</div>
 	<div id='history-content'>
 		<div id='history-left'>

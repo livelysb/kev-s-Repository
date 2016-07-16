@@ -1684,6 +1684,15 @@ $(function(){
         
       }
       
+      /*최초접속일 노티파이*/
+      var firstNotify = function(){
+    	  console.log(userInfo.nickName+"${firstLoginToday}")
+      	//if("${firstLoginToday}"==true){ 
+      		$("#noti-msg").html( userInfo.nickName+ "님 오늘 최초접속!!<br>20000루비를 획득하셨습니다..");
+    	  	    $("#friend-request-noti").jqxNotification("open");
+      	//}
+      }
+      
       /*히스토리 */
       var historyInit = function(targetPlayer){
          var nowPage=0;
@@ -2185,7 +2194,10 @@ $(function(){
       initChatRoom();
       initRanking();
       userInfoInit();
+      firstNotify()
       historyInit(userInfo.nickName);
+      
+      
       
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));

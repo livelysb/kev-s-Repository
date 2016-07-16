@@ -75,25 +75,26 @@
 		</div>
 		<hr>
 		<div class="company-buy">
-			<div class="row-fluid">
-				<div class="col-xs-12"><div class='company-buy-slider company-slider'></div></div>
-			</div>
-			<div class="row-fluid">
-				<div class="col-xs-4"><div class="company-buy-input company-input"></div></div>
-				<div class="col-xs-5"><h4 class="company-buy-value"></h4></div>
-				<div class="col-xs-3"><button class="company-buy-btn btn btn-block btn-success">매수</button></div>
-			</div>
-		</div>
-		<div class="company-sell">
-			<div class="row-fluid">
-				<div class="col-xs-12"><div class='company-sell-slider company-slider'></div></div>
-			</div>
-			<div class="row-fluid">
-				<div class="col-xs-4"><div class="company-sell-input company-input"></div></div>
-				<div class="col-xs-5"><h4 class="company-sell-value"></h4></div>
-				<div class="col-xs-3"><button class="company-sell-btn btn btn-danger btn-block">매도</button></div>
-			</div>
-		</div>
+         <div class="row-fluid">
+            <div class="col-xs-12"><div class='company-buy-slider company-slider'></div></div>
+         </div>
+         <div class="row-fluid">
+            <div class="col-xs-4"><div class="company-buy-input company-input"></div></div>
+            <div class="col-xs-5"><h4 class="company-buy-value">${plQuantity-(plQuantity*0.03)}</h4></div>
+            <div class="col-xs-3"><button class="company-buy-btn btn btn-block btn-success">매수</button></div>
+         </div>
+      </div>
+      <div class="company-sell">
+         <div class="row-fluid">
+            <div class="col-xs-12"><div class='company-sell-slider company-slider'></div></div>
+         </div>
+         <div class="row-fluid">
+            <div class="col-xs-4"><div class="company-sell-input company-input"></div></div>
+            <div class="col-xs-5"><h4 class="company-sell-value">${plQuantity-(plQuantity*0.15)}</h4></div>
+            <div class="col-xs-3"><button class="company-sell-btn btn btn-danger btn-block">매도</button></div>
+         </div>
+      </div>
+		
 	</div>
 </div>
 <script type="text/javascript">
@@ -117,8 +118,8 @@
 									chartJson.push(ChartObj);
 							})
 
-							kind=="rtp" ? companylineChart(chartJson,"#company-${masterDTO.isuCd} #company-chart-today") : 
-										  companylineChart(chartJson,"#company-${masterDTO.isuCd} #company-chart-month");
+							kind=="rtp" ? companylineChart(chartJson,"#company-${masterDTO.isuCd} #company-chart-today-${masterDTO.isuCd}") : 
+										  companylineChart(chartJson,"#company-${masterDTO.isuCd} #company-chart-month-${masterDTO.isuCd}");
 
 						}
 

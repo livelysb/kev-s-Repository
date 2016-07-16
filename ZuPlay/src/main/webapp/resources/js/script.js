@@ -141,36 +141,35 @@ $(function(){
          )
         }
       var myStockListUpdate = function(targetPlayer){
-    	  if(targetPlayer != userInfo.nickName){
-    		  userStockListUpdate(targetPlayer);
-    		  return;
-    	  }
-          $.ajax({
-             url:"playerStock",
-             type:"post",
-             data:"targetPlayer="+userInfo.nickName,
-             dataType:"json",
-             success:function(data){
-            	 console.log(data);
-                var str="";
-                $("#mystockListTBody").empty();
-                $.each(data, function(index, item){
-                   str+="<tr><td>"+item.isuKorAbbrv+"</td>";
-                   str+="<td>"+item.kind+"</td>";
-                   str+="<td>"+(item.plQuantity).format()+"</td>";
-                   str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
-                   str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
-                   str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
-                   str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
-                });
-                $("#mystockListTBody").html(str);
-             },
-             error:function(err){
-                console.log("Exception : myStockListUpdate");
-             }
-          });
-       }
-      /*유저 주식 확인*/
+          if(targetPlayer != userInfo.nickName){
+             userStockListUpdate(targetPlayer);
+             return;
+          }
+           $.ajax({
+              url:"playerStock",
+              type:"post",
+              data:"targetPlayer="+userInfo.nickName,
+              dataType:"json",
+              success:function(data){
+                 var str="";
+                 $("#mystockListTBody").empty();
+                 $.each(data, function(index, item){
+                    str+="<tr><td>"+item.isuKorAbbrv+"</td>";
+                    str+="<td>"+item.kind+"</td>";
+                    str+="<td>"+(item.plQuantity).format()+"</td>";
+                    str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
+                    str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
+                    str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
+                    str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
+                 });
+                 $("#mystockListTBody").html(str);
+              },
+              error:function(err){
+                 console.log("Exception : myStockListUpdate");
+              }
+           });
+        }
+       /*유저 주식 확인*/
       var userStockListUpdate = function(targetPlayer){
           $.ajax({
              url:"playerStock",
@@ -1344,16 +1343,14 @@ $(function(){
       
       /*친구주식현황보기*/
       $(document).on("click", ".userinfo-stocklist-btn",function(){
-    	  var friendNick = $(this).parents(".userinfo-window").attr("id").split("-")[2];
-    	  myStockListUpdate(friendNick);
+         var friendNick = $(this).parents(".userinfo-window").attr("id").split("-")[2];
+         myStockListUpdate(friendNick);
 
       })
       
       /*친구주식분석보기*/
-      $(document).on("click", ".userinfo-stocklist-btn",function(){
-    	  var friendNick = $(this).parents(".userinfo-stockHistory-btn").attr("id").split("-")[2];
-    	  myStockListUpdate(friendNick);
-    	  $("#mystock-window").jqxWindow("show");
+      $(document).on("click", "",function(){
+         var friendNick = $(this).parents(".userinfo-stockHistory-btn").attr("id").split("-")[2];
       })
       
 
@@ -1692,6 +1689,14 @@ $(function(){
         
       }
       
+      /*최초접속일 노티파이*/
+      var firstNotify = function(){
+         if($("#index-firstLogin")=="true"){ 
+            $("#noti-msg").html( userInfo.nickName+ "님 오늘 최초접속!!<br>20000루비를 획득하셨습니다.");
+            $("#friend-request-noti").jqxNotification("open");
+         }
+      }
+      
       /*히스토리 */
       var historyInit = function(targetPlayer){
          var nowPage=0;
@@ -1818,7 +1823,7 @@ $(function(){
                      }else{
                         etcMoney+=item.earningMoney;
                         if(index+1 == data.length) {
-                           pieChartObj.name="기타";
+                           pieChartObj.name="etc";
                            pieChartObj.y=etcMoney;
                            pieChartJson.push(pieChartObj);
                         }
@@ -2193,6 +2198,7 @@ $(function(){
       initChatRoom();
       initRanking();
       userInfoInit();
+      firstNotify();
       historyInit(userInfo.nickName);
       
       var setBtn = function(){

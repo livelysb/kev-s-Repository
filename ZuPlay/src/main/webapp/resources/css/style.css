@@ -1,79 +1,79 @@
 html, body {
-	width: 100%;
-	height: 100%;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	margin: 0 0 0 0;
-	overflow: hidden;
-	position: relative;
+   width: 100%;
+   height: 100%;
+   box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   margin: 0 0 0 0;
+   overflow: hidden;
+   position: relative;
 }
 
 body {
-	background-image: url("../img/back.png");
+   background-image: url("../img/back.png");
 }
 
 table{
-	text-align: center;
+   text-align: center;
 }
 
 table th{
-	text-align: center;
+   text-align: center;
 }
 
 #loader {
-	visibility: hidden;
+   visibility: hidden;
 }
 
 #logo {
-	position: absolute;
-	top: 0;
-	bottom: 100px;
-	left: 0;
-	right: 0;
-	margin: auto;
-	opacity: 0.2;
+   position: absolute;
+   top: 0;
+   bottom: 100px;
+   left: 0;
+   right: 0;
+   margin: auto;
+   opacity: 0.2;
 }
 
 #menu-bar {
-	width: 100%;
+   width: 100%;
 }
 
 a:hover, a:active, a:focus {
-	text-decoration: none;
-	outline: 0;
+   text-decoration: none;
+   outline: 0;
 }
 
 .bg-white {
-	background-color: #fff;
+   background-color: #fff;
 }
 
 small, .small {
-	font-size: 85%;
+   font-size: 85%;
 }
 
 .jqx-popover-title {
-	padding-right: 3px;
-	padding-left: 3px;
-	text-align: center;
+   padding-right: 3px;
+   padding-left: 3px;
+   text-align: center;
 }
 
 .jqx-popover-content {
-	padding: 3px 3px 3px 3px;
+   padding: 3px 3px 3px 3px;
 }
 
 #loading-content {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 480px;
-	height: 320px;
-	margin-top: -160px; /* 이미지 높이/2 */
-	margin-left: -240px; /* 이미지 너비/2  */
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 480px;
+   height: 320px;
+   margin-top: -160px; /* 이미지 높이/2 */
+   margin-left: -240px; /* 이미지 너비/2  */
 }
 
 #dock-menu-wrapper {
-	width: 100% !important;
-	z-index: 99999999 !important;
+   width: 100% !important;
+   z-index: 99999999 !important;
 }
 
 .price-up:before{
@@ -106,14 +106,44 @@ small, .small {
   color:blue;
 }
 .font-red{
-	color:red;
+   color:red;
 }
 .font-blue{
-	color:blue;
+   color:blue;
+}
+
+hr.style-dotted {
+    border: 0;
+    border-bottom: 1px dashed #ccc;
+    background: #999;
+    margin: 2px 2px;
+}
+hr.style-transparent {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    margin: 2px 2px;
+}
+hr.style-glyph {
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+    margin: 2px 2px;
+}
+hr.style-glyph:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.0em;
+    padding: 0 0.25em;
+    background: white;
 }
 
 .no-border-top{
-	border-top: none;
+   border-top: none;
 }
 
 .side-section{
@@ -764,47 +794,73 @@ div.vertical-line {
 }
 /*뉴스 검색*/
 #news-search-window .ibox-content {
-	background-color: #FFFFFF;
-	color: inherit;
-	padding: 15px 20px 20px 20px;
-	border-color: #E7EAEC;
-	border-image: none;
-	border-style: solid solid none;
-	border-width: 1px 0px;
+   background-color: #FFFFFF;
+   color: inherit;
+   padding: 15px 20px 20px 20px;
+   border-color: #E7EAEC;
+   border-image: none;
+   border-style: solid solid none;
+   border-width: 1px 0px;
+}
+#news-search-window .news-search-tlink:hover{
+   cursor: pointer;
+   color: green;
 }
 
 #news-search-window .search-form {
-	margin-top: 10px;
+   margin-top: 10px;
 }
 
 #news-search-window .search-result h3 {
-	margin-bottom: 3px;
-	padding-left: 3px;
-	color: #1E0FBE;
+   margin-bottom: 3px;
+   padding-left: 3px;
+   color: #1E0FBE;
 }
 
 #news-search-window .search-result .search-link {
-	color: #006621;
+   color: #006621;
 }
 
 #news-search-window .search-result p {
-	font-size: 12px;
-	margin-top: 5px;
+   font-size: 12px;
+   margin-top: 5px;
 }
 
 #hr-line-dashed {
-	border-top: 1px solid #E7EAEC;
-	color: #ffffff;
-	background-color: #ffffff;
-	height: 1px;
-	margin: 20px 0;
+   border-top: 1px solid #E7EAEC;
+   color: #ffffff;
+   background-color: #ffffff;
+   height: 1px;
+   margin: 20px 0;
 }
 
 #news-search-window .news-search-img img {
-	width: 100%;
-	max-height: 70px;
+   width: 100%;
+   max-height: 70px;
 }
 
+.news-page-title{
+  display: block;
+  text-align: center;
+}
+
+.news-page-info{
+  clear: both;
+  text-align: justify;
+}
+
+.news-page-info small{
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.news-page-context{
+  padding: 5px 5px 5px 5px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  overflow: auto;
+  text-align: justify;
+}
 /*채팅*/
 .chat-group {
 	list-style: none;
@@ -943,6 +999,7 @@ div.vertical-line {
 	position: absolute;
 	width: 100%;
 	height: 100%;
+	left:0;
 }
 
 .chat-one {

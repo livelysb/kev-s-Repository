@@ -96,9 +96,9 @@ public class PlayerInfoServicempl implements PlayerInfoService {
 		PlayerDTO playerDTO = playerInfoDAO.getPlayer(playerNickname);
 		String lastAccess = playerDTO.getPlayerLastAccess().replaceAll("-", "");
 		if (!utilService.currentDate().equals(lastAccess.substring(0, 8))) {
-			System.out.println(playerDTO.getPlayerNickname() + "님, 오늘의 최초접속 5000원 드립니다.");
+			System.out.println(playerDTO.getPlayerNickname() + "님, 오늘의 최초접속 20000원 드립니다.");
 			// 루비 5000원 추가
-			playerDTO.setPlayerRuby(playerDTO.getPlayerRuby() + 5000);
+			playerDTO.setPlayerRuby(playerDTO.getPlayerRuby() + 20000);
 			playerInfoService.updateRuby(playerDTO.getPlayerNickname(), playerDTO.getPlayerRuby());
 			playerDTO.setTodayFirst(true);// 첫 접속인 경우 뷰에 알리기 위함;
 			result = true;

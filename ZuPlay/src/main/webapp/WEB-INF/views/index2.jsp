@@ -28,7 +28,7 @@
 	<img src="resources/img/logo_kr.png" id="logo">
 		<div class="side-section">
 			<div class="side-id">
-				<label>${playerNickname}${firstLoginToday}</label>
+				<label>${playerNickname}</label>
 			</div>
 			<div class="side-avatar" > <!-- relative -->
 				<img src="" id="side-avatar-player-clothes"> <!-- absolute -->
@@ -100,8 +100,6 @@
     
     $(function(){
     	$("#rta-btn li").append("<div>");
-    	console.log("민수");
-    	console.log("최초접속 : ${firstLoginToday}");
     	
     	//if("${firstLoginToday}"==true){
     		$("#noti-msg").html(userInfo.nickName+"님 오늘 최초접속!!<br>2만루비를 드립니다.");

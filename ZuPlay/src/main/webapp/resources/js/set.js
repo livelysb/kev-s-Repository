@@ -38,7 +38,7 @@ String.prototype.format = function() {
 /* 셋팅 정보 */
 var setting = {
 	parts : [ "clothes", "hair", "eyes", "mouse", "earring", "acc" ],
-	page : [],
+	page : {},
 	chat : {},
 	content : "body",
 };

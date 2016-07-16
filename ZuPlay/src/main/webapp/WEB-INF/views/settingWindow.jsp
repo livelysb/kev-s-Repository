@@ -3,7 +3,7 @@
 
 <div id="setting-window">
 		<div id="setting-header">Setting</div>
-		<div id="setting-content"><br><br>
+		<div id="setting-content"><br>
 	<label>내정보 : </label>
 	<label class="switch switch-flat" >
 		<input class="switch-input" type="checkbox" id="setting-myInfo"/>

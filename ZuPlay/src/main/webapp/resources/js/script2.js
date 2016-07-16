@@ -88,8 +88,8 @@ $(function(){
       var rtaInit = function(){
        
        $("#rta-Window").jqxWindow({
-             width:"400",
-             height:"450",
+             width:650,
+             height:480,
              resizable:true,
              showCollapseButton: true,
              autoOpen:false,
@@ -215,7 +215,7 @@ $(function(){
       
        var myStockInit = function(){
           $("#mystock-window").jqxWindow({
-                width:"400",
+                width:"650",
                 height:"450",
                 resizable:true,
                 showCollapseButton: true,
@@ -660,9 +660,11 @@ $(function(){
             
             
          $("#stock-window").jqxWindow({
-             width:750,
-             height:600,
-             resizable:false,
+             width:880,
+             maxWidth:1200,
+             height:630,
+             maxHeight:1200,
+             resizable:true,
              showCollapseButton: true,
              autoOpen:false,
              theme:userInfo.theme
@@ -766,8 +768,8 @@ $(function(){
               })
           })
           $("#store-window").jqxWindow({
-              width:640,
-              height:390,
+              width:"680",
+              height:"390",
               resizable:false,
               showCollapseButton: true,
               autoOpen:false,
@@ -1252,8 +1254,12 @@ $(function(){
         }
         
         $("#auction-window").jqxWindow({
-            minWidth:600,
-            minHeight:420,
+            minWidth:700,
+            maxWidth:1200,
+            width:700,
+            minHeight:430,
+            height:430,
+            maxHeight:1200,
             resizable:true,
             showCollapseButton: true,
             autoOpen:false,
@@ -1300,8 +1306,10 @@ $(function(){
                 success:function(data){
                  $("#main").append(data);
                    $("#userinfo-player-"+nickName).jqxWindow({
-                        width:"450",
-                        height:"400",
+                        width:580,
+                        height:460,
+                        minHeight:420,
+                        maxHeight:1000,
                         showCollapseButton: true,
                         autoOpen:true,
                         closeButtonAction: 'close',
@@ -1643,7 +1651,7 @@ $(function(){
                str+="</div>";
                str+="</td>";
                str+="<td class='ranking-playernickname'>"+item.playerNickname+"</td>";
-               kind=="s" ? str+="<td>"+(item.totalEarningRate).toFixed(2)+"</td>" : str+="<td>"+item.earningRate+"%</td>";
+               kind=="s" ? str+="<td>"+(item.totalEarningRate).toFixed(2)+"</td>" : str+="<td>"+(item.earningRate).toFixed(2)+"</td>";
                str+="<td>"+(item.totalMoney).format()+"</td></tr>";
             }) 
             if(kind=="s"){
@@ -1658,7 +1666,7 @@ $(function(){
        $("#ranking-window").jqxWindow({
               theme:userInfo.theme,
               height:440,
-              width:550,
+              width:600,
               maxWidth:800,
               minWidth:400,
               minHeight:400,

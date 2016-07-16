@@ -246,7 +246,7 @@ $(function(){
         /* 기업 정보 조회 */
         var companyInfo = function(companyId){
               var company = $(companyId);
-               var price = $(company).find(".company-title-stock").text();
+               var price = $(company).find(".company-price").text();
                var sellPrice = price - (price*0.15);
                price = price - (price * 0.03);
                var isuCd = $(company).find(".company-isuCd").val();

@@ -12,7 +12,7 @@
                <div class='userinfo-avatar-div'>
                	
                </div>
-               <label class="userinfo-favorite">
+               <%-- <label class="userinfo-favorite">
                   <c:choose>
                      <c:when test="${isLike}">
                         <span class="glyphicon glyphicon-heart">${likeNum}</span>
@@ -21,7 +21,7 @@
                         <span class="glyphicon glyphicon-heart-empty">${likeNum}</span>
                      </c:otherwise>
                   </c:choose>
-               </label> 
+               </label>  --%>
                <span class="glyphicon glyphicon-king toppad">${playerDTO.playerDailyRank}</span>
                <span class="glyphicon glyphicon-queen">${playerDTO.playerSeasonRank}</span>
             </div>

@@ -80,7 +80,7 @@
          </div>
          <div class="row-fluid">
             <div class="col-xs-4"><div class="company-buy-input company-input"></div></div>
-            <div class="col-xs-5"><h4 class="company-buy-value">${plQuantity-(plQuantity*0.03)}</h4></div>
+            <div class="col-xs-5"><h4 class="company-buy-value">${masterDTO.priceDTO.trdPrc-(masterDTO.priceDTO.trdPrc*0.03)}</h4></div>
             <div class="col-xs-3"><button class="company-buy-btn btn btn-block btn-success">매수</button></div>
          </div>
       </div>
@@ -90,7 +90,7 @@
          </div>
          <div class="row-fluid">
             <div class="col-xs-4"><div class="company-sell-input company-input"></div></div>
-            <div class="col-xs-5"><h4 class="company-sell-value">${plQuantity-(plQuantity*0.15)}</h4></div>
+            <div class="col-xs-5"><h4 class="company-sell-value">${masterDTO.priceDTO.trdPrc-(masterDTO.priceDTO.trdPrc*0.15)}</h4></div>
             <div class="col-xs-3"><button class="company-sell-btn btn btn-danger btn-block">매도</button></div>
          </div>
       </div>
@@ -101,7 +101,6 @@
 	$("#company-${masterDTO.isuCd}")
 			.ready(function() {
 							var chartData = function(data,kind) {
-							console.log(data);
 							chartJson = new Array();
 							
 							$.each(data, function(index, item) {
@@ -199,13 +198,10 @@
 						
 						/*탭 클릭 이벤트*/
 				          $("#company-${masterDTO.isuCd} .nav-tabs  a").on("click",function(){
-				        	 console.log("#company-${masterDTO.isuCd} 탭클릭")
 				            if($(this).text()=="오늘"){
-				            	console.log("오늘")
 				               $("#company-${masterDTO.isuCd} #company-chart-today").empty();
 				               chartData(JSON.parse('${rtpList}'),"rtp"); 
 				            }else{
-				            	console.log("한달")
 				               $("#company-${masterDTO.isuCd} #company-chart-month").empty();
 				            	chartData(JSON.parse('${dpList}'),"dp")
 				            }

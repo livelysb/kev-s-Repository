@@ -95,7 +95,7 @@
                   </tr>
                   <tr>
                      <th>저가</th>
-                     <td><fmt:formatNumber value="${masterDTO.priceDTO.lwprc}" /></td>
+                     <td class="price-label"><fmt:formatNumber value="${masterDTO.priceDTO.lwprc}" /></td>
                      <th>고가</th>
                      <td><fmt:formatNumber value="${masterDTO.priceDTO.hgprc}" /></td>
                   </tr>

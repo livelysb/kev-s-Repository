@@ -77,8 +77,8 @@
                </table>
             </div>
          </div>
-         <button type="button" class="userinfo-stocklist-btn">주식현황보기</button>
-         <button type="button" class="userinfo-stockHistory-btn">주식분석보기</button>
+         <button type="button" class="userinfo-stocklist-btn btn btn-default">주식보기</button>
+         <!-- <button type="button" class="userinfo-stockHistory-btn">주식분석보기</button> -->
          
       </div>
    </div>

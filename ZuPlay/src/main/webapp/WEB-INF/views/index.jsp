@@ -44,6 +44,7 @@
 			<div class="side-ruby side-info">
 				<img src="resources/img/ruby-small.png" class='pull-left'><label>loading</label>
 			</div>
+			<input type="hidden" id="index-firstLogin" value="${firstLoginToday}">
 		</div>
 	      
 	    <!-- includes JSP -->

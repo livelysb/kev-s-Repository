@@ -98,16 +98,10 @@
 <script src="resources/js/set.js"></script>
 <script type="text/javascript">
     userInfo.theme = "${theme}"; 
-    
     $(function(){
     	$("#rta-btn li").append("<div>");
     	
     })
-    /*console.log(userInfo.nickName+"${firstLoginToday}")
-    	//if("${firstLoginToday}"==true){ 
-    		$("#noti-msg").html( userInfo.nickName+ "님 오늘 최초접속!!<br>20000루비를 획득하셨습니다..");
-  	  	    $("#friend-request-noti").jqxNotification("open");
-    	//}*/   
 </script>
 <script src="http://192.168.0.43:8000/zuplay/resources/js/script2.js"></script>
 </html>

@@ -52,7 +52,7 @@
          <div class="col-xs-6">
             <table class="table table-condensed">
                <tbody>
-                  <tr>
+                  <tr class="no-border-top">
                      <th>전일비</th>
                      <td>
                      	<c:choose>
@@ -60,7 +60,7 @@
 			           			<span class="price-up"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			           		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc lt 0}">
-			          			<span class="price-down"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
+			          			<span class="price-down"><fmt:formatNumber value="-${masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			          		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc eq 0}">
 			          			<span><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
@@ -101,7 +101,7 @@
                   <tr>
                      <th>시가</th>
                      <td><fmt:formatNumber value="${masterDTO.priceDTO.opnprc}" /></td>
-                     <th>시가총액(억원)</th>
+                     <th>시가총액(억)</th>
                      <td><fmt:formatNumber value="${masterDTO.listShrs * masterDTO.priceDTO.trdPrc/100000000}"/></td>
                   </tr>
                    <tr>

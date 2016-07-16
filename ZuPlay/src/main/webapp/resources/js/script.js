@@ -1348,10 +1348,10 @@ $(function(){
 
       })
       
-      /*친구주식분석보기*/
+/*      친구주식분석보기
       $(document).on("click", "",function(){
          var friendNick = $(this).parents(".userinfo-stockHistory-btn").attr("id").split("-")[2];
-      })
+      })*/
       
 
        /* 뉴스 검색 */
@@ -1373,30 +1373,25 @@ $(function(){
              }
              
              $.ajax({
-                 url:"searchNews",
-               type:'post',
+                url:"searchNews",
+                type:'post',
                 data:{"keyword":keyword},
                 dataType:"json",
                 success:function(result){
                     var str = "";
                     if(!result.found){
                        alert("검색된 결과가 없습니다.");
-                       return;
+                       return; 
                     }
+                    console.log(result)
                    var str = "";
                    $.each(result.data.docs,function(index, item){
-                      if(item.image_urls.length>0){
-                         str += "<div class='hr-line-dashed'></div>";
-                         str += "<div class='news-search-img col-md-4'>";
-                         str += "<img src='"+item.image_urls[0]+"'/></div>";
-                         str += "<div class='col-md-8 search-result'>";
-                      }else{
-                         str += "<div class='col-md-12 search-result'>";
-                      }
-                      str+="<h3><a href='#'>"+item.title+"</a></h3>";
+                	  setting.page[item.uid_str] = item;
+                      str += "<div class='col-md-12 search-result'>";
+                      str+="<h3 class='news-search-tlink'>"+item.title;
+                      str+="<input type='hidden' value='"+item.uid_str+"'></h3>";
                       str+="<small>"+item.updated_at+"</small><br>"
-                     str+="<a href='#' class='search-link'>"+item.author+" 기자 ("+item.publisher+")</a>";
-                     str+="<p>"+item.content+"</p>";
+                     str+="<a href='#' class='search-link'>"+item.author ? item.author : "" +"("+item.publisher+")</a>";
                      str+="</div>";
                    })
                    $("#news-search-results").empty().append(str);              
@@ -1407,9 +1402,33 @@ $(function(){
                 }
              });
           })
-          
        }
-       
+      
+      /*뉴스 버튼 클릭*/
+      $(document).on("click", ".news-search-tlink", function(){
+    	  console.log($(this).find("input[type=hidden]").val());
+    	  showNews($(this).find("input[type=hidden]").val());
+      })
+
+      /* 뉴스 보기 */
+      var showNews = function(uid){
+    	  var page = setting.page[uid];
+    	  var str = "<div class='news-page-window'><div>"+page.title+"</div><div class='news-page-content'>";
+    	  str += "<div class='news-page-head'><h4 class=''news-page-title'>"+page.title+"</h4></div><hr class='style-glyph'><div><small>";
+    	  str += "<a href='"+page.content_url+"' class='pull-right'>"+page.content_url+"</a></div><div class=''news-page-info'>"
+    	  str += "<small>"+page.uid.updated_at+"</small><small>"+page.author ? page.author : "" + "</small>";
+    	  str += "<small class='news-page-publisher pull-right block'>"+page.publisher+"</small></div>";
+    	  str += "<div class='news-page-context'>" + page.content + "</div></div></div>";
+    	  
+    	  $(str).jqxWindow({
+              width:"500",
+              height:"700",
+              showCollapseButton: true,
+              closeButtonAction: 'close',
+              theme:userInfo.theme
+    	  });
+      }
+      
 
        /* 1:1 채팅 */
        var showChatWindow = function(nick){

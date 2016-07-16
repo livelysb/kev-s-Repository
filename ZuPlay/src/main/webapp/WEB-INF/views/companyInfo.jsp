@@ -7,6 +7,7 @@
    <div class="company-header">기업정보 - ${masterDTO.isuCd}</div>
    <input type="hidden" value="${masterDTO.isuCd}" class="company-isuCd">
    <input type="hidden" value="${plQuantity}" class="company-qty">
+   <input type="hidden" value="${masterDTO.priceDTO.trdPrc}" class="company-price">
    <div class="company-content">
       <div class="row-fluid">
       
@@ -121,7 +122,7 @@
          </div>
          <div class="row-fluid">
             <div class="col-xs-4"><div class="company-buy-input company-input"></div></div>
-            <div class="col-xs-5"><h4 class="company-buy-value">${masterDTO.priceDTO.trdPrc-(masterDTO.priceDTO.trdPrc*0.03)}</h4></div>
+            <div class="col-xs-5"><h4 class="company-buy-value"></h4></div>
             <div class="col-xs-3"><button class="company-buy-btn btn btn-block btn-success">매수</button></div>
          </div>
       </div>
@@ -131,7 +132,7 @@
          </div>
          <div class="row-fluid">
             <div class="col-xs-4"><div class="company-sell-input company-input"></div></div>
-            <div class="col-xs-5"><h4 class="company-sell-value">${masterDTO.priceDTO.trdPrc-(masterDTO.priceDTO.trdPrc*0.15)}</h4></div>
+            <div class="col-xs-5"><h4 class="company-sell-value"></h4></div>
             <div class="col-xs-3"><button class="company-sell-btn btn btn-danger btn-block">매도</button></div>
          </div>
       </div>

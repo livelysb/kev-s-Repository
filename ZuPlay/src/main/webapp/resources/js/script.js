@@ -179,7 +179,7 @@ $(function(){
       
       
       
-        /* 주식 구매 */
+     /* 주식 구매 */
      /* buyStock , sellStock*/
 	   var tradingStock = function(companyId, qty, url){
 		      $.ajax({
@@ -187,43 +187,21 @@ $(function(){
 		    	  dataType:"text",
 		    	  data:{isuCd:companyId, plQuantity:qty},
 		    	  success:function(data){
-		    		  if(data == "true"){
-		    			  myStockListUpdate();
-		    			  alert("구매 성공하였습니다.");
-		    		  }else{
-		    			  alert("구매 실패하였습니다.");
-		    		  }
+	    			  myStockListUpdate();
+	    			  alert(data);
 		    		  updatePI();
 		    	  },
 		    	  error:function(){
 		    		  console.log("Exception : tradingStock");
 		    	  }
 		      });
-		  };/*
-		   주식 판매 
-		   var sellStock = function(companyId, qty){
-			      $.ajax({
-			    	  url:"sellStock",
-			    	  dataType:"text",
-			    	  data:{isuCd:companyId, plQuantity:qty},
-			    	  success:function(data){
-			    		  if(data == "true"){
-			    			  myStockListUpdate();
-			    			  alert("판매 하였습니다.");
-			    		  }else{
-			    			  alert("판매 실패하였습니다.");
-			    		  }
-			    		  updatePI();
-			    	  },
-			    	  error:function(){
-			    		  console.log("Exception : sellStock");
-			    	  }
-			      });
-			  };*/
+		  };
       /* 기업 정보 조회 */
       var companyInfo = function(companyId){
     	     var company = $(companyId);
              var price = $(company).find(".company-title-stock").text();
+             var sellPrice = price - (price*0.15);
+             price = price - (price * 0.03);
              var isuCd = $(company).find(".company-isuCd").val();
              var qty = parseInt($(company).find(".company-qty").val()/1);
              var ticks = parseInt(userInfo.money/price);
@@ -233,18 +211,17 @@ $(function(){
              
              var sellSlider = $(company).find(".company-sell-slider");
              var sellNum = $(company).find(".company-sell-input");
-             console.log(qty);
-             
+             $(companyId).jqxWindow({
+                 theme:userInfo.theme,
+                 minWidth:700,
+                 width:"auto",
+                 height:500,
+                 showCollapseButton: true,
+                 resizable : true
+               });
+           
              if(ticks>0){
-	             $(companyId).jqxWindow({
-	                   theme:userInfo.theme,
-	                   minWidth:700,
-	                   width:"auto",
-	                   height:500,
-	                   showCollapseButton: true,
-	                   resizable : true
-	                 });
-	             
+
 	             $(buySlider).jqxSlider({
 	                 width: "100%",
 	                 tooltip: true,
@@ -254,25 +231,29 @@ $(function(){
 	                 ticksFrequency: ticks/10,
 	                 theme : userInfo.theme,
 	                 step: 1
-	             });
+	             }).on("change",companyBind(event,price));
+	             
+	             $(buyNum).jqxNumberInput({
+	                 width: '100%',
+	                 height: '25px',
+	                 inputMode: 'simple',
+	                 decimal: 1,
+	                 spinButtons: true,
+	                 spinButtonsStep: 1,
+	                 min : 1,
+	                 max : ticks,
+	                 textAlign: "center",
+	                 decimalDigits: 0,
+	                 theme : userInfo.theme
+	               }).on("change",companyBind(event,price));
+	              
+	             
              }else{
             	 $(company).find(".company-buy").remove();
              }
-             $(buyNum).jqxNumberInput({
-                 width: '100%',
-                 height: '25px',
-                 inputMode: 'simple',
-                 decimal: 1,
-                 spinButtons: true,
-                 spinButtonsStep: 1,
-                 min : 1,
-                 max : ticks,
-                 textAlign: "center",
-                 decimalDigits: 0,
-                 theme : userInfo.theme
-               });
-              
+             
               if(qty>0){
+            	  
                   $(sellNum).jqxNumberInput({
                       width: '100%',
                       height: '25px',
@@ -285,7 +266,8 @@ $(function(){
                       textAlign: "center",
                       decimalDigits: 0,
                       theme : userInfo.theme
-                    });
+                    }).on("change",companyBind(event,sellPrice));
+                  
                   $(sellSlider).jqxSlider({
                       width: "100%",
                       tooltip: true,
@@ -295,14 +277,37 @@ $(function(){
                       max : qty,
                       theme : userInfo.theme,
                       step: 1
-                  });
+                  }).on("change",companyBind(event,sellPrice));
+                  
               }else{
-             	 $(company).find(".company-buy").remove();
+             	 $(company).find(".company-sell").remove();
               }
       }
-
       
+      var companyBind = function(event,price){
+    	  return function(event){
+	    	  var value = $(this).val();
+	    	  var parentCompany = $(this).parent().parent().parent();
+	    	  $(parentCompany).find(".company-slider").val(value);
+	    	  $(parentCompany).find(".company-input").val(value);
+	    	  $(parentCompany).find("h4").text((value*price).format());
+    	  }
+      }
 
+      /*주식 구매*/
+      $(document).on("click", ".company-buy-btn" ,function(event){
+      	var pValue = $(this).parent().parent().find(".company-input").val();
+      	var pIsuId = $(this).parents(".company-window").attr("id").substr(8);
+      	tradingStock(pIsuId, pValue, "buyStock");
+       });
+      
+      /*주식 판매*/   
+      $(document).on("click", ".company-sell-btn" ,function(event){
+    	var pValue = $(this).parent().parent().find(".company-input").val();
+      	var pIsuId = $(this).parents(".company-window").attr("id").substr(8);
+      	tradingStock(pIsuId, pValue, "sellStock");
+      });
+        
       var invenInit = function(){
           
     	  // 내아이템 목록 조회

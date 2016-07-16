@@ -19,17 +19,17 @@
 				<div class="company-chart">
 					<ul class="nav nav-tabs">
 						<li class="active"><a data-toggle="tab"
-							href="#company-chart-today">오늘</a></li>
-						<li><a data-toggle="tab" href="#company-chart-month">한달</a></li>
+							href="#company-chart-today-${masterDTO.isuCd}">오늘</a></li>
+						<li><a data-toggle="tab" href="#company-chart-month-${masterDTO.isuCd}">한달</a></li>
 					</ul>
 
 					<div class="tab-content">
-						<div id="company-chart-today" class="tab-pane fade in active">
+						<div id="company-chart-today-${masterDTO.isuCd}" class="tab-pane fade in active">
 							<%-- <c:forEach items="${masterDTO.rtpList}" var="rtp" varStatus="stu">
 						   		${rtp.rpTrdTm2} : ${rtp.rpTrdPrc}
 						   </c:forEach> --%>
-						</div>
-						<div id="company-chart-month" class="tab-pane fade">
+						</div> 
+						<div id="company-chart-month-${masterDTO.isuCd}" class="tab-pane fade">
 							<%-- <c:forEach items="${masterDTO.dpList}" var="dp" varStatus="stu">
 						   		${dp.dpDate2} : ${dp.dpClsprc}
 						   </c:forEach> --%>
@@ -197,7 +197,7 @@
 						}
 						
 						/*탭 클릭 이벤트*/
-				         /* $("#company-${masterDTO.isuCd} .nav-tabs  a").on("click",function(){
+				          $("#company-${masterDTO.isuCd} .nav-tabs  a").on("click",function(){
 				        	 console.log("#company-${masterDTO.isuCd} 탭클릭")
 				            if($(this).text()=="오늘"){
 				            	console.log("오늘")
@@ -208,7 +208,7 @@
 				               $("#company-${masterDTO.isuCd} #company-chart-month").empty();
 				            	chartData(JSON.parse('${dpList}'),"dp")
 				            }
-				         })  */
+				         });
 						chartData(JSON.parse('${rtpList}'),"rtp"); 
  					});
 </script>

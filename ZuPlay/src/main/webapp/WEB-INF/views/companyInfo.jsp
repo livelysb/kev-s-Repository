@@ -9,9 +9,21 @@
    <input type="hidden" value="${plQuantity}" class="company-qty">
    <div class="company-content">
       <div class="row-fluid">
+      
          <div class="col-xs-12 company-title">
-            <span class="company-title-name">${masterDTO.isuKorAbbrv}</span> <span
-               class="company-title-stock">${masterDTO.priceDTO.trdPrc}</span>
+            <span class="company-title-name">${masterDTO.isuKorAbbrv}</span> 
+           	<c:choose>
+           		<c:when test="${masterDTO.priceDTO.trdPrc gt 0}">
+           			<span class="company-title-stock price-up" ><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
+           		</c:when>
+          		<c:when test="${masterDTO.priceDTO.trdPrc lt 0}">
+          			<span class="company-title-stock price-down" ><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
+          		</c:when>
+          		<c:when test="${masterDTO.priceDTO.trdPrc eq 0}">
+          			<span class="company-title-stock" ><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
+          		</c:when>
+           	</c:choose>
+            
          </div>
       </div>
       <div class="row-fluid">

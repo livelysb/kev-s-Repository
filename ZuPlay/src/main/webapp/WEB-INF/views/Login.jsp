@@ -184,8 +184,8 @@
 						class="img-responsive" alt="">
 						<div class="portfolio-box-caption">
 							<div class="portfolio-box-caption-content">
-								<div class="project-category text-faded">Next Member</div>
-								<div class="project-name">You</div>
+								<div class="project-category text-faded">Team ZUPLAY</div>
+								<div class="project-name"></div>
 							</div>
 						</div>
 					</a>

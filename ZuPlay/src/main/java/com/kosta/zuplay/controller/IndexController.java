@@ -19,9 +19,32 @@ public class IndexController {
 	@Autowired
 	SettingService settingServiceImpl;
 
-	@RequestMapping({ "/", "index", "index2" })
+	@RequestMapping({ "/", "index"})
 	public ModelAndView index(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView("index");
+		try {
+			if (session.getAttribute("playerNickname") != null) {
+				SettingDTO settingDTO = settingServiceImpl
+						.settingSelect((String) session.getAttribute("playerNickname"));
+				boolean firstLoginToday = playerInfoService.getRubyPerDay((String) session.getAttribute("playerNickname"));
+				System.out.println(firstLoginToday);
+				mv.addObject("firstLoginToday",
+						firstLoginToday);
+				mv.addObject("theme", settingDTO.getPsTheme());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMsg", e.toString());
+			System.out.println(e.getMessage());
+			throw new Exception();
+		}
+
+		return mv;
+	}
+	
+	@RequestMapping({"index2" })
+	public ModelAndView index2(HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView("index2");
 		try {
 			if (session.getAttribute("playerNickname") != null) {
 				SettingDTO settingDTO = settingServiceImpl

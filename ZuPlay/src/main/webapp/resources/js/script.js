@@ -236,6 +236,8 @@ $(function(){
                  data:{isuCd:companyId, plQuantity:qty},
                  success:function(data){
                     alert(data);
+                    
+                    showCompanyInfo(companyId);
                     updatePI(myStockListUpdate(userInfo.nickName));
                  },
                  error:function(){
@@ -259,10 +261,10 @@ $(function(){
                 success:function(data){
     	        	var position;
     	            if($(companyId).length){
-    	            	position = $(companyId).jqxWindow('position'); 
+    	            	position = $(companyId).offset(); 
+        	            console.log(position);
     	            	$(companyId).remove();
     	            }
-    	            console.log(position);
 
                     $("body").append(data);
 	                   var company = $(companyId);
@@ -285,7 +287,7 @@ $(function(){
 	                       height:500,
 	                       showCollapseButton: true,
 	                       closeButtonAction: 'close',
-	                       postion : postion ? postion : "center",
+	                       position : position ? position : "center, center",
 	                       resizable : true
 	                     });
 	                 

@@ -72,10 +72,10 @@
                      <td>
                      	<c:choose>
 			           		<c:when test="${masterDTO.priceDTO.fluctuationRate gt 0}">
-			           			<span class="price-up">${masterDTO.priceDTO.cmpprevddPrc}%</span>
+			           			<span class="price-plus">${masterDTO.priceDTO.fluctuationRate}%</span>
 			           		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.fluctuationRate lt 0}">
-			          			<span class="price-down">${-masterDTO.priceDTO.cmpprevddPrc}%</span>
+			          			<span class="price-minus">${-masterDTO.priceDTO.fluctuationRate}%</span>
 			          		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.fluctuationRate eq 0}">
 			          			<span>${masterDTO.priceDTO.cmpprevddPrc}%</span>
@@ -101,9 +101,14 @@
                   <tr>
                      <th>시가</th>
                      <td><fmt:formatNumber value="${masterDTO.priceDTO.opnprc}" /></td>
-                     <th>시가총액</th>
-                     <td><fmt:formatNumber
-                           value="${masterDTO.listShrs * masterDTO.priceDTO.trdPrc/100000000}" /></td>
+                     <th>시가총액(억원)</th>
+                     <td><fmt:formatNumber value="${masterDTO.listShrs * masterDTO.priceDTO.trdPrc/100000000}"/></td>
+                  </tr>
+                   <tr>
+                     <th>하한가</th>
+                     <td><fmt:formatNumber value="${masterDTO.lwlmtprc}" /></td>
+                     <th>상한가</th>
+                     <td><fmt:formatNumber value="${masterDTO.listShrs * masterDTO.priceDTO.uplmtprc}" /></td>
                   </tr>
                </tbody>
             </table>

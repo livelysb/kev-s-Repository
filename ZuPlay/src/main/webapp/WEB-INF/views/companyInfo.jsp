@@ -60,7 +60,7 @@
 			           			<span class="price-up"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			           		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc lt 0}">
-			          			<span class="price-down"><fmt:formatNumber value="${-masterDTO.priceDTO.cmpprevddPrc}" /></span>
+			          			<span class="price-down"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			          		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc eq 0}">
 			          			<span><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
@@ -72,10 +72,10 @@
                      <td>
                      	<c:choose>
 			           		<c:when test="${masterDTO.priceDTO.fluctuationRate gt 0}">
-			           			<span class="price-plus">${masterDTO.priceDTO.fluctuationRate}%</span>
+			           			<span style="color:red">+${masterDTO.priceDTO.fluctuationRate}%</span>
 			           		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.fluctuationRate lt 0}">
-			          			<span class="price-minus">${-masterDTO.priceDTO.fluctuationRate}%</span>
+			          			<span style="color:blue">${masterDTO.priceDTO.fluctuationRate}%</span>
 			          		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.fluctuationRate eq 0}">
 			          			<span>${masterDTO.priceDTO.cmpprevddPrc}%</span>

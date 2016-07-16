@@ -112,27 +112,6 @@ small, .small {
 	color:blue;
 }
 
-.price-plus:before{
-  content: "\f067";
-  margin-right: 2px;
-  font-family: FontAwesome;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: inherit;
-  font-weight: bold;
-  color: red;
-}
-
-.price-minus:before{
-  content: "\f068";
-  margin-right: 2px;
-  font-family: FontAwesome;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: inherit;
-  font-weight: bold;
-  color: blue;
-}
 .side-section{
 	width : 228px;
 	height: auto;

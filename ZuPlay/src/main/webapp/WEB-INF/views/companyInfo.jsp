@@ -23,7 +23,6 @@
           			<span class="company-title-stock" ><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
           		</c:when>
            	</c:choose>
-            
          </div>
       </div>
       <div class="row-fluid">
@@ -55,10 +54,35 @@
                <tbody>
                   <tr>
                      <th>전일비</th>
-                     <td><fmt:formatNumber
-                           value="${masterDTO.priceDTO.cmpprevddPrc}" /></td>
+                     <td>
+                     	<c:choose>
+			           		<c:when test="${masterDTO.priceDTO.cmpprevddPrc gt 0}">
+			           			<span class="company-title-stock price-up"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
+			           		</c:when>
+			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc lt 0}">
+			          			<span class="company-title-stock price-down"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
+			          		</c:when>
+			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc eq 0}">
+			          			<span class="company-title-stock" ><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
+			          		</c:when>
+			           	</c:choose>
+			         </td>
                      <th>등락</th>
-                     <td>${masterDTO.priceDTO.fluctuationRate}%</td>
+                     
+                     <td>
+                     	<c:choose>
+			           		<c:when test="${masterDTO.priceDTO.fluctuationRate gt 0}">
+			           			<span class="company-title-stock price-up">${masterDTO.priceDTO.cmpprevddPrc}%</span>
+			           		</c:when>
+			          		<c:when test="${masterDTO.priceDTO.fluctuationRate lt 0}">
+			          			<span class="company-title-stock price-down">${masterDTO.priceDTO.cmpprevddPrc}%</span>
+			          		</c:when>
+			          		<c:when test="${masterDTO.priceDTO.fluctuationRate eq 0}">
+			          			<span class="company-title-stock" >${masterDTO.priceDTO.cmpprevddPrc}%</span>
+			          		</c:when>
+			           	</c:choose>
+                     
+                     </td>
                   </tr>
                   <tr>
                      <th>전일</th>

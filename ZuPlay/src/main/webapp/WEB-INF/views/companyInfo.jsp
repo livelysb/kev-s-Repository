@@ -17,7 +17,7 @@
            			<span class="company-title-stock" style="color:red"><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
            		</c:when>
           		<c:when test="${masterDTO.priceDTO.trdPrc lt 0}">
-          			<span class="company-title-stock blue" style="color:blue"><fmt:formatNumber value="${-masterDTO.priceDTO.trdPrc}" /></span>
+          			<span class="company-title-stock blue" style="color:blue"><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
           		</c:when>
           		<c:when test="${masterDTO.priceDTO.trdPrc eq 0}">
           			<span class="company-title-stock" ><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>

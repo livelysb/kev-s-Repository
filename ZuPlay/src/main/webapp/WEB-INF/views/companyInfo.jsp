@@ -98,10 +98,8 @@
 </div>
 <script type="text/javascript">
 	$("#company-${masterDTO.isuCd}")
-			.ready(
-					function() {
-
-						var chartData = function(data,kind) {
+			.ready(function() {
+							var chartData = function(data,kind) {
 							console.log(data);
 							chartJson = new Array();
 							
@@ -127,9 +125,7 @@
 						/*라인차트 그리기*/
 						var companylineChart = function(chartJson,chartId) {
 							console.log(chartId);
-							$(chartId).highcharts(
-											{
-												chart : {
+							$(chartId).highcharts({ chart : {
 													zoomType : 'x',
 													height : 200,
 													width : 300
@@ -201,7 +197,7 @@
 						}
 						
 						/*탭 클릭 이벤트*/
-				         $("#company-${masterDTO.isuCd} .nav-tabs  a").on("click",function(){
+				         /* $("#company-${masterDTO.isuCd} .nav-tabs  a").on("click",function(){
 				        	 console.log("#company-${masterDTO.isuCd} 탭클릭")
 				            if($(this).text()=="오늘"){
 				            	console.log("오늘")
@@ -212,7 +208,7 @@
 				               $("#company-${masterDTO.isuCd} #company-chart-month").empty();
 				            	chartData(JSON.parse('${dpList}'),"dp")
 				            }
-				         }) 
+				         })  */
 						chartData(JSON.parse('${rtpList}'),"rtp"); 
  					});
 </script>

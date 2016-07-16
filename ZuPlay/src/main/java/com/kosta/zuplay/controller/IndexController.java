@@ -19,7 +19,7 @@ public class IndexController {
 	@Autowired
 	SettingService settingServiceImpl;
 
-	@RequestMapping({ "/", "index" })
+	@RequestMapping({ "/", "index", "index2" })
 	public ModelAndView index(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView("index");
 		try {

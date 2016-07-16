@@ -28,7 +28,7 @@
 	<img src="resources/img/logo_kr.png" id="logo">
 		<div class="side-section">
 			<div class="side-id">
-				<label>${playerNickname}</label>
+				<label>${playerNickname}${firstLoginToday}</label>
 			</div>
 			<div class="side-avatar" > <!-- relative -->
 				<img src="" id="side-avatar-player-clothes"> <!-- absolute -->

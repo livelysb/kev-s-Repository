@@ -60,7 +60,7 @@
 			           			<span class="price-up"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			           		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc lt 0}">
-			          			<span class="price-down"><fmt:formatNumber value="-${masterDTO.priceDTO.cmpprevddPrc}" /></span>
+			          			<span class="price-down"><fmt:formatNumber value="${-masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			          		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc eq 0}">
 			          			<span><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>

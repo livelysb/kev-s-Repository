@@ -141,36 +141,35 @@ $(function(){
          )
         }
       var myStockListUpdate = function(targetPlayer){
-    	  if(targetPlayer != userInfo.nickName){
-    		  userStockListUpdate(targetPlayer);
-    		  return;
-    	  }
-          $.ajax({
-             url:"playerStock",
-             type:"post",
-             data:"targetPlayer="+userInfo.nickName,
-             dataType:"json",
-             success:function(data){
-            	 console.log(data);
-                var str="";
-                $("#mystockListTBody").empty();
-                $.each(data, function(index, item){
-                   str+="<tr><td>"+item.isuKorAbbrv+"</td>";
-                   str+="<td>"+item.kind+"</td>";
-                   str+="<td>"+(item.plQuantity).format()+"</td>";
-                   str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
-                   str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
-                   str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
-                   str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
-                });
-                $("#mystockListTBody").html(str);
-             },
-             error:function(err){
-                console.log("Exception : myStockListUpdate");
-             }
-          });
-       }
-      /*유저 주식 확인*/
+          if(targetPlayer != userInfo.nickName){
+             userStockListUpdate(targetPlayer);
+             return;
+          }
+           $.ajax({
+              url:"playerStock",
+              type:"post",
+              data:"targetPlayer="+userInfo.nickName,
+              dataType:"json",
+              success:function(data){
+                 var str="";
+                 $("#mystockListTBody").empty();
+                 $.each(data, function(index, item){
+                    str+="<tr><td>"+item.isuKorAbbrv+"</td>";
+                    str+="<td>"+item.kind+"</td>";
+                    str+="<td>"+(item.plQuantity).format()+"</td>";
+                    str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
+                    str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
+                    str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
+                    str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
+                 });
+                 $("#mystockListTBody").html(str);
+              },
+              error:function(err){
+                 console.log("Exception : myStockListUpdate");
+              }
+           });
+        }
+       /*유저 주식 확인*/
       var userStockListUpdate = function(targetPlayer){
           $.ajax({
              url:"playerStock",
@@ -236,6 +235,8 @@ $(function(){
                  data:{isuCd:companyId, plQuantity:qty},
                  success:function(data){
                     alert(data);
+                    
+                    showCompanyInfo(companyId);
                     updatePI(myStockListUpdate(userInfo.nickName));
                  },
                  error:function(){
@@ -243,93 +244,124 @@ $(function(){
                  }
               });
           };
-        /* 기업 정보 조회 */
-        var companyInfo = function(companyId){
-              var company = $(companyId);
-               var price = $(company).find(".company-title-stock").text();
-               var sellPrice = price - (price*0.15);
-               price = price - (price * 0.03);
-               var isuCd = $(company).find(".company-isuCd").val();
-               var qty = parseInt($(company).find(".company-qty").val()/1);
-               var ticks = parseInt(userInfo.money/price);
-               
-               var buySlider = $(company).find(".company-buy-slider");
-               var buyNum = $(company).find(".company-buy-input");
-               
-               var sellSlider = $(company).find(".company-sell-slider");
-               var sellNum = $(company).find(".company-sell-input");
-               $(companyId).jqxWindow({
-                   theme:userInfo.theme,
-                   minWidth:700,
-                   width:"auto",
-                   height:500,
-                   showCollapseButton: true,
-                   resizable : true
-                 });
-             
-               if(ticks>0){
+          
 
-                  $(buySlider).jqxSlider({
-                      width: "100%",
-                      tooltip: true,
-                      mode: 'fixed',
-                      min : 1,
-                      max : ticks,
-                      ticksFrequency: ticks/10,
-                      theme : userInfo.theme,
-                      step: 1
-                  }).on("change",companyBind(event,price));
-                  
-                  $(buyNum).jqxNumberInput({
-                      width: '100%',
-                      height: '25px',
-                      inputMode: 'simple',
-                      decimal: 1,
-                      spinButtons: true,
-                      spinButtonsStep: 1,
-                      min : 1,
-                      max : ticks,
-                      textAlign: "center",
-                      decimalDigits: 0,
-                      theme : userInfo.theme
-                    }).on("change",companyBind(event,price));
-                   
-                  
-               }else{
-                  $(company).find(".company-buy").remove();
-               }
-               
-                if(qty>0){
-                   
-                    $(sellNum).jqxNumberInput({
-                        width: '100%',
-                        height: '25px',
-                        inputMode: 'simple',
-                        decimal: 1,
-                        spinButtons: true,
-                        spinButtonsStep: 1,
-                        min : 1,
-                        max : qty,
-                        textAlign: "center",
-                        decimalDigits: 0,
-                        theme : userInfo.theme
-                      }).on("change",companyBind(event,sellPrice));
-                    
-                    $(sellSlider).jqxSlider({
-                        width: "100%",
-                        tooltip: true,
-                        mode: 'fixed',
-                        min : 1,
-                        ticksFrequency: qty/10,
-                        max : qty,
-                        theme : userInfo.theme,
-                        step: 1
-                    }).on("change",companyBind(event,sellPrice));
-                    
-                }else{
-                   $(company).find(".company-sell").remove();
+          /* 종목명 클릭 시 상세정보 띄어줌. */
+          var showCompanyInfo = function(code){
+             if(!code)
+                return;
+              var companyId = "#company-"+code;
+
+             $.ajax({
+                url:"companyInfo",
+                type:"post",
+                dataType:"html",
+                data:"isuCd="+code,
+                success:function(data){
+    	        	var position;
+    	            if($(companyId).length){
+    	            	position = $(companyId).offset(); 
+        	            console.log(position);
+    	            	$(companyId).remove();
+    	            }
+
+                    $("body").append(data);
+	                   var company = $(companyId);
+	                   var price = parseInt($(company).find(".company-price").val());
+	                   var sellPrice = price - (price*0.015);
+	                   price = price + (price * 0.03);
+	                   var isuCd = $(company).find(".company-isuCd").val();
+	                   var qty = parseInt($(company).find(".company-qty").val()/1);
+	                   var ticks = parseInt(userInfo.money/price);
+	                   
+	                   var buySlider = $(company).find(".company-buy-slider");
+	                   var buyNum = $(company).find(".company-buy-input");
+	                   
+	                   var sellSlider = $(company).find(".company-sell-slider");
+	                   var sellNum = $(company).find(".company-sell-input");
+	                   $(companyId).jqxWindow({
+	                       theme:userInfo.theme,
+	                       minWidth:700,
+	                       width:"auto",
+	                       height:500,
+	                       showCollapseButton: true,
+	                       closeButtonAction: 'close',
+	                       position : position ? position : "center, center",
+	                       resizable : true
+	                     });
+	                 
+	                   if(ticks>0){
+	
+	                      $(buySlider).jqxSlider({
+	                          width: "100%",
+	                          tooltip: true,
+	                          mode: 'fixed',
+	                          min : 1,
+	                          max : ticks,
+	                          ticksFrequency: ticks/10,
+	                          theme : userInfo.theme,
+	                          step: 1
+	                      }).on("change",companyBind(event,price));
+	                      
+	                      $(buyNum).jqxNumberInput({
+	                          width: '100%',
+	                          height: '25px',
+	                          inputMode: 'simple',
+	                          decimal: 1,
+	                          spinButtons: true,
+	                          spinButtonsStep: 1,
+	                          min : 1,
+	                          max : ticks,
+	                          textAlign: "center",
+	                          decimalDigits: 0,
+	                          theme : userInfo.theme
+	                        }).on("change",companyBind(event,price));
+	                       
+	                      
+	                   }else{
+	                      $(company).find(".company-buy").remove();
+	                   }
+	                   
+	                    if(qty>0){
+	                       
+	                        $(sellNum).jqxNumberInput({
+	                            width: '100%',
+	                            height: '25px',
+	                            inputMode: 'simple',
+	                            decimal: 1,
+	                            spinButtons: true,
+	                            spinButtonsStep: 1,
+	                            min : 1,
+	                            max : qty,
+	                            textAlign: "center",
+	                            decimalDigits: 0,
+	                            theme : userInfo.theme
+	                          }).on("change",companyBind(event,sellPrice));
+	                        
+	                        $(sellSlider).jqxSlider({
+	                            width: "100%",
+	                            tooltip: true,
+	                            mode: 'fixed',
+	                            min : 1,
+	                            ticksFrequency: qty/10,
+	                            max : qty,
+	                            theme : userInfo.theme,
+	                            step: 1
+	                        }).on("change",companyBind(event,sellPrice));
+	                        
+	                    }else{
+	                       $(company).find(".company-sell").remove();
+	                    }
+	          
+                },
+                error:function(err){
+                   console.log("Exception : showCompanyInfo");
                 }
-        }
+             });
+          }
+
+        /* 기업 정보 조회 */
+        
         
         var companyBind = function(event,price){
            return function(event){
@@ -337,7 +369,7 @@ $(function(){
               var parentCompany = $(this).parent().parent().parent();
               $(parentCompany).find(".company-slider").val(value);
               $(parentCompany).find(".company-input").val(value);
-              $(parentCompany).find("h4").text((value*price).format());
+              $(parentCompany).find("h4").text(parseInt((value*price)).format());
            }
         }
 
@@ -372,9 +404,19 @@ $(function(){
                      }
                      var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item);
                      $("#inven-player-"+item.piIndex).html(items);
+                     
                      $("#inven-player-"+item.piIndex+" img").jqxTooltip({ content: item.itemDTO.itemName+"("+item.itemDTO.itemGrade+")", position: 'bottom', autoHide: true, 
                          name: 'movieTooltip', theme : userInfo.theme });
                   });
+                  
+                  for(var i=1; i<=6; i++){
+                	  console.log("테스트");
+                	  console.log($("#inven-player-"+i).children("img").attr("class"));
+                	  if($("#inven-player-"+i).children("img").attr("class")){
+                		  $("#inven-player-"+i).html("<img src='resources/img/inven/inven-"+i+"' class='item-img'>")
+                	  }
+                  }
+                  
                   updateAvatar()
                 },
                 error:function(err){
@@ -617,31 +659,6 @@ $(function(){
                  stockPageSelect(num,$("#stock-search-keyword").val());
               });
             
-            /* 종목명 클릭 시 상세정보 띄어줌. */
-            var showCompanyInfo = function(code){
-               if(!code)
-                  return;
-                var companyId = "#company-"+code;
-                if(setting.page.indexOf(companyId) > -1){
-                   $(companyId).jqxWindow("show");
-                   return;
-                }
-                setting.page.push(companyId);
-               $.ajax({
-                  url:"companyInfo",
-                  type:"post",
-                  dataType:"html",
-                  data:"isuCd="+code,
-                  success:function(data){
-                     $(setting.content).append(data);
-                     companyInfo(companyId);
-                  },
-                  error:function(err){
-                     console.log("Exception : showCompanyInfo");
-                  }
-               });
-            }
-
             /* 검색 */
             $("#stock-search").on("keyup",function(){
                if(event.keyCode == 13) {
@@ -1336,16 +1353,14 @@ $(function(){
       
       /*친구주식현황보기*/
       $(document).on("click", ".userinfo-stocklist-btn",function(){
-    	  var friendNick = $(this).parents(".userinfo-window").attr("id").split("-")[2];
-    	  myStockListUpdate(friendNick);
+         var friendNick = $(this).parents(".userinfo-window").attr("id").split("-")[2];
+         myStockListUpdate(friendNick);
 
       })
       
       /*친구주식분석보기*/
-      $(document).on("click", ".userinfo-stocklist-btn",function(){
-    	  var friendNick = $(this).parents(".userinfo-stockHistory-btn").attr("id").split("-")[2];
-    	  myStockListUpdate(friendNick);
-    	  $("#mystock-window").jqxWindow("show");
+      $(document).on("click", "",function(){
+         var friendNick = $(this).parents(".userinfo-stockHistory-btn").attr("id").split("-")[2];
       })
       
 
@@ -1686,11 +1701,10 @@ $(function(){
       
       /*최초접속일 노티파이*/
       var firstNotify = function(){
-    	  console.log(userInfo.nickName+"${firstLoginToday}")
-      	if($("#index-firstLogin")=="true"){ 
-      		$("#noti-msg").html( userInfo.nickName+ "님 오늘 최초접속!!<br>20000루비를 획득하셨습니다.");
-	  	    $("#friend-request-noti").jqxNotification("open");
-      	}
+         if($("#index-firstLogin")=="true"){ 
+            $("#noti-msg").html( userInfo.nickName+ "님 오늘 최초접속!!<br>20000루비를 획득하셨습니다.");
+            $("#friend-request-noti").jqxNotification("open");
+         }
       }
       
       /*히스토리 */
@@ -1819,7 +1833,7 @@ $(function(){
                      }else{
                         etcMoney+=item.earningMoney;
                         if(index+1 == data.length) {
-                           pieChartObj.name="기타";
+                           pieChartObj.name="etc";
                            pieChartObj.y=etcMoney;
                            pieChartJson.push(pieChartObj);
                         }
@@ -2194,10 +2208,8 @@ $(function(){
       initChatRoom();
       initRanking();
       userInfoInit();
-      firstNotify()
+      firstNotify();
       historyInit(userInfo.nickName);
-      
-      
       
       var setBtn = function(){
             $("#inven-btn").setBtn($("#inven-Window"));

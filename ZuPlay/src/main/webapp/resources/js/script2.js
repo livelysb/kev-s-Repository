@@ -196,7 +196,7 @@ $(function(){
                 console.log(str);
 
                 $(table).jqxWindow({
-                    width:"400",
+                    width:"650",
                     height:"450",
                     resizable:true,
                     showCollapseButton: true,

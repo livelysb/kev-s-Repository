@@ -57,13 +57,13 @@
                      <td>
                      	<c:choose>
 			           		<c:when test="${masterDTO.priceDTO.cmpprevddPrc gt 0}">
-			           			<span class="company-title-stock price-up"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
+			           			<span class="price-up"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			           		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc lt 0}">
-			          			<span class="company-title-stock price-down"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
+			          			<span class="price-down"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			          		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc eq 0}">
-			          			<span class="company-title-stock" ><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
+			          			<span><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			          		</c:when>
 			           	</c:choose>
 			         </td>
@@ -72,13 +72,13 @@
                      <td>
                      	<c:choose>
 			           		<c:when test="${masterDTO.priceDTO.fluctuationRate gt 0}">
-			           			<span class="company-title-stock price-up">${masterDTO.priceDTO.cmpprevddPrc}%</span>
+			           			<span class="price-up">${masterDTO.priceDTO.cmpprevddPrc}%</span>
 			           		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.fluctuationRate lt 0}">
-			          			<span class="company-title-stock price-down">${masterDTO.priceDTO.cmpprevddPrc}%</span>
+			          			<span class="price-down">${masterDTO.priceDTO.cmpprevddPrc}%</span>
 			          		</c:when>
 			          		<c:when test="${masterDTO.priceDTO.fluctuationRate eq 0}">
-			          			<span class="company-title-stock" >${masterDTO.priceDTO.cmpprevddPrc}%</span>
+			          			<span>${masterDTO.priceDTO.cmpprevddPrc}%</span>
 			          		</c:when>
 			           	</c:choose>
                      

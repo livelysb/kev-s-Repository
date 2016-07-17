@@ -70,7 +70,7 @@
 									<th>아이템 이름</th>
 									<th>판매가</th>
 									<th>종료시간</th>
-									<th>취소</th>
+									<th>구분</th>
 								</tr>
 							</thead>
 							<tbody id="auction-sell-tbody">

@@ -19,7 +19,7 @@
    <link href="resources/css/jqwidgets/jqx.${theme}.css" rel="stylesheet" />
 </c:if>
 <link href="resources/css/jquery-ui/jquery-ui.css" rel="stylesheet" />
-<link href="http://192.168.123.107:8000/zuplay/resources/css/style.css" rel="stylesheet" />
+<link href="resources/css/style.css" rel="stylesheet" />
 </head>
 <body class='default' id="main">
 	<img src="resources/img/loading.gif" id="loading-content">
@@ -96,12 +96,12 @@
 <script type="text/javascript" src="resources/js/jquery-ui/jquery-ui.js"></script>
 <script type="text/javascript" src="resources/js/highcharts.js"></script>
 <script type="text/javascript" src="resources/js/dockmenu.min.js"></script>
-<script src="http://192.168.123.107:8000/zuplay/resources/js/set.js"></script>
+<script src="resources/js/set.js"></script>
 <script type="text/javascript">
     userInfo.theme = "${theme}"; 
     $(function(){
     	$("#rta-btn li").append("<div>");
     })
 </script>
-<script src="http://192.168.123.107:8000/zuplay/resources/js/script.js"></script>
+<script src="resources/js/script.js"></script>
 </html>

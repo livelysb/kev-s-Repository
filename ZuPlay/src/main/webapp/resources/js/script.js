@@ -2562,10 +2562,8 @@ $(function(){
                  default : console.log("unknow msg : " + data.type);
               }
            }
-           
            /* 최초 친구리스트 */
            ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
-           
       });
       $(".side-avatar").css({
           width : $("#side-avatar-player-clothes").css("width"),

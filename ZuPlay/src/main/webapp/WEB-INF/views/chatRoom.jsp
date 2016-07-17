@@ -37,10 +37,13 @@
                         </div>
                         
                         <div class="modal-footer">
-                              <button type="button" class="btn btn-success" id="chat-create-confirm">생성</button>
-                              <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+	                        <div class="col-xs-6">
+	                        	<button type="button" class="btn btn-success btn-block" id="chat-create-confirm">생성</button>
+	                        </div>
+	                        <div class="col-xs-6">
+	                        	<button type="button" class="btn btn-danger btn-block" data-dismiss="modal">취소</button>
+	                        </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>

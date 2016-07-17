@@ -40,6 +40,25 @@ $(function(){
       return this;
    };
    
+   $.fn.upDown = function(){
+	   $.each($(this),function(index,item){
+		   var checkVal = $(item).text();
+		   var floatVal = parseFloat(checkVal);
+		   var checker = checkVal.substr(0,1);
+		   if(!checker || floatVal == 0){
+			   return;
+		   }
+		   
+		   if(checker == "-"){
+			   $(item).addClass("price-down");
+			   $(item).text(checkVal.substr(1));
+		   }else{
+			   $(item).addClass("price-up");
+		   }
+	   })
+	   return this;
+   }
+   
    /* 내 정보 갱신 (Money, Ruby) */
    var updateLabel = function(){
 	   $(".side-money label").text(userInfo.money.format());
@@ -95,7 +114,6 @@ $(function(){
              autoOpen:false,
              theme:userInfo.theme
            });
-           
 
           var stockPage = 1;
           var getRealTimeStock = function(){
@@ -114,9 +132,12 @@ $(function(){
                         $(data).each(function(index, item) {
                       
                           if(index!=0){
-                             $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+(item.priceDTO.trdPrc).format()+"</td> <td>"+(item.priceDTO.cmpprevddPrc).format()+"</td> <td>"+item.priceDTO.fluctuationRate+"</td><td>"+(item.priceDTO.accTrdvol).format()+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
+                             $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+(item.priceDTO.trdPrc).format()+"</td> <td>"+(item.priceDTO.cmpprevddPrc).format()+"</td> <td>"+item.priceDTO.fluctuationRate+"%</td><td>"+(item.priceDTO.accTrdvol).format()+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
                           }
                         });
+                        $("#rta-tbody tr td:nth-child(3)").upDown();
+                        $("#rta-tbody tr td:nth-child(4)").upDown();
+                        
                        if(data.length < 11) stockPage=1;
                      },
                      error:function(e){
@@ -159,10 +180,12 @@ $(function(){
                     str+="<td>"+(item.plQuantity).format()+"</td>";
                     str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
                     str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
-                    str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
-                    str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
+                    str+="<td>"+item.priceDTO.fluctuationRate+"%</td>"
+                    str+="<td>"+(item.earningRate).toFixed(2)+"%</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
                  });
                  $("#mystockListTBody").html(str);
+                 $("#mystockListTBody tr td:nth-child(6)").upDown();
+                 $("#mystockListTBody tr td:nth-child(7)").upDown();
               },
               error:function(err){
                  console.log("Exception : myStockListUpdate");
@@ -181,7 +204,7 @@ $(function(){
             	var table = "<div class='stock-user-window'><div>유저주식 - "+targetPlayer+"</div><div class='stock-user-content'>";
             	table += "<table class='table table-bordered table-hover'><thead><tr>";
             	table += "<th>종목명</th><th>분야</th><th>수량</th><th>체결가</th><th>총가치</th><th>등락률</th><th>수익률</th></tr>"
-            	table += "</thead><tbody></tbody></table></div></div>";
+            	table += "</thead><tbody id=mystockListTBody"+targetPlayer+"></tbody></table></div></div>";
                 var str="";
 
                 $.each(data, function(index, item){
@@ -190,14 +213,12 @@ $(function(){
                    str+="<td>"+(item.plQuantity).format()+"</td>";
                    str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
                    str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
-                   str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
-                   str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
+                   str+="<td>"+item.priceDTO.fluctuationRate+"%</td>"
+                   str+="<td>"+(item.earningRate).toFixed(2)+"%</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
                 });
                 
-                console.log(str);
-
                 $(table).jqxWindow({
-                    width:"400",
+                    width:"650",
                     height:"450",
                     resizable:true,
                     showCollapseButton: true,
@@ -205,6 +226,10 @@ $(function(){
                     closeButtonAction: "close",
                     theme:userInfo.theme
                 }).find('tbody').html(str);
+                
+                $("#mystockListTBody"+targetPlayer+" tr td:nth-child(6)").upDown();
+                $("#mystockListTBody"+targetPlayer+" tr td:nth-child(7)").upDown();
+                
              },
              error:function(err){
                 console.log("Exception : userStockListUpdate");
@@ -404,9 +429,17 @@ $(function(){
                      }
                      var items = $("<img src='"+item.itemDTO.itemImg+"' class='item-img'>").data("item" , item);
                      $("#inven-player-"+item.piIndex).html(items);
+                     
                      $("#inven-player-"+item.piIndex+" img").jqxTooltip({ content: item.itemDTO.itemName+"("+item.itemDTO.itemGrade+")", position: 'bottom', autoHide: true, 
                          name: 'movieTooltip', theme : userInfo.theme });
                   });
+                  
+                  /*for(var i=1; i<=6; i++){
+                	  if(!$("#inven-player-"+i).children("img").attr("class")){
+                		  console.log($("#inven-player-"+i).children("img").attr("class"));
+                		  $("#inven-player-"+i).html("<img src='resources/img/inven/inven-"+i+".png' class='item-img'>")
+                	  }
+                  }*/ 
                   updateAvatar()
                 },
                 error:function(err){
@@ -609,7 +642,7 @@ $(function(){
                            str+="<td>"+item.kind+"</td>"
                            str+="<td>"+(item.priceDTO.trdPrc).format() +"</td>";
                            str+="<td>"+(item.priceDTO.cmpprevddPrc).format() +"</td>";
-                           str+="<td>"+item.priceDTO.fluctuationRate +"</td>";
+                           str+="<td>"+item.priceDTO.fluctuationRate +"%</td>";
                            str+="<td>"+(item.priceDTO.accTrdvol).format() +"</td>";
                            str+="<td>"+(item.priceDTO.opnprc).format() +"</td>";
                            str+="<td>"+(item.priceDTO.hgprc).format() +"</td>";
@@ -619,7 +652,8 @@ $(function(){
                      })
                      
                      $("#stockListTBody").html(str);
-                    
+                     	$("#stockListTBody tr td:nth-child(4)").upDown();
+                     	$("#stockListTBody tr td:nth-child(5)").upDown();
                     },
                   
                   
@@ -661,7 +695,6 @@ $(function(){
             })
             
             var stockListSearch = function(){
-               if($("#stock-search").val()=="") return;
                 $("#stock-content #page-selection ul li").eq(1).trigger("click");
                 $("#stock-search-keyword").val($("#stock-search").val());
                 stockPageSelect(1,$("#stock-search").val());
@@ -898,7 +931,7 @@ $(function(){
          $("#friend-request-noti").jqxNotification({
             position: "top-right", opacity: 0.9,
              autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template: "info"
-            });
+         });
          
          
          /* 친구삭제 버튼 클릭 시 */
@@ -1211,7 +1244,7 @@ $(function(){
                        if(item.imAuctionEnd="T"){
                           str+="<tr><td><img src='"+item.itemDTO.itemImg+"' class='auction-itemImg'></td>";
                           str+="<td>"+item.itemDTO.itemName+"</td>";
-                          str+="<td>"+item.imPurchasePrice+"</td>";
+                          str+="<td>"+(item.imPurchasePrice).format()+"</td>";
                           str+="<td>"+item.imBidTime+"</td>";
                           str+="<td>"+item.playerNickname+"</td>";
                           str+="<td><input type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnBuy' value='구매'></td>"
@@ -1239,7 +1272,7 @@ $(function(){
                    
                     str+="<tr><td><img src='"+ item.itemDTO.itemImg +"' class='auction-itemImg' ></td>";
                     str+="<td>"+item.itemDTO.itemName+"</td>";
-                    str+="<td>"+item.imPurchasePrice+"</td>";
+                    str+="<td>"+(item.imPurchasePrice).format()+"</td>";
                     str+="<td>"+item.imBidTime+"</td>";
                     
                     if(item.imAuctionEnd=="T"){
@@ -1327,6 +1360,8 @@ $(function(){
                         closeButtonAction: 'close',
                         theme:userInfo.theme
                    });
+                   $("#userinfo-player-"+nickName+"-season").upDown();
+                   $("#userinfo-player-"+nickName+"-daily").upDown();
                    myInfoAvatar(nickName,"#userinfo-player-"+nickName);
                 },
                 error:function(err){
@@ -1348,88 +1383,96 @@ $(function(){
 
       })
       
-/*      친구주식분석보기
-      $(document).on("click", "",function(){
-         var friendNick = $(this).parents(".userinfo-stockHistory-btn").attr("id").split("-")[2];
-      })*/
-      
-
-       /* 뉴스 검색 */
-       var newsSearchInit = function(){
-          $("#news-search-window").jqxWindow({
-                width:"500",
-                height:"700",
-                resizable:true,
-                showCollapseButton: true,
-                autoOpen:false,
-                theme:userInfo.theme
-              });
-          
-          $("#news-search-submit").click(function(){
-             var keyword = $("#news-search-keyword").val();
-             if(keyword == ""){
-                alert("검색어를 입력해주세요.");
-                return;
-             }
-             
-             $.ajax({
-                url:"searchNews",
-                type:'post',
-                data:{"keyword":keyword},
-                dataType:"json",
-                success:function(result){
-                    var str = "";
-                    if(!result.found){
-                       alert("검색된 결과가 없습니다.");
-                       return; 
-                    }
-                    console.log(result)
-                   var str = "";
-                   $.each(result.data.docs,function(index, item){
-                	  setting.page[item.uid_str] = item;
-                      str += "<div class='col-md-12 search-result'>";
-                      str+="<h4 class='news-search-tlink'>"+item.title;
-                      str+="<input type='hidden' value='"+item.uid_str+"'></h4>";
-/*                    str+="<small>"+item.updated_at+"</small><br>" */
-                      str+="<small style='color:gray'>"+item.publisher+"</small>";
-                     str+="</div>";
-                   })
-                   $("#news-search-results").empty().append(str);              
-                   
-                },
-                error:function(err){
-                   console.log("Exception : searchNews(keyword : "+keyword+")");
-                }
-             });
-          })
-       }
-      
-      /*뉴스 버튼 클릭*/
-      $(document).on("click", ".news-search-tlink", function(){
-    	  console.log($(this).find("input[type=hidden]").val());
-    	  showNews($(this).find("input[type=hidden]").val());
+      /*친구주식분석보기*/
+      $(document).on("click", ".userinfo-stockHistory-btn",function(){
+         var friendNick = $(this).parents(".userinfo-window").attr("id").split("-")[2];
+         
+         console.log(friendNick);
+         historyInit(friendNick);
       })
-
-      /* 뉴스 보기 */
-      var showNews = function(uid){
-    	  var page = setting.page[uid];
-    	  var str = "<div class='news-page-window'><div>"+page.title+"</div><div class='news-page-content'>";
-    	  str += "<div class='news-page-head'><h4 class=''news-page-title'>"+page.title+"</h4></div><hr class='style-glyph'><div><small>";
-    	  str += "<a href='"+page.content_url+"' class='pull-right'>"+page.content_url+"</a></div><div class=''news-page-info'>"
-    	  str += "<small>"+page.uid.updated_at+"</small><small>"+page.author ? page.author : "" + "</small>";
-    	  str += "<small class='news-page-publisher pull-right block'>"+page.publisher+"</small></div>";
-    	  str += "<div class='news-page-context'>" + page.content + "</div></div></div>";
-    	  
-    	  $(str).jqxWindow({
-              minWidth:"750",
-              height:"700",
-              showCollapseButton: true,
-              closeButtonAction: 'close',
-              theme:userInfo.theme
-    	  });
-      }
       
 
+
+      /* 뉴스 검색 */
+      var newsSearchInit = function(){
+         $("#news-search-window").jqxWindow({
+               width:"500",
+               height:"700",
+               resizable:true,
+               showCollapseButton: true,
+               autoOpen:false,
+               theme:userInfo.theme
+             });
+         
+         $("#news-search-submit").click(function(){
+            var keyword = $("#news-search-keyword").val();
+            if(keyword == ""){
+               alert("검색어를 입력해주세요.");
+               return;
+            }
+            
+            $.ajax({
+               url:"searchNews",
+               type:'post',
+               data:{"keyword":keyword},
+               dataType:"json",
+               success:function(result){
+                   var str = "";
+                   if(!result.found){
+                      alert("검색된 결과가 없습니다.");
+                      return; 
+                   }
+                   console.log(result)
+                  var str = "";
+                  $.each(result.data.docs,function(index, item){
+                    setting.page[item.uid_str] = item;
+                     str += "<div class='col-md-12 search-result'>";
+                     str+="<h4 class='news-search-tlink'>"+item.title;
+                     str+="<input type='hidden' value='"+item.uid_str+"'></h4>";
+                     str+="<small style='color:gray'>"+item.publisher+"</small>";
+                    str+="</div>";
+                  })
+                  $("#news-search-results").empty().append(str);              
+                  
+               },
+               error:function(err){
+                  console.log("Exception : searchNews(keyword : "+keyword+")");
+               }
+            });
+         })
+      }
+     
+     /*뉴스 버튼 클릭*/
+     $(document).on("click", ".news-search-tlink", function(){
+        console.log($(this).find("input[type=hidden]").val());
+        showNews($(this).find("input[type=hidden]").val());
+     })
+     
+     /* 뉴스 보기 */
+     var showNews = function(uid){
+        var page = setting.page[uid];
+        var pageTime = page.updated_at.substr(0,page.updated_at.indexOf("T"));
+        var imgUrl = page.image_urls ? page.image_urls[1] : "";
+        console.log(pageTime);
+        var str = "<div class='news-page-window'><div>"+page.title+"</div><div class='row news-page-content'>";
+        str += "<div class='col-xs-12'><h2 class='news-page-subtitle'>"+page.title+"</h2>";
+        str += "<small>" + pageTime + " | " + (page.author ? page.author + " | " : "");
+        str += "<a href='"+page.content_url+"' target='_blank'>원문</a></small>";
+        str += "<hr></div><div class='news-page-context col-xs-12'>";
+        if(page.image_urls[0]){
+           str += "<img src='"+page.image_urls[0]+"' class='pull-right'>";
+        }
+        str += page.content + "</div></div></div>";
+        $(str).jqxWindow({
+             width:"600",
+             height:"auto",
+             maxHeight:"1000",
+             showCollapseButton: true,
+             closeButtonAction: 'close',
+             theme:userInfo.theme
+        });
+     }
+     
        /* 1:1 채팅 */
        var showChatWindow = function(nick){
           if(!$("#chat-no-"+nick).length || !setting.chat[nick]){
@@ -1680,15 +1723,17 @@ $(function(){
                str+="</div>";
                str+="</td>";
                str+="<td class='ranking-playernickname'>"+item.playerNickname+"</td>";
-               kind=="s" ? str+="<td>"+(item.totalEarningRate).toFixed(2)+"</td>" : str+="<td>"+(item.earningRate).toFixed(2)+"</td>";
+               kind=="s" ? str+="<td>"+(item.totalEarningRate).toFixed(2)+"%</td>" : str+="<td>"+(item.earningRate).toFixed(2)+"%</td>";
                str+="<td>"+(item.totalMoney).format()+"</td></tr>";
             }) 
             if(kind=="s"){
                $("#ranking-season-tbody").empty();
-               $("#ranking-season-tbody").html(str);                   
+               $("#ranking-season-tbody").html(str);      
+               $("#ranking-season-tbody tr td:nth-child(4)").upDown();
             }else{
                $("#ranking-daily-tbody").empty();
                $("#ranking-daily-tbody").html(str);
+               $("#ranking-daily-tbody tr td:nth-child(4)").upDown();
             }
          }
         
@@ -1715,6 +1760,7 @@ $(function(){
             $("#friend-request-noti").jqxNotification("open");
          }
       }
+
       
       /*히스토리 */
       var historyInit = function(targetPlayer){
@@ -1835,7 +1881,7 @@ $(function(){
                   var etcMoney=0;
                   $.each(data,function(index,item){
                      var pieChartObj = new Object();
-                     if(index<=6){
+                     if(index<=4){
                         pieChartObj.name=item.isuKorAbbrv;
                         pieChartObj.y=(item.earningMoney);
                         pieChartJson.push(pieChartObj);
@@ -1867,7 +1913,7 @@ $(function(){
                   var etcMoney=0;
                   $.each(data,function(index,item){
                      var pieChartObj = new Object();
-                     if(index<=6){
+                     if(index<=4){
                         pieChartObj.name=item.isuKorAbbrv;
                         pieChartObj.y=(-item.earningMoney);
                         pieChartJson.push(pieChartObj);
@@ -2066,7 +2112,7 @@ $(function(){
            str += data[i].playerList.length + " / " + data[i].maxNum;
            str += "</small>"
            if(data[i].password == "T"){
-             str += "<small class='chat-alert label label-danger chat-label-pwd'>password</small>"
+             str += " <small class='chat-alert label label-danger chat-label-pwd'><i class='fa fa-key' aria-hidden='true'></i></small>"
            }
            str += "</div>";
          }
@@ -2078,7 +2124,7 @@ $(function(){
          $(eventTargets).click(function(event){
             var roomNo = $(this).find(":hidden").val();
             if(setting.chat[roomNo]){
-            	return;
+               return;
             }
             
             if($(this).find(".chat-label-pwd").length){
@@ -2086,7 +2132,7 @@ $(function(){
               sendMsg("chatRoomJoin",userInfo.nickName,roomNo, password);
               return;
             }else{
-            	sendMsg("chatRoomJoin",userInfo.nickName,roomNo);
+               sendMsg("chatRoomJoin",userInfo.nickName,roomNo);
             }
          })
       }
@@ -2159,47 +2205,50 @@ $(function(){
           });
           
       }
+
       
       /* 내 채팅 업데이트*/
       var updateMyChat = function(){
-    	  var str = "";
-    	  for(var key in setting.chat){
-    		  str += "<li class='chatroom-mychat-li'><input type='hidden' value='"+setting.chat[key].roomNo+"'><a href='#' class='clearfix'>";
-    		  str += "<div class='chatroom-name'><strong>";
-    		  str += setting.chat[key].isOBO ? setting.chat[key].roomNo : setting.chat[key].roomName;
-    		  str += "</strong></div><div class='chat-last-message text-muted'></div>";
-    		  str += "</a></li>";
-    	  }
+         var str = "";
+         for(var key in setting.chat){
+            str += "<li class='chatroom-mychat-li'><input type='hidden' value='"+setting.chat[key].roomNo+"'><a href='#' class='clearfix'>";
+            str += "<div class='chatroom-name'><strong><h3>";
+            str += setting.chat[key].isOBO ? setting.chat[key].roomNo : setting.chat[key].roomName;
+            str += "</h3></strong></div><div class='chat-last-message text-muted'></div>";
+            str += "<small class='chat-time text-muted'></small>";
+            str += "</a></li>";
+         }
 
-    	  $("#chatroom-mychat-ul").html(str);
-    	  
-    	  for(var key in setting.chat){
-    		  updateMyChatOne(key);
-    	  }
+         $("#chatroom-mychat-ul").html(str);
+         
+         for(var key in setting.chat){
+            updateMyChatOne(key);
+         }
       }
       
       /* 내 채팅 개별 업데이트 */
       var updateMyChatOne = function(roomNo){
-    	  var myChat = $("#chatroom-mychat-ul li input[value="+roomNo+"]").parent();
-    	  $(myChat).find(".chat-last-message").text(setting.chat[roomNo].lastMsg);
-    	  $(myChat).find(".chat-time").text(setting.chat[roomNo].lastTime);
-    	  $(myChat).find(".chat-count").text(setting.chat[roomNo].count);
+         var myChat = $("#chatroom-mychat-ul li input[value="+roomNo+"]").parent();
+         $(myChat).find(".chat-last-message").text(setting.chat[roomNo].lastMsg);
+         $(myChat).find(".chat-time").text(setting.chat[roomNo].lastTime);
+         $(myChat).find(".chat-count").text(setting.chat[roomNo].count);
       }
       
       /* 내 채팅 클릭 이벤트 */
       $(document).on("click","#chatroom-mychat-ul li", function(event){
-    	  var roomNo = $(this).find(":hidden").val();
-    	  
-    	  if(setting.chat[roomNo].isOBO){
-    		  var targetWindow = $("#chat-no-"+roomNo);
-    	  }else{
-	    	  var targetWindow = $("#chat-roomNo-"+roomNo);
-	      }
-    	  $(targetWindow).jqxWindow("open");
-    	  $(targetWindow).jqxWindow("focus");
-    	  $(targetWindow).jqxWindow("expand");
-    	  $(targetWindow).jqxWindow('bringToFront');
+         var roomNo = $(this).find(":hidden").val();
+         
+         if(setting.chat[roomNo].isOBO){
+            var targetWindow = $("#chat-no-"+roomNo);
+         }else{
+            var targetWindow = $("#chat-roomNo-"+roomNo);
+         }
+         $(targetWindow).jqxWindow("open");
+         $(targetWindow).jqxWindow("focus");
+         $(targetWindow).jqxWindow("expand");
+         $(targetWindow).jqxWindow('bringToFront');
       });
+      
       
       
       invenInit();

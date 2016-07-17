@@ -1272,7 +1272,7 @@ $(function(){
                    
                     str+="<tr><td><img src='"+ item.itemDTO.itemImg +"' class='auction-itemImg' ></td>";
                     str+="<td>"+item.itemDTO.itemName+"</td>";
-                    str+="<td>"+item.imPurchasePrice+"</td>";
+                    str+="<td>"+(item.imPurchasePrice).format()+"</td>";
                     str+="<td>"+item.imBidTime+"</td>";
                     
                     if(item.imAuctionEnd=="T"){

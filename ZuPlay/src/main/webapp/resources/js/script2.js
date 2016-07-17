@@ -645,7 +645,7 @@ $(function(){
                      })
                      
                      $("#stockListTBody").html(str);
-                    $("#stockListTBody td").upDown();
+                     	$("#stockListTBody td").upDown();
                     },
                   
                   

@@ -124,7 +124,7 @@
     	 //모달이 포커스를 잃을 시 로그인화면으로 이동
     	 $('#nickModal').on('hidden.bs.modal', function() {
     		 alert("별명을 입력하지않으면 게임을 할 수 없습니다.")
-    		 location.href="http://192.168.123.103/zuplay/Login"; 
+    		 location.href="http://192.168.123.102:8000/zuplay/Login";  
     	 })
    }) 
 	</script>

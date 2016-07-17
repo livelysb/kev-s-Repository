@@ -448,6 +448,7 @@ div.vertical-line {
 
 .store-container {
 	float: left;
+	margin-left: 35px;
 }
 
 #store-content a {

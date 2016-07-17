@@ -478,6 +478,11 @@ div.vertical-line {
 	/* This makes sure that we can still click outside of the modal to close it */
 }
 
+#friend-content .pull-right{
+	position: relative;
+	bottom:40px;
+}
+
 #friend-content .vertical-align-center {
 	/* To center vertically */
 	display: table-cell;

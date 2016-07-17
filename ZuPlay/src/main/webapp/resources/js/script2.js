@@ -1392,6 +1392,7 @@ $(function(){
       })
       
 
+
       /* 뉴스 검색 */
       var newsSearchInit = function(){
          $("#news-search-window").jqxWindow({
@@ -1426,10 +1427,9 @@ $(function(){
                   $.each(result.data.docs,function(index, item){
                     setting.page[item.uid_str] = item;
                      str += "<div class='col-md-12 search-result'>";
-                     str+="<h3 class='news-search-tlink'>"+item.title;
-                     str+="<input type='hidden' value='"+item.uid_str+"'></h3>";
-                     str+="<small>"+item.updated_at+"</small><br>"
-                    str+="<a href='#' class='search-link'>"+item.author ? item.author : "" +"("+item.publisher+")</a>";
+                     str+="<h4 class='news-search-tlink'>"+item.title;
+                     str+="<input type='hidden' value='"+item.uid_str+"'></h4>";
+                     str+="<small style='color:gray'>"+item.publisher+"</small>";
                     str+="</div>";
                   })
                   $("#news-search-results").empty().append(str);              
@@ -1447,20 +1447,26 @@ $(function(){
         console.log($(this).find("input[type=hidden]").val());
         showNews($(this).find("input[type=hidden]").val());
      })
-
+     
      /* 뉴스 보기 */
      var showNews = function(uid){
         var page = setting.page[uid];
-        var str = "<div class='news-page-window'><div>"+page.title+"</div><div class='news-page-content'>";
-        str += "<div class='news-page-head'><h4 class=''news-page-title'>"+page.title+"</h4></div><hr class='style-glyph'><div><small>";
-        str += "<a href='"+page.content_url+"' class='pull-right'>"+page.content_url+"</a></div><div class=''news-page-info'>"
-        str += "<small>"+page.uid.updated_at+"</small><small>"+page.author ? page.author : "" + "</small>";
-        str += "<small class='news-page-publisher pull-right block'>"+page.publisher+"</small></div>";
-        str += "<div class='news-page-context'>" + page.content + "</div></div></div>";
-        
+        var pageTime = page.updated_at.substr(0,page.updated_at.indexOf("T"));
+        var imgUrl = page.image_urls ? page.image_urls[1] : "";
+        console.log(pageTime);
+        var str = "<div class='news-page-window'><div>"+page.title+"</div><div class='row news-page-content'>";
+        str += "<div class='col-xs-12'><h2 class='news-page-subtitle'>"+page.title+"</h2>";
+        str += "<small>" + pageTime + " | " + (page.author ? page.author + " | " : "");
+        str += "<a href='"+page.content_url+"' target='_blank'>원문</a></small>";
+        str += "<hr></div><div class='news-page-context col-xs-12'>";
+        if(page.image_urls[0]){
+           str += "<img src='"+page.image_urls[0]+"' class='pull-right'>";
+        }
+        str += page.content + "</div></div></div>";
         $(str).jqxWindow({
-             width:"500",
-             height:"700",
+             width:"600",
+             height:"auto",
+             maxHeight:"1000",
              showCollapseButton: true,
              closeButtonAction: 'close',
              theme:userInfo.theme
@@ -2106,7 +2112,7 @@ $(function(){
            str += data[i].playerList.length + " / " + data[i].maxNum;
            str += "</small>"
            if(data[i].password == "T"){
-             str += "<small class='chat-alert label label-danger chat-label-pwd'>password</small>"
+             str += " <small class='chat-alert label label-danger chat-label-pwd'><i class='fa fa-key' aria-hidden='true'></i></small>"
            }
            str += "</div>";
          }
@@ -2118,7 +2124,7 @@ $(function(){
          $(eventTargets).click(function(event){
             var roomNo = $(this).find(":hidden").val();
             if(setting.chat[roomNo]){
-            	return;
+               return;
             }
             
             if($(this).find(".chat-label-pwd").length){
@@ -2126,7 +2132,7 @@ $(function(){
               sendMsg("chatRoomJoin",userInfo.nickName,roomNo, password);
               return;
             }else{
-            	sendMsg("chatRoomJoin",userInfo.nickName,roomNo);
+               sendMsg("chatRoomJoin",userInfo.nickName,roomNo);
             }
          })
       }
@@ -2199,49 +2205,50 @@ $(function(){
           });
           
       }
+
       
       /* 내 채팅 업데이트*/
       var updateMyChat = function(){
-    	  var str = "";
-    	  for(var key in setting.chat){
-    		  str += "<li class='chatroom-mychat-li'><input type='hidden' value='"+setting.chat[key].roomNo+"'><a href='#' class='clearfix'>";
-    		  str += "<img src='http://bootdey.com/img/Content/user_1.jpg' alt='' class='img-circle'>";
-    		  str += "<div class='chatroom-name'><strong>";
-    		  str += setting.chat[key].isOBO ? setting.chat[key].roomNo : setting.chat[key].roomName;
-    		  str += "</strong></div><div class='chat-last-message text-muted'></div>";
-    		  str += "<small class='chat-time text-muted'></small><small class='chat-alert chat-count label label-danger'></small>";
-    		  str += "</a></li>";
-    	  }
+         var str = "";
+         for(var key in setting.chat){
+            str += "<li class='chatroom-mychat-li'><input type='hidden' value='"+setting.chat[key].roomNo+"'><a href='#' class='clearfix'>";
+            str += "<div class='chatroom-name'><strong><h3>";
+            str += setting.chat[key].isOBO ? setting.chat[key].roomNo : setting.chat[key].roomName;
+            str += "</h3></strong></div><div class='chat-last-message text-muted'></div>";
+            str += "<small class='chat-time text-muted'></small>";
+            str += "</a></li>";
+         }
 
-    	  $("#chatroom-mychat-ul").html(str);
-    	  
-    	  for(var key in setting.chat){
-    		  updateMyChatOne(key);
-    	  }
+         $("#chatroom-mychat-ul").html(str);
+         
+         for(var key in setting.chat){
+            updateMyChatOne(key);
+         }
       }
       
       /* 내 채팅 개별 업데이트 */
       var updateMyChatOne = function(roomNo){
-    	  var myChat = $("#chatroom-mychat-ul li input[value="+roomNo+"]").parent();
-    	  $(myChat).find(".chat-last-message").text(setting.chat[roomNo].lastMsg);
-    	  $(myChat).find(".chat-time").text(setting.chat[roomNo].lastTime);
-    	  $(myChat).find(".chat-count").text(setting.chat[roomNo].count);
+         var myChat = $("#chatroom-mychat-ul li input[value="+roomNo+"]").parent();
+         $(myChat).find(".chat-last-message").text(setting.chat[roomNo].lastMsg);
+         $(myChat).find(".chat-time").text(setting.chat[roomNo].lastTime);
+         $(myChat).find(".chat-count").text(setting.chat[roomNo].count);
       }
       
       /* 내 채팅 클릭 이벤트 */
       $(document).on("click","#chatroom-mychat-ul li", function(event){
-    	  var roomNo = $(this).find(":hidden").val();
-    	  
-    	  if(setting.chat[roomNo].isOBO){
-    		  var targetWindow = $("#chat-no-"+roomNo);
-    	  }else{
-	    	  var targetWindow = $("#chat-roomNo-"+roomNo);
-	      }
-    	  $(targetWindow).jqxWindow("open");
-    	  $(targetWindow).jqxWindow("focus");
-    	  $(targetWindow).jqxWindow("expand");
-    	  $(targetWindow).jqxWindow('bringToFront');
+         var roomNo = $(this).find(":hidden").val();
+         
+         if(setting.chat[roomNo].isOBO){
+            var targetWindow = $("#chat-no-"+roomNo);
+         }else{
+            var targetWindow = $("#chat-roomNo-"+roomNo);
+         }
+         $(targetWindow).jqxWindow("open");
+         $(targetWindow).jqxWindow("focus");
+         $(targetWindow).jqxWindow("expand");
+         $(targetWindow).jqxWindow('bringToFront');
       });
+      
       
       
       invenInit();

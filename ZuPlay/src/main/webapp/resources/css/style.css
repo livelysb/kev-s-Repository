@@ -815,6 +815,7 @@ div.vertical-line {
 #page-align {
 	text-align: center;
 }
+
 /*뉴스 검색*/
 #news-search-window .ibox-content {
    background-color: #FFFFFF;
@@ -825,28 +826,26 @@ div.vertical-line {
    border-style: solid solid none;
    border-width: 1px 0px;
 }
-#news-search-window .news-search-tlink:hover{
-   cursor: pointer;
-   color: green;
-}
+
 
 #news-search-window .search-form {
    margin-top: 10px;
 }
 
 #news-search-window .search-result .news-search-tlink {
-   margin-bottom: 3px;
+   margin-bottom: 8px;
    padding-left: 3px;
    color: #1E0FBE;
 }
 
-#news-search-window .search-result .search-link {
+#news-search-window .news-search-tlink:hover{
+   cursor: pointer;
+   color: green;
    color: #006621;
 }
 
-#news-search-window .search-result p {
-   font-size: 12px;
-   margin-top: 5px;
+#news-search-window .search-result{
+   margin-bottom: 8px;
 }
 
 #hr-line-dashed {
@@ -862,28 +861,27 @@ div.vertical-line {
    max-height: 70px;
 }
 
-.news-page-title{
-  display: block;
-  text-align: center;
-}
+ .news-page-content{
+   padding: 10px 10px 10px 10px;
+   overflow: auto;
+ }
 
-.news-page-info{
-  clear: both;
-  text-align: justify;
-}
+ .news-page-content hr{
+   margin-top: 7px;
+   margin-bottom: 7px;
+ }
 
-.news-page-info small{
-  margin-left: 8px;
-  margin-right: 8px;
-}
-
+ .news-page-subtitle{
+   margin: 5px;
+ }
+ 
 .news-page-context{
-  padding: 5px 5px 5px 5px;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  overflow: auto;
-  text-align: justify;
+   font-size: 23px;
 }
+ .news-page-context img{
+  max-width: 200px;
+}
+
 /*채팅*/
 .chat-group {
 	list-style: none;
@@ -1201,99 +1199,119 @@ div.vertical-line {
 
 /*채팅*/
 #chatroom-ul {
-	list-style: none;
-	margin-left: -35px;
+   list-style: none;
+   margin-left: -35px;
 }
 
 #chatroom-window .nav-tabs>li {
-	width: 50%;
-	text-align: center;
+   width: 50%;
+   text-align: center;
 }
 
 #chatroom-mychat {
-	list-style: none;
-	margin-left: -40px;
+   list-style: none;
+   margin-left: -40px;
 }
 
 #chatroom-mychat li {
-	border-bottom: 1px solid #eee;
+   border-bottom: 1px solid #eee;
 }
 
 #chatroom-mychat li a img {
-	float: left;
-	width: 45px;
-	height: 45px;
-	margin-right: 0px;
+   float: left;
+   width: 45px;
+   height: 45px;
+   margin-right: 0px;
 }
 
 #chatroom-mychat li a {
-	position: relative;
-	display: block;
-	padding: 10px;
-	transition: all .2s ease;
-	-webkit-transition: all .2s ease;
-	-moz-transition: all .2s ease;
-	-ms-transition: all .2s ease;
-	-o-transition: all .2s ease;
+   position: relative;
+   display: block;
+   padding: 10px;
+   transition: all .2s ease;
+   -webkit-transition: all .2s ease;
+   -moz-transition: all .2s ease;
+   -ms-transition: all .2s ease;
+   -o-transition: all .2s ease;
 }
 
 #chatroom-mychat li.active a {
-	background-color: #f1f5fc;
+   background-color: #f1f5fc;
 }
 
 #chatroom-mychat li a .chatroom-name, #chatroom-mychat li a .chatroom-name:hover
-	{
-	color: #777;
+   {
+   color: #777;
 }
 
 #chatroom-mychat li a .chat-last-message {
-	width: 65%;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
+   width: 65%;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   overflow: hidden;
 }
 
 #chatroom-mychat li a .chat-time {
-	position: absolute;
-	top: 10px;
-	right: 8px;
+   position: absolute;
+   top: 10px;
+   right: 8px;
+}
+
+#chatroom-mychat .chat-time:BEFORE {
+   content: f017;
+   font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    font-weight: bold;
 }
 
 #chatroom-mychat li a .chat-alert {
-	position: absolute;
-	right: 8px;
-	top: 27px;
-	font-size: 10px;
-	padding: 3px 5px;
+   position: absolute;
+   right: 8px;
+   top: 27px;
+   font-size: 10px;
+   padding: 3px 5px;
+}
+
+#chatroom-create-modal .modal-body input{
+   width:100%;
+   margin: 5px 5px;
+   text-align: center;
+}
+
+#chatroom-create-modal .modal-footer{
+   margin-top: 5px;
+   border-top: none !important;
 }
 
 .chat-content .btn-sq-xs.btn-danger {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 .chat-content .col-md-1 {
-	padding: 0;
+   padding: 0;
 }
 
 .chat-room-info {
-	border-bottom: 2px #F2F2FF solid;
-	text-align: center;
-	overflow: hidden;
-	line-height: 100%;
+   border-bottom: 2px #F2F2FF solid;
+   text-align: center;
+   overflow: hidden;
+   line-height: 100%;
 }
 
 .chat-room-header {
-	color: #4682b4;
+   color: #4682b4;
 }
 
 .chat-room-header:HOVER {
-	color: blue;
-	font-weight: bold;
+   color: blue;
+   font-weight: bold;
 }
 
 .chat-room-popover-contents .table {
-	margin-bottom: 2px;
+   margin-bottom: 2px;
 }
 /*랭킹*/
 .ranking-avatar-div {

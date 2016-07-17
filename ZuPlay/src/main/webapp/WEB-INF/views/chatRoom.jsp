@@ -25,20 +25,20 @@
                             <h4 class="modal-title">Confirmation</h4>
                         </div>
                         <div class="modal-body">
-                        <div class="col-xs-12">
-                        	<input type="text" id="chat-create-name" value="" placeholder="채팅방 이름"></input>
-                        </div>
-                        <div class="col-xs-6">
-                        	<input type="text" id="chat-create-pwd" value="" placeholder="패스워드"></input>
-                        </div>
-                        <div class="col-xs-6">
-                        	<input type="number" id="chat-create-max" value="" placeholder="최대 인원"></input>
-                        </div>
+	                        <div class="col-xs-12">
+	                        	<input type="text" id="chat-create-name" value="" placeholder="채팅방 이름"></input>
+	                        </div>
+	                        <div class="col-xs-6">
+	                        	<input type="text" id="chat-create-pwd" value="" placeholder="패스워드"></input>
+	                        </div>
+	                        <div class="col-xs-6">
+	                        	<input type="number" id="chat-create-max" value="" placeholder="최대 인원" min="2" max="8" value="8"></input>
+	                        </div>
                         </div>
                         
                         <div class="modal-footer">
 	                        <div class="col-xs-6">
-	                        	<button type="button" class="btn btn-success btn-block" id="chat-create-confirm">생성</button>
+	                        	<button type="button" class="btn btn-success btn-block" id="chat-create-confirm" >생성</button>
 	                        </div>
 	                        <div class="col-xs-6">
 	                        	<button type="button" class="btn btn-danger btn-block" data-dismiss="modal">취소</button>

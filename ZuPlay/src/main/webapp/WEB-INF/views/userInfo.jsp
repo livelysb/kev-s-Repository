@@ -91,7 +91,7 @@
 				</div>
 			</div>
 			<div style="text-align: center;">
-	         <button type="button" class="userinfo-stocklist-btn btn btn-primary" >주식보기</button>
+	         <button type="button" class="userinfo-stocklist-btn btn btn-primary" >보유주식</button>
 	         </div>
          <!-- <button type="button" class="userinfo-stockHistory-btn">주식분석보기</button> -->
          

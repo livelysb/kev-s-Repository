@@ -53,12 +53,12 @@
 							<tbody id="auction-buy-tbody">
 							</tbody>
 						</table>
-						<div id="auction-page-btn">
+						<!-- <div id="auction-page-btn">
 							<button type="button" class="btn btn-default"
 								id="auction-back-btn">이전</button>
 							<button type="button" class="btn btn-default"
 								id="auction-next-btn">다음</button>
-						</div>
+						</div> -->  <!-- 기능적인 부분의오류로인한 주석 -->
 					</div>
 				</div>
 				<div class="tab-pane fade" id="profile">

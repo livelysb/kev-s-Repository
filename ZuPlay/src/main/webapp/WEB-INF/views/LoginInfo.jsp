@@ -86,11 +86,10 @@
     				}
     			} ,
     			error:function(err){
-    				alert("여기")
-    				alert(err +"에러발생");
+    				console.log("Exception : Logincheck에러");
     			}
     		}) 
-    	 }
+    	 } 
 		//닉네임 중복체크
     	 $("#playerNickname").on("keyup",function (){
     		 if(event.keyCode == 13) {
@@ -113,7 +112,7 @@
 	 					}
 	 				} ,
 	 				error:function(err){
-	 					alert(err +"에러발생");
+	 					console.log("Exception : 닉네임 중복체크");
 	 				}
 	 			});
 			}

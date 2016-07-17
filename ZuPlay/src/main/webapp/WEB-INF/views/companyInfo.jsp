@@ -14,16 +14,16 @@
          <div class="col-xs-12 company-title">
             <span class="company-title-name">${masterDTO.isuKorAbbrv}</span> 
            	<c:choose>
-           		<c:when test="${masterDTO.priceDTO.trdPrc gt 0}">
-           			<span class="company-title-stock" style="color:red"><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
-           		</c:when>
-          		<c:when test="${masterDTO.priceDTO.trdPrc lt 0}">
-          			<span class="company-title-stock blue" style="color:blue"><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
-          		</c:when>
-          		<c:when test="${masterDTO.priceDTO.trdPrc eq 0}">
-          			<span class="company-title-stock" ><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
-          		</c:when>
-           	</c:choose>
+                 <c:when test="${masterDTO.priceDTO.trdPrc ge 1}">
+                    <span class="company-title-stock" style="color:red"><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
+                 </c:when>
+                <c:when test="${masterDTO.priceDTO.trdPrc le -1}">
+                   <span class="company-title-stock blue" style="color:blue"><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
+                </c:when>
+				<c:otherwise>
+                   <span class="company-title-stock" ><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
+				</c:otherwise> 
+              </c:choose>
          </div>
       </div>
       <div class="row-fluid">
@@ -57,30 +57,30 @@
                      <th>전일비</th>
                      <td>
                      	<c:choose>
-			           		<c:when test="${masterDTO.priceDTO.cmpprevddPrc gt 0}">
+			           		<c:when test="${masterDTO.priceDTO.cmpprevddPrc ge 1}">
 			           			<span class="price-up"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			           		</c:when>
-			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc lt 0}">
+			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc le -1}">
 			          			<span class="price-down"><fmt:formatNumber value="${-masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			          		</c:when>
-			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc eq 0}">
+							<c:otherwise>
 			          			<span><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
-			          		</c:when>
+							</c:otherwise>
 			           	</c:choose>
 			         </td>
-                     <th>등락</th>
+                     <th>등락률</th>
                      
                      <td>
                      	<c:choose>
-			           		<c:when test="${masterDTO.priceDTO.fluctuationRate gt 0}">
-			           			<span style="color:red">+${masterDTO.priceDTO.fluctuationRate}%</span>
+			           		<c:when test="${masterDTO.priceDTO.fluctuationRate gt 1}">
+			           			<span class="price-up">${masterDTO.priceDTO.fluctuationRate}%</span>
 			           		</c:when>
-			          		<c:when test="${masterDTO.priceDTO.fluctuationRate lt 0}">
-			          			<span style="color:blue">${masterDTO.priceDTO.fluctuationRate}%</span>
+			          		<c:when test="${masterDTO.priceDTO.fluctuationRate lt -1}">
+			          			<span class="price-down">${-masterDTO.priceDTO.fluctuationRate}%</span>
 			          		</c:when>
-			          		<c:when test="${masterDTO.priceDTO.fluctuationRate eq 0}">
-			          			<span>${masterDTO.priceDTO.cmpprevddPrc}%</span>
-			          		</c:when>
+							<c:otherwise>
+			          			<span>${masterDTO.priceDTO.fluctuationRate}%</span>
+							</c:otherwise>
 			           	</c:choose>
                      
                      </td>

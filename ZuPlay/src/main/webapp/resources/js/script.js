@@ -1390,8 +1390,8 @@ $(function(){
                       str += "<div class='col-md-12 search-result'>";
                       str+="<h4 class='news-search-tlink'>"+item.title;
                       str+="<input type='hidden' value='"+item.uid_str+"'></h4>";
-/*                      str+="<small>"+item.updated_at+"</small><br>"
-                     str+="<a href='#' class='search-link'>"+item.author ? item.author : "" +"("+item.publisher+")</a>";*/
+/*                    str+="<small>"+item.updated_at+"</small><br>" */
+                      str+="<small style='color:gray'>"+item.publisher+"</small>";
                      str+="</div>";
                    })
                    $("#news-search-results").empty().append(str);              
@@ -2165,11 +2165,9 @@ $(function(){
     	  var str = "";
     	  for(var key in setting.chat){
     		  str += "<li class='chatroom-mychat-li'><input type='hidden' value='"+setting.chat[key].roomNo+"'><a href='#' class='clearfix'>";
-    		  str += "<img src='http://bootdey.com/img/Content/user_1.jpg' alt='' class='img-circle'>";
     		  str += "<div class='chatroom-name'><strong>";
     		  str += setting.chat[key].isOBO ? setting.chat[key].roomNo : setting.chat[key].roomName;
     		  str += "</strong></div><div class='chat-last-message text-muted'></div>";
-    		  str += "<small class='chat-time text-muted'></small><small class='chat-alert chat-count label label-danger'></small>";
     		  str += "</a></li>";
     	  }
 

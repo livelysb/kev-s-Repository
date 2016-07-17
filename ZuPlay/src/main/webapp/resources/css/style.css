@@ -30,6 +30,7 @@ table th{
    text-align: center;
 }
 
+
 #loader {
    visibility: hidden;
 }
@@ -449,6 +450,7 @@ div.vertical-line {
 .store-container {
 	float: left;
 	margin-left: 35px;
+	margin-top: 20px;
 }
 
 #store-content a {
@@ -703,6 +705,10 @@ div.vertical-line {
 /*경매장*/
 .auction-itemImg {
 	width: 100%;
+}
+
+#auction-window table td, #auction-window table th{
+	vertical-align: middle !important;
 }
 
 #auction-tab-div {

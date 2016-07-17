@@ -41,21 +41,21 @@ $(function(){
    };
    
    $.fn.upDown = function(){
-	   var checkVal = $(this).text();
-	   console.log("value : " + checkVal);
-	   if(!checkVal || checkVal == "0" || checkVal == 0){
-		   return;
-	   }
-	   
-	   var checker = checkVal.substr(0,1);
-	   console.log("value : " + checker);
-	   if(checker == "-"){
-		   $(this).addClass("price-down");
-		   $(this).text(checkVal.substr(1).format());
-	   }else{
-		   $(this).addClass("price-up");
-	   }
-	   
+	   $.each($(this),function(index,item){
+		   var checkVal = $(item).text();
+		   var floatVal = parseFloat(checkVal);
+		   var checker = checkVal.substr(0,1);
+		   if(!checker || floatVal == 0){
+			   return;
+		   }
+		   
+		   if(checker == "-"){
+			   $(item).addClass("price-down");
+			   $(item).text(checkVal.substr(1));
+		   }else{
+			   $(item).addClass("price-up");
+		   }
+	   })
 	   return this;
    }
    
@@ -132,9 +132,12 @@ $(function(){
                         $(data).each(function(index, item) {
                       
                           if(index!=0){
-                             $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+(item.priceDTO.trdPrc).format()+"</td> <td>"+(item.priceDTO.cmpprevddPrc).format()+"</td> <td>"+item.priceDTO.fluctuationRate+"</td><td>"+(item.priceDTO.accTrdvol).format()+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
+                             $(tbd).append("<tr><td>"+item.isuKorAbbrv+"</td> <td>"+(item.priceDTO.trdPrc).format()+"</td> <td>"+(item.priceDTO.cmpprevddPrc).format()+"</td> <td>"+item.priceDTO.fluctuationRate+"%</td><td>"+(item.priceDTO.accTrdvol).format()+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>")
                           }
                         });
+                        $("#rta-tbody tr td:nth-child(3)").upDown();
+                        $("#rta-tbody tr td:nth-child(4)").upDown();
+                        
                        if(data.length < 11) stockPage=1;
                      },
                      error:function(e){
@@ -177,10 +180,12 @@ $(function(){
                     str+="<td>"+(item.plQuantity).format()+"</td>";
                     str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
                     str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
-                    str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
+                    str+="<td>"+item.priceDTO.fluctuationRate+"%</td>"
                     str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
                  });
                  $("#mystockListTBody").html(str);
+                 $("#mystockListTBody tr td:nth-child(6)").upDown();
+                 $("#mystockListTBody tr td:nth-child(7)").upDown();
               },
               error:function(err){
                  console.log("Exception : myStockListUpdate");
@@ -635,7 +640,7 @@ $(function(){
                            str+="<td>"+item.kind+"</td>"
                            str+="<td>"+(item.priceDTO.trdPrc).format() +"</td>";
                            str+="<td>"+(item.priceDTO.cmpprevddPrc).format() +"</td>";
-                           str+="<td>"+item.priceDTO.fluctuationRate +"</td>";
+                           str+="<td>"+item.priceDTO.fluctuationRate +"%</td>";
                            str+="<td>"+(item.priceDTO.accTrdvol).format() +"</td>";
                            str+="<td>"+(item.priceDTO.opnprc).format() +"</td>";
                            str+="<td>"+(item.priceDTO.hgprc).format() +"</td>";
@@ -645,7 +650,8 @@ $(function(){
                      })
                      
                      $("#stockListTBody").html(str);
-                     	$("#stockListTBody td").upDown();
+                     	$("#stockListTBody tr td:nth-child(4)").upDown();
+                     	$("#stockListTBody tr td:nth-child(5)").upDown();
                     },
                   
                   
@@ -1236,7 +1242,7 @@ $(function(){
                        if(item.imAuctionEnd="T"){
                           str+="<tr><td><img src='"+item.itemDTO.itemImg+"' class='auction-itemImg'></td>";
                           str+="<td>"+item.itemDTO.itemName+"</td>";
-                          str+="<td>"+item.imPurchasePrice+"</td>";
+                          str+="<td>"+(item.imPurchasePrice).format()+"</td>";
                           str+="<td>"+item.imBidTime+"</td>";
                           str+="<td>"+item.playerNickname+"</td>";
                           str+="<td><input type='button' id='"+item.imSq+"' class='btn btn-primary btn-sm btnBuy' value='구매'></td>"

@@ -1713,15 +1713,17 @@ $(function(){
                str+="</div>";
                str+="</td>";
                str+="<td class='ranking-playernickname'>"+item.playerNickname+"</td>";
-               kind=="s" ? str+="<td>"+(item.totalEarningRate).toFixed(2)+"</td>" : str+="<td>"+(item.earningRate).toFixed(2)+"</td>";
+               kind=="s" ? str+="<td>"+(item.totalEarningRate).toFixed(2)+"%</td>" : str+="<td>"+(item.earningRate).toFixed(2)+"%</td>";
                str+="<td>"+(item.totalMoney).format()+"</td></tr>";
             }) 
             if(kind=="s"){
                $("#ranking-season-tbody").empty();
-               $("#ranking-season-tbody").html(str);                   
+               $("#ranking-season-tbody").html(str);      
+               $("#ranking-season-tbody tr td:nth-child(4)").upDown();
             }else{
                $("#ranking-daily-tbody").empty();
                $("#ranking-daily-tbody").html(str);
+               $("#ranking-daily-tbody tr td:nth-child(4)").upDown();
             }
          }
         

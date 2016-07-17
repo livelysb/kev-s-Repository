@@ -22,7 +22,7 @@ public class NewsController {
 		HttpURLConnection conn = null;
 		try {
 		keyword = URLEncoder.encode(keyword,"UTF-8");
-		URL url = new URL("https://testbed.koscom.co.kr/gateway/v1/uberple/news/politics%2Ceconomy%2Csociety%2Cculture%2Cworld%2Ctech%2Copinion/_search?query="+keyword+"&count=10&summary=1&clustering=0&apikey=63170644-73dc-4c51-a519-8f6aab3642d6");
+		URL url = new URL("https://testbed.koscom.co.kr/gateway/v1/uberple/news/politics%2Ceconomy%2Csociety%2Cculture%2Cworld%2Ctech%2Copinion/_search?query="+keyword+"&count=20&summary=1&clustering=0&apikey=63170644-73dc-4c51-a519-8f6aab3642d6");
 		conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");  
 		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {

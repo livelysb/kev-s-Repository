@@ -1388,10 +1388,10 @@ $(function(){
                    $.each(result.data.docs,function(index, item){
                 	  setting.page[item.uid_str] = item;
                       str += "<div class='col-md-12 search-result'>";
-                      str+="<h3 class='news-search-tlink'>"+item.title;
-                      str+="<input type='hidden' value='"+item.uid_str+"'></h3>";
-                      str+="<small>"+item.updated_at+"</small><br>"
-                     str+="<a href='#' class='search-link'>"+item.author ? item.author : "" +"("+item.publisher+")</a>";
+                      str+="<h4 class='news-search-tlink'>"+item.title;
+                      str+="<input type='hidden' value='"+item.uid_str+"'></h4>";
+/*                      str+="<small>"+item.updated_at+"</small><br>"
+                     str+="<a href='#' class='search-link'>"+item.author ? item.author : "" +"("+item.publisher+")</a>";*/
                      str+="</div>";
                    })
                    $("#news-search-results").empty().append(str);              

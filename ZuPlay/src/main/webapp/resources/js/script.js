@@ -1363,6 +1363,9 @@ $(function(){
                    $("#userinfo-player-"+nickName+"-season").upDown();
                    $("#userinfo-player-"+nickName+"-daily").upDown();
                    myInfoAvatar(nickName,"#userinfo-player-"+nickName);
+                   if(userInfo.nickName==nickName){
+                	   $(".userinfo-stocklist-btn,.userinfo-stockHistory-btn").hide();
+                   }
                 },
                 error:function(err){
                    console.log("Exception : showUserInfo");
@@ -1386,8 +1389,6 @@ $(function(){
       /*친구주식분석보기*/
       $(document).on("click", ".userinfo-stockHistory-btn",function(){
          var friendNick = $(this).parents(".userinfo-window").attr("id").split("-")[2];
-         
-         console.log(friendNick);
          historyInit(friendNick);
       })
       
@@ -1757,17 +1758,19 @@ $(function(){
       var firstNotify = function(){
          if($("#index-firstLogin")=="true"){ 
             $("#noti-msg").html( userInfo.nickName+ "님 오늘 최초접속!!<br>20000루비를 획득하셨습니다.");
+            $('#friend-request-noti').jqxNotification({ template: 'info' }); 
             $("#friend-request-noti").jqxNotification("open");
          }
       }
 
       
+      var numFlag=0;
       /*히스토리 */
       var historyInit = function(targetPlayer){
          var nowPage=0;
          var nowOrderby="";
          var nowAsc=false;
-         
+         numFlag++;
          /*히스토리 페이지네이션*/
          var historyPage = function(page){
             $("#history-content #page-selection").bootpag({
@@ -2065,21 +2068,28 @@ $(function(){
                   }]
               });
          }
-         $("#history-window").jqxWindow({
-             width:1000,
-             maxWidth:1200,
-             height:800,
-             maxHeight:1200,
-             resizable:true,
-             showCollapseButton: true,
-             autoOpen:false,
-             theme : userInfo.theme
-           });
+         
+         if(numFlag==1){
+	         $("#history-window").jqxWindow({
+	             width:1000,
+	             maxWidth:1200,
+	             height:800,
+	             maxHeight:1200,
+	             resizable:true,
+	             showCollapseButton: true,
+	             autoOpen:false,
+	             theme : userInfo.theme
+	           });
+         }
          
          earningChart();
          historyBest();
          historyStockListCount();
          historyStockList();
+         if(numFlag>1){
+        	 $("#history-window .pagination li:nth-child(2) a").trigger("click");
+        	 $("#history-window").jqxWindow("show");
+         }
       }
       
       
@@ -2281,6 +2291,10 @@ $(function(){
             $("#chatroom-btn").setBtn($("#chatroom-window"));
             $("#ranking-btn").setBtn($("#ranking-window"));
             $("#history-btn").setBtn($("#history-window"));
+            $("#history-btn").click(function(){
+            	historyInit(userInfo.nickName);
+            	// $("#history-window .pagination li:nth-child(2) a").trigger("click");
+            }) 
             $("#myinfo-btn").click(function(){
             showUserInfo(userInfo.nickName);
           });
@@ -2504,6 +2518,7 @@ $(function(){
                  case "friendSelect" : friendSelectAll(data);  break;
                  
                  case "notiFriendAdd" : $("#noti-msg").text(data.data.playerNickname+"님께서 친구신청을 하셨습니다.");
+                 						$('#friend-request-noti').jqxNotification({ template: 'mail' });
 						          	    $("#friend-request-noti").jqxNotification("open");
 						          	    ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
 						          	    
@@ -2513,20 +2528,26 @@ $(function(){
                  
                  case "notiFriendAcceptYou":ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#");
 							          	    $("#noti-msg").text(data.data+"님께서 친구수락을 하셨습니다.");
+							          	    $('#friend-request-noti').jqxNotification({ template: 'success' }); 
 							        	    $("#friend-request-noti").jqxNotification("open"); break;
 							        	    
+							        	    
                  case "notiFriendLogin" : $("#noti-msg").text(data.data+"님께서 로그인을 하셨습니다.");
+                 						  $('#friend-request-noti').jqxNotification({ template: 'info' });
 							          	  $("#friend-request-noti").jqxNotification("open");
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
                  case "notiFriendLogout" :$("#noti-msg").text(data.data+"님께서 로그아웃 하셨습니다.");
+                 						  $('#friend-request-noti').jqxNotification({ template: 'error' });
 						                  $("#friend-request-noti").jqxNotification("open");
 							          	  ws.send("friendSelect#/fuckWebSocket/#"+userInfo.nickName+"#/fuckWebSocket/#"); break;
                  case "notiIsAuctionFinish" : 
                 	 				if(data.data=="true"){
 							           $("#noti-msg").html("낙찰 된 물품이 있습니다.<br>확인해주십시오");
+							           $('#friend-request-noti').jqxNotification({ template: 'info' });
 							           $("#friend-request-noti").jqxNotification("open");
 							        }; break;
                  case "notiAuctionEndBySeller" : $("#noti-msg").html(data.data.itemName+"이 "+data.data.imPrice+"루비에 팔렸습니다.<br>낙찰금액을 수령해 주십시오.");
+                 								 $('#friend-request-noti').jqxNotification({ template: 'info' });
                     							 $("#friend-request-noti").jqxNotification("open");break;			          	  
 							          	  
 							          	  

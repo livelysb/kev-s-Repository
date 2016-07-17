@@ -14,7 +14,7 @@
             </ul>
          </div>
          <div class="tab-pane" id="chatroom-list">
-            <button id="chatroom-create-btn" class="btn btn-success btn-block">채팅방 생성</button>
+            <button id="chatroom-create-btn" class="btn btn-block btn-success">채팅방 생성</button>
             <ul id="chatroom-list-ul">
             </ul>
             <div id="chatroom-create-modal" class="modal fade">

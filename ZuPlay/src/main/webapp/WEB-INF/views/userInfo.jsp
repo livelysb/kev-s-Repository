@@ -53,21 +53,10 @@
 							</tr>
 							<tr>
 								<th>시즌 수익률</th>
-								<c:choose>
-									<c:when test="${playerDTO.totalEarningRate gt 0} ">
-										<td class="price-up" style="color:red; font-size: 15px"><fmt:formatNumber value="${playerDTO.totalEarningRate}" maxFractionDigits="2" />%</td>
-									</c:when>
-									<c:when test="${playerDTO.totalEarningRate lt 0}">
-										<td class="price-down" style="color:blue; font-size: 15px;"><fmt:formatNumber value="${-playerDTO.totalEarningRate}" maxFractionDigits="2" />%</td>
-									</c:when>
-									<c:when test="${playerDTO.totalEarningRate eq 0}">
-										<td><fmt:formatNumber value="${playerDTO.totalEarningRate}" maxFractionDigits="2" />%</td>
-									</c:when>
-								</c:choose>
+								<td id="userinfo-player-${playerDTO.playerNickname}-season"><fmt:formatNumber value="${playerDTO.totalEarningRate}" maxFractionDigits="2" />%</td>
 							</tr>
 							
 							<%-- 
-							
 								<c:choose>
 					           		<c:when test="${masterDTO.priceDTO.trdPrc ge 1}">
 					           			<span class="company-title-stock" style="color:red"><fmt:formatNumber value="${masterDTO.priceDTO.trdPrc}" /></span>
@@ -83,18 +72,7 @@
 							
 							<tr>
 								<th>일일 수익률</th>
-								<%-- <td class="price-up" style="color:red">${playerDTO.earningRate}zz</td> --%>
-								 <c:choose>
-									<c:when test="${playerDTO.earningRate ge 1} ">
-										<td class="price-up" style="color:red; font-size: 15px;"><fmt:formatNumber value="${playerDTO.earningRate}" maxFractionDigits="2" />%</td>
-									</c:when>
-									<c:when test="${playerDTO.earningRate le -1}">
-										<td class="price-down " style="color:blue; font-size: 15px;"><fmt:formatNumber value="${-playerDTO.earningRate}" maxFractionDigits="2" />%</td>
-									</c:when>
-									<c:otherwise>
-										<td><fmt:formatNumber value="${playerDTO.earningRate}" maxFractionDigits="2" />%</td>
-									</c:otherwise>
-								</c:choose>
+								<td id="userinfo-player-${playerDTO.playerNickname}-daily"><fmt:formatNumber value="${playerDTO.earningRate}" maxFractionDigits="2" />%</td>
 							</tr>
 							<tr>
 								<th>루비</th>
@@ -112,7 +90,9 @@
 					</table>
 				</div>
 			</div>
-         <button type="button" class="userinfo-stocklist-btn btn btn-default">주식보기</button>
+			<div style="text-align: right;">
+	         <button type="button" class="userinfo-stocklist-btn btn btn-primary" >주식보기</button>
+	         </div>
          <!-- <button type="button" class="userinfo-stockHistory-btn">주식분석보기</button> -->
          
       </div>

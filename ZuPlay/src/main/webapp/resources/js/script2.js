@@ -181,7 +181,7 @@ $(function(){
                     str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
                     str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
                     str+="<td>"+item.priceDTO.fluctuationRate+"%</td>"
-                    str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
+                    str+="<td>"+(item.earningRate).toFixed(2)+"%</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
                  });
                  $("#mystockListTBody").html(str);
                  $("#mystockListTBody tr td:nth-child(6)").upDown();
@@ -204,7 +204,7 @@ $(function(){
             	var table = "<div class='stock-user-window'><div>유저주식 - "+targetPlayer+"</div><div class='stock-user-content'>";
             	table += "<table class='table table-bordered table-hover'><thead><tr>";
             	table += "<th>종목명</th><th>분야</th><th>수량</th><th>체결가</th><th>총가치</th><th>등락률</th><th>수익률</th></tr>"
-            	table += "</thead><tbody></tbody></table></div></div>";
+            	table += "</thead><tbody id=mystockListTBody"+targetPlayer+"></tbody></table></div></div>";
                 var str="";
 
                 $.each(data, function(index, item){
@@ -213,12 +213,10 @@ $(function(){
                    str+="<td>"+(item.plQuantity).format()+"</td>";
                    str+="<td>"+(item.priceDTO.trdPrc).format()+"</td>";
                    str+="<td>"+(item.priceDTO.trdPrc * item.plQuantity).format()+"</td>";
-                   str+="<td>"+item.priceDTO.fluctuationRate+"</td>"
-                   str+="<td>"+(item.earningRate).toFixed(2)+"</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
+                   str+="<td>"+item.priceDTO.fluctuationRate+"%</td>"
+                   str+="<td>"+(item.earningRate).toFixed(2)+"%</td><input type='hidden' value='"+item.isuCd+"'/></tr>";
                 });
                 
-                console.log(str);
-
                 $(table).jqxWindow({
                     width:"650",
                     height:"450",
@@ -228,6 +226,10 @@ $(function(){
                     closeButtonAction: "close",
                     theme:userInfo.theme
                 }).find('tbody').html(str);
+                
+                $("#mystockListTBody"+targetPlayer+" tr td:nth-child(6)").upDown();
+                $("#mystockListTBody"+targetPlayer+" tr td:nth-child(7)").upDown();
+                
              },
              error:function(err){
                 console.log("Exception : userStockListUpdate");
@@ -929,7 +931,7 @@ $(function(){
          $("#friend-request-noti").jqxNotification({
             position: "top-right", opacity: 0.9,
              autoOpen: false, animationOpenDelay: 800, autoClose: true, autoCloseDelay: 3000, template: "info"
-            });
+         });
          
          
          /* 친구삭제 버튼 클릭 시 */
@@ -1358,6 +1360,8 @@ $(function(){
                         closeButtonAction: 'close',
                         theme:userInfo.theme
                    });
+                   $("#userinfo-player-"+nickName+"-season").upDown();
+                   $("#userinfo-player-"+nickName+"-daily").upDown();
                    myInfoAvatar(nickName,"#userinfo-player-"+nickName);
                 },
                 error:function(err){

@@ -29,7 +29,9 @@ table{
 table th{
    text-align: center;
 }
-
+#jqxNotificationDefaultContainer-top-right{
+	z-index: 2100000000 !important;
+}
 
 #loader {
    visibility: hidden;
@@ -43,6 +45,10 @@ table th{
    right: 0;
    margin: auto;
    opacity: 0.2;
+}
+
+.jqx-window-header{
+	font-size: 20px;
 }
 
 #menu-bar {
@@ -787,10 +793,10 @@ div.vertical-line {
 
 .userinfo-avatar-div {
 	position: relative;
-	height: 170px;
-	width: 135px;
-	border: #DDDDDD 1px solid;
+	height: 240px;
+	width: 180px;
 	text-align: left;
+    margin-top: 35px;
 }
 
 .userinfo-avatar-div img {

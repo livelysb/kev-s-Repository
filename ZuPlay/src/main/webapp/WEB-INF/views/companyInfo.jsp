@@ -57,10 +57,10 @@
                      <th>전일비</th>
                      <td>
                      	<c:choose>
-			           		<c:when test="${masterDTO.priceDTO.cmpprevddPrc ge 1}">
+			           		<c:when test="${masterDTO.priceDTO.cmpprevddPrc gt 0}">
 			           			<span class="price-up"><fmt:formatNumber value="${masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			           		</c:when>
-			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc le -1}">
+			          		<c:when test="${masterDTO.priceDTO.cmpprevddPrc lt 0}">
 			          			<span class="price-down"><fmt:formatNumber value="${-masterDTO.priceDTO.cmpprevddPrc}" /></span>
 			          		</c:when>
 							<c:otherwise>
@@ -72,10 +72,10 @@
                      
                      <td>
                      	<c:choose>
-			           		<c:when test="${masterDTO.priceDTO.fluctuationRate gt 1}">
+			           		<c:when test="${masterDTO.priceDTO.fluctuationRate gt 0}">
 			           			<span class="price-up">${masterDTO.priceDTO.fluctuationRate}%</span>
 			           		</c:when>
-			          		<c:when test="${masterDTO.priceDTO.fluctuationRate lt -1}">
+			          		<c:when test="${masterDTO.priceDTO.fluctuationRate lt 0}">
 			          			<span class="price-down">${-masterDTO.priceDTO.fluctuationRate}%</span>
 			          		</c:when>
 							<c:otherwise>

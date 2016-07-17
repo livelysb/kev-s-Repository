@@ -1421,7 +1421,7 @@ $(function(){
     	  str += "<div class='news-page-context'>" + page.content + "</div></div></div>";
     	  
     	  $(str).jqxWindow({
-              width:"500",
+              minWidth:"750",
               height:"700",
               showCollapseButton: true,
               closeButtonAction: 'close',

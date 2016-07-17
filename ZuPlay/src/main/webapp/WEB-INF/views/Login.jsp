@@ -242,8 +242,8 @@
 		})
 
 		var naver_id_login = new naver_id_login("MEu9lHVoIBXQU0fULcr6",
-				"http://127.0.0.1:8000/zuplay/LoginInfo");
-		var state = naver_id_login.getUniqState();
+				"http://192.168.123.103/zuplay/LoginInfo");
+		var state = naver_id_login.getUniqState(); 
 		naver_id_login.setButton("white", 3, 40);
 		naver_id_login.setDomain(".service.com");
 		naver_id_login.setState(state);

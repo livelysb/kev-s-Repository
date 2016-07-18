@@ -2089,6 +2089,9 @@ $(function(){
          if(numFlag>1){
         	 $("#history-window .pagination li:nth-child(2) a").trigger("click");
         	 $("#history-window").jqxWindow("show");
+        	 $("#history-window").jqxWindow('bringToFront');
+             $("#history-window").jqxWindow('expand');
+             $("#history-window").jqxWindow('focus');
          }
       }
       

@@ -1101,7 +1101,7 @@ $(function(){
        })
        
        /* 가나다인척하기 */
-       //financialSearch("가")
+       financialSearch("가");
       }
       
       /* 경매장 */
@@ -2099,7 +2099,6 @@ $(function(){
              $("#history-window").jqxWindow('focus');
          }
       }
-      
       
       /* 방 유저 업데이트 */
       var getChatCurrentUsers = function(players){

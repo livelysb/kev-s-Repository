@@ -150,7 +150,6 @@ public class PlayerInfoController {
 	@ResponseBody
 	public String playerStock(HttpSession session, String targetPlayer) throws Exception {
 		try {
-			System.out.println(targetPlayer);
 			Gson gson = new Gson();
 			String json = gson.toJson(playerStockService.getPlayerStocksDetail(targetPlayer));
 			return json;

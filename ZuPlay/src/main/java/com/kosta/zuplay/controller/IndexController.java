@@ -27,7 +27,6 @@ public class IndexController {
 				SettingDTO settingDTO = settingServiceImpl
 						.settingSelect((String) session.getAttribute("playerNickname"));
 				boolean firstLoginToday = playerInfoService.getRubyPerDay((String) session.getAttribute("playerNickname"));
-				System.out.println(firstLoginToday);
 				mv.addObject("firstLoginToday",
 						firstLoginToday);
 				mv.addObject("theme", settingDTO.getPsTheme());

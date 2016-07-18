@@ -192,7 +192,7 @@
                                           return result+ "<br>"+ this.series.name+ ' : <b>'+ (this.y).format()+ '원</b>';
                                        }
                                     },
-                                    /* plotOptions : {
+                                    plotOptions : {
                                        area : {
                                           fillColor : {
                                              linearGradient : {
@@ -228,7 +228,7 @@
                                           },
                                           threshold : null
                                        }
-                                    } ,*/
+                                    },
 
                                     series : [ {
                                        type : 'area',

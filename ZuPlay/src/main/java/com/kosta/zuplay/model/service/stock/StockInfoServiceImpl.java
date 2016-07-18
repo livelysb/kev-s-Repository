@@ -1,5 +1,7 @@
 package com.kosta.zuplay.model.service.stock;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.kosta.zuplay.model.dao.stock.PlayerStockDAO;
 import com.kosta.zuplay.model.dao.stock.StockInfoDAO;
+import com.kosta.zuplay.model.dto.player.PlayerDTO;
 import com.kosta.zuplay.model.dto.player.PlayerListsDTO;
 import com.kosta.zuplay.model.dto.stock.DailyPriceDTO;
 import com.kosta.zuplay.model.dto.stock.ListsDTO;
@@ -110,14 +113,34 @@ public class StockInfoServiceImpl implements StockInfoService {
 			masterDTO.setPlQuantity(0);
 		else
 			masterDTO.setPlQuantity(playerStockService.getPlayerStock(playerNickname, isuCd).getPlQuantity());
+		
+		Collections.sort(masterDTO.getDpList(), new DailyPriceCompare());
+		Collections.sort(masterDTO.getRtpList(), new RealTimePriceCompare());
+		
 		return masterDTO;
 
 	}
+	
+	class DailyPriceCompare implements Comparator<DailyPriceDTO> {
+		@Override
+		public int compare(DailyPriceDTO p2, DailyPriceDTO p1) {
+			return p1.getDpDate2() > p2.getDpDate2() ? 1 : p1.getDpDate2() < p2.getDpDate2() ? -1 : 0;
+		}
+	}
+	
+	class RealTimePriceCompare implements Comparator<RealTimePriceDTO> {
+		@Override
+		public int compare(RealTimePriceDTO p2, RealTimePriceDTO p1) {
+			return p1.getRpTrdTm2() > p2.getRpTrdTm2() ? 1 : p1.getRpTrdTm2() < p2.getRpTrdTm2() ? -1 : 0;
+		}
+	}
+
 
 	@Override
 	public int getListSize(String isuKorAbbrv) throws Exception {
 		StockInfoDAO stockInfoDAO = sqlSession.getMapper(StockInfoDAO.class);
 		return stockInfoDAO.getListSize(isuKorAbbrv);
 	}
-
+	
+	
 }

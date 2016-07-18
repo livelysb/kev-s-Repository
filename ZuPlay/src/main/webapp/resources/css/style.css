@@ -888,6 +888,10 @@ div.vertical-line {
 }
 
 /*채팅*/
+.chat-room-online-users td{
+	vertical-align: middle;
+}
+
 .chat-group {
 	list-style: none;
 	margin: 0;

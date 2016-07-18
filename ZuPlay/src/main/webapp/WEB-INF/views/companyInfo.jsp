@@ -228,7 +228,7 @@
                                           },
                                           threshold : null
                                        }
-                                    } */,
+                                    } ,*/
 
                                     series : [ {
                                        type : 'area',

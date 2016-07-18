@@ -146,6 +146,7 @@
                      chartJson = new Array();
                      
                      $.each(data, function(index, item) {
+                    	 console.log(data)
                         var ChartObj = new Object();
                         if(kind=="rtp"){
                            ChartObj.x = item.rpTrdTm2+32400000;
@@ -233,10 +234,10 @@
                                     series : [ {
                                        type : 'area',
                                        name : '체결가',
-                                       data : chartJson,
-                                       dataGrouping: {
+                                       data : chartJson
+                                       /* dataGrouping: {
                                            enabled: false
-                                       }
+                                       } */
                                     } ]
                                  });
                   }

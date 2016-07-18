@@ -233,7 +233,10 @@
                                     series : [ {
                                        type : 'area',
                                        name : '체결가',
-                                       data : chartJson
+                                       data : chartJson,
+                                       dataGrouping: {
+                                           enabled: false
+                                       }
                                     } ]
                                  });
                   }

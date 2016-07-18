@@ -556,7 +556,8 @@ $(function(){
               data:"piSq="+imgData.piSq+"&itemCode="+imgData.itemDTO.itemCode,
               dataType:"text",
               success:function(result){
-                 playerItemSelectAll()
+                 playerItemSelectAll();
+                 updatePI();
               },
               error:function(err){
                  console.log("Exception : itemStoreSell");
@@ -581,6 +582,7 @@ $(function(){
                     $("#inven-auction-imPurchasePrice").val("");
                     search(1)
                     $("#auction-selltab").trigger("click");
+                    updatePI();
                  }else{
                     alert("잘못 된 입력 값 입니다.");
                  }
@@ -806,6 +808,7 @@ $(function(){
                       default : alert(result+"을(를) 획득하였습니다."); break;
                    }
                    playerItemSelectAll();
+                   updatePI();
                 },
                 error:function(err){
                    console.log("Exception : 아이템 구매");
@@ -1141,6 +1144,7 @@ $(function(){
                     case "4" : alert("이미 판매 된 물품입니다.");break;   
                  }
                  playerItemSelectAll();
+                 updatePI();
                  search(count);
                  
               },
@@ -1178,6 +1182,7 @@ $(function(){
               success:function(result){
                  if(wordBtn=="수령"){
                     alert("판매금을 수령하셨습니다.");
+                    updatePI();
                  }else{
                     if(result!="false"){
                        playerItemSelectAll();

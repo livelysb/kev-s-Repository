@@ -36,12 +36,13 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 			rankService.calRank("PLAYER_DAILY_RANK");
 			rankService.calRank("PLAYER_SEASON_RANK");
 			stockUpdateService.stockPriceUpdate();
+			stockUpdateService.realtimePriceInsert();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	@Scheduled(cron="0 0/10 9-17 * * MON-FRI")
+	//@Scheduled(cron="0 0/10 9-17 * * MON-FRI")
 	@Override
 	public void actionPer20Min(){
 		System.out.println("매 10분마다 작업을 시작합니다.");

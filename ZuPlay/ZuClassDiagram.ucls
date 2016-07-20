@@ -1,0 +1,1558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.10" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
+  <class id="1" language="java" name="com.kosta.zuplay.advice.SessionCheckAdvice" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/advice/SessionCheckAdvice.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="144" x="2438" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.kosta.zuplay.controller.NewsController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/NewsController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="217" x="783" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.kosta.zuplay.controller.LoginController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/LoginController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="301" x="9173" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.kosta.zuplay.controller.StockTradeController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/StockTradeController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="211" x="7052" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.kosta.zuplay.controller.ItemAuctionController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/ItemAuctionController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="269" x="510" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.kosta.zuplay.controller.SettingController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/SettingController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="247" x="269" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.kosta.zuplay.controller.StockInfoController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/StockInfoController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="244" x="5402" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.kosta.zuplay.controller.IndexController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/IndexController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="201" x="1875" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.kosta.zuplay.controller.DictionaryController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/DictionaryController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="213" x="2657" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.kosta.zuplay.controller.FriendController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/FriendController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="236" x="6903" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.kosta.zuplay.controller.InventoryController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/InventoryController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="240" x="2905" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.kosta.zuplay.controller.ItemStoreController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/ItemStoreController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="244" x="556" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.kosta.zuplay.controller.PlayerInfoController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/PlayerInfoController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="315" width="337" x="5025" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.kosta.zuplay.exception.LoginException" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/exception/LoginException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="126" x="6154" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="15" language="java" name="com.kosta.zuplay.model.dao.PlayerInfoDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/PlayerInfoDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="235" x="6367" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="16" language="java" name="com.kosta.zuplay.model.dao.SettingDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/SettingDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="181" x="1417" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="17" language="java" name="com.kosta.zuplay.model.dao.ItemAuctionDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/ItemAuctionDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="311" x="4237" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="18" language="java" name="com.kosta.zuplay.model.dao.FriendDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/FriendDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="256" x="71" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="19" language="java" name="com.kosta.zuplay.model.dao.LoginDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/LoginDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="191" x="5254" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="20" language="java" name="com.kosta.zuplay.model.dao.PlayerItemDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/PlayerItemDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="255" x="4916" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="21" language="java" name="com.kosta.zuplay.model.dao.ItemStoreDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/ItemStoreDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="317" x="396" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="22" language="java" name="com.kosta.zuplay.model.dao.EarningRateDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/EarningRateDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="224" x="3586" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="23" language="java" name="com.kosta.zuplay.model.dao.stock.StockUpdateDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/stock/StockUpdateDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="190" x="5878" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="24" language="java" name="com.kosta.zuplay.model.dao.stock.PlayerStockDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/stock/PlayerStockDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="274" x="1071" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="25" language="java" name="com.kosta.zuplay.model.dao.stock.StockInfoDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/stock/StockInfoDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="270" x="1671" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="26" language="java" name="com.kosta.zuplay.model.dao.stock.DealHistoryDAO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dao/stock/DealHistoryDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="350" x="2014" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="27" language="java" name="com.kosta.zuplay.model.dto.QuestDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/QuestDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="495" width="264" x="5529" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.kosta.zuplay.model.dto.item.ItemDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/item/ItemDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="441" width="240" x="4786" y="3586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.kosta.zuplay.model.dto.item.ItemMarketDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/item/ItemMarketDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="477" width="298" x="1354" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.kosta.zuplay.model.dto.player.FriendDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/player/FriendDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="495" width="376" x="8219" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.kosta.zuplay.model.dto.player.FriendVO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/player/FriendVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="585" width="420" x="8259" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="com.kosta.zuplay.model.dto.player.PlayerDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/player/PlayerDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="999" width="307" x="7891" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="com.kosta.zuplay.model.dto.player.PlayerItemDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/player/PlayerItemDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="369" width="234" x="8219" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="com.kosta.zuplay.model.dto.player.PlayerListsDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/player/PlayerListsDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="369" width="195" x="9608" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="com.kosta.zuplay.model.dto.player.SettingDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/player/SettingDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="495" width="268" x="3889" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="com.kosta.zuplay.model.dto.stock.PriceDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/PriceDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="693" width="410" x="9727" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="com.kosta.zuplay.model.dto.stock.StockDealHistoryDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/StockDealHistoryDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="531" width="300" x="9843" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="com.kosta.zuplay.model.dto.stock.DailyPriceDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/DailyPriceDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="387" width="189" x="9498" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="com.kosta.zuplay.model.dto.stock.RealTimePriceDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/RealTimePriceDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="387" width="209" x="10177" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="com.kosta.zuplay.model.dto.stock.ListsDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/ListsDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="230" x="2946" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="com.kosta.zuplay.model.dto.stock.MasterDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/MasterDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="2205" width="1070" x="9725" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="com.kosta.zuplay.model.dto.stock.EarningRateHistoryDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/EarningRateHistoryDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="387" width="255" x="3253" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="43" language="java" name="com.kosta.zuplay.model.service.community.ChattingService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/community/ChattingService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="241" x="5138" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="44" language="java" name="com.kosta.zuplay.model.service.community.ChattingServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/community/ChattingServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="297" width="241" x="3480" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="45" language="java" name="com.kosta.zuplay.model.service.item.InventoryService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/item/InventoryService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="255" x="2920" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="46" language="java" name="com.kosta.zuplay.model.service.item.InventoryServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/item/InventoryServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="255" x="3185" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="47" language="java" name="com.kosta.zuplay.model.service.item.ItemAuctionService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/item/ItemAuctionService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="312" x="1094" y="3586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="48" language="java" name="com.kosta.zuplay.model.service.item.ItemAuctionServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/item/ItemAuctionServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="261" width="312" x="1134" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="49" language="java" name="com.kosta.zuplay.model.service.item.ItemStoreService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/item/ItemStoreService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="254" x="819" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="50" language="java" name="com.kosta.zuplay.model.service.item.ItemStoreServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/item/ItemStoreServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="254" x="840" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="com.kosta.zuplay.model.service.player.RankServiceImpl.DailyRankCompare" 
+    project="ZuPlay" file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/RankServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="195" x="2450" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="com.kosta.zuplay.model.service.player.PlayerInfoServicempl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/PlayerInfoServicempl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="279" width="266" x="3761" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="com.kosta.zuplay.model.service.player.RankServiceImpl.TotalEarningRateCompare" 
+    project="ZuPlay" file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/RankServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="195" x="2215" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="com.kosta.zuplay.model.service.player.FriendServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/FriendServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="225" width="248" x="1692" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="55" language="java" name="com.kosta.zuplay.model.service.player.PlayerInfoService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/PlayerInfoService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="266" x="3480" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="56" language="java" name="com.kosta.zuplay.model.service.player.RankService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/RankService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="184" x="6098" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="57" language="java" name="com.kosta.zuplay.model.service.player.EarningRateServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/EarningRateServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="225" width="219" x="5978" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="58" language="java" name="com.kosta.zuplay.model.service.player.RankServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/RankServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="184" x="2681" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="59" language="java" name="com.kosta.zuplay.model.service.player.EarningRateService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/EarningRateService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="219" x="5839" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="60" language="java" name="com.kosta.zuplay.model.service.player.RankServiceImpl.EarningRateCompare" 
+    project="ZuPlay" file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/RankServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="195" x="1980" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="61" language="java" name="com.kosta.zuplay.model.service.player.FriendService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/FriendService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="248" x="6903" y="3586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="62" language="java" name="com.kosta.zuplay.model.service.player.RankServiceImpl.SeasonRankCompare" 
+    project="ZuPlay" file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/player/RankServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="195" x="2685" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="com.kosta.zuplay.model.service.stock.StockInfoServiceImpl.DailyPriceCompare" 
+    project="ZuPlay" file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockInfoServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="229" x="4095" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="com.kosta.zuplay.model.service.stock.StockInfoServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockInfoServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="221" x="4344" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="65" language="java" name="com.kosta.zuplay.model.service.stock.StockInfoServiceImpl.RealTimePriceCompare" 
+    project="ZuPlay" file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockInfoServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="269" x="3786" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="66" language="java" name="com.kosta.zuplay.model.service.stock.StockHistoryService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockHistoryService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="380" x="5419" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="67" language="java" name="com.kosta.zuplay.model.service.stock.StockTradeService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockTradeService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="193" x="7200" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="68" language="java" name="com.kosta.zuplay.model.service.stock.DealHistoryServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/DealHistoryServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="280" x="7571" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="69" language="java" name="com.kosta.zuplay.model.service.stock.ScheduleTaskServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/ScheduleTaskServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="171" x="9514" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="70" language="java" name="com.kosta.zuplay.model.service.stock.StockHistoryServiceImpl.EarningCompareDesc" 
+    project="ZuPlay" file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockHistoryServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="201" x="4364" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="71" language="java" name="com.kosta.zuplay.model.service.stock.PlayerStockServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/PlayerStockServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="252" x="5686" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="72" language="java" name="com.kosta.zuplay.model.service.stock.StockTradeServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockTradeServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="193" x="6237" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="73" language="java" name="com.kosta.zuplay.model.service.stock.DealHistoryService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/DealHistoryService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="280" x="6583" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="74" language="java" name="com.kosta.zuplay.model.service.stock.StockUpdateServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockUpdateServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="228" x="7303" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="75" language="java" name="com.kosta.zuplay.model.service.stock.StockInfoService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockInfoService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="221" x="6322" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="76" language="java" name="com.kosta.zuplay.model.service.stock.StockUpdateService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockUpdateService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="228" x="8713" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="77" language="java" name="com.kosta.zuplay.model.service.stock.StockHistoryServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockHistoryServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="380" x="4605" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="78" language="java" name="com.kosta.zuplay.model.service.stock.PlayerStockService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/PlayerStockService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="252" x="4846" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="79" language="java" name="com.kosta.zuplay.model.service.stock.ScheduleTaskService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/ScheduleTaskService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="171" x="9287" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="80" language="java" name="com.kosta.zuplay.model.service.stock.StockHistoryServiceImpl.EarningCompareAsc" 
+    project="ZuPlay" file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/stock/StockHistoryServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="201" x="4605" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="81" language="java" name="com.kosta.zuplay.model.service.system.UtilService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/system/UtilService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="180" x="1134" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="82" language="java" name="com.kosta.zuplay.model.service.system.LoginServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/system/LoginServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="180" x="6470" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="83" language="java" name="com.kosta.zuplay.model.service.system.SettingService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/system/SettingService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="186" x="269" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="84" language="java" name="com.kosta.zuplay.model.service.system.UtilServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/system/UtilServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="180" x="1486" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="85" language="java" name="com.kosta.zuplay.model.service.system.SettingServiceImpl" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/system/SettingServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="186" x="43" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="86" language="java" name="com.kosta.zuplay.model.service.system.LoginService" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/service/system/LoginService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="180" x="8493" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="87" language="java" name="com.kosta.zuplay.util.EchoHandler" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/util/EchoHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="322" x="6690" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="88" language="java" name="com.kosta.zuplay.util.ControllerConfiguration" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/util/ControllerConfiguration.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="324" x="6690" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="89" language="java" name="com.kosta.zuplay.util.SendDataWebSocket" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/util/SendDataWebSocket.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="225" x="3215" y="2853"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="90" language="java" name="com.kosta.zuplay.util.vo.PlayerVO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/util/vo/PlayerVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="205" x="4629" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="91" language="java" name="com.kosta.zuplay.util.vo.ChatMsgVO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/util/vo/ChatMsgVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="459" width="414" x="8719" y="608"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="92" language="java" name="com.kosta.zuplay.util.vo.ChatRoomVO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/util/vo/ChatRoomVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="300" x="7879" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="93">    
+    <end type="SOURCE" refId="72"/>    
+    <end type="TARGET" refId="67"/>  
+  </realization>  
+  <association id="94">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="95" name="rankService"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="56" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="91" navigable="false">      
+      <attribute id="98" name="playerItem"/>      
+      <multiplicity id="99" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="71" navigable="false">      
+      <attribute id="101" name="earningRateService"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="104" name="stockHistoryService"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="66" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="107" name="itemStoreServiceImpl"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="49" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="109">    
+    <end type="SOURCE" refId="58"/>    
+    <end type="TARGET" refId="62"/>  
+  </nesting>  
+  <association id="110">    
+    <end type="SOURCE" refId="57" navigable="false">      
+      <attribute id="111" name="stockInfoService"/>      
+      <multiplicity id="112" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="113">    
+    <end type="SOURCE" refId="74"/>    
+    <end type="TARGET" refId="76"/>  
+  </realization>  
+  <association id="114">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="115" name="masterDTO"/>      
+      <multiplicity id="116" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="117">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="118">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="119" name="inventoryService"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <end type="SOURCE" refId="77" navigable="false">      
+      <attribute id="122" name="earningRateService"/>      
+      <multiplicity id="123" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="124">    
+    <end type="SOURCE" refId="57" navigable="false">      
+      <attribute id="125" name="playerInfoService"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="128" name="playerStockService"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="78" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="130">    
+    <end type="SOURCE" refId="64"/>    
+    <end type="TARGET" refId="65"/>  
+  </nesting>  
+  <association id="131">    
+    <end type="SOURCE" refId="50" navigable="false">      
+      <attribute id="132" name="utilServiceImpl"/>      
+      <multiplicity id="133" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="81" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="134">    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="43"/>  
+  </realization>  
+  <association id="135">    
+    <end type="SOURCE" refId="72" navigable="false">      
+      <attribute id="136" name="dealHistoryService"/>      
+      <multiplicity id="137" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="73" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="138">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="139" name="playerInfoService"/>      
+      <multiplicity id="140" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="141">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="142" name="playerInfoService"/>      
+      <multiplicity id="143" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="144">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="145" name="itemAuctionServiceImpl"/>      
+      <multiplicity id="146" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="47" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="147">    
+    <end type="SOURCE" refId="82"/>    
+    <end type="TARGET" refId="86"/>  
+  </realization>  
+  <association id="148">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="149" name="utilService"/>      
+      <multiplicity id="150" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="81" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="151">    
+    <end type="SOURCE" refId="57"/>    
+    <end type="TARGET" refId="59"/>  
+  </realization>  
+  <association id="152">    
+    <end type="SOURCE" refId="71" navigable="false">      
+      <attribute id="153" name="stockInfoService"/>      
+      <multiplicity id="154" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="155">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="156" name="sendDataWebSocket"/>      
+      <multiplicity id="157" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="89" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="158">    
+    <end type="SOURCE" refId="58"/>    
+    <end type="TARGET" refId="60"/>  
+  </nesting>  
+  <realization id="159">    
+    <end type="SOURCE" refId="64"/>    
+    <end type="TARGET" refId="75"/>  
+  </realization>  
+  <association id="160">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="161" name="playerInfoService"/>      
+      <multiplicity id="162" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="163">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="164" name="rtpList"/>      
+      <multiplicity id="165" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="166">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="167" name="settingServiceImpl"/>      
+      <multiplicity id="168" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="83" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="169">    
+    <end type="SOURCE" refId="64"/>    
+    <end type="TARGET" refId="63"/>  
+  </nesting>  
+  <association id="170">    
+    <end type="SOURCE" refId="87" navigable="false">      
+      <attribute id="171" name="chattingServiceImpl"/>      
+      <multiplicity id="172" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="173">    
+    <end type="SOURCE" refId="85"/>    
+    <end type="TARGET" refId="83"/>  
+  </realization>  
+  <association id="174">    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="175" name="utilServiceImpl"/>      
+      <multiplicity id="176" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="81" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="177">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="178" name="playerInfoService"/>      
+      <multiplicity id="179" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="180">    
+    <end type="SOURCE" refId="72" navigable="false">      
+      <attribute id="181" name="playerInfoService"/>      
+      <multiplicity id="182" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="183">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="184" name="inventoryService"/>      
+      <multiplicity id="185" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="186">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="187" name="inventoryServiceImpl"/>      
+      <multiplicity id="188" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="189">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="190" name="playerItemDTO"/>      
+      <multiplicity id="191" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="192">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="193" name="playerInfoService"/>      
+      <multiplicity id="194" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="195">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="196" name="playerDTO"/>      
+      <multiplicity id="197" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="198">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="55"/>  
+  </realization>  
+  <association id="199">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="200" name="playerItemDTO"/>      
+      <multiplicity id="201" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="202">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="203" name="inventoryService"/>      
+      <multiplicity id="204" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="205">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="206" name="stockInfoService"/>      
+      <multiplicity id="207" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="208">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="209" name="dpList"/>      
+      <multiplicity id="210" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="211">    
+    <end type="SOURCE" refId="77"/>    
+    <end type="TARGET" refId="80"/>  
+  </nesting>  
+  <association id="212">    
+    <end type="SOURCE" refId="69" navigable="false">      
+      <attribute id="213" name="rankService"/>      
+      <multiplicity id="214" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="56" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="215">    
+    <end type="SOURCE" refId="69" navigable="false">      
+      <attribute id="216" name="stockUpdateService"/>      
+      <multiplicity id="217" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="76" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="218">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="219" name="itemDTO"/>      
+      <multiplicity id="220" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="221">    
+    <end type="SOURCE" refId="77" navigable="false">      
+      <attribute id="222" name="stockInfoService"/>      
+      <multiplicity id="223" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="224">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="225" name="playerStockService"/>      
+      <multiplicity id="226" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="78" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="227">    
+    <end type="SOURCE" refId="54"/>    
+    <end type="TARGET" refId="61"/>  
+  </realization>  
+  <association id="228">    
+    <end type="SOURCE" refId="74" navigable="false">      
+      <attribute id="229" name="stockInfoService"/>      
+      <multiplicity id="230" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="231">    
+    <bendpoint x="1103" y="2853"/>    
+    <end type="SOURCE" refId="48"/>    
+    <end type="TARGET" refId="47"/>  
+  </realization>  
+  <association id="232">    
+    <end type="SOURCE" refId="72" navigable="false">      
+      <attribute id="233" name="playerStockService"/>      
+      <multiplicity id="234" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="78" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="235">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="236" name="playerStockService"/>      
+      <multiplicity id="237" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="78" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="238">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="239" name="earningRateService"/>      
+      <multiplicity id="240" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="241">    
+    <end type="SOURCE" refId="77"/>    
+    <end type="TARGET" refId="66"/>  
+  </realization>  
+  <association id="242">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="243" name="stockInfoService"/>      
+      <multiplicity id="244" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="245">    
+    <end type="SOURCE" refId="58"/>    
+    <end type="TARGET" refId="53"/>  
+  </nesting>  
+  <association id="246">    
+    <end type="SOURCE" refId="72" navigable="false">      
+      <attribute id="247" name="stockInfoService"/>      
+      <multiplicity id="248" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="249">    
+    <end type="SOURCE" refId="92" navigable="false">      
+      <attribute id="250" name="playerList"/>      
+      <multiplicity id="251" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="252">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="253" name="earningRateService"/>      
+      <multiplicity id="254" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="255">    
+    <end type="SOURCE" refId="87" navigable="false">      
+      <attribute id="256" name="friendController"/>      
+      <multiplicity id="257" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="258">    
+    <end type="SOURCE" refId="82" navigable="false">      
+      <attribute id="259" name="playerInfoService"/>      
+      <multiplicity id="260" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="261">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="262" name="itemDTO"/>      
+      <multiplicity id="263" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="264">    
+    <end type="SOURCE" refId="77"/>    
+    <end type="TARGET" refId="70"/>  
+  </nesting>  
+  <realization id="265">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="49"/>  
+  </realization>  
+  <association id="266">    
+    <end type="SOURCE" refId="88" navigable="false">      
+      <attribute id="267" name="echoHandler"/>      
+      <multiplicity id="268" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="87" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="269">    
+    <end type="SOURCE" refId="58"/>    
+    <end type="TARGET" refId="56"/>  
+  </realization>  
+  <association id="270">    
+    <bendpoint x="7169" y="2853"/>    
+    <end type="SOURCE" refId="87" navigable="false">      
+      <attribute id="271" name="friendServiceImpl"/>      
+      <multiplicity id="272" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="61" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="273">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="274" name="friendServiceImpl"/>      
+      <multiplicity id="275" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="61" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="276">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="277" name="masterDTO"/>      
+      <multiplicity id="278" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="279">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="280" name="inventoryService"/>      
+      <multiplicity id="281" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="282">    
+    <end type="SOURCE" refId="84"/>    
+    <end type="TARGET" refId="81"/>  
+  </realization>  
+  <association id="283">    
+    <end type="SOURCE" refId="69" navigable="false">      
+      <attribute id="284" name="earningRateService"/>      
+      <multiplicity id="285" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="286">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="287" name="stockTradeService"/>      
+      <multiplicity id="288" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="67" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="289">    
+    <end type="SOURCE" refId="69"/>    
+    <end type="TARGET" refId="79"/>  
+  </realization>  
+  <association id="290">    
+    <end type="SOURCE" refId="57" navigable="false">      
+      <attribute id="291" name="dealHistoryService"/>      
+      <multiplicity id="292" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="73" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="293">    
+    <end type="SOURCE" refId="58"/>    
+    <end type="TARGET" refId="51"/>  
+  </nesting>  
+  <realization id="294">    
+    <end type="SOURCE" refId="68"/>    
+    <end type="TARGET" refId="73"/>  
+  </realization>  
+  <association id="295">    
+    <bendpoint x="8228" y="608"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="296" name="playerItemDTO"/>      
+      <multiplicity id="297" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="298">    
+    <end type="SOURCE" refId="57" navigable="false">      
+      <attribute id="299" name="playerStockService"/>      
+      <multiplicity id="300" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="78" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="301">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="302" name="playerStockService"/>      
+      <multiplicity id="303" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="78" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="304">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="305" name="settingServiceImpl"/>      
+      <multiplicity id="306" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="83" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="307">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="308" name="loginServiceImpl"/>      
+      <multiplicity id="309" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="86" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="310">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="311" name="dealHistoryService"/>      
+      <multiplicity id="312" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="73" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="313">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="314" name="earningRateService"/>      
+      <multiplicity id="315" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="316">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="317" name="priceDTO"/>      
+      <multiplicity id="318" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="319">    
+    <end type="SOURCE" refId="71"/>    
+    <end type="TARGET" refId="78"/>  
+  </realization>  
+  <association id="320">    
+    <end type="SOURCE" refId="77" navigable="false">      
+      <attribute id="321" name="playerStockService"/>      
+      <multiplicity id="322" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="78" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="323">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="324" name="itemAuctionServiceImpl"/>      
+      <multiplicity id="325" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="47" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.10" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.kosta.zuplay.controller.DictionaryController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/DictionaryController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="121" width="306" x="318" y="554"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.kosta.zuplay.controller.FriendController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/FriendController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="338" x="936" y="451"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.kosta.zuplay.controller.IndexController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/IndexController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="227" width="307" x="4" y="250"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.kosta.zuplay.controller.InventoryController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/InventoryController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="179" width="283" x="637" y="3"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.kosta.zuplay.controller.ItemAuctionController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/ItemAuctionController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="281" x="643" y="468"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.kosta.zuplay.controller.ItemStoreController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/ItemStoreController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="194" width="283" x="641" y="229"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.kosta.zuplay.controller.LoginController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/LoginController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="213" width="303" x="4" y="6"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.kosta.zuplay.controller.NewsController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/NewsController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="125" width="300" x="321" y="382"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.kosta.zuplay.controller.PlayerInfoController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/PlayerInfoController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1104" y="224"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.kosta.zuplay.controller.SettingController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/SettingController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="300" x="6" y="521"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.kosta.zuplay.controller.StockInfoController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/StockInfoController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="174" width="299" x="319" y="6"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.kosta.zuplay.controller.StockTradeController" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/controller/StockTradeController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="299" x="320" y="205"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

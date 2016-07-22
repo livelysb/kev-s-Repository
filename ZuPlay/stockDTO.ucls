@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.10" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.kosta.zuplay.model.dto.stock.PriceDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/PriceDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="698" width="153" x="407" y="835"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.kosta.zuplay.model.dto.stock.StockDealHistoryDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/StockDealHistoryDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="536" width="153" x="403" y="285"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.kosta.zuplay.model.dto.stock.DailyPriceDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/DailyPriceDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="392" width="153" x="407" y="1543"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.kosta.zuplay.model.dto.stock.RealTimePriceDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/RealTimePriceDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="391" width="157" x="571" y="-118"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.kosta.zuplay.model.dto.stock.ListsDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/ListsDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="392" width="153" x="403" y="-118"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.kosta.zuplay.model.dto.stock.MasterDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/MasterDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="2210" width="312" x="57" y="-119"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.kosta.zuplay.model.dto.stock.EarningRateHistoryDTO" project="ZuPlay" 
+    file="/ZuPlay/src/main/java/com/kosta/zuplay/model/dto/stock/EarningRateHistoryDTO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="392" width="157" x="573" y="285"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="8">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="9" name="dpList"/>      
+      <multiplicity id="10" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="11">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="12" name="rtpList"/>      
+      <multiplicity id="13" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="14">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="15" name="priceDTO"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="17">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="18" name="masterDTO"/>      
+      <multiplicity id="19" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

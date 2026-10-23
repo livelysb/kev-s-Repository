@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.0.RELEASE</version>
+			<version>7.0.9</version>
 		</dependency>
 
 		<!-- JSP & Servlet -->
